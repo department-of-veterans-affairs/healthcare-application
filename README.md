@@ -1,6 +1,6 @@
 # `hca-rest-soap-connector`
 
-Hacked from examples at Strongloop github
+Hacked from examples at Strongloop github.
 
 ## Example 1 - from Strongloop github (works)
 
