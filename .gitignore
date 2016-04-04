@@ -1,0 +1,13 @@
+.DS_Store
+*.log
+
+#Compiled files.
+*.class
+.sass-cache
+_site/
+_site_production/
+node_modules/
+vendor/bundle
+.ruby-gemset
+assets/js/generated/
+.bundle/
