@@ -14,13 +14,18 @@ then browse to [http://localhost:3000/explorer](http://localhost:3000/explorer)
 
 ## Example 2 - simple Java SOAP server access (semi-works)
 
-To expose REST APIs to proxy the SOAP web services, run:
+### To start a simple soap server, run:
+
+javac -d . *.java
+java wsserver/ServiceStarter
+
+### To expose REST APIs to proxy the SOAP web services, run:
 
 ```
 node hello-rest
 ```
 
-then browse to [http://localhost:3000/explorer](http://localhost:3000/explorer)
+### Browse to [http://localhost:3000/explorer](http://localhost:3000/explorer)
 
 ### Example 3 - access internal VA/VOA SOAP endpoint (doesn't work)
 
