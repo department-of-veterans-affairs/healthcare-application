@@ -1,0 +1,22 @@
+<soapenv:Envelope 
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+  xmlns:v1="http://va.gov/schema/esr/voa/v1">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <v1:retrieveFormSubmissionStatusRequest>
+      <v1:formSubmissionId>?</v1:formSubmissionId>
+      <v1:identity>
+        <!--Optional:-->
+        <v1:veteranIdentifier>
+          <v1:type>?</v1:type>
+          <v1:value>?</v1:value>
+        </v1:veteranIdentifier>
+        <v1:authenticationLevel>
+          <v1:type>?</v1:type>
+          <!--Optional:-->
+          <v1:value>?</v1:value>
+        </v1:authenticationLevel>
+      </v1:identity>
+    </v1:retrieveFormSubmissionStatusRequest>
+  </soapenv:Body>
+</soapenv:Envelope>

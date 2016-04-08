@@ -1,0 +1,17 @@
+<soapenv:Envelope 
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+  xmlns:v1="http://va.gov/schema/esr/voa/v1">
+  <soapenv:Header/>
+  <soapenv:Body>
+    <v1:retrieveFormSubmissionStatusResponse>
+      <v1:status>?</v1:status>
+      <v1:formSubmissionId>?</v1:formSubmissionId>
+      <v1:message>
+        <v1:type>?</v1:type>
+        <!--Optional:-->
+        <v1:detail>?</v1:detail>
+      </v1:message>
+      <v1:timeStamp>?</v1:timeStamp>
+    </v1:retrieveFormSubmissionStatusResponse>
+  </soapenv:Body>
+</soapenv:Envelope>

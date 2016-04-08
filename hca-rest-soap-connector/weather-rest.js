@@ -32,6 +32,7 @@ ds.once('connected', function () {
   };
 
   WeatherService.weather = function (zip, cb) {
+    console.log('*** zip', zip);
     WeatherService.GetCityWeatherByZIP({ZIP: zip || '94555'}, function (err, response) {
       console.log('Weather: %j', response);
       // var result = response.GetCityWeatherByZIPResult.Temperature;

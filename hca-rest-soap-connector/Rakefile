@@ -1,0 +1,13 @@
+require "tmpdir"
+
+# TODO(joesoftware): Make this do useful stuff.
+
+desc "Bootstrap bundler and npm using brew"
+task :bootstrap do
+  # If we're here, ruby is already installed. Just ensure bundler is here.
+  sh "gem install bundler --no-rdoc --no-ri"
+
+  # Install npm.
+  sh "brew update"
+  sh "brew install npm"
+end
