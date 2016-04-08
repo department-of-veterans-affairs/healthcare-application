@@ -4,7 +4,7 @@ var path = require('path');
 var fs = require('fs');
 
 // read canned JSON file for loopback's SOAP connector to use.
-var anon1 = JSON.parse(fs.readFileSync('ssf.json', 'utf8'));
+var anon1 = JSON.parse(fs.readFileSync('hasan-1.json', 'utf8'));
  
 var app = module.exports = loopback();
 
@@ -38,9 +38,7 @@ ds.once('connected', function () {
   };
 
   VoaService.status = function (request, cb) {
-    console.log('*** here');
     VoaService.getFormSubmissionStatus({retrieveFormSubmissionStatusRequest: request}, function (err, response) {
-      console.log('***', request);
       console.log('getFormSubmissionStatus: %j', response);
       var result = response;
       cb(err, result);
