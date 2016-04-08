@@ -1,7 +1,11 @@
 // liberally copy-pasta'ed from the loopback getFormSubmissionStatus example
 var loopback = require('loopback');
 var path = require('path');
+var fs = require('fs');
 
+// read canned JSON file for loopback's SOAP connector to use.
+var anon1 = JSON.parse(fs.readFileSync('ssf.json', 'utf8'));
+ 
 var app = module.exports = loopback();
 
 app.set('restApiRoot', '/api');
@@ -21,8 +25,12 @@ ds.once('connected', function () {
 
   // Add the methods
   VoaService.submit = function (form, cb) {
-    VoaService.saveSubmitForm({saveSubmitFormResult: form}, function (err, response) {
-      console.log('*** form:', form);
+
+    console.log('*** intercept');
+    
+    var formPrime = anon1;
+
+    VoaService.saveSubmitForm({saveSubmitFormResult: formPrime}, function (err, response) {
       console.log('saveSubmitForm: %j', response);
       var result = response;
       cb(err, result);
@@ -30,8 +38,9 @@ ds.once('connected', function () {
   };
 
   VoaService.status = function (request, cb) {
+    console.log('*** here');
     VoaService.getFormSubmissionStatus({retrieveFormSubmissionStatusRequest: request}, function (err, response) {
-      console.log('***', form);
+      console.log('***', request);
       console.log('getFormSubmissionStatus: %j', response);
       var result = response;
       cb(err, result);

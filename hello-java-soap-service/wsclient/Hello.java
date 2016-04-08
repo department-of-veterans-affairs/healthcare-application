@@ -32,6 +32,22 @@ public interface Hello {
 
     /**
      * 
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(partName = "return")
+    @Action(input = "http://wsserver/Hello/sayByeRequest", output = "http://wsserver/Hello/sayByeResponse")
+    public String sayBye(
+        @WebParam(name = "arg0", partName = "arg0")
+        String arg0,
+        @WebParam(name = "arg1", partName = "arg1")
+        int arg1);
+
+    /**
+     * 
      * @param arg0
      * @return
      *     returns java.lang.String

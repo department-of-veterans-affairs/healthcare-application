@@ -1,0 +1,810 @@
+{
+  "submitFormRequest": {
+    "form": {
+      "formIdentifier": {
+        "type": "?",
+        "value": "?",
+        "version": "?"
+      },
+      "summary": {
+        "associations": {
+          "association": {
+            "address": {
+              "city": "?",
+              "country": "?",
+              "county": "?",
+              "line1": "?",
+              "line2": "?",
+              "line3": "?",
+              "postalCode": "?",
+              "provinceCode": "?",
+              "state": "?",
+              "zipCode": "?",
+              "zipPlus4": "?"
+            },
+            "alternatePhone": "?",
+            "contactType": "?",
+            "familyName": "?",
+            "givenName": "?",
+            "lastUpdateDate": "?",
+            "middleName": "?",
+            "organizationName": "?",
+            "prefix": "?",
+            "primaryPhone": "?",
+            "relationship": "?",
+            "suffix": "?"
+          }
+        },
+        "deathRecond": {
+          "dataSource": "?",
+          "deathDate": "?",
+          "deathLastModified": "?",
+          "deathReportDate": "?",
+          "facilityReceived": "?"
+        },
+        "demographics": {
+          "appointmentRequestDate": "?",
+          "appointmentRequestResponse": "?",
+          "claimFolderLocation": "?",
+          "claimFolderNumber": "?",
+          "contactInfo": {
+            "addresses": {
+              "address": {
+                "city": "?",
+                "country": "?",
+                "county": "?",
+                "line1": "?",
+                "line2": "?",
+                "line3": "?",
+                "postalCode": "?",
+                "provinceCode": "?",
+                "state": "?",
+                "zipCode": "?",
+                "zipcode": "?",
+                "zipPlus4": "?",
+                "addressChangeDateTime": "?",
+                "addressChangeEffectiveDate": "?",
+                "addressChangeSite": "?",
+                "addressChangeSource": "?",
+                "addressTypeCode": "?",
+                "badAddressReason": "?",
+                "confidentialAddressCategories": { "confidentialAddressCategoryType": "?" },
+                "endDate": "?",
+                "phoneNumber": "?",
+                "contactMethodType": "?",
+                "contactMethodReportDate": "?"
+              }
+            },
+            "emails": {
+              "email": {
+                "address": "?",
+                "changeDate": "?",
+                "siteOfChange": "?",
+                "sourceOfChange": "?",
+                "type": "?"
+              }
+            },
+            "phones": {
+              "phone": {
+                "phoneNumber": "?",
+                "type": "?",
+                "phoneNumberReportDate": "?"
+              }
+            }
+          },
+          "ethnicity": "?",
+          "maritalStatus": "?",
+          "preferredFacility": "?",
+          "assignmentDate": "?",
+          "unassignmentDate": "?",
+          "races": { "race": "?" },
+          "religion": "?",
+          "preferredFacilities": {
+            "preferredFacilityInfo": {
+              "preferredFacility": "?",
+              "assignmentDate": "?",
+              "unassignmentDate": "?"
+            }
+          },
+          "acaIndicator": "?"
+        },
+        "eligibilityVerificationInfo": {
+          "eligibilityStatus": "?",
+          "eligibilityStatusDate": "?",
+          "verificationMethod": "?"
+        },
+        "employmentInfo": {
+          "employerAddress": {
+            "city": "?",
+            "country": "?",
+            "county": "?",
+            "line1": "?",
+            "line2": "?",
+            "line3": "?",
+            "postalCode": "?",
+            "provinceCode": "?",
+            "state": "?",
+            "zipCode": "?",
+            "zipcode": "?",
+            "zipPlus4": "?",
+            "addressChangeDateTime": "?",
+            "addressChangeEffectiveDate": "?",
+            "addressChangeSite": "?",
+            "addressChangeSource": "?",
+            "addressTypeCode": "?",
+            "badAddressReason": "?",
+            "confidentialAddressCategories": { "confidentialAddressCategoryType": "?" },
+            "endDate": "?",
+            "phoneNumber": "?",
+            "contactMethodType": "?",
+            "contactMethodReportDate": "?"
+          },
+          "employerName": "?",
+          "employerPhone": "?",
+          "employmentStatus": "?",
+          "occupation": "?",
+          "retirementDate": "?"
+        },
+        "enrollmentDeterminationInfo": {
+          "applicationDate": "?",
+          "calculationSource": "?",
+          "cancelDeclineInfo": {
+            "cancelDeclineIndicator": "?",
+            "reason": "?",
+            "remarks": "?"
+          },
+          "catastrophicDisabilityInfo": {
+            "catastrophicallyDisabled": "?",
+            "cdConditions": {
+              "cdCondition": {
+                "condition": "?",
+                "permanentIndicator": "?",
+                "score": "?"
+              }
+            },
+            "cdProcedures": {
+              "cdProcedure": {
+                "affectedExtremity": "?",
+                "procedure": "?"
+              }
+            },
+            "decisionDate": "?",
+            "determinationFacility": "?",
+            "determinationMethod": "?",
+            "determinedBy": "?",
+            "diagnoses": { "diagnosis": "?" },
+            "facilityInitiatedCDReviewDate": "?",
+            "reviewDate": "?",
+            "veteranRequestedCDReviewDate": "?",
+            "veteranWasNotifiedCDDate": "?"
+          },
+          "effectiveDate": "?",
+          "eligibleForMedicaid": "?",
+          "medicaidLastModifiedDate": "?",
+          "endDate": "?",
+          "enrollmentDate": "?",
+          "enrollmentStatus": "?",
+          "facilityReceived": "?",
+          "enrollmentCategoryName": "?",
+          "ineligibilityFactor": {
+            "facilityReceived": "?",
+            "ineligibleDate": "?",
+            "reason": "?",
+            "varoDecision": "?",
+            "recordCreatedDate": "?"
+          },
+          "militarySexualTraumaInfo": {
+            "determinationFacility": "?",
+            "status": "?",
+            "statusChangeDate": "?"
+          },
+          "monetaryBenefitAwardInfo": {
+            "checkAmount": "?",
+            "monetaryBenefits": {
+              "monetaryBenefit": {
+                "monetaryBenefitIndicator": "?",
+                "type": "?",
+                "monetaryBenefitReportDate": "?"
+              }
+            }
+          },
+          "noseThroatRadiumInfo": {
+            "determinationFacility": "?",
+            "diagnosedWithCancer": "?",
+            "diagnosisVerifiedDate": "?",
+            "fromAviatorServiceBefore1955": "?",
+            "fromSubmarinerServiceBefore1965": "?",
+            "receivingTreatment": "?",
+            "verificationDate": "?",
+            "verificationFacility": "?",
+            "verificationMethod": "?"
+          },
+          "otherEligibilities": {
+            "eligibility": {
+              "indicator": "?",
+              "type": "?",
+              "eligibilityReportDate": "?"
+            }
+          },
+          "primaryEligibility": {
+            "indicator": "?",
+            "type": "?",
+            "eligibilityReportDate": "?"
+          },
+          "priorityGroup": "?",
+          "prioritySubGroup": "?",
+          "secondaryEligibilities": {
+            "eligibility": {
+              "indicator": "?",
+              "type": "?",
+              "eligibilityReportDate": "?"
+            }
+          },
+          "serviceConnectionAward": {
+            "awardDate": "?",
+            "combinedServiceConnectedPercentageEffectiveDate": "?",
+            "permanentAndTotal": "?",
+            "permanentAndTotalEffectiveDate": "?",
+            "ratedDisabilities": {
+              "ratedDisability": {
+                "diagnosticExtremity": "?",
+                "disability": "?",
+                "disabilityCode": "?",
+                "originalEffectiveRatingDate": "?",
+                "percentage": "?",
+                "ratingDate": "?",
+                "serviceConnected": "?",
+                "recordModifiedDate": "?"
+              }
+            },
+            "serviceConnectedIndicator": "?",
+            "serviceConnectedPercentage": "?",
+            "unemployable": "?",
+            "scReportDate": "?"
+          },
+          "specialFactors": {
+            "agentOrangeInd": "?",
+            "agentOrangeLocation": "?",
+            "envContaminantsInd": "?",
+            "campLejeuneInd": "?",
+            "radiationExposureInd": "?",
+            "radiationExposureMethod": "?"
+          },
+          "userEnrolleeSite": "?",
+          "userEnrolleeValidThrough": "?",
+          "veteran": "?",
+          "recordCreatedDate": "?",
+          "recordModifiedDate": "?"
+        },
+        "feeBasisList": {
+          "feeBasis": {
+            "authorizationFromDate": "?",
+            "authorizationToDate": "?",
+            "program": "?",
+            "reportDate": "?",
+            "reportSite": "?",
+            "treatmentType": "?"
+          }
+        },
+        "financialsInfo": {
+          "beneficiaryTravels": {
+            "beneficiaryTravel": {
+              "amountCertified": "?",
+              "dateCertified": "?",
+              "eligible": "?"
+            }
+          },
+          "financialStatement": {
+            "assets": {
+              "asset": {
+                "amount": "?",
+                "assetType": "?",
+                "assetReportDate": "?"
+              }
+            },
+            "debits": { "amount": "?" },
+            "expenses": {
+              "expense": {
+                "amount": "?",
+                "expenseType": "?",
+                "expenseReportDate": "?"
+              }
+            },
+            "incomeYear": "?",
+            "incomes": {
+              "income": {
+                "amount": "?",
+                "type": "?",
+                "incomeReportDate": "?"
+              }
+            },
+            "contributionToSpouse": "?",
+            "contributedToSpouse": "?",
+            "dependentFinancialsList": {
+              "dependentFinancials": {
+                "assets": {
+                  "asset": {
+                    "amount": "?",
+                    "assetType": "?",
+                    "assetReportDate": "?"
+                  }
+                },
+                "debits": { "amount": "?" },
+                "expenses": {
+                  "expense": {
+                    "amount": "?",
+                    "expenseType": "?",
+                    "expenseReportDate": "?"
+                  }
+                },
+                "incomeYear": "?",
+                "incomes": {
+                  "income": {
+                    "amount": "?",
+                    "type": "?",
+                    "incomeReportDate": "?"
+                  }
+                },
+                "livedWithPatient": "?",
+                "inpatientDays": "?",
+                "outpatientDays": "?",
+                "validDependent": "?",
+                "amountContributedToSupport": "?",
+                "attendedSchool": "?",
+                "contributedToSupport": "?",
+                "dependentInfo": {
+                  "dob": "?",
+                  "endDate": "?",
+                  "familyName": "?",
+                  "gender": "?",
+                  "givenName": "?",
+                  "middleName": "?",
+                  "relationship": "?",
+                  "ssns": {
+                    "ssn": {
+                      "pseudoSSNReason": "?",
+                      "sourceOfChange": "?",
+                      "ssaMessage": "?",
+                      "ssaReceivedDate": "?",
+                      "ssaSentDate": "?",
+                      "ssaVerificationDate": "?",
+                      "ssaVerificationStatus": "?",
+                      "ssnText": "?",
+                      "type": "?"
+                    }
+                  },
+                  "startDate": "?",
+                  "prefix": "?",
+                  "suffix": "?",
+                  "incapableOfSelfSupport": "?"
+                },
+                "hasIncome": "?",
+                "incapableOfSelfSupport": "?",
+                "incomeAvailableToPatient": "?"
+              }
+            },
+            "marriedLastCalendarYear": "?",
+            "numberOfDependentChildren": "?",
+            "spouseFinancialsList": {
+              "spouseFinancials": {
+                "assets": {
+                  "asset": {
+                    "amount": "?",
+                    "assetType": "?",
+                    "assetReportDate": "?"
+                  }
+                },
+                "debits": { "amount": "?" },
+                "expenses": {
+                  "expense": {
+                    "amount": "?",
+                    "expenseType": "?",
+                    "expenseReportDate": "?"
+                  }
+                },
+                "incomeYear": "?",
+                "incomes": {
+                  "income": {
+                    "amount": "?",
+                    "type": "?",
+                    "incomeReportDate": "?"
+                  }
+                },
+                "livedWithPatient": "?",
+                "inpatientDays": "?",
+                "outpatientDays": "?",
+                "validDependent": "?",
+                "spouse": {
+                  "dob": "?",
+                  "endDate": "?",
+                  "familyName": "?",
+                  "gender": "?",
+                  "givenName": "?",
+                  "middleName": "?",
+                  "relationship": "?",
+                  "ssns": {
+                    "ssn": {
+                      "pseudoSSNReason": "?",
+                      "sourceOfChange": "?",
+                      "ssaMessage": "?",
+                      "ssaReceivedDate": "?",
+                      "ssaSentDate": "?",
+                      "ssaVerificationDate": "?",
+                      "ssaVerificationStatus": "?",
+                      "ssnText": "?",
+                      "type": "?"
+                    }
+                  },
+                  "startDate": "?",
+                  "address": {
+                    "city": "?",
+                    "country": "?",
+                    "county": "?",
+                    "line1": "?",
+                    "line2": "?",
+                    "line3": "?",
+                    "postalCode": "?",
+                    "provinceCode": "?",
+                    "state": "?",
+                    "zipCode": "?",
+                    "zipcode": "?",
+                    "zipPlus4": "?",
+                    "addressChangeDateTime": "?",
+                    "addressChangeEffectiveDate": "?",
+                    "addressChangeSite": "?",
+                    "addressChangeSource": "?",
+                    "addressTypeCode": "?",
+                    "badAddressReason": "?",
+                    "confidentialAddressCategories": { "confidentialAddressCategoryType": "?" },
+                    "endDate": "?",
+                    "phoneNumber": "?",
+                    "contactMethodType": "?",
+                    "contactMethodReportDate": "?"
+                  },
+                  "employment": {
+                    "employerAddress": {
+                      "city": "?",
+                      "country": "?",
+                      "county": "?",
+                      "line1": "?",
+                      "line2": "?",
+                      "line3": "?",
+                      "postalCode": "?",
+                      "provinceCode": "?",
+                      "state": "?",
+                      "zipCode": "?",
+                      "zipcode": "?",
+                      "zipPlus4": "?",
+                      "addressChangeDateTime": "?",
+                      "addressChangeEffectiveDate": "?",
+                      "addressChangeSite": "?",
+                      "addressChangeSource": "?",
+                      "addressTypeCode": "?",
+                      "badAddressReason": "?",
+                      "confidentialAddressCategories": { "confidentialAddressCategoryType": "?" },
+                      "endDate": "?",
+                      "phoneNumber": "?",
+                      "contactMethodType": "?",
+                      "contactMethodReportDate": "?"
+                    },
+                    "employerName": "?",
+                    "employerPhone": "?",
+                    "employmentStatus": "?",
+                    "occupation": "?",
+                    "retirementDate": "?"
+                  },
+                  "maidenName": "?",
+                  "prefix": "?",
+                  "suffix": "?"
+                },
+                "contributionToSpouseAmt": "?",
+                "contributedToSpousalSupport": "?"
+              }
+            },
+            "inpatientDays": "?",
+            "outpatientDays": "?",
+            "lastVisitDate": "?",
+            "vamcReportDate": "?"
+          },
+          "incomeTest": {
+            "adjudicationDate": "?",
+            "agreesToPayDeductible": "?",
+            "cadAdjusted": "?",
+            "childIncomeExclusionThreshold": "?",
+            "comments": "?",
+            "dateMTNoLongerRequired": "?",
+            "deductibleExpenses": "?",
+            "discloseFinancialInformation": "?",
+            "effectiveDate": "?",
+            "futureTest": "?",
+            "gmtAddressInfo": {
+              "city": "?",
+              "country": "?",
+              "county": "?",
+              "line1": "?",
+              "line2": "?",
+              "line3": "?",
+              "postalCode": "?",
+              "provinceCode": "?",
+              "state": "?",
+              "zipCode": "?",
+              "zipcode": "?",
+              "zipPlus4": "?",
+              "addressChangeDateTime": "?",
+              "addressChangeEffectiveDate": "?",
+              "addressChangeSite": "?",
+              "addressChangeSource": "?",
+              "addressTypeCode": "?",
+              "badAddressReason": "?",
+              "confidentialAddressCategories": { "confidentialAddressCategoryType": "?" },
+              "endDate": "?",
+              "phoneNumber": "?",
+              "contactMethodType": "?",
+              "contactMethodReportDate": "?"
+            },
+            "gmtThresholdAmount": "?",
+            "hardShipReason": "?",
+            "hardshipInfo": {
+              "effectiveDate": "?",
+              "hardshipGranted": "?",
+              "reason": "?",
+              "reviewDate": "?",
+              "siteGrantingHardship": "?"
+            },
+            "incomeTestType": "?",
+            "incomeTestsource": "?",
+            "incomeVerificationStatus": "?",
+            "incomeVerificationStatusDate": "?",
+            "incomeYear": "?",
+            "ivmTestCompletionDate": "?",
+            "ivmConversionDate": "?",
+            "incomeTestReportDate": "?",
+            "netIncome": "?",
+            "netWorth": "?",
+            "networthThreshold": "?",
+            "pensionThreshold": "?",
+            "previousYearThresholdApplies": "?",
+            "primaryIncomeTest": "?",
+            "reasonMTNoLongerRequired": "?",
+            "refusedToSign": "?",
+            "sendForAdjudication": "?",
+            "siteConductingTest": "?",
+            "statuses": {
+              "status": {
+                "completedDate": "?",
+                "determinedStatus": "?",
+                "incomeTestType": "?",
+                "lastEditedDate": "?",
+                "status": "?"
+              }
+            },
+            "thresholdA": "?",
+            "totalIncome": "?",
+            "totalNumberOfDependents": "?",
+            "priorityGroup8Relaxation": "?",
+            "ivmCaseStatus": "?"
+          },
+          "nonPrimaryFinancialsInfo": {
+            "nonPrimaryFinancialStatement": {
+              "incomeYear": "?",
+              "facilityVisitedCode": "?",
+              "inpatientDays": "?",
+              "outpatientDays": "?",
+              "lastVisitDate": "?",
+              "vamcReportDate": "?"
+            }
+          }
+        },
+        "incompetenceRulingInfo": {
+          "civilRulingDate": "?",
+          "incompetent": "?",
+          "vaRulingDate": "?"
+        },
+        "insuranceList": {
+          "insurance": {
+            "companyName": "?",
+            "enrolledInPartA": "?",
+            "enrolledInPartB": "?",
+            "groupName": "?",
+            "groupNumber": "?",
+            "insAddress": {
+              "city": "?",
+              "country": "?",
+              "county": "?",
+              "line1": "?",
+              "line2": "?",
+              "line3": "?",
+              "postalCode": "?",
+              "provinceCode": "?",
+              "state": "?",
+              "zipCode": "?",
+              "zipcode": "?",
+              "zipPlus4": "?",
+              "addressChangeDateTime": "?",
+              "addressChangeEffectiveDate": "?",
+              "addressChangeSite": "?",
+              "addressChangeSource": "?",
+              "addressTypeCode": "?",
+              "badAddressReason": "?",
+              "confidentialAddressCategories": { "confidentialAddressCategoryType": "?" },
+              "endDate": "?",
+              "phoneNumber": "?",
+              "contactMethodType": "?",
+              "contactMethodReportDate": "?"
+            },
+            "insurancePhones": {
+              "phone": {
+                "phoneNumber": "?",
+                "type": "?",
+                "phoneNumberReportDate": "?"
+              }
+            },
+            "insuranceSiteUploadStatus": "?",
+            "insuredRelationship": "?",
+            "insuranceMappingTypeName": "?",
+            "lastEditedDate": "?",
+            "partAEffectiveDate": "?",
+            "partBEffectiveDate": "?",
+            "planType": "?",
+            "policyEffectiveDate": "?",
+            "policyExpirationDate": "?",
+            "policyHolderName": "?",
+            "policyNumber": "?",
+            "preadmitCertification": "?",
+            "reasonInsuranceNotUploaded": "?",
+            "subscriber": "?"
+          }
+        },
+        "militaryServiceInfo": {
+          "combatEpisodes": {
+            "combatEpisode": {
+              "combatPayType": "?",
+              "conflictLocation": "?",
+              "endDate": "?",
+              "OEFOIFSource": "?",
+              "OEFOIFStationNumber": "?",
+              "startDate": "?"
+            }
+          },
+          "combatVeteranEligibilityEndDate": "?",
+          "disabilityRetirementIndicator": "?",
+          "dischargeDueToDisability": "?",
+          "militaryServiceSiteRecords": {
+            "militaryServiceSiteRecord": {
+              "conflictExperiences": {
+                "conflictExperience": {
+                  "conflictLocation": "?",
+                  "endDate": "?",
+                  "startDate": "?"
+                }
+              },
+              "militaryServiceEpisodes": {
+                "militaryServiceEpisode": {
+                  "endDate": "?",
+                  "serviceBranch": "?",
+                  "serviceNumber": "?",
+                  "startDate": "?",
+                  "dischargeType": "?"
+                }
+              },
+              "servicePeriod": "?",
+              "site": "?"
+            }
+          },
+          "shadIndicator": "?",
+          "medalofHonorIndicator": "?",
+          "eligibleForClassIIDental": "?",
+          "classIIDentalApplicationDueBefore": "?"
+        },
+        "prisonerOfWarInfo": {
+          "episodes": {
+            "episode": {
+              "captureDate": "?",
+              "dataSource": "?",
+              "documentType": "?",
+              "releaseDate": "?"
+            }
+          },
+          "powIndicator": "?"
+        },
+        "purpleHeart": {
+          "status": "?",
+          "indicator": "?"
+        },
+        "relations": {
+          "relation": {
+            "dob": "?",
+            "endDate": "?",
+            "familyName": "?",
+            "gender": "?",
+            "givenName": "?",
+            "middleName": "?",
+            "relationship": "?",
+            "ssns": {
+              "ssn": {
+                "pseudoSSNReason": "?",
+                "sourceOfChange": "?",
+                "ssaMessage": "?",
+                "ssaReceivedDate": "?",
+                "ssaSentDate": "?",
+                "ssaVerificationDate": "?",
+                "ssaVerificationStatus": "?",
+                "ssnText": "?",
+                "type": "?"
+              }
+            },
+            "startDate": "?"
+          }
+        },
+        "sensitivityInfo": {
+          "sensitivityChangeDate": "?",
+          "sensitivityChangeSite": "?",
+          "sensitivityChangeSource": "?",
+          "sensityFlag": "?"
+        },
+        "spinalCordInjuryInfo": {
+          "determinationFacility": "?",
+          "spinalCordInjuryType": "?"
+        },
+        "personInfo": {
+          "firstName": "?",
+          "middleName": "?",
+          "lastName": "?",
+          "prefix": "?",
+          "suffix": "?",
+          "ssnText": "?",
+          "gender": "?",
+          "dob": "?",
+          "ssaVerificationStatus": "?",
+          "ssaVerificationDate": "?",
+          "vamcData": {
+            "vamcInfo": {
+              "dfnNumber": "?",
+              "facilityNumber": "?",
+              "lastVisitDate": "?",
+              "vamcReportDate": "?"
+            }
+          },
+          "names": {
+            "name": { "otherName": "?" }
+          },
+          "mothersMaidenName": "?",
+          "placeOfBirthCity": "?",
+          "placeOfBirthState": "?"
+        },
+        "consentInfo": {
+          "consentAuthCode": "?",
+          "consentImagingSite": "?",
+          "consentImageIndexNumber": "?",
+          "consentReportDate": "?",
+          "consentLastUpdateDate": "?"
+        }
+      },
+      "attachments": {
+        "document": {
+          "name": "?",
+          "format": "?",
+          "type": "?",
+          "content": "cid:1078664215271"
+        }
+      },
+      "applications": {
+        "applicationInfo": {
+          "benefitType": "?",
+          "appDate": "?",
+          "appMethod": "1"
+        }
+      }
+    },
+    "identity": {
+      "veteranIdentifier": {
+        "type": "?",
+        "value": "?"
+      },
+      "authenticationLevel": {
+        "type": "?",
+        "value": "?"
+      }
+    }
+  }
+}

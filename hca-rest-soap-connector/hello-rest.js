@@ -9,8 +9,8 @@ var ds = loopback.createDataSource('soap',
   {
     connector: require('loopback-connector-soap'),
     remotingEnabled: true,
-    // wsdl: 'http://localhost:1212/hello?WSDL' // The url to WSDL
-    wsdl: path.join(__dirname, './hello.wsdl')
+    wsdl: 'http://localhost:1212/hello?WSDL' // The url to WSDL
+    //wsdl: path.join(__dirname, './hello.wsdl')
   });
 
 // Unfortunately, the methods from the connector are mixed in asynchronously
@@ -21,11 +21,30 @@ ds.once('connected', function () {
   var HelloService = ds.createModel('HelloService', {});
 
   // Refine the methods
-  HelloService.hello = function (arg0, cb) {
-    HelloService.sayHello({ARG0: arg0}, function (err, response) {
-      console.log('***', arg0);
+  HelloService.hello = function (str, cb) {
+    HelloService.sayHello({arg0: str}, function (err, response) {
+      console.log('***', str);
       console.log('Response: %j', response);
-      var result = (!err) ? response.sayHelloResponse : [];
+      //var result = response.sayHelloResponse;
+      var result = response;
+      cb(err, result);
+    });
+  };
+  
+  HelloService.guid = function (str, cb) {
+    HelloService.getGUID(null, function (err, response) {
+      console.log('***', str);
+      console.log('Response: %j', response);
+      var result = response;
+      cb(err, result);
+    });
+  };
+
+  HelloService.bye = function (str, cb) {
+    HelloService.sayHello({arg0: str}, function (err, response) {
+      console.log('***', str);
+      console.log('Response: %j', response);
+      var result = response;
       cb(err, result);
     });
   };
@@ -42,12 +61,33 @@ ds.once('connected', function () {
     }
   );
 
+  loopback.remoteMethod(
+    HelloService.guid, {
+      accepts: [
+        {http: {source: 'query'}}
+      ],
+      returns: {arg: 'return', type: 'string', root: true},
+      http: {verb: 'get', path: '/guid'}
+    }
+  );
+  
+    loopback.remoteMethod(
+    HelloService.bye, {
+      accepts: [
+        {http: {source: 'query'}}
+      ],
+      returns: {arg: 'return', type: 'string', root: true},
+      http: {verb: 'get', path: '/bye'}
+    }
+  );
+  
   // Expose to REST
   app.model(HelloService);
 
   // LoopBack REST interface
   app.use(app.get('restApiRoot'), loopback.rest());
-// API explorer (if present)
+  
+  // API explorer (if present)
   try {
     var explorer = require('loopback-explorer')(app);
     app.use('/explorer', explorer);
