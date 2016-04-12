@@ -4,7 +4,7 @@ var path = require('path');
 var fs = require('fs');
 
 // read canned JSON file for loopback's SOAP connector to use.
-var anon1 = JSON.parse(fs.readFileSync('hasan-1.json', 'utf8'));
+var anon1 = JSON.parse(fs.readFileSync(path.join(__dirname, './hasan-1.json'), 'utf8'));
  
 var app = module.exports = loopback();
 
