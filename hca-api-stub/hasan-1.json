@@ -1,103 +1,101 @@
 {
-  "submitFormRequest": {
-    "form": {
-      "formIdentifier": {
-        "type": "100",
-        "value": "1010EZ"
+  "form": {
+    "formIdentifier": {
+      "type": "100",
+      "value": "1010EZ"
+    },
+    "summary": {
+      "demographics": {
+        "appointmentRequestResponse": "true",
+        "contactInfo": {
+          "addresses": {
+            "address": {
+              "city": "Jacksonville",
+              "country": "USA",
+              "line1": "232 FAKE Dr",
+              "state": "NC",
+              "zipCode": "28540",
+              "addressTypeCode": "P"
+            }
+          }
+        },
+        "ethnicity": "2186-5",
+        "maritalStatus": "M",
+        "preferredFacility": "608",
+        "races": {
+          "race": "2106-3"
+        },
+        "acaIndicator": "false"
       },
-      "summary": {
-        "demographics": {
-          "appointmentRequestResponse": "true",
-          "contactInfo": {
-            "addresses": {
-              "address": {
-                "city": "Jacksonville",
-                "country": "USA",
-                "line1": "232 FAKE Dr",
-                "state": "NC",
-                "zipCode": "28540",
-                "addressTypeCode": "P"
+      "enrollmentDeterminationInfo": {
+        "eligibleForMedicaid": "false",
+        "noseThroatRadiumInfo": {
+          "receivingTreatment": "false"
+        },
+        "serviceConnectionAward": {
+          "serviceConnectedIndicator": "false"
+        },
+        "specialFactors": {
+          "agentOrangeInd": "false",
+          "envContaminantsInd": "false",
+          "campLejeuneInd": "false",
+          "radiationExposureInd": "false"
+        }
+      },
+      "insuranceList": {
+        "insurance": {
+          "companyName": "Medicare",
+          "enrolledInPartA": "false",
+          "enrolledInPartB": "false",
+          "insuranceMappingTypeName": "MDCR"
+        }
+      },
+      "militaryServiceInfo": {
+        "disabilityRetirementIndicator": "false",
+        "dischargeDueToDisability": "false",
+        "militaryServiceSiteRecords": {
+          "militaryServiceSiteRecord": {
+            "militaryServiceEpisodes": {
+              "militaryServiceEpisode": {
+                "endDate": "06/28/2015",
+                "serviceBranch": "4",
+                "startDate": "08/08/2004",
+                "dischargeType": "1"
               }
-            }
-          },
-          "ethnicity": "2186-5",
-          "maritalStatus": "M",
-          "preferredFacility": "608",
-          "races": {
-            "race": "2106-3"
-          },
-          "acaIndicator": "false"
-        },
-        "enrollmentDeterminationInfo": {
-          "eligibleForMedicaid": "false",
-          "noseThroatRadiumInfo": {
-            "receivingTreatment": "false"
-          },
-          "serviceConnectionAward": {
-            "serviceConnectedIndicator": "false"
-          },
-          "specialFactors": {
-            "agentOrangeInd": "false",
-            "envContaminantsInd": "false",
-            "campLejeuneInd": "false",
-            "radiationExposureInd": "false"
+            },
+            "site": "565GC"
           }
-        },
-        "insuranceList": {
-          "insurance": {
-            "companyName": "Medicare",
-            "enrolledInPartA": "false",
-            "enrolledInPartB": "false",
-            "insuranceMappingTypeName": "MDCR"
-          }
-        },
-        "militaryServiceInfo": {
-          "disabilityRetirementIndicator": "false",
-          "dischargeDueToDisability": "false",
-          "militaryServiceSiteRecords": {
-            "militaryServiceSiteRecord": {
-              "militaryServiceEpisodes": {
-                "militaryServiceEpisode": {
-                  "endDate": "06/28/2015",
-                  "serviceBranch": "4",
-                  "startDate": "08/08/2004",
-                  "dischargeType": "1"
-                }
-              },
-              "site": "565GC"
-            }
-          }
-        },
-        "prisonerOfWarInfo": {
-          "powIndicator": "false"
-        },
-        "purpleHeart": {
-          "indicator": "false"
-        },
-        "personInfo": {
-          "firstName": "SAL",
-          "middleName": "F",
-          "lastName": "VOASAL",
-          "ssnText": "498745223",
-          "gender": "M",
-          "dob": "02/08/1981",
-          "mothersMaidenName": "Young",
-          "placeOfBirthCity": "Mt Vernon",
-          "placeOfBirthState": "MO"
         }
       },
-      "applications": {
-        "applicationInfo": {
-          "appDate": "2015-12-21",
-          "appMethod": "1"
-        }
+      "prisonerOfWarInfo": {
+        "powIndicator": "false"
+      },
+      "purpleHeart": {
+        "indicator": "false"
+      },
+      "personInfo": {
+        "firstName": "SAL",
+        "middleName": "F",
+        "lastName": "VOASAL",
+        "ssnText": "498745223",
+        "gender": "M",
+        "dob": "02/08/1981",
+        "mothersMaidenName": "Young",
+        "placeOfBirthCity": "Mt Vernon",
+        "placeOfBirthState": "MO"
       }
     },
-    "identity": {
-      "authenticationLevel": {
-        "type": "100",
-        "value": "anonymous"
+    "applications": {
+      "applicationInfo": {
+        "appDate": "2015-12-21",
+        "appMethod": "1"
       }
+    }
+  },
+  "identity": {
+    "authenticationLevel": {
+      "type": "100",
+      "value": "anonymous"
     }
   }
 }
