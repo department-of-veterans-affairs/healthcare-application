@@ -1,10 +1,5 @@
-// liberally copy-pasta'ed from the loopback getFormSubmissionStatus example
 const loopback = require('loopback');
 const path = require('path');
-const fs = require('fs');
-
-// read canned JSON file for loopback's SOAP connector to use.
-const anon1 = JSON.parse(fs.readFileSync(path.join(__dirname, './hasan-1.json'), 'utf8'));
 
 function attach(app) {
   app.set('restApiRoot', '/api');
@@ -23,20 +18,14 @@ function attach(app) {
 
     // Add the methods
     VoaService.submit = (form, cb) => {
-      console.log('*** intercept');
-
-      const formPrime = anon1;
-
-      VoaService.saveSubmitForm(formPrime, (err, response) => {
-        console.log('saveSubmitForm: %j', response);
+      VoaService.saveSubmitForm(form, (err, response) => {
         const result = response;
         cb(err, result);
       });
     };
 
     VoaService.status = (request, cb) => {
-      VoaService.getFormSubmissionStatus({ retrieveFormSubmissionStatusRequest: request }, (err, response) => {
-        console.log('getFormSubmissionStatus: %j', response);
+      VoaService.getFormSubmissionStatus(request, (err, response) => {
         const result = response;
         cb(err, result);
       });
@@ -46,7 +35,7 @@ function attach(app) {
     loopback.remoteMethod(
       VoaService.submit, {
         accepts: [
-          { arg: 'form', type: 'string', required: true,
+          { arg: 'form', type: 'Object', required: true,
             http: { source: 'query' } }
         ],
         returns: { arg: 'result', type: 'string', root: true },
@@ -57,8 +46,8 @@ function attach(app) {
     loopback.remoteMethod(
       VoaService.status, {
         accepts: [
-          { arg: 'request', type: 'string', required: true,
-            http: {source: 'query' } }
+          { arg: 'request', type: 'Object', required: true,
+            http: { source: 'query' } }
         ],
         returns: { arg: 'result', type: 'string', root: true },
         http: { verb: 'get', path: '/status' }
@@ -78,9 +67,7 @@ function attach(app) {
         console.log('Browse your REST API at %s%s', baseUrl, explorer.route);
       });
     } catch (e) {
-      console.log(
-        'Run `npm install loopback-component-explorer` to enable the LoopBack explorer' + e
-      );
+      console.log(`Run "npm install loopback-component-explorer" to enable the LoopBack explorer ${e}`);
     }
 
     app.use(loopback.urlNotFound());
