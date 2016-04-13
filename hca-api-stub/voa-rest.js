@@ -89,5 +89,5 @@ function attach(app) {
 }
 
 module.exports = {
-  attach: attach
+  attach
 };
