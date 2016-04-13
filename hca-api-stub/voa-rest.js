@@ -4,12 +4,18 @@ const path = require('path');
 function attach(app) {
   app.set('restApiRoot', '/api');
 
+  const endpoint = {
+    c7401: 'http://vaausesrapp803.aac.va.gov:7401/voa/voaSvc',
+    e6401: 'https://vaausesrapp803.aac.va.gov:6401/voa/voaSvc',
+    e8432: 'https://vaww.esrdev30.aac.va.gov:8432/voa/voaSvc',
+  };
+
   const ds = loopback.createDataSource('soap',
     {
       connector: require('loopback-connector-soap'),
       remotingEnabled: true,
-      // wsdl: 'http://vaausesrapp803.aac.va.gov:7401/voa/voaSvc?wsdl' // The url to WSDL
-      wsdl: path.join(__dirname, './voa.wsdl')
+      wsdl: path.join(__dirname, './voa.wsdl'),
+      url: endpoint.e8432
     });
 
   ds.once('connected', () => {
