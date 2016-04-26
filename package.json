@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Health care app API and UI",
   "scripts": {
-    "test": "mocha"
+    "dev": "nodemon npm start",
+    "lint": "eslint --ext .js --ext .jsx lib src test",
+    "prestart": "npm run lint",
+    "start": "node src/server.js"
   },
   "repository": {
     "type": "git",
@@ -41,6 +44,7 @@
     "mocha": "^2.4.5",
     "modernizr": "^3.3.1",
     "modernizr-loader": "0.0.4",
+    "nodemon": "^1.9.1",
     "phantomjs-prebuilt": "^2.1.4",
     "react-addons-test-utils": "^15.0.0",
     "react-transform-catch-errors": "^1.0.2",
@@ -68,11 +72,6 @@
   },
   "optionalDependencies": {
     "fsevents": "^1.0.7"
-  },
-  "scripts": {
-    "karma": "karma",
-    "lint": "eslint --ext .js --ext .jsx lib src test",
-    "start": "node src/server.js"
   },
   "private": true
 }
