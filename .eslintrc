@@ -27,7 +27,7 @@
     'comma-dangle': 0,  // Dangling commas are wonderful. It's JSON that's stupid.
     'func-names': 2,
     'max-len': 0, // TODO(awong): Enforce after a reindent.
-    'no-console': 2,
+    'no-console': 0,  // TODO(awong): Enforce after split server/client linting.
     'no-negated-condition': 0,  // Sometimes negated conditions are easier to understand.
     'no-unused-expressions': 0, // TODO(awong): Breaks chai expect() statements.
     'no-unused-vars': [2, {'args': 'after-used', 'argsIgnorePattern': '^_', 'vars': 'local'}],

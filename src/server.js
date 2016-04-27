@@ -1,11 +1,25 @@
-var loopback = require('loopback');
-var voaRest = require('../hca-api-stub/voa-rest');
+const loopback = require('loopback');
+const voaRest = require('../hca-api-stub/voa-rest');
 
-var app = loopback();
-voaRest.attach(app);
+const api = loopback();
+voaRest.attach(api);
 
-app.listen(3000, function () {
-  var baseUrl = 'http://127.0.0.1:3000';
-  app.emit('started', baseUrl);
-  console.log('LoopBack server listening @ %s%s', baseUrl, '/');
+// TODO(awong): Ensure we do NOT load this on travis and staging.
+//   const express = require('express');
+//   server.use(express.static('public'));
+// Set up webpack dev server.
+const webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
+const webpackConfig = require('../webpack.config');
+webpackConfig.entry.app.unshift(
+  'webpack-dev-server/client?http://localhost:8080/',
+  'webpack/hot/dev-server');
+const webpackCompiler = webpack(webpackConfig);
+const server = new WebpackDevServer(webpackCompiler, {
+  contentBase: 'public',
+  hot: true,
+  publicPath: webpackConfig.output.publicPath,
+  stats: { colors: true }
 });
+server.use('/', api);
+server.listen(8080);
