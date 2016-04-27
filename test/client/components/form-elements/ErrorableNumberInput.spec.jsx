@@ -2,7 +2,7 @@ import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import SkinDeep from 'skin-deep';
 
-import ErrorableNumberInput from '../../../../../_health-care/_js/components/form-elements/ErrorableNumberInput';
+import ErrorableNumberInput from '../../../../src/client/components/form-elements/ErrorableNumberInput';
 
 describe('<ErrorableNumberInput>', () => {
   describe('propTypes', () => {

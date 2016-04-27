@@ -1,7 +1,7 @@
 import React from 'react';
 import SkinDeep from 'skin-deep';
 
-import Email from '../../../../../_health-care/_js/components/questions/Email';
+import Email from '../../../../src/client/components/questions/Email';
 
 describe('<Email>', () => {
   describe('propTypes', () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import SkinDeep from 'skin-deep';
 
-import DateInput from '../../../../../_health-care/_js/components/form-elements/DateInput';
+import DateInput from '../../../../src/client/components/form-elements/DateInput';
 
 describe('<DateInput>', () => {
   describe('propTypes', () => {

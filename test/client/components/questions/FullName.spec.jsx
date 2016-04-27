@@ -2,7 +2,7 @@ import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import SkinDeep from 'skin-deep';
 
-import FullName from '../../../../../_health-care/_js/components/questions/FullName';
+import FullName from '../../../../src/client/components/questions/FullName';
 
 describe('<FullName>', () => {
   describe('propTypes', () => {

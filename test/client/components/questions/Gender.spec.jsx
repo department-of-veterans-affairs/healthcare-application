@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import Gender from
-    '../../../../../_health-care/_js/components/questions/Gender';
+    '../../../../src/client/components/questions/Gender';
 
 describe('<Gender>', () => {
   let component = null;

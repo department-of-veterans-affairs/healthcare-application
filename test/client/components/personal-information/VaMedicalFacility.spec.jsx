@@ -2,7 +2,7 @@ import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import SkinDeep from 'skin-deep';
 
-import VaMedicalFacility from '../../../../../_health-care/_js/components/personal-information/VaMedicalFacility';
+import VaMedicalFacility from '../../../../src/client/components/personal-information/VaMedicalFacility';
 
 describe('<VaMedicalFacility>', () => {
   describe('propTypes', () => {
