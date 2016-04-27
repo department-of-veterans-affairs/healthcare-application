@@ -1,3 +1,5 @@
+import { expect } from 'chai';
+
 import { initializeNullValues, isValidDate, isValidSSN, isValidName, isNotBlank, isBlank, isValidMonetaryValue } from '../../../src/client/utils/validations.js';
 
 describe('Validations unit tests', () => {

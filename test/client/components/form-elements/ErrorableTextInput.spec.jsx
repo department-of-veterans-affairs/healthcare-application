@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import SkinDeep from 'skin-deep';
+import chaiAsPromised from "chai-as-promised";
+import sinon from 'sinon';
+import { default as chai, expect } from 'chai';
 
 import ErrorableTextInput from '../../../../src/client/components/form-elements/ErrorableTextInput';
+
+chai.use(chaiAsPromised);
 
 describe('<ErrorableTextInput>', () => {
   describe('propTypes', () => {

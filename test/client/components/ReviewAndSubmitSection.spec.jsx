@@ -1,5 +1,6 @@
 import React from 'react';
 import SkinDeep from 'skin-deep';
+import { expect } from 'chai';
 
 import { ReviewAndSubmitSection } from '../../../src/client/components/ReviewAndSubmitSection';
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
+import { assert, expect } from 'chai';
+
 import Address from
     '../../../../src/client/components/questions/Address';
 

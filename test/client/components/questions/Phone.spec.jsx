@@ -1,5 +1,7 @@
 import React from 'react';
 import SkinDeep from 'skin-deep';
+import sinon from 'sinon';
+import { expect } from 'chai';
 
 import Phone from '../../../../src/client/components/questions/Phone';
 

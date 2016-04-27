@@ -18,6 +18,7 @@ class Nav extends React.Component {
 
     function determinePanelStyles(currentPath, completePath) {
       let classes = '';
+      console.error(currentUrl);
       if (currentUrl.startsWith(currentPath)) {
         classes += ' section-current';
       }

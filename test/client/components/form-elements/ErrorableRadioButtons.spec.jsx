@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import SkinDeep from 'skin-deep';
+import sinon from 'sinon';
+import { expect } from 'chai';
 
 import ErrorableRadioButtons from '../../../../src/client/components/form-elements/ErrorableRadioButtons';
 

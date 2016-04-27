@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import SkinDeep from 'skin-deep';
+import sinon from 'sinon';
+import { assert, expect } from 'chai';
 
 import FullName from '../../../../src/client/components/questions/FullName';
 

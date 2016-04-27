@@ -2,6 +2,7 @@ import React from 'react';
 import SkinDeep from 'skin-deep';
 import { Router, Route, createMemoryHistory } from 'react-router';
 import { createStore } from 'redux';
+import { expect } from 'chai';
 
 import AdditionalInformationSection from '../../src/client/components/personal-information/AdditionalInformationSection';
 import AdditionalMilitaryInformationSection from '../../src/client/components/military-service/AdditionalMilitaryInformationSection';

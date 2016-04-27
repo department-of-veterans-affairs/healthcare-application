@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
+import { assert, expect } from 'chai';
+
 import State from
     '../../../../src/client/components/questions/State';
 

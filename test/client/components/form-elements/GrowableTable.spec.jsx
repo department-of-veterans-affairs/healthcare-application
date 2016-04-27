@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import SkinDeep from 'skin-deep';
+import { expect } from 'chai';
+import sinon from 'sinon';
 
 import GrowableTable from '../../../../src/client/components/form-elements/GrowableTable';
 

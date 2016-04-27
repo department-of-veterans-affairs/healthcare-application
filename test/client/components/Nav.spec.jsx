@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
-import { Router, Route, createMemoryHistory } from 'react-router';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import SkinDeep from 'skin-deep';
+import { Provider } from 'react-redux';
+import { Router, Route, createMemoryHistory } from 'react-router';
+import { createStore } from 'redux';
+import sinon from 'sinon';
+import { expect } from 'chai';
 
 import Nav from '../../../src/client/components/Nav';
 import routes from '../../../src/client/routes';
