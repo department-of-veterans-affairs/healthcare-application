@@ -19,7 +19,7 @@ const server = new WebpackDevServer(webpackCompiler, {
   contentBase: 'public',
   hot: true,
   publicPath: webpackConfig.output.publicPath,
-  stats: {colors: true}
+  stats: { colors: true }
 });
 server.use('/', api);
 server.listen(8080);
