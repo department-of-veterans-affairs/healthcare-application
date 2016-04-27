@@ -7,7 +7,7 @@ var neat = require('bourbon-neat').includePaths;
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var config = {
-  entry: "./src/client.js",
+  entry: { app: ["./src/client.js"] },
   output: {
     path: path.join(__dirname, "assets/js/generated/dev"),
     publicPath: "/assets/js/generated/dev/",
@@ -40,7 +40,23 @@ var config = {
           presets: ['es2015', 'react'],
 
           // Share polyfills between files.
-          plugins: ['transform-runtime'],
+          //plugins: ['transform-runtime'],
+          plugins: [
+            // must be an array with options object as second item
+            ["react-transform", {
+              "transforms": [{
+                // can be an NPM module name or a local path
+                "transform": "react-transform-hmr",
+                // see transform docs for "imports" and "locals" dependencies
+                "imports": ["react"],
+                "locals": ["module"]
+              }, {
+                "transform": "react-transform-catch-errors",
+                "imports": ["react", "redbox-react"]
+              }]
+            }],
+            ["transform-runtime"]
+          ],
 
           // Speed up compilation.
           cacheDirectory: true
@@ -105,7 +121,8 @@ var config = {
       "window.jQuery": "jquery" 
     }),
 
-    new ExtractTextPlugin("bundle.css")
+    new ExtractTextPlugin("bundle.css"),
+    new webpack.HotModuleReplacementPlugin()
   ],
 };
 
