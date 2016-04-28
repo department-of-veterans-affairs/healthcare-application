@@ -87,7 +87,7 @@ var config = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css!resolve-url!sass?includePaths[]=" + bourbon + "&includePaths[]=" + neat + "&includePaths[]=" + "/Users/awong/src/VA/vets-website/~/uswds/src/stylesheets" + "&sourceMap")
+        loader: ExtractTextPlugin.extract("style-loader", "css!resolve-url!sass?includePaths[]=" + bourbon + "&includePaths[]=" + neat + "&includePaths[]=" + "~/uswds/src/stylesheets" + "&sourceMap")
       },
       { test: /\.(jpe?g|png|gif|svg)$/i,
         loader: 'url?limit=10000!img?progressive=true'

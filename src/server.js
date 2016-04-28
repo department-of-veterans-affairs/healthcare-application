@@ -12,7 +12,7 @@ const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const webpackConfig = require('../webpack.config');
 webpackConfig.entry.app.unshift(
-  'webpack-dev-server/client?http://localhost:8080/',
+  'webpack-dev-server/client?http://localhost:3000/',
   'webpack/hot/dev-server');
 const webpackCompiler = webpack(webpackConfig);
 const server = new WebpackDevServer(webpackCompiler, {
@@ -22,4 +22,4 @@ const server = new WebpackDevServer(webpackCompiler, {
   stats: { colors: true }
 });
 server.use('/', api);
-server.listen(8080);
+server.listen(3000);
