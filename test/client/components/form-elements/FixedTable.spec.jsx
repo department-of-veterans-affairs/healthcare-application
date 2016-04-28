@@ -1,7 +1,6 @@
 import React from 'react';
 import SkinDeep from 'skin-deep';
 import sinon from 'sinon';
-import { expect } from 'chai';
 
 import FixedTable from '../../../../src/client/components/form-elements/FixedTable';
 

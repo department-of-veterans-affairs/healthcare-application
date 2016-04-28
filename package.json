@@ -4,9 +4,12 @@
   "description": "Health care app API and UI",
   "scripts": {
     "dev": "nodemon npm start",
+    "karma": "karma start",
     "lint": "eslint --ext .js --ext .jsx lib src test",
     "prestart": "npm run lint",
     "start": "node src/server.js",
+    "watch": "BABEL_ENV=hot npm start & npm run karma & npm run watch-lint",
+    "watch-lint": "nodemon --watch src --watch test --ext js,jsx --exec 'npm run lint'",
     "webpack": "webpack -p",
     "webpack-noopt": "webpack",
     "webpack-prod": "webpack -p --config webpack_prod.config.js",

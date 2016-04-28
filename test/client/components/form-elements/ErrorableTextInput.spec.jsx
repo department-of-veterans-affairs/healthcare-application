@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import SkinDeep from 'skin-deep';
-import chaiAsPromised from "chai-as-promised";
+import chaiAsPromised from 'chai-as-promised';
 import sinon from 'sinon';
 import { default as chai, expect } from 'chai';
 

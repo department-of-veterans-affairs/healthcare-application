@@ -2,7 +2,7 @@ import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import SkinDeep from 'skin-deep';
 import sinon from 'sinon';
-import chaiAsPromised from "chai-as-promised";
+import chaiAsPromised from 'chai-as-promised';
 import { default as chai, expect } from 'chai';
 
 import ErrorableCheckbox from '../../../../src/client/components/form-elements/ErrorableCheckbox';
