@@ -13,6 +13,7 @@ addons:
       - clang-3.6
       - g++-4.8
 cache:
+  apt: true
   directories:
     - node_modules
 notifications:
