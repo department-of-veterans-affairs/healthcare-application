@@ -1,25 +1,51 @@
 const loopback = require('loopback');
 const voaRest = require('../hca-api-stub/voa-rest');
+const express = require('express');
 
+const port = 3000;
+
+function makeServer() {
+  if (process.env.NODE_ENV === undefined || process.env.NODE_ENV === 'development') {
+    // Set up webpack dev server.
+    const webpack = require('webpack');
+    const WebpackDevServer = require('webpack-dev-server');
+    const webpackConfig = require('../webpack.config');
+    webpackConfig.entry.app.unshift(
+      `webpack-dev-server/client?http://localhost:${port}/`,
+      'webpack/hot/dev-server');
+    const webpackCompiler = webpack(webpackConfig);
+    return new WebpackDevServer(webpackCompiler, {
+      contentBase: 'public',
+      hot: true,
+      publicPath: webpackConfig.output.publicPath,
+      stats: {
+        hash: true,
+        version: true,
+        timings: true,
+        assets: false,
+        chunks: false,
+        modules: false,
+        reasons: false,
+        children: false,
+        source: false,
+        errors: true,
+        errorDetails: true,
+        warnings: true,
+        publicPath: true,
+        colors: true
+      }
+    });
+  }
+
+  const server = express();
+  server.use('/', express.static('public'));
+  server.use('/generated', express.static('generated'));
+  return server;
+}
+
+const server = makeServer();
 const api = loopback();
 voaRest.attach(api);
-
-// TODO(awong): Ensure we do NOT load this on travis and staging.
-//   const express = require('express');
-//   server.use(express.static('public'));
-// Set up webpack dev server.
-const webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
-const webpackConfig = require('../webpack.config');
-webpackConfig.entry.app.unshift(
-  'webpack-dev-server/client?http://localhost:3000/',
-  'webpack/hot/dev-server');
-const webpackCompiler = webpack(webpackConfig);
-const server = new WebpackDevServer(webpackCompiler, {
-  contentBase: 'public',
-  hot: true,
-  publicPath: webpackConfig.output.publicPath,
-  stats: { colors: true }
-});
 server.use('/', api);
-server.listen(3000);
+
+server.listen(port);

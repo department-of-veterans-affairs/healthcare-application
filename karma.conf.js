@@ -1,6 +1,12 @@
 // Karma configuration
 // Generated on Wed Dec 30 2015 15:40:11 GMT-0800 (PST)
 var webpack = require('webpack');
+var webpackConfig = require('./webpack.config');
+
+webpackConfig.entry = undefined;
+webpackConfig.output = undefined;
+webpackConfig.devtool = 'inline-source-map';
+webpackConfig.plugins.push(new webpack.IgnorePlugin(/ReactContext|react\/addons/));
 
 module.exports = function(config) {
   config.set({
@@ -32,43 +38,7 @@ module.exports = function(config) {
       'test/**/*.spec.js?(x)': ['webpack', 'sourcemap']
     },
 
-    webpack: {
-      devtool: 'inline-source-map',
-      module: {
-        loaders: [
-          {
-            test: /\.js$/,
-            exclude: /node_modules/,
-            loader: 'babel',
-            query: {
-              // es2015 is current name for the es6 settings.
-              presets: ['es2015'],
-
-              // Speed up compilation.
-              cacheDirectory: true
-            }
-          },
-          {
-            test: /\.jsx$/,
-            exclude: /node_modules/,
-            loader: 'babel',
-            query: {
-              // es2015 is current name for the es6 settings.
-              presets: ['es2015', 'react'],
-
-              // Speed up compilation.
-              cacheDirectory: true
-            }
-          }
-        ]
-      },
-      plugins: [
-        new webpack.IgnorePlugin(/ReactContext/)
-      ],
-      resolve: {
-        extensions: ['', '.js', '.jsx']
-      }
-    },
+    webpack: webpackConfig,
 
     webpackMiddleware: {
       // Don't spam Karma with output.

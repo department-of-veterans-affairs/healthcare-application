@@ -4,14 +4,16 @@ var path = require('path');
 var webpack = require('webpack');
 var bourbon = require('bourbon').includePaths;
 var neat = require('bourbon-neat').includePaths;
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const isDev = process.env.NODE_ENV === undefined || process.env.NODE_ENV === 'development';
 
 var config = {
-  entry: { app: ["./src/client.js"] },
+  entry: { app: ['./src/client.js'] },
   output: {
-    path: path.join(__dirname, "assets/js/generated/dev"),
-    publicPath: "/assets/js/generated/dev/",
-    filename: "bundle.js"
+    path: path.join(__dirname, 'generated/dev'),
+    publicPath: '/generated/dev/',
+    filename: 'bundle.js'
   },
   devtool: '#cheap-module-eval-source-map',
   module: {
@@ -21,12 +23,6 @@ var config = {
         exclude: /node_modules/,
         loader: 'babel',
         query: {
-          // es2015 is current name for the es6 settings.
-          presets: ['es2015'],
-
-          // Share polyfills between files.
-          plugins: ['transform-runtime'],
-
           // Speed up compilation.
           cacheDirectory: true
         }
@@ -36,27 +32,7 @@ var config = {
         exclude: /node_modules/,
         loader: 'babel',
         query: {
-          // es2015 is current name for the es6 settings.
-          presets: ['es2015', 'react'],
-
-          // Share polyfills between files.
-          //plugins: ['transform-runtime'],
-          plugins: [
-            // must be an array with options object as second item
-            ["react-transform", {
-              "transforms": [{
-                // can be an NPM module name or a local path
-                "transform": "react-transform-hmr",
-                // see transform docs for "imports" and "locals" dependencies
-                "imports": ["react"],
-                "locals": ["module"]
-              }, {
-                "transform": "react-transform-catch-errors",
-                "imports": ["react", "redbox-react"]
-              }]
-            }],
-            ["transform-runtime"]
-          ],
+          presets: ['react'],
 
           // Speed up compilation.
           cacheDirectory: true
@@ -65,65 +41,60 @@ var config = {
       {
         // components.js is effectively a hand-rolled bundle.js. Break it apart.
         test: /components\.js$/,
-        loader: "imports?this=>window"
+        loader: 'imports?this=>window'
       },
       {
         test: /foundation\.js$/,
-        loader: "imports?this=>window"
+        loader: 'imports?this=>window'
       },
       {
         test: /\.modernizrrc/,
-        loader: "modernizr"
+        loader: 'modernizr'
       },
       {
         // Loaders are executed bottom to top, right to left. This MUST
         // appear before the \.coffee loader.
         test: /wow\.coffee$/,
-        loaders: [ "imports?this=>window", "exports?this.WOW" ]
+        loaders: [ 'imports?this=>window', 'exports?this.WOW' ]
       },
       {
         test: /\.coffee$/,
-        loader: "coffee-loader"
+        loader: 'coffee-loader'
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css!resolve-url!sass?includePaths[]=" + bourbon + "&includePaths[]=" + neat + "&includePaths[]=" + "~/uswds/src/stylesheets" + "&sourceMap")
+        loader: ExtractTextPlugin.extract('style-loader', 'css!resolve-url!sass?includePaths[]=' + bourbon + '&includePaths[]=' + neat + '&includePaths[]=' + '~/uswds/src/stylesheets' + '&sourceMap')
       },
       { test: /\.(jpe?g|png|gif|svg)$/i,
         loader: 'url?limit=10000!img?progressive=true'
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "url-loader?limit=10000&minetype=application/font-woff"
+        loader: 'url-loader?limit=10000&minetype=application/font-woff'
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "file-loader"
+        loader: 'file-loader'
       }
     ]
   },
   resolve: {
     alias: {
-      modernizr$: path.resolve(__dirname, "./.modernizrrc"),
-      jquery: "jquery/src/jquery"
+      modernizr$: path.resolve(__dirname, './.modernizrrc'),
     },
     extensions: ['', '.js', '.jsx']
   },
   plugins: [
     new webpack.DefinePlugin({
-        __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_TYPE === "dev"))
+        __DEV__: JSON.stringify(JSON.parse(isDev))
     }),
 
-    // See http://stackoverflow.com/questions/28969861/managing-jquery-plugin-dependency-in-webpack
-    new webpack.ProvidePlugin({
-      "$": "jquery",
-      jQuery: "jquery",
-      "window.jQuery": "jquery" 
-    }),
-
-    new ExtractTextPlugin("bundle.css"),
-    new webpack.HotModuleReplacementPlugin()
+    new ExtractTextPlugin('bundle.css'),
   ],
 };
+
+if (isDev) {
+  config.plugins.push(new webpack.HotModuleReplacementPlugin());
+}
 
 module.exports = config;
