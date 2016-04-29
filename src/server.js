@@ -5,7 +5,7 @@ const express = require('express');
 const port = 3000;
 
 function makeServer() {
-  if (process.env.NODE_ENV === undefined || process.env.NODE_ENV === 'development') {
+  if (process.env.BABEL_ENV === 'hot') {
     // Set up webpack dev server.
     const webpack = require('webpack');
     const WebpackDevServer = require('webpack-dev-server');

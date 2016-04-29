@@ -6,7 +6,7 @@
   'plugins': ['transform-runtime'],
 
   'env': {
-    'development': {
+    'hot': {
       'plugins': [
         ['react-transform', {
           'transforms': [{
