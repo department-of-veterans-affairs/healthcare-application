@@ -102,6 +102,11 @@ select {
   }
 }
 
+.hca-required-span {
+  color: $color-secondary-dark;
+  margin: 0 0.35em;
+}
+
 .hca-process {
   li {
     h5 {

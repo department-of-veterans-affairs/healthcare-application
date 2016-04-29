@@ -37,6 +37,7 @@ class AdditionalInformationSection extends React.Component {
       </table>);
     } else {
       content = (<div>
+        <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
           <ErrorableCheckbox
               label="I am enrolling to obtain minimal essential coverage under the affordable care act"

@@ -126,20 +126,19 @@ describe('<ErrorableTextInput>', () => {
     expect(inputs[0].props['aria-describedby']).to.equal(errorMessages[0].props.id);
   });
 
-  it('required=false does not have required span', () => {
+  it('required=false does not have required asterisk', () => {
     const tree = SkinDeep.shallowRender(
       <ErrorableTextInput field={makeField(1)} label="my label" onValueChange={(_update) => {}}/>);
 
-    expect(tree.everySubTree('.usa-additional_text')).to.have.lengthOf(0);
+    expect(tree.everySubTree('label')[0].text()).to.equal('my label');
   });
 
-  it('required=true has required span', () => {
+  it('required=true has required asterisk', () => {
     const tree = SkinDeep.shallowRender(
       <ErrorableTextInput field={makeField(1)} label="my label" required onValueChange={(_update) => {}}/>);
 
-    const requiredSpan = tree.everySubTree('.usa-additional_text');
-    expect(requiredSpan).to.have.lengthOf(1);
-    expect(requiredSpan[0].text()).to.equal('Required');
+    const label = tree.everySubTree('label');
+    expect(label[0].text()).to.equal('my label*');
   });
 
   it('label attribute propagates', () => {

@@ -42,7 +42,7 @@ class VaInformationSection extends React.Component {
           This information will be used to determine which sections of the Application for
           Health Benefits you should complete.
         </p>
-
+        <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
           <ErrorableRadioButtons required
               errorMessage={validateIfDirty(this.props.data.isVaServiceConnected, isNotBlank) ? '' : 'Please select a response'}
