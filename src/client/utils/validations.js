@@ -1,17 +1,35 @@
 import _ from 'lodash';
 
-function isBlank(value) {
-  if (value !== null) {
-    return value === '';
+function validateIfDirty(field, validator) {
+  if (field.dirty) {
+    return validator(field.value);
   }
+
   return true;
 }
 
-function isNotBlank(value) {
-  if (value !== null) {
-    return value !== '';
+function validateIfDirtyDate(dayField, monthField, yearField, validator) {
+  if (dayField.dirty || monthField.dirty || yearField.dirty) {
+    return validator(dayField.value, monthField.value, yearField.value);
   }
+
   return true;
+}
+
+function isBlank(value) {
+  return value === '';
+  // if (value !== null) {
+  //   return value === '';
+  // }
+  // return true;
+}
+
+function isNotBlank(value) {
+  return value !== '';
+  // if (value !== null) {
+  //   return value !== '';
+  // }
+  // return true;
 }
 
 // Conditions for valid SSN from the original 1010ez pdf form:
@@ -288,6 +306,8 @@ function initializeNullValues(value) {
 }
 
 export {
+  validateIfDirty,
+  validateIfDirtyDate,
   initializeNullValues,
   isBlank,
   isNotBlank,

@@ -10,7 +10,7 @@ import Gender from '../questions/Gender';
 import MothersMaidenName from './MothersMaidenName';
 import SocialSecurityNumber from '../questions/SocialSecurityNumber';
 import { maritalStatuses, states } from '../../utils/options-for-select.js';
-import { isNotBlank } from '../../utils/validations';
+import { isNotBlank, validateIfDirty } from '../../utils/validations';
 import { updateReviewStatus, veteranUpdateField } from '../../actions';
 
 /**
@@ -86,7 +86,7 @@ class NameAndGeneralInfoSection extends React.Component {
               value={this.props.data.stateOfBirth}
               onValueChange={(update) => {this.props.onStateChange('stateOfBirth', update);}}/>
           <ErrorableSelect
-              errorMessage={isNotBlank(this.props.data.maritalStatus.value) ? undefined : 'Please select a marital status'}
+              errorMessage={validateIfDirty(this.props.data.maritalStatus, isNotBlank) ? undefined : 'Please select a marital status'}
               label="Current Marital Status"
               options={maritalStatuses}
               required

@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
 import ErrorableSelect from '../form-elements/ErrorableSelect';
-import { isValidName, isBlank } from '../../utils/validations';
+import { validateIfDirty, isValidName, isBlank } from '../../utils/validations';
 import { suffixes } from '../../utils/options-for-select';
 
 /**
@@ -41,9 +41,9 @@ class FullName extends React.Component {
 
   validateRequiredFields(field, isRequired) {
     if (isRequired) {
-      return !field.dirty || isValidName(field.value);
+      return validateIfDirty(field, isValidName);
     }
-    return isBlank(field.value) || isValidName(field.value);
+    return validateIfDirty(field, isBlank) || validateIfDirty(field, isValidName);
   }
 
   render() {

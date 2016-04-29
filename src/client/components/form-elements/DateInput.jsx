@@ -4,7 +4,7 @@ import _ from 'lodash';
 import ErrorableSelect from '../form-elements/ErrorableSelect';
 import ErrorableNumberInput from '../form-elements/ErrorableNumberInput';
 
-import { isBlank, isValidDate } from '../../utils/validations';
+import { validateIfDirtyDate, isBlank, isValidDate } from '../../utils/validations';
 import { months, days } from '../../utils/options-for-select.js';
 
 /**
@@ -43,19 +43,19 @@ class DateInput extends React.Component {
   render() {
     let isValid;
     let daysForSelectedMonth = [];
-    const day = this.props.day.value;
-    const month = this.props.month.value;
-    const year = this.props.year.value;
+    const day = this.props.day;
+    const month = this.props.month;
+    const year = this.props.year;
 
     if (month) {
-      daysForSelectedMonth = days[month];
+      daysForSelectedMonth = days[month.value];
     }
 
     if (this.props.required) {
-      isValid = isValidDate(day, month, year);
+      isValid = validateIfDirtyDate(day, month, year, isValidDate);
     } else {
-      isValid = (isBlank(day) && isBlank(month) && isBlank(year)) ||
-          isValidDate(day, month, year);
+      isValid = (isBlank(day.value) && isBlank(month.value) && isBlank(year.value)) ||
+          validateIfDirtyDate(day, month, year, isValidDate);
     }
 
     return (

@@ -40,7 +40,7 @@ describe('<SocialSecurityNumber>', () => {
     });
   });
 
-  it('includes ErrorMessage component when invalid SSN', () => {
+  it('excludes ErrorMessage prop when valid SSN', () => {
     const tree = SkinDeep.shallowRender(<SocialSecurityNumber ssn={makeField('555-12-6789')} onValueChange={(_update) => {}}/>);
     const errorableInputs = tree.everySubTree('ErrorableTextInput');
     expect(errorableInputs).to.have.lengthOf(1);
@@ -48,7 +48,7 @@ describe('<SocialSecurityNumber>', () => {
   });
 
   it('sets error message when SSN is invalid', () => {
-    const tree = SkinDeep.shallowRender(<SocialSecurityNumber ssn={makeField('123-45-678')} onValueChange={(_update) => {}}/>);
+    const tree = SkinDeep.shallowRender(<SocialSecurityNumber ssn={makeField('123-45-678', true)} onValueChange={(_update) => {}}/>);
     const errorableInputs = tree.everySubTree('ErrorableTextInput');
     expect(errorableInputs).to.have.lengthOf(1);
     expect(errorableInputs[0].props.errorMessage).to.not.be.undefined;

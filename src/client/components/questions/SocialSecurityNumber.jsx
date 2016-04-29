@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
-import { isBlank, isValidSSN } from '../../utils/validations.js';
+import { validateIfDirty, isBlank, isValidSSN } from '../../utils/validations.js';
 
 /**
  * Input component for collecting a Social Security Number.
@@ -24,9 +24,9 @@ class SocialSecurityNumber extends React.Component {
 
   validate(field) {
     if (this.props.required) {
-      return !field.dirty || isValidSSN(field.value);
+      return validateIfDirty(field, isValidSSN);
     }
-    return isBlank(field.value) || isValidSSN(field.value);
+    return isBlank(field.value) || validateIfDirty(field, isValidSSN);
   }
 
   render() {

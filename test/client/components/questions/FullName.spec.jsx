@@ -9,10 +9,10 @@ import { makeField } from '../../../../src/client/reducers/fields';
 
 function makeName(first, middle, last, suffix) {
   return {
-    first: makeField(first),
-    middle: makeField(middle),
-    last: makeField(last),
-    suffix: makeField(suffix)
+    first: makeField(first, true),
+    middle: makeField(middle, true),
+    last: makeField(last, true),
+    suffix: makeField(suffix, true)
   };
 }
 
