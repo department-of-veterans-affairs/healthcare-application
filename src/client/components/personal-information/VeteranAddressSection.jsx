@@ -36,43 +36,43 @@ class VeteranAddressSection extends React.Component {
         <tbody>
           <tr>
             <td>Street:</td>
-            <td>{this.props.data.address.street}</td>
+            <td>{this.props.data.address.street.value}</td>
           </tr>
           <tr>
             <td>City:</td>
-            <td>{this.props.data.address.city}</td>
+            <td>{this.props.data.address.city.value}</td>
           </tr>
           <tr>
             <td>Country:</td>
-            <td>{this.props.data.address.country}</td>
+            <td>{this.props.data.address.country.value}</td>
           </tr>
           <tr>
             <td>State:</td>
-            <td>{this.props.data.address.state}</td>
+            <td>{this.props.data.address.state.value}</td>
           </tr>
           <tr>
             <td>ZIP Code:</td>
-            <td>{this.props.data.address.zipcode}</td>
+            <td>{this.props.data.address.zipcode.value}</td>
           </tr>
           <tr>
             <td>County:</td>
-            <td>{this.props.data.county}</td>
+            <td>{this.props.data.county.value}</td>
           </tr>
           <tr>
             <td>Email Address:</td>
-            <td>{this.props.data.email}</td>
+            <td>{this.props.data.email.value}</td>
           </tr>
           <tr>
             <td>Re-enter Email address:</td>
-            <td>{this.props.data.emailConfirmation}</td>
+            <td>{this.props.data.emailConfirmation.value}</td>
           </tr>
           <tr>
             <td>Home telephone number:</td>
-            <td>{this.props.data.homePhone}</td>
+            <td>{this.props.data.homePhone.value}</td>
           </tr>
           <tr>
             <td>Mobile telephone number:</td>
-            <td>{this.props.data.mobilePhone}</td>
+            <td>{this.props.data.mobilePhone.value}</td>
           </tr>
         </tbody>
       </table>);

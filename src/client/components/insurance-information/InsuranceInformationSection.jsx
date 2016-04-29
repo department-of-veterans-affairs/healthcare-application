@@ -55,16 +55,16 @@ class InsuranceInformationSection extends React.Component {
       let reactKey = 0;
       let providerIndex = 0;
       providers = providersList.map((obj) => {
-        const insuranceName = obj.insuranceName;
-        const insuranceAddress = obj.insuranceAddress;
-        const insuranceCity = obj.insuranceCity;
-        const insuranceCountry = obj.insuranceCountry;
-        const insuranceState = obj.insuranceState;
-        const insuranceZipcode = obj.insuranceZipcode;
-        const insurancePhone = obj.insurancePhone;
-        const insurancePolicyHolderName = obj.insurancePolicyHolderName;
-        const insurancePolicyNumber = obj.insurancePolicyNumber;
-        const insuranceGroupCode = obj.insuranceGroupCode;
+        const insuranceName = obj.insuranceName.value;
+        const insuranceAddress = obj.insuranceAddress.value;
+        const insuranceCity = obj.insuranceCity.value;
+        const insuranceCountry = obj.insuranceCountry.value;
+        const insuranceState = obj.insuranceState.value;
+        const insuranceZipcode = obj.insuranceZipcode.value;
+        const insurancePhone = obj.insurancePhone.value;
+        const insurancePolicyHolderName = obj.insurancePolicyHolderName.value;
+        const insurancePolicyNumber = obj.insurancePolicyNumber.value;
+        const insuranceGroupCode = obj.insuranceGroupCode.value;
         return (<table key={++reactKey} className="review usa-table-borderless">
           <thead>
             <tr>

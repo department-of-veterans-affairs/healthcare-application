@@ -27,7 +27,7 @@ class AdditionalInformationSection extends React.Component {
           </tr>
           <tr>
             <td>Preferred VA Medical Facility:</td>
-            <td>{this.props.data.vaMedicalFacility} in {this.props.data.facilityState}</td>
+            <td>{this.props.data.vaMedicalFacility.value} in {this.props.data.facilityState.value}</td>
           </tr>
           <tr>
             <td>Do you want VA to contact you to schedule your first appointment?:</td>

@@ -19,9 +19,9 @@ class MedicareMedicaidSection extends React.Component {
     if (this.props.data.isEnrolledMedicarePartA) {
       medicarePartA = (<tr>
         <td>If so, what is your Medicare Part A effective date?:</td>
-        <td>{this.props.data.medicarePartAEffectiveDate.month}
-        /{this.props.data.medicarePartAEffectiveDate.day}/
-        {this.props.data.medicarePartAEffectiveDate.year}</td>
+        <td>{this.props.data.medicarePartAEffectiveDate.month.value}
+        /{this.props.data.medicarePartAEffectiveDate.day.value}/
+        {this.props.data.medicarePartAEffectiveDate.year.value}</td>
       </tr>);
     }
 

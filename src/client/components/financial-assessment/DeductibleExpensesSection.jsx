@@ -38,19 +38,19 @@ class DeductibleExpensesSection extends React.Component {
         <tbody>
           <tr>
             <td>Total non-reimbursed medical expenses paid by you or your spouse:</td>
-            <td>{this.props.data.deductibleMedicalExpenses}</td>
+            <td>{this.props.data.deductibleMedicalExpenses.value}</td>
           </tr>
           <tr>
             <td>Amount you paid last calendar year for funeral and burial expenses
          for your deceased spouse or dependent child:
             </td>
-            <td>{this.props.data.deductibleFuneralExpenses}</td>
+            <td>{this.props.data.deductibleFuneralExpenses.value}</td>
           </tr>
           <tr>
             <td>Amount you paid last calendar year for your college or vocational
               educational expenses:
             </td>
-            <td>{this.props.data.deductibleEducationExpenses}</td>
+            <td>{this.props.data.deductibleEducationExpenses.value}</td>
           </tr>
         </tbody>
       </table>);

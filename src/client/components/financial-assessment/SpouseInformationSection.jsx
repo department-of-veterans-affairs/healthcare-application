@@ -47,27 +47,27 @@ class SpouseInformationSection extends React.Component {
             <tbody>
               <tr>
                 <td>Street:</td>
-                <td>{this.props.data.spouseAddress.street}</td>
+                <td>{this.props.data.spouseAddress.street.value}</td>
               </tr>
               <tr>
                 <td>City:</td>
-                <td>{this.props.data.spouseAddress.city}</td>
+                <td>{this.props.data.spouseAddress.city.value}</td>
               </tr>
               <tr>
                 <td>Country:</td>
-                <td>{this.props.data.spouseAddress.country}</td>
+                <td>{this.props.data.spouseAddress.country.value}</td>
               </tr>
               <tr>
                 <td>State:</td>
-                <td>{this.props.data.spouseAddress.state}</td>
+                <td>{this.props.data.spouseAddress.state.value}</td>
               </tr>
               <tr>
                 <td>ZIP Code:</td>
-                <td>{this.props.data.spouseAddress.zipcode}</td>
+                <td>{this.props.data.spouseAddress.zipcode.value}</td>
               </tr>
               <tr>
                 <td>Phone:</td>
-                <td>{this.props.data.spousePhone}</td>
+                <td>{this.props.data.spousePhone.value}</td>
               </tr>
             </tbody>
           </table>

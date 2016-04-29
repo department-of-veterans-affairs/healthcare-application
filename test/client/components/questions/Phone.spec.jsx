@@ -48,7 +48,7 @@ describe('<Phone>', () => {
   });
 
   it('sets error message when phone number is invalid', () => {
-    const tree = SkinDeep.shallowRender(<Phone value={makeField('123-45-6789')} onValueChange={(_update) => {}}/>);
+    const tree = SkinDeep.shallowRender(<Phone value={makeField('123-45-6789', true)} onValueChange={(_update) => {}}/>);
     const errorableInputs = tree.everySubTree('ErrorableTextInput');
     expect(errorableInputs).to.have.lengthOf(1);
     expect(errorableInputs[0].props.errorMessage).to.not.be.undefined;

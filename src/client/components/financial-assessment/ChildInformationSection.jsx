@@ -54,21 +54,21 @@ class ChildInformationSection extends React.Component {
       let reactKey = 0;
       let childNumber = 0;
       children = childList.map((obj) => {
-        const childFirstName = obj.childFullName.first;
-        const childMiddleName = obj.childFullName.middle;
-        const childLastName = obj.childFullName.last;
-        const childSuffix = obj.childFullName.suffix;
-        const childRelation = obj.childRelation;
-        const childSocialSecurityNumber = obj.childSocialSecurityNumber;
-        const childBecameDependentMonth = obj.childBecameDependent.month;
-        const childBecameDependentDay = obj.childBecameDependent.day;
-        const childBecameDependentYear = obj.childBecameDependent.year;
-        const childDateOfBirthMonth = obj.childDateOfBirth.month;
-        const childDateOfBirthDay = obj.childDateOfBirth.day;
-        const childDateOfBirthYear = obj.childDateOfBirth.year;
+        const childFirstName = obj.childFullName.first.value;
+        const childMiddleName = obj.childFullName.middle.value;
+        const childLastName = obj.childFullName.last.value;
+        const childSuffix = obj.childFullName.suffix.value;
+        const childRelation = obj.childRelation.value;
+        const childSocialSecurityNumber = obj.childSocialSecurityNumber.value;
+        const childBecameDependentMonth = obj.childBecameDependent.month.value;
+        const childBecameDependentDay = obj.childBecameDependent.day.value;
+        const childBecameDependentYear = obj.childBecameDependent.year.value;
+        const childDateOfBirthMonth = obj.childDateOfBirth.month.value;
+        const childDateOfBirthDay = obj.childDateOfBirth.day.value;
+        const childDateOfBirthYear = obj.childDateOfBirth.year.value;
         const childDisabledBefore18 = obj.childDisabledBefore18;
         const childAttendedSchoolLastYear = obj.childAttendedSchoolLastYear;
-        const childEducationExpenses = obj.childEducationExpenses;
+        const childEducationExpenses = obj.childEducationExpenses.value;
         const childCohabitedLastYear = obj.childCohabitedLastYear;
         const childReceivedSupportLastYear = obj.childReceivedSupportLastYear;
         return (<table key={++reactKey} className="review usa-table-borderless">

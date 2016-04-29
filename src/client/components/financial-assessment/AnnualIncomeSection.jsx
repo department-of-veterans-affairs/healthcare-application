@@ -60,20 +60,20 @@ class AnnualIncomeSection extends React.Component {
       childrenIncomeReview = this.props.data.children.map((obj, index) => {
         return (
           <div key={reactKey++}>
-            <h6>Child: {`${childrenData[index].childFullName.first} ${childrenData[index].childFullName.last}`}</h6>
+            <h6>Child: {`${childrenData[index].childFullName.first.value} ${childrenData[index].childFullName.last.value}`}</h6>
             <table className="review usa-table-borderless">
               <tbody>
                 <tr>
                   <td>Children Gross Income:</td>
-                  <td>{obj.childGrossIncome}</td>
+                  <td>{obj.childGrossIncome.value}</td>
                 </tr>
                 <tr>
                   <td>Children Net Income:</td>
-                  <td>{obj.childNetIncome}</td>
+                  <td>{obj.childNetIncome.value}</td>
                 </tr>
                 <tr>
                   <td>Children Other Income:</td>
-                  <td>{obj.childOtherIncome}</td>
+                  <td>{obj.childOtherIncome.value}</td>
                 </tr>
               </tbody>
             </table>
@@ -88,15 +88,15 @@ class AnnualIncomeSection extends React.Component {
             <tbody>
               <tr>
                 <td>Veteran Gross Income:</td>
-                <td>{this.props.data.veteranGrossIncome}</td>
+                <td>{this.props.data.veteranGrossIncome.value}</td>
               </tr>
               <tr>
                 <td>Veteran Net Income:</td>
-                <td>{this.props.data.veteranNetIncome}</td>
+                <td>{this.props.data.veteranNetIncome.value}</td>
               </tr>
               <tr>
                 <td>Veteran Other Income:</td>
-                <td>{this.props.data.veteranOtherIncome}</td>
+                <td>{this.props.data.veteranOtherIncome.value}</td>
               </tr>
             </tbody>
           </table>
@@ -105,15 +105,15 @@ class AnnualIncomeSection extends React.Component {
             <tbody>
               <tr>
                 <td>Spouse Gross Income:</td>
-                <td>{this.props.data.spouseGrossIncome}</td>
+                <td>{this.props.data.spouseGrossIncome.value}</td>
               </tr>
               <tr>
                 <td>Spouse Net Income:</td>
-                <td>{this.props.data.spouseNetIncome}</td>
+                <td>{this.props.data.spouseNetIncome.value}</td>
               </tr>
               <tr>
                 <td>Spouse Other Income:</td>
-                <td>{this.props.data.spouseOtherIncome}</td>
+                <td>{this.props.data.spouseOtherIncome.value}</td>
               </tr>
             </tbody>
           </table>

@@ -48,7 +48,7 @@ describe('<Email>', () => {
   });
 
   it('sets error message when Email is invalid', () => {
-    const tree = SkinDeep.shallowRender(<Email email={makeField('test')} onValueChange={(_update) => {}}/>);
+    const tree = SkinDeep.shallowRender(<Email email={makeField('test', true)} onValueChange={(_update) => {}}/>);
     const errorableInputs = tree.everySubTree('ErrorableTextInput');
     expect(errorableInputs).to.have.lengthOf(1);
     expect(errorableInputs[0].props.errorMessage).to.not.be.undefined;

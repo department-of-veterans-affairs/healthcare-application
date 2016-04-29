@@ -28,31 +28,31 @@ class NameAndGeneralInfoSection extends React.Component {
         <tbody>
           <tr>
             <td>Veteran Name:</td>
-            <td>{this.props.data.fullName.first} {this.props.data.fullName.middle} {this.props.data.fullName.last} {this.props.data.fullName.suffix}</td>
+            <td>{this.props.data.fullName.first.value} {this.props.data.fullName.middle.value} {this.props.data.fullName.last.value} {this.props.data.fullName.suffix.value}</td>
           </tr>
           <tr>
             <td>Mother's Maiden Name:</td>
-            <td>{this.props.data.mothersMaidenName}</td>
+            <td>{this.props.data.mothersMaidenName.value}</td>
           </tr>
           <tr>
             <td>Social Security Number:</td>
-            <td>{this.props.data.socialSecurityNumber}</td>
+            <td>{this.props.data.socialSecurityNumber.value}</td>
           </tr>
           <tr>
             <td>Gender:</td>
-            <td>{this.props.data.gender}</td>
+            <td>{this.props.data.gender.value}</td>
           </tr>
           <tr>
             <td>Date of Birth:</td>
-            <td>{this.props.data.dateOfBirth.month}/{this.props.data.dateOfBirth.day}/{this.props.data.dateOfBirth.year}</td>
+            <td>{this.props.data.dateOfBirth.month.value}/{this.props.data.dateOfBirth.day.value}/{this.props.data.dateOfBirth.year.value}</td>
           </tr>
           <tr>
             <td>Place of Birth:</td>
-            <td>{this.props.data.cityOfBirth} {this.props.data.stateOfBirth}</td>
+            <td>{this.props.data.cityOfBirth.value} {this.props.data.stateOfBirth.value}</td>
           </tr>
           <tr>
             <td>Current Marital Status:</td>
-            <td>{this.props.data.maritalStatus}</td>
+            <td>{this.props.data.maritalStatus.value}</td>
           </tr>
         </tbody>
       </table>);
