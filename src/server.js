@@ -13,6 +13,7 @@ function makeServer() {
     webpackConfig.entry.app.unshift(
       `webpack-dev-server/client?http://localhost:${port}/`,
       'webpack/hot/dev-server');
+    webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
     const webpackCompiler = webpack(webpackConfig);
     return new WebpackDevServer(webpackCompiler, {
       contentBase: 'public',
