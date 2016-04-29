@@ -6,8 +6,6 @@ var bourbon = require('bourbon').includePaths;
 var neat = require('bourbon-neat').includePaths;
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const isDev = process.env.NODE_ENV === undefined || process.env.NODE_ENV === 'development';
-
 var config = {
   entry: { app: ['./src/client.js'] },
   output: {
@@ -86,15 +84,11 @@ var config = {
   },
   plugins: [
     new webpack.DefinePlugin({
-        __DEV__: JSON.stringify(JSON.parse(isDev))
+        __DEV__: JSON.stringify(JSON.parse(process.env.NODE_ENV === undefined || process.env.NODE_ENV === 'development'))
     }),
 
     new ExtractTextPlugin('bundle.css'),
   ],
 };
-
-if (isDev) {
-  config.plugins.push(new webpack.HotModuleReplacementPlugin());
-}
 
 module.exports = config;
