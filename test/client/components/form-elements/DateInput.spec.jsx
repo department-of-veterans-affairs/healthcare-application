@@ -29,10 +29,10 @@ describe('<DateInput>', () => {
       sinon.assert.calledWithMatch(consoleStub, /Required prop `day` was not specified in `DateInput`/);
     });
 
-    it('day must be a number', () => {
+    it('day must be an object', () => {
       SkinDeep.shallowRender(
         <DateInput day month={makeField(12)} year={makeField(2010)} onValueChange={(_update) => {}}/>);
-      sinon.assert.calledWithMatch(consoleStub, /Invalid prop `day` of type `boolean` supplied to `DateInput`, expected `number`./);
+      sinon.assert.calledWithMatch(consoleStub, /Invalid prop `day` of type `boolean` supplied to `DateInput`, expected `object`./);
     });
 
     xit('month is required', () => {
@@ -41,10 +41,10 @@ describe('<DateInput>', () => {
       sinon.assert.calledWithMatch(consoleStub, /Required prop `month` was not specified in `DateInput`/);
     });
 
-    it('month must be a number', () => {
+    it('month must be an object', () => {
       SkinDeep.shallowRender(
         <DateInput day={makeField(1)} month year={makeField(2010)} onValueChange={(_update) => {}}/>);
-      sinon.assert.calledWithMatch(consoleStub, /Invalid prop `month` of type `boolean` supplied to `DateInput`, expected `number`./);
+      sinon.assert.calledWithMatch(consoleStub, /Invalid prop `month` of type `boolean` supplied to `DateInput`, expected `object`./);
     });
 
     xit('year is required', () => {
@@ -53,10 +53,10 @@ describe('<DateInput>', () => {
       sinon.assert.calledWithMatch(consoleStub, /Required prop `year` was not specified in `DateInput`/);
     });
 
-    it('year must be a number', () => {
+    it('year must be an object', () => {
       SkinDeep.shallowRender(
         <DateInput day={makeField(1)} month={makeField(12)} year onValueChange={(_update) => {}}/>);
-      sinon.assert.calledWithMatch(consoleStub, /Invalid prop `year` of type `boolean` supplied to `DateInput`, expected `number`./);
+      sinon.assert.calledWithMatch(consoleStub, /Invalid prop `year` of type `boolean` supplied to `DateInput`, expected `object`./);
     });
 
     it('onValueChange is required', () => {
