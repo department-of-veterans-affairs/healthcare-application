@@ -173,12 +173,14 @@ function isValidNameAndGeneralInformation(data) {
 }
 
 function isValidVaInformation(data) {
-  return isNotBlank(data.isVaServiceConnected);
+  return validateIfDirty(data.isVaServiceConnected, isNotBlank) &&
+      validateIfDirty(data.compensableVaServiceConnected, isNotBlank) &&
+      validateIfDirty(data.receivesVaPension, isNotBlank);
 }
 
 function isValidAdditionalInformation(data) {
-  return isNotBlank(data.facilityState) &&
-    isNotBlank(data.vaMedicalFacility);
+  return validateIfDirty(data.facilityState, isNotBlank) &&
+    validateIfDirty(data.vaMedicalFacility, isNotBlank);
 }
 
 function isValidVeteranAddress(data) {

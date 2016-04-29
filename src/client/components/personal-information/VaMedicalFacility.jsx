@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 
 import ErrorableSelect from '../form-elements/ErrorableSelect';
-import { isNotBlank } from '../../utils/validations';
+import { validateIfDirty, isNotBlank } from '../../utils/validations';
 import { vaMedicalFacilities } from '../../utils/options-for-select.js';
 
 /**
@@ -33,7 +33,7 @@ class VaMedicalFacility extends React.Component {
 
   render() {
     let clinicList = [];
-    const selectedState = this.props.facilityState;
+    const selectedState = this.props.facilityState.value;
     if (selectedState) {
       clinicList = vaMedicalFacilities[selectedState];
     }
@@ -41,10 +41,10 @@ class VaMedicalFacility extends React.Component {
     return (
       <div className="usa-input-grid usa-input-grid-large">
         <ErrorableSelect required={this.props.required}
-            errorMessage={isNotBlank(this.props.value) ? undefined : 'Please select a medical facility'}
+            errorMessage={validateIfDirty(this.props.value, isNotBlank) ? undefined : 'Please select a medical facility'}
             label="Center/Clinic"
             options={clinicList}
-            value={this.props.value}
+            value={this.props.value.value}
             onValueChange={this.handleChange}/>
       </div>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
-import { isBlank, isValidPhone } from '../../utils/validations.js';
+import { validateIfDirty, isBlank, isValidPhone } from '../../utils/validations.js';
 
 /**
  * Input component for collecting a Phone number.
@@ -21,9 +21,9 @@ class Phone extends React.Component {
   render() {
     let errorMessage;
     if (this.props.required) {
-      errorMessage = isValidPhone(this.props.value.value) ? undefined : 'Please put your number in this format xxx-xxx-xxxx';
+      errorMessage = validateIfDirty(this.props.value, isValidPhone) ? undefined : 'Please put your number in this format xxx-xxx-xxxx';
     } else {
-      errorMessage = isBlank(this.props.value.value) || isValidPhone(this.props.value.value) ? undefined : 'Please put your number in this format xxx-xxx-xxxx';
+      errorMessage = isBlank(this.props.value.value) || validateIfDirty(this.props.value, isValidPhone) ? undefined : 'Please put your number in this format xxx-xxx-xxxx';
     }
 
     return (

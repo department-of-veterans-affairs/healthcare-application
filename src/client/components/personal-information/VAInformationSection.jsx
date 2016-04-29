@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
 import { yesNo } from '../../utils/options-for-select';
-import { isNotBlank } from '../../utils/validations';
+import { validateIfDirty, isNotBlank } from '../../utils/validations';
 import { updateReviewStatus, veteranUpdateField } from '../../actions';
 
 /**
@@ -22,15 +22,15 @@ class VaInformationSection extends React.Component {
         <tbody>
           <tr>
             <td>Are you VA Service Connected 50% to 100% Disabled?:</td>
-            <td>{`${this.props.data.isVaServiceConnected === 'Y' ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.isVaServiceConnected.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
             <td>Are you compensable VA Service Connected 0% - 40%?:</td>
-            <td>{`${this.props.data.compensableVaServiceConnected === 'Y' ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.compensableVaServiceConnected.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
             <td>Do you receive a VA pension?:</td>
-            <td>{`${this.props.data.receivesVaPension === 'Y' ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.receivesVaPension.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
         </tbody>
       </table>
@@ -45,14 +45,14 @@ class VaInformationSection extends React.Component {
 
         <div className="input-section">
           <ErrorableRadioButtons required
-              errorMessage={isNotBlank(this.props.data.isVaServiceConnected) ? '' : 'Please select a response'}
+              errorMessage={validateIfDirty(this.props.data.isVaServiceConnected, isNotBlank) ? '' : 'Please select a response'}
               label="Are you VA Service Connected 50% to 100% Disabled?"
               options={yesNo}
               value={this.props.data.isVaServiceConnected}
               onValueChange={(update) => {this.props.onStateChange('isVaServiceConnected', update);}}/>
 
           <ErrorableRadioButtons required
-              errorMessage={isNotBlank(this.props.data.compensableVaServiceConnected) ? '' : 'Please select a response'}
+              errorMessage={validateIfDirty(this.props.data.compensableVaServiceConnected, isNotBlank) ? '' : 'Please select a response'}
               label="Are you compensable VA Service Connected 0% - 40%?"
               options={yesNo}
               value={this.props.data.compensableVaServiceConnected}
@@ -62,7 +62,7 @@ class VaInformationSection extends React.Component {
           </span>
 
           <ErrorableRadioButtons required
-              errorMessage={isNotBlank(this.props.data.receivesVaPension) ? '' : 'Please select a response'}
+              errorMessage={validateIfDirty(this.props.data.receivesVaPension, isNotBlank) ? '' : 'Please select a response'}
               label="Do you receive a VA pension?"
               options={yesNo}
               value={this.props.data.receivesVaPension}
@@ -102,6 +102,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
+      // TODO: Updates for radio buttons are getting passed as a string instead of makeField();
       dispatch(veteranUpdateField(['vaInformation', field], update));
     },
     onUIStateChange: (update) => {

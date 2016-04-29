@@ -55,7 +55,7 @@ class ErrorableRadioButtons extends React.Component {
         optionLabel = obj.label;
         optionValue = obj.value;
       }
-      const checked = storedValue !== undefined && optionValue === storedValue ? 'checked=true' : '';
+      const checked = optionValue === storedValue ? 'checked=true' : '';
       return (
         <div key={reactKey++} className="hca-radio-buttons">
           <input

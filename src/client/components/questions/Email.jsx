@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
-import { isValidEmail } from '../../utils/validations.js';
+import { validateIfDirty, isValidEmail } from '../../utils/validations.js';
 
 /**
  * Input component for collecting a Email number.
@@ -22,7 +22,7 @@ class Email extends React.Component {
     if (this.props.error !== undefined) {
       errorMessage = this.props.error;
     } else {
-      errorMessage = isValidEmail(this.props.email.value) ? undefined : 'Please put your email in this format x@x.xxx';
+      errorMessage = validateIfDirty(this.props.email, isValidEmail) ? undefined : 'Please put your email in this format x@x.xxx';
     }
     return (
       <div>
