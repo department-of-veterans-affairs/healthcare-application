@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
+import FinancialDisclosureSection from './FinancialDisclosureSection';
 import { yesNo } from '../../utils/options-for-select';
 import { validateIfDirty, isNotBlank } from '../../utils/validations';
 import { updateReviewStatus, veteranUpdateField } from '../../actions';
@@ -67,6 +68,7 @@ class VaInformationSection extends React.Component {
               options={yesNo}
               value={this.props.data.receivesVaPension}
               onValueChange={(update) => {this.props.onStateChange('receivesVaPension', update);}}/>
+          <FinancialDisclosureSection/>
         </div>
       </div>);
     }
@@ -94,8 +96,8 @@ class VaInformationSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.vaInformation,
-    isSectionComplete: state.uiState.completedSections['/personal-information/va-information']
+    data: state.veteran,
+    isSectionComplete: state.uiState.completedSections['/who-are-you/va-information']
   };
 }
 
@@ -103,10 +105,10 @@ function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
       // TODO: Updates for radio buttons are getting passed as a string instead of makeField();
-      dispatch(veteranUpdateField(['vaInformation', field], update));
+      dispatch(veteranUpdateField(field, update));
     },
     onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/personal-information/va-information'], update));
+      dispatch(updateReviewStatus(['/who-are-you/va-information'], update));
     }
   };
 }

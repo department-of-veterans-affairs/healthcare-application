@@ -111,7 +111,7 @@ class DemographicInformationSection extends React.Component {
 function mapStateToProps(state) {
   return {
     data: state.veteran.demographicInformation,
-    isSectionComplete: state.uiState.completedSections['/personal-information/demographic-information']
+    isSectionComplete: state.uiState.completedSections['/who-are-you/demographic-information']
   };
 }
 
@@ -121,7 +121,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(veteranUpdateField(['demographicInformation', field], update));
     },
     onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/personal-information/demographic-information'], update));
+      dispatch(updateReviewStatus(['/who-are-you/demographic-information'], update));
     }
   };
 }

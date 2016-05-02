@@ -82,18 +82,18 @@ class MedicareMedicaidSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.medicareMedicaid,
-    isSectionComplete: state.uiState.completedSections['/insurance-information/medicare-medicaid']
+    data: state.veteran,
+    isSectionComplete: state.uiState.completedSections['/other-insurance/panel1']
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
-      dispatch(veteranUpdateField(['medicareMedicaid', field], update));
+      dispatch(veteranUpdateField(field, update));
     },
     onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/insurance-information/medicare-medicaid'], update));
+      dispatch(updateReviewStatus(['/other-insurance/panel1'], update));
     }
   };
 }

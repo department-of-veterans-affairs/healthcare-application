@@ -119,19 +119,19 @@ class DeductibleExpensesSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.deductibleExpenses,
-    receivesVaPension: state.veteran.vaInformation.receivesVaPension,
-    isSectionComplete: state.uiState.completedSections['/financial-assessment/deductible-expenses']
+    data: state.veteran,
+    receivesVaPension: state.veteran.receivesVaPension,
+    isSectionComplete: state.uiState.completedSections['/financial-assessment/panel2']
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
-      dispatch(veteranUpdateField(['deductibleExpenses', field], update));
+      dispatch(veteranUpdateField(field, update));
     },
     onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/financial-assessment/deductible-expenses'], update));
+      dispatch(updateReviewStatus(['/financial-assessment/panel2'], update));
     }
   };
 }

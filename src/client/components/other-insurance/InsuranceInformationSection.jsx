@@ -44,7 +44,7 @@ class InsuranceInformationSection extends React.Component {
             data={this.props.data}
             initializeCurrentElement={() => {this.props.initializeFields();}}
             onRowsUpdate={(update) => {this.props.onStateChange('providers', update);}}
-            path="/insurance-information/general"
+            path="/other-insurance/panel2"
             rows={this.props.data.providers}/>
       );
     }
@@ -163,21 +163,21 @@ class InsuranceInformationSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.insuranceInformation,
-    isSectionComplete: state.uiState.completedSections['/insurance-information/general']
+    data: state.veteran,
+    isSectionComplete: state.uiState.completedSections['/other-insurance/panel2']
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
-      dispatch(veteranUpdateField(['insuranceInformation', field], update));
+      dispatch(veteranUpdateField(field, update));
     },
     initializeFields: () => {
-      dispatch(ensureFieldsInitialized('/insurance-information/general'));
+      dispatch(ensureFieldsInitialized('/other-insurance/panel2'));
     },
     onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/insurance-information/general'], update));
+      dispatch(updateReviewStatus(['/other-insurance/panel2'], update));
     }
   };
 }
