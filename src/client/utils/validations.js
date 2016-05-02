@@ -280,25 +280,25 @@ function isValidSection(completePath, sectionData) {
   switch (completePath) {
     case '/who-are-you/panel1':
       return isValidWhoAreYouPanel1(sectionData);
-    case '/who-are-you/panel2':
-      return isValidWhoAreYouPanel2(sectionData);
+    // case '/who-are-you/panel2':
+    //   return isValidWhoAreYouPanel2(sectionData);
     // case '/who-are-you/panel3':
     //   return isValidAdditionalInformation(sectionData);
     // case '/who-are-you/veteran-address':
     //   return isValidVeteranAddress(sectionData);
-    // case '/financial-assessment/spouse-information':
+    // case '/financial-assessment/panel3':
     //   return isValidSpouseInformation(sectionData);
-    // case '/financial-assessment/child-information':
+    // case '/financial-assessment/panel4':
     //   return isValidChildren(sectionData);
-    // case '/financial-assessment/annual-income':
+    // case '/financial-assessment/panel1':
     //   return isValidAnnualIncome(sectionData);
-    // case '/financial-assessment/deductible-expenses':
+    // case '/financial-assessment/panel2':
     //   return isValidDeductibleExpenses(sectionData);
     // case '/insurance-information/general':
     //   return isValidGeneralInsurance(sectionData);
     // case '/insurance-information/medicare-medicaid':
     //   return isValidMedicareMedicaid(sectionData);
-    // case '/military-service/service-information':
+    // case 'military-service/panel1':
     //   return isValidServiceInformation(sectionData);
     default:
       return true;

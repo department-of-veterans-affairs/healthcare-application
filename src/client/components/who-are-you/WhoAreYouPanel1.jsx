@@ -30,7 +30,7 @@ class WhoAreYouPanel1 extends React.Component {
           </tr>
           <tr>
             <td>Social Security Number:</td>
-            <td>{this.props.data.socialSecurityNumber}</td>
+            <td>{this.props.data.socialSecurityNumber.value}</td>
           </tr>
         </tbody>
       </table>);

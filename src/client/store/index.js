@@ -24,7 +24,7 @@ export function pathToData(state, path) {
     // case '/insurance-information/medicare-medicaid':
     //   return state.medicareMedicaid;
 
-    // case '/military-service/service-information':
+    // case 'military-service/panel1':
     //   return state.serviceInformation;
 
     // case '/military-service/panel3':
@@ -33,16 +33,16 @@ export function pathToData(state, path) {
     // case '/financial-assessment/financial-disclosure':
     //   return state.financialDisclosure;
 
-    // case '/financial-assessment/spouse-information':
+    // case '/financial-assessment/panel3':
     //   return state.spouseInformation;
 
-    // case '/financial-assessment/child-information':
-    //   return state.childInformation;
+    case '/financial-assessment/panel4':
+      return state;
 
-    // case '/financial-assessment/annual-income':
+    // case '/financial-assessment/panel1':
     //   return state.annualIncome;
 
-    // case '/financial-assessment/deductible-expenses':
+    // case '/financial-assessment/panel2':
     //   return state.deductibleExpenses;
 
     // case '/review-and-submit':

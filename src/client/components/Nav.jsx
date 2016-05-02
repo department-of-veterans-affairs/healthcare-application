@@ -90,29 +90,51 @@ class Nav extends React.Component {
           </div>
         </li>
         <li role="presentation" className={`five ${subnavStyles}
-         ${determinePanelStyles('/financial-assessment', '/financial-assessment/deductible-expenses')}`}>
+         ${determinePanelStyles('/military-service', '/military-service/panel2')}`}>
           <div>
-            <h5>Financial Assessment</h5>
+            <h5>MILITARY SERVICE</h5>
             <ul className="usa-unstyled-list">
-              <li className={`${determineSectionStyles('/financial-assessment/financial-disclosure')}`}>
-                Financial Disclosure
+              <li className={`${determineSectionStyles('/military-service/panel1')}`}>
+                Panel 1
               </li>
-              <li className={`${determineSectionStyles('/financial-assessment/spouse-information')}`}>
-                Spouse
-              </li>
-              <li className={`${determineSectionStyles('/financial-assessment/child-information')}`}>
-                Child
-              </li>
-              <li className={`${determineSectionStyles('/financial-assessment/annual-income')}`}>
-                Annual Income
-              </li>
-              <li className={`${determineSectionStyles('/financial-assessment/deductible-expenses')}`}>
-                Deductible Expenses
+              <li className={`${determineSectionStyles('/military-service/panel2')}`}>
+                Panel 2
               </li>
             </ul>
           </div>
         </li>
-        <li role="presentation" className={`six last ${subnavStyles}
+        <li role="presentation" className={`six ${subnavStyles}
+         ${determinePanelStyles('/va-service-connected', '/va-service-connected/panel1')}`}>
+          <div>
+            <h5>SERVICE-CONNECTED</h5>
+            <ul className="usa-unstyled-list">
+              <li className={`${determineSectionStyles('/va-service-connected/panel1')}`}>
+                Panel 1
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li role="presentation" className={`seven ${subnavStyles}
+         ${determinePanelStyles('/financial-assessment', '/financial-assessment/panel2')}`}>
+          <div>
+            <h5>Financial Assessment</h5>
+            <ul className="usa-unstyled-list">
+              <li className={`${determineSectionStyles('/financial-assessment/panel1')}`}>
+                Annual Income
+              </li>
+              <li className={`${determineSectionStyles('/financial-assessment/panel2')}`}>
+                Deductible Expenses
+              </li>
+              <li className={`${determineSectionStyles('/financial-assessment/panel3')}`}>
+                Spouse
+              </li>
+              <li className={`${determineSectionStyles('/financial-assessment/panel4')}`}>
+                Child
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li role="presentation" className={`eight last ${subnavStyles}
          ${determinePanelStyles('/review-and-submit', '/review-and-submit')}`}>
           <div>
             <h5>Review and Submit</h5>

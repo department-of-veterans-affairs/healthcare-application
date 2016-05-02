@@ -88,18 +88,18 @@ class ServiceInformationSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.serviceInformation,
-    isSectionComplete: state.uiState.completedSections['/military-service/service-information']
+    data: state.veteran,
+    isSectionComplete: state.uiState.completedSections['military-service/panel1']
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
-      dispatch(veteranUpdateField(['serviceInformation', field], update));
+      dispatch(veteranUpdateField(field, update));
     },
     onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/military-service/service-information'], update));
+      dispatch(updateReviewStatus(['military-service/panel1'], update));
     }
   };
 }

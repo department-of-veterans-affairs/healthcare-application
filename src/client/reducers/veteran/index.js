@@ -63,11 +63,44 @@ const blankVeteran = {
     year: makeField('')
   },
 
-  vaInformation: {
-    isVaServiceConnected: makeField(''),
-    compensableVaServiceConnected: makeField(''),
-    receivesVaPension: makeField('')
+  lastServiceBranch: makeField(''),
+  lastEntryDate: {
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField('')
   },
+  lastDischargeDate: {
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField('')
+  },
+  dischargeType: makeField(''),
+
+  purpleHeartRecipient: false,
+  isFormerPow: false,
+  postNov111998Combat: false,
+  disabledInLineOfDuty: false,
+  swAsiaCombat: false,
+  vietnamService: false,
+  exposedToRadiation: false,
+  radiumTreatments: false,
+  campLejeune: false,
+
+  isVaServiceConnected: makeField(''),
+  compensableVaServiceConnected: makeField(''),
+  receivesVaPension: makeField(''),
+
+  veteranGrossIncome: makeField(''),
+  veteranNetIncome: makeField(''),
+  veteranOtherIncome: makeField(''),
+  spouseGrossIncome: makeField(''),
+  spouseNetIncome: makeField(''),
+  spouseOtherIncome: makeField(''),
+  childrenIncome: [],
+
+  deductibleMedicalExpenses: makeField(''),
+  deductibleFuneralExpenses: makeField(''),
+  deductibleEducationExpenses: makeField(''),
 
   additionalInformation: {
     isEssentialAcaCoverage: false,
@@ -76,89 +109,45 @@ const blankVeteran = {
     wantsInitialVaContact: false
   },
 
+  spouseFullName: {
+    first: makeField(''),
+    middle: makeField(''),
+    last: makeField(''),
+    suffix: makeField(''),
+  },
+  spouseSocialSecurityNumber: makeField(''),
+  spouseDateOfBirth: {
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField(''),
+  },
+  dateOfMarriage: {
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField('')
+  },
+  sameAddress: false,
+  cohabitedLastYear: false,
+  provideSupportLastYear: false,
+  spouseAddress: {
+    street: makeField(''),
+    city: makeField(''),
+    country: makeField(''),
+    state: makeField(''),
+    zipcode: makeField(''),
+  },
+  spousePhone: makeField(''),
+
+
+  hasChildrenToReport: false,
+  children: [],
+
+  // This information was not in the new structure.
   financialDisclosure: {
     provideFinancialInfo: false,
     understandsFinancialDisclosure: false
   },
 
-  spouseInformation: {
-    spouseFullName: {
-      first: makeField(''),
-      middle: makeField(''),
-      last: makeField(''),
-      suffix: makeField(''),
-    },
-    spouseSocialSecurityNumber: makeField(''),
-    spouseDateOfBirth: {
-      month: makeField(''),
-      day: makeField(''),
-      year: makeField(''),
-    },
-    dateOfMarriage: {
-      month: makeField(''),
-      day: makeField(''),
-      year: makeField('')
-    },
-    sameAddress: false,
-    cohabitedLastYear: false,
-    provideSupportLastYear: false,
-    spouseAddress: {
-      street: makeField(''),
-      city: makeField(''),
-      country: makeField(''),
-      state: makeField(''),
-      zipcode: makeField(''),
-    },
-    spousePhone: makeField('')
-  },
-
-  childInformation: {
-    hasChildrenToReport: false,
-    children: []
-  },
-
-  annualIncome: {
-    veteranGrossIncome: makeField(''),
-    veteranNetIncome: makeField(''),
-    veteranOtherIncome: makeField(''),
-    spouseGrossIncome: makeField(''),
-    spouseNetIncome: makeField(''),
-    spouseOtherIncome: makeField(''),
-    children: []
-  },
-
-  deductibleExpenses: {
-    deductibleMedicalExpenses: makeField(''),
-    deductibleFuneralExpenses: makeField(''),
-    deductibleEducationExpenses: makeField('')
-  },
-
-  serviceInformation: {
-    lastServiceBranch: makeField(''),
-    lastEntryDate: {
-      month: makeField(''),
-      day: makeField(''),
-      year: makeField('')
-    },
-    lastDischargeDate: {
-      month: makeField(''),
-      day: makeField(''),
-      year: makeField('')
-    },
-    dischargeType: makeField('')
-  },
-
-  militaryAdditionalInfo: {
-    purpleHeartRecipient: false,
-    isFormerPow: false,
-    postNov111998Combat: false,
-    disabledInLineOfDuty: false,
-    swAsiaCombat: false,
-    vietnamService: false,
-    exposedToRadiation: false,
-    radiumTreatments: false,
-    campLejeune: false
-  }
 };
 
 function createBlankChild() {
@@ -208,10 +197,10 @@ function veteran(state = blankVeteran, action) {
     case CREATE_CHILD_INCOME_FIELDS:
       newState = Object.assign({}, state);
       // update children income from children info
-      newState.annualIncome.children.splice(newState.childInformation.children.length);
-      for (let i = 0; i < newState.childInformation.children.length; i++) {
-        if (newState.annualIncome.children[i] === undefined) {
-          newState.annualIncome.children[i] = createBlankChild();
+      newState.childrenIncome.splice(newState.children.length);
+      for (let i = 0; i < newState.children.length; i++) {
+        if (newState.childrenIncome[i] === undefined) {
+          newState.childrenIncome[i] = createBlankChild();
         }
       }
       Object.assign(pathToData(newState, action.path), dirtyAllFields(pathToData(newState, action.path)));

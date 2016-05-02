@@ -16,15 +16,14 @@ const ui = {
     '/who-are-you/panel3': false,
     '/how-do-we-reach-you/panel1': false,
     '/how-do-we-reach-you/panel2': false,
-    '/other-insurance/general': false,
-    '/other-insurance/medicare-medicaid': false,
-    '/military-service/service-information': false,
-    '/military-service/additional-information': false,
-    '/financial-assessment/financial-disclosure': false,
-    '/financial-assessment/spouse-information': false,
-    '/financial-assessment/child-information': false,
-    '/financial-assessment/annual-income': false,
-    '/financial-assessment/deductible-expenses': false,
+    '/other-insurance/panel2': false,
+    '/other-insurance/panel1': false,
+    'military-service/panel1': false,
+    'military-service/panel2': false,
+    '/financial-assessment/panel3': false,
+    '/financial-assessment/panel4': false,
+    '/financial-assessment/panel1': false,
+    '/financial-assessment/panel2': false,
     '/review-and-submit': false
   }
 };

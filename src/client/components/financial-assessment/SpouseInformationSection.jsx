@@ -217,23 +217,23 @@ class SpouseInformationSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.spouseInformation,
-    receivesVaPension: state.veteran.vaInformation.receivesVaPension,
+    data: state.veteran,
+    receivesVaPension: state.veteran.receivesVaPension,
     neverMarried: calculated.neverMarried(state),
-    isSectionComplete: state.uiState.completedSections['/financial-assessment/spouse-information']
+    isSectionComplete: state.uiState.completedSections['/financial-assessment/panel3']
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
-      dispatch(veteranUpdateField(['spouseInformation', field], update));
+      dispatch(veteranUpdateField(field, update));
       if (field === 'sameAddress') {
-        dispatch(updateSpouseAddress(['spouseInformation', 'spouseAddress'], update));
+        dispatch(updateSpouseAddress('spouseAddress', update));
       }
     },
     onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/financial-assessment/spouse-information'], update));
+      dispatch(updateReviewStatus(['/financial-assessment/panel3'], update));
     }
   };
 }

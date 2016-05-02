@@ -80,60 +80,60 @@ describe('<Nav>', () => {
       expectActiveSection(nav, '/introduction');
     });
 
-    it('/who-are-you/name-and-general-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/who-are-you/name-and-general-information');
+    it('/who-are-you/panel1', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/who-are-you/panel1');
     });
 
-    it('/who-are-you/va-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/who-are-you/va-information');
+    it('/who-are-you/panel2', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/who-are-you/panel2');
     });
 
-    it('/who-are-you/additional-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/who-are-you/additional-information');
+    it('/who-are-you/panel3', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/who-are-you/panel3');
     });
 
-    it('/who-are-you/demographic-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/who-are-you/demographic-information');
+    it('/how-do-we-reach-you/panel1', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/how-do-we-reach-you/panel1');
     });
 
-    it('/who-are-you/veteran-address', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/who-are-you/veteran-address');
+    it('/how-do-we-reach-you/panel2', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/how-do-we-reach-you/panel2');
     });
 
-    it('/insurance-information/general', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/insurance-information/general');
+    it('/other-insurance/panel1', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/other-insurance/panel1');
     });
 
-    it('/insurance-information/medicare-medicaid', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/insurance-information/medicare-medicaid');
+    it('/other-insurance/panel2', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/other-insurance/panel2');
     });
 
-    it('/military-service/service-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/military-service/service-information');
+    it('/military-service/panel1', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/military-service/panel1');
     });
 
-    it('/military-service/additional-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/military-service/additional-information');
+    it('/military-service/panel2', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/military-service/panel2');
     });
 
-    it('/financial-assessment/financial-disclosure', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/financial-disclosure');
+    it('/va-service-connected/panel1', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/va-service-connected/panel1');
     });
 
-    it('/financial-assessment/spouse-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/spouse-information');
+    it('/financial-assessment/panel1', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/panel1');
     });
 
-    it('/financial-assessment/child-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/child-information');
+    it('/financial-assessment/panel2', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/panel2');
     });
 
-    it('/financial-assessment/annual-income', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/annual-income');
+    it('/financial-assessment/panel3', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/panel3');
     });
 
-    it('/financial-assessment/deductible-expenses', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/deductible-expenses');
+    it('/financial-assessment/panel4', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/panel4');
     });
 
     it('/review-and-submit', () => {

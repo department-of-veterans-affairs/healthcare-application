@@ -125,18 +125,18 @@ class AdditionalMilitaryInformationSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.militaryAdditionalInfo,
-    isSectionComplete: state.uiState.completedSections['/military-service/additional-information']
+    data: state.veteran,
+    isSectionComplete: state.uiState.completedSections['military-service/panel2']
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
-      dispatch(veteranUpdateField(['militaryAdditionalInfo', field], update));
+      dispatch(veteranUpdateField(field, update));
     },
     onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/military-service/additional-information'], update));
+      dispatch(updateReviewStatus(['military-service/panel2'], update));
     }
   };
 }

@@ -4,22 +4,22 @@ import { Router, Route, createMemoryHistory } from 'react-router';
 import { createStore } from 'redux';
 import { expect } from 'chai';
 
-import AdditionalInformationSection from '../../src/client/components/who-are-you/AdditionalInformationSection';
 import AdditionalMilitaryInformationSection from '../../src/client/components/military-service/AdditionalMilitaryInformationSection';
 import AnnualIncomeSection from '../../src/client/components/financial-assessment/AnnualIncomeSection';
 import ChildInformationSection from '../../src/client/components/financial-assessment/ChildInformationSection';
 import DeductibleExpensesSection from '../../src/client/components/financial-assessment/DeductibleExpensesSection';
-import DemographicInformationSection from '../../src/client/components/who-are-you/DemographicInformationSection';
-import FinancialDisclosureSection from '../../src/client/components/financial-assessment/FinancialDisclosureSection';
 import InsuranceInformationSection from '../../src/client/components/other-insurance/InsuranceInformationSection';
 import IntroductionSection from '../../src/client/components/IntroductionSection.jsx';
 import MedicareMedicaidSection from '../../src/client/components/other-insurance/MedicareMedicaidSection';
-import NameAndGeneralInfoSection from '../../src/client/components/who-are-you/NameAndGeneralInfoSection';
 import ReviewAndSubmitSection from '../../src/client/components/ReviewAndSubmitSection.jsx';
 import ServiceInformationSection from '../../src/client/components/military-service/ServiceInformationSection';
 import SpouseInformationSection from '../../src/client/components/financial-assessment/SpouseInformationSection';
-import VAInformationSection from '../../src/client/components/who-are-you/VAInformationSection';
-import VeteranAddressSection from '../../src/client/components/who-are-you/VeteranAddressSection';
+import VAInformationSection from '../../src/client/components/va-service-connected/VAInformationSection';
+import WhoAreYouPanel1 from '../../src/client/components/who-are-you/WhoAreYouPanel1';
+import WhoAreYouPanel2 from '../../src/client/components/who-are-you/WhoAreYouPanel2';
+import WhoAreYouPanel3 from '../../src/client/components/who-are-you/WhoAreYouPanel3';
+import HowDoWeReachYouPanel1 from '../../src/client/components/how-do-we-reach-you/HowDoWeReachYouPanel1';
+import HowDoWeReachYouPanel2 from '../../src/client/components/how-do-we-reach-you/HowDoWeReachYouPanel2';
 import routes from '../../src/client/routes';
 import veteran from '../../src/client/reducers/veteran';
 
@@ -64,74 +64,74 @@ describe('routes', () => {
       expect(tree.dive(['RouterContext']).subTree(getName(IntroductionSection))).to.be.an('object');
     });
 
-    it('/who-are-you/name-and-general-information', () => {
-      history.replace('/who-are-you/name-and-general-information');
-      expect(tree.dive(['RouterContext']).subTree(getName(NameAndGeneralInfoSection))).to.be.an('object');
+    it('/who-are-you/panel1', () => {
+      history.replace('/who-are-you/panel1');
+      expect(tree.dive(['RouterContext']).subTree(getName(WhoAreYouPanel1))).to.be.an('object');
     });
 
-    it('/who-are-you/va-information', () => {
-      history.replace('/who-are-you/va-information');
-      expect(tree.dive(['RouterContext']).subTree(getName(VAInformationSection))).to.be.an('object');
+    it('/who-are-you/panel2', () => {
+      history.replace('/who-are-you/panel2');
+      expect(tree.dive(['RouterContext']).subTree(getName(WhoAreYouPanel2))).to.be.an('object');
     });
 
-    it('/who-are-you/additional-information', () => {
-      history.replace('/who-are-you/additional-information');
-      expect(tree.dive(['RouterContext']).subTree(getName(AdditionalInformationSection))).to.be.an('object');
+    it('/who-are-you/panel3', () => {
+      history.replace('/who-are-you/panel3');
+      expect(tree.dive(['RouterContext']).subTree(getName(WhoAreYouPanel3))).to.be.an('object');
     });
 
-    it('/who-are-you/demographic-information', () => {
-      history.replace('/who-are-you/demographic-information');
-      expect(tree.dive(['RouterContext']).subTree(getName(DemographicInformationSection))).to.be.an('object');
+    it('/how-do-we-reach-you/panel1', () => {
+      history.replace('/how-do-we-reach-you/panel1');
+      expect(tree.dive(['RouterContext']).subTree(getName(HowDoWeReachYouPanel1))).to.be.an('object');
     });
 
-    it('/who-are-you/veteran-address', () => {
-      history.replace('/who-are-you/veteran-address');
-      expect(tree.dive(['RouterContext']).subTree(getName(VeteranAddressSection))).to.be.an('object');
+    it('/how-do-we-reach-you/panel2', () => {
+      history.replace('/how-do-we-reach-you/panel2');
+      expect(tree.dive(['RouterContext']).subTree(getName(HowDoWeReachYouPanel2))).to.be.an('object');
     });
 
     it('/other-insurance/panel1', () => {
       history.replace('/other-insurance/panel1');
-      expect(tree.dive(['RouterContext']).subTree(getName(InsuranceInformationSection))).to.be.an('object');
+      expect(tree.dive(['RouterContext']).subTree(getName(MedicareMedicaidSection))).to.be.an('object');
     });
 
     it('/other-insurance/panel2', () => {
       history.replace('/other-insurance/panel2');
-      expect(tree.dive(['RouterContext']).subTree(getName(MedicareMedicaidSection))).to.be.an('object');
+      expect(tree.dive(['RouterContext']).subTree(getName(InsuranceInformationSection))).to.be.an('object');
     });
 
-    it('/military-service/service-information', () => {
-      history.replace('/military-service/service-information');
+    it('/military-service/panel1', () => {
+      history.replace('/military-service/panel1');
       expect(tree.dive(['RouterContext']).subTree(getName(ServiceInformationSection))).to.be.an('object');
     });
 
-    it('/military-service/additional-information', () => {
-      history.replace('/military-service/additional-information');
+    it('/military-service/panel2', () => {
+      history.replace('/military-service/panel2');
       expect(tree.dive(['RouterContext']).subTree(getName(AdditionalMilitaryInformationSection))).to.be.an('object');
     });
 
-    it('/financial-assessment/financial-disclosure', () => {
-      history.replace('/financial-assessment/financial-disclosure');
-      expect(tree.dive(['RouterContext']).subTree(getName(FinancialDisclosureSection))).to.be.an('object');
+    it('/va-service-connected/panel1', () => {
+      history.replace('/va-service-connected/panel1');
+      expect(tree.dive(['RouterContext']).subTree(getName(VAInformationSection))).to.be.an('object');
     });
 
-    it('/financial-assessment/spouse-information', () => {
-      history.replace('/financial-assessment/spouse-information');
-      expect(tree.dive(['RouterContext']).subTree(getName(SpouseInformationSection))).to.be.an('object');
-    });
-
-    it('/financial-assessment/child-information', () => {
-      history.replace('/financial-assessment/child-information');
-      expect(tree.dive(['RouterContext']).subTree(getName(ChildInformationSection))).to.be.an('object');
-    });
-
-    it('/financial-assessment/annual-income', () => {
-      history.replace('/financial-assessment/annual-income');
+    it('/financial-assessment/panel1', () => {
+      history.replace('/financial-assessment/panel1');
       expect(tree.dive(['RouterContext']).subTree(getName(AnnualIncomeSection))).to.be.an('object');
     });
 
-    it('/financial-assessment/deductible-expenses', () => {
-      history.replace('/financial-assessment/deductible-expenses');
+    it('/financial-assessment/panel2', () => {
+      history.replace('/financial-assessment/panel2');
       expect(tree.dive(['RouterContext']).subTree(getName(DeductibleExpensesSection))).to.be.an('object');
+    });
+
+    it('/financial-assessment/panel3', () => {
+      history.replace('/financial-assessment/panel3');
+      expect(tree.dive(['RouterContext']).subTree(getName(SpouseInformationSection))).to.be.an('object');
+    });
+
+    it('/financial-assessment/panel4', () => {
+      history.replace('/financial-assessment/panel4');
+      expect(tree.dive(['RouterContext']).subTree(getName(ChildInformationSection))).to.be.an('object');
     });
 
     it('/review-and-submit', () => {

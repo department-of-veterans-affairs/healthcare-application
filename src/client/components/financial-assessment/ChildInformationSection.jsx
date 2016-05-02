@@ -134,7 +134,7 @@ class ChildInformationSection extends React.Component {
               data={this.props.data}
               initializeCurrentElement={() => {this.props.initializeFields();}}
               onRowsUpdate={(update) => {this.props.onStateChange('children', update);}}
-              path="/financial-assessment/child-information"
+              path="/financial-assessment/panel4"
               rows={this.props.data.children}/>
         </div>
       );
@@ -187,22 +187,22 @@ class ChildInformationSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.childInformation,
-    receivesVaPension: state.veteran.vaInformation.receivesVaPension,
-    isSectionComplete: state.uiState.completedSections['/financial-assessment/child-information']
+    data: state.veteran,
+    receivesVaPension: state.veteran.receivesVaPension,
+    isSectionComplete: state.uiState.completedSections['/financial-assessment/panel4']
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
-      dispatch(veteranUpdateField(['childInformation', field], update));
+      dispatch(veteranUpdateField(field, update));
     },
     initializeFields: () => {
-      dispatch(ensureFieldsInitialized('/financial-assessment/child-information'));
+      dispatch(ensureFieldsInitialized('/financial-assessment/panel4'));
     },
     onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/financial-assessment/child-information'], update));
+      dispatch(updateReviewStatus(['/financial-assessment/panel4'], update));
     }
   };
 }

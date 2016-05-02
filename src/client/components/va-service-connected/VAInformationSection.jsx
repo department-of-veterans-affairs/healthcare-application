@@ -94,7 +94,7 @@ class VaInformationSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.vaInformation,
+    data: state.veteran,
     isSectionComplete: state.uiState.completedSections['/who-are-you/va-information']
   };
 }
@@ -103,7 +103,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
       // TODO: Updates for radio buttons are getting passed as a string instead of makeField();
-      dispatch(veteranUpdateField(['vaInformation', field], update));
+      dispatch(veteranUpdateField(field, update));
     },
     onUIStateChange: (update) => {
       dispatch(updateReviewStatus(['/who-are-you/va-information'], update));

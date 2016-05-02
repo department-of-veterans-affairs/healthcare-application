@@ -1,20 +1,12 @@
 import React from 'react';
 import { Route } from 'react-router';
 
-// import AdditionalInformationSection from './components/who-are-you/AdditionalInformationSection';
-import AdditionalMilitaryInformationSection from './components/military-service/AdditionalMilitaryInformationSection';
 import AnnualIncomeSection from './components/financial-assessment/AnnualIncomeSection';
 import ChildInformationSection from './components/financial-assessment/ChildInformationSection';
 import DeductibleExpensesSection from './components/financial-assessment/DeductibleExpensesSection';
-// import DemographicInformationSection from './components/who-are-you/DemographicInformationSection';
-import FinancialDisclosureSection from './components/financial-assessment/FinancialDisclosureSection';
 import IntroductionSection from './components/IntroductionSection.jsx';
-// import NameAndGeneralInfoSection from './components/who-are-you/NameAndGeneralInfoSection';
 import ReviewAndSubmitSection from './components/ReviewAndSubmitSection.jsx';
-import ServiceInformationSection from './components/military-service/ServiceInformationSection';
 import SpouseInformationSection from './components/financial-assessment/SpouseInformationSection';
-// import VAInformationSection from './components/who-are-you/VAInformationSection';
-// import VeteranAddressSection from './components/who-are-you/VeteranAddressSection';
 import WhoAreYouPanel1 from './components/who-are-you/WhoAreYouPanel1';
 import WhoAreYouPanel2 from './components/who-are-you/WhoAreYouPanel2';
 import WhoAreYouPanel3 from './components/who-are-you/WhoAreYouPanel3';
@@ -22,6 +14,10 @@ import HowDoWeReachYouPanel1 from './components/how-do-we-reach-you/HowDoWeReach
 import HowDoWeReachYouPanel2 from './components/how-do-we-reach-you/HowDoWeReachYouPanel2';
 import InsuranceInformationSection from './components/other-insurance/InsuranceInformationSection';
 import MedicareMedicaidSection from './components/other-insurance/MedicareMedicaidSection';
+import ServiceInformationSection from './components/military-service/ServiceInformationSection';
+import AdditionalMilitaryInformationSection from './components/military-service/AdditionalMilitaryInformationSection';
+import VAInformationSection from './components/va-service-connected/VAInformationSection';
+
 
 const routes = [
   // Introduction route.
@@ -67,34 +63,36 @@ const routes = [
   // Military Service routes.
   <Route
       component={ServiceInformationSection}
-      key="/military-service/service-information"
-      path="/military-service/service-information"/>,
+      key="/military-service/panel1"
+      path="/military-service/panel1"/>,
   <Route
       component={AdditionalMilitaryInformationSection}
-      key="/military-service/additional-information"
-      path="/military-service/additional-information"/>,
+      key="/military-service/panel2"
+      path="/military-service/panel2"/>,
+
+  // VA Service-Connected routes.
+  <Route
+      component={VAInformationSection}
+      key="/va-service-connected/panel1"
+      path="/va-service-connected/panel1"/>,
 
   // Financial Assessment routes.
   <Route
-      component={FinancialDisclosureSection}
-      key="/financial-assessment/financial-disclosure"
-      path="/financial-assessment/financial-disclosure"/>,
-  <Route
-      component={SpouseInformationSection}
-      key="/financial-assessment/spouse-information"
-      path="/financial-assessment/spouse-information"/>,
-  <Route
-      component={ChildInformationSection}
-      key="/financial-assessment/child-information"
-      path="/financial-assessment/child-information"/>,
-  <Route
       component={AnnualIncomeSection}
-      key="/financial-assessment/annual-income"
-      path="/financial-assessment/annual-income"/>,
+      key="/financial-assessment/panel1"
+      path="/financial-assessment/panel1"/>,
   <Route
       component={DeductibleExpensesSection}
-      key="/financial-assessment/deductible-expenses"
-      path="/financial-assessment/deductible-expenses"/>,
+      key="/financial-assessment/panel2"
+      path="/financial-assessment/panel2"/>,
+  <Route
+      component={SpouseInformationSection}
+      key="/financial-assessment/panel3"
+      path="/financial-assessment/panel3"/>,
+  <Route
+      component={ChildInformationSection}
+      key="/financial-assessment/panel4"
+      path="/financial-assessment/panel4"/>,
 
   // Review and Submit route.
   <Route

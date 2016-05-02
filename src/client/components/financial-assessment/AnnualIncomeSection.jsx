@@ -22,7 +22,10 @@ class AnnualIncomeSection extends React.Component {
     this.props.initializeChildIncomeFields();
   }
 
-  // TODO: Figure out best way to enable users to change their response to pension
+  // TODO: Figure out best way to enable users to change their response to pension.
+
+  // TODO: We need to talk about the order of the questions because we don't know if you have
+  // any children at this point in the form.
   render() {
     const message = 'Please enter only numbers and a decimal point if necessary (no commas or currency signs)';
     let notRequiredMessage;
@@ -48,16 +51,16 @@ class AnnualIncomeSection extends React.Component {
           <FixedTable
               component={ChildIncome}
               onRowsUpdate={(update) => {this.props.onStateChange('children', update);}}
-              relatedData={this.props.childrenData.children}
-              rows={this.props.data.children}/>
+              relatedData={this.props.childrenData}
+              rows={this.props.data.childrenIncome}/>
         </div>
       );
     }
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
-      const childrenData = this.props.childrenData.children;
+      const childrenData = this.props.childrenData;
       let reactKey = 0;
-      childrenIncomeReview = this.props.data.children.map((obj, index) => {
+      childrenIncomeReview = this.props.data.childrenIncome.map((obj, index) => {
         return (
           <div key={reactKey++}>
             <h6>Child: {`${childrenData[index].childFullName.first.value} ${childrenData[index].childFullName.last.value}`}</h6>
@@ -80,6 +83,7 @@ class AnnualIncomeSection extends React.Component {
           </div>
         );
       });
+
 
       content = (
         <div>
@@ -240,23 +244,23 @@ class AnnualIncomeSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.annualIncome,
-    childrenData: state.veteran.childInformation,
-    receivesVaPension: state.veteran.vaInformation.receivesVaPension,
-    isSectionComplete: state.uiState.completedSections['/financial-assessment/annual-income']
+    data: state.veteran,
+    childrenData: state.veteran.children,
+    receivesVaPension: state.veteran.receivesVaPension,
+    isSectionComplete: state.uiState.completedSections['/financial-assessment/panel1']
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
-      dispatch(veteranUpdateField(['annualIncome', field], update));
+      dispatch(veteranUpdateField(field, update));
     },
     onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/financial-assessment/annual-income'], update));
+      dispatch(updateReviewStatus(['/financial-assessment/panel1'], update));
     },
     initializeChildIncomeFields: () => {
-      dispatch(createChildIncomeFields('/financial-assessment/annual-income'));
+      dispatch(createChildIncomeFields('/financial-assessment/panel1'));
     }
   };
 }
