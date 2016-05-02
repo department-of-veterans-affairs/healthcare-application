@@ -156,12 +156,15 @@ function isValidAddressField(field) {
   return isValidAddress(field.street.value, field.city.value, field.country.value, field.state.value, field.zipcode.value);
 }
 
-function isValidNameAndGeneralInformation(data) {
+function isValidWhoAreYouPanel1(data) {
   return isValidFullNameField(data.fullName) &&
       isValidRequiredField(isValidSSN, data.socialSecurityNumber) &&
-      // isNotBlank(data.gender.value) &&
-      // isNotBlank(data.maritalStatus) &&
       isValidDateField(data.dateOfBirth);
+}
+
+function isValidWhoAreYouPanel2(data) {
+  return isNotBlank(data.gender.value) &&
+      isNotBlank(data.maritalStatus);
 }
 
 function isValidVaInformation(data) {
@@ -275,28 +278,28 @@ function isValidServiceInformation(data) {
 
 function isValidSection(completePath, sectionData) {
   switch (completePath) {
-    case '/who-are-you/name-and-general-information':
-      return isValidNameAndGeneralInformation(sectionData);
-    case '/who-are-you/va-information':
-      return isValidVaInformation(sectionData);
-    case '/who-are-you/additional-information':
-      return isValidAdditionalInformation(sectionData);
-    case '/who-are-you/veteran-address':
-      return isValidVeteranAddress(sectionData);
-    case '/financial-assessment/spouse-information':
-      return isValidSpouseInformation(sectionData);
-    case '/financial-assessment/child-information':
-      return isValidChildren(sectionData);
-    case '/financial-assessment/annual-income':
-      return isValidAnnualIncome(sectionData);
-    case '/financial-assessment/deductible-expenses':
-      return isValidDeductibleExpenses(sectionData);
-    case '/insurance-information/general':
-      return isValidGeneralInsurance(sectionData);
-    case '/insurance-information/medicare-medicaid':
-      return isValidMedicareMedicaid(sectionData);
-    case '/military-service/service-information':
-      return isValidServiceInformation(sectionData);
+    case '/who-are-you/panel1':
+      return isValidWhoAreYouPanel1(sectionData);
+    case '/who-are-you/panel2':
+      return isValidWhoAreYouPanel2(sectionData);
+    // case '/who-are-you/panel3':
+    //   return isValidAdditionalInformation(sectionData);
+    // case '/who-are-you/veteran-address':
+    //   return isValidVeteranAddress(sectionData);
+    // case '/financial-assessment/spouse-information':
+    //   return isValidSpouseInformation(sectionData);
+    // case '/financial-assessment/child-information':
+    //   return isValidChildren(sectionData);
+    // case '/financial-assessment/annual-income':
+    //   return isValidAnnualIncome(sectionData);
+    // case '/financial-assessment/deductible-expenses':
+    //   return isValidDeductibleExpenses(sectionData);
+    // case '/insurance-information/general':
+    //   return isValidGeneralInsurance(sectionData);
+    // case '/insurance-information/medicare-medicaid':
+    //   return isValidMedicareMedicaid(sectionData);
+    // case '/military-service/service-information':
+    //   return isValidServiceInformation(sectionData);
     default:
       return true;
   }
@@ -330,7 +333,8 @@ export {
   isValidAddress,
   isValidInsurancePolicy,
   isValidField,
-  isValidNameAndGeneralInformation,
+  isValidWhoAreYouPanel1,
+  isValidWhoAreYouPanel2,
   isValidVaInformation,
   isValidAdditionalInformation,
   isValidVeteranAddress,

@@ -1,22 +1,27 @@
 import React from 'react';
 import { Route } from 'react-router';
 
-import AdditionalInformationSection from './components/who-are-you/AdditionalInformationSection';
+// import AdditionalInformationSection from './components/who-are-you/AdditionalInformationSection';
 import AdditionalMilitaryInformationSection from './components/military-service/AdditionalMilitaryInformationSection';
 import AnnualIncomeSection from './components/financial-assessment/AnnualIncomeSection';
 import ChildInformationSection from './components/financial-assessment/ChildInformationSection';
 import DeductibleExpensesSection from './components/financial-assessment/DeductibleExpensesSection';
-import DemographicInformationSection from './components/who-are-you/DemographicInformationSection';
+// import DemographicInformationSection from './components/who-are-you/DemographicInformationSection';
 import FinancialDisclosureSection from './components/financial-assessment/FinancialDisclosureSection';
-import InsuranceInformationSection from './components/insurance-information/InsuranceInformationSection';
 import IntroductionSection from './components/IntroductionSection.jsx';
-import MedicareMedicaidSection from './components/insurance-information/MedicareMedicaidSection';
-import NameAndGeneralInfoSection from './components/who-are-you/NameAndGeneralInfoSection';
+// import NameAndGeneralInfoSection from './components/who-are-you/NameAndGeneralInfoSection';
 import ReviewAndSubmitSection from './components/ReviewAndSubmitSection.jsx';
 import ServiceInformationSection from './components/military-service/ServiceInformationSection';
 import SpouseInformationSection from './components/financial-assessment/SpouseInformationSection';
-import VAInformationSection from './components/who-are-you/VAInformationSection';
-import VeteranAddressSection from './components/who-are-you/VeteranAddressSection';
+// import VAInformationSection from './components/who-are-you/VAInformationSection';
+// import VeteranAddressSection from './components/who-are-you/VeteranAddressSection';
+import WhoAreYouPanel1 from './components/who-are-you/WhoAreYouPanel1';
+import WhoAreYouPanel2 from './components/who-are-you/WhoAreYouPanel2';
+import WhoAreYouPanel3 from './components/who-are-you/WhoAreYouPanel3';
+import HowDoWeReachYouPanel1 from './components/how-do-we-reach-you/HowDoWeReachYouPanel1';
+import HowDoWeReachYouPanel2 from './components/how-do-we-reach-you/HowDoWeReachYouPanel2';
+import InsuranceInformationSection from './components/other-insurance/InsuranceInformationSection';
+import MedicareMedicaidSection from './components/other-insurance/MedicareMedicaidSection';
 
 const routes = [
   // Introduction route.
@@ -27,35 +32,37 @@ const routes = [
 
   // Personal Information routes.
   <Route
-      component={NameAndGeneralInfoSection}
-      key="/who-are-you/name-and-general-information"
-      path="/who-are-you/name-and-general-information"/>,
+      component={WhoAreYouPanel1}
+      key="/who-are-you/panel1"
+      path="/who-are-you/panel1"/>,
   <Route
-      component={VAInformationSection}
-      key="/who-are-you/va-information"
-      path="/who-are-you/va-information"/>,
+      component={WhoAreYouPanel2}
+      key="/who-are-you/panel2"
+      path="/who-are-you/panel2"/>,
   <Route
-      component={AdditionalInformationSection}
-      key="/who-are-you/additional-information"
-      path="/who-are-you/additional-information"/>,
+      component={WhoAreYouPanel3}
+      key="/who-are-you/panel3"
+      path="/who-are-you/panel3"/>,
+
+  // Contact Information routes.
   <Route
-      component={DemographicInformationSection}
-      key="/who-are-you/demographic-information"
-      path="/who-are-you/demographic-information"/>,
+      component={HowDoWeReachYouPanel1}
+      key="/how-do-we-reach-you/panel1"
+      path="/how-do-we-reach-you/panel1"/>,
   <Route
-      component={VeteranAddressSection}
-      key="/who-are-you/veteran-address"
-      path="/who-are-you/veteran-address"/>,
+      component={HowDoWeReachYouPanel2}
+      key="/how-do-we-reach-you/panel2"
+      path="/how-do-we-reach-you/panel2"/>,
 
   // Insurance Information routes.
   <Route
-      component={InsuranceInformationSection}
-      key="/insurance-information/general"
-      path="/insurance-information/general"/>,
-  <Route
       component={MedicareMedicaidSection}
-      key="/insurance-information/medicare-medicaid"
-      path="/insurance-information/medicare-medicaid"/>,
+      key="/other-insurance/panel1"
+      path="/other-insurance/panel1"/>,
+  <Route
+      component={InsuranceInformationSection}
+      key="/other-insurance/panel2"
+      path="/other-insurance/panel2"/>,
 
   // Military Service routes.
   <Route

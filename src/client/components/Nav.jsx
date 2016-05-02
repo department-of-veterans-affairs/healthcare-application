@@ -45,52 +45,46 @@ class Nav extends React.Component {
           </div>
         </li>
         <li role="presentation" className={`two ${subnavStyles}
-         ${determinePanelStyles('/who-are-you', '/who-are-you/veteran-address')}`}>
+         ${determinePanelStyles('/who-are-you', '/who-are-you/panel3')}`}>
           <div>
             <h5>WHO ARE YOU?</h5>
             <ul className="usa-unstyled-list">
-              <li className={`${determineSectionStyles('/who-are-you/name-and-general-information')}`}>
+              <li className={`${determineSectionStyles('/who-are-you/panel1')}`}>
                 Panel 1
               </li>
-              <li className={`${determineSectionStyles('/who-are-you/va-information')}`}>
-                VA-Specific
+              <li className={`${determineSectionStyles('/who-are-you/panel2')}`}>
+                Panel 2
               </li>
-              <li className={`${determineSectionStyles('/who-are-you/additional-information')}`}>
-                Additional
-              </li>
-              <li className={`${determineSectionStyles('/who-are-you/demographic-information')}`}>
-                Demographic
-              </li>
-              <li className={`${determineSectionStyles('/who-are-you/veteran-address')}`}>
-                Veteran Address
+              <li className={`${determineSectionStyles('/who-are-you/panel3')}`}>
+                Panel 3
               </li>
             </ul>
           </div>
         </li>
         <li role="presentation" className={`three ${subnavStyles}
-         ${determinePanelStyles('/insurance-information', '/insurance-information/medicare-medicaid')}`}>
+         ${determinePanelStyles('/how-do-we-reach-you', '/how-do-we-reach-you/panel2')}`}>
           <div>
-            <h5>Insurance Information</h5>
+            <h5>HOW DO WE REACH YOU?</h5>
             <ul className="usa-unstyled-list">
-              <li className={`${determineSectionStyles('/insurance-information/general')}`}>
-                General Insurance
+              <li className={`${determineSectionStyles('/how-do-we-reach-you/panel1')}`}>
+                Panel 1
               </li>
-              <li className={`${determineSectionStyles('/insurance-information/medicare-medicaid')}`}>
-                Medicare/Medicaid
+              <li className={`${determineSectionStyles('/how-do-we-reach-you/panel2')}`}>
+                Panel 2
               </li>
             </ul>
           </div>
         </li>
         <li role="presentation" className={`four ${subnavStyles}
-         ${determinePanelStyles('/military-service', '/military-service/additional-information')}`}>
+         ${determinePanelStyles('/other-insurance', '/other-insurance/panel2')}`}>
           <div>
-            <h5>Military Service</h5>
+            <h5>OTHER INSURANCE</h5>
             <ul className="usa-unstyled-list">
-              <li className={`${determineSectionStyles('/military-service/service-information')}`}>
-                Service
+              <li className={`${determineSectionStyles('/other-insurance/panel1')}`}>
+                Panel 1
               </li>
-              <li className={`${determineSectionStyles('/military-service/additional-information')}`}>
-                Additional Military
+              <li className={`${determineSectionStyles('/other-insurance/panel2')}`}>
+                Panel 2
               </li>
             </ul>
           </div>

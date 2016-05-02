@@ -25,12 +25,42 @@ const blankVeteran = {
     day: makeField(''),
     year: makeField(''),
   },
-  nameAndGeneralInformation: {
-    mothersMaidenName: makeField(''),
-    gender: makeField(''),
-    cityOfBirth: makeField(''),
-    stateOfBirth: makeField(''),
-    maritalStatus: makeField('')
+
+  mothersMaidenName: makeField(''),
+  gender: makeField(''),
+  cityOfBirth: makeField(''),
+  stateOfBirth: makeField(''),
+  maritalStatus: makeField(''),
+
+  isSpanishHispanicLatino: false,
+  isAmericanIndianOrAlaskanNative: false,
+  isBlackOrAfricanAmerican: false,
+  isNativeHawaiianOrOtherPacificIslander: false,
+  isAsian: false,
+  isWhite: false,
+
+  veteranAddress: {
+    street: makeField(''),
+    city: makeField(''),
+    country: makeField(''),
+    state: makeField(''),
+    zipcode: makeField(''),
+  },
+  veteranCounty: makeField(''),
+  veteranEmail: makeField(''),
+  veteranEmailConfirmation: makeField(''),
+  veteranHomePhone: makeField(''),
+  veteranMobilePhone: makeField(''),
+
+  isCoveredByHealthInsurance: false,
+  providers: [],
+
+  isMedicaidEligible: false,
+  isEnrolledMedicarePartA: false,
+  medicarePartAEffectiveDate: {
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField('')
   },
 
   vaInformation: {
@@ -44,30 +74,6 @@ const blankVeteran = {
     facilityState: makeField(''),
     vaMedicalFacility: makeField(''),
     wantsInitialVaContact: false
-  },
-
-  demographicInformation: {
-    isSpanishHispanicLatino: false,
-    isAmericanIndianOrAlaskanNative: false,
-    isBlackOrAfricanAmerican: false,
-    isNativeHawaiianOrOtherPacificIslander: false,
-    isAsian: false,
-    isWhite: false
-  },
-
-  veteranAddress: {
-    address: {
-      street: makeField(''),
-      city: makeField(''),
-      country: makeField(''),
-      state: makeField(''),
-      zipcode: makeField(''),
-    },
-    county: makeField(''),
-    email: makeField(''),
-    emailConfirmation: makeField(''),
-    homePhone: makeField(''),
-    mobilePhone: makeField('')
   },
 
   financialDisclosure: {
@@ -125,21 +131,6 @@ const blankVeteran = {
     deductibleMedicalExpenses: makeField(''),
     deductibleFuneralExpenses: makeField(''),
     deductibleEducationExpenses: makeField('')
-  },
-
-  insuranceInformation: {
-    isCoveredByHealthInsurance: false,
-    providers: []
-  },
-
-  medicareMedicaid: {
-    isMedicaidEligible: false,
-    isEnrolledMedicarePartA: false,
-    medicarePartAEffectiveDate: {
-      month: makeField(''),
-      day: makeField(''),
-      year: makeField('')
-    }
   },
 
   serviceInformation: {

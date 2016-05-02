@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import AdditionalInformationSection from './who-are-you/AdditionalInformationSection';
-import AdditionalMilitaryInformationSection from './military-service/AdditionalMilitaryInformationSection';
-import AnnualIncomeSection from './financial-assessment/AnnualIncomeSection';
-import ChildInformationSection from './financial-assessment/ChildInformationSection';
-import DeductibleExpensesSection from './financial-assessment/DeductibleExpensesSection';
-import DemographicInformationSection from './who-are-you/DemographicInformationSection';
-import FinancialDisclosureSection from './financial-assessment/FinancialDisclosureSection';
-import InsuranceInformationSection from './insurance-information/InsuranceInformationSection';
-import MedicareMedicaidSection from './insurance-information/MedicareMedicaidSection';
-import NameAndGeneralInfoSection from './who-are-you/NameAndGeneralInfoSection';
-import ServiceInformationSection from './military-service/ServiceInformationSection';
-import SpouseInformationSection from './financial-assessment/SpouseInformationSection';
-import VAInformationSection from './who-are-you/VAInformationSection';
-import VeteranAddressSection from './who-are-you/VeteranAddressSection';
+import WhoAreYouPanel1 from './who-are-you/WhoAreYouPanel1';
+// import AdditionalMilitaryInformationSection from './military-service/AdditionalMilitaryInformationSection';
+// import AnnualIncomeSection from './financial-assessment/AnnualIncomeSection';
+// import ChildInformationSection from './financial-assessment/ChildInformationSection';
+// import DeductibleExpensesSection from './financial-assessment/DeductibleExpensesSection';
+// import DemographicInformationSection from './who-are-you/DemographicInformationSection';
+// import FinancialDisclosureSection from './financial-assessment/FinancialDisclosureSection';
+// import InsuranceInformationSection from './insurance-information/InsuranceInformationSection';
+// import MedicareMedicaidSection from './insurance-information/MedicareMedicaidSection';
+// import NameAndGeneralInfoSection from './who-are-you/NameAndGeneralInfoSection';
+// import ServiceInformationSection from './military-service/ServiceInformationSection';
+// import SpouseInformationSection from './financial-assessment/SpouseInformationSection';
+// import VAInformationSection from './who-are-you/VAInformationSection';
+// import VeteranAddressSection from './who-are-you/VeteranAddressSection';
 
 
 class ReviewAndSubmitSection extends React.Component {
@@ -35,20 +35,7 @@ class ReviewAndSubmitSection extends React.Component {
     } else {
       content = (<div>
         <p>Please ensure all of your information is correct before submitting your application.</p>
-        <NameAndGeneralInfoSection reviewSection/>
-        <VAInformationSection reviewSection/>
-        <AdditionalInformationSection reviewSection/>
-        <DemographicInformationSection reviewSection/>
-        <VeteranAddressSection reviewSection/>
-        <InsuranceInformationSection reviewSection/>
-        <MedicareMedicaidSection reviewSection/>
-        <ServiceInformationSection reviewSection/>
-        <AdditionalMilitaryInformationSection reviewSection/>
-        <FinancialDisclosureSection reviewSection/>
-        <SpouseInformationSection reviewSection/>
-        <ChildInformationSection reviewSection/>
-        <AnnualIncomeSection reviewSection/>
-        <DeductibleExpensesSection reviewSection/>
+        <WhoAreYouPanel1 reviewSection/>
         <div className="input-section">
           <a href="#">Upload documents</a>
         </div>

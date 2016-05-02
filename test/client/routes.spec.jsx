@@ -11,9 +11,9 @@ import ChildInformationSection from '../../src/client/components/financial-asses
 import DeductibleExpensesSection from '../../src/client/components/financial-assessment/DeductibleExpensesSection';
 import DemographicInformationSection from '../../src/client/components/who-are-you/DemographicInformationSection';
 import FinancialDisclosureSection from '../../src/client/components/financial-assessment/FinancialDisclosureSection';
-import InsuranceInformationSection from '../../src/client/components/insurance-information/InsuranceInformationSection';
+import InsuranceInformationSection from '../../src/client/components/other-insurance/InsuranceInformationSection';
 import IntroductionSection from '../../src/client/components/IntroductionSection.jsx';
-import MedicareMedicaidSection from '../../src/client/components/insurance-information/MedicareMedicaidSection';
+import MedicareMedicaidSection from '../../src/client/components/other-insurance/MedicareMedicaidSection';
 import NameAndGeneralInfoSection from '../../src/client/components/who-are-you/NameAndGeneralInfoSection';
 import ReviewAndSubmitSection from '../../src/client/components/ReviewAndSubmitSection.jsx';
 import ServiceInformationSection from '../../src/client/components/military-service/ServiceInformationSection';
@@ -89,13 +89,13 @@ describe('routes', () => {
       expect(tree.dive(['RouterContext']).subTree(getName(VeteranAddressSection))).to.be.an('object');
     });
 
-    it('/insurance-information/general', () => {
-      history.replace('/insurance-information/general');
+    it('/other-insurance/panel1', () => {
+      history.replace('/other-insurance/panel1');
       expect(tree.dive(['RouterContext']).subTree(getName(InsuranceInformationSection))).to.be.an('object');
     });
 
-    it('/insurance-information/medicare-medicaid', () => {
-      history.replace('/insurance-information/medicare-medicaid');
+    it('/other-insurance/panel2', () => {
+      history.replace('/other-insurance/panel2');
       expect(tree.dive(['RouterContext']).subTree(getName(MedicareMedicaidSection))).to.be.an('object');
     });
 
