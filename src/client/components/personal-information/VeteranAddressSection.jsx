@@ -20,7 +20,7 @@ class VeteranAddressSection extends React.Component {
   }
 
   confirmEmail() {
-    if (this.props.data.email !== this.props.data.emailConfirmation) {
+    if (this.props.data.email.value !== this.props.data.emailConfirmation.value) {
       return 'Please ensure your entries match';
     }
 
@@ -36,43 +36,43 @@ class VeteranAddressSection extends React.Component {
         <tbody>
           <tr>
             <td>Street:</td>
-            <td>{this.props.data.address.street}</td>
+            <td>{this.props.data.address.street.value}</td>
           </tr>
           <tr>
             <td>City:</td>
-            <td>{this.props.data.address.city}</td>
+            <td>{this.props.data.address.city.value}</td>
           </tr>
           <tr>
             <td>Country:</td>
-            <td>{this.props.data.address.country}</td>
+            <td>{this.props.data.address.country.value}</td>
           </tr>
           <tr>
             <td>State:</td>
-            <td>{this.props.data.address.state}</td>
+            <td>{this.props.data.address.state.value}</td>
           </tr>
           <tr>
             <td>ZIP Code:</td>
-            <td>{this.props.data.address.zipcode}</td>
+            <td>{this.props.data.address.zipcode.value}</td>
           </tr>
           <tr>
             <td>County:</td>
-            <td>{this.props.data.county}</td>
+            <td>{this.props.data.county.value}</td>
           </tr>
           <tr>
             <td>Email Address:</td>
-            <td>{this.props.data.email}</td>
+            <td>{this.props.data.email.value}</td>
           </tr>
           <tr>
             <td>Re-enter Email address:</td>
-            <td>{this.props.data.emailConfirmation}</td>
+            <td>{this.props.data.emailConfirmation.value}</td>
           </tr>
           <tr>
             <td>Home telephone number:</td>
-            <td>{this.props.data.homePhone}</td>
+            <td>{this.props.data.homePhone.value}</td>
           </tr>
           <tr>
             <td>Mobile telephone number:</td>
-            <td>{this.props.data.mobilePhone}</td>
+            <td>{this.props.data.mobilePhone.value}</td>
           </tr>
         </tbody>
       </table>);
@@ -86,16 +86,16 @@ class VeteranAddressSection extends React.Component {
             onUserInput={(update) => {this.props.onStateChange('address', update);}}/>
 
         <ErrorableTextInput label="County"
-            value={this.props.data.county}
+            field={this.props.data.county}
             onValueChange={(update) => {this.props.onStateChange('county', update);}}/>
 
         <Email label="Email address"
-            value={this.props.data.email}
+            email={this.props.data.email}
             onValueChange={(update) => {this.props.onStateChange('email', update);}}/>
 
         <Email error={this.confirmEmail()}
             label="Re-enter Email address"
-            value={this.props.data.emailConfirmation}
+            email={this.props.data.emailConfirmation}
             onValueChange={(update) => {this.props.onStateChange('emailConfirmation', update);}}/>
 
         <Phone required

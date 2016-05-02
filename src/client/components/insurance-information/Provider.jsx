@@ -1,41 +1,41 @@
 import React from 'react';
 
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
-import { isNotBlank, isValidInsurancePolicy } from '../../utils/validations';
+import { validateIfDirty, validateIfDirtyProvider, isNotBlank, isValidInsurancePolicy } from '../../utils/validations';
 
 class Provider extends React.Component {
   render() {
     let content;
 
     if (this.props.view === 'collapsed') {
-      content = this.props.data.insuranceName;
+      content = this.props.data.insuranceName.value;
     } else {
       content = (
         <div className="input-section">
           <ErrorableTextInput required
-              errorMessage={isNotBlank(this.props.data.insuranceName) ? undefined : 'Please enter the insurer’s name'}
+              errorMessage={validateIfDirty(this.props.data.insuranceName, isNotBlank) ? undefined : 'Please enter the insurer’s name'}
               label="Name"
-              value={this.props.data.insuranceName}
+              field={this.props.data.insuranceName}
               onValueChange={(update) => {this.props.onValueChange('insuranceName', update);}}/>
 
           <ErrorableTextInput required
-              errorMessage={isNotBlank(this.props.data.insurancePolicyHolderName) ? undefined : 'Please enter the name of the policy holder'}
+              errorMessage={validateIfDirty(this.props.data.insurancePolicyHolderName, isNotBlank) ? undefined : 'Please enter the name of the policy holder'}
               label="Name of Policy Holder"
-              value={this.props.data.insurancePolicyHolderName}
+              field={this.props.data.insurancePolicyHolderName}
               onValueChange={(update) => {this.props.onValueChange('insurancePolicyHolderName', update);}}/>
 
           <p>Either the provider's policy number or group code is required.</p>
 
           <ErrorableTextInput required
-              errorMessage={isValidInsurancePolicy(this.props.data.insurancePolicyNumber, this.props.data.insuranceGroupCode) ? undefined : 'Please enter the policy number or group code'}
+              errorMessage={validateIfDirtyProvider(this.props.data.insurancePolicyNumber, this.props.data.insuranceGroupCode, isValidInsurancePolicy) ? undefined : 'Please enter the policy number or group code'}
               label="Policy Number"
-              value={this.props.data.insurancePolicyNumber}
+              field={this.props.data.insurancePolicyNumber}
               onValueChange={(update) => {this.props.onValueChange('insurancePolicyNumber', update);}}/>
 
           <ErrorableTextInput required
-              errorMessage={isValidInsurancePolicy(this.props.data.insurancePolicyNumber, this.props.data.insuranceGroupCode) ? undefined : 'Please enter the policy number or group code'}
+              errorMessage={validateIfDirtyProvider(this.props.data.insurancePolicyNumber, this.props.data.insuranceGroupCode, isValidInsurancePolicy) ? undefined : 'Please enter the policy number or group code'}
               label="Group Code"
-              value={this.props.data.insuranceGroupCode}
+              field={this.props.data.insuranceGroupCode}
               onValueChange={(update) => {this.props.onValueChange('insuranceGroupCode', update);}}/>
         </div>
       );

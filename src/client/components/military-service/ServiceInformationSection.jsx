@@ -22,21 +22,21 @@ class ServiceInformationSection extends React.Component {
         <tbody>
           <tr>
             <td>Last branch of service:</td>
-            <td>{this.props.data.lastServiceBranch}</td>
+            <td>{this.props.data.lastServiceBranch.value}</td>
           </tr>
           <tr>
             <td>Last entry date:</td>
-            <td>{this.props.data.lastEntryDate.month}/
-        {this.props.data.lastEntryDate.day}/{this.props.data.lastEntryDate.year}</td>
+            <td>{this.props.data.lastEntryDate.month.value}/
+        {this.props.data.lastEntryDate.day.value}/{this.props.data.lastEntryDate.year.value}</td>
           </tr>
           <tr>
             <td>Last discharge date:</td>
-            <td>{this.props.data.lastDischargeDate.month}/
-        {this.props.data.lastDischargeDate.day}/{this.props.data.lastDischargeDate.year}</td>
+            <td>{this.props.data.lastDischargeDate.month.value}/
+        {this.props.data.lastDischargeDate.day.value}/{this.props.data.lastDischargeDate.year.value}</td>
           </tr>
           <tr>
             <td>Discharge Type:</td>
-            <td>{this.props.data.dischargeType}</td>
+            <td>{this.props.data.dischargeType.value}</td>
           </tr>
         </tbody>
       </table>);

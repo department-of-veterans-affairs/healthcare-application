@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Child from './Child';
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import GrowableTable from '../form-elements/GrowableTable.jsx';
+import { makeField } from '../../reducers/fields';
 import { veteranUpdateField, ensureFieldsInitialized, updateReviewStatus } from '../../actions';
 
 /**
@@ -16,26 +17,26 @@ class ChildInformationSection extends React.Component {
   createBlankChild() {
     return {
       childFullName: {
-        first: null,
-        middle: null,
-        last: null,
-        suffix: null
+        first: makeField(''),
+        middle: makeField(''),
+        last: makeField(''),
+        suffix: makeField('')
       },
-      childRelation: null,
-      childSocialSecurityNumber: null,
+      childRelation: makeField(''),
+      childSocialSecurityNumber: makeField(''),
       childBecameDependent: {
-        month: null,
-        day: null,
-        year: null
+        month: makeField(''),
+        day: makeField(''),
+        year: makeField('')
       },
       childDateOfBirth: {
-        month: null,
-        day: null,
-        year: null
+        month: makeField(''),
+        day: makeField(''),
+        year: makeField('')
       },
       childDisabledBefore18: false,
       childAttendedSchoolLastYear: false,
-      childEducationExpenses: null,
+      childEducationExpenses: makeField(''),
       childCohabitedLastYear: false,
       childReceivedSupportLastYear: false
     };
@@ -53,21 +54,21 @@ class ChildInformationSection extends React.Component {
       let reactKey = 0;
       let childNumber = 0;
       children = childList.map((obj) => {
-        const childFirstName = obj.childFullName.first;
-        const childMiddleName = obj.childFullName.middle;
-        const childLastName = obj.childFullName.last;
-        const childSuffix = obj.childFullName.suffix;
-        const childRelation = obj.childRelation;
-        const childSocialSecurityNumber = obj.childSocialSecurityNumber;
-        const childBecameDependentMonth = obj.childBecameDependent.month;
-        const childBecameDependentDay = obj.childBecameDependent.day;
-        const childBecameDependentYear = obj.childBecameDependent.year;
-        const childDateOfBirthMonth = obj.childDateOfBirth.month;
-        const childDateOfBirthDay = obj.childDateOfBirth.day;
-        const childDateOfBirthYear = obj.childDateOfBirth.year;
+        const childFirstName = obj.childFullName.first.value;
+        const childMiddleName = obj.childFullName.middle.value;
+        const childLastName = obj.childFullName.last.value;
+        const childSuffix = obj.childFullName.suffix.value;
+        const childRelation = obj.childRelation.value;
+        const childSocialSecurityNumber = obj.childSocialSecurityNumber.value;
+        const childBecameDependentMonth = obj.childBecameDependent.month.value;
+        const childBecameDependentDay = obj.childBecameDependent.day.value;
+        const childBecameDependentYear = obj.childBecameDependent.year.value;
+        const childDateOfBirthMonth = obj.childDateOfBirth.month.value;
+        const childDateOfBirthDay = obj.childDateOfBirth.day.value;
+        const childDateOfBirthYear = obj.childDateOfBirth.year.value;
         const childDisabledBefore18 = obj.childDisabledBefore18;
         const childAttendedSchoolLastYear = obj.childAttendedSchoolLastYear;
-        const childEducationExpenses = obj.childEducationExpenses;
+        const childEducationExpenses = obj.childEducationExpenses.value;
         const childCohabitedLastYear = obj.childCohabitedLastYear;
         const childReceivedSupportLastYear = obj.childReceivedSupportLastYear;
         return (<table key={++reactKey} className="review usa-table-borderless">

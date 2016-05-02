@@ -2,7 +2,7 @@ import React from 'react';
 
 import ErrorableSelect from '../form-elements/ErrorableSelect';
 import { genders } from '../../utils/options-for-select';
-import { isNotBlank } from '../../utils/validations';
+import { validateIfDirty, isNotBlank } from '../../utils/validations';
 
 /**
  * Select component for gender.
@@ -15,7 +15,7 @@ class Gender extends React.Component {
     return (
       <div>
         <ErrorableSelect required={this.props.required}
-            errorMessage={isNotBlank(this.props.value) ? undefined : 'Please select a gender'}
+            errorMessage={validateIfDirty(this.props.value, isNotBlank) ? undefined : 'Please select a gender'}
             label="Gender"
             options={genders}
             value={this.props.value}

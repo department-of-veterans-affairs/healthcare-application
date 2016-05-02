@@ -6,6 +6,8 @@ import GrowableTable from '../form-elements/GrowableTable.jsx';
 import Provider from './Provider.jsx';
 import { veteranUpdateField, ensureFieldsInitialized, updateReviewStatus } from '../../actions';
 
+import { makeField } from '../../reducers/fields';
+
 /**
  * Props:
  * `isSectionComplete` - Boolean. Marks the section as completed. Provides styles for completed sections.
@@ -15,16 +17,16 @@ class InsuranceInformationSection extends React.Component {
   // TODO(awong): Pull this out into a model.
   createBlankProvider() {
     return {
-      insuranceName: null,
-      insuranceAddress: null,
-      insuranceCity: null,
-      insuranceCountry: null,
-      insuranceState: null,
-      insuranceZipcode: null,
-      insurancePhone: null,
-      insurancePolicyHolderName: null,
-      insurancePolicyNumber: null,
-      insuranceGroupCode: null,
+      insuranceName: makeField(''),
+      insuranceAddress: makeField(''),
+      insuranceCity: makeField(''),
+      insuranceCountry: makeField(''),
+      insuranceState: makeField(''),
+      insuranceZipcode: makeField(''),
+      insurancePhone: makeField(''),
+      insurancePolicyHolderName: makeField(''),
+      insurancePolicyNumber: makeField(''),
+      insuranceGroupCode: makeField(''),
     };
   }
 
@@ -53,16 +55,16 @@ class InsuranceInformationSection extends React.Component {
       let reactKey = 0;
       let providerIndex = 0;
       providers = providersList.map((obj) => {
-        const insuranceName = obj.insuranceName;
-        const insuranceAddress = obj.insuranceAddress;
-        const insuranceCity = obj.insuranceCity;
-        const insuranceCountry = obj.insuranceCountry;
-        const insuranceState = obj.insuranceState;
-        const insuranceZipcode = obj.insuranceZipcode;
-        const insurancePhone = obj.insurancePhone;
-        const insurancePolicyHolderName = obj.insurancePolicyHolderName;
-        const insurancePolicyNumber = obj.insurancePolicyNumber;
-        const insuranceGroupCode = obj.insuranceGroupCode;
+        const insuranceName = obj.insuranceName.value;
+        const insuranceAddress = obj.insuranceAddress.value;
+        const insuranceCity = obj.insuranceCity.value;
+        const insuranceCountry = obj.insuranceCountry.value;
+        const insuranceState = obj.insuranceState.value;
+        const insuranceZipcode = obj.insuranceZipcode.value;
+        const insurancePhone = obj.insurancePhone.value;
+        const insurancePolicyHolderName = obj.insurancePolicyHolderName.value;
+        const insurancePolicyNumber = obj.insurancePolicyNumber.value;
+        const insuranceGroupCode = obj.insuranceGroupCode.value;
         return (<table key={++reactKey} className="review usa-table-borderless">
           <thead>
             <tr>

@@ -5,8 +5,12 @@ import ChildIncome from './ChildIncome';
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
 import FixedTable from '../form-elements/FixedTable.jsx';
-import { isBlank, isValidMonetaryValue } from '../../utils/validations';
+import { isValidField, isValidMonetaryValue } from '../../utils/validations';
 import { createChildIncomeFields, updateReviewStatus, veteranUpdateField } from '../../actions';
+
+function getErrorMessage(field, message) {
+  return isValidField(isValidMonetaryValue, field) ? undefined : message;
+}
 
 /**
  * Props:
@@ -14,17 +18,8 @@ import { createChildIncomeFields, updateReviewStatus, veteranUpdateField } from 
  * `reviewSection` - Boolean. Hides components that are only needed for ReviewAndSubmitSection.
  */
 class AnnualIncomeSection extends React.Component {
-  constructor() {
-    super();
-    this.isValidMonetaryValue = this.isValidMonetaryValue.bind(this);
-  }
-
   componentWillMount() {
     this.props.initializeChildIncomeFields();
-  }
-
-  isValidMonetaryValue(value, message) {
-    return isBlank(value) || isValidMonetaryValue(value) ? undefined : message;
   }
 
   // TODO: Figure out best way to enable users to change their response to pension
@@ -65,20 +60,20 @@ class AnnualIncomeSection extends React.Component {
       childrenIncomeReview = this.props.data.children.map((obj, index) => {
         return (
           <div key={reactKey++}>
-            <h6>Child: {`${childrenData[index].childFullName.first} ${childrenData[index].childFullName.last}`}</h6>
+            <h6>Child: {`${childrenData[index].childFullName.first.value} ${childrenData[index].childFullName.last.value}`}</h6>
             <table className="review usa-table-borderless">
               <tbody>
                 <tr>
                   <td>Children Gross Income:</td>
-                  <td>{obj.childGrossIncome}</td>
+                  <td>{obj.childGrossIncome.value}</td>
                 </tr>
                 <tr>
                   <td>Children Net Income:</td>
-                  <td>{obj.childNetIncome}</td>
+                  <td>{obj.childNetIncome.value}</td>
                 </tr>
                 <tr>
                   <td>Children Other Income:</td>
-                  <td>{obj.childOtherIncome}</td>
+                  <td>{obj.childOtherIncome.value}</td>
                 </tr>
               </tbody>
             </table>
@@ -93,15 +88,15 @@ class AnnualIncomeSection extends React.Component {
             <tbody>
               <tr>
                 <td>Veteran Gross Income:</td>
-                <td>{this.props.data.veteranGrossIncome}</td>
+                <td>{this.props.data.veteranGrossIncome.value}</td>
               </tr>
               <tr>
                 <td>Veteran Net Income:</td>
-                <td>{this.props.data.veteranNetIncome}</td>
+                <td>{this.props.data.veteranNetIncome.value}</td>
               </tr>
               <tr>
                 <td>Veteran Other Income:</td>
-                <td>{this.props.data.veteranOtherIncome}</td>
+                <td>{this.props.data.veteranOtherIncome.value}</td>
               </tr>
             </tbody>
           </table>
@@ -110,15 +105,15 @@ class AnnualIncomeSection extends React.Component {
             <tbody>
               <tr>
                 <td>Spouse Gross Income:</td>
-                <td>{this.props.data.spouseGrossIncome}</td>
+                <td>{this.props.data.spouseGrossIncome.value}</td>
               </tr>
               <tr>
                 <td>Spouse Net Income:</td>
-                <td>{this.props.data.spouseNetIncome}</td>
+                <td>{this.props.data.spouseNetIncome.value}</td>
               </tr>
               <tr>
                 <td>Spouse Other Income:</td>
-                <td>{this.props.data.spouseOtherIncome}</td>
+                <td>{this.props.data.spouseOtherIncome.value}</td>
               </tr>
             </tbody>
           </table>
@@ -180,42 +175,42 @@ class AnnualIncomeSection extends React.Component {
         <div className="input-section">
           <h6>Veteran</h6>
           <ErrorableTextInput
-              errorMessage={this.isValidMonetaryValue(this.props.data.veteranGrossIncome, message)}
+              errorMessage={getErrorMessage(this.props.data.veteranGrossIncome, message)}
               label="Veteran Gross Income"
-              value={this.props.data.veteranGrossIncome}
+              field={this.props.data.veteranGrossIncome}
               onValueChange={(update) => {this.props.onStateChange('veteranGrossIncome', update);}}/>
 
           <ErrorableTextInput
-              errorMessage={this.isValidMonetaryValue(this.props.data.veteranNetIncome, message)}
+              errorMessage={getErrorMessage(this.props.data.veteranNetIncome, message)}
               label="Veteran Net Income"
-              value={this.props.data.veteranNetIncome}
+              field={this.props.data.veteranNetIncome}
               onValueChange={(update) => {this.props.onStateChange('veteranNetIncome', update);}}/>
 
           <ErrorableTextInput
-              errorMessage={this.isValidMonetaryValue(this.props.data.veteranOtherIncome, message)}
+              errorMessage={getErrorMessage(this.props.data.veteranOtherIncome, message)}
               label="Veteran Other Income"
-              value={this.props.data.veteranOtherIncome}
+              field={this.props.data.veteranOtherIncome}
               onValueChange={(update) => {this.props.onStateChange('veteranOtherIncome', update);}}/>
         </div>
 
         <div className="input-section">
           <h6>Spouse</h6>
           <ErrorableTextInput
-              errorMessage={this.isValidMonetaryValue(this.props.data.spouseGrossIncome, message)}
+              errorMessage={getErrorMessage(this.props.data.spouseGrossIncome, message)}
               label="Spouse Gross Income"
-              value={this.props.data.spouseGrossIncome}
+              field={this.props.data.spouseGrossIncome}
               onValueChange={(update) => {this.props.onStateChange('spouseGrossIncome', update);}}/>
 
           <ErrorableTextInput
-              errorMessage={this.isValidMonetaryValue(this.props.data.spouseNetIncome, message)}
+              errorMessage={getErrorMessage(this.props.data.spouseNetIncome, message)}
               label="Spouse Net Income"
-              value={this.props.data.spouseNetIncome}
+              field={this.props.data.spouseNetIncome}
               onValueChange={(update) => {this.props.onStateChange('spouseNetIncome', update);}}/>
 
           <ErrorableTextInput
-              errorMessage={this.isValidMonetaryValue(this.props.data.spouseOtherIncome, message)}
+              errorMessage={getErrorMessage(this.props.data.spouseOtherIncome, message)}
               label="Spouse Other Income"
-              value={this.props.data.spouseOtherIncome}
+              field={this.props.data.spouseOtherIncome}
               onValueChange={(update) => {this.props.onStateChange('spouseOtherIncome', update);}}/>
         </div>
 

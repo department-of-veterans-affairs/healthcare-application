@@ -47,27 +47,27 @@ class SpouseInformationSection extends React.Component {
             <tbody>
               <tr>
                 <td>Street:</td>
-                <td>{this.props.data.spouseAddress.street}</td>
+                <td>{this.props.data.spouseAddress.street.value}</td>
               </tr>
               <tr>
                 <td>City:</td>
-                <td>{this.props.data.spouseAddress.city}</td>
+                <td>{this.props.data.spouseAddress.city.value}</td>
               </tr>
               <tr>
                 <td>Country:</td>
-                <td>{this.props.data.spouseAddress.country}</td>
+                <td>{this.props.data.spouseAddress.country.value}</td>
               </tr>
               <tr>
                 <td>State:</td>
-                <td>{this.props.data.spouseAddress.state}</td>
+                <td>{this.props.data.spouseAddress.state.value}</td>
               </tr>
               <tr>
                 <td>ZIP Code:</td>
-                <td>{this.props.data.spouseAddress.zipcode}</td>
+                <td>{this.props.data.spouseAddress.zipcode.value}</td>
               </tr>
               <tr>
                 <td>Phone:</td>
-                <td>{this.props.data.spousePhone}</td>
+                <td>{this.props.data.spousePhone.value}</td>
               </tr>
             </tbody>
           </table>
@@ -96,19 +96,19 @@ class SpouseInformationSection extends React.Component {
           <tbody>
             <tr>
               <td>Spouse Name:</td>
-              <td>{this.props.data.spouseFullName.first} {this.props.data.spouseFullName.middle} {this.props.data.spouseFullName.last} {this.props.data.spouseFullName.suffix}</td>
+              <td>{this.props.data.spouseFullName.first.value} {this.props.data.spouseFullName.middle.value} {this.props.data.spouseFullName.last.value} {this.props.data.spouseFullName.suffix.value}</td>
             </tr>
             <tr>
               <td>Social Security Number:</td>
-              <td>{this.props.data.spouseSocialSecurityNumber}</td>
+              <td>{this.props.data.spouseSocialSecurityNumber.value}</td>
             </tr>
             <tr>
               <td>Date of Birth:</td>
-              <td>{this.props.data.spouseDateOfBirth.month}/{this.props.data.spouseDateOfBirth.day}/{this.props.data.spouseDateOfBirth.year}</td>
+              <td>{this.props.data.spouseDateOfBirth.month.value}/{this.props.data.spouseDateOfBirth.day.value}/{this.props.data.spouseDateOfBirth.year.value}</td>
             </tr>
             <tr>
               <td>Date of Marriage:</td>
-              <td>{this.props.data.dateOfMarriage.month}/{this.props.data.dateOfMarriage.day}/{this.props.data.dateOfMarriage.year}</td>
+              <td>{this.props.data.dateOfMarriage.month.value}/{this.props.data.dateOfMarriage.day.value}/{this.props.data.dateOfMarriage.year.value}</td>
             </tr>
             <tr>
               <td>Do you have the same address as your spouse?:</td>
@@ -132,7 +132,7 @@ class SpouseInformationSection extends React.Component {
         {noSpouseMessage}
         <div className="input-section">
           <FullName
-              value={this.props.data.spouseFullName}
+              name={this.props.data.spouseFullName}
               onUserInput={(update) => {this.props.onStateChange('spouseFullName', update);}}/>
 
           <SocialSecurityNumber label="Spouse’s Social Security Number"

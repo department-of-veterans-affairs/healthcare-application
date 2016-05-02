@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
 import ErrorableSelect from '../form-elements/ErrorableSelect';
-import { isValidName, isBlank } from '../../utils/validations';
+import { validateIfDirty, isValidName, isBlank } from '../../utils/validations';
 import { suffixes } from '../../utils/options-for-select';
 
 /**
@@ -19,7 +19,6 @@ class FullName extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
-    this.validateRequiredFields = this.validateRequiredFields.bind(this);
   }
 
   componentWillMount() {
@@ -29,10 +28,10 @@ class FullName extends React.Component {
   // TODO: look into why this is updating so slowly
   handleChange(path, update) {
     const name = {
-      first: this.props.value.first,
-      middle: this.props.value.middle,
-      last: this.props.value.last,
-      suffix: this.props.value.suffix
+      first: this.props.name.first,
+      middle: this.props.name.middle,
+      last: this.props.name.last,
+      suffix: this.props.name.suffix
     };
 
     name[path] = update;
@@ -40,49 +39,41 @@ class FullName extends React.Component {
     this.props.onUserInput(name);
   }
 
-  validateRequiredFields(value) {
-    if (this.props.required) {
-      return isValidName(value);
+  validateRequiredFields(field, isRequired) {
+    if (isRequired) {
+      return validateIfDirty(field, isValidName);
     }
-    return isBlank(value) || isValidName(value);
+    return validateIfDirty(field, isBlank) || validateIfDirty(field, isValidName);
   }
 
   render() {
     return (
       <div>
-        <div>
-          <ErrorableTextInput
-              errorMessage={this.validateRequiredFields(this.props.value.first) ? undefined : 'Please enter a valid name'}
-              label="First Name"
-              required={this.props.required}
-              value={this.props.value.first}
-              onValueChange={(update) => {this.handleChange('first', update);}}/>
-        </div>
+        <ErrorableTextInput
+            errorMessage={this.validateRequiredFields(this.props.name.first, this.props.required) ? undefined : 'Please enter a valid name'}
+            label="First Name"
+            required={this.props.required}
+            field={this.props.name.first}
+            onValueChange={(update) => {this.handleChange('first', update);}}/>
 
-        <div>
-          <ErrorableTextInput
-              errorMessage={isBlank(this.props.value.middle) || isValidName(this.props.value.middle) ? undefined : 'Please enter a valid name'}
-              label="Middle Name"
-              value={this.props.value.middle}
-              onValueChange={(update) => {this.handleChange('middle', update);}}/>
-        </div>
+        <ErrorableTextInput
+            errorMessage={this.validateRequiredFields(this.props.name.middle, false) ? undefined : 'Please enter a valid name'}
+            label="Middle Name"
+            field={this.props.name.middle}
+            onValueChange={(update) => {this.handleChange('middle', update);}}/>
 
-        <div>
-          <ErrorableTextInput
-              errorMessage={this.validateRequiredFields(this.props.value.last) ? undefined : 'Please enter a valid name'}
-              label="Last Name"
-              required={this.props.required}
-              value={this.props.value.last}
-              onValueChange={(update) => {this.handleChange('last', update);}}/>
-        </div>
+        <ErrorableTextInput
+            errorMessage={this.validateRequiredFields(this.props.name.last, this.props.required) ? undefined : 'Please enter a valid name'}
+            label="Last Name"
+            required={this.props.required}
+            field={this.props.name.last}
+            onValueChange={(update) => {this.handleChange('last', update);}}/>
 
-        <div>
-          <ErrorableSelect
-              label="Suffix"
-              options={suffixes}
-              value={this.props.value.suffix}
-              onValueChange={(update) => {this.handleChange('suffix', update);}}/>
-        </div>
+        <ErrorableSelect
+            label="Suffix"
+            options={suffixes}
+            value={this.props.name.suffix}
+            onValueChange={(update) => {this.handleChange('suffix', update);}}/>
       </div>
     );
   }
@@ -90,11 +81,23 @@ class FullName extends React.Component {
 
 FullName.propTypes = {
   required: React.PropTypes.bool,
-  value: React.PropTypes.shape({
-    first: React.PropTypes.string,
-    middle: React.PropTypes.string,
-    last: React.PropTypes.string,
-    suffix: React.PropTypes.string,
+  name: React.PropTypes.shape({
+    first: React.PropTypes.shape({
+      value: React.PropTypes.string,
+      dirty: React.PropTypes.bool,
+    }),
+    middle: React.PropTypes.shape({
+      value: React.PropTypes.string,
+      dirty: React.PropTypes.bool,
+    }),
+    last: React.PropTypes.shape({
+      value: React.PropTypes.string,
+      dirty: React.PropTypes.bool,
+    }),
+    suffix: React.PropTypes.shape({
+      value: React.PropTypes.string,
+      dirty: React.PropTypes.bool,
+    }),
   }).isRequired,
   onUserInput: React.PropTypes.func.isRequired,
 };

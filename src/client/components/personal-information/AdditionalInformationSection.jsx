@@ -6,7 +6,7 @@ import ErrorableSelect from '../form-elements/ErrorableSelect';
 import VaMedicalFacility from './VaMedicalFacility';
 import { updateReviewStatus, veteranUpdateField } from '../../actions';
 import { states } from '../../utils/options-for-select';
-import { isNotBlank } from '../../utils/validations';
+import { validateIfDirty, isNotBlank } from '../../utils/validations';
 
 /**
  * Props:
@@ -27,7 +27,7 @@ class AdditionalInformationSection extends React.Component {
           </tr>
           <tr>
             <td>Preferred VA Medical Facility:</td>
-            <td>{this.props.data.vaMedicalFacility} in {this.props.data.facilityState}</td>
+            <td>{this.props.data.vaMedicalFacility.value} in {this.props.data.facilityState.value}</td>
           </tr>
           <tr>
             <td>Do you want VA to contact you to schedule your first appointment?:</td>
@@ -47,7 +47,7 @@ class AdditionalInformationSection extends React.Component {
         <div className="input-section">
           <h4>Select the VA Medical Facility which will be your preferred facility</h4>
           <ErrorableSelect required
-              errorMessage={isNotBlank(this.props.data.facilityState) ? undefined : 'Please select a state'}
+              errorMessage={validateIfDirty(this.props.data.facilityState, isNotBlank) ? undefined : 'Please select a state'}
               label="State"
               options={states.USA}
               value={this.props.data.facilityState}

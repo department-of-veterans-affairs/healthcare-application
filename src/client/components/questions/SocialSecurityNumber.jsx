@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
-import { isBlank, isValidSSN } from '../../utils/validations.js';
+import { validateIfDirty, isBlank, isValidSSN } from '../../utils/validations.js';
 
 /**
  * Input component for collecting a Social Security Number.
@@ -22,11 +22,11 @@ class SocialSecurityNumber extends React.Component {
     this.validate = this.validate.bind(this);
   }
 
-  validate(value) {
+  validate(field) {
     if (this.props.required) {
-      return isValidSSN(value);
+      return validateIfDirty(field, isValidSSN);
     }
-    return isBlank(value) || isValidSSN(value);
+    return isBlank(field.value) || validateIfDirty(field, isValidSSN);
   }
 
   render() {
@@ -38,7 +38,7 @@ class SocialSecurityNumber extends React.Component {
             label={this.props.label || 'Social Security Number'}
             placeholder="xxx-xx-xxxx"
             required={this.props.required !== undefined ? this.props.required : true}
-            value={this.props.ssn}
+            field={this.props.ssn}
             onValueChange={this.props.onValueChange}/>
       </div>
     );
@@ -48,7 +48,10 @@ class SocialSecurityNumber extends React.Component {
 SocialSecurityNumber.propTypes = {
   label: React.PropTypes.string,
   required: React.PropTypes.bool,
-  ssn: React.PropTypes.string.isRequired,
+  ssn: React.PropTypes.shape({
+    value: React.PropTypes.string,
+    dirty: React.PropTypes.bool,
+  }).isRequired,
   onValueChange: React.PropTypes.func.isRequired,
 };
 

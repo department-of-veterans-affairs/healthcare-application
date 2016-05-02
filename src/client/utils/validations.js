@@ -1,17 +1,35 @@
 import _ from 'lodash';
 
-function isBlank(value) {
-  if (value !== null) {
-    return value === '';
+function validateIfDirty(field, validator) {
+  if (field.dirty) {
+    return validator(field.value);
   }
+
   return true;
 }
 
-function isNotBlank(value) {
-  if (value !== null) {
-    return value !== '';
+function validateIfDirtyDate(dayField, monthField, yearField, validator) {
+  if (dayField.dirty || monthField.dirty || yearField.dirty) {
+    return validator(dayField.value, monthField.value, yearField.value);
   }
+
   return true;
+}
+
+function validateIfDirtyProvider(field1, field2, validator) {
+  if (field1.dirty || field2.dirty) {
+    return validator(field1.value, field2.value);
+  }
+
+  return true;
+}
+
+function isBlank(value) {
+  return value === '';
+}
+
+function isNotBlank(value) {
+  return value !== '';
 }
 
 // Conditions for valid SSN from the original 1010ez pdf form:
@@ -22,55 +40,46 @@ function isNotBlank(value) {
 // A value with 3 digits, an optional -, 2 digits, an optional -, and 4 digits is a valid SSN
 // 9 of the same digits (e.g., '111111111') is not a valid SSN
 function isValidSSN(value) {
-  if (value !== null) {
-    if (value === '123456789' || value === '123-45-6789') {
-      return false;
-    } else if (/1{9}|2{9}|3{9}|4{9}|5{9}|6{9}|7{9}|8{9}|9{9}/.test(value)) {
-      return false;
-    } else if (/^0{3}-?\d{2}-?\d{4}$/.test(value)) {
-      return false;
-    } else if (/^\d{3}-?0{2}-?\d{4}$/.test(value)) {
-      return false;
-    } else if (/^\d{3}-?\d{2}-?0{4}$/.test(value)) {
-      return false;
-    }
-
-    for (let i = 1; i < 10; i++) {
-      const sameDigitRegex = new RegExp(`${i}{3}-?${i}{2}-?${i}{4}`);
-      if (sameDigitRegex.test(value)) {
-        return false;
-      }
-    }
-
-    return /^\d{3}-?\d{2}-?\d{4}$/.test(value);
+  if (value === '123456789' || value === '123-45-6789') {
+    return false;
+  } else if (/1{9}|2{9}|3{9}|4{9}|5{9}|6{9}|7{9}|8{9}|9{9}/.test(value)) {
+    return false;
+  } else if (/^0{3}-?\d{2}-?\d{4}$/.test(value)) {
+    return false;
+  } else if (/^\d{3}-?0{2}-?\d{4}$/.test(value)) {
+    return false;
+  } else if (/^\d{3}-?\d{2}-?0{4}$/.test(value)) {
+    return false;
   }
-  return true;
+
+  for (let i = 1; i < 10; i++) {
+    const sameDigitRegex = new RegExp(`${i}{3}-?${i}{2}-?${i}{4}`);
+    if (sameDigitRegex.test(value)) {
+      return false;
+    }
+  }
+
+  return /^\d{3}-?\d{2}-?\d{4}$/.test(value);
 }
 
 function isValidDate(day, month, year) {
-  if (day !== null && month !== null && year !== null) {
-    // Use the date class to see if the date parses back sanely as a
-    // validation check. Not sure is a great idea...
-    const adjustedMonth = Number(month) - 1;  // JS Date object 0-indexes months. WTF.
-    const date = new Date(year, adjustedMonth, day);
-    const today = new Date();
+  // Use the date class to see if the date parses back sanely as a
+  // validation check. Not sure is a great idea...
+  const adjustedMonth = Number(month) - 1;  // JS Date object 0-indexes months. WTF.
+  const date = new Date(year, adjustedMonth, day);
+  const today = new Date();
 
-    if (today < date) {
-      return false;
-    }
-
-    return date.getDate() === Number(day) &&
-      date.getMonth() === adjustedMonth &&
-      date.getFullYear() === Number(year);
+  if (today < date) {
+    return false;
   }
-  return true;
+
+  return date.getDate() === Number(day) &&
+    date.getMonth() === adjustedMonth &&
+    date.getFullYear() === Number(year);
 }
 
 function isValidName(value) {
-  if (value !== null) {
-    return /^[a-zA-Z '\-]+$/.test(value);
-  }
-  return true;
+  return /^[a-zA-Z][a-zA-Z '\-]*$/.test(value);
 }
 
 function isValidMonetaryValue(value) {
@@ -82,28 +91,23 @@ function isValidMonetaryValue(value) {
 
 // TODO: look into validation libraries (npm "validator")
 function isValidPhone(value) {
-  if (value !== null) {
-    return /^\d{3}-\d{3}-\d{4}$/.test(value);
-  }
-  return true;
+  return /^\d{3}-\d{3}-\d{4}$/.test(value);
 }
 
 function isValidEmail(value) {
-  if (value !== null) {
-    // Comes from StackOverflow: http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
-    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
-  }
-  return true;
+  // Comes from StackOverflow: http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
+  return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
 }
 
 // TODO:  1. what is a valid address?
 //        2. 6 arguments to a function is ugly...
 //        3. argument order is now based on form order... using
 function isValidAddress(street, city, country, state, zipcode) {
-  if (street !== null && city !== null && country !== null && state !== null && zipcode !== null) {
+  // arbitraty use of field to keep linter happy until we answer #1
+  if (isNotBlank(street.value) && isNotBlank(city.value) && isNotBlank(country.value) && isNotBlank(state.value) && isNotBlank(zipcode.value)) {
     return true;
   }
-  // arbitraty use of field to keep linter happy until we answer #1
+
   return true;
 }
 
@@ -114,56 +118,87 @@ function isValidInsurancePolicy(policyNumber, groupCode) {
   return true;
 }
 
+function isValidField(validator, field) {
+  return isBlank(field.value) || validator(field.value);
+}
+
+function isValidRequiredField(validator, field) {
+  return isNotBlank(field.value) || validator(field.value);
+}
+
+function isBlankDateField(field) {
+  return isBlank(field.day.value) && isBlank(field.month.value) && isBlank(field.year.value);
+}
+
+function isValidDateField(field) {
+  return isValidDate(field.day.value, field.month.value, field.year.value);
+}
+
+function isBlankFullNameField(field) {
+  return isBlank(field.first.value) && isBlank(field.middle.value) && isBlank(field.last.value);
+}
+
+function isValidFullNameField(field) {
+  return isValidName(field.first.value) &&
+    (isBlank(field.middle.value) || isValidName(field.middle.value)) &&
+    isValidName(field.last.value);
+}
+
+function isBlankAddressField(field) {
+  return isBlank(field.street.value) &&
+    isBlank(field.city.value) &&
+    isBlank(field.country.value) &&
+    isBlank(field.state.value) &&
+    isBlank(field.zipcode.value);
+}
+
+function isValidAddressField(field) {
+  return isValidAddress(field.street.value, field.city.value, field.country.value, field.state.value, field.zipcode.value);
+}
+
 function isValidNameAndGeneralInformation(data) {
-  return (isNotBlank(data.fullName.first) && isValidName(data.fullName.first)) &&
-      (isBlank(data.fullName.middle) || isValidName(data.fullName.middle)) &&
-      (isNotBlank(data.fullName.last) && isValidName(data.fullName.last)) &&
-      isValidSSN(data.socialSecurityNumber) &&
-      isNotBlank(data.gender) &&
+  return isValidFullNameField(data.fullName) &&
+      isValidRequiredField(isValidSSN, data.socialSecurityNumber) &&
+      isNotBlank(data.gender.value) &&
       isNotBlank(data.maritalStatus) &&
-      isValidDate(data.dateOfBirth.day, data.dateOfBirth.month, data.dateOfBirth.year);
+      isValidDateField(data.dateOfBirth);
 }
 
 function isValidVaInformation(data) {
-  return isNotBlank(data.isVaServiceConnected);
+  return validateIfDirty(data.isVaServiceConnected, isNotBlank) &&
+      validateIfDirty(data.compensableVaServiceConnected, isNotBlank) &&
+      validateIfDirty(data.receivesVaPension, isNotBlank);
 }
 
 function isValidAdditionalInformation(data) {
-  return isNotBlank(data.facilityState) &&
-    isNotBlank(data.vaMedicalFacility);
+  return validateIfDirty(data.facilityState, isNotBlank) &&
+    validateIfDirty(data.vaMedicalFacility, isNotBlank);
 }
 
 function isValidVeteranAddress(data) {
-  return isValidAddress(data.address.street, data.address.city, data.address.country, data.address.state, data.address.zipcode) &&
-      (isBlank(data.email) || isValidEmail(data.email)) &&
-      (isBlank(data.emailConfirmation) || isValidEmail(data.emailConfirmation)) &&
-      (isBlank(data.homePhone) || isValidPhone(data.homePhone)) &&
-      (isBlank(data.mobilePhone) || isValidPhone(data.mobilePhone));
+  return isValidAddressField(data.address) &&
+      isValidField(isValidEmail, data.email) &&
+      isValidField(isValidEmail, data.emailConfirmation) &&
+      isValidField(isValidPhone, data.homePhone) &&
+      isValidField(isValidPhone, data.mobilePhone);
 }
 
 function isValidSpouseInformation(data) {
-  return (isBlank(data.spouseFullName.first) || isValidName(data.spouseFullName.first)) &&
-      (isBlank(data.spouseFullName.middle) || isValidName(data.spouseFullName.middle)) &&
-      (isBlank(data.spouseFullName.last) || isValidName(data.spouseFullName.last)) &&
-      (isBlank(data.spouseSocialSecurityNumber) || isValidSSN(data.spouseSocialSecurityNumber)) &&
-      ((isBlank(data.spouseDateOfBirth.day) && isBlank(data.spouseDateOfBirth.month) && isBlank(data.spouseDateOfBirth.year)) ||
-      isValidDate(data.spouseDateOfBirth.day, data.spouseDateOfBirth.month, data.spouseDateOfBirth.year)) &&
-      ((isBlank(data.dateOfMarriage.day) && isBlank(data.dateOfMarriage.month) && isBlank(data.dateOfMarriage.year)) ||
-      isValidDate(data.dateOfMarriage.day, data.dateOfMarriage.month, data.dateOfMarriage.year)) &&
-      ((isBlank(data.spouseAddress.street) && isBlank(data.spouseAddress.city) && isBlank(data.spouseAddress.country) && isBlank(data.spouseAddress.state) && isBlank(data.spouseAddress.zipcode)) ||
-      isValidAddress(data.spouseAddress.street, data.spouseAddress.city, data.spouseAddress.country, data.spouseAddress.state, data.spouseAddress.zipcode)) &&
-      (isBlank(data.spousePhone) || isValidPhone(data.spousePhone));
+  return (isBlankFullNameField(data.spouseFullName) || isValidFullNameField(data.spouseFullName)) &&
+      isValidField(isValidSSN, data.spouseSocialSecurityNumber) &&
+      (isBlankDateField(data.spouseDateOfBirth) || isValidDateField(data.spouseDateOfBirth)) &&
+      (isBlankDateField(data.dateOfMarriage) || isValidDateField(data.dateOfMarriage)) &&
+      (isBlankAddressField(data.spouseAddress) || isValidAddressField(data.spouseAddress)) &&
+      isValidField(isValidPhone, data.spousePhone);
 }
 
-function isValidChildInformation(child) {
-  return (isValidName(child.childFullName.first) &&
-      (isBlank(child.childFullName.middle) || isValidName(child.childFullName.middle)) &&
-      isValidName(child.childFullName.last) &&
-      isNotBlank(child.childRelation) &&
-      isValidSSN(child.childSocialSecurityNumber) &&
-      isValidDate(child.childBecameDependent.day, child.childBecameDependent.month, child.childBecameDependent.year) &&
-      isValidDate(child.childDateOfBirth.day, child.childDateOfBirth.month, child.childDateOfBirth.year) &&
-      (isBlank(child.childEducationExpenses) || isValidMonetaryValue(child.childEducationExpenses)));
+function isValidChildInformationField(child) {
+  return isValidFullNameField(child.childFullName) &&
+    isNotBlank(child.childRelation.value) &&
+    isValidRequiredField(isValidSSN, child.childSocialSecurityNumber) &&
+    isValidDateField(child.childBecameDependent) &&
+    isValidDateField(child.childDateOfBirth) &&
+    isValidField(isValidMonetaryValue, child.childEducationExpenses);
 }
 
 function isValidChildren(data) {
@@ -172,23 +207,24 @@ function isValidChildren(data) {
     return true;
   }
   for (let i = 0; i < children.length; i++) {
-    if (!isValidChildInformation(children[i])) {
+    if (!isValidChildInformationField(children[i])) {
       return false;
     }
   }
   return true;
 }
 
-function isValidChildIncome(child) {
-  return (isBlank(child.childGrossIncome) || isValidMonetaryValue(child.childGrossIncome)) &&
-    (isBlank(child.childNetIncome) || isValidMonetaryValue(child.childNetIncome)) &&
-    (isBlank(child.childOtherIncome) || isValidMonetaryValue(child.childOtherIncome));
-}
-
 function isValidChildrenIncome(data) {
   const children = data.children;
+  if (children.length === 0) {
+    return true;
+  }
   for (let i = 0; i < children.length; i++) {
-    if (!isValidChildIncome(children[i])) {
+    if (
+        !isValidField(isValidMonetaryValue, children[i].childrenGrossIncome) &&
+        !isValidField(isValidMonetaryValue, children[i].childrenNetIncome) &&
+        !isValidField(isValidMonetaryValue, children[i].childrenOtherIncome)
+    ) {
       return false;
     }
   }
@@ -196,19 +232,19 @@ function isValidChildrenIncome(data) {
 }
 
 function isValidAnnualIncome(data) {
-  return (isBlank(data.veteranGrossIncome) || isValidMonetaryValue(data.veteranGrossIncome)) &&
-    (isBlank(data.veteranNetIncome) || isValidMonetaryValue(data.veteranNetIncome)) &&
-    (isBlank(data.veteranOtherIncome) || isValidMonetaryValue(data.veteranOtherIncome)) &&
-    (isBlank(data.spouseGrossIncome) || isValidMonetaryValue(data.spouseGrossIncome)) &&
-    (isBlank(data.spouseNetIncome) || isValidMonetaryValue(data.spouseNetIncome)) &&
-    (isBlank(data.spouseOtherIncome) || isValidMonetaryValue(data.spouseOtherIncome)) &&
+  return isValidField(isValidMonetaryValue, data.veteranGrossIncome) &&
+    isValidField(isValidMonetaryValue, data.veteranNetIncome) &&
+    isValidField(isValidMonetaryValue, data.veteranOtherIncome) &&
+    isValidField(isValidMonetaryValue, data.spouseGrossIncome) &&
+    isValidField(isValidMonetaryValue, data.spouseNetIncome) &&
+    isValidField(isValidMonetaryValue, data.spouseOtherIncome) &&
     isValidChildrenIncome(data);
 }
 
 function isValidDeductibleExpenses(data) {
-  return (isBlank(data.deductibleMedicalExpenses) || isValidMonetaryValue(data.deductibleMedicalExpenses)) &&
-      (isBlank(data.deductibleFuneralExpenses) || isValidMonetaryValue(data.deductibleFuneralExpenses)) &&
-      (isBlank(data.deductibleEducationExpenses) || isValidMonetaryValue(data.deductibleEducationExpenses));
+  return isValidField(isValidMonetaryValue, data.deductibleMedicalExpenses) &&
+    isValidField(isValidMonetaryValue, data.deductibleFuneralExpenses) &&
+    isValidField(isValidMonetaryValue, data.deductibleEducationExpenses);
 }
 
 function isValidGeneralInsurance(data) {
@@ -228,15 +264,13 @@ function isValidGeneralInsurance(data) {
 }
 
 function isValidMedicareMedicaid(data) {
-  return (isBlank(data.medicarePartAEffectiveDate.day) && isBlank(data.medicarePartAEffectiveDate.month) && isBlank(data.medicarePartAEffectiveDate.year)) ||
-    isValidDate(data.medicarePartAEffectiveDate.day, data.medicarePartAEffectiveDate.month, data.medicarePartAEffectiveDate.year);
+  return isBlankDateField(data.medicarePartAEffectiveDate) ||
+    isValidDateField(data.medicarePartAEffectiveDate);
 }
 
 function isValidServiceInformation(data) {
-  return ((isBlank(data.lastEntryDate.day) && isBlank(data.lastEntryDate.month) && isBlank(data.lastEntryDate.year)) ||
-      isValidDate(data.lastEntryDate.day, data.lastEntryDate.month, data.lastEntryDate.year)) &&
-      ((isBlank(data.lastDischargeDate.day) && isBlank(data.lastDischargeDate.month) && isBlank(data.lastDischargeDate.year)) ||
-      isValidDate(data.lastDischargeDate.day, data.lastDischargeDate.month, data.lastDischargeDate.year));
+  return (isBlankDateField(data.lastEntryDate) || isValidDateField(data.lastEntryDate)) &&
+         (isBlankDateField(data.lastDischargeDate) || isValidDateField(data.lastDischargeDate));
 }
 
 function isValidSection(completePath, sectionData) {
@@ -281,6 +315,9 @@ function initializeNullValues(value) {
 }
 
 export {
+  validateIfDirty,
+  validateIfDirtyDate,
+  validateIfDirtyProvider,
   initializeNullValues,
   isBlank,
   isNotBlank,
@@ -292,14 +329,15 @@ export {
   isValidEmail,
   isValidAddress,
   isValidInsurancePolicy,
+  isValidField,
   isValidNameAndGeneralInformation,
   isValidVaInformation,
   isValidAdditionalInformation,
   isValidVeteranAddress,
   isValidSpouseInformation,
-  isValidChildInformation,
   isValidChildren,
   isValidAnnualIncome,
+  isValidChildrenIncome,
   isValidDeductibleExpenses,
   isValidGeneralInsurance,
   isValidMedicareMedicaid,
