@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router';
 
+// TODO(crew): Alphabetize after we give sections cohesive names.
+import AdditionalInformationSection from './components/other-info/AdditionalInformationSection';
 import AnnualIncomeSection from './components/financial-assessment/AnnualIncomeSection';
 import ChildInformationSection from './components/financial-assessment/ChildInformationSection';
 import DeductibleExpensesSection from './components/financial-assessment/DeductibleExpensesSection';
@@ -93,6 +95,12 @@ const routes = [
       component={ChildInformationSection}
       key="/financial-assessment/panel4"
       path="/financial-assessment/panel4"/>,
+
+  // Other Info route
+  <Route
+      component={AdditionalInformationSection}
+      key="/other-info/panel1"
+      path="/other-info/panel1"/>,
 
   // Review and Submit route.
   <Route

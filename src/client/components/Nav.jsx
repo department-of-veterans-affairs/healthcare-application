@@ -134,7 +134,18 @@ class Nav extends React.Component {
             </ul>
           </div>
         </li>
-        <li role="presentation" className={`eight last ${subnavStyles}
+        <li role="presentation" className={`eight ${subnavStyles}
+         ${determinePanelStyles('/va-service-connected', '/va-service-connected/panel1')}`}>
+          <div>
+            <h5>OTHER INFO</h5>
+            <ul className="usa-unstyled-list">
+              <li className={`${determineSectionStyles('/other-info/panel1')}`}>
+                Panel 1
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li role="presentation" className={`nine last ${subnavStyles}
          ${determinePanelStyles('/review-and-submit', '/review-and-submit')}`}>
           <div>
             <h5>Review and Submit</h5>

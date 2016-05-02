@@ -90,6 +90,9 @@ const blankVeteran = {
   compensableVaServiceConnected: makeField(''),
   receivesVaPension: makeField(''),
 
+  provideFinancialInfo: false,
+  understandsFinancialDisclosure: false,
+
   veteranGrossIncome: makeField(''),
   veteranNetIncome: makeField(''),
   veteranOtherIncome: makeField(''),
@@ -140,14 +143,7 @@ const blankVeteran = {
 
 
   hasChildrenToReport: false,
-  children: [],
-
-  // This information was not in the new structure.
-  financialDisclosure: {
-    provideFinancialInfo: false,
-    understandsFinancialDisclosure: false
-  },
-
+  children: []
 };
 
 function createBlankChild() {

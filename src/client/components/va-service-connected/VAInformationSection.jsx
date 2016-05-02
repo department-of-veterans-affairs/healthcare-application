@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
+import FinancialDisclosureSection from './FinancialDisclosureSection';
 import { yesNo } from '../../utils/options-for-select';
 import { validateIfDirty, isNotBlank } from '../../utils/validations';
 import { updateReviewStatus, veteranUpdateField } from '../../actions';
@@ -67,6 +68,7 @@ class VaInformationSection extends React.Component {
               options={yesNo}
               value={this.props.data.receivesVaPension}
               onValueChange={(update) => {this.props.onStateChange('receivesVaPension', update);}}/>
+          <FinancialDisclosureSection/>
         </div>
       </div>);
     }

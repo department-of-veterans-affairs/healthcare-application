@@ -136,6 +136,10 @@ describe('<Nav>', () => {
       expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/panel4');
     });
 
+    it('/other-info/panel1', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/other-info/panel1');
+    });
+
     it('/review-and-submit', () => {
       expectActiveSection(nav, '/review-and-submit');
     });
