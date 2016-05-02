@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import AdditionalInformationSection from './personal-information/AdditionalInformationSection';
+import AdditionalInformationSection from './who-are-you/AdditionalInformationSection';
 import AdditionalMilitaryInformationSection from './military-service/AdditionalMilitaryInformationSection';
 import AnnualIncomeSection from './financial-assessment/AnnualIncomeSection';
 import ChildInformationSection from './financial-assessment/ChildInformationSection';
 import DeductibleExpensesSection from './financial-assessment/DeductibleExpensesSection';
-import DemographicInformationSection from './personal-information/DemographicInformationSection';
+import DemographicInformationSection from './who-are-you/DemographicInformationSection';
 import FinancialDisclosureSection from './financial-assessment/FinancialDisclosureSection';
 import InsuranceInformationSection from './insurance-information/InsuranceInformationSection';
 import MedicareMedicaidSection from './insurance-information/MedicareMedicaidSection';
-import NameAndGeneralInfoSection from './personal-information/NameAndGeneralInfoSection';
+import NameAndGeneralInfoSection from './who-are-you/NameAndGeneralInfoSection';
 import ServiceInformationSection from './military-service/ServiceInformationSection';
 import SpouseInformationSection from './financial-assessment/SpouseInformationSection';
-import VAInformationSection from './personal-information/VAInformationSection';
-import VeteranAddressSection from './personal-information/VeteranAddressSection';
+import VAInformationSection from './who-are-you/VAInformationSection';
+import VeteranAddressSection from './who-are-you/VeteranAddressSection';
 
 
 class ReviewAndSubmitSection extends React.Component {

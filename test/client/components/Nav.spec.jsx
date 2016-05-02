@@ -80,24 +80,24 @@ describe('<Nav>', () => {
       expectActiveSection(nav, '/introduction');
     });
 
-    it('/personal-information/name-and-general-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/personal-information/name-and-general-information');
+    it('/who-are-you/name-and-general-information', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/who-are-you/name-and-general-information');
     });
 
-    it('/personal-information/va-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/personal-information/va-information');
+    it('/who-are-you/va-information', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/who-are-you/va-information');
     });
 
-    it('/personal-information/additional-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/personal-information/additional-information');
+    it('/who-are-you/additional-information', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/who-are-you/additional-information');
     });
 
-    it('/personal-information/demographic-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/personal-information/demographic-information');
+    it('/who-are-you/demographic-information', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/who-are-you/demographic-information');
     });
 
-    it('/personal-information/veteran-address', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/personal-information/veteran-address');
+    it('/who-are-you/veteran-address', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/who-are-you/veteran-address');
     });
 
     it('/insurance-information/general', () => {

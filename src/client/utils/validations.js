@@ -159,8 +159,8 @@ function isValidAddressField(field) {
 function isValidNameAndGeneralInformation(data) {
   return isValidFullNameField(data.fullName) &&
       isValidRequiredField(isValidSSN, data.socialSecurityNumber) &&
-      isNotBlank(data.gender.value) &&
-      isNotBlank(data.maritalStatus) &&
+      // isNotBlank(data.gender.value) &&
+      // isNotBlank(data.maritalStatus) &&
       isValidDateField(data.dateOfBirth);
 }
 
@@ -275,13 +275,13 @@ function isValidServiceInformation(data) {
 
 function isValidSection(completePath, sectionData) {
   switch (completePath) {
-    case '/personal-information/name-and-general-information':
+    case '/who-are-you/name-and-general-information':
       return isValidNameAndGeneralInformation(sectionData);
-    case '/personal-information/va-information':
+    case '/who-are-you/va-information':
       return isValidVaInformation(sectionData);
-    case '/personal-information/additional-information':
+    case '/who-are-you/additional-information':
       return isValidAdditionalInformation(sectionData);
-    case '/personal-information/veteran-address':
+    case '/who-are-you/veteran-address':
       return isValidVeteranAddress(sectionData);
     case '/financial-assessment/spouse-information':
       return isValidSpouseInformation(sectionData);

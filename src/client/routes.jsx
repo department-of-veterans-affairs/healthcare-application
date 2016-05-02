@@ -1,22 +1,22 @@
 import React from 'react';
 import { Route } from 'react-router';
 
-import AdditionalInformationSection from './components/personal-information/AdditionalInformationSection';
+import AdditionalInformationSection from './components/who-are-you/AdditionalInformationSection';
 import AdditionalMilitaryInformationSection from './components/military-service/AdditionalMilitaryInformationSection';
 import AnnualIncomeSection from './components/financial-assessment/AnnualIncomeSection';
 import ChildInformationSection from './components/financial-assessment/ChildInformationSection';
 import DeductibleExpensesSection from './components/financial-assessment/DeductibleExpensesSection';
-import DemographicInformationSection from './components/personal-information/DemographicInformationSection';
+import DemographicInformationSection from './components/who-are-you/DemographicInformationSection';
 import FinancialDisclosureSection from './components/financial-assessment/FinancialDisclosureSection';
 import InsuranceInformationSection from './components/insurance-information/InsuranceInformationSection';
 import IntroductionSection from './components/IntroductionSection.jsx';
 import MedicareMedicaidSection from './components/insurance-information/MedicareMedicaidSection';
-import NameAndGeneralInfoSection from './components/personal-information/NameAndGeneralInfoSection';
+import NameAndGeneralInfoSection from './components/who-are-you/NameAndGeneralInfoSection';
 import ReviewAndSubmitSection from './components/ReviewAndSubmitSection.jsx';
 import ServiceInformationSection from './components/military-service/ServiceInformationSection';
 import SpouseInformationSection from './components/financial-assessment/SpouseInformationSection';
-import VAInformationSection from './components/personal-information/VAInformationSection';
-import VeteranAddressSection from './components/personal-information/VeteranAddressSection';
+import VAInformationSection from './components/who-are-you/VAInformationSection';
+import VeteranAddressSection from './components/who-are-you/VeteranAddressSection';
 
 const routes = [
   // Introduction route.
@@ -28,24 +28,24 @@ const routes = [
   // Personal Information routes.
   <Route
       component={NameAndGeneralInfoSection}
-      key="/personal-information/name-and-general-information"
-      path="/personal-information/name-and-general-information"/>,
+      key="/who-are-you/name-and-general-information"
+      path="/who-are-you/name-and-general-information"/>,
   <Route
       component={VAInformationSection}
-      key="/personal-information/va-information"
-      path="/personal-information/va-information"/>,
+      key="/who-are-you/va-information"
+      path="/who-are-you/va-information"/>,
   <Route
       component={AdditionalInformationSection}
-      key="/personal-information/additional-information"
-      path="/personal-information/additional-information"/>,
+      key="/who-are-you/additional-information"
+      path="/who-are-you/additional-information"/>,
   <Route
       component={DemographicInformationSection}
-      key="/personal-information/demographic-information"
-      path="/personal-information/demographic-information"/>,
+      key="/who-are-you/demographic-information"
+      path="/who-are-you/demographic-information"/>,
   <Route
       component={VeteranAddressSection}
-      key="/personal-information/veteran-address"
-      path="/personal-information/veteran-address"/>,
+      key="/who-are-you/veteran-address"
+      path="/who-are-you/veteran-address"/>,
 
   // Insurance Information routes.
   <Route

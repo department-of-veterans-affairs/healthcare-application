@@ -134,7 +134,7 @@ class VeteranAddressSection extends React.Component {
 function mapStateToProps(state) {
   return {
     data: state.veteran.veteranAddress,
-    isSectionComplete: state.uiState.completedSections['/personal-information/veteran-address']
+    isSectionComplete: state.uiState.completedSections['/who-are-you/veteran-address']
   };
 }
 
@@ -144,7 +144,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(veteranUpdateField(['veteranAddress', field], update));
     },
     onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/personal-information/veteran-address'], update));
+      dispatch(updateReviewStatus(['/who-are-you/veteran-address'], update));
     }
   };
 }

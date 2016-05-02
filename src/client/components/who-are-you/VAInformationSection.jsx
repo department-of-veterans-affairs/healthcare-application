@@ -95,7 +95,7 @@ class VaInformationSection extends React.Component {
 function mapStateToProps(state) {
   return {
     data: state.veteran.vaInformation,
-    isSectionComplete: state.uiState.completedSections['/personal-information/va-information']
+    isSectionComplete: state.uiState.completedSections['/who-are-you/va-information']
   };
 }
 
@@ -106,7 +106,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(veteranUpdateField(['vaInformation', field], update));
     },
     onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/personal-information/va-information'], update));
+      dispatch(updateReviewStatus(['/who-are-you/va-information'], update));
     }
   };
 }

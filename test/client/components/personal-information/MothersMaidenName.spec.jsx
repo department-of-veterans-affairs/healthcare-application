@@ -3,7 +3,7 @@ import ReactTestUtils from 'react-addons-test-utils';
 import SkinDeep from 'skin-deep';
 import { assert, expect } from 'chai';
 
-import MothersMaidenName from '../../../../src/client/components/personal-information/MothersMaidenName';
+import MothersMaidenName from '../../../../src/client/components/who-are-you/MothersMaidenName';
 import { makeField } from '../../../../src/client/reducers/fields';
 
 describe('<MothersMaidenName>', () => {

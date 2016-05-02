@@ -45,23 +45,23 @@ class Nav extends React.Component {
           </div>
         </li>
         <li role="presentation" className={`two ${subnavStyles}
-         ${determinePanelStyles('/personal-information', '/personal-information/veteran-address')}`}>
+         ${determinePanelStyles('/who-are-you', '/who-are-you/veteran-address')}`}>
           <div>
-            <h5>Personal Information</h5>
+            <h5>WHO ARE YOU?</h5>
             <ul className="usa-unstyled-list">
-              <li className={`${determineSectionStyles('/personal-information/name-and-general-information')}`}>
-                Name and General
+              <li className={`${determineSectionStyles('/who-are-you/name-and-general-information')}`}>
+                Panel 1
               </li>
-              <li className={`${determineSectionStyles('/personal-information/va-information')}`}>
+              <li className={`${determineSectionStyles('/who-are-you/va-information')}`}>
                 VA-Specific
               </li>
-              <li className={`${determineSectionStyles('/personal-information/additional-information')}`}>
+              <li className={`${determineSectionStyles('/who-are-you/additional-information')}`}>
                 Additional
               </li>
-              <li className={`${determineSectionStyles('/personal-information/demographic-information')}`}>
+              <li className={`${determineSectionStyles('/who-are-you/demographic-information')}`}>
                 Demographic
               </li>
-              <li className={`${determineSectionStyles('/personal-information/veteran-address')}`}>
+              <li className={`${determineSectionStyles('/who-are-you/veteran-address')}`}>
                 Veteran Address
               </li>
             </ul>

@@ -13,23 +13,23 @@ _.mixin(lodashDeep);
 
 // TODO: Remove providers and children if checkbox within section is unchecked
 const blankVeteran = {
+  fullName: {
+    first: makeField(''),
+    middle: makeField(''),
+    last: makeField(''),
+    suffix: makeField(''),
+  },
+  socialSecurityNumber: makeField(''),
+  dateOfBirth: {
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField(''),
+  },
   nameAndGeneralInformation: {
-    fullName: {
-      first: makeField(''),
-      middle: makeField(''),
-      last: makeField(''),
-      suffix: makeField(''),
-    },
     mothersMaidenName: makeField(''),
-    socialSecurityNumber: makeField(''),
     gender: makeField(''),
     cityOfBirth: makeField(''),
     stateOfBirth: makeField(''),
-    dateOfBirth: {
-      month: makeField(''),
-      day: makeField(''),
-      year: makeField(''),
-    },
     maritalStatus: makeField('')
   },
 
