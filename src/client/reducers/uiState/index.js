@@ -26,6 +26,9 @@ const ui = {
     '/financial-assessment/annual-income': false,
     '/financial-assessment/deductible-expenses': false,
     '/review-and-submit': false
+  },
+  verifiedSections: {
+    NameAndGeneralInfoSection: false
   }
 };
 

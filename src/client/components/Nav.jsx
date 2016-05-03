@@ -38,13 +38,7 @@ class Nav extends React.Component {
     // TODO(akainic): change this check once the alias for introduction has been changed
     return (
       <ol className="process hca-process">
-        <li className={`one ${subnavStyles}
-         ${determinePanelStyles('/introduction', '/introduction')}`}>
-          <div>
-            <h5>Introduction</h5>
-          </div>
-        </li>
-        <li role="presentation" className={`two ${subnavStyles}
+        <li role="presentation" className={`one ${subnavStyles}
          ${determinePanelStyles('/personal-information', '/personal-information/veteran-address')}`}>
           <div>
             <h5>Personal Information</h5>
@@ -67,7 +61,7 @@ class Nav extends React.Component {
             </ul>
           </div>
         </li>
-        <li role="presentation" className={`three ${subnavStyles}
+        <li role="presentation" className={`two ${subnavStyles}
          ${determinePanelStyles('/insurance-information', '/insurance-information/medicare-medicaid')}`}>
           <div>
             <h5>Insurance Information</h5>
@@ -81,7 +75,7 @@ class Nav extends React.Component {
             </ul>
           </div>
         </li>
-        <li role="presentation" className={`four ${subnavStyles}
+        <li role="presentation" className={`three ${subnavStyles}
          ${determinePanelStyles('/military-service', '/military-service/additional-information')}`}>
           <div>
             <h5>Military Service</h5>
@@ -95,7 +89,7 @@ class Nav extends React.Component {
             </ul>
           </div>
         </li>
-        <li role="presentation" className={`five ${subnavStyles}
+        <li role="presentation" className={`four ${subnavStyles}
          ${determinePanelStyles('/financial-assessment', '/financial-assessment/deductible-expenses')}`}>
           <div>
             <h5>Financial Assessment</h5>
@@ -118,10 +112,10 @@ class Nav extends React.Component {
             </ul>
           </div>
         </li>
-        <li role="presentation" className={`six last ${subnavStyles}
+        <li role="presentation" className={`five last ${subnavStyles}
          ${determinePanelStyles('/review-and-submit', '/review-and-submit')}`}>
           <div>
-            <h5>Review and Submit</h5>
+            <h5>Review</h5>
           </div>
         </li>
       </ol>
