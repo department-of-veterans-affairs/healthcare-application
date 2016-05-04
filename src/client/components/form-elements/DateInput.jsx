@@ -58,9 +58,18 @@ class DateInput extends React.Component {
           validateIfDirtyDate(day, month, year, isValidDate);
     }
 
+    // Calculate required.
+    let requiredSpan = undefined;
+    if (this.props.required) {
+      requiredSpan = <span className="hca-required-span">*</span>;
+    }
+
     return (
       <div>
-        <label>{this.props.label ? this.props.label : 'Date of Birth'}</label>
+        <label>
+          {this.props.label ? this.props.label : 'Date of Birth'}
+          {requiredSpan}
+        </label>
         <span className="usa-form-hint usa-datefield-hint" id="dobHint">For example: Apr 28 1986</span>
         <div className={isValid ? undefined : 'usa-input-error'}>
           <div className="usa-date-of-birth row">

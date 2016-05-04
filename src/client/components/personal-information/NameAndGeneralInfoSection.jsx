@@ -58,6 +58,7 @@ class NameAndGeneralInfoSection extends React.Component {
       </table>);
     } else {
       content = (<div>
+        <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
           <FullName required
               name={this.props.data.fullName}

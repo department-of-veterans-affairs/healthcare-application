@@ -39,9 +39,9 @@ class ErrorableSelect extends React.Component {
     }
 
     // Calculate required.
-    let requiredSpan = '';
+    let requiredSpan = undefined;
     if (this.props.required) {
-      requiredSpan = <span className="usa-additional_text">Required</span>;
+      requiredSpan = <span className="hca-required-span">*</span>;
     }
 
     // Calculate options for select
