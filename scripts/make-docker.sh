@@ -2,4 +2,4 @@
 
 set -e
 
-docker build -t 'awongdev/hca-staging' .
+docker build -t 'dsva/healthcare-application' .
