@@ -1,6 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import _ from 'lodash';
 
 import ErrorableCheckbox from './ErrorableCheckbox';
+import { updateReviewStatus } from '../../actions';
+
 
 /**
  * A component for the review section to validate information is correct.
@@ -9,11 +13,18 @@ import ErrorableCheckbox from './ErrorableCheckbox';
  */
 
 class ReviewCollapsiblePanel extends React.Component {
+  componentWillMount() {
+    this.id = _.uniqueId();
+  }
 
   render() {
     let panelAction;
+    let editButton;
+    const currentPath = this.props.updatePath;
+    const sectionsComplete = this.props.uiData.completedSections[currentPath];
 
-    if (this.props.sectionComplete) {
+
+    if (sectionsComplete) {
       panelAction = (<ErrorableCheckbox
           label="I certify that all information above is correct to the best of my knowledge."
           checked={this.props.value}
@@ -23,15 +34,23 @@ class ReviewCollapsiblePanel extends React.Component {
         );
     }
 
+    editButton = (<ErrorableCheckbox
+        label={`${sectionsComplete ? 'Edit' : 'Update'}`}
+        checked={sectionsComplete}
+        className="edit-checkbox"
+        onValueChange={(update) => {this.props.onUIStateChange(currentPath, update);}}/>
+    );
+
+
     return (
-      <div className="usa-accordion-bordered">
+      <div id={`${this.id}-collapsiblePanel`} className="usa-accordion-bordered">
         <ul className="usa-unstyled-list">
           <li>
             <button className="usa-button-unstyled" aria-expanded="true" aria-controls="collapsible-0">
-              {this.props.sectionLabel}
+              {this.props.sectionLabel} {editButton}
             </button>
             <div id="collapsible-0" aria-hidden="false" className="usa-accordion-content">
-              {this.props.children}
+              {this.props.component}
               {panelAction}
             </div>
           </li>
@@ -41,4 +60,20 @@ class ReviewCollapsiblePanel extends React.Component {
   }
 }
 
-export default ReviewCollapsiblePanel;
+function mapStateToProps(state) {
+  return {
+    uiData: state.uiState
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onUIStateChange: (path, update) => {
+      dispatch(updateReviewStatus(path, update));
+    }
+  };
+}
+
+// TODO(awong): Remove the pure: false once we start using ImmutableJS.
+export default connect(mapStateToProps, mapDispatchToProps, undefined, { pure: false })(ReviewCollapsiblePanel);
+export { ReviewCollapsiblePanel };

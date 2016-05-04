@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import DateInput from '../form-elements/DateInput';
-import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import ErrorableSelect from '../form-elements/ErrorableSelect';
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
 import FullName from '../questions/FullName';
@@ -11,7 +10,7 @@ import MothersMaidenName from './MothersMaidenName';
 import SocialSecurityNumber from '../questions/SocialSecurityNumber';
 import { maritalStatuses, states } from '../../utils/options-for-select.js';
 import { isNotBlank, validateIfDirty } from '../../utils/validations';
-import { updateReviewStatus, veteranUpdateField } from '../../actions';
+import { veteranUpdateField } from '../../actions';
 
 /**
  * Props:
@@ -21,7 +20,6 @@ import { updateReviewStatus, veteranUpdateField } from '../../actions';
 class NameAndGeneralInfoSection extends React.Component {
   render() {
     let content;
-    let editButton;
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
       content = (<table className="review usa-table-borderless">
@@ -97,19 +95,9 @@ class NameAndGeneralInfoSection extends React.Component {
       </div>);
     }
 
-    if (this.props.reviewSection) {
-      editButton = (<ErrorableCheckbox
-          label={`${this.props.isSectionComplete ? 'Edit' : 'Update'}`}
-          checked={this.props.isSectionComplete}
-          className="edit-checkbox"
-          onValueChange={(update) => {this.props.onUIStateChange(update);}}/>
-      );
-    }
-
     return (
       <fieldset>
         <h4>Veteran's Name</h4>
-        {editButton}
         {content}
       </fieldset>
     );
@@ -127,9 +115,6 @@ function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
       dispatch(veteranUpdateField(['nameAndGeneralInformation', field], update));
-    },
-    onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/personal-information/name-and-general-information'], update));
     }
   };
 }
