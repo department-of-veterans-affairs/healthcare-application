@@ -2,11 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ChildIncome from './ChildIncome';
-import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
 import FixedTable from '../form-elements/FixedTable.jsx';
 import { isValidField, isValidMonetaryValue } from '../../utils/validations';
-import { createChildIncomeFields, updateReviewStatus, veteranUpdateField } from '../../actions';
+import { createChildIncomeFields, veteranUpdateField } from '../../actions';
 
 function getErrorMessage(field, message) {
   return isValidField(isValidMonetaryValue, field) ? undefined : message;
@@ -29,7 +28,6 @@ class AnnualIncomeSection extends React.Component {
     let childrenIncomeInput;
     let childrenIncomeReview;
     let content;
-    let editButton;
 
     if (this.props.receivesVaPension === true) {
       notRequiredMessage = (
@@ -219,19 +217,9 @@ class AnnualIncomeSection extends React.Component {
       </div>);
     }
 
-    if (this.props.reviewSection) {
-      editButton = (<ErrorableCheckbox
-          label={`${this.props.isSectionComplete ? 'Edit' : 'Update'}`}
-          checked={this.props.isSectionComplete}
-          className="edit-checkbox"
-          onValueChange={(update) => {this.props.onUIStateChange(update);}}/>
-      );
-    }
-
     return (
       <div>
         <h4>Annual Income</h4>
-        {editButton}
         {content}
       </div>
     );
@@ -251,9 +239,6 @@ function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
       dispatch(veteranUpdateField(['annualIncome', field], update));
-    },
-    onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/financial-assessment/annual-income'], update));
     },
     initializeChildIncomeFields: () => {
       dispatch(createChildIncomeFields('/financial-assessment/annual-income'));

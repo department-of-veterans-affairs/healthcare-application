@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
-import { updateReviewStatus, veteranUpdateField } from '../../actions';
+import { veteranUpdateField } from '../../actions';
 
 /**
  * Props:
@@ -13,7 +13,6 @@ class FinancialDisclosureSection extends React.Component {
   render() {
     let notRequiredMessage;
     let content;
-    let editButton;
 
     if (this.props.receivesVaPension === true) {
       notRequiredMessage = (
@@ -85,19 +84,9 @@ class FinancialDisclosureSection extends React.Component {
       </div>);
     }
 
-    if (this.props.reviewSection) {
-      editButton = (<ErrorableCheckbox
-          label={`${this.props.isSectionComplete ? 'Edit' : 'Update'}`}
-          checked={this.props.isSectionComplete}
-          className="edit-checkbox"
-          onValueChange={(update) => {this.props.onUIStateChange(update);}}/>
-      );
-    }
-
     return (
       <div>
         <h4>Financial Disclosure</h4>
-        {editButton}
         {content}
       </div>
     );
@@ -116,9 +105,6 @@ function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
       dispatch(veteranUpdateField(['financialDisclosure', field], update));
-    },
-    onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/financial-assessment/financial-disclosure'], update));
     }
   };
 }

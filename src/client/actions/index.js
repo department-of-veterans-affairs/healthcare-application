@@ -1,7 +1,9 @@
 export const ENSURE_FIELDS_INITIALIZED = 'ENSURE_FIELDS_INITIALIZED';
 export const VETERAN_FIELD_UPDATE = 'VETERAN_FIELD_UPDATE';
-export const UPDATE_COMPLETION_STATUS = 'UPDATE_COMPLETION_STATUS';
+export const UPDATE_COMPLETED_STATUS = 'UPDATE_COMPLETED_STATUS';
+export const UPDATE_INCOMPLETE_STATUS = 'UPDATE_INCOMPLETE_STATUS';
 export const UPDATE_REVIEW_STATUS = 'UPDATE_REVIEW_STATUS';
+export const UPDATE_VERIFIED_STATUS = 'UPDATE_VERIFIED_STATUS';
 export const UPDATE_SPOUSE_ADDRESS = 'UPDATE_SPOUSE_ADDRESS';
 export const UPDATE_SUBMISSION_STATUS = 'UPDATE_SUBMISSION_STATUS';
 export const CREATE_CHILD_INCOME_FIELDS = 'CREATE_CHILD_INCOME_FIELDS';
@@ -21,9 +23,16 @@ export function veteranUpdateField(propertyPath, value) {
   };
 }
 
-export function updateCompletionStatus(path) {
+export function updateCompletedStatus(path) {
   return {
-    type: UPDATE_COMPLETION_STATUS,
+    type: UPDATE_COMPLETED_STATUS,
+    path
+  };
+}
+
+export function updateIncompleteStatus(path) {
+  return {
+    type: UPDATE_INCOMPLETE_STATUS,
     path
   };
 }
@@ -31,6 +40,14 @@ export function updateCompletionStatus(path) {
 export function updateReviewStatus(path, value) {
   return {
     type: UPDATE_REVIEW_STATUS,
+    path,
+    value
+  };
+}
+
+export function updateVerifiedStatus(path, value) {
+  return {
+    type: UPDATE_VERIFIED_STATUS,
     path,
     value
   };

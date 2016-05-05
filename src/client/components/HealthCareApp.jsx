@@ -5,7 +5,7 @@ import { hashHistory } from 'react-router';
 import IntroductionSection from './IntroductionSection.jsx';
 import Nav from './Nav.jsx';
 import ProgressButton from './ProgressButton';
-import { ensureFieldsInitialized, updateCompletionStatus, updateSubmissionStatus } from '../actions';
+import { ensureFieldsInitialized, updateCompletedStatus, updateSubmissionStatus } from '../actions';
 import { pathToData } from '../store';
 
 import * as validations from '../utils/validations';
@@ -64,9 +64,8 @@ class HealthCareApp extends React.Component {
     this.context.store.dispatch(ensureFieldsInitialized(path));
     if (validations.isValidSection(path, sectionData)) {
       hashHistory.push(this.getUrl('next'));
-      this.context.store.dispatch(updateCompletionStatus(path));
+      this.context.store.dispatch(updateCompletedStatus(path));
     }
-
     this.scrollToTop();
   }
 
@@ -78,7 +77,7 @@ class HealthCareApp extends React.Component {
   handleSubmit() {
     const path = this.props.location.pathname;
     this.context.store.dispatch(updateSubmissionStatus('applicationSubmitted'));
-    this.context.store.dispatch(updateCompletionStatus(path));
+    this.context.store.dispatch(updateCompletedStatus(path));
     this.scrollToTop();
   }
 

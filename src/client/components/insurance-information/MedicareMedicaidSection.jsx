@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import DateInput from '../form-elements/DateInput';
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
-import { updateReviewStatus, veteranUpdateField } from '../../actions';
+import { veteranUpdateField } from '../../actions';
 
 /**
  * Props:
@@ -13,7 +13,6 @@ import { updateReviewStatus, veteranUpdateField } from '../../actions';
 class MedicareMedicaidSection extends React.Component {
   render() {
     let content;
-    let editButton;
     let medicarePartA;
 
     if (this.props.data.isEnrolledMedicarePartA) {
@@ -62,18 +61,9 @@ class MedicareMedicaidSection extends React.Component {
       </div>);
     }
 
-    if (this.props.reviewSection) {
-      editButton = (<ErrorableCheckbox
-          label={`${this.props.isSectionComplete ? 'Edit' : 'Update'}`}
-          checked={this.props.isSectionComplete}
-          className="edit-checkbox"
-          onValueChange={(update) => {this.props.onUIStateChange(update);}}/>
-      );
-    }
     return (
       <div>
         <h4>Medicare/Medicaid</h4>
-        {editButton}
         {content}
       </div>
     );
@@ -91,9 +81,6 @@ function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
       dispatch(veteranUpdateField(['medicareMedicaid', field], update));
-    },
-    onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/insurance-information/medicare-medicaid'], update));
     }
   };
 }

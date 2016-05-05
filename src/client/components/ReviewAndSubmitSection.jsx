@@ -18,6 +18,11 @@ import VeteranAddressSection from './personal-information/VeteranAddressSection'
 
 import ReviewCollapsiblePanel from './form-elements/ReviewCollapsiblePanel';
 
+/*
+    TODO(crew): Get components from store and create array to check if ReviewCollapsiblePanel is
+    open or closed. Also, potentially generate ReviewCollapsiblePanel components with routes from
+    json object.
+*/
 
 class ReviewAndSubmitSection extends React.Component {
   render() {
@@ -36,28 +41,78 @@ class ReviewAndSubmitSection extends React.Component {
       );
     } else {
       content = (<div>
+        <p>Please ensure all of your information is correct before submitting your application.</p>
+
+        {/* TODO(crew): Change names of sections to real names. */}
         <ReviewCollapsiblePanel
             sectionLabel="NameAndGeneralInfoSection"
             updatePath="/personal-information/name-and-general-information"
             component={<NameAndGeneralInfoSection reviewSection/>}/>
 
-        <p>Please ensure all of your information is correct before submitting your application.</p>
-        <VAInformationSection reviewSection/>
-        <AdditionalInformationSection reviewSection/>
-        <DemographicInformationSection reviewSection/>
-        <VeteranAddressSection reviewSection/>
-        <InsuranceInformationSection reviewSection/>
-        <MedicareMedicaidSection reviewSection/>
-        <ServiceInformationSection reviewSection/>
-        <AdditionalMilitaryInformationSection reviewSection/>
-        <FinancialDisclosureSection reviewSection/>
-        <SpouseInformationSection reviewSection/>
-        <ChildInformationSection reviewSection/>
-        <AnnualIncomeSection reviewSection/>
-        <DeductibleExpensesSection reviewSection/>
-        <div className="input-section">
-          <a href="#">Upload documents</a>
-        </div>
+        <ReviewCollapsiblePanel
+            sectionLabel="VAInformationSection"
+            updatePath="/personal-information/va-information"
+            component={<VAInformationSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="AdditionalInformationSection"
+            updatePath="/personal-information/additional-information"
+            component={<AdditionalInformationSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="DemographicInformationSection"
+            updatePath="/personal-information/demographic-information"
+            component={<DemographicInformationSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="VeteranAddressSection"
+            updatePath="/personal-information/veteran-address"
+            component={<VeteranAddressSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="InsuranceInformationSection"
+            updatePath="/insurance-information/general"
+            component={<InsuranceInformationSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="MedicareMedicaidSection"
+            updatePath="/insurance-information/medicare-medicaid"
+            component={<MedicareMedicaidSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="ServiceInformationSection"
+            updatePath="/military-service/service-information"
+            component={<ServiceInformationSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="AdditionalMilitaryInformationSection"
+            updatePath="/military-service/additional-information"
+            component={<AdditionalMilitaryInformationSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="FinancialDisclosureSection"
+            updatePath="/financial-assessment/financial-disclosure"
+            component={<FinancialDisclosureSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="SpouseInformationSection"
+            updatePath="/financial-assessment/spouse-information"
+            component={<SpouseInformationSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="ChildInformationSection"
+            updatePath="/financial-assessment/child-information"
+            component={<ChildInformationSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="AnnualIncomeSection"
+            updatePath="/financial-assessment/annual-income"
+            component={<AnnualIncomeSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="DeductibleExpensesSection"
+            updatePath="/financial-assessment/deductible-expenses"
+            component={<DeductibleExpensesSection reviewSection/>}/>
       </div>);
     }
     return (

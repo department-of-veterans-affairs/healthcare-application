@@ -5,7 +5,7 @@ import Child from './Child';
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import GrowableTable from '../form-elements/GrowableTable.jsx';
 import { makeField } from '../../reducers/fields';
-import { veteranUpdateField, ensureFieldsInitialized, updateReviewStatus } from '../../actions';
+import { veteranUpdateField, ensureFieldsInitialized } from '../../actions';
 
 /**
  * Props:
@@ -46,7 +46,6 @@ class ChildInformationSection extends React.Component {
     let notRequiredMessage;
     let childrenContent;
     let content;
-    let editButton;
     let children;
 
     if (this.props.data.children) {
@@ -166,19 +165,9 @@ class ChildInformationSection extends React.Component {
       </div>);
     }
 
-    if (this.props.reviewSection) {
-      editButton = (<ErrorableCheckbox
-          label={`${this.props.isSectionComplete ? 'Edit' : 'Update'}`}
-          checked={this.props.isSectionComplete}
-          className="edit-checkbox"
-          onValueChange={(update) => {this.props.onUIStateChange(update);}}/>
-      );
-    }
-
     return (
       <div>
         <h4>Children Information</h4>
-        {editButton}
         {content}
       </div>
     );
@@ -200,9 +189,6 @@ function mapDispatchToProps(dispatch) {
     },
     initializeFields: () => {
       dispatch(ensureFieldsInitialized('/financial-assessment/child-information'));
-    },
-    onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/financial-assessment/child-information'], update));
     }
   };
 }

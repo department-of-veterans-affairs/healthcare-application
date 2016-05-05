@@ -155,7 +155,28 @@ select {
   }
 }
 
-.hidden{
+.hca-review-panel {
+  .accordion-header {
+    height: 8rem;
+    padding: 1rem;
+    .edit-btn {
+      background-color: $color-primary;
+      color: $white;
+      &:hover {
+        background-color: $color-primary-darker;
+      }
+    }
+  }
+}
+
+.verify-label {
+  padding-top: 1rem;
+  span{
+    background-color: $color-green;
+  }
+}
+
+.hidden {
   display: none !important;
 }
 
