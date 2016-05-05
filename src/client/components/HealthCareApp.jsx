@@ -1,4 +1,5 @@
 import React from 'react';
+import Scroll from 'react-scroll';
 import { hashHistory } from 'react-router';
 
 import IntroductionSection from './IntroductionSection.jsx';
@@ -8,6 +9,9 @@ import { ensureFieldsInitialized, updateCompletionStatus, updateSubmissionStatus
 import { pathToData } from '../store';
 
 import * as validations from '../utils/validations';
+
+const Element = Scroll.Element;
+const scroller = Scroll.scroller;
 
 class HealthCareApp extends React.Component {
   constructor() {
@@ -45,6 +49,14 @@ class HealthCareApp extends React.Component {
     return nextPath;
   }
 
+  scrollToTop() {
+    scroller.scrollTo('topScrollElement', {
+      duration: 500,
+      delay: 0,
+      smooth: true,
+    });
+  }
+
   handleContinue() {
     const path = this.props.location.pathname;
     const sectionData = pathToData(this.context.store.getState().veteran, path);
@@ -53,31 +65,21 @@ class HealthCareApp extends React.Component {
     if (validations.isValidSection(path, sectionData)) {
       hashHistory.push(this.getUrl('next'));
       this.context.store.dispatch(updateCompletionStatus(path));
-      if (document.getElementsByClassName('progress-box').length > 0) {
-        document.getElementsByClassName('progress-box')[0].scrollIntoView();
-      }
-    } else {
-      // TODO: improve this
-      if (document.getElementsByClassName('usa-input-error').length > 0) {
-        document.getElementsByClassName('usa-input-error')[0].scrollIntoView();
-      }
     }
+
+    this.scrollToTop();
   }
 
   handleBack() {
     hashHistory.push(this.getUrl('back'));
-    if (document.getElementsByClassName('progress-box').length > 0) {
-      document.getElementsByClassName('progress-box')[0].scrollIntoView();
-    }
+    this.scrollToTop();
   }
 
   handleSubmit() {
     const path = this.props.location.pathname;
     this.context.store.dispatch(updateSubmissionStatus('applicationSubmitted'));
     this.context.store.dispatch(updateCompletionStatus(path));
-    if (document.getElementsByTagName('h4').length > 0) {
-      document.getElementsByTagName('h4')[0].scrollIntoView();
-    }
+    this.scrollToTop();
   }
 
   render() {
@@ -141,6 +143,7 @@ class HealthCareApp extends React.Component {
 
     return (
       <div className="row">
+        <Element name="topScrollElement"/>
         <div className="medium-4 columns show-for-medium-up">
           <Nav currentUrl={this.props.location.pathname}/>
         </div>

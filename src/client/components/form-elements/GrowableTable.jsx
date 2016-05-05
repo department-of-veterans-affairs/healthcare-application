@@ -1,7 +1,11 @@
 import React from 'react';
+import Scroll from 'react-scroll';
 import _ from 'lodash';
 
 import * as validations from '../../utils/validations';
+
+const Element = Scroll.Element;
+const scroller = Scroll.scroller;
 
 class GrowableTable extends React.Component {
   constructor(props) {
@@ -29,6 +33,14 @@ class GrowableTable extends React.Component {
     }
   }
 
+  scrollToTop() {
+    scroller.scrollTo('topOfTable', {
+      duration: 500,
+      delay: 0,
+      smooth: true,
+    });
+  }
+
   createNewElement() {
     const blankRowData = this.props.createRow();
     blankRowData.key = _.uniqueId('key-');
@@ -54,12 +66,9 @@ class GrowableTable extends React.Component {
 
     if (validations.isValidSection(this.props.path, this.props.data)) {
       this.setState({ [event.target.dataset.key]: 'complete' });
-      document.getElementsByClassName('input-section')[1].scrollIntoView();
-    } else {
-      // TODO: figure out how to deal with the fact that this runs before the
-      // child component renders, so there will be no error classes yet
-      document.getElementsByClassName('usa-input-error')[0].scrollIntoView();
     }
+
+    this.scrollToTop();
   }
 
   handleRemove(event) {
@@ -146,6 +155,7 @@ class GrowableTable extends React.Component {
 
     return (
       <div>
+        <Element name="topOfTable"/>
         {rowElements}
         <div className="row">
           <div className="small-3 small-centered columns">
