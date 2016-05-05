@@ -5,8 +5,8 @@ var path = require('path');
 
 var config = require('./webpack.config');
 
-config.output.path = path.join(__dirname, "assets/js/generated/prod");
-config.output.publicPath = "/assets/js/generated/prod/";
+config.output.path = path.join(__dirname, "generated/prod");
+config.output.publicPath = "/healthcare/apply/generated/prod/";
 config.devtool = '#source-map';
 
 module.exports = config;
