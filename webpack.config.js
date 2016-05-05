@@ -10,7 +10,7 @@ var config = {
   entry: { app: ['./src/client.js'] },
   output: {
     path: path.join(__dirname, 'generated/dev'),
-    publicPath: '/generated/dev/',
+    publicPath: '/healthcare/apply/generated/dev/',
     filename: 'bundle.js'
   },
   devtool: '#cheap-module-eval-source-map',

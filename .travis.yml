@@ -1,9 +1,17 @@
+sudo: required
+
 language: node_js
 node_js:
- - "4"
+  - "4"
 compiler: clang-3.6
 env:
-  - CXX=clang-3.6
+  global:
+    - CXX=clang-3.6
+    - DOCKER_EMAIL=awong.dev@gmail.com
+    - DOCKER_USERNAME=awongdev
+    - secure: "nyOcp09Xzs9RhOF7wqRGk5yJ8e+NVXGaJVr79LvzrknZAHKrB3QMptC/rECGKTKdrwHr7Jas6/+mK36ZpIVUEF1P3EdDrsCYd6Vrgk+NS4UlgEBzCz5qnxaeLp1RA4BZ2pUVXQyavlQnRGgODiqw4C9aI4VKyaiz4QaskDH9fra/Sz8afmkwoSl0jKXn0kl+DstMrP71rJHZ31eznLC6d2AW8Y/LcA+7Abi5yq9ltDwK9h6RUB4VlTNJiis6xPyegw8OmIKIMpsnfeQpbf2oYpodxp4zLtJlr5RdXXli2zQ67mibtt/0+1dqsNQpxIdT9NU9ZucM1bBuiCbTJfd+7IURJkhz+4AU+vzenH9RNvYu5zqS/ykIhQGSi4L2QPWHJ1u++D97seJQ5BMUl85ZejdmVVhauV0AwPvrBplnZGHw6k9fuc5PZWHQGDLKynt/Jo/kHePLvbxTPGpYa+eU/uCRzdmxtJU0UBQucaj+S3Ub0mwyFpfYyOmED03AhNvodZVmLnx9EKfOq1t33+cnRYpAvvmWH0X0xtNC/HTfaBAwsrapr9mwFaZV4zIHVWqo9o70/HEvTe1/PQ0iC/N1FeKRxJ34cxTs4hUVE027wJc07jqyMs5tbn4fj2cLJXav3jGoKnS/lR9FKVl2VMoNhxr+/lMmykXTiBQ84noroww="
+services:
+  - docker
 addons:
   apt:
     sources:
@@ -18,3 +26,9 @@ cache:
     - node_modules
 notifications:
   email: false
+deploy:
+  provider: script
+  script: ./scripts/release-docker.sh
+  skip_cleanup: true
+  on:
+    branch: master
