@@ -5,7 +5,7 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema" 
   xmlns:va="http://va.gov/schema/esr/voa/v1" 
   xmlns:eeSummary="http://jaxws.webservices.esr.med.va.gov/schemas" targetNamespace="http://va.gov/schema/esr/voa/v1" elementFormDefault="qualified">
-  <xs:import namespace="http://jaxws.webservices.esr.med.va.gov/schemas" schemaLocation="http://vaausesrapp803.aac.va.gov:7401/voa/voaSvc?xsd=1"/>
+  <xs:import namespace="http://jaxws.webservices.esr.med.va.gov/schemas" schemaLocation="voa-voaSvc-xsd-1.xml"/>
   <xs:element name="document">
     <xs:complexType>
       <xs:sequence>

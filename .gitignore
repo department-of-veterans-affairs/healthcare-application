@@ -2,13 +2,6 @@
 *.log
 
 #Compiled files.
-*.class
 .sass-cache
-_site/
-_site_production/
+generated/
 node_modules/
-vendor/bundle
-.ruby-gemset
-assets/js/generated/
-.bundle/
-.vscode/

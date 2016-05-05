@@ -1,14 +1,52 @@
 const loopback = require('loopback');
 const voaRest = require('../hca-api-stub/voa-rest');
+const express = require('express');
 
-const app = loopback();
-voaRest.attach(app);
+const port = 3000;
 
-// this is needed to talk to some of the internal HTTPS endpoints
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+function makeServer() {
+  if (process.env.BABEL_ENV === 'hot') {
+    // Set up webpack dev server.
+    const webpack = require('webpack');
+    const WebpackDevServer = require('webpack-dev-server');
+    const webpackConfig = require('../webpack.config');
+    webpackConfig.entry.app.unshift(
+      `webpack-dev-server/client?http://localhost:${port}/`,
+      'webpack/hot/dev-server');
+    webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+    const webpackCompiler = webpack(webpackConfig);
+    return new WebpackDevServer(webpackCompiler, {
+      contentBase: 'public',
+      hot: true,
+      publicPath: webpackConfig.output.publicPath,
+      stats: {
+        hash: true,
+        version: true,
+        timings: true,
+        assets: false,
+        chunks: false,
+        modules: false,
+        reasons: false,
+        children: false,
+        source: false,
+        errors: true,
+        errorDetails: true,
+        warnings: true,
+        publicPath: true,
+        colors: true
+      }
+    });
+  }
 
-app.listen(3000, () => {
-  const baseUrl = 'http://127.0.0.1:3000';
-  app.emit('started', baseUrl);
-  console.log('LoopBack server listening @ %s%s', baseUrl, '/');
-});
+  const server = express();
+  server.use('/', express.static('public'));
+  server.use('/generated', express.static('generated'));
+  return server;
+}
+
+const server = makeServer();
+const api = loopback();
+voaRest.attach(api);
+server.use('/', api);
+
+server.listen(port);
