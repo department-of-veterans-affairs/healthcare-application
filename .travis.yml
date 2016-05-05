@@ -33,4 +33,4 @@ deploy:
   script: ./scripts/release-docker.sh
   skip_cleanup: true
   on:
-    branch: master
+    all_branches: true

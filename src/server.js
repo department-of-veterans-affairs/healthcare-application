@@ -40,7 +40,8 @@ function makeServer() {
 
   const server = express();
   server.use('/', express.static('public'));
-  server.use('/generated', express.static('generated'));
+  server.use('/healthcare/apply', express.static('public'));
+  server.use('/healthcare/apply/generated', express.static('generated'));
   return server;
 }
 
