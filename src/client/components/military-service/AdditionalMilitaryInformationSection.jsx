@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
-import { updateReviewStatus, veteranUpdateField } from '../../actions';
+import { veteranUpdateField } from '../../actions';
 
 /**
  * Props:
@@ -12,7 +12,6 @@ import { updateReviewStatus, veteranUpdateField } from '../../actions';
 class AdditionalMilitaryInformationSection extends React.Component {
   render() {
     let content;
-    let editButton;
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
       content = (<table className="review usa-table-borderless">
@@ -104,19 +103,9 @@ class AdditionalMilitaryInformationSection extends React.Component {
       </div>);
     }
 
-    if (this.props.reviewSection) {
-      editButton = (<ErrorableCheckbox
-          label={`${this.props.isSectionComplete ? 'Edit' : 'Update'}`}
-          checked={this.props.isSectionComplete}
-          className="edit-checkbox"
-          onValueChange={(update) => {this.props.onUIStateChange(update);}}/>
-      );
-    }
-
     return (
       <div>
         <h4>Additional Information</h4>
-        {editButton}
         {content}
       </div>
     );
@@ -134,9 +123,6 @@ function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
       dispatch(veteranUpdateField(['militaryAdditionalInfo', field], update));
-    },
-    onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/military-service/additional-information'], update));
     }
   };
 }

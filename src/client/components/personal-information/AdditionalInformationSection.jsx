@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import ErrorableSelect from '../form-elements/ErrorableSelect';
 import VaMedicalFacility from './VaMedicalFacility';
-import { updateReviewStatus, veteranUpdateField } from '../../actions';
+import { veteranUpdateField } from '../../actions';
 import { states } from '../../utils/options-for-select';
 import { validateIfDirty, isNotBlank } from '../../utils/validations';
 
@@ -16,7 +16,6 @@ import { validateIfDirty, isNotBlank } from '../../utils/validations';
 class AdditionalInformationSection extends React.Component {
   render() {
     let content;
-    let editButton;
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
       content = (<table className="review usa-table-borderless">
@@ -69,18 +68,9 @@ class AdditionalInformationSection extends React.Component {
       </div>);
     }
 
-    if (this.props.reviewSection) {
-      editButton = (<ErrorableCheckbox
-          label={`${this.props.isSectionComplete ? 'Edit' : 'Update'}`}
-          checked={this.props.isSectionComplete}
-          className="edit-checkbox"
-          onValueChange={(update) => {this.props.onUIStateChange(update);}}/>
-      );
-    }
     return (
       <fieldset>
         <h4>Additional Information</h4>
-        {editButton}
         {content}
       </fieldset>
     );
@@ -98,9 +88,6 @@ function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
       dispatch(veteranUpdateField(['additionalInformation', field], update));
-    },
-    onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/personal-information/additional-information'], update));
     }
   };
 }

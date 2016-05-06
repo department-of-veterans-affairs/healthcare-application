@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
 import { yesNo } from '../../utils/options-for-select';
 import { validateIfDirty, isNotBlank } from '../../utils/validations';
-import { updateReviewStatus, veteranUpdateField } from '../../actions';
+import { veteranUpdateField } from '../../actions';
 
 /**
  * Props:
@@ -15,7 +14,6 @@ import { updateReviewStatus, veteranUpdateField } from '../../actions';
 class VaInformationSection extends React.Component {
   render() {
     let content;
-    let editButton;
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
       content = (<table className="review usa-table-borderless">
@@ -71,20 +69,10 @@ class VaInformationSection extends React.Component {
       </div>);
     }
 
-    if (this.props.reviewSection) {
-      editButton = (<ErrorableCheckbox
-          label={`${this.props.isSectionComplete ? 'Edit' : 'Update'}`}
-          checked={this.props.isSectionComplete}
-          className="edit-checkbox"
-          onValueChange={(update) => {this.props.onUIStateChange(update);}}/>
-      );
-    }
-
     return (
       <div className="row">
         <div className="small-12 columns">
           <h4>Veteran</h4>
-          {editButton}
           {content}
         </div>
       </div>
@@ -104,9 +92,6 @@ function mapDispatchToProps(dispatch) {
     onStateChange: (field, update) => {
       // TODO: Updates for radio buttons are getting passed as a string instead of makeField();
       dispatch(veteranUpdateField(['vaInformation', field], update));
-    },
-    onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/personal-information/va-information'], update));
     }
   };
 }

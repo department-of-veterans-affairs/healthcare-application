@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
 import { isValidField, isValidMonetaryValue } from '../../utils/validations';
-import { updateReviewStatus, veteranUpdateField } from '../../actions';
+import { veteranUpdateField } from '../../actions';
 
 function getErrorMessage(field, message) {
   return isValidField(isValidMonetaryValue, field) ? undefined : message;
@@ -20,7 +19,6 @@ class DeductibleExpensesSection extends React.Component {
     const message = 'Please enter only numbers and a decimal point if necessary (no commas or currency signs)';
     let notRequiredMessage;
     let content;
-    let editButton;
 
     if (this.props.receivesVaPension === true) {
       notRequiredMessage = (
@@ -98,19 +96,9 @@ class DeductibleExpensesSection extends React.Component {
       </div>);
     }
 
-    if (this.props.reviewSection) {
-      editButton = (<ErrorableCheckbox
-          label={`${this.props.isSectionComplete ? 'Edit' : 'Update'}`}
-          checked={this.props.isSectionComplete}
-          className="edit-checkbox"
-          onValueChange={(update) => {this.props.onUIStateChange(update);}}/>
-      );
-    }
-
     return (
       <div>
         <h4>Previous calendar year deductible expenses</h4>
-        {editButton}
         {content}
       </div>
     );
@@ -129,9 +117,6 @@ function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
       dispatch(veteranUpdateField(['deductibleExpenses', field], update));
-    },
-    onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/financial-assessment/deductible-expenses'], update));
     }
   };
 }

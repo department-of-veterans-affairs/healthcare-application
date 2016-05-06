@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import GrowableTable from '../form-elements/GrowableTable.jsx';
 import Provider from './Provider.jsx';
-import { veteranUpdateField, ensureFieldsInitialized, updateReviewStatus } from '../../actions';
+import { veteranUpdateField, ensureFieldsInitialized } from '../../actions';
 
 import { makeField } from '../../reducers/fields';
 
@@ -33,7 +33,6 @@ class InsuranceInformationSection extends React.Component {
   render() {
     let providersTable;
     let content;
-    let editButton;
     let providers;
 
     if (this.props.data.isCoveredByHealthInsurance) {
@@ -141,19 +140,10 @@ class InsuranceInformationSection extends React.Component {
       </div>);
     }
 
-    if (this.props.reviewSection) {
-      editButton = (<ErrorableCheckbox
-          label={`${this.props.isSectionComplete ? 'Edit' : 'Update'}`}
-          checked={this.props.isSectionComplete}
-          className="edit-checkbox"
-          onValueChange={(update) => {this.props.onUIStateChange(update);}}/>
-      );
-    }
     return (
       <fieldset>
         <div className="input-section">
           <h4>Coverage Information</h4>
-          {editButton}
           {content}
         </div>
       </fieldset>
@@ -175,9 +165,6 @@ function mapDispatchToProps(dispatch) {
     },
     initializeFields: () => {
       dispatch(ensureFieldsInitialized('/insurance-information/general'));
-    },
-    onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/insurance-information/general'], update));
     }
   };
 }

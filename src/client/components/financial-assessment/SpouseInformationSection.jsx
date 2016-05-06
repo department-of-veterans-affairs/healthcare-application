@@ -8,7 +8,7 @@ import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import FullName from '../questions/FullName';
 import Phone from '../questions/Phone';
 import SocialSecurityNumber from '../questions/SocialSecurityNumber';
-import { updateReviewStatus, veteranUpdateField, updateSpouseAddress } from '../../actions';
+import { veteranUpdateField, updateSpouseAddress } from '../../actions';
 
 // TODO: Consider adding question for marital status here so if user
 // entered something incorrect in Personal Information they don't have
@@ -26,7 +26,6 @@ class SpouseInformationSection extends React.Component {
     let content;
     let spouseAddressSummary;
     let spouseAddressFields;
-    let editButton;
 
     if (this.props.receivesVaPension) {
       notRequiredMessage = (
@@ -174,15 +173,6 @@ class SpouseInformationSection extends React.Component {
       </div>);
     }
 
-    if (this.props.reviewSection) {
-      editButton = (<ErrorableCheckbox
-          label={`${this.props.isSectionComplete ? 'Edit' : 'Update'}`}
-          checked={this.props.isSectionComplete}
-          className="edit-checkbox"
-          onValueChange={(update) => {this.props.onUIStateChange(update);}}/>
-      );
-    }
-
     if (this.props.receivesVaPension === true) {
       notRequiredMessage = (
         <p>
@@ -208,7 +198,6 @@ class SpouseInformationSection extends React.Component {
     return (
       <div>
         <h4>Spouse's Information</h4>
-        {editButton}
         {content}
       </div>
     );
@@ -231,9 +220,6 @@ function mapDispatchToProps(dispatch) {
       if (field === 'sameAddress') {
         dispatch(updateSpouseAddress(['spouseInformation', 'spouseAddress'], update));
       }
-    },
-    onUIStateChange: (update) => {
-      dispatch(updateReviewStatus(['/financial-assessment/spouse-information'], update));
     }
   };
 }
