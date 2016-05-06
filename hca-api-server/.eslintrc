@@ -1,0 +1,10 @@
+{
+    "rules": {
+        "comma-dangle": ["error", "never"]
+    },
+    "env" : {
+        "node": true,
+        "mocha": true
+    },
+    "extends": "airbnb-base"
+}

@@ -1,0 +1,31 @@
+{
+  "name": "hca-api-server",
+  "description": "API server for the Health Care Application.",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./src/server",
+    "lint": "eslint ./src/**/*.js ./specs/**/*.js",
+    "test": "istanbul cover _mocha -- ./specs --recursive",
+    "cc:display": "open coverage/lcov-report/*.html"
+  },
+  "dependencies": {
+    "body-parser": "~1.12.0",
+    "cookie-parser": "~1.3.4",
+    "debug": "~2.1.1",
+    "express": "~4.12.2",
+    "morgan": "~1.5.1"
+  },
+  "devDependencies": {
+    "eslint": "^2.9.0",
+    "eslint-config-airbnb-base": "^2.0.0",
+    "eslint-plugin-import": "^1.7.0",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.4.5",
+    "supertest": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=4.4.0",
+    "npm": ">=3.8.0"
+  }
+}
