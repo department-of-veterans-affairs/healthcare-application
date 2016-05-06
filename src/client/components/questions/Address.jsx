@@ -47,7 +47,7 @@ class Address extends React.Component {
     );
 
     let stateList = [];
-    const selectedCountry = this.props.value.country;
+    const selectedCountry = this.props.value.country.value;
     if (selectedCountry) {
       stateList = states[selectedCountry];
     }
