@@ -40,8 +40,8 @@ class ReviewCollapsiblePanel extends React.Component {
     let editButton;
     let verifiedLabel;
     const currentPath = this.props.updatePath;
-    const sectionsComplete = this.props.uiData.completedSections[currentPath];
-    const sectionsVerified = this.props.uiData.verifiedSections[currentPath];
+    const sectionsComplete = this.props.uiData.sections[currentPath].complete;
+    const sectionsVerified = this.props.uiData.sections[currentPath].verified;
 
 
     if (sectionsComplete) {

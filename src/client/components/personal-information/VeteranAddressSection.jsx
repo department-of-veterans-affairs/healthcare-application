@@ -34,27 +34,27 @@ class VeteranAddressSection extends React.Component {
         <tbody>
           <tr>
             <td>Street:</td>
-            <td>{this.props.data.address.street.value}</td>
+            <td>{this.props.data.veteranAddress.street.value}</td>
           </tr>
           <tr>
             <td>City:</td>
-            <td>{this.props.data.address.city.value}</td>
+            <td>{this.props.data.veteranAddress.city.value}</td>
           </tr>
           <tr>
             <td>Country:</td>
-            <td>{this.props.data.address.country.value}</td>
+            <td>{this.props.data.veteranAddress.country.value}</td>
           </tr>
           <tr>
             <td>State:</td>
-            <td>{this.props.data.address.state.value}</td>
+            <td>{this.props.data.veteranAddress.state.value}</td>
           </tr>
           <tr>
             <td>ZIP Code:</td>
-            <td>{this.props.data.address.zipcode.value}</td>
+            <td>{this.props.data.veteranAddress.zipcode.value}</td>
           </tr>
           <tr>
             <td>County:</td>
-            <td>{this.props.data.county.value}</td>
+            <td>{this.props.data.veteranCounty.value}</td>
           </tr>
           <tr>
             <td>Email Address:</td>
@@ -82,12 +82,12 @@ class VeteranAddressSection extends React.Component {
               (e.g., "Paris,France"), and select Foreign Country for State.
           </p>
 
-          <Address value={this.props.data.address}
-              onUserInput={(update) => {this.props.onStateChange('address', update);}}/>
+          <Address value={this.props.data.veteranAddress}
+              onUserInput={(update) => {this.props.onStateChange('veteranAddress', update);}}/>
 
           <ErrorableTextInput label="County"
-              field={this.props.data.county}
-              onValueChange={(update) => {this.props.onStateChange('county', update);}}/>
+              field={this.props.data.veteranCounty}
+              onValueChange={(update) => {this.props.onStateChange('veteranCounty', update);}}/>
 
           <Email label="Email address"
               email={this.props.data.email}
@@ -121,15 +121,15 @@ class VeteranAddressSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.veteranAddress,
-    isSectionComplete: state.uiState.completedSections['/personal-information/veteran-address']
+    data: state.veteran,
+    isSectionComplete: state.uiState.sections['/personal-information/veteran-address'].complete
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
-      dispatch(veteranUpdateField(['veteranAddress', field], update));
+      dispatch(veteranUpdateField(field, update));
     }
   };
 }

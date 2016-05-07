@@ -9,42 +9,88 @@ _.mixin(lodashDeep);
 
 const ui = {
   applicationSubmitted: false,
-  completedSections: {
-    '/introduction': false,
-    '/personal-information/name-and-general-information': false,
-    '/personal-information/va-information': false,
-    '/personal-information/additional-information': false,
-    '/personal-information/demographic-information': false,
-    '/personal-information/veteran-address': false,
-    '/insurance-information/general': false,
-    '/insurance-information/medicare-medicaid': false,
-    '/military-service/service-information': false,
-    '/military-service/additional-information': false,
-    '/financial-assessment/financial-disclosure': false,
-    '/financial-assessment/spouse-information': false,
-    '/financial-assessment/child-information': false,
-    '/financial-assessment/annual-income': false,
-    '/financial-assessment/deductible-expenses': false,
-    '/review-and-submit': false
-  },
-  verifiedSections: {
-    '/introduction': false,
-    '/personal-information/name-and-general-information': false,
-    '/personal-information/va-information': false,
-    '/personal-information/additional-information': false,
-    '/personal-information/demographic-information': false,
-    '/personal-information/veteran-address': false,
-    '/insurance-information/general': false,
-    '/insurance-information/medicare-medicaid': false,
-    '/military-service/service-information': false,
-    '/military-service/additional-information': false,
-    '/financial-assessment/financial-disclosure': false,
-    '/financial-assessment/spouse-information': false,
-    '/financial-assessment/child-information': false,
-    '/financial-assessment/annual-income': false,
-    '/financial-assessment/deductible-expenses': false,
-    '/review-and-submit': false
-  },
+  sections: {
+    '/introduction': {
+      complete: false,
+      verified: false,
+      fields: []
+    },
+    '/personal-information/name-and-general-information': {
+      complete: false,
+      verified: false,
+      fields: ['veteranFullName', 'mothersMaidenName', 'veteranSocialSecurityNumber', 'gender', 'cityOfBirth', 'stateOfBirth', 'veteranDateOfBirth', 'maritalStatus']
+    },
+    '/personal-information/va-information': {
+      complete: false,
+      verified: false,
+      fields: ['isVaServiceConnected', 'compensableVaServiceConnected', 'receivesVaPension']
+    },
+    '/personal-information/additional-information': {
+      complete: false,
+      verified: false,
+      fields: ['isEssentialAcaCoverage', 'facilityState', 'vaMedicalFacility', 'wantsInitialVaContact']
+    },
+    '/personal-information/demographic-information': {
+      complete: false,
+      verified: false,
+      fields: ['isSpanishHispanicLatino', 'isAmericanIndianOrAlaskanNative', 'isBlackOrAfricanAmerican', 'isNativeHawaiianOrOtherPacificIslander', 'isAsian', 'isWhite']
+    },
+    '/personal-information/veteran-address': {
+      complete: false,
+      verified: false,
+      fields: ['veteranAddress', 'veteranCounty', 'email', 'emailConfirmation', 'homePhone', 'mobilePhone']
+    },
+    '/insurance-information/general': {
+      complete: false,
+      verified: false,
+      fields: ['isCoveredByHealthInsurance', 'providers']
+    },
+    '/insurance-information/medicare-medicaid': {
+      complete: false,
+      verified: false,
+      fields: ['isMedicaidEligible', 'isEnrolledMedicarePartA', 'medicarePartAEffectiveDate']
+    },
+    '/military-service/service-information': {
+      complete: false,
+      verified: false,
+      fields: ['lastServiceBranch', 'lastEntryDate', 'lastDischargeDate', 'dischargeType']
+    },
+    '/military-service/additional-information': {
+      complete: false,
+      verified: false,
+      fields: ['purpleHeartRecipient', 'isFormerPow', 'postNov111998Combat', 'disabledInLineOfDuty', 'swAsiaCombat', 'vietnamService', 'exposedToRadiation', 'radiumTreatments', 'campLejeune']
+    },
+    '/financial-assessment/financial-disclosure': {
+      complete: false,
+      verified: false,
+      fields: ['provideFinancialInfo', 'understandsFinancialDisclosure']
+    },
+    '/financial-assessment/spouse-information': {
+      completed: false,
+      verified: false,
+      fields: ['spouseFullName', 'spouseSocialSecurityNumber', 'spouseDateOfBirth', 'dateOfMarriage', 'sameAddress', 'cohabitedLastYear', 'provideSupportLastYear', 'spouseAddress', 'spousePhone']
+    },
+    '/financial-assessment/child-information': {
+      complete: false,
+      verified: false,
+      fields: ['hasChildrenToReport', 'children']
+    },
+    '/financial-assessment/annual-income': {
+      complete: false,
+      verified: false,
+      fields: ['veteranGrossIncome', 'veteranNetIncome', 'veteranOtherIncome', 'spouseGrossIncome', 'spouseNetIncome', 'spouseOtherIncome', 'childrenIncome']
+    },
+    '/financial-assessment/deductible-expenses': {
+      complete: false,
+      verified: false,
+      fields: ['deductibleMedicalExpenses', 'deductibleFuneralExpenses', 'deductibleEducationExpenses']
+    },
+    '/review-and-submit': {
+      complete: false,
+      verified: false,
+      fields: []
+    }
+  }
 };
 
 function uiState(state = ui, action) {
@@ -52,22 +98,22 @@ function uiState(state = ui, action) {
   switch (action.type) {
     case UPDATE_COMPLETED_STATUS:
       newState = Object.assign({}, state);
-      _.set(newState.completedSections, action.path, true);
+      _.set(newState.sections, [action.path, 'complete'], true);
       return newState;
 
     case UPDATE_INCOMPLETE_STATUS:
       newState = Object.assign({}, state);
-      _.set(newState.completedSections, action.path, false);
+      _.set(newState.sections, [action.path, 'complete'], false);
       return newState;
 
     case UPDATE_REVIEW_STATUS:
       newState = Object.assign({}, state);
-      _.set(newState.completedSections, action.path, action.value);
+      _.set(newState.sections, [action.path, 'complete'], action.value);
       return newState;
 
     case UPDATE_VERIFIED_STATUS:
       newState = Object.assign({}, state);
-      _.set(newState.verifiedSections, action.path, action.value);
+      _.set(newState.sections, [action.path, 'verified'], action.value);
       return newState;
 
     case UPDATE_SUBMISSION_STATUS:

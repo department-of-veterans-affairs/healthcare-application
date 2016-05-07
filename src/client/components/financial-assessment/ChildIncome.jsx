@@ -2,7 +2,7 @@ import React from 'react';
 
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
 
-import { isBlank, isValidMonetaryValue } from '../../utils/validations';
+import { isBlank, isValidMonetaryValue, validateIfDirty } from '../../utils/validations';
 
 /**
  * Sub-component for children income portion AnnualIncomeSection.
@@ -18,21 +18,21 @@ class ChildIncome extends React.Component {
 
     return (
       <div>
-        <h6>Child: {`${this.props.relatedData.childFullName.first} ${this.props.relatedData.childFullName.last}`}</h6>
+        <h6>Child: {`${this.props.relatedData.childFullName.first.value} ${this.props.relatedData.childFullName.last.value}`}</h6>
         <ErrorableTextInput
-            errorMessage={isBlank(this.props.data.childGrossIncome) || isValidMonetaryValue(this.props.data.childGrossIncome) ? undefined : message}
+            errorMessage={validateIfDirty(this.props.data.childGrossIncome, isBlank) || validateIfDirty(this.props.data.childGrossIncome, isValidMonetaryValue) ? undefined : message}
             label="Gross Income"
-            value={this.props.data.childGrossIncome}
+            field={this.props.data.childGrossIncome}
             onValueChange={(update) => {this.props.onValueChange('childGrossIncome', update);}}/>
         <ErrorableTextInput
-            errorMessage={isBlank(this.props.data.childNetIncome) || isValidMonetaryValue(this.props.data.childNetIncome) ? undefined : message}
+            errorMessage={validateIfDirty(this.props.data.childNetIncome, isBlank) || validateIfDirty(this.props.data.childNetIncome, isValidMonetaryValue) ? undefined : message}
             label="Net Income"
-            value={this.props.data.childNetIncome}
+            field={this.props.data.childNetIncome}
             onValueChange={(update) => {this.props.onValueChange('childNetIncome', update);}}/>
         <ErrorableTextInput
-            errorMessage={isBlank(this.props.data.childOtherIncome) || isValidMonetaryValue(this.props.data.childOtherIncome) ? undefined : message}
+            errorMessage={validateIfDirty(this.props.data.childOtherIncome, isBlank) || validateIfDirty(this.props.data.childOtherIncome, isValidMonetaryValue) ? undefined : message}
             label="Other Income"
-            value={this.props.data.childOtherIncome}
+            field={this.props.data.childOtherIncome}
             onValueChange={(update) => {this.props.onValueChange('childOtherIncome', update);}}/>
       </div>
     );

@@ -2,6 +2,6 @@
 //
 
 export function neverMarried(state) {
-  return state.veteran.nameAndGeneralInformation.maritalStatus === '' ||
-    state.veteran.nameAndGeneralInformation.maritalStatus === 'Never Married';
+  return state.veteran.maritalStatus === '' ||
+    state.veteran.maritalStatus === 'Never Married';
 }

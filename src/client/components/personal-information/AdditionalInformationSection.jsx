@@ -80,15 +80,15 @@ class AdditionalInformationSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.additionalInformation,
-    isSectionComplete: state.uiState.completedSections['/personal-information/additional-information']
+    data: state.veteran,
+    isSectionComplete: state.uiState.sections['/personal-information/additional-information'].complete
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
-      dispatch(veteranUpdateField(['additionalInformation', field], update));
+      dispatch(veteranUpdateField(field, update));
     }
   };
 }

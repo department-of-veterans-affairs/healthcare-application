@@ -47,6 +47,7 @@ class ChildInformationSection extends React.Component {
     let childrenContent;
     let content;
     let children;
+    const fields = ['childFullName', 'childRelation', 'childSocialSecurityNumber', 'childBecameDependent', 'childDateOfBirth', 'childDisabledBefore18', 'childAttendedSchoolLastYear', 'childEducationExpenses', 'childCohabitedLastYear', 'childReceivedSupportLastYear'];
 
     if (this.props.data.children) {
       const childList = this.props.data.children;
@@ -131,7 +132,7 @@ class ChildInformationSection extends React.Component {
               component={Child}
               createRow={this.createBlankChild}
               data={this.props.data}
-              initializeCurrentElement={() => {this.props.initializeFields();}}
+              initializeCurrentElement={() => {this.props.initializeFields(fields);}}
               onRowsUpdate={(update) => {this.props.onStateChange('children', update);}}
               path="/financial-assessment/child-information"
               rows={this.props.data.children}/>
@@ -178,19 +179,18 @@ class ChildInformationSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.childInformation,
-    receivesVaPension: state.veteran.vaInformation.receivesVaPension,
-    isSectionComplete: state.uiState.completedSections['/financial-assessment/child-information']
+    data: state.veteran,
+    isSectionComplete: state.uiState.sections['/financial-assessment/child-information'].complete
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
-      dispatch(veteranUpdateField(['childInformation', field], update));
+      dispatch(veteranUpdateField(field, update));
     },
-    initializeFields: () => {
-      dispatch(ensureFieldsInitialized('/financial-assessment/child-information'));
+    initializeFields: (fields) => {
+      dispatch(ensureFieldsInitialized(fields, 'children'));
     }
   };
 }

@@ -27,7 +27,7 @@ class SpouseInformationSection extends React.Component {
     let spouseAddressSummary;
     let spouseAddressFields;
 
-    if (this.props.receivesVaPension) {
+    if (this.props.data.receivesVaPension) {
       notRequiredMessage = (
         <p>
           <strong>
@@ -174,7 +174,7 @@ class SpouseInformationSection extends React.Component {
       </fieldset>);
     }
 
-    if (this.props.receivesVaPension === true) {
+    if (this.props.data.receivesVaPension === true) {
       notRequiredMessage = (
         <p>
           <strong>
@@ -206,19 +206,18 @@ class SpouseInformationSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.spouseInformation,
-    receivesVaPension: state.veteran.vaInformation.receivesVaPension,
+    data: state.veteran,
     neverMarried: calculated.neverMarried(state),
-    isSectionComplete: state.uiState.completedSections['/financial-assessment/spouse-information']
+    isSectionComplete: state.uiState.sections['/financial-assessment/spouse-information'].complete
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
-      dispatch(veteranUpdateField(['spouseInformation', field], update));
+      dispatch(veteranUpdateField(field, update));
       if (field === 'sameAddress') {
-        dispatch(updateSpouseAddress(['spouseInformation', 'spouseAddress'], update));
+        dispatch(updateSpouseAddress('spouseAddress', update));
       }
     }
   };

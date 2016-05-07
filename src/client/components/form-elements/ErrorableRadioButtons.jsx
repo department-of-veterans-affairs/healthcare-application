@@ -1,6 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 
+import { makeField } from '../../reducers/fields.js';
+
 /**
  * A radio button group with a label.
  *
@@ -23,7 +25,7 @@ class ErrorableRadioButtons extends React.Component {
   }
 
   handleChange(domEvent) {
-    this.props.onValueChange(domEvent.target.value);
+    this.props.onValueChange(makeField(domEvent.target.value, true));
   }
 
   render() {
@@ -43,7 +45,7 @@ class ErrorableRadioButtons extends React.Component {
     }
 
     const options = _.isArray(this.props.options) ? this.props.options : [];
-    const storedValue = this.props.value;
+    const storedValue = this.props.value.value;
     let reactKey = 0;
     const optionElements = options.map((obj, index) => {
       let optionLabel;

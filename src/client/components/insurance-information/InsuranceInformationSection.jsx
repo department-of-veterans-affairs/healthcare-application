@@ -18,12 +18,6 @@ class InsuranceInformationSection extends React.Component {
   createBlankProvider() {
     return {
       insuranceName: makeField(''),
-      insuranceAddress: makeField(''),
-      insuranceCity: makeField(''),
-      insuranceCountry: makeField(''),
-      insuranceState: makeField(''),
-      insuranceZipcode: makeField(''),
-      insurancePhone: makeField(''),
       insurancePolicyHolderName: makeField(''),
       insurancePolicyNumber: makeField(''),
       insuranceGroupCode: makeField(''),
@@ -34,6 +28,7 @@ class InsuranceInformationSection extends React.Component {
     let providersTable;
     let content;
     let providers;
+    const fields = ['insuranceName', 'insurancePolicyHolderName', 'insurancePolicyNumber', 'insuranceGroupCode'];
 
     if (this.props.data.isCoveredByHealthInsurance) {
       providersTable = (
@@ -41,7 +36,7 @@ class InsuranceInformationSection extends React.Component {
             component={Provider}
             createRow={this.createBlankProvider}
             data={this.props.data}
-            initializeCurrentElement={() => {this.props.initializeFields();}}
+            initializeCurrentElement={() => {this.props.initializeFields(fields);}}
             onRowsUpdate={(update) => {this.props.onStateChange('providers', update);}}
             path="/insurance-information/general"
             rows={this.props.data.providers}/>
@@ -55,12 +50,6 @@ class InsuranceInformationSection extends React.Component {
       let providerIndex = 0;
       providers = providersList.map((obj) => {
         const insuranceName = obj.insuranceName.value;
-        const insuranceAddress = obj.insuranceAddress.value;
-        const insuranceCity = obj.insuranceCity.value;
-        const insuranceCountry = obj.insuranceCountry.value;
-        const insuranceState = obj.insuranceState.value;
-        const insuranceZipcode = obj.insuranceZipcode.value;
-        const insurancePhone = obj.insurancePhone.value;
         const insurancePolicyHolderName = obj.insurancePolicyHolderName.value;
         const insurancePolicyNumber = obj.insurancePolicyNumber.value;
         const insuranceGroupCode = obj.insuranceGroupCode.value;
@@ -75,30 +64,6 @@ class InsuranceInformationSection extends React.Component {
             <tr>
               <td>Name:</td>
               <td>{insuranceName}</td>
-            </tr>
-            <tr>
-              <td>Address:</td>
-              <td>{insuranceAddress}</td>
-            </tr>
-            <tr>
-              <td>City:</td>
-              <td>{insuranceCity}</td>
-            </tr>
-            <tr>
-              <td>Country:</td>
-              <td>{insuranceCountry}</td>
-            </tr>
-            <tr>
-              <td>State:</td>
-              <td>{insuranceState}</td>
-            </tr>
-            <tr>
-              <td>ZIP Code:</td>
-              <td>{insuranceZipcode}</td>
-            </tr>
-            <tr>
-              <td>Phone:</td>
-              <td>{insurancePhone}</td>
             </tr>
             <tr>
               <td>Policy Holder Name:</td>
@@ -151,18 +116,18 @@ class InsuranceInformationSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.insuranceInformation,
-    isSectionComplete: state.uiState.completedSections['/insurance-information/general']
+    data: state.veteran,
+    isSectionComplete: state.uiState.sections['/insurance-information/general'].complete
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
-      dispatch(veteranUpdateField(['insuranceInformation', field], update));
+      dispatch(veteranUpdateField(field, update));
     },
-    initializeFields: () => {
-      dispatch(ensureFieldsInitialized('/insurance-information/general'));
+    initializeFields: (fields) => {
+      dispatch(ensureFieldsInitialized(fields, 'providers'));
     }
   };
 }

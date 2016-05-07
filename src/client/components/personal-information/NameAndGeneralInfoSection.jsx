@@ -26,7 +26,7 @@ class NameAndGeneralInfoSection extends React.Component {
         <tbody>
           <tr>
             <td>Veteran Name:</td>
-            <td>{this.props.data.fullName.first.value} {this.props.data.fullName.middle.value} {this.props.data.fullName.last.value} {this.props.data.fullName.suffix.value}</td>
+            <td>{this.props.data.veteranFullName.first.value} {this.props.data.veteranFullName.middle.value} {this.props.data.veteranFullName.last.value} {this.props.data.veteranFullName.suffix.value}</td>
           </tr>
           <tr>
             <td>Mother's Maiden Name:</td>
@@ -34,7 +34,7 @@ class NameAndGeneralInfoSection extends React.Component {
           </tr>
           <tr>
             <td>Social Security Number:</td>
-            <td>{this.props.data.socialSecurityNumber.value}</td>
+            <td>{this.props.data.veteranSocialSecurityNumber.value}</td>
           </tr>
           <tr>
             <td>Gender:</td>
@@ -42,7 +42,7 @@ class NameAndGeneralInfoSection extends React.Component {
           </tr>
           <tr>
             <td>Date of Birth:</td>
-            <td>{this.props.data.dateOfBirth.month.value}/{this.props.data.dateOfBirth.day.value}/{this.props.data.dateOfBirth.year.value}</td>
+            <td>{this.props.data.veteranDateOfBirth.month.value}/{this.props.data.veteranDateOfBirth.day.value}/{this.props.data.veteranDateOfBirth.year.value}</td>
           </tr>
           <tr>
             <td>Place of Birth:</td>
@@ -60,21 +60,21 @@ class NameAndGeneralInfoSection extends React.Component {
         <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
           <FullName required
-              name={this.props.data.fullName}
-              onUserInput={(update) => {this.props.onStateChange('fullName', update);}}/>
+              name={this.props.data.veteranFullName}
+              onUserInput={(update) => {this.props.onStateChange('veteranFullName', update);}}/>
           <MothersMaidenName value={this.props.data.mothersMaidenName}
               onUserInput={(update) => {this.props.onStateChange('mothersMaidenName', update);}}/>
           <SocialSecurityNumber required
-              ssn={this.props.data.socialSecurityNumber}
-              onValueChange={(update) => {this.props.onStateChange('socialSecurityNumber', update);}}/>
+              ssn={this.props.data.veteranSocialSecurityNumber}
+              onValueChange={(update) => {this.props.onStateChange('veteranSocialSecurityNumber', update);}}/>
           <Gender required
               value={this.props.data.gender}
               onUserInput={(update) => {this.props.onStateChange('gender', update);}}/>
           <DateInput required
-              day={this.props.data.dateOfBirth.day}
-              month={this.props.data.dateOfBirth.month}
-              year={this.props.data.dateOfBirth.year}
-              onValueChange={(update) => {this.props.onStateChange('dateOfBirth', update);}}/>
+              day={this.props.data.veteranDateOfBirth.day}
+              month={this.props.data.veteranDateOfBirth.month}
+              year={this.props.data.veteranDateOfBirth.year}
+              onValueChange={(update) => {this.props.onStateChange('veteranDateOfBirth', update);}}/>
         </div>
         <div className="input-section">
           <h4>Place of Birth</h4>
@@ -106,15 +106,15 @@ class NameAndGeneralInfoSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.nameAndGeneralInformation,
-    isSectionComplete: state.uiState.completedSections['/personal-information/name-and-general-information']
+    data: state.veteran,
+    isSectionComplete: state.uiState.sections['/personal-information/name-and-general-information'].complete
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
-      dispatch(veteranUpdateField(['nameAndGeneralInformation', field], update));
+      dispatch(veteranUpdateField(field, update));
     }
   };
 }

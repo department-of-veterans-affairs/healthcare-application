@@ -14,7 +14,7 @@ class FinancialDisclosureSection extends React.Component {
     let notRequiredMessage;
     let content;
 
-    if (this.props.receivesVaPension === true) {
+    if (this.props.data.receivesVaPension === true) {
       notRequiredMessage = (
         <p>
           <strong>
@@ -97,16 +97,15 @@ class FinancialDisclosureSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.financialDisclosure,
-    receivesVaPension: state.veteran.vaInformation.receivesVaPension,
-    isSectionComplete: state.uiState.completedSections['/financial-assessment/financial-disclosure']
+    data: state.veteran,
+    isSectionComplete: state.uiState.sections['/financial-assessment/financial-disclosure'].complete
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
-      dispatch(veteranUpdateField(['financialDisclosure', field], update));
+      dispatch(veteranUpdateField(field, update));
     }
   };
 }
