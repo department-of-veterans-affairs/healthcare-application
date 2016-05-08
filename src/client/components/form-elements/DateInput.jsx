@@ -70,7 +70,7 @@ class DateInput extends React.Component {
           {this.props.label ? this.props.label : 'Date of Birth'}
           {requiredSpan}
         </label>
-        <span className="usa-form-hint usa-datefield-hint" id="dobHint">For example: Apr 28 1986</span>
+        <span className="usa-form-hint usa-datefield-hint">For example: Apr 28 1986</span>
         <div className={isValid ? undefined : 'usa-input-error'}>
           <div className="usa-date-of-birth row">
             <div className="hca-datefield-month">
