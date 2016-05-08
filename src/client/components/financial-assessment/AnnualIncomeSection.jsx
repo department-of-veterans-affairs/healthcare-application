@@ -121,105 +121,108 @@ class AnnualIncomeSection extends React.Component {
         </div>
       );
     } else {
-      content = (<div>
-                {notRequiredMessage}
+      content = (<fieldset>
+        <legend>Annual Income</legend>
 
-        <h5>Previous calendar year gross annual income of veteran, spouse and
-        dependent children</h5>
+        <div>
+          {notRequiredMessage}
 
-        <p><strong>Report</strong> gross annual income from employment, except for income
-        from your farm, ranch, property or business, including information
-        about your wages, bonuses, tips, severance pay and other accrued
-        benefits and your child's income information if it could have been used
-        to pay your household expenses.
-        </p>
+          <h5>Previous calendar year gross annual income of veteran, spouse and
+          dependent children</h5>
 
-        <p><strong>Report</strong> net income from your farm, ranch, property or business.
-        Payments on principal of mortgage and depreciation expenses are not
-        deductible.
-        </p>
+          <p><strong>Report</strong> gross annual income from employment, except for income
+          from your farm, ranch, property or business, including information
+          about your wages, bonuses, tips, severance pay and other accrued
+          benefits and your child's income information if it could have been used
+          to pay your household expenses.
+          </p>
 
-        <p><strong>Report</strong> other income amounts, including retirement and pension
-        income, Social Security Retirement and Social Security Disability
-        income, compensation benefits such as VA disability, unemployment,
-        Workers and black lung; cash gifts, interest and dividends, including
-        tax exempt earnings and distributions from Individual Retirement
-        Accounts (IRAs) or annuities.
-        </p>
+          <p><strong>Report</strong> net income from your farm, ranch, property or business.
+          Payments on principal of mortgage and depreciation expenses are not
+          deductible.
+          </p>
 
-        <p><strong>Do Not Report:</strong> Donations from public or private relief,
-        welfare or charitable organizations; Supplemental Security Income (SSI)
-        and need-based payments from a government agency; profit from the
-        occasional sale of property; income tax refunds; reinvested interest on
-        Individual Retirement Accounts (IRAs); scholarship and grants for school
-        attendance; disaster relief payment; reimbursement for casualty loss;
-        loans; Radiation Compensation Exposure Act payments; Agent Orange
-        settlement payments; and Alaska Native Claim Settlement Acts Income;
-        payments to foster parents; amounts in joint accounts in banks and
-        similar institutions acquired by reason of death or other joint owner;
-        Japanese ancestry restitution under Public Law 100-383; cash surrender
-        value of life insurance; lump-sum proceeds of life insurance policy on a
-        Veteran; and payments received under the Medicare transitional
-        assistance program.
-        </p>
+          <p><strong>Report</strong> other income amounts, including retirement and pension
+          income, Social Security Retirement and Social Security Disability
+          income, compensation benefits such as VA disability, unemployment,
+          Workers and black lung; cash gifts, interest and dividends, including
+          tax exempt earnings and distributions from Individual Retirement
+          Accounts (IRAs) or annuities.
+          </p>
 
-        <h6>Definitions</h6>
-        <p><strong>Gross annual income</strong>: from employment (wages, bonuses, tips, etc.)
-        excluding income from your farm, ranch, property or business</p>
-        <p><strong>Net income</strong>: from your farm, ranch, property or business.</p>
-        <p><strong>Other income</strong>: possibly from Social Security, compensation, pension,
-        interest, and dividends. Exclude welfare.</p>
+          <p><strong>Do Not Report:</strong> Donations from public or private relief,
+          welfare or charitable organizations; Supplemental Security Income (SSI)
+          and need-based payments from a government agency; profit from the
+          occasional sale of property; income tax refunds; reinvested interest on
+          Individual Retirement Accounts (IRAs); scholarship and grants for school
+          attendance; disaster relief payment; reimbursement for casualty loss;
+          loans; Radiation Compensation Exposure Act payments; Agent Orange
+          settlement payments; and Alaska Native Claim Settlement Acts Income;
+          payments to foster parents; amounts in joint accounts in banks and
+          similar institutions acquired by reason of death or other joint owner;
+          Japanese ancestry restitution under Public Law 100-383; cash surrender
+          value of life insurance; lump-sum proceeds of life insurance policy on a
+          Veteran; and payments received under the Medicare transitional
+          assistance program.
+          </p>
 
-        <div className="input-section">
-          <h6>Veteran</h6>
-          <ErrorableTextInput
-              errorMessage={getErrorMessage(this.props.data.veteranGrossIncome, message)}
-              label="Veteran Gross Income"
-              field={this.props.data.veteranGrossIncome}
-              onValueChange={(update) => {this.props.onStateChange('veteranGrossIncome', update);}}/>
+          <h6>Definitions</h6>
+          <p><strong>Gross annual income</strong>: from employment (wages, bonuses, tips, etc.)
+          excluding income from your farm, ranch, property or business</p>
+          <p><strong>Net income</strong>: from your farm, ranch, property or business.</p>
+          <p><strong>Other income</strong>: possibly from Social Security, compensation, pension,
+          interest, and dividends. Exclude welfare.</p>
 
-          <ErrorableTextInput
-              errorMessage={getErrorMessage(this.props.data.veteranNetIncome, message)}
-              label="Veteran Net Income"
-              field={this.props.data.veteranNetIncome}
-              onValueChange={(update) => {this.props.onStateChange('veteranNetIncome', update);}}/>
+          <div className="input-section">
+            <h6>Veteran</h6>
+            <ErrorableTextInput
+                errorMessage={getErrorMessage(this.props.data.veteranGrossIncome, message)}
+                label="Veteran Gross Income"
+                field={this.props.data.veteranGrossIncome}
+                onValueChange={(update) => {this.props.onStateChange('veteranGrossIncome', update);}}/>
 
-          <ErrorableTextInput
-              errorMessage={getErrorMessage(this.props.data.veteranOtherIncome, message)}
-              label="Veteran Other Income"
-              field={this.props.data.veteranOtherIncome}
-              onValueChange={(update) => {this.props.onStateChange('veteranOtherIncome', update);}}/>
+            <ErrorableTextInput
+                errorMessage={getErrorMessage(this.props.data.veteranNetIncome, message)}
+                label="Veteran Net Income"
+                field={this.props.data.veteranNetIncome}
+                onValueChange={(update) => {this.props.onStateChange('veteranNetIncome', update);}}/>
+
+            <ErrorableTextInput
+                errorMessage={getErrorMessage(this.props.data.veteranOtherIncome, message)}
+                label="Veteran Other Income"
+                field={this.props.data.veteranOtherIncome}
+                onValueChange={(update) => {this.props.onStateChange('veteranOtherIncome', update);}}/>
+          </div>
+
+          <div className="input-section">
+            <h6>Spouse</h6>
+            <ErrorableTextInput
+                errorMessage={getErrorMessage(this.props.data.spouseGrossIncome, message)}
+                label="Spouse Gross Income"
+                field={this.props.data.spouseGrossIncome}
+                onValueChange={(update) => {this.props.onStateChange('spouseGrossIncome', update);}}/>
+
+            <ErrorableTextInput
+                errorMessage={getErrorMessage(this.props.data.spouseNetIncome, message)}
+                label="Spouse Net Income"
+                field={this.props.data.spouseNetIncome}
+                onValueChange={(update) => {this.props.onStateChange('spouseNetIncome', update);}}/>
+
+            <ErrorableTextInput
+                errorMessage={getErrorMessage(this.props.data.spouseOtherIncome, message)}
+                label="Spouse Other Income"
+                field={this.props.data.spouseOtherIncome}
+                onValueChange={(update) => {this.props.onStateChange('spouseOtherIncome', update);}}/>
+          </div>
+
+          {childrenIncomeInput}
+
         </div>
-
-        <div className="input-section">
-          <h6>Spouse</h6>
-          <ErrorableTextInput
-              errorMessage={getErrorMessage(this.props.data.spouseGrossIncome, message)}
-              label="Spouse Gross Income"
-              field={this.props.data.spouseGrossIncome}
-              onValueChange={(update) => {this.props.onStateChange('spouseGrossIncome', update);}}/>
-
-          <ErrorableTextInput
-              errorMessage={getErrorMessage(this.props.data.spouseNetIncome, message)}
-              label="Spouse Net Income"
-              field={this.props.data.spouseNetIncome}
-              onValueChange={(update) => {this.props.onStateChange('spouseNetIncome', update);}}/>
-
-          <ErrorableTextInput
-              errorMessage={getErrorMessage(this.props.data.spouseOtherIncome, message)}
-              label="Spouse Other Income"
-              field={this.props.data.spouseOtherIncome}
-              onValueChange={(update) => {this.props.onStateChange('spouseOtherIncome', update);}}/>
-        </div>
-
-        {childrenIncomeInput}
-
-      </div>);
+      </fieldset>);
     }
 
     return (
       <div>
-        <h4>Annual Income</h4>
         {content}
       </div>
     );
