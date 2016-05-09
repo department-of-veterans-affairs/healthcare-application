@@ -130,23 +130,21 @@ class InsuranceInformationSection extends React.Component {
       {providers}
       </div>);
     } else {
-      content = (<div>
+      content = (<fieldset>
+        <legend>Coverage Information</legend>
         <ErrorableCheckbox
             label="Are you covered by health insurance? (Including coverage through a spouse or another person)"
             checked={this.props.data.isCoveredByHealthInsurance}
             onValueChange={(update) => {this.props.onStateChange('isCoveredByHealthInsurance', update);}}/>
         <hr/>
         {providersTable}
-      </div>);
+      </fieldset>);
     }
 
     return (
-      <fieldset>
-        <div className="input-section">
-          <h4>Coverage Information</h4>
-          {content}
-        </div>
-      </fieldset>
+      <div className="input-section">
+        {content}
+      </div>
     );
   }
 }

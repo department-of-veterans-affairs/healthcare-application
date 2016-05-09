@@ -50,7 +50,8 @@ class DemographicInformationSection extends React.Component {
         </table>
       </div>);
     } else {
-      content = (<div>
+      content = (<fieldset>
+        <legend>Demographic Information</legend>
         <div className="input-section">
           <ErrorableCheckbox
               label="Are you Spanish, Hispanic, or Latino?"
@@ -86,12 +87,11 @@ class DemographicInformationSection extends React.Component {
               checked={this.props.data.isWhite}
               onValueChange={(update) => {this.props.onStateChange('isWhite', update);}}/>
         </div>
-      </div>);
+      </fieldset>);
     }
 
     return (
       <div>
-        <h4>Demographic Information</h4>
         {content}
       </div>
     );

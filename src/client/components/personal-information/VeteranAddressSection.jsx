@@ -75,46 +75,46 @@ class VeteranAddressSection extends React.Component {
         </tbody>
       </table>);
     } else {
-      content = (<div className="input-section">
-        <p>For locations outside the U.S., enter "City,Country" in the City field
-            (e.g., "Paris,France"), and select Foreign Country for State.
-        </p>
+      content = (<fieldset>
+        <legend>Permanent Address</legend>
+        <div className="input-section">
+          <p>For locations outside the U.S., enter "City,Country" in the City field
+              (e.g., "Paris,France"), and select Foreign Country for State.
+          </p>
 
-        <Address value={this.props.data.address}
-            onUserInput={(update) => {this.props.onStateChange('address', update);}}/>
+          <Address value={this.props.data.address}
+              onUserInput={(update) => {this.props.onStateChange('address', update);}}/>
 
-        <ErrorableTextInput label="County"
-            field={this.props.data.county}
-            onValueChange={(update) => {this.props.onStateChange('county', update);}}/>
+          <ErrorableTextInput label="County"
+              field={this.props.data.county}
+              onValueChange={(update) => {this.props.onStateChange('county', update);}}/>
 
-        <Email label="Email address"
-            email={this.props.data.email}
-            onValueChange={(update) => {this.props.onStateChange('email', update);}}/>
+          <Email label="Email address"
+              email={this.props.data.email}
+              onValueChange={(update) => {this.props.onStateChange('email', update);}}/>
 
-        <Email error={this.confirmEmail()}
-            label="Re-enter Email address"
-            email={this.props.data.emailConfirmation}
-            onValueChange={(update) => {this.props.onStateChange('emailConfirmation', update);}}/>
+          <Email error={this.confirmEmail()}
+              label="Re-enter Email address"
+              email={this.props.data.emailConfirmation}
+              onValueChange={(update) => {this.props.onStateChange('emailConfirmation', update);}}/>
 
-        <Phone required
-            label="Home telephone number"
-            value={this.props.data.homePhone}
-            onValueChange={(update) => {this.props.onStateChange('homePhone', update);}}/>
+          <Phone required
+              label="Home telephone number"
+              value={this.props.data.homePhone}
+              onValueChange={(update) => {this.props.onStateChange('homePhone', update);}}/>
 
-        <Phone required
-            label="Mobile telephone number"
-            value={this.props.data.mobilePhone}
-            onValueChange={(update) => {this.props.onStateChange('mobilePhone', update);}}/>
-      </div>);
+          <Phone required
+              label="Mobile telephone number"
+              value={this.props.data.mobilePhone}
+              onValueChange={(update) => {this.props.onStateChange('mobilePhone', update);}}/>
+        </div>
+      </fieldset>);
     }
 
     return (
-      <fieldset >
-        <div>
-          <h4>Permanent Address</h4>
-          {content}
-        </div>
-      </fieldset>
+      <div>
+        {content}
+      </div>
     );
   }
 }

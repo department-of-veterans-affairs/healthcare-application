@@ -15,6 +15,10 @@ select {
   background-image: url('../../../public/images/arrow-down.png');
 }
 
+legend {
+  @extend h4;
+}
+
 .form-panel {
   @include media($medium-screen) {
     max-width: 32em;

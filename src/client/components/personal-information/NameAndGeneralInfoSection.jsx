@@ -55,7 +55,8 @@ class NameAndGeneralInfoSection extends React.Component {
         </tbody>
       </table>);
     } else {
-      content = (<div>
+      content = (<fieldset>
+        <legend>Veteran's Name</legend>
         <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
           <FullName required
@@ -92,14 +93,13 @@ class NameAndGeneralInfoSection extends React.Component {
               value={this.props.data.maritalStatus}
               onValueChange={(update) => {this.props.onStateChange('maritalStatus', update);}}/>
         </div>
-      </div>);
+      </fieldset>);
     }
 
     return (
-      <fieldset>
-        <h4>Veteran's Name</h4>
+      <div>
         {content}
-      </fieldset>
+      </div>
     );
   }
 }

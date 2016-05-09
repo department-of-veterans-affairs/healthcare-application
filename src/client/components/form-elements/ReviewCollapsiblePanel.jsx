@@ -72,7 +72,7 @@ class ReviewCollapsiblePanel extends React.Component {
       <div id={`${this.id}-collapsiblePanel`} className="usa-accordion-bordered hca-review-panel">
         <ul className="usa-unstyled-list">
           <li>
-            <div className="accordion-header" aria-expanded="true" aria-controls="collapsible-0">
+            <div className="accordion-header" aria-expanded="true" aria-controls={`collapsible-${this.id}`}>
               <div className="medium-9 columns">
                 {this.props.sectionLabel} {verifiedLabel}
               </div>
@@ -80,7 +80,7 @@ class ReviewCollapsiblePanel extends React.Component {
                 {editButton}
               </div>
             </div>
-            <div id="collapsible-0" aria-hidden={`${sectionsVerified}`} className="usa-accordion-content">
+            <div id={`collapsible-${this.id}`} aria-hidden={`${sectionsVerified}`} className="usa-accordion-content">
               {this.props.component}
               {panelAction}
             </div>

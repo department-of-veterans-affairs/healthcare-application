@@ -126,7 +126,8 @@ class SpouseInformationSection extends React.Component {
         {spouseAddressSummary}
       </div>);
     } else {
-      content = (<div>
+      content = (<fieldset>
+        <legend>Spouse's Information</legend>
         {notRequiredMessage}
         {noSpouseMessage}
         <div className="input-section">
@@ -170,7 +171,7 @@ class SpouseInformationSection extends React.Component {
               onValueChange={(update) => {this.props.onStateChange('provideSupportLastYear', update);}}/>
         </div>
         {spouseAddressFields}
-      </div>);
+      </fieldset>);
     }
 
     if (this.props.receivesVaPension === true) {
@@ -197,7 +198,6 @@ class SpouseInformationSection extends React.Component {
 
     return (
       <div>
-        <h4>Spouse's Information</h4>
         {content}
       </div>
     );

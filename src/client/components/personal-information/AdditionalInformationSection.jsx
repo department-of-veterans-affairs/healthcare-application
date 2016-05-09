@@ -35,7 +35,9 @@ class AdditionalInformationSection extends React.Component {
         </tbody>
       </table>);
     } else {
-      content = (<div>
+      content = (<fieldset>
+        {/* TODO: Change the headings to something related to the questions. */}
+        <legend>Additional Information</legend>
         <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
           <ErrorableCheckbox
@@ -65,14 +67,13 @@ class AdditionalInformationSection extends React.Component {
               checked={this.props.data.wantsInitialVaContact}
               onValueChange={(update) => {this.props.onStateChange('wantsInitialVaContact', update);}}/>
         </div>
-      </div>);
+      </fieldset>);
     }
 
     return (
-      <fieldset>
-        <h4>Additional Information</h4>
+      <div>
         {content}
-      </fieldset>
+      </div>
     );
   }
 }

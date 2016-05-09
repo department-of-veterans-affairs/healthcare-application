@@ -22,9 +22,9 @@ class Child extends React.Component {
     } else {
       content = (
         <fieldset>
+          <legend>Child's Name</legend>
           <div className="row">
             <div className="small-12 columns">
-              <p>Child's Name</p>
               <FullName required
                   name={this.props.data.childFullName}
                   onUserInput={(update) => {this.props.onValueChange('childFullName', update);}}/>

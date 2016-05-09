@@ -53,7 +53,8 @@ class DeductibleExpensesSection extends React.Component {
         </tbody>
       </table>);
     } else {
-      content = (<div>
+      content = (<fieldset>
+        <legend>Previous calendar year deductible expenses</legend>
         {notRequiredMessage}
 
         <p>
@@ -93,12 +94,11 @@ class DeductibleExpensesSection extends React.Component {
               field={this.props.data.deductibleEducationExpenses}
               onValueChange={(update) => {this.props.onStateChange('deductibleEducationExpenses', update);}}/>
         </div>
-      </div>);
+      </fieldset>);
     }
 
     return (
       <div>
-        <h4>Previous calendar year deductible expenses</h4>
         {content}
       </div>
     );

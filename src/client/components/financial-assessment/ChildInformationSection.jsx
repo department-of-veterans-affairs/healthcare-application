@@ -152,22 +152,24 @@ class ChildInformationSection extends React.Component {
       {children}
       </div>);
     } else {
-      content = (<div>
-        {notRequiredMessage}
+      content = (<fieldset>
+        <legend>Children Information</legend>
+        <div>
+          {notRequiredMessage}
 
-        <div className="input-section">
-          <ErrorableCheckbox
-              label="Do you have any children to report?"
-              checked={this.props.data.hasChildrenToReport}
-              onValueChange={(update) => {this.props.onStateChange('hasChildrenToReport', update);}}/>
+          <div className="input-section">
+            <ErrorableCheckbox
+                label="Do you have any children to report?"
+                checked={this.props.data.hasChildrenToReport}
+                onValueChange={(update) => {this.props.onStateChange('hasChildrenToReport', update);}}/>
+          </div>
+          {childrenContent}
         </div>
-        {childrenContent}
-      </div>);
+      </fieldset>);
     }
 
     return (
       <div>
-        <h4>Children Information</h4>
         {content}
       </div>
     );

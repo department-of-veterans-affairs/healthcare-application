@@ -34,7 +34,9 @@ class VaInformationSection extends React.Component {
       </table>
         );
     } else {
-      content = (<div>
+      content = (<fieldset>
+        {/* TODO: Change the headings to something related to the questions. */}
+        <legend>Veteran</legend>
         <p>
           Please review the following list and select all the responses that apply to you.
           This information will be used to determine which sections of the Application for
@@ -66,13 +68,12 @@ class VaInformationSection extends React.Component {
               value={this.props.data.receivesVaPension}
               onValueChange={(update) => {this.props.onStateChange('receivesVaPension', update);}}/>
         </div>
-      </div>);
+      </fieldset>);
     }
 
     return (
       <div className="row">
         <div className="small-12 columns">
-          <h4>Veteran</h4>
           {content}
         </div>
       </div>
