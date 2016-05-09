@@ -28,7 +28,7 @@ const store = {
     facilityState: null, // not used by ES
   },
 
-  demographicInformation: {
+  store: {
   },
 
   veteranAddress: {
@@ -40,7 +40,7 @@ const store = {
     understandsFinancialDisclosure: false, // not used by ES
   },
 
-  spouseInformation: {
+  store: {
     dateOfMarriage: { // TODO not in ES
       month: null,
       day: null,
@@ -92,20 +92,20 @@ function makeGender(gender) {
   return gender;
 }
 
-function makeRaces(demographicInformation) {
+function makeRaces(store) {
   // from VHA Standard Data Service (ADRDEV01) HL7 24 Race Map List
   const races = [];
-  if (demographicInformation.isAmericanIndianOrAlaskanNative) races.push('1002-5');
-  if (demographicInformation.isAsian) races.push('2028-9');
-  if (demographicInformation.isBlackOrAfricanAmerican) races.push('2054-5');
-  if (demographicInformation.isNativeHawaiianOrOtherPacificIslander) races.push('2076-8');
-  if (demographicInformation.isWhite) races.push('2106-3');
+  if (store.isAmericanIndianOrAlaskanNative) races.push('1002-5');
+  if (store.isAsian) races.push('2028-9');
+  if (store.isBlackOrAfricanAmerican) races.push('2054-5');
+  if (store.isNativeHawaiianOrOtherPacificIslander) races.push('2076-8');
+  if (store.isWhite) races.push('2106-3');
   return races;
 }
 
-function makeEthnicity(demographicInformation) {
+function makeEthnicity(store) {
   // from VHA Standard Data Service (ADRDEV01) HL7 24 Ethnicity Map List
-  switch (demographicInformation.isSpanishHispanicLatino) {
+  switch (store.isSpanishHispanicLatino) {
     case true:
       return '2135-2';
     case false:
@@ -133,24 +133,24 @@ function makeMaritalStatus(maritalStatus) {
   }
 }
 
-function makeSpouse(nameAndGeneralInformation, spouseInformation) {
-  if (nameAndGeneralInformation.maritalStatus !== 'Never Married') {
+function makeSpouse(store) {
+  if (store.maritalStatus !== 'Never Married') {
     return {
-      dob: makeDateString(spouseInformation.spouseDateOfBirth),
-      givenName: spouseInformation.spouseFullName.first,
-      middleName: spouseInformation.spouseFullName.middle,
-      familyName: spouseInformation.spouseFullName.last,
-      suffix: spouseInformation.spouseFullName.suffix,
+      dob: makeDateString(store.spouseDateOfBirth),
+      givenName: store.spouseFullName.first,
+      middleName: store.spouseFullName.middle,
+      familyName: store.spouseFullName.last,
+      suffix: store.spouseFullName.suffix,
       ssns: {
-        ssnText: makeSSN(spouseInformation.spouseSocialSecurityNumber)
+        ssnText: makeSSN(store.spouseSocialSecurityNumber)
       },
       address: {
-        city: spouseInformation.spouseAddress.city,
-        country: spouseInformation.spouseAddress.country,
-        line1: spouseInformation.spouseAddress.street,
-        zipCode: spouseInformation.spouseAddress.zipcode
+        city: store.spouseAddress.city,
+        country: store.spouseAddress.country,
+        line1: store.spouseAddress.street,
+        zipCode: store.spouseAddress.zipcode
       },
-      phoneNumber: spouseInformation.spousePhone
+      phoneNumber: store.spousePhone
     };
   }
   return undefined;
@@ -186,8 +186,8 @@ function makeDependent(child) {
   };
 }
 
-function makeDependentList(nameAndGeneralInformation, childInformation) {
-  if (nameAndGeneralInformation.hasChildrenToReport) {
+function makeDependentList(store, childInformation) {
+  if (store.hasChildrenToReport) {
     return childInformation.children.map(makeDependent);
   }
   return undefined;
@@ -328,24 +328,24 @@ function makeVetIncomes(annualIncome) {
   return undefined;
 }
 
-function makeSpouseIncomes(annualIncome) {
+function makeSpouseIncomes(store) {
   // Income Type List
   const list = [];
-  if (annualIncome.spouseGrossIncome > 0) {
+  if (store.spouseGrossIncome > 0) {
     list.push({
-      amount: annualIncome.spouseGrossIncome,
+      amount: store.spouseGrossIncome,
       type: 12, // Total Employment Income TODO is this right?
     });
   }
-  if (annualIncome.spouseNetIncome > 0) {
+  if (store.spouseNetIncome > 0) {
     list.push({
-      amount: annualIncome.spouseNetIncome,
+      amount: store.spouseNetIncome,
       type: 13, // Net Income TODO is this right?
     });
   }
-  if (annualIncome.spouseOtherIncome > 0) {
+  if (store.spouseOtherIncome > 0) {
     list.push({
-      ammount: annualIncome.spouseOtherIncome,
+      ammount: store.spouseOtherIncome,
       type: 10, // All Other Income TODO is this right?
     });
   }
@@ -415,10 +415,10 @@ function makeEnrollmentSystemJSON(store) {
               }
             }
           },
-          ethnicity: makeEthnicity(store.demographicInformation),
-          maritalStatus: makeMaritalStatus(store.nameAndGeneralInformation.maritalStatus),
+          ethnicity: makeEthnicity(store),
+          maritalStatus: makeMaritalStatus(store.maritalStatus),
           preferredFacility: store.additionalInformation.vaMedicalFacility,
-          races: makeRaces(store.demographicInformation),
+          races: makeRaces(store),
           acaIndicator: store.additionalInformation.isEssentialAcaCoverage
         },
         enrollmentDeterminationInfo: {
@@ -443,17 +443,17 @@ function makeEnrollmentSystemJSON(store) {
             spouseFinancialsList: {
               spouseFinancials: {
                 incomes: makeSpouseIncomes(store.annualIncome),
-                spouse: makeSpouse(store.nameAndGeneralInformation, store.spouseInformation),
-                contributedToSpouse: store.spouseInformation.provideSupportLastYear,
-                marriedLastCalendarYear: store.nameAndGeneralInformation.maritalStatus === 'Married',
-                livedWithPatient: store.spouseInformation.cohabitedLastYear,
+                spouse: makeSpouse(store.store, store.store),
+                contributedToSpouse: store.store.provideSupportLastYear,
+                marriedLastCalendarYear: store.store.maritalStatus === 'Married',
+                livedWithPatient: store.store.cohabitedLastYear,
               },
             },
 
             dependentFinancialsList: {
               dependentFinancials: {
                 incomes: makeDependentIncomes(store.annualIncome),
-                dependentInfo: makeDependentList(store.nameAndGeneralInformation, store.childInformation),
+                dependentInfo: makeDependentList(store.store, store.childInformation),
                 /* TODO : these items are in the wrong place...
                 livedWithPatient: store.childInformation.children[i].cohabitedLastYear,
                 incapableOfSelfSupport: store.childInformation.children[i].childDisabledBefore18,
@@ -489,15 +489,15 @@ function makeEnrollmentSystemJSON(store) {
           indicator: store.militaryAdditionalInfo.purpleHeart
         },
         personInfo: {
-          firstName: store.nameAndGeneralInformation.fullName.first,
-          middleName: store.nameAndGeneralInformation.fullName.middle,
-          lastName: store.nameAndGeneralInformation.fullName.last,
-          ssnText: makeSSN(store.nameAndGeneralInformation.socialSecurityNumber),
-          gender: makeGender(store.nameAndGeneralInformation.gender),
-          dob: makeDateString(store.nameAndGeneralInformation.dateOfBirth),
-          mothersMaidenName: store.nameAndGeneralInformation.mothersMaidenName,
-          placeOfBirthCity: store.nameAndGeneralInformation.cityOfBirth,
-          placeOfBirthState: store.nameAndGeneralInformation.stateOfBirth
+          firstName: store.store.fullName.first,
+          middleName: store.store.fullName.middle,
+          lastName: store.store.fullName.last,
+          ssnText: makeSSN(store.store.socialSecurityNumber),
+          gender: makeGender(store.store.gender),
+          dob: makeDateString(store.store.dateOfBirth),
+          mothersMaidenName: store.store.mothersMaidenName,
+          placeOfBirthCity: store.store.cityOfBirth,
+          placeOfBirthState: store.store.stateOfBirth
         }
       },
       applications: {
