@@ -1,3 +1,7 @@
+// Variables
+
+$button-stroke: inset 0 0 0 1px;
+
 // TODO: properly incorporate usds web standards for this
 body .row {
   max-width: 62.5em;
@@ -32,8 +36,33 @@ legend {
   }
 }
 
-.button-icon{
+.button-icon {
   font-size: 1.7rem;
+}
+
+.row.progress-buttons {
+  max-width: 47rem;
+}
+
+button.usa-button-outline {
+  box-shadow: $button-stroke $color-primary;
+
+  &:hover,
+  &.usa-button-hover {
+    box-shadow: $button-stroke $color-primary-darker;
+    color: $color-primary-darker;
+  }
+
+  &:active,
+  &.usa-button-active {
+    box-shadow: $button-stroke $color-primary-darkest;
+    color: $color-primary-darkest;
+  }
+
+  &:focus,
+  &.usa-button-focus {
+    box-shadow: $button-stroke $color-primary-darkest, $focus-shadow;
+  }
 }
 
 .progress-box {
