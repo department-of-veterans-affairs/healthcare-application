@@ -6,6 +6,8 @@ var app = module.exports = loopback();
 
 app.set('restApiRoot', '/api');
 
+// app.set('legacyExplorer', false); TODO should this be set? In production, we don't want exporer.
+
 var ds = loopback.createDataSource('soap',
   {
     connector: require('loopback-connector-soap'),
@@ -14,8 +16,8 @@ var ds = loopback.createDataSource('soap',
     wsdl: path.join(__dirname, './voa.wsdl'),
     security: {
       scheme: 'ClientSSL',
-      certPath: 'healthcare.application.crt',
-      keyPath: 'healthcare.application.key'
+      certPath: path.join(__dirname, './healthcare.application.crt'),
+      keyPath: path.join(__dirname, './healthcare.application.key')
     },
     wsdl_options: {
       rejectUnauthorized: false,
@@ -41,7 +43,6 @@ ds.once('connected', function () {
 
   VoaService.status = function (request, cb) {
     VoaService.getFormSubmissionStatus({retrieveFormSubmissionStatusRequest: request}, function (err, response) {
-      console.log('***', form);
       console.log('getFormSubmissionStatus: %j', response);
       var result = response;
       cb(err, result);
