@@ -22,14 +22,10 @@ class ProgressButton extends React.Component {
     const afterText = (this.props.afterText) ? (<span className="button-icon"> {this.props.afterText}</span>) : '';
 
     return (
-      <div className="row progress-buttons">
-        <div className="small-12 medium-8 columns">
-          <button
-              className={`text-capitalize ${this.props.buttonClass}`}
-              id={`${this.id}-continueButton`}
-              onClick={this.props.onButtonClick}>{beforeText}{this.props.buttonText}{afterText}</button>
-        </div>
-      </div>
+      <button
+          className={`text-capitalize ${this.props.buttonClass}`}
+          id={`${this.id}-continueButton`}
+          onClick={this.props.onButtonClick}>{beforeText}{this.props.buttonText}{afterText}</button>
     );
   }
 }
