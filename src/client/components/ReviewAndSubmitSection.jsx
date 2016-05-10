@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import AdditionalInformationSection from './veteran-information/AdditionalInformationSection';
+import AdditionalInformationSection from './insurance-information/AdditionalInformationSection';
 import AdditionalMilitaryInformationSection from './military-service/AdditionalMilitaryInformationSection';
 import AnnualIncomeSection from './household-information/AnnualIncomeSection';
 import ChildInformationSection from './household-information/ChildInformationSection';
@@ -61,7 +61,7 @@ class ReviewAndSubmitSection extends React.Component {
 
         <ReviewCollapsiblePanel
             sectionLabel="AdditionalInformationSection"
-            updatePath="/veteran-information/additional-information"
+            updatePath="/insurance-information/additional-information"
             component={<AdditionalInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel

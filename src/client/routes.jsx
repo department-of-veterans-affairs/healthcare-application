@@ -10,7 +10,6 @@ import DemographicInformationSection from './components/veteran-information/Demo
 import FinancialDisclosureSection from './components/household-information/FinancialDisclosureSection';
 import InsuranceInformationSection from './components/insurance-information/InsuranceInformationSection';
 import IntroductionSection from './components/IntroductionSection.jsx';
-import MedicareMedicaidSection from './components/insurance-information/MedicareMedicaidSection';
 import PersonalInfoSection from './components/veteran-information/PersonalInfoSection';
 import ReviewAndSubmitSection from './components/ReviewAndSubmitSection.jsx';
 import ServiceInformationSection from './components/military-service/ServiceInformationSection';
@@ -39,10 +38,6 @@ const routes = [
       component={VeteranAddressSection}
       key="/veteran-information/veteran-address"
       path="/veteran-information/veteran-address"/>,
-//   <Route
-//       component={AdditionalInformationSection}
-//       key="/veteran-information/additional-information"
-//       path="/veteran-information/additional-information"/>,
 
 // Military Service routes.
   <Route
@@ -87,10 +82,6 @@ const routes = [
       component={InsuranceInformationSection}
       key="/insurance-information/general"
       path="/insurance-information/general"/>,
-  <Route
-      component={MedicareMedicaidSection}
-      key="/insurance-information/medicare-medicaid"
-      path="/insurance-information/medicare-medicaid"/>,
 
   // Review and Submit route.
   <Route

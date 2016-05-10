@@ -45,7 +45,7 @@ const ui = {
       verified: false,
       fields: ['isVaServiceConnected', 'compensableVaServiceConnected', 'receivesVaPension']
     },
-    '/veteran-information/additional-information': {
+    '/insurance-information/additional-information': {
       complete: false,
       verified: false,
       fields: ['isEssentialAcaCoverage', 'facilityState', 'vaMedicalFacility', 'wantsInitialVaContact']

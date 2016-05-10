@@ -9,7 +9,7 @@ export function pathToData(state, path) {
     case '/veteran-information/va-information':
       return state.vaInformation;
 
-    case '/veteran-information/additional-information':
+    case '/insurance-information/additional-information':
       return state.additionalInformation;
 
     case '/veteran-information/demographic-information':

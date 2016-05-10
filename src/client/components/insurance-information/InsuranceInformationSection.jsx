@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import DateInput from '../form-elements/DateInput';
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import GrowableTable from '../form-elements/GrowableTable.jsx';
+import AdditionalInformationSection from './AdditionalInformationSection.jsx';
 import Provider from './Provider.jsx';
 import { veteranUpdateField, ensureFieldsInitialized } from '../../actions';
 
@@ -145,6 +146,7 @@ class InsuranceInformationSection extends React.Component {
               year={this.props.data.medicarePartAEffectiveDate.year}
               onValueChange={(update) => {this.props.onStateChange('medicarePartAEffectiveDate', update);}}/>
         </div>
+        <AdditionalInformationSection/>
       </fieldset>);
     }
 

@@ -76,21 +76,8 @@ describe('<Nav>', () => {
       expect(activeSubSection).to.have.lengthOf(1);
     };
 
-    // TODO(crew): Remove this if we decide that we do not want introduction in the subway nav.
-    xit('/introduction', () => {
-      expectActiveSection(nav, '/introduction');
-    });
-
     it('/veteran-information/name-and-general-information', () => {
       expectActiveSectionForNavAndSubNav(nav, '/veteran-information/name-and-general-information');
-    });
-
-    it('/veteran-information/va-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/veteran-information/va-information');
-    });
-
-    it('/veteran-information/additional-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/veteran-information/additional-information');
     });
 
     it('/veteran-information/demographic-information', () => {
@@ -101,20 +88,16 @@ describe('<Nav>', () => {
       expectActiveSectionForNavAndSubNav(nav, '/veteran-information/veteran-address');
     });
 
-    it('/insurance-information/general', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/insurance-information/general');
-    });
-
-    it('/insurance-information/medicare-medicaid', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/insurance-information/medicare-medicaid');
-    });
-
     it('/military-service/service-information', () => {
       expectActiveSectionForNavAndSubNav(nav, '/military-service/service-information');
     });
 
     it('/military-service/additional-information', () => {
       expectActiveSectionForNavAndSubNav(nav, '/military-service/additional-information');
+    });
+
+    it('/va-benefits/basic-information', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/va-benefits/basic-information');
     });
 
     it('/household-information/financial-disclosure', () => {
@@ -135,6 +118,10 @@ describe('<Nav>', () => {
 
     it('/household-information/deductible-expenses', () => {
       expectActiveSectionForNavAndSubNav(nav, '/household-information/deductible-expenses');
+    });
+
+    it('/insurance-information/general', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/insurance-information/general');
     });
 
     it('/review-and-submit', () => {

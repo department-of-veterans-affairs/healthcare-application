@@ -52,14 +52,6 @@ class Nav extends React.Component {
               <li className={`${determineSectionStyles('/veteran-information/veteran-address')}`}>
                 Contact Information
               </li>
-              {/*
-              <li className={`${determineSectionStyles('/veteran-information/va-information')}`}>
-                VA-Specific
-              </li>
-              <li className={`${determineSectionStyles('/veteran-information/additional-information')}`}>
-                Additional
-              </li>
-              */}
             </ul>
           </div>
         </li>

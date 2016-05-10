@@ -4,7 +4,6 @@ import { Router, Route, createMemoryHistory } from 'react-router';
 import { createStore } from 'redux';
 import { expect } from 'chai';
 
-import AdditionalInformationSection from '../../src/client/components/veteran-information/AdditionalInformationSection';
 import AdditionalMilitaryInformationSection from '../../src/client/components/military-service/AdditionalMilitaryInformationSection';
 import AnnualIncomeSection from '../../src/client/components/household-information/AnnualIncomeSection';
 import ChildInformationSection from '../../src/client/components/household-information/ChildInformationSection';
@@ -13,12 +12,11 @@ import DemographicInformationSection from '../../src/client/components/veteran-i
 import FinancialDisclosureSection from '../../src/client/components/household-information/FinancialDisclosureSection';
 import InsuranceInformationSection from '../../src/client/components/insurance-information/InsuranceInformationSection';
 import IntroductionSection from '../../src/client/components/IntroductionSection.jsx';
-import MedicareMedicaidSection from '../../src/client/components/insurance-information/MedicareMedicaidSection';
 import PersonalInfoSection from '../../src/client/components/veteran-information/PersonalInfoSection';
 import ReviewAndSubmitSection from '../../src/client/components/ReviewAndSubmitSection.jsx';
 import ServiceInformationSection from '../../src/client/components/military-service/ServiceInformationSection';
 import SpouseInformationSection from '../../src/client/components/household-information/SpouseInformationSection';
-import VAInformationSection from '../../src/client/components/va-benefits/VaInformationSection';
+import VaInformationSection from '../../src/client/components/va-benefits/VaInformationSection';
 import VeteranAddressSection from '../../src/client/components/veteran-information/VeteranAddressSection';
 import routes from '../../src/client/routes';
 import veteran from '../../src/client/reducers/veteran';
@@ -69,16 +67,6 @@ describe('routes', () => {
       expect(tree.dive(['RouterContext']).subTree(getName(PersonalInfoSection))).to.be.an('object');
     });
 
-    it('/veteran-information/va-information', () => {
-      history.replace('/veteran-information/va-information');
-      expect(tree.dive(['RouterContext']).subTree(getName(VAInformationSection))).to.be.an('object');
-    });
-
-    it('/veteran-information/additional-information', () => {
-      history.replace('/veteran-information/additional-information');
-      expect(tree.dive(['RouterContext']).subTree(getName(AdditionalInformationSection))).to.be.an('object');
-    });
-
     it('/veteran-information/demographic-information', () => {
       history.replace('/veteran-information/demographic-information');
       expect(tree.dive(['RouterContext']).subTree(getName(DemographicInformationSection))).to.be.an('object');
@@ -89,16 +77,6 @@ describe('routes', () => {
       expect(tree.dive(['RouterContext']).subTree(getName(VeteranAddressSection))).to.be.an('object');
     });
 
-    it('/insurance-information/general', () => {
-      history.replace('/insurance-information/general');
-      expect(tree.dive(['RouterContext']).subTree(getName(InsuranceInformationSection))).to.be.an('object');
-    });
-
-    it('/insurance-information/medicare-medicaid', () => {
-      history.replace('/insurance-information/medicare-medicaid');
-      expect(tree.dive(['RouterContext']).subTree(getName(MedicareMedicaidSection))).to.be.an('object');
-    });
-
     it('/military-service/service-information', () => {
       history.replace('/military-service/service-information');
       expect(tree.dive(['RouterContext']).subTree(getName(ServiceInformationSection))).to.be.an('object');
@@ -107,6 +85,11 @@ describe('routes', () => {
     it('/military-service/additional-information', () => {
       history.replace('/military-service/additional-information');
       expect(tree.dive(['RouterContext']).subTree(getName(AdditionalMilitaryInformationSection))).to.be.an('object');
+    });
+
+    it('/va-benefits/basic-information', () => {
+      history.replace('/va-benefits/basic-information');
+      expect(tree.dive(['RouterContext']).subTree(getName(VaInformationSection))).to.be.an('object');
     });
 
     it('/household-information/financial-disclosure', () => {
@@ -132,6 +115,11 @@ describe('routes', () => {
     it('/household-information/deductible-expenses', () => {
       history.replace('/household-information/deductible-expenses');
       expect(tree.dive(['RouterContext']).subTree(getName(DeductibleExpensesSection))).to.be.an('object');
+    });
+
+    it('/insurance-information/general', () => {
+      history.replace('/insurance-information/general');
+      expect(tree.dive(['RouterContext']).subTree(getName(InsuranceInformationSection))).to.be.an('object');
     });
 
     it('/review-and-submit', () => {
