@@ -8,7 +8,7 @@ import FullName from '../questions/FullName';
 import SocialSecurityNumber from '../questions/SocialSecurityNumber';
 
 import { childRelationships } from '../../utils/options-for-select.js';
-import { isNotBlank, isValidField, isValidMonetaryValue } from '../../utils/validations';
+import { isNotBlank, isValidField, isValidMonetaryValue, validateIfDirty } from '../../utils/validations';
 
 // TODO: create unique nodes for each child in applicationData
 
@@ -34,7 +34,7 @@ class Child extends React.Component {
           <div className="row">
             <div className="small-12 columns">
               <ErrorableSelect required
-                  errorMessage={isNotBlank(this.props.data.childRelation.value) ? undefined : 'Please select an option'}
+                  errorMessage={validateIfDirty(this.props.data.childRelation, isNotBlank) ? undefined : 'Please select an option'}
                   label="Child’s relationship to you"
                   options={childRelationships}
                   value={this.props.data.childRelation}

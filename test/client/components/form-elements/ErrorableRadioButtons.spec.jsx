@@ -5,6 +5,7 @@ import sinon from 'sinon';
 import { expect } from 'chai';
 
 import ErrorableRadioButtons from '../../../../src/client/components/form-elements/ErrorableRadioButtons';
+import { makeField } from '../../../../src/client/reducers/fields';
 
 describe('<ErrorableRadioButtons>', () => {
   const options = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
@@ -21,35 +22,35 @@ describe('<ErrorableRadioButtons>', () => {
 
     it('label is required', () => {
       SkinDeep.shallowRender(
-        <ErrorableRadioButtons options={options} onValueChange={(_update) => {}}/>);
+        <ErrorableRadioButtons options={options} value={makeField('test')} onValueChange={(_update) => {}}/>);
       sinon.assert.calledWithMatch(consoleStub, /Required prop `label` was not specified in `ErrorableRadioButtons`/);
     });
 
     it('label must be a string', () => {
       SkinDeep.shallowRender(
-        <ErrorableRadioButtons label options={options} onValueChange={(_update) => {}}/>);
+        <ErrorableRadioButtons label options={options} value={makeField('test')} onValueChange={(_update) => {}}/>);
       sinon.assert.calledWithMatch(consoleStub, /Invalid prop `label` of type `boolean` supplied to `ErrorableRadioButtons`, expected `string`./);
     });
 
     it('onValueChange is required', () => {
-      SkinDeep.shallowRender(<ErrorableRadioButtons label="test" options={options}/>);
+      SkinDeep.shallowRender(<ErrorableRadioButtons label="test" value={makeField('test')} options={options}/>);
       sinon.assert.calledWithMatch(consoleStub, /Required prop `onValueChange` was not specified in `ErrorableRadioButtons`/);
     });
 
     it('onValueChange must be a function', () => {
-      SkinDeep.shallowRender(<ErrorableRadioButtons label="test" options={options} onValueChange/>);
+      SkinDeep.shallowRender(<ErrorableRadioButtons label="test" options={options} value={makeField('test')} onValueChange/>);
       sinon.assert.calledWithMatch(consoleStub, /Invalid prop `onValueChange` of type `boolean` supplied to `ErrorableRadioButtons`, expected `function`/);
     });
 
     it('options is required', () => {
       SkinDeep.shallowRender(
-        <ErrorableRadioButtons label="test" onValueChange={(_update) => {}}/>);
+        <ErrorableRadioButtons label="test" value={makeField('test')} onValueChange={(_update) => {}}/>);
       sinon.assert.calledWithMatch(consoleStub, /Required prop `options` was not specified in `ErrorableRadioButtons`/);
     });
 
     it('options must be an object', () => {
       SkinDeep.shallowRender(
-        <ErrorableRadioButtons label="test" options onValueChange={(_update) => {}}/>);
+        <ErrorableRadioButtons label="test" options value={makeField('test')} onValueChange={(_update) => {}}/>);
       sinon.assert.calledWithMatch(consoleStub, /Invalid prop `options` of type `boolean` supplied to `ErrorableRadioButtons`, expected an array/);
     });
   });
@@ -59,7 +60,7 @@ describe('<ErrorableRadioButtons>', () => {
 
     const updatePromise = new Promise((resolve, _reject) => {
       myRadioButtons = SkinDeep.shallowRender(
-        <ErrorableRadioButtons label="test" options={options} onValueChange={(update) => { resolve(update); }}/>
+        <ErrorableRadioButtons label="test" options={options} value={makeField('test')} onValueChange={(update) => { resolve(update); }}/>
       );
       done();
     });
@@ -72,7 +73,7 @@ describe('<ErrorableRadioButtons>', () => {
 
   it('label attribute propagates', () => {
     const tree = SkinDeep.shallowRender(
-      <ErrorableRadioButtons label="my label" options={options} onValueChange={(_update) => {}}/>);
+      <ErrorableRadioButtons label="my label" options={options} value={makeField('test')} onValueChange={(_update) => {}}/>);
 
     // Ensure label text is correct.
     const labels = tree.everySubTree('label');

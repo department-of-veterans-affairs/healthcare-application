@@ -215,15 +215,15 @@ function isValidChildren(data) {
 }
 
 function isValidChildrenIncome(data) {
-  const children = data.children;
+  const children = data.childrenIncome;
   if (children.length === 0) {
     return true;
   }
   for (let i = 0; i < children.length; i++) {
     if (
-        !isValidField(isValidMonetaryValue, children[i].childrenGrossIncome) &&
-        !isValidField(isValidMonetaryValue, children[i].childrenNetIncome) &&
-        !isValidField(isValidMonetaryValue, children[i].childrenOtherIncome)
+        !isValidField(isValidMonetaryValue, children[i].childGrossIncome) &&
+        !isValidField(isValidMonetaryValue, children[i].childNetIncome) &&
+        !isValidField(isValidMonetaryValue, children[i].childOtherIncome)
     ) {
       return false;
     }

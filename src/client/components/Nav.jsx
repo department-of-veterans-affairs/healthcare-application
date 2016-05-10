@@ -13,7 +13,7 @@ class Nav extends React.Component {
 
   render() {
     const subnavStyles = 'step one wow fadeIn animated';
-    const completedSections = this.props.data.completedSections;
+    const sections = this.props.data.sections;
     const currentUrl = this.props.currentUrl;
 
     function determinePanelStyles(currentPath, completePath) {
@@ -21,7 +21,7 @@ class Nav extends React.Component {
       if (currentUrl.startsWith(currentPath)) {
         classes += ' section-current';
       }
-      if (completedSections[completePath] === true) {
+      if (sections[completePath].complete === true) {
         classes += ' section-complete';
       }
       return classes;

@@ -8,10 +8,11 @@ export const UPDATE_SPOUSE_ADDRESS = 'UPDATE_SPOUSE_ADDRESS';
 export const UPDATE_SUBMISSION_STATUS = 'UPDATE_SUBMISSION_STATUS';
 export const CREATE_CHILD_INCOME_FIELDS = 'CREATE_CHILD_INCOME_FIELDS';
 
-export function ensureFieldsInitialized(path) {
+export function ensureFieldsInitialized(fields, parentNode) {
   return {
     type: ENSURE_FIELDS_INITIALIZED,
-    path
+    fields,
+    parentNode
   };
 }
 

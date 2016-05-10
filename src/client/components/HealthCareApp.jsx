@@ -6,7 +6,6 @@ import IntroductionSection from './IntroductionSection.jsx';
 import Nav from './Nav.jsx';
 import ProgressButton from './ProgressButton';
 import { ensureFieldsInitialized, updateCompletedStatus, updateSubmissionStatus } from '../actions';
-import { pathToData } from '../store';
 
 import * as validations from '../utils/validations';
 
@@ -59,10 +58,11 @@ class HealthCareApp extends React.Component {
 
   handleContinue() {
     const path = this.props.location.pathname;
-    const sectionData = pathToData(this.context.store.getState().veteran, path);
+    const formData = this.context.store.getState().veteran;
+    const sectionFields = this.context.store.getState().uiState.sections[path].fields;
 
-    this.context.store.dispatch(ensureFieldsInitialized(path));
-    if (validations.isValidSection(path, sectionData)) {
+    this.context.store.dispatch(ensureFieldsInitialized(sectionFields));
+    if (validations.isValidSection(path, formData)) {
       hashHistory.push(this.getUrl('next'));
       this.context.store.dispatch(updateCompletedStatus(path));
     }

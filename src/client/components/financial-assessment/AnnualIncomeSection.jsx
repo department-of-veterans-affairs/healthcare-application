@@ -29,7 +29,7 @@ class AnnualIncomeSection extends React.Component {
     let childrenIncomeReview;
     let content;
 
-    if (this.props.receivesVaPension === true) {
+    if (this.props.data.receivesVaPension === true) {
       notRequiredMessage = (
         <p>
           <strong>
@@ -40,22 +40,22 @@ class AnnualIncomeSection extends React.Component {
       );
     }
 
-    if (this.props.childrenData.hasChildrenToReport === true) {
+    if (this.props.data.hasChildrenToReport === true) {
       childrenIncomeInput = (
         <div className="input-section">
           <FixedTable
               component={ChildIncome}
-              onRowsUpdate={(update) => {this.props.onStateChange('children', update);}}
-              relatedData={this.props.childrenData.children}
-              rows={this.props.data.children}/>
+              onRowsUpdate={(update) => {this.props.onStateChange('childrenIncome', update);}}
+              relatedData={this.props.data.children}
+              rows={this.props.data.childrenIncome}/>
         </div>
       );
     }
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
-      const childrenData = this.props.childrenData.children;
+      const childrenData = this.props.data.children;
       let reactKey = 0;
-      childrenIncomeReview = this.props.data.children.map((obj, index) => {
+      childrenIncomeReview = this.props.data.childrenIncome.map((obj, index) => {
         return (
           <div key={reactKey++}>
             <h6>Child: {`${childrenData[index].childFullName.first.value} ${childrenData[index].childFullName.last.value}`}</h6>
@@ -231,17 +231,15 @@ class AnnualIncomeSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.veteran.annualIncome,
-    childrenData: state.veteran.childInformation,
-    receivesVaPension: state.veteran.vaInformation.receivesVaPension,
-    isSectionComplete: state.uiState.completedSections['/financial-assessment/annual-income']
+    data: state.veteran,
+    isSectionComplete: state.uiState.sections['/financial-assessment/annual-income'].complete
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     onStateChange: (field, update) => {
-      dispatch(veteranUpdateField(['annualIncome', field], update));
+      dispatch(veteranUpdateField(field, update));
     },
     initializeChildIncomeFields: () => {
       dispatch(createChildIncomeFields('/financial-assessment/annual-income'));

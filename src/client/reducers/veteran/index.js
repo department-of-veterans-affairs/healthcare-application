@@ -3,171 +3,140 @@ import lodashDeep from 'lodash-deep';
 
 import { ENSURE_FIELDS_INITIALIZED, VETERAN_FIELD_UPDATE, UPDATE_SPOUSE_ADDRESS, CREATE_CHILD_INCOME_FIELDS } from '../../actions';
 import { makeField, dirtyAllFields } from '../fields';
-import { pathToData } from '../../store';
 
 // Add deep object manipulation routines to lodash.
 _.mixin(lodashDeep);
 
-// TODO(awong): This structure should reflect a logical data model for a veteran. Currently it
-// mirrors the UI stricture too much.
-
 // TODO: Remove providers and children if checkbox within section is unchecked
 const blankVeteran = {
-  nameAndGeneralInformation: {
-    fullName: {
-      first: makeField(''),
-      middle: makeField(''),
-      last: makeField(''),
-      suffix: makeField(''),
-    },
-    mothersMaidenName: makeField(''),
-    socialSecurityNumber: makeField(''),
-    gender: makeField(''),
-    cityOfBirth: makeField(''),
-    stateOfBirth: makeField(''),
-    dateOfBirth: {
-      month: makeField(''),
-      day: makeField(''),
-      year: makeField(''),
-    },
-    maritalStatus: makeField('')
+  veteranFullName: {
+    first: makeField(''),
+    middle: makeField(''),
+    last: makeField(''),
+    suffix: makeField(''),
   },
+  mothersMaidenName: makeField(''),
+  veteranSocialSecurityNumber: makeField(''),
+  gender: makeField(''),
+  cityOfBirth: makeField(''),
+  stateOfBirth: makeField(''),
+  veteranDateOfBirth: {
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField(''),
+  },
+  maritalStatus: makeField(''),
 
-  vaInformation: {
-    isVaServiceConnected: makeField(''),
-    compensableVaServiceConnected: makeField(''),
-    receivesVaPension: makeField('')
-  },
+  isVaServiceConnected: makeField(''),
+  compensableVaServiceConnected: makeField(''),
+  receivesVaPension: makeField(''),
 
-  additionalInformation: {
-    isEssentialAcaCoverage: false,
-    facilityState: makeField(''),
-    vaMedicalFacility: makeField(''),
-    wantsInitialVaContact: false
-  },
+  isEssentialAcaCoverage: false,
+  facilityState: makeField(''),
+  vaMedicalFacility: makeField(''),
+  wantsInitialVaContact: false,
 
-  demographicInformation: {
-    isSpanishHispanicLatino: false,
-    isAmericanIndianOrAlaskanNative: false,
-    isBlackOrAfricanAmerican: false,
-    isNativeHawaiianOrOtherPacificIslander: false,
-    isAsian: false,
-    isWhite: false
-  },
+  isSpanishHispanicLatino: false,
+  isAmericanIndianOrAlaskanNative: false,
+  isBlackOrAfricanAmerican: false,
+  isNativeHawaiianOrOtherPacificIslander: false,
+  isAsian: false,
+  isWhite: false,
 
   veteranAddress: {
-    address: {
-      street: makeField(''),
-      city: makeField(''),
-      country: makeField(''),
-      state: makeField(''),
-      zipcode: makeField(''),
-    },
-    county: makeField(''),
-    email: makeField(''),
-    emailConfirmation: makeField(''),
-    homePhone: makeField(''),
-    mobilePhone: makeField('')
+    street: makeField(''),
+    city: makeField(''),
+    country: makeField(''),
+    state: makeField(''),
+    zipcode: makeField(''),
+  },
+  veteranCounty: makeField(''),
+  email: makeField(''),
+  emailConfirmation: makeField(''),
+  homePhone: makeField(''),
+  mobilePhone: makeField(''),
+
+  provideFinancialInfo: false,
+  understandsFinancialDisclosure: false,
+
+  spouseFullName: {
+    first: makeField(''),
+    middle: makeField(''),
+    last: makeField(''),
+    suffix: makeField(''),
+  },
+  spouseSocialSecurityNumber: makeField(''),
+  spouseDateOfBirth: {
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField(''),
+  },
+  dateOfMarriage: {
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField('')
+  },
+  sameAddress: false,
+  cohabitedLastYear: false,
+  provideSupportLastYear: false,
+  spouseAddress: {
+    street: makeField(''),
+    city: makeField(''),
+    country: makeField(''),
+    state: makeField(''),
+    zipcode: makeField(''),
+  },
+  spousePhone: makeField(''),
+
+  hasChildrenToReport: false,
+  children: [],
+
+  veteranGrossIncome: makeField(''),
+  veteranNetIncome: makeField(''),
+  veteranOtherIncome: makeField(''),
+  spouseGrossIncome: makeField(''),
+  spouseNetIncome: makeField(''),
+  spouseOtherIncome: makeField(''),
+  childrenIncome: [],
+
+  deductibleMedicalExpenses: makeField(''),
+  deductibleFuneralExpenses: makeField(''),
+  deductibleEducationExpenses: makeField(''),
+
+  isCoveredByHealthInsurance: false,
+  providers: [],
+
+  isMedicaidEligible: false,
+  isEnrolledMedicarePartA: false,
+  medicarePartAEffectiveDate: {
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField('')
   },
 
-  financialDisclosure: {
-    provideFinancialInfo: false,
-    understandsFinancialDisclosure: false
+  lastServiceBranch: makeField(''),
+  lastEntryDate: {
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField('')
   },
-
-  spouseInformation: {
-    spouseFullName: {
-      first: makeField(''),
-      middle: makeField(''),
-      last: makeField(''),
-      suffix: makeField(''),
-    },
-    spouseSocialSecurityNumber: makeField(''),
-    spouseDateOfBirth: {
-      month: makeField(''),
-      day: makeField(''),
-      year: makeField(''),
-    },
-    dateOfMarriage: {
-      month: makeField(''),
-      day: makeField(''),
-      year: makeField('')
-    },
-    sameAddress: false,
-    cohabitedLastYear: false,
-    provideSupportLastYear: false,
-    spouseAddress: {
-      street: makeField(''),
-      city: makeField(''),
-      country: makeField(''),
-      state: makeField(''),
-      zipcode: makeField(''),
-    },
-    spousePhone: makeField('')
+  lastDischargeDate: {
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField('')
   },
+  dischargeType: makeField(''),
 
-  childInformation: {
-    hasChildrenToReport: false,
-    children: []
-  },
+  purpleHeartRecipient: false,
+  isFormerPow: false,
+  postNov111998Combat: false,
+  disabledInLineOfDuty: false,
+  swAsiaCombat: false,
+  vietnamService: false,
+  exposedToRadiation: false,
+  radiumTreatments: false,
+  campLejeune: false
 
-  annualIncome: {
-    veteranGrossIncome: makeField(''),
-    veteranNetIncome: makeField(''),
-    veteranOtherIncome: makeField(''),
-    spouseGrossIncome: makeField(''),
-    spouseNetIncome: makeField(''),
-    spouseOtherIncome: makeField(''),
-    children: []
-  },
-
-  deductibleExpenses: {
-    deductibleMedicalExpenses: makeField(''),
-    deductibleFuneralExpenses: makeField(''),
-    deductibleEducationExpenses: makeField('')
-  },
-
-  insuranceInformation: {
-    isCoveredByHealthInsurance: false,
-    providers: []
-  },
-
-  medicareMedicaid: {
-    isMedicaidEligible: false,
-    isEnrolledMedicarePartA: false,
-    medicarePartAEffectiveDate: {
-      month: makeField(''),
-      day: makeField(''),
-      year: makeField('')
-    }
-  },
-
-  serviceInformation: {
-    lastServiceBranch: makeField(''),
-    lastEntryDate: {
-      month: makeField(''),
-      day: makeField(''),
-      year: makeField('')
-    },
-    lastDischargeDate: {
-      month: makeField(''),
-      day: makeField(''),
-      year: makeField('')
-    },
-    dischargeType: makeField('')
-  },
-
-  militaryAdditionalInfo: {
-    purpleHeartRecipient: false,
-    isFormerPow: false,
-    postNov111998Combat: false,
-    disabledInLineOfDuty: false,
-    swAsiaCombat: false,
-    vietnamService: false,
-    exposedToRadiation: false,
-    radiumTreatments: false,
-    campLejeune: false
-  }
 };
 
 function createBlankChild() {
@@ -189,9 +158,19 @@ function veteran(state = blankVeteran, action) {
 
     case ENSURE_FIELDS_INITIALIZED: {
       newState = Object.assign({}, state);
-      // TODO(awong): HACK! Assigning to the sub object assumes pathToData() returns a reference
-      // to the actual substructre such that it can be reassigned to.
-      Object.assign(pathToData(newState, action.path), dirtyAllFields(pathToData(newState, action.path)));
+
+      if (action.parentNode) {
+        action.fields.map((field) => {
+          Object.assign(newState[action.parentNode][0][field], dirtyAllFields(newState[action.parentNode][0][field]));
+          return newState;
+        });
+      } else {
+        action.fields.map((field) => {
+          Object.assign(newState[field], dirtyAllFields(newState[field]));
+          return newState;
+        });
+      }
+
       return newState;
     }
 
@@ -217,13 +196,14 @@ function veteran(state = blankVeteran, action) {
     case CREATE_CHILD_INCOME_FIELDS:
       newState = Object.assign({}, state);
       // update children income from children info
-      newState.annualIncome.children.splice(newState.childInformation.children.length);
-      for (let i = 0; i < newState.childInformation.children.length; i++) {
-        if (newState.annualIncome.children[i] === undefined) {
-          newState.annualIncome.children[i] = createBlankChild();
+      newState.childrenIncome.splice(newState.children.length);
+      for (let i = 0; i < newState.children.length; i++) {
+        if (newState.childrenIncome[i] === undefined) {
+          newState.childrenIncome[i] = createBlankChild();
         }
       }
-      Object.assign(pathToData(newState, action.path), dirtyAllFields(pathToData(newState, action.path)));
+
+      Object.assign(newState.childrenIncome, dirtyAllFields(newState.childrenIncome));
       return newState;
 
     default:
