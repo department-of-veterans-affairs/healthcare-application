@@ -117,24 +117,24 @@ describe('<Nav>', () => {
       expectActiveSectionForNavAndSubNav(nav, '/military-service/additional-information');
     });
 
-    it('/financial-assessment/financial-disclosure', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/financial-disclosure');
+    it('/household-information/financial-disclosure', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/household-information/financial-disclosure');
     });
 
-    it('/financial-assessment/spouse-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/spouse-information');
+    it('/household-information/spouse-information', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/household-information/spouse-information');
     });
 
-    it('/financial-assessment/child-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/child-information');
+    it('/household-information/child-information', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/household-information/child-information');
     });
 
-    it('/financial-assessment/annual-income', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/annual-income');
+    it('/household-information/annual-income', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/household-information/annual-income');
     });
 
-    it('/financial-assessment/deductible-expenses', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/deductible-expenses');
+    it('/household-information/deductible-expenses', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/household-information/deductible-expenses');
     });
 
     it('/review-and-submit', () => {

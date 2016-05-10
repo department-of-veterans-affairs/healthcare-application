@@ -84,7 +84,7 @@ class VaInformationSection extends React.Component {
 function mapStateToProps(state) {
   return {
     data: state.veteran,
-    isSectionComplete: state.uiState.sections['/veteran-information/va-information'].complete
+    isSectionComplete: state.uiState.sections['/va-benefits/basic-information'].complete
   };
 }
 

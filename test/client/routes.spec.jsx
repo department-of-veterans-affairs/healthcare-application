@@ -6,19 +6,19 @@ import { expect } from 'chai';
 
 import AdditionalInformationSection from '../../src/client/components/veteran-information/AdditionalInformationSection';
 import AdditionalMilitaryInformationSection from '../../src/client/components/military-service/AdditionalMilitaryInformationSection';
-import AnnualIncomeSection from '../../src/client/components/financial-assessment/AnnualIncomeSection';
-import ChildInformationSection from '../../src/client/components/financial-assessment/ChildInformationSection';
-import DeductibleExpensesSection from '../../src/client/components/financial-assessment/DeductibleExpensesSection';
+import AnnualIncomeSection from '../../src/client/components/household-information/AnnualIncomeSection';
+import ChildInformationSection from '../../src/client/components/household-information/ChildInformationSection';
+import DeductibleExpensesSection from '../../src/client/components/household-information/DeductibleExpensesSection';
 import DemographicInformationSection from '../../src/client/components/veteran-information/DemographicInformationSection';
-import FinancialDisclosureSection from '../../src/client/components/financial-assessment/FinancialDisclosureSection';
+import FinancialDisclosureSection from '../../src/client/components/household-information/FinancialDisclosureSection';
 import InsuranceInformationSection from '../../src/client/components/insurance-information/InsuranceInformationSection';
 import IntroductionSection from '../../src/client/components/IntroductionSection.jsx';
 import MedicareMedicaidSection from '../../src/client/components/insurance-information/MedicareMedicaidSection';
 import PersonalInfoSection from '../../src/client/components/veteran-information/PersonalInfoSection';
 import ReviewAndSubmitSection from '../../src/client/components/ReviewAndSubmitSection.jsx';
 import ServiceInformationSection from '../../src/client/components/military-service/ServiceInformationSection';
-import SpouseInformationSection from '../../src/client/components/financial-assessment/SpouseInformationSection';
-import VAInformationSection from '../../src/client/components/veteran-information/VAInformationSection';
+import SpouseInformationSection from '../../src/client/components/household-information/SpouseInformationSection';
+import VAInformationSection from '../../src/client/components/va-benefits/VaInformationSection';
 import VeteranAddressSection from '../../src/client/components/veteran-information/VeteranAddressSection';
 import routes from '../../src/client/routes';
 import veteran from '../../src/client/reducers/veteran';
@@ -109,28 +109,28 @@ describe('routes', () => {
       expect(tree.dive(['RouterContext']).subTree(getName(AdditionalMilitaryInformationSection))).to.be.an('object');
     });
 
-    it('/financial-assessment/financial-disclosure', () => {
-      history.replace('/financial-assessment/financial-disclosure');
+    it('/household-information/financial-disclosure', () => {
+      history.replace('/household-information/financial-disclosure');
       expect(tree.dive(['RouterContext']).subTree(getName(FinancialDisclosureSection))).to.be.an('object');
     });
 
-    it('/financial-assessment/spouse-information', () => {
-      history.replace('/financial-assessment/spouse-information');
+    it('/household-information/spouse-information', () => {
+      history.replace('/household-information/spouse-information');
       expect(tree.dive(['RouterContext']).subTree(getName(SpouseInformationSection))).to.be.an('object');
     });
 
-    it('/financial-assessment/child-information', () => {
-      history.replace('/financial-assessment/child-information');
+    it('/household-information/child-information', () => {
+      history.replace('/household-information/child-information');
       expect(tree.dive(['RouterContext']).subTree(getName(ChildInformationSection))).to.be.an('object');
     });
 
-    it('/financial-assessment/annual-income', () => {
-      history.replace('/financial-assessment/annual-income');
+    it('/household-information/annual-income', () => {
+      history.replace('/household-information/annual-income');
       expect(tree.dive(['RouterContext']).subTree(getName(AnnualIncomeSection))).to.be.an('object');
     });
 
-    it('/financial-assessment/deductible-expenses', () => {
-      history.replace('/financial-assessment/deductible-expenses');
+    it('/household-information/deductible-expenses', () => {
+      history.replace('/household-information/deductible-expenses');
       expect(tree.dive(['RouterContext']).subTree(getName(DeductibleExpensesSection))).to.be.an('object');
     });
 

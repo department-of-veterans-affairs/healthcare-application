@@ -58,39 +58,25 @@ class DeductibleExpensesSection extends React.Component {
         {notRequiredMessage}
 
         <p>
-          Report non-reimbursed medical expenses paid by you or your spouse.
-          Include expenses for medical and dental care, drugs, eyeglasses,
-          Medicare, medical insurance premiums and other health care expenses
-          paid by you for dependents and persons for whom you have a legal or
-          moral obligation to support. Do not list expenses if you expect to
-          receive reimbursement from insurance or other sources. Report expenses
-          of last illness and burial expenses, e.g., prepaid burial, paid by the
-          Veteran for spouse or dependent(s).
+          Tell us a bit about your expenses this past calendar year.
         </p>
 
         <div className="input-section">
           <ErrorableTextInput
               errorMessage={getErrorMessage(this.props.data.deductibleMedicalExpenses, message)}
-              label="Total non-reimbursed medical expenses paid by you or your spouse
-                  (e.g., payments for doctors, dentists, medications, Medicare, health
-                  insurance, hospital and nursing home) VA will calculate a deductible
-                  and the net medical expenses you may claim."
+              label="Have you or your spouse paid any non-reimbursable medical expenses this past year?"
               field={this.props.data.deductibleMedicalExpenses}
               onValueChange={(update) => {this.props.onStateChange('deductibleMedicalExpenses', update);}}/>
 
           <ErrorableTextInput
               errorMessage={getErrorMessage(this.props.data.deductibleFuneralExpenses, message)}
-              label="Amount you paid last calendar year for funeral and burial expenses
-                  for your deceased spouse or dependent child (Also enter spouse or child’s
-                  information in Spouse Information and Children Information)"
+              label="Have you paid any funeral or burial expenses for a deceased spouse or child this past year?"
               field={this.props.data.deductibleFuneralExpenses}
               onValueChange={(update) => {this.props.onStateChange('deductibleFuneralExpenses', update);}}/>
 
           <ErrorableTextInput
               errorMessage={getErrorMessage(this.props.data.deductibleEducationExpenses, message)}
-              label="Amount you paid last calendar year for your college or vocational
-              educational expenses (e.g., tuition, books, fees, materials) Do not list
-              your dependents’ educational expenses."
+              label="Have you paid for anything related to your own education (college or vocational)? Do not list your dependent's educational expenses."
               field={this.props.data.deductibleEducationExpenses}
               onValueChange={(update) => {this.props.onStateChange('deductibleEducationExpenses', update);}}/>
         </div>
@@ -108,7 +94,7 @@ class DeductibleExpensesSection extends React.Component {
 function mapStateToProps(state) {
   return {
     data: state.veteran,
-    isSectionComplete: state.uiState.sections['/financial-assessment/deductible-expenses'].complete
+    isSectionComplete: state.uiState.sections['/household-information/deductible-expenses'].complete
   };
 }
 

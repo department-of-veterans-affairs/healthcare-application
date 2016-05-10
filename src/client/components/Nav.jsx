@@ -52,11 +52,61 @@ class Nav extends React.Component {
               <li className={`${determineSectionStyles('/veteran-information/veteran-address')}`}>
                 Contact Information
               </li>
+              {/*
               <li className={`${determineSectionStyles('/veteran-information/va-information')}`}>
                 VA-Specific
               </li>
               <li className={`${determineSectionStyles('/veteran-information/additional-information')}`}>
                 Additional
+              </li>
+              */}
+            </ul>
+          </div>
+        </li>
+        <li role="presentation" className={`three ${subnavStyles}
+         ${determinePanelStyles('/military-service', '/military-service/additional-information')}`}>
+          <div>
+            <h5>Military Service</h5>
+            <ul className="usa-unstyled-list">
+              <li className={`${determineSectionStyles('/military-service/service-information')}`}>
+                Basic Information
+              </li>
+              <li className={`${determineSectionStyles('/military-service/additional-information')}`}>
+                Service History
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li role="presentation" className={`three ${subnavStyles}
+         ${determinePanelStyles('/va-benefits', '/va-benefits/basic-information')}`}>
+          <div>
+            <h5>VA Benefits</h5>
+            <ul className="usa-unstyled-list">
+              <li className={`${determineSectionStyles('/va-benefits/basic-information')}`}>
+                Basic Information
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li role="presentation" className={`four ${subnavStyles}
+         ${determinePanelStyles('/household-information', '/household-information/deductible-expenses')}`}>
+          <div>
+            <h5>Household Information</h5>
+            <ul className="usa-unstyled-list">
+              <li className={`${determineSectionStyles('/household-information/financial-disclosure')}`}>
+                Financial Disclosure
+              </li>
+              <li className={`${determineSectionStyles('/household-information/spouse-information')}`}>
+                Spouse
+              </li>
+              <li className={`${determineSectionStyles('/household-information/child-information')}`}>
+                Child
+              </li>
+              <li className={`${determineSectionStyles('/household-information/annual-income')}`}>
+                Annual Income
+              </li>
+              <li className={`${determineSectionStyles('/household-information/deductible-expenses')}`}>
+                Deductible Expenses
               </li>
             </ul>
           </div>
@@ -68,46 +118,6 @@ class Nav extends React.Component {
             <ul className="usa-unstyled-list">
               <li className={`${determineSectionStyles('/insurance-information/general')}`}>
                 General Insurance
-              </li>
-              <li className={`${determineSectionStyles('/insurance-information/medicare-medicaid')}`}>
-                Medicare/Medicaid
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li role="presentation" className={`three ${subnavStyles}
-         ${determinePanelStyles('/military-service', '/military-service/additional-information')}`}>
-          <div>
-            <h5>Military Service</h5>
-            <ul className="usa-unstyled-list">
-              <li className={`${determineSectionStyles('/military-service/service-information')}`}>
-                Service
-              </li>
-              <li className={`${determineSectionStyles('/military-service/additional-information')}`}>
-                Additional Military
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li role="presentation" className={`four ${subnavStyles}
-         ${determinePanelStyles('/financial-assessment', '/financial-assessment/deductible-expenses')}`}>
-          <div>
-            <h5>Financial Assessment</h5>
-            <ul className="usa-unstyled-list">
-              <li className={`${determineSectionStyles('/financial-assessment/financial-disclosure')}`}>
-                Financial Disclosure
-              </li>
-              <li className={`${determineSectionStyles('/financial-assessment/spouse-information')}`}>
-                Spouse
-              </li>
-              <li className={`${determineSectionStyles('/financial-assessment/child-information')}`}>
-                Child
-              </li>
-              <li className={`${determineSectionStyles('/financial-assessment/annual-income')}`}>
-                Annual Income
-              </li>
-              <li className={`${determineSectionStyles('/financial-assessment/deductible-expenses')}`}>
-                Deductible Expenses
               </li>
             </ul>
           </div>

@@ -98,7 +98,7 @@ class FinancialDisclosureSection extends React.Component {
 function mapStateToProps(state) {
   return {
     data: state.veteran,
-    isSectionComplete: state.uiState.sections['/financial-assessment/financial-disclosure'].complete
+    isSectionComplete: state.uiState.sections['/household-information/financial-disclosure'].complete
   };
 }
 

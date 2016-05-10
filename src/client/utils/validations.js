@@ -283,13 +283,13 @@ function isValidSection(completePath, sectionData) {
       return isValidAdditionalInformation(sectionData);
     case '/veteran-information/veteran-address':
       return isValidVeteranAddress(sectionData);
-    case '/financial-assessment/spouse-information':
+    case '/household-information/spouse-information':
       return isValidSpouseInformation(sectionData);
-    case '/financial-assessment/child-information':
+    case '/household-information/child-information':
       return isValidChildren(sectionData);
-    case '/financial-assessment/annual-income':
+    case '/household-information/annual-income':
       return isValidAnnualIncome(sectionData);
-    case '/financial-assessment/deductible-expenses':
+    case '/household-information/deductible-expenses':
       return isValidDeductibleExpenses(sectionData);
     case '/insurance-information/general':
       return isValidGeneralInsurance(sectionData);

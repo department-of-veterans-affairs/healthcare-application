@@ -5,9 +5,12 @@ import * as calculated from '../../store/calculated';
 import Address from '../questions/Address';
 import DateInput from '../form-elements/DateInput';
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
+import ErrorableSelect from '../form-elements/ErrorableSelect';
 import FullName from '../questions/FullName';
 import Phone from '../questions/Phone';
 import SocialSecurityNumber from '../questions/SocialSecurityNumber';
+import { maritalStatuses } from '../../utils/options-for-select.js';
+import { isNotBlank, validateIfDirty } from '../../utils/validations';
 import { veteranUpdateField, updateSpouseAddress } from '../../actions';
 
 // TODO: Consider adding question for marital status here so if user
@@ -129,6 +132,13 @@ class SpouseInformationSection extends React.Component {
       content = (<fieldset>
         <legend>Spouse's Information</legend>
         {notRequiredMessage}
+        <ErrorableSelect
+            errorMessage={validateIfDirty(this.props.data.maritalStatus, isNotBlank) ? undefined : 'Please select a marital status'}
+            label="Current Marital Status"
+            options={maritalStatuses}
+            required
+            value={this.props.data.maritalStatus}
+            onValueChange={(update) => {this.props.onStateChange('maritalStatus', update);}}/>
         {noSpouseMessage}
         <div className="input-section">
           <FullName
@@ -146,16 +156,16 @@ class SpouseInformationSection extends React.Component {
               year={this.props.data.spouseDateOfBirth.year}
               onValueChange={(update) => {this.props.onStateChange('spouseDateOfBirth', update);}}/>
 
+          <ErrorableCheckbox
+              label="Do you have the same address as your spouse?"
+              checked={this.props.data.sameAddress}
+              onValueChange={(update) => {this.props.onStateChange('sameAddress', update);}}/>
+
           <DateInput label="Date of Marriage"
               day={this.props.data.dateOfMarriage.day}
               month={this.props.data.dateOfMarriage.month}
               year={this.props.data.dateOfMarriage.year}
               onValueChange={(update) => {this.props.onStateChange('dateOfMarriage', update);}}/>
-
-          <ErrorableCheckbox
-              label="Do you have the same address as your spouse?"
-              checked={this.props.data.sameAddress}
-              onValueChange={(update) => {this.props.onStateChange('sameAddress', update);}}/>
 
           <ErrorableCheckbox
               label="Did your spouse live with you last year?"
@@ -208,7 +218,7 @@ function mapStateToProps(state) {
   return {
     data: state.veteran,
     neverMarried: calculated.neverMarried(state),
-    isSectionComplete: state.uiState.sections['/financial-assessment/spouse-information'].complete
+    isSectionComplete: state.uiState.sections['/household-information/spouse-information'].complete
   };
 }
 
