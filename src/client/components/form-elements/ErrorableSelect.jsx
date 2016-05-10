@@ -74,6 +74,8 @@ class ErrorableSelect extends React.Component {
         <select
             aria-describedby={errorSpanId}
             id={this.selectId}
+            name={this.props.name}
+            autoComplete={this.props.autocomplete}
             value={this.props.value.value}
             onChange={this.handleChange}>
           <option value=""></option>
@@ -86,6 +88,8 @@ class ErrorableSelect extends React.Component {
 
 ErrorableSelect.propTypes = {
   errorMessage: React.PropTypes.string,
+  name: React.PropTypes.string,
+  autocomplete: React.PropTypes.string,
   label: React.PropTypes.string.isRequired,
   options: React.PropTypes.arrayOf(
     React.PropTypes.oneOfType([

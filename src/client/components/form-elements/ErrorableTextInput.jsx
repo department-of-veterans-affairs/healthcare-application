@@ -61,6 +61,8 @@ class ErrorableTextInput extends React.Component {
             aria-describedby={errorSpanId}
             id={this.inputId}
             placeholder={this.props.placeholder}
+            name={this.props.name}
+            autoComplete={this.props.autocomplete}
             type="text"
             value={this.props.field.value}
             onChange={this.handleChange}/>
@@ -73,6 +75,8 @@ ErrorableTextInput.propTypes = {
   errorMessage: React.PropTypes.string,
   label: React.PropTypes.string.isRequired,
   placeholder: React.PropTypes.string,
+  name: React.PropTypes.string,
+  autocomplete: React.PropTypes.string,
   required: React.PropTypes.bool,
   field: React.PropTypes.shape({
     value: React.PropTypes.string,
