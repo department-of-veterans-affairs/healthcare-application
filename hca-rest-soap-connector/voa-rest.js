@@ -10,8 +10,18 @@ var ds = loopback.createDataSource('soap',
   {
     connector: require('loopback-connector-soap'),
     remotingEnabled: true,
-    // wsdl: 'http://vaausesrapp803.aac.va.gov:7401/voa/voaSvc?wsdl' // The url to WSDL
-    wsdl: path.join(__dirname, './voa.wsdl')
+    url: 'https://vaww.esrpre-prod.aac.va.gov/voa/voaSvc',
+    wsdl: path.join(__dirname, './voa.wsdl'),
+    security: {
+      scheme: 'ClientSSL',
+      certPath: 'healthcare.application.crt',
+      keyPath: 'healthcare.application.key'
+    },
+    wsdl_options: {
+      rejectUnauthorized: false,
+      strictSSL: false,
+      requestCert: true
+    }
   });
 
 ds.once('connected', function () {

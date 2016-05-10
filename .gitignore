@@ -1,6 +1,10 @@
 .DS_Store
 *.log
 
+*.gpg
+*.key
+*.crt
+
 #Compiled files.
 .sass-cache
 generated/
