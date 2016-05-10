@@ -3,19 +3,19 @@ export function pathToData(state, path) {
     case '/introduction':
       return {};
 
-    case '/personal-information/name-and-general-information':
+    case '/veteran-information/name-and-general-information':
       return state.nameAndGeneralInformation;
 
-    case '/personal-information/va-information':
+    case '/veteran-information/va-information':
       return state.vaInformation;
 
-    case '/personal-information/additional-information':
+    case '/veteran-information/additional-information':
       return state.additionalInformation;
 
-    case '/personal-information/demographic-information':
+    case '/veteran-information/demographic-information':
       return state.demographicInformation;
 
-    case '/personal-information/veteran-address':
+    case '/veteran-information/veteran-address':
       return state.veteranAddress;
 
     case '/insurance-information/general':

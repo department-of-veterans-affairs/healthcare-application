@@ -4,7 +4,7 @@ import SkinDeep from 'skin-deep';
 import sinon from 'sinon';
 import { assert, expect } from 'chai';
 
-import VaMedicalFacility from '../../../../src/client/components/personal-information/VaMedicalFacility';
+import VaMedicalFacility from '../../../../src/client/components/veteran-information/VaMedicalFacility';
 import { makeField } from '../../../../src/client/reducers/fields';
 
 describe('<VaMedicalFacility>', () => {

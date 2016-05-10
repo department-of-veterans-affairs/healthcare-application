@@ -275,13 +275,13 @@ function isValidServiceInformation(data) {
 
 function isValidSection(completePath, sectionData) {
   switch (completePath) {
-    case '/personal-information/name-and-general-information':
-      return isValidNameAndGeneralInformation(sectionData);
-    case '/personal-information/va-information':
+    case '/veteran-information/name-and-general-information':
+      return isValidPersonalInfoSection(sectionData);
+    case '/veteran-information/va-information':
       return isValidVaInformation(sectionData);
-    case '/personal-information/additional-information':
+    case '/veteran-information/additional-information':
       return isValidAdditionalInformation(sectionData);
-    case '/personal-information/veteran-address':
+    case '/veteran-information/veteran-address':
       return isValidVeteranAddress(sectionData);
     case '/financial-assessment/spouse-information':
       return isValidSpouseInformation(sectionData);
@@ -330,7 +330,7 @@ export {
   isValidAddress,
   isValidInsurancePolicy,
   isValidField,
-  isValidNameAndGeneralInformation,
+  isValidPersonalInfoSection,
   isValidVaInformation,
   isValidAdditionalInformation,
   isValidVeteranAddress,

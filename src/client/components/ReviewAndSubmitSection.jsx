@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import AdditionalInformationSection from './personal-information/AdditionalInformationSection';
+import AdditionalInformationSection from './veteran-information/AdditionalInformationSection';
 import AdditionalMilitaryInformationSection from './military-service/AdditionalMilitaryInformationSection';
 import AnnualIncomeSection from './financial-assessment/AnnualIncomeSection';
 import ChildInformationSection from './financial-assessment/ChildInformationSection';
 import DeductibleExpensesSection from './financial-assessment/DeductibleExpensesSection';
-import DemographicInformationSection from './personal-information/DemographicInformationSection';
+import DemographicInformationSection from './veteran-information/DemographicInformationSection';
 import FinancialDisclosureSection from './financial-assessment/FinancialDisclosureSection';
 import InsuranceInformationSection from './insurance-information/InsuranceInformationSection';
 import MedicareMedicaidSection from './insurance-information/MedicareMedicaidSection';
-import NameAndGeneralInfoSection from './personal-information/NameAndGeneralInfoSection';
+import PersonalInfoSection from './veteran-information/PersonalInfoSection';
 import ServiceInformationSection from './military-service/ServiceInformationSection';
 import SpouseInformationSection from './financial-assessment/SpouseInformationSection';
-import VAInformationSection from './personal-information/VAInformationSection';
-import VeteranAddressSection from './personal-information/VeteranAddressSection';
+import VAInformationSection from './veteran-information/VAInformationSection';
+import VeteranAddressSection from './veteran-information/VeteranAddressSection';
 
 import ReviewCollapsiblePanel from './form-elements/ReviewCollapsiblePanel';
 
@@ -45,28 +45,28 @@ class ReviewAndSubmitSection extends React.Component {
 
         {/* TODO(crew): Change names of sections to real names. */}
         <ReviewCollapsiblePanel
-            sectionLabel="NameAndGeneralInfoSection"
-            updatePath="/personal-information/name-and-general-information"
-            component={<NameAndGeneralInfoSection reviewSection/>}/>
+            sectionLabel="PersonalInfoSection"
+            updatePath="/veteran-information/name-and-general-information"
+            component={<PersonalInfoSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="DemographicInformationSection"
+            updatePath="/veteran-information/demographic-information"
+            component={<DemographicInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
             sectionLabel="VAInformationSection"
-            updatePath="/personal-information/va-information"
+            updatePath="/veteran-information/demographic-information"
             component={<VAInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
             sectionLabel="AdditionalInformationSection"
-            updatePath="/personal-information/additional-information"
+            updatePath="/veteran-information/additional-information"
             component={<AdditionalInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="DemographicInformationSection"
-            updatePath="/personal-information/demographic-information"
-            component={<DemographicInformationSection reviewSection/>}/>
-
-        <ReviewCollapsiblePanel
             sectionLabel="VeteranAddressSection"
-            updatePath="/personal-information/veteran-address"
+            updatePath="/veteran-information/veteran-address"
             component={<VeteranAddressSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel

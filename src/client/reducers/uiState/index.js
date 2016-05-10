@@ -15,27 +15,27 @@ const ui = {
       verified: false,
       fields: []
     },
-    '/personal-information/name-and-general-information': {
+    '/veteran-information/name-and-general-information': {
       complete: false,
       verified: false,
-      fields: ['veteranFullName', 'mothersMaidenName', 'veteranSocialSecurityNumber', 'gender', 'cityOfBirth', 'stateOfBirth', 'veteranDateOfBirth', 'maritalStatus']
+      fields: ['veteranFullName', 'mothersMaidenName', 'veteranSocialSecurityNumber', 'veteranDateOfBirth', 'cityOfBirth', 'stateOfBirth', 'maritalStatus']
     },
-    '/personal-information/va-information': {
+    '/veteran-information/demographic-information': {
+      complete: false,
+      verified: false,
+      fields: ['gender', 'isSpanishHispanicLatino', 'isAmericanIndianOrAlaskanNative', 'isBlackOrAfricanAmerican', 'isNativeHawaiianOrOtherPacificIslander', 'isAsian', 'isWhite']
+    },
+    '/veteran-information/va-information': {
       complete: false,
       verified: false,
       fields: ['isVaServiceConnected', 'compensableVaServiceConnected', 'receivesVaPension']
     },
-    '/personal-information/additional-information': {
+    '/veteran-information/additional-information': {
       complete: false,
       verified: false,
       fields: ['isEssentialAcaCoverage', 'facilityState', 'vaMedicalFacility', 'wantsInitialVaContact']
     },
-    '/personal-information/demographic-information': {
-      complete: false,
-      verified: false,
-      fields: ['isSpanishHispanicLatino', 'isAmericanIndianOrAlaskanNative', 'isBlackOrAfricanAmerican', 'isNativeHawaiianOrOtherPacificIslander', 'isAsian', 'isWhite']
-    },
-    '/personal-information/veteran-address': {
+    '/veteran-information/veteran-address': {
       complete: false,
       verified: false,
       fields: ['veteranAddress', 'veteranCounty', 'email', 'emailConfirmation', 'homePhone', 'mobilePhone']

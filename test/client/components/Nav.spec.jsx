@@ -81,24 +81,24 @@ describe('<Nav>', () => {
       expectActiveSection(nav, '/introduction');
     });
 
-    it('/personal-information/name-and-general-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/personal-information/name-and-general-information');
+    it('/veteran-information/name-and-general-information', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/veteran-information/name-and-general-information');
     });
 
-    it('/personal-information/va-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/personal-information/va-information');
+    it('/veteran-information/va-information', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/veteran-information/va-information');
     });
 
-    it('/personal-information/additional-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/personal-information/additional-information');
+    it('/veteran-information/additional-information', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/veteran-information/additional-information');
     });
 
-    it('/personal-information/demographic-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/personal-information/demographic-information');
+    it('/veteran-information/demographic-information', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/veteran-information/demographic-information');
     });
 
-    it('/personal-information/veteran-address', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/personal-information/veteran-address');
+    it('/veteran-information/veteran-address', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/veteran-information/veteran-address');
     });
 
     it('/insurance-information/general', () => {

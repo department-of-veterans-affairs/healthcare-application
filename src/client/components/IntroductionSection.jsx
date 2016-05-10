@@ -13,7 +13,13 @@ class IntroductionSection extends React.Component {
         <div className="row">
           <div className="small-12 columns">
             <p>
-              You are ready to begin applying for health care.
+              You are ready to apply for healthcare at the VA.
+            </p>
+            <p>
+              Fill out this application with the most accurate information you have—the more accurate it is, the more likely you are to get a rapid response.
+            </p>
+            <p>
+              All of the information you submit is used to determine your eligibility and to help us provide the best service to you.
             </p>
           </div>
         </div>

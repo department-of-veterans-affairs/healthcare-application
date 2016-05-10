@@ -39,24 +39,24 @@ class Nav extends React.Component {
     return (
       <ol className="process hca-process">
         <li role="presentation" className={`one ${subnavStyles}
-         ${determinePanelStyles('/personal-information', '/personal-information/veteran-address')}`}>
+         ${determinePanelStyles('/veteran-information', '/veteran-information/veteran-address')}`}>
           <div>
-            <h5>Personal Information</h5>
+            <h5>Veteran Information</h5>
             <ul className="usa-unstyled-list">
-              <li className={`${determineSectionStyles('/personal-information/name-and-general-information')}`}>
-                Name and General
+              <li className={`${determineSectionStyles('/veteran-information/name-and-general-information')}`}>
+                Personal Information
               </li>
-              <li className={`${determineSectionStyles('/personal-information/va-information')}`}>
+              <li className={`${determineSectionStyles('/veteran-information/demographic-information')}`}>
+                Demographic Information
+              </li>
+              <li className={`${determineSectionStyles('/veteran-information/veteran-address')}`}>
+                Contact Information
+              </li>
+              <li className={`${determineSectionStyles('/veteran-information/va-information')}`}>
                 VA-Specific
               </li>
-              <li className={`${determineSectionStyles('/personal-information/additional-information')}`}>
+              <li className={`${determineSectionStyles('/veteran-information/additional-information')}`}>
                 Additional
-              </li>
-              <li className={`${determineSectionStyles('/personal-information/demographic-information')}`}>
-                Demographic
-              </li>
-              <li className={`${determineSectionStyles('/personal-information/veteran-address')}`}>
-                Veteran Address
               </li>
             </ul>
           </div>

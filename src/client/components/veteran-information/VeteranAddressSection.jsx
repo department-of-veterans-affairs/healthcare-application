@@ -122,7 +122,7 @@ class VeteranAddressSection extends React.Component {
 function mapStateToProps(state) {
   return {
     data: state.veteran,
-    isSectionComplete: state.uiState.sections['/personal-information/veteran-address'].complete
+    isSectionComplete: state.uiState.sections['/veteran-information/veteran-address'].complete
   };
 }
 
