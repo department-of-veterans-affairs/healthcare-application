@@ -48,6 +48,6 @@ function makeServer() {
 const server = makeServer();
 const api = loopback();
 voaRest.attach(api);
-server.use('/', api);
+server.use('/hca', api);
 
 server.listen(port);
