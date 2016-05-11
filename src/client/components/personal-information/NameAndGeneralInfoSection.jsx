@@ -80,9 +80,11 @@ class NameAndGeneralInfoSection extends React.Component {
           <h4>Place of Birth</h4>
           <ErrorableTextInput label="City"
               field={this.props.data.cityOfBirth}
+              autocomplete="off"
               onValueChange={(update) => {this.props.onStateChange('cityOfBirth', update);}}/>
           <ErrorableSelect label="State"
               options={states.USA}
+              autocomplete="off"
               value={this.props.data.stateOfBirth}
               onValueChange={(update) => {this.props.onStateChange('stateOfBirth', update);}}/>
           <ErrorableSelect

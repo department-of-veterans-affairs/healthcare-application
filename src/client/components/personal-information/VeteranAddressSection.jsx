@@ -97,7 +97,7 @@ class VeteranAddressSection extends React.Component {
               label="Re-enter Email address"
               email={this.props.data.emailConfirmation}
               onValueChange={(update) => {this.props.onStateChange('emailConfirmation', update);}}/>
-
+          {/* TODO: Change validation to accept phone number without dashes. */}
           <Phone required
               label="Home telephone number"
               value={this.props.data.homePhone}

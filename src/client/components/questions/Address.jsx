@@ -56,28 +56,38 @@ class Address extends React.Component {
       <div className={isValid ? undefined : 'usa-input-error'}>
         <ErrorableTextInput errorMessage={isValid ? undefined : 'Please enter a valid street address'}
             label="Street"
+            name="address"
+            autocomplete="street-address"
             field={this.props.value.street}
             onValueChange={(update) => {this.handleChange('street', update);}}/>
 
         <ErrorableTextInput errorMessage={isValid ? undefined : 'Please enter a valid city'}
             label="City"
+            name="city"
+            autocomplete="address-level2"
             field={this.props.value.city}
             onValueChange={(update) => {this.handleChange('city', update);}}/>
 
         <ErrorableSelect errorMessage={isValid ? undefined : 'Please enter a valid country'}
             label="Country"
+            name="country"
+            autocomplete="country"
             options={countries}
             value={this.props.value.country}
             onValueChange={(update) => {this.handleChange('country', update);}}/>
 
         <ErrorableSelect errorMessage={isValid ? undefined : 'Please enter a valid state'}
             label="State"
+            name="state"
+            autocomplete="address-level1"
             options={stateList}
             value={this.props.value.state}
             onValueChange={(update) => {this.handleChange('state', update);}}/>
 
         <ErrorableTextInput errorMessage={isValid ? undefined : 'Please enter a valid ZIP code'}
             label="ZIP Code"
+            name="zip"
+            autocomplete="postal-code"
             field={this.props.value.zipcode}
             onValueChange={(update) => {this.handleChange('zipcode', update);}}/>
       </div>

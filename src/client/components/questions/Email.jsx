@@ -29,6 +29,8 @@ class Email extends React.Component {
         <ErrorableTextInput
             errorMessage={errorMessage}
             label={this.props.label}
+            name="email"
+            autocomplete="email"
             placeholder="x@x.xxx"
             field={this.props.email}
             onValueChange={this.props.onValueChange}/>

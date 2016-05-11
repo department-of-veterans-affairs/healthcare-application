@@ -10,6 +10,8 @@ import { makeField } from '../../reducers/fields.js';
  * `errorMessage` - Error string to display in the component.
  *                  When defined, indicates input has a validation error.
  * `label` - String for the input field label.
+ * `name` - String for the input name attribute.
+ * `autocomplete` - String for the input autocomplete attribute.
  * `placeholder` - placeholder string for input field.
  * `required` - boolean. Render marker indicating field is required.
  * `field` - string. Value of the input field.
@@ -61,6 +63,8 @@ class ErrorableTextInput extends React.Component {
             aria-describedby={errorSpanId}
             id={this.inputId}
             placeholder={this.props.placeholder}
+            name={this.props.name}
+            autoComplete={this.props.autocomplete}
             type="text"
             value={this.props.field.value}
             onChange={this.handleChange}/>
@@ -73,6 +77,8 @@ ErrorableTextInput.propTypes = {
   errorMessage: React.PropTypes.string,
   label: React.PropTypes.string.isRequired,
   placeholder: React.PropTypes.string,
+  name: React.PropTypes.string,
+  autocomplete: React.PropTypes.string,
   required: React.PropTypes.bool,
   field: React.PropTypes.shape({
     value: React.PropTypes.string,

@@ -154,10 +154,11 @@ class HealthCareApp extends React.Component {
         </div>
         <div className="medium-8 columns">
           <div className="progress-box">
-            <div className="form-panel">
+          {/* TODO: Change action to reflect actual action for form submission. */}
+            <form className="form-panel">
               {children}
               {buttons}
-            </div>
+            </form>
           </div>
         </div>
       </div>
