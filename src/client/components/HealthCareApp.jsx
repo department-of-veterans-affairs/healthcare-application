@@ -2,6 +2,8 @@ import React from 'react';
 import Scroll from 'react-scroll';
 import { hashHistory } from 'react-router';
 
+import fetch from 'isomorphic-fetch';
+
 import IntroductionSection from './IntroductionSection.jsx';
 import Nav from './Nav.jsx';
 import ProgressButton from './ProgressButton';
@@ -74,8 +76,10 @@ class HealthCareApp extends React.Component {
     this.scrollToTop();
   }
 
-  handleSubmit() {
+  handleSubmit(e){
+    e.preventDefault();
     const path = this.props.location.pathname;
+
     this.context.store.dispatch(updateSubmissionStatus('applicationSubmitted'));
     this.context.store.dispatch(updateCompletedStatus(path));
     this.scrollToTop();
