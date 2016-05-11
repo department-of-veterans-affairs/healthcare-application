@@ -8,9 +8,9 @@ to serve the REST API to the front-end, convert JSON structures into SOAP-friend
 connections and responses from end endpoint.
 
 #### High-level design
-[Network Diagram](diagrams/hca-top.png)
+![Network Diagram](diagrams/hca-top.png)
 
-(TODO: sequence diagram)
+![Sequence Diagram](diagrams/hca-seq-01.png)
 
 (TODO: some words to go along with these diagrams)
 
