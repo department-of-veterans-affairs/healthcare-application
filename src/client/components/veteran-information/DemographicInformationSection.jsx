@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
+import Gender from '../questions/Gender';
 import { veteranUpdateField } from '../../actions';
 
 /**
@@ -17,6 +18,10 @@ class DemographicInformationSection extends React.Component {
       content = (<div>
         <table className="review usa-table-borderless">
           <tbody>
+            <tr>
+              <td>Gender:</td>
+              <td>{this.props.data.gender.value}</td>
+            </tr>
             <tr>
               <td>Are you Spanish, Hispanic, or Latino?:</td>
               <td>{`${this.props.data.isSpanishHispanicLatino ? 'Yes' : 'No'}`}</td>
@@ -53,6 +58,9 @@ class DemographicInformationSection extends React.Component {
       content = (<fieldset>
         <legend>Demographic Information</legend>
         <div className="input-section">
+          <Gender required
+              value={this.props.data.gender}
+              onUserInput={(update) => {this.props.onStateChange('gender', update);}}/>
           <ErrorableCheckbox
               label="Are you Spanish, Hispanic, or Latino?"
               checked={this.props.data.isSpanishHispanicLatino}
@@ -101,7 +109,7 @@ class DemographicInformationSection extends React.Component {
 function mapStateToProps(state) {
   return {
     data: state.veteran,
-    isSectionComplete: state.uiState.sections['/personal-information/demographic-information'].complete
+    isSectionComplete: state.uiState.sections['/veteran-information/demographic-information'].complete
   };
 }
 

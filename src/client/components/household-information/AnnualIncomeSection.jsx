@@ -24,21 +24,9 @@ class AnnualIncomeSection extends React.Component {
   // TODO: Figure out best way to enable users to change their response to pension
   render() {
     const message = 'Please enter only numbers and a decimal point if necessary (no commas or currency signs)';
-    let notRequiredMessage;
     let childrenIncomeInput;
     let childrenIncomeReview;
     let content;
-
-    if (this.props.data.receivesVaPension === true) {
-      notRequiredMessage = (
-        <p>
-          <strong>
-            You are not required to enter financial information because you
-            indicated you are receiving a VA pension.
-          </strong>
-        </p>
-      );
-    }
 
     if (this.props.data.hasChildrenToReport === true) {
       childrenIncomeInput = (
@@ -125,53 +113,18 @@ class AnnualIncomeSection extends React.Component {
         <legend>Annual Income</legend>
 
         <div>
-          {notRequiredMessage}
 
-          <h5>Previous calendar year gross annual income of veteran, spouse and
-          dependent children</h5>
+          <h5></h5>
 
-          <p><strong>Report</strong> gross annual income from employment, except for income
-          from your farm, ranch, property or business, including information
-          about your wages, bonuses, tips, severance pay and other accrued
-          benefits and your child's income information if it could have been used
-          to pay your household expenses.
-          </p>
-
-          <p><strong>Report</strong> net income from your farm, ranch, property or business.
-          Payments on principal of mortgage and depreciation expenses are not
-          deductible.
-          </p>
-
-          <p><strong>Report</strong> other income amounts, including retirement and pension
-          income, Social Security Retirement and Social Security Disability
-          income, compensation benefits such as VA disability, unemployment,
-          Workers and black lung; cash gifts, interest and dividends, including
-          tax exempt earnings and distributions from Individual Retirement
-          Accounts (IRAs) or annuities.
-          </p>
-
-          <p><strong>Do Not Report:</strong> Donations from public or private relief,
-          welfare or charitable organizations; Supplemental Security Income (SSI)
-          and need-based payments from a government agency; profit from the
-          occasional sale of property; income tax refunds; reinvested interest on
-          Individual Retirement Accounts (IRAs); scholarship and grants for school
-          attendance; disaster relief payment; reimbursement for casualty loss;
-          loans; Radiation Compensation Exposure Act payments; Agent Orange
-          settlement payments; and Alaska Native Claim Settlement Acts Income;
-          payments to foster parents; amounts in joint accounts in banks and
-          similar institutions acquired by reason of death or other joint owner;
-          Japanese ancestry restitution under Public Law 100-383; cash surrender
-          value of life insurance; lump-sum proceeds of life insurance policy on a
-          Veteran; and payments received under the Medicare transitional
-          assistance program.
+          <p>
+          Please fill these out to the best of your knowledge. You should provide the previous calendar year gross
+          annual income of veteran, spouse and dependent children.
           </p>
 
           <h6>Definitions</h6>
-          <p><strong>Gross annual income</strong>: from employment (wages, bonuses, tips, etc.)
-          excluding income from your farm, ranch, property or business</p>
-          <p><strong>Net income</strong>: from your farm, ranch, property or business.</p>
-          <p><strong>Other income</strong>: possibly from Social Security, compensation, pension,
-          interest, and dividends. Exclude welfare.</p>
+          <p><strong>Gross annual income</strong>: Are you are currently employeed? If so, what was your gross (pre-tax) annual income last year?</p>
+          <p><strong>Net income</strong>: Do you get income from a farm, ranch, property or business? If so, what was your net income from your farm, ranch, property, or business last year?</p>
+          <p><strong>Other income</strong>: Do you receive income from anywhere else? (social security, compensation, pension, interest, dividens) If so, what was your gross income from these sources last year?</p>
 
           <div className="input-section">
             <h6>Veteran</h6>
@@ -232,7 +185,7 @@ class AnnualIncomeSection extends React.Component {
 function mapStateToProps(state) {
   return {
     data: state.veteran,
-    isSectionComplete: state.uiState.sections['/financial-assessment/annual-income'].complete
+    isSectionComplete: state.uiState.sections['/household-information/annual-income'].complete
   };
 }
 
@@ -242,7 +195,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(veteranUpdateField(field, update));
     },
     initializeChildIncomeFields: () => {
-      dispatch(createChildIncomeFields('/financial-assessment/annual-income'));
+      dispatch(createChildIncomeFields('/household-information/annual-income'));
     }
   };
 }

@@ -75,7 +75,7 @@ class MedicareMedicaidSection extends React.Component {
 function mapStateToProps(state) {
   return {
     data: state.veteran,
-    isSectionComplete: state.uiState.sections['/insurance-information/medicare-medicaid'].complete
+    isSectionComplete: state.uiState.sections['/insurance-information/medicare'].complete
   };
 }
 

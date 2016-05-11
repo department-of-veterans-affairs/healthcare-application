@@ -3,19 +3,19 @@ export function pathToData(state, path) {
     case '/introduction':
       return {};
 
-    case '/personal-information/name-and-general-information':
+    case '/veteran-information/personal-information':
       return state.nameAndGeneralInformation;
 
-    case '/personal-information/va-information':
+    case '/veteran-information/va-information':
       return state.vaInformation;
 
-    case '/personal-information/additional-information':
+    case '/insurance-information/additional-information':
       return state.additionalInformation;
 
-    case '/personal-information/demographic-information':
+    case '/veteran-information/demographic-information':
       return state.demographicInformation;
 
-    case '/personal-information/veteran-address':
+    case '/veteran-information/veteran-address':
       return state.veteranAddress;
 
     case '/insurance-information/general':
@@ -30,19 +30,19 @@ export function pathToData(state, path) {
     case '/military-service/additional-information':
       return state.militaryAdditionalInfo;
 
-    case '/financial-assessment/financial-disclosure':
+    case '/household-information/financial-disclosure':
       return state.financialDisclosure;
 
-    case '/financial-assessment/spouse-information':
+    case '/household-information/spouse-information':
       return state.spouseInformation;
 
-    case '/financial-assessment/child-information':
+    case '/household-information/child-information':
       return state.childInformation;
 
-    case '/financial-assessment/annual-income':
+    case '/household-information/annual-income':
       return state.annualIncome;
 
-    case '/financial-assessment/deductible-expenses':
+    case '/household-information/deductible-expenses':
       return state.deductibleExpenses;
 
     case '/review-and-submit':

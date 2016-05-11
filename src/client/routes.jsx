@@ -1,22 +1,23 @@
 import React from 'react';
 import { Route } from 'react-router';
 
-import AdditionalInformationSection from './components/personal-information/AdditionalInformationSection';
+import AdditionalInformationSection from './components/insurance-information/AdditionalInformationSection';
 import AdditionalMilitaryInformationSection from './components/military-service/AdditionalMilitaryInformationSection';
-import AnnualIncomeSection from './components/financial-assessment/AnnualIncomeSection';
-import ChildInformationSection from './components/financial-assessment/ChildInformationSection';
-import DeductibleExpensesSection from './components/financial-assessment/DeductibleExpensesSection';
-import DemographicInformationSection from './components/personal-information/DemographicInformationSection';
-import FinancialDisclosureSection from './components/financial-assessment/FinancialDisclosureSection';
+import AnnualIncomeSection from './components/household-information/AnnualIncomeSection';
+import ChildInformationSection from './components/household-information/ChildInformationSection';
+import DeductibleExpensesSection from './components/household-information/DeductibleExpensesSection';
+import DemographicInformationSection from './components/veteran-information/DemographicInformationSection';
+import FinancialDisclosureSection from './components/household-information/FinancialDisclosureSection';
 import InsuranceInformationSection from './components/insurance-information/InsuranceInformationSection';
 import IntroductionSection from './components/IntroductionSection.jsx';
 import MedicareMedicaidSection from './components/insurance-information/MedicareMedicaidSection';
-import NameAndGeneralInfoSection from './components/personal-information/NameAndGeneralInfoSection';
+import PersonalInfoSection from './components/veteran-information/PersonalInfoSection';
 import ReviewAndSubmitSection from './components/ReviewAndSubmitSection.jsx';
 import ServiceInformationSection from './components/military-service/ServiceInformationSection';
-import SpouseInformationSection from './components/financial-assessment/SpouseInformationSection';
-import VAInformationSection from './components/personal-information/VAInformationSection';
-import VeteranAddressSection from './components/personal-information/VeteranAddressSection';
+import SpouseInformationSection from './components/household-information/SpouseInformationSection';
+import VeteranAddressSection from './components/veteran-information/VeteranAddressSection';
+import VAInformationSection from './components/va-benefits/VAInformationSection';
+
 
 const routes = [
   // Introduction route.
@@ -27,37 +28,19 @@ const routes = [
 
   // Personal Information routes.
   <Route
-      component={NameAndGeneralInfoSection}
-      key="/personal-information/name-and-general-information"
-      path="/personal-information/name-and-general-information"/>,
-  <Route
-      component={VAInformationSection}
-      key="/personal-information/va-information"
-      path="/personal-information/va-information"/>,
-  <Route
-      component={AdditionalInformationSection}
-      key="/personal-information/additional-information"
-      path="/personal-information/additional-information"/>,
+      component={PersonalInfoSection}
+      key="/veteran-information/personal-information"
+      path="/veteran-information/personal-information"/>,
   <Route
       component={DemographicInformationSection}
-      key="/personal-information/demographic-information"
-      path="/personal-information/demographic-information"/>,
+      key="/veteran-information/demographic-information"
+      path="/veteran-information/demographic-information"/>,
   <Route
       component={VeteranAddressSection}
-      key="/personal-information/veteran-address"
-      path="/personal-information/veteran-address"/>,
+      key="/veteran-information/veteran-address"
+      path="/veteran-information/veteran-address"/>,
 
-  // Insurance Information routes.
-  <Route
-      component={InsuranceInformationSection}
-      key="/insurance-information/general"
-      path="/insurance-information/general"/>,
-  <Route
-      component={MedicareMedicaidSection}
-      key="/insurance-information/medicare-medicaid"
-      path="/insurance-information/medicare-medicaid"/>,
-
-  // Military Service routes.
+// Military Service routes.
   <Route
       component={ServiceInformationSection}
       key="/military-service/service-information"
@@ -67,27 +50,47 @@ const routes = [
       key="/military-service/additional-information"
       path="/military-service/additional-information"/>,
 
-  // Financial Assessment routes.
+  // VA Benefits routes.
+  <Route
+      component={VAInformationSection}
+      key="/va-benefits/basic-information"
+      path="/va-benefits/basic-information"/>,
+
+ // Household Information routes.
   <Route
       component={FinancialDisclosureSection}
-      key="/financial-assessment/financial-disclosure"
-      path="/financial-assessment/financial-disclosure"/>,
+      key="/household-information/financial-disclosure"
+      path="/household-information/financial-disclosure"/>,
   <Route
       component={SpouseInformationSection}
-      key="/financial-assessment/spouse-information"
-      path="/financial-assessment/spouse-information"/>,
+      key="/household-information/spouse-information"
+      path="/household-information/spouse-information"/>,
   <Route
       component={ChildInformationSection}
-      key="/financial-assessment/child-information"
-      path="/financial-assessment/child-information"/>,
+      key="/household-information/child-information"
+      path="/household-information/child-information"/>,
   <Route
       component={AnnualIncomeSection}
-      key="/financial-assessment/annual-income"
-      path="/financial-assessment/annual-income"/>,
+      key="/household-information/annual-income"
+      path="/household-information/annual-income"/>,
   <Route
       component={DeductibleExpensesSection}
-      key="/financial-assessment/deductible-expenses"
-      path="/financial-assessment/deductible-expenses"/>,
+      key="/household-information/deductible-expenses"
+      path="/household-information/deductible-expenses"/>,
+
+// Insurance Information routes.
+  <Route
+      component={MedicareMedicaidSection}
+      key="/insurance-information/medicare"
+      path="/insurance-information/medicare"/>,
+  <Route
+      component={InsuranceInformationSection}
+      key="/insurance-information/general"
+      path="/insurance-information/general"/>,
+  <Route
+      component={AdditionalInformationSection}
+      key="/insurance-information/va-facility"
+      path="/insurance-information/va-facility"/>,
 
   // Review and Submit route.
   <Route

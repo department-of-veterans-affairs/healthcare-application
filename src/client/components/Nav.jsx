@@ -39,80 +39,88 @@ class Nav extends React.Component {
     return (
       <ol className="process hca-process">
         <li role="presentation" className={`one ${subnavStyles}
-         ${determinePanelStyles('/personal-information', '/personal-information/veteran-address')}`}>
+         ${determinePanelStyles('/veteran-information', '/veteran-information/veteran-address')}`}>
           <div>
-            <h5>Personal Information</h5>
+            <h5>Veteran Information</h5>
             <ul className="usa-unstyled-list">
-              <li className={`${determineSectionStyles('/personal-information/name-and-general-information')}`}>
-                Name and General
+              <li className={`${determineSectionStyles('/veteran-information/personal-information')}`}>
+                Personal Information
               </li>
-              <li className={`${determineSectionStyles('/personal-information/va-information')}`}>
-                VA-Specific
+              <li className={`${determineSectionStyles('/veteran-information/demographic-information')}`}>
+                Demographic Information
               </li>
-              <li className={`${determineSectionStyles('/personal-information/additional-information')}`}>
-                Additional
-              </li>
-              <li className={`${determineSectionStyles('/personal-information/demographic-information')}`}>
-                Demographic
-              </li>
-              <li className={`${determineSectionStyles('/personal-information/veteran-address')}`}>
-                Veteran Address
+              <li className={`${determineSectionStyles('/veteran-information/veteran-address')}`}>
+                Contact Information
               </li>
             </ul>
           </div>
         </li>
         <li role="presentation" className={`two ${subnavStyles}
-         ${determinePanelStyles('/insurance-information', '/insurance-information/medicare-medicaid')}`}>
-          <div>
-            <h5>Insurance Information</h5>
-            <ul className="usa-unstyled-list">
-              <li className={`${determineSectionStyles('/insurance-information/general')}`}>
-                General Insurance
-              </li>
-              <li className={`${determineSectionStyles('/insurance-information/medicare-medicaid')}`}>
-                Medicare/Medicaid
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li role="presentation" className={`three ${subnavStyles}
          ${determinePanelStyles('/military-service', '/military-service/additional-information')}`}>
           <div>
             <h5>Military Service</h5>
             <ul className="usa-unstyled-list">
               <li className={`${determineSectionStyles('/military-service/service-information')}`}>
-                Service
+                Basic Information
               </li>
               <li className={`${determineSectionStyles('/military-service/additional-information')}`}>
-                Additional Military
+                Service History
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li role="presentation" className={`three ${subnavStyles}
+         ${determinePanelStyles('/va-benefits', '/va-benefits/basic-information')}`}>
+          <div>
+            <h5>VA Benefits</h5>
+            <ul className="usa-unstyled-list">
+              <li className={`${determineSectionStyles('/va-benefits/basic-information')}`}>
+                Basic Information
               </li>
             </ul>
           </div>
         </li>
         <li role="presentation" className={`four ${subnavStyles}
-         ${determinePanelStyles('/financial-assessment', '/financial-assessment/deductible-expenses')}`}>
+         ${determinePanelStyles('/household-information', '/household-information/deductible-expenses')}`}>
           <div>
-            <h5>Financial Assessment</h5>
+            <h5>Household Information</h5>
             <ul className="usa-unstyled-list">
-              <li className={`${determineSectionStyles('/financial-assessment/financial-disclosure')}`}>
+              <li className={`${determineSectionStyles('/household-information/financial-disclosure')}`}>
                 Financial Disclosure
               </li>
-              <li className={`${determineSectionStyles('/financial-assessment/spouse-information')}`}>
+              <li className={`${determineSectionStyles('/household-information/spouse-information')}`}>
                 Spouse
               </li>
-              <li className={`${determineSectionStyles('/financial-assessment/child-information')}`}>
-                Child
+              <li className={`${determineSectionStyles('/household-information/child-information')}`}>
+                Children
               </li>
-              <li className={`${determineSectionStyles('/financial-assessment/annual-income')}`}>
+              <li className={`${determineSectionStyles('/household-information/annual-income')}`}>
                 Annual Income
               </li>
-              <li className={`${determineSectionStyles('/financial-assessment/deductible-expenses')}`}>
+              <li className={`${determineSectionStyles('/household-information/deductible-expenses')}`}>
                 Deductible Expenses
               </li>
             </ul>
           </div>
         </li>
-        <li role="presentation" className={`five last ${subnavStyles}
+        <li role="presentation" className={`five ${subnavStyles}
+         ${determinePanelStyles('/insurance-information', '/insurance-information/va-facility')}`}>
+          <div>
+            <h5>Insurance Information</h5>
+            <ul className="usa-unstyled-list">
+              <li className={`${determineSectionStyles('/insurance-information/medicare')}`}>
+                Medicare/Medicaid
+              </li>
+              <li className={`${determineSectionStyles('/insurance-information/general')}`}>
+                General Insurance
+              </li>
+              <li className={`${determineSectionStyles('/insurance-information/va-facility')}`}>
+                VA Medical Facility
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li role="presentation" className={`six last ${subnavStyles}
          ${determinePanelStyles('/review-and-submit', '/review-and-submit')}`}>
           <div>
             <h5>Review</h5>

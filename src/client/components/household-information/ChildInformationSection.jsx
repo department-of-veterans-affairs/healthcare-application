@@ -43,7 +43,6 @@ class ChildInformationSection extends React.Component {
   }
 
   render() {
-    let notRequiredMessage;
     let childrenContent;
     let content;
     let children;
@@ -134,7 +133,7 @@ class ChildInformationSection extends React.Component {
               data={this.props.data}
               initializeCurrentElement={() => {this.props.initializeFields(fields);}}
               onRowsUpdate={(update) => {this.props.onStateChange('children', update);}}
-              path="/financial-assessment/child-information"
+              path="/household-information/child-information"
               rows={this.props.data.children}/>
         </div>
       );
@@ -156,8 +155,7 @@ class ChildInformationSection extends React.Component {
       content = (<fieldset>
         <legend>Children Information</legend>
         <div>
-          {notRequiredMessage}
-
+          <p>Please fill these out to the best of your knowledge. The more accurate your responses, the faster your application can proceed.</p>
           <div className="input-section">
             <ErrorableCheckbox
                 label="Do you have any children to report?"
@@ -180,7 +178,7 @@ class ChildInformationSection extends React.Component {
 function mapStateToProps(state) {
   return {
     data: state.veteran,
-    isSectionComplete: state.uiState.sections['/financial-assessment/child-information'].complete
+    isSectionComplete: state.uiState.sections['/household-information/child-information'].complete
   };
 }
 
