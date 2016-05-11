@@ -8,6 +8,8 @@ function attach(app) {
     c7401: 'http://vaausesrapp803.aac.va.gov:7401/voa/voaSvc',
     e6401: 'https://vaausesrapp803.aac.va.gov:6401/voa/voaSvc',
     e8432: 'https://vaww.esrdev30.aac.va.gov:8432/voa/voaSvc',
+    preprod: 'https://vaww.esrpre-prod.aac.va.gov/voa/voaSvc',
+    prod: 'https://vaww.esr.aac.va.gov/voa/voaSvc'
   };
 
   const ds = loopback.createDataSource('soap',
@@ -15,7 +17,17 @@ function attach(app) {
       connector: require('loopback-connector-soap'),
       remotingEnabled: true,
       wsdl: path.join(__dirname, './voa.wsdl'),
-      url: endpoint.e8432
+      url: endpoint.preprod,
+      security: {
+        scheme: 'ClientSSL',
+        certPath: path.join(__dirname, './healthcare.application.crt'),
+        keyPath: path.join(__dirname, './healthcare.application.key')
+      },
+      wsdl_options: {
+        rejectUnauthorized: false,
+        strictSSL: false,
+        requestCert: true
+      }
     });
 
   ds.once('connected', () => {

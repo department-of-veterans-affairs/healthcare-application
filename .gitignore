@@ -4,6 +4,8 @@
 *.gpg
 *.key
 *.crt
+jsconfig.json
+.vscode/
 
 #Compiled files.
 .sass-cache
