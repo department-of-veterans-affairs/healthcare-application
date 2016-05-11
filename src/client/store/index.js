@@ -3,7 +3,7 @@ export function pathToData(state, path) {
     case '/introduction':
       return {};
 
-    case '/veteran-information/name-and-general-information':
+    case '/veteran-information/personal-information':
       return state.nameAndGeneralInformation;
 
     case '/veteran-information/va-information':

@@ -24,21 +24,9 @@ class AnnualIncomeSection extends React.Component {
   // TODO: Figure out best way to enable users to change their response to pension
   render() {
     const message = 'Please enter only numbers and a decimal point if necessary (no commas or currency signs)';
-    let notRequiredMessage;
     let childrenIncomeInput;
     let childrenIncomeReview;
     let content;
-
-    if (this.props.data.receivesVaPension === true) {
-      notRequiredMessage = (
-        <p>
-          <strong>
-            You are not required to enter financial information because you
-            indicated you are receiving a VA pension.
-          </strong>
-        </p>
-      );
-    }
 
     if (this.props.data.hasChildrenToReport === true) {
       childrenIncomeInput = (
@@ -125,21 +113,18 @@ class AnnualIncomeSection extends React.Component {
         <legend>Annual Income</legend>
 
         <div>
-          {notRequiredMessage}
 
-          <h5>Previous calendar year gross annual income of veteran, spouse and
-          dependent children</h5>
+          <h5></h5>
 
           <p>
-          Please fill these out to the best of your knowledge. The more accurate your responses,
-           the faster your application can proceed. Your most recent tax filing will have all the
-            information you need in it.
+          Please fill these out to the best of your knowledge. You should provide the previous calendar year gross
+          annual income of veteran, spouse and dependent children.
           </p>
 
           <h6>Definitions</h6>
-          <p><strong>Gross annual income</strong>: Are you currently employeed? + What was your gross annual income last year?</p>
-          <p><strong>Net income</strong>: Do you get income from a farm, ranch, property or business? + What was your net income from your farm, ranch, property, or business last year?</p>
-          <p><strong>Other income</strong>: Do you receive income from anywhere else? (social security, compensation, pension, interest, dividens) + What was your gross income from these sources last year?</p>
+          <p><strong>Gross annual income</strong>: Are you are currently employeed? If so, what was your gross (pre-tax) annual income last year?</p>
+          <p><strong>Net income</strong>: Do you get income from a farm, ranch, property or business? If so, what was your net income from your farm, ranch, property, or business last year?</p>
+          <p><strong>Other income</strong>: Do you receive income from anywhere else? (social security, compensation, pension, interest, dividens) If so, what was your gross income from these sources last year?</p>
 
           <div className="input-section">
             <h6>Veteran</h6>

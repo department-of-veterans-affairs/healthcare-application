@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import DateInput from '../form-elements/DateInput';
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import GrowableTable from '../form-elements/GrowableTable.jsx';
-import AdditionalInformationSection from './AdditionalInformationSection.jsx';
 import Provider from './Provider.jsx';
 import { veteranUpdateField, ensureFieldsInitialized } from '../../actions';
 
@@ -29,7 +27,6 @@ class InsuranceInformationSection extends React.Component {
   render() {
     let providersTable;
     let content;
-    let medicarePartA;
     let providers;
     const fields = ['insuranceName', 'insurancePolicyHolderName', 'insurancePolicyNumber', 'insuranceGroupCode'];
 
@@ -81,28 +78,8 @@ class InsuranceInformationSection extends React.Component {
               <td>{insuranceGroupCode}</td>
             </tr>
           </tbody>
-          <tbody>
-            <tr>
-              <td>Are you eligible for Medicaid?:</td>
-              <td>{`${this.props.data.isMedicaidEligible ? 'Yes' : 'No'}`}</td>
-            </tr>
-            <tr>
-              <td>Are you enrolled in Medicare Part A (hospital insurance):</td>
-              <td>{`${this.props.data.isEnrolledMedicarePartA ? 'Yes' : 'No'}`}</td>
-            </tr>
-            {medicarePartA}
-          </tbody>
         </table>);
       });
-    }
-
-    if (this.props.data.isEnrolledMedicarePartA) {
-      medicarePartA = (<tr>
-        <td>If so, what is your Medicare Part A effective date?:</td>
-        <td>{this.props.data.medicarePartAEffectiveDate.month.value}
-        /{this.props.data.medicarePartAEffectiveDate.day.value}/
-        {this.props.data.medicarePartAEffectiveDate.year.value}</td>
-      </tr>);
     }
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
@@ -126,27 +103,6 @@ class InsuranceInformationSection extends React.Component {
             onValueChange={(update) => {this.props.onStateChange('isCoveredByHealthInsurance', update);}}/>
         <hr/>
         {providersTable}
-        <div className="input-section">
-          <ErrorableCheckbox
-              label="Are you eligible for Medicaid?"
-              checked={this.props.data.isMedicaidEligible}
-              onValueChange={(update) => {this.props.onStateChange('isMedicaidEligible', update);}}/>
-          <div>Medicaid is a United States Health program for eligible individuals and
-          families with low income and resources.</div>
-          <ErrorableCheckbox
-              label="Are you enrolled in Medicare Part A (hospital insurance)"
-              checked={this.props.data.isEnrolledMedicarePartA}
-              onValueChange={(update) => {this.props.onStateChange('isEnrolledMedicarePartA', update);}}/>
-          <div>Medicare is a social insurance program administered by the United
-          States government, providing health insurance coverage to people aged
-          65 and over, or who meet special criteria.</div>
-          <DateInput label="If so, what is your Medicare Part A effective date?"
-              day={this.props.data.medicarePartAEffectiveDate.day}
-              month={this.props.data.medicarePartAEffectiveDate.month}
-              year={this.props.data.medicarePartAEffectiveDate.year}
-              onValueChange={(update) => {this.props.onStateChange('medicarePartAEffectiveDate', update);}}/>
-        </div>
-        <AdditionalInformationSection/>
       </fieldset>);
     }
 

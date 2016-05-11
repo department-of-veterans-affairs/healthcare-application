@@ -43,7 +43,7 @@ class Nav extends React.Component {
           <div>
             <h5>Veteran Information</h5>
             <ul className="usa-unstyled-list">
-              <li className={`${determineSectionStyles('/veteran-information/name-and-general-information')}`}>
+              <li className={`${determineSectionStyles('/veteran-information/personal-information')}`}>
                 Personal Information
               </li>
               <li className={`${determineSectionStyles('/veteran-information/demographic-information')}`}>
@@ -55,7 +55,7 @@ class Nav extends React.Component {
             </ul>
           </div>
         </li>
-        <li role="presentation" className={`three ${subnavStyles}
+        <li role="presentation" className={`two ${subnavStyles}
          ${determinePanelStyles('/military-service', '/military-service/additional-information')}`}>
           <div>
             <h5>Military Service</h5>
@@ -92,7 +92,7 @@ class Nav extends React.Component {
                 Spouse
               </li>
               <li className={`${determineSectionStyles('/household-information/child-information')}`}>
-                Child
+                Children
               </li>
               <li className={`${determineSectionStyles('/household-information/annual-income')}`}>
                 Annual Income
@@ -103,18 +103,24 @@ class Nav extends React.Component {
             </ul>
           </div>
         </li>
-        <li role="presentation" className={`two ${subnavStyles}
-         ${determinePanelStyles('/insurance-information', '/insurance-information/medicare-medicaid')}`}>
+        <li role="presentation" className={`five ${subnavStyles}
+         ${determinePanelStyles('/insurance-information', '/insurance-information/va-facility')}`}>
           <div>
             <h5>Insurance Information</h5>
             <ul className="usa-unstyled-list">
+              <li className={`${determineSectionStyles('/insurance-information/medicare')}`}>
+                Medicare/Medicaid
+              </li>
               <li className={`${determineSectionStyles('/insurance-information/general')}`}>
                 General Insurance
+              </li>
+              <li className={`${determineSectionStyles('/insurance-information/va-facility')}`}>
+                VA Medical Facility
               </li>
             </ul>
           </div>
         </li>
-        <li role="presentation" className={`five last ${subnavStyles}
+        <li role="presentation" className={`six last ${subnavStyles}
          ${determinePanelStyles('/review-and-submit', '/review-and-submit')}`}>
           <div>
             <h5>Review</h5>

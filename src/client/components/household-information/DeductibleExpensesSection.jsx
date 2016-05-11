@@ -58,25 +58,25 @@ class DeductibleExpensesSection extends React.Component {
         {notRequiredMessage}
 
         <p>
-          Tell us a bit about your expenses this past calendar year.
+          Tell us a bit about your expenses this past calendar year. Enter information for any expenses that apply to you.
         </p>
 
         <div className="input-section">
           <ErrorableTextInput
               errorMessage={getErrorMessage(this.props.data.deductibleMedicalExpenses, message)}
-              label="Have you or your spouse paid any non-reimbursable medical expenses this past year?"
+              label="How much have you or your spouse paid in non-reimbursable medical expenses this past year?"
               field={this.props.data.deductibleMedicalExpenses}
               onValueChange={(update) => {this.props.onStateChange('deductibleMedicalExpenses', update);}}/>
 
           <ErrorableTextInput
               errorMessage={getErrorMessage(this.props.data.deductibleFuneralExpenses, message)}
-              label="Have you paid any funeral or burial expenses for a deceased spouse or child this past year?"
+              label="How much have you paid in funeral or burial expenses for a deceased spouse or child this past year?"
               field={this.props.data.deductibleFuneralExpenses}
               onValueChange={(update) => {this.props.onStateChange('deductibleFuneralExpenses', update);}}/>
 
           <ErrorableTextInput
               errorMessage={getErrorMessage(this.props.data.deductibleEducationExpenses, message)}
-              label="Have you paid for anything related to your own education (college or vocational)? Do not list your dependent's educational expenses."
+              label="How much have you paid for anything related to your own education (college or vocational) this past year? Do not list your dependent's educational expenses."
               field={this.props.data.deductibleEducationExpenses}
               onValueChange={(update) => {this.props.onStateChange('deductibleEducationExpenses', update);}}/>
         </div>

@@ -280,7 +280,7 @@ function isValidServiceInformation(data) {
 
 function isValidSection(completePath, sectionData) {
   switch (completePath) {
-    case '/veteran-information/name-and-general-information':
+    case '/veteran-information/personal-information':
       return isValidPersonalInfoSection(sectionData);
     case '/veteran-information/demographic-information':
       return isValidDemographicInformation(sectionData);

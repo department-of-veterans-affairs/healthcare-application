@@ -15,10 +15,10 @@ const ui = {
       verified: false,
       fields: []
     },
-    '/veteran-information/name-and-general-information': {
+    '/veteran-information/personal-information': {
       complete: false,
       verified: false,
-      fields: ['veteranFullName', 'mothersMaidenName', 'veteranSocialSecurityNumber', 'veteranDateOfBirth', 'cityOfBirth', 'stateOfBirth', 'maritalStatus']
+      fields: ['veteranFullName', 'mothersMaidenName', 'veteranSocialSecurityNumber', 'veteranDateOfBirth', 'cityOfBirth', 'stateOfBirth']
     },
     '/veteran-information/demographic-information': {
       complete: false,
@@ -45,30 +45,15 @@ const ui = {
       verified: false,
       fields: ['isVaServiceConnected', 'compensableVaServiceConnected', 'receivesVaPension']
     },
-    '/insurance-information/additional-information': {
-      complete: false,
-      verified: false,
-      fields: ['isEssentialAcaCoverage', 'facilityState', 'vaMedicalFacility', 'wantsInitialVaContact']
-    },
-    '/insurance-information/general': {
-      complete: false,
-      verified: false,
-      fields: ['isCoveredByHealthInsurance', 'providers']
-    },
-    '/insurance-information/medicare-medicaid': {
-      complete: false,
-      verified: false,
-      fields: ['isMedicaidEligible', 'isEnrolledMedicarePartA', 'medicarePartAEffectiveDate']
-    },
     '/household-information/financial-disclosure': {
       complete: false,
       verified: false,
       fields: ['provideFinancialInfo', 'understandsFinancialDisclosure']
     },
     '/household-information/spouse-information': {
-      completed: false,
+      complete: false,
       verified: false,
-      fields: ['spouseFullName', 'spouseSocialSecurityNumber', 'spouseDateOfBirth', 'dateOfMarriage', 'sameAddress', 'cohabitedLastYear', 'provideSupportLastYear', 'spouseAddress', 'spousePhone']
+      fields: ['maritalStatus', 'spouseFullName', 'spouseSocialSecurityNumber', 'spouseDateOfBirth', 'dateOfMarriage', 'sameAddress', 'cohabitedLastYear', 'provideSupportLastYear', 'spouseAddress', 'spousePhone']
     },
     '/household-information/child-information': {
       complete: false,
@@ -84,6 +69,21 @@ const ui = {
       complete: false,
       verified: false,
       fields: ['deductibleMedicalExpenses', 'deductibleFuneralExpenses', 'deductibleEducationExpenses']
+    },
+    '/insurance-information/medicare': {
+      complete: false,
+      verified: false,
+      fields: ['isMedicaidEligible', 'isEnrolledMedicarePartA', 'medicarePartAEffectiveDate']
+    },
+    '/insurance-information/general': {
+      complete: false,
+      verified: false,
+      fields: ['isCoveredByHealthInsurance', 'providers']
+    },
+    '/insurance-information/va-facility': {
+      complete: false,
+      verified: false,
+      fields: ['isEssentialAcaCoverage', 'facilityState', 'vaMedicalFacility', 'wantsInitialVaContact']
     },
     '/review-and-submit': {
       complete: false,

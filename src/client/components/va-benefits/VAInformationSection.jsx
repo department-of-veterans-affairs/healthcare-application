@@ -11,7 +11,7 @@ import { veteranUpdateField } from '../../actions';
  * `isSectionComplete` - Boolean. Marks the section as completed. Provides styles for completed sections.
  * `reviewSection` - Boolean. Hides components that are only needed for ReviewAndSubmitSection.
  */
-class VaInformationSection extends React.Component {
+class VAInformationSection extends React.Component {
   render() {
     let content;
 
@@ -97,6 +97,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 // TODO(awong): Remove the pure: false once we start using ImmutableJS.
-export default connect(mapStateToProps, mapDispatchToProps, undefined, { pure: false })(VaInformationSection);
-export { VaInformationSection };
+export default connect(mapStateToProps, mapDispatchToProps, undefined, { pure: false })(VAInformationSection);
+export { VAInformationSection };
 

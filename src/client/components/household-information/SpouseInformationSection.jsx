@@ -24,22 +24,10 @@ import { veteranUpdateField, updateSpouseAddress } from '../../actions';
  */
 class SpouseInformationSection extends React.Component {
   render() {
-    let notRequiredMessage;
     let noSpouseMessage;
     let content;
     let spouseAddressSummary;
     let spouseAddressFields;
-
-    if (this.props.data.receivesVaPension) {
-      notRequiredMessage = (
-        <p>
-          <strong>
-            You are not required to enter financial information because you
-            indicated you are receiving a VA pension.
-          </strong>
-        </p>
-      );
-    }
 
     if (!this.props.data.sameAddress) {
       spouseAddressSummary = (
@@ -131,7 +119,7 @@ class SpouseInformationSection extends React.Component {
     } else {
       content = (<fieldset>
         <legend>Spouse's Information</legend>
-        {notRequiredMessage}
+        <p>Please fill these out to the best of your knowledge. The more accurate your responses, the faster your application can proceed.</p>
         <ErrorableSelect
             errorMessage={validateIfDirty(this.props.data.maritalStatus, isNotBlank) ? undefined : 'Please select a marital status'}
             label="Current Marital Status"
@@ -182,17 +170,6 @@ class SpouseInformationSection extends React.Component {
         </div>
         {spouseAddressFields}
       </fieldset>);
-    }
-
-    if (this.props.data.receivesVaPension === true) {
-      notRequiredMessage = (
-        <p>
-          <strong>
-            You are not required to enter financial information because you
-            indicated you are receiving a VA pension.
-          </strong>
-        </p>
-      );
     }
 
     if (this.props.neverMarried === true) {

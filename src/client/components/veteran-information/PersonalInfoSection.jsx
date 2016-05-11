@@ -89,7 +89,7 @@ class PersonalInfoSection extends React.Component {
 function mapStateToProps(state) {
   return {
     data: state.veteran,
-    isSectionComplete: state.uiState.sections['/veteran-information/name-and-general-information'].complete
+    isSectionComplete: state.uiState.sections['/veteran-information/personal-information'].complete
   };
 }
 

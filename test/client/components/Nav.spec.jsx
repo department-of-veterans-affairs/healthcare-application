@@ -76,8 +76,8 @@ describe('<Nav>', () => {
       expect(activeSubSection).to.have.lengthOf(1);
     };
 
-    it('/veteran-information/name-and-general-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/veteran-information/name-and-general-information');
+    it('/veteran-information/personal-information', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/veteran-information/personal-information');
     });
 
     it('/veteran-information/demographic-information', () => {

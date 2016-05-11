@@ -43,7 +43,6 @@ class ChildInformationSection extends React.Component {
   }
 
   render() {
-    let notRequiredMessage;
     let childrenContent;
     let content;
     let children;
@@ -156,8 +155,7 @@ class ChildInformationSection extends React.Component {
       content = (<fieldset>
         <legend>Children Information</legend>
         <div>
-          {notRequiredMessage}
-
+          <p>Please fill these out to the best of your knowledge. The more accurate your responses, the faster your application can proceed.</p>
           <div className="input-section">
             <ErrorableCheckbox
                 label="Do you have any children to report?"

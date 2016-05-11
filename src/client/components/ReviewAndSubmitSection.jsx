@@ -46,7 +46,7 @@ class ReviewAndSubmitSection extends React.Component {
         {/* TODO(crew): Change names of sections to real names. */}
         <ReviewCollapsiblePanel
             sectionLabel="PersonalInfoSection"
-            updatePath="/veteran-information/name-and-general-information"
+            updatePath="/veteran-information/personal-information"
             component={<PersonalInfoSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel

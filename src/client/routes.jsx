@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
 
-// import AdditionalInformationSection from './components/veteran-information/AdditionalInformationSection';
+import AdditionalInformationSection from './components/insurance-information/AdditionalInformationSection';
 import AdditionalMilitaryInformationSection from './components/military-service/AdditionalMilitaryInformationSection';
 import AnnualIncomeSection from './components/household-information/AnnualIncomeSection';
 import ChildInformationSection from './components/household-information/ChildInformationSection';
@@ -10,12 +10,13 @@ import DemographicInformationSection from './components/veteran-information/Demo
 import FinancialDisclosureSection from './components/household-information/FinancialDisclosureSection';
 import InsuranceInformationSection from './components/insurance-information/InsuranceInformationSection';
 import IntroductionSection from './components/IntroductionSection.jsx';
+import MedicareMedicaidSection from './components/insurance-information/MedicareMedicaidSection';
 import PersonalInfoSection from './components/veteran-information/PersonalInfoSection';
 import ReviewAndSubmitSection from './components/ReviewAndSubmitSection.jsx';
 import ServiceInformationSection from './components/military-service/ServiceInformationSection';
 import SpouseInformationSection from './components/household-information/SpouseInformationSection';
 import VeteranAddressSection from './components/veteran-information/VeteranAddressSection';
-import VaInformationSection from './components/va-benefits/VaInformationSection';
+import VAInformationSection from './components/va-benefits/VAInformationSection';
 
 
 const routes = [
@@ -28,8 +29,8 @@ const routes = [
   // Personal Information routes.
   <Route
       component={PersonalInfoSection}
-      key="/veteran-information/name-and-general-information"
-      path="/veteran-information/name-and-general-information"/>,
+      key="/veteran-information/personal-information"
+      path="/veteran-information/personal-information"/>,
   <Route
       component={DemographicInformationSection}
       key="/veteran-information/demographic-information"
@@ -51,7 +52,7 @@ const routes = [
 
   // VA Benefits routes.
   <Route
-      component={VaInformationSection}
+      component={VAInformationSection}
       key="/va-benefits/basic-information"
       path="/va-benefits/basic-information"/>,
 
@@ -79,9 +80,17 @@ const routes = [
 
 // Insurance Information routes.
   <Route
+      component={MedicareMedicaidSection}
+      key="/insurance-information/medicare"
+      path="/insurance-information/medicare"/>,
+  <Route
       component={InsuranceInformationSection}
       key="/insurance-information/general"
       path="/insurance-information/general"/>,
+  <Route
+      component={AdditionalInformationSection}
+      key="/insurance-information/va-facility"
+      path="/insurance-information/va-facility"/>,
 
   // Review and Submit route.
   <Route

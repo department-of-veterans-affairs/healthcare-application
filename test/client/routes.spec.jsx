@@ -16,7 +16,7 @@ import PersonalInfoSection from '../../src/client/components/veteran-information
 import ReviewAndSubmitSection from '../../src/client/components/ReviewAndSubmitSection.jsx';
 import ServiceInformationSection from '../../src/client/components/military-service/ServiceInformationSection';
 import SpouseInformationSection from '../../src/client/components/household-information/SpouseInformationSection';
-import VaInformationSection from '../../src/client/components/va-benefits/VaInformationSection';
+import VAInformationSection from '../../src/client/components/va-benefits/VAInformationSection';
 import VeteranAddressSection from '../../src/client/components/veteran-information/VeteranAddressSection';
 import routes from '../../src/client/routes';
 import veteran from '../../src/client/reducers/veteran';
@@ -62,8 +62,8 @@ describe('routes', () => {
       expect(tree.dive(['RouterContext']).subTree(getName(IntroductionSection))).to.be.an('object');
     });
 
-    it('/veteran-information/name-and-general-information', () => {
-      history.replace('/veteran-information/name-and-general-information');
+    it('/veteran-information/personal-information', () => {
+      history.replace('/veteran-information/personal-information');
       expect(tree.dive(['RouterContext']).subTree(getName(PersonalInfoSection))).to.be.an('object');
     });
 
@@ -89,7 +89,7 @@ describe('routes', () => {
 
     it('/va-benefits/basic-information', () => {
       history.replace('/va-benefits/basic-information');
-      expect(tree.dive(['RouterContext']).subTree(getName(VaInformationSection))).to.be.an('object');
+      expect(tree.dive(['RouterContext']).subTree(getName(VAInformationSection))).to.be.an('object');
     });
 
     it('/household-information/financial-disclosure', () => {
