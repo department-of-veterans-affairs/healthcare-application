@@ -44,6 +44,11 @@ legend {
   max-width: 47rem;
 }
 
+button.short {
+  font-weight: 500;
+  padding: 1rem;
+}
+
 button.usa-button-outline {
   box-shadow: $button-stroke $color-primary;
 
@@ -63,6 +68,11 @@ button.usa-button-outline {
   &.usa-button-focus {
     box-shadow: $button-stroke $color-primary-darkest, $focus-shadow;
   }
+}
+
+button i.fa {
+  font-size: 0.75em;
+  margin-right: 0.5em;
 }
 
 .progress-box {
