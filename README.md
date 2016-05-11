@@ -10,7 +10,7 @@ To expose REST APIs to proxy the SOAP web services, run:
 node weather-rest
 ```
 
-then browse to [http://localhost:3000/explorer](http://localhost:3000/explorer)
+then browse to [http://localhost:3000/hca/explorer](http://localhost:3000/hca/explorer)
 
 ## Example 2 - simple Java SOAP server access (semi-works)
 
@@ -25,7 +25,7 @@ java wsserver/ServiceStarter
 node hello-rest
 ```
 
-### Browse to [http://localhost:3000/explorer](http://localhost:3000/explorer)
+### Browse to [http://localhost:3000/hca/explorer](http://localhost:3000/hca/explorer)
 
 ### Example 3 - access internal VA/VOA SOAP endpoint (doesn't work)
 
@@ -35,7 +35,7 @@ To expose REST APIs to proxy the SOAP web services, run:
 node voa-rest
 ```
 
-then browse to [http://localhost:3000/explorer](http://localhost:3000/explorer)
+then browse to [http://localhost:3000/hca/explorer](http://localhost:3000/hca/explorer)
 
 ### Docker
 #### Environment setup

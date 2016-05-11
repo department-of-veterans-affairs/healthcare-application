@@ -2,7 +2,7 @@ const loopback = require('loopback');
 const path = require('path');
 
 function attach(app) {
-  app.set('restApiRoot', '/api');
+  app.set('restApiRoot', '/v1/api');
 
   const endpoint = {
     c7401: 'http://vaausesrapp803.aac.va.gov:7401/voa/voaSvc',
@@ -68,7 +68,7 @@ function attach(app) {
 
     // API explorer (if present)
     try {
-      const explorer = require('loopback-component-explorer')(app, { basePath: '/api', mountPath: '/explorer' });
+      const explorer = require('loopback-component-explorer')(app, { basePath: '/hca', mountPath: '/explorer' });
       app.once('started', (baseUrl) => {
         console.log('Browse your REST API at %s%s', baseUrl, explorer.route);
       });
