@@ -1,0 +1,28 @@
+@startuml
+title Healthcare Application Sequence (Production)
+actor Veteran as vet
+
+box "Public Internet"
+participant "Vet's web\nbrowser" as browser
+end box
+
+box "GovCloud"
+participant "vets.gov\n(content)" as vetsgov
+participant "api.vets.gov\n(REST endpoint)" as vetrest
+end box
+
+box "VA Network"
+participant "vaww.esr.aac.va.gov/voa/voaSvc\n(SOAP endpoint)" as vetsoap
+end box
+
+vet -> browser : opens URL
+browser -> vetsgov : GET /healthcare/apply
+vetsgov -> browser : returns form
+vet -> vet : fills out form
+vet -> browser : presses "submit"
+browser -> vetrest : POST form JSON to /v1/submit-hca
+vetrest -> vetsoap : call saveSubmitFormResult\nwith XML version of form
+vetsoap -> vetrest : returns XML with response ID
+vetrest -> browser : returns JSON with response ID
+browser -> vet : shows response ID on form
+@enduml
