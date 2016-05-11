@@ -1,5 +1,6 @@
 const loopback = require('loopback');
 const path = require('path');
+const veteranToSaveSubmitForm = require('../src/server/enrollment-system').veteranToSaveSubmitForm;
 
 function attach(app) {
   app.set('restApiRoot', '/v1/api');
@@ -23,8 +24,9 @@ function attach(app) {
     const VoaService = ds.createModel('VoaService', {});
 
     // Add the methods
+    // TODO(awong): Rename "form" to "veteran" uniformly. #210
     VoaService.submit = (form, cb) => {
-      VoaService.saveSubmitForm(form, (err, response) => {
+      VoaService.saveSubmitForm(veteranToSaveSubmitForm(form), (err, response) => {
         const result = response;
         cb(err, result);
       });
