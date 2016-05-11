@@ -157,11 +157,11 @@ function isValidAddressField(field) {
 }
 
 function isValidNameAndGeneralInformation(data) {
-  return isValidFullNameField(data.fullName) &&
-      isValidRequiredField(isValidSSN, data.socialSecurityNumber) &&
+  return isValidFullNameField(data.veteranFullName) &&
+      isValidRequiredField(isValidSSN, data.veteranSocialSecurityNumber) &&
       isNotBlank(data.gender.value) &&
       isNotBlank(data.maritalStatus) &&
-      isValidDateField(data.dateOfBirth);
+      isValidDateField(data.veteranDateOfBirth);
 }
 
 function isValidVaInformation(data) {
@@ -176,7 +176,7 @@ function isValidAdditionalInformation(data) {
 }
 
 function isValidVeteranAddress(data) {
-  return isValidAddressField(data.address) &&
+  return isValidAddressField(data.veteranAddress) &&
       isValidField(isValidEmail, data.email) &&
       isValidField(isValidEmail, data.emailConfirmation) &&
       isValidField(isValidPhone, data.homePhone) &&
