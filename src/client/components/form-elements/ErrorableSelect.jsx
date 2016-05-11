@@ -10,6 +10,8 @@ import { makeField } from '../../reducers/fields.js';
  * `errorMessage` - Error string to display in the component.
  *                  When defined, indicates select has a validation error.
  * `label` - String for the select field label.
+ * `name` - String for the select name attribute.
+ * `autocomplete` - String for the select autocomplete attribute.
  * `options` - Array of options to populate select.
  * `required` - boolean. Render marker indicating field is required.
  * `value` - string. Value of the select field.

@@ -10,6 +10,8 @@ import { makeField } from '../../reducers/fields.js';
  * `errorMessage` - Error string to display in the component.
  *                  When defined, indicates input has a validation error.
  * `label` - String for the input field label.
+ * `name` - String for the input name attribute.
+ * `autocomplete` - String for the input autocomplete attribute.
  * `placeholder` - placeholder string for input field.
  * `required` - boolean. Render marker indicating field is required.
  * `field` - string. Value of the input field.
