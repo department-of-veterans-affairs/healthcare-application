@@ -45,17 +45,17 @@ class ReviewAndSubmitSection extends React.Component {
 
         {/* TODO(crew): Change names of sections to real names. */}
         <ReviewCollapsiblePanel
-            sectionLabel="PersonalInfoSection"
+            sectionLabel="Veteran Information - Personal Information"
             updatePath="/veteran-information/personal-information"
             component={<PersonalInfoSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="DemographicInformationSection"
+            sectionLabel="Demographic Information"
             updatePath="/veteran-information/demographic-information"
             component={<DemographicInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="VeteranAddressSection"
+            sectionLabel="Contact Information"
             updatePath="/veteran-information/veteran-address"
             component={<VeteranAddressSection reviewSection/>}/>
 
@@ -126,7 +126,8 @@ class ReviewAndSubmitSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    isApplicationSubmitted: state.uiState.applicationSubmitted
+    isApplicationSubmitted: state.uiState.applicationSubmitted,
+    components: state.uiState
   };
 }
 // TODO(awong): Remove the pure: false once we start using ImmutableJS.

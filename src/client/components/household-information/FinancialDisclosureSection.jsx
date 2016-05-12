@@ -17,14 +17,14 @@ class FinancialDisclosureSection extends React.Component {
       content = (<table className="review usa-table-borderless">
         <tbody>
           <tr>
-            <td>I agree to provide my financial information so the VA can determine
-             my eligibility for VA healthcare and if I should be charged for copays and medication:
+            <td>I agree to provide my financial information so the VA can determine my eligibility
+             for VA healthcare and if I should be charged for copays and medication.:
             </td>
             <td>{`${this.props.data.provideFinancialInfo ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
-            <td>I understand VA is not currently enrolling new applicants who decline to
-            provide their financial information unless they have other qualifying eligibility factors: </td>
+            <td>I understand VA is not currently enrolling new applicants who decline to provide
+            their financial information unless they have other qualifying eligibility factors.: </td>
             <td>{`${this.props.data.understandsFinancialDisclosure ? 'Yes' : 'No'}`}</td>
           </tr>
         </tbody>

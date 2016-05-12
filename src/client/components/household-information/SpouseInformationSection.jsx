@@ -85,6 +85,10 @@ class SpouseInformationSection extends React.Component {
         <table className="review usa-table-borderless">
           <tbody>
             <tr>
+              <td>Martial Status:</td>
+              <td>{this.props.data.maritalStatus.value}</td>
+            </tr>
+            <tr>
               <td>Spouse Name:</td>
               <td>{this.props.data.spouseFullName.first.value} {this.props.data.spouseFullName.middle.value} {this.props.data.spouseFullName.last.value} {this.props.data.spouseFullName.suffix.value}</td>
             </tr>

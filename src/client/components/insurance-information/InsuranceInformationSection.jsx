@@ -47,7 +47,6 @@ class InsuranceInformationSection extends React.Component {
     if (this.props.data.providers) {
       const providersList = this.props.data.providers;
       let reactKey = 0;
-      let providerIndex = 0;
       providers = providersList.map((obj) => {
         const insuranceName = obj.insuranceName.value;
         const insurancePolicyHolderName = obj.insurancePolicyHolderName.value;
@@ -56,15 +55,11 @@ class InsuranceInformationSection extends React.Component {
         return (<table key={++reactKey} className="review usa-table-borderless">
           <thead>
             <tr>
-              <td scope="col">Provider {++providerIndex}</td>
+              <td scope="col">Provider - {insuranceName}</td>
               <td scope="col"></td>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Name:</td>
-              <td>{insuranceName}</td>
-            </tr>
             <tr>
               <td>Policy Holder Name:</td>
               <td>{insurancePolicyHolderName}</td>
