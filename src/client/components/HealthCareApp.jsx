@@ -2,6 +2,8 @@ import React from 'react';
 import Scroll from 'react-scroll';
 import { hashHistory } from 'react-router';
 
+import fetch from 'isomorphic-fetch';
+
 import IntroductionSection from './IntroductionSection.jsx';
 import Nav from './Nav.jsx';
 import ProgressButton from './ProgressButton';
@@ -74,10 +76,36 @@ class HealthCareApp extends React.Component {
     this.scrollToTop();
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault();
     const path = this.props.location.pathname;
-    this.context.store.dispatch(updateSubmissionStatus('applicationSubmitted'));
-    this.context.store.dispatch(updateCompletedStatus(path));
+    const store = this.context.store;
+    const veteran = store.getState().veteran;
+
+    store.dispatch(updateSubmissionStatus('submitPending'));
+    store.dispatch(updateCompletedStatus(path));
+
+    // Pretty-print the data that we're about to POST
+    console.log(JSON.stringify(veteran, null, 2));
+
+    // POST data to endpoint
+    fetch('/v1/api/submit', {
+      method: 'POST',
+      header: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      timeout: 10000, // 10 seconds
+      body: JSON.stringify(veteran)
+    }).then(response => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      store.dispatch(updateSubmissionStatus('submitSucceeded', response.json()));
+    }).catch(error => {
+      store.dispatch(updateSubmissionStatus('submitFailed', error));
+    });
+
     this.scrollToTop();
   }
 
@@ -154,11 +182,11 @@ class HealthCareApp extends React.Component {
         </div>
         <div className="medium-8 columns">
           <div className="progress-box">
-          {/* TODO: Change action to reflect actual action for form submission. */}
-            <form className="form-panel">
+          {/* TODO: Figure out why <form> adds fields to url, and change action to reflect actual action for form submission. */}
+            <div className="form-panel">
               {children}
               {buttons}
-            </form>
+            </div>
           </div>
         </div>
       </div>

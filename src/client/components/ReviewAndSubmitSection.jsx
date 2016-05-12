@@ -55,29 +55,9 @@ class ReviewAndSubmitSection extends React.Component {
             component={<DemographicInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="VAInformationSection"
-            updatePath="/veteran-information/demographic-information"
-            component={<VAInformationSection reviewSection/>}/>
-
-        <ReviewCollapsiblePanel
-            sectionLabel="AdditionalInformationSection"
-            updatePath="/insurance-information/additional-information"
-            component={<AdditionalInformationSection reviewSection/>}/>
-
-        <ReviewCollapsiblePanel
             sectionLabel="VeteranAddressSection"
             updatePath="/veteran-information/veteran-address"
             component={<VeteranAddressSection reviewSection/>}/>
-
-        <ReviewCollapsiblePanel
-            sectionLabel="InsuranceInformationSection"
-            updatePath="/insurance-information/general"
-            component={<InsuranceInformationSection reviewSection/>}/>
-
-        <ReviewCollapsiblePanel
-            sectionLabel="MedicareMedicaidSection"
-            updatePath="/insurance-information/medicare-medicaid"
-            component={<MedicareMedicaidSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
             sectionLabel="ServiceInformationSection"
@@ -88,6 +68,11 @@ class ReviewAndSubmitSection extends React.Component {
             sectionLabel="AdditionalMilitaryInformationSection"
             updatePath="/military-service/additional-information"
             component={<AdditionalMilitaryInformationSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="VAInformationSection"
+            updatePath="/va-benefits/basic-information"
+            component={<VAInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
             sectionLabel="FinancialDisclosureSection"
@@ -113,6 +98,21 @@ class ReviewAndSubmitSection extends React.Component {
             sectionLabel="DeductibleExpensesSection"
             updatePath="/household-information/deductible-expenses"
             component={<DeductibleExpensesSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="MedicareMedicaidSection"
+            updatePath="/insurance-information/medicare"
+            component={<MedicareMedicaidSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="InsuranceInformationSection"
+            updatePath="/insurance-information/general"
+            component={<InsuranceInformationSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="AdditionalInformationSection"
+            updatePath="/insurance-information/va-facility"
+            component={<AdditionalInformationSection reviewSection/>}/>
       </div>);
     }
     return (
