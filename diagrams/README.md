@@ -45,14 +45,17 @@ user -> browser : navigates to our URL
 browser -> server : requests URL
 server -> browser : returns search page
 user -> browser : types 'kittens' in search box
-brower -> server : submits 'kittens' to search URL
+browser -> server : submits 'kittens' to search URL
 server -> mysql : searches for 'kittens'
 mysql -> server : returns list of kitten pictures
 server <-> store : request list of kitten pictures
 server -> browser : returns kitten pictures
+browser -> user : user sees kittens
 
 @enduml
 ```
+
+![Example component diagram](ex1-sequence.png)
 
 This shows the elements mentioned above for a web query:
 
