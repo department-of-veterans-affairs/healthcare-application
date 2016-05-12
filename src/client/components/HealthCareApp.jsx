@@ -89,7 +89,7 @@ class HealthCareApp extends React.Component {
     console.log(JSON.stringify(veteran, null, 2));
 
     // POST data to endpoint
-    fetch('/hca/', {
+    fetch('/v1/api/submit', {
       method: 'POST',
       header: {
         Accept: 'application/json',
