@@ -1,0 +1,10 @@
+@startuml
+
+[User's web\nbrowser] as browser
+[Our fabulous\nweb server] as server
+database "Much\ndata" as mysql
+
+browser <-> server : HTTP
+server <-> mysql : ODBC
+
+@enduml

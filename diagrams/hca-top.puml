@@ -1,0 +1,72 @@
+@startuml
+
+title Healthcare Application Network Diagram
+skinparam componentStyle uml2
+
+frame "Public Internet" {
+  [End-user\nweb-browser] as user
+  [Staging-user\nweb-browser] as tester
+}
+
+cloud "GovCloud" {
+  [vets.gov\nContent] as vets_prod_html
+  [staging.vets.gov\nContent] as vets_sqa_html
+  [HCA Back-end\nStaging] as hca_sqa_rest
+  [HCA Back-end\nProduction] as hca_prod_rest
+}
+
+frame "VA Network" {
+  [Pre-Prod VOA Submit (protected)] as es_preprod_soap
+  [Production VOA Submit (protected)] as es_prod_soap
+  [Dev VOA Submit] as es_dev_soap
+  [SQA VOA Submit] as es_sqa_soap
+}
+
+note right of es_sqa_soap
+https://vaww.esrstage1a.aac.va.gov/voa/voaSvc
+vaww.esrstage1a.aac.va.gov is an alias for
+vhaesrweb6.aac.va.gov.
+vhaesrweb6.aac.va.gov
+has address 10.224.132.152
+end note
+
+note right of es_preprod_soap
+https://vaww.esrpre-prod.aac.va.gov/voa/voaSvc
+vaww.esrpre-prod.aac.va.gov
+has address 10.224.51.10
+end note
+
+note right of es_prod_soap
+https://vaww.esr.aac.va.gov/voa/voaSvc
+vaww.esr.aac.va.gov
+has address 10.224.132.39
+end note
+
+note right of es_dev_soap
+https://vaww.esrdev30.aac.va.gov:8432/voa/voaSvc
+vaww.esrdev30.aac.va.gov
+has address 10.224.132.131
+end note
+
+frame "DSVA developers on VA Network" {
+  [Developer\nweb-browser] as devuser
+  [Developer\nweb-server] as devui
+  [Developer\nBack-end] as devbe
+  () "choose endpoint" as choose
+}
+
+user <--> vets_prod_html : HTML
+user <--> hca_prod_rest : REST
+hca_prod_rest <--> es_prod_soap : SOAP
+
+tester <--> vets_sqa_html : HTML
+tester <--> hca_sqa_rest : REST
+hca_sqa_rest <--> es_preprod_soap : SOAP
+
+devuser <--> devui : HTML
+devuser <--> devbe : REST
+devbe <--> choose
+choose <--> es_dev_soap : SOAP
+choose <--> es_sqa_soap : SOAP
+
+@enduml
