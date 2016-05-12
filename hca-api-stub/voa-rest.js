@@ -10,13 +10,15 @@ function attach(app) {
 
   // TODO: use `NODE_ENV` should probably determining which endpoint is selected.
   const endpoint = {
-    // ES endpoints for development
+    // ES "unofficial" (provided by Joshua) endpoints for development
     c7401: 'http://vaausesrapp803.aac.va.gov:7401/voa/voaSvc',
     e6401: 'https://vaausesrapp803.aac.va.gov:6401/voa/voaSvc',
-    e8432: 'https://vaww.esrdev30.aac.va.gov:8432/voa/voaSvc',
+    // ES "official" endpoints for development
+    esSqa: 'https://vaww.esrstage1a.aac.va.gov/voa/voaSvc',
+    esDev: 'https://vaww.esrdev30.aac.va.gov:8432/voa/voaSvc',
     // ES endpoints that require keys from PKI team and certs installed by Joshua
-    preprod: 'https://vaww.esrpre-prod.aac.va.gov/voa/voaSvc',
-    prod: 'https://vaww.esr.aac.va.gov/voa/voaSvc'
+    esPreprod: 'https://vaww.esrpre-prod.aac.va.gov/voa/voaSvc',
+    esProd: 'https://vaww.esr.aac.va.gov/voa/voaSvc'
   };
 
   /*
@@ -71,7 +73,7 @@ function attach(app) {
       connector: require('loopback-connector-soap'),
       remotingEnabled: true,
       wsdl: path.join(__dirname, './voa.wsdl'),
-      url: endpoint.preprod,
+      url: endpoint.esPreprod,
       security: securityArtifacts,
       wsdl_options: securityArtifacts === null ? null : { // eslint-disable-line
         rejectUnauthorized: false,
