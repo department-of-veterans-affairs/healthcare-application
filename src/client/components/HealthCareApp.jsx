@@ -6,7 +6,6 @@ import IntroductionSection from './IntroductionSection.jsx';
 import Nav from './Nav.jsx';
 import ProgressButton from './ProgressButton';
 import { ensureFieldsInitialized, updateCompletedStatus, updateSubmissionStatus } from '../actions';
-import { pathToData } from '../store';
 
 import * as validations from '../utils/validations';
 
@@ -59,10 +58,11 @@ class HealthCareApp extends React.Component {
 
   handleContinue() {
     const path = this.props.location.pathname;
-    const sectionData = pathToData(this.context.store.getState().veteran, path);
+    const formData = this.context.store.getState().veteran;
+    const sectionFields = this.context.store.getState().uiState.sections[path].fields;
 
-    this.context.store.dispatch(ensureFieldsInitialized(path));
-    if (validations.isValidSection(path, sectionData)) {
+    this.context.store.dispatch(ensureFieldsInitialized(sectionFields));
+    if (validations.isValidSection(path, formData)) {
       hashHistory.push(this.getUrl('next'));
       this.context.store.dispatch(updateCompletedStatus(path));
     }
@@ -90,52 +90,58 @@ class HealthCareApp extends React.Component {
       children = <IntroductionSection/>;
     }
 
-    // Check which section the user is on and render the correct ProgressButtons.
-    const lastSectionText = (this.getUrl('back')) ? this.getUrl('back').split('/').slice(-1)[0].replace(/-/g, ' ') : '';
-    const nextSectionText = (this.getUrl('next')) ? this.getUrl('next').split('/').slice(-1)[0].replace(/-/g, ' ') : '';
-
     // TODO(crew): Move these buttons into sections.
     const backButton = (
       <ProgressButton
           onButtonClick={this.handleBack}
-          buttonText={`Back to ${lastSectionText}`}
-          buttonClass={'usa-button-outline'}
-          beforeText={'«'}/>
+          buttonText="Back"
+          buttonClass="usa-button-outline"
+          beforeText="«"/>
     );
 
     const nextButton = (
       <ProgressButton
           onButtonClick={this.handleContinue}
-          buttonText={`Continue to ${nextSectionText}`}
-          buttonClass={'usa-button-primary'}
-          afterText={'»'}/>
+          buttonText="Continue"
+          buttonClass="usa-button-primary"
+          afterText="»"/>
     );
 
     const submitButton = (
       <ProgressButton
           onButtonClick={this.handleSubmit}
-          buttonText={'Submit Application'}
-          buttonClass={'usa-button-primary'}/>
+          buttonText="Submit Application"
+          buttonClass="usa-button-primary"/>
     );
 
     if (this.props.location.pathname === '/review-and-submit') {
       buttons = (
-        <div>
-          {submitButton}
-          {backButton}
+        <div className="row progress-buttons">
+          <div className="small-6 medium-5 columns">
+            {backButton}
+          </div>
+          <div className="small-6 medium-5 end columns">
+            {submitButton}
+          </div>
         </div>
       );
     } else if (this.props.location.pathname === '/introduction') {
       buttons = (
-        <div>
-          {nextButton}
+        <div className="row progress-buttons">
+          <div className="small-6 medium-5 columns">
+            {nextButton}
+          </div>
         </div>
       );
     } else {
       buttons = (
-        <div>
-          {nextButton}
-          {backButton}
+        <div className="row progress-buttons">
+          <div className="small-6 medium-5 columns">
+            {backButton}
+          </div>
+          <div className="small-6 medium-5 end columns">
+            {nextButton}
+          </div>
         </div>
       );
     }
@@ -148,10 +154,11 @@ class HealthCareApp extends React.Component {
         </div>
         <div className="medium-8 columns">
           <div className="progress-box">
-            <div className="form-panel">
+          {/* TODO: Change action to reflect actual action for form submission. */}
+            <form className="form-panel">
               {children}
               {buttons}
-            </div>
+            </form>
           </div>
         </div>
       </div>

@@ -31,6 +31,8 @@ class Phone extends React.Component {
         <ErrorableTextInput
             errorMessage={errorMessage}
             label={this.props.label}
+            name="phone"
+            autocomplete="tel"
             placeholder="xxx-xxx-xxxx"
             field={this.props.value}
             onValueChange={this.props.onValueChange}/>

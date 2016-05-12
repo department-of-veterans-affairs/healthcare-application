@@ -76,37 +76,16 @@ describe('<Nav>', () => {
       expect(activeSubSection).to.have.lengthOf(1);
     };
 
-    // TODO(crew): Remove this if we decide that we do not want introduction in the subway nav.
-    xit('/introduction', () => {
-      expectActiveSection(nav, '/introduction');
+    it('/veteran-information/personal-information', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/veteran-information/personal-information');
     });
 
-    it('/personal-information/name-and-general-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/personal-information/name-and-general-information');
+    it('/veteran-information/demographic-information', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/veteran-information/demographic-information');
     });
 
-    it('/personal-information/va-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/personal-information/va-information');
-    });
-
-    it('/personal-information/additional-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/personal-information/additional-information');
-    });
-
-    it('/personal-information/demographic-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/personal-information/demographic-information');
-    });
-
-    it('/personal-information/veteran-address', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/personal-information/veteran-address');
-    });
-
-    it('/insurance-information/general', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/insurance-information/general');
-    });
-
-    it('/insurance-information/medicare-medicaid', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/insurance-information/medicare-medicaid');
+    it('/veteran-information/veteran-address', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/veteran-information/veteran-address');
     });
 
     it('/military-service/service-information', () => {
@@ -117,24 +96,32 @@ describe('<Nav>', () => {
       expectActiveSectionForNavAndSubNav(nav, '/military-service/additional-information');
     });
 
-    it('/financial-assessment/financial-disclosure', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/financial-disclosure');
+    it('/va-benefits/basic-information', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/va-benefits/basic-information');
     });
 
-    it('/financial-assessment/spouse-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/spouse-information');
+    it('/household-information/financial-disclosure', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/household-information/financial-disclosure');
     });
 
-    it('/financial-assessment/child-information', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/child-information');
+    it('/household-information/spouse-information', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/household-information/spouse-information');
     });
 
-    it('/financial-assessment/annual-income', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/annual-income');
+    it('/household-information/child-information', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/household-information/child-information');
     });
 
-    it('/financial-assessment/deductible-expenses', () => {
-      expectActiveSectionForNavAndSubNav(nav, '/financial-assessment/deductible-expenses');
+    it('/household-information/annual-income', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/household-information/annual-income');
+    });
+
+    it('/household-information/deductible-expenses', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/household-information/deductible-expenses');
+    });
+
+    it('/insurance-information/general', () => {
+      expectActiveSectionForNavAndSubNav(nav, '/insurance-information/general');
     });
 
     it('/review-and-submit', () => {

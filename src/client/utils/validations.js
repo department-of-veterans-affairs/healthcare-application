@@ -156,12 +156,14 @@ function isValidAddressField(field) {
   return isValidAddress(field.street.value, field.city.value, field.country.value, field.state.value, field.zipcode.value);
 }
 
-function isValidNameAndGeneralInformation(data) {
-  return isValidFullNameField(data.fullName) &&
-      isValidRequiredField(isValidSSN, data.socialSecurityNumber) &&
-      isNotBlank(data.gender.value) &&
-      isNotBlank(data.maritalStatus) &&
-      isValidDateField(data.dateOfBirth);
+function isValidPersonalInfoSection(data) {
+  return isValidFullNameField(data.veteranFullName) &&
+      isValidRequiredField(isValidSSN, data.veteranSocialSecurityNumber) &&
+      isValidDateField(data.veteranDateOfBirth);
+}
+
+function isValidDemographicInformation(data) {
+  return isNotBlank(data.gender.value);
 }
 
 function isValidVaInformation(data) {
@@ -170,13 +172,8 @@ function isValidVaInformation(data) {
       validateIfDirty(data.receivesVaPension, isNotBlank);
 }
 
-function isValidAdditionalInformation(data) {
-  return validateIfDirty(data.facilityState, isNotBlank) &&
-    validateIfDirty(data.vaMedicalFacility, isNotBlank);
-}
-
 function isValidVeteranAddress(data) {
-  return isValidAddressField(data.address) &&
+  return isValidAddressField(data.veteranAddress) &&
       isValidField(isValidEmail, data.email) &&
       isValidField(isValidEmail, data.emailConfirmation) &&
       isValidField(isValidPhone, data.homePhone) &&
@@ -189,7 +186,8 @@ function isValidSpouseInformation(data) {
       (isBlankDateField(data.spouseDateOfBirth) || isValidDateField(data.spouseDateOfBirth)) &&
       (isBlankDateField(data.dateOfMarriage) || isValidDateField(data.dateOfMarriage)) &&
       (isBlankAddressField(data.spouseAddress) || isValidAddressField(data.spouseAddress)) &&
-      isValidField(isValidPhone, data.spousePhone);
+      isValidField(isValidPhone, data.spousePhone) &&
+      isNotBlank(data.maritalStatus);
 }
 
 function isValidChildInformationField(child) {
@@ -215,15 +213,15 @@ function isValidChildren(data) {
 }
 
 function isValidChildrenIncome(data) {
-  const children = data.children;
+  const children = data.childrenIncome;
   if (children.length === 0) {
     return true;
   }
   for (let i = 0; i < children.length; i++) {
     if (
-        !isValidField(isValidMonetaryValue, children[i].childrenGrossIncome) &&
-        !isValidField(isValidMonetaryValue, children[i].childrenNetIncome) &&
-        !isValidField(isValidMonetaryValue, children[i].childrenOtherIncome)
+        !isValidField(isValidMonetaryValue, children[i].childGrossIncome) &&
+        !isValidField(isValidMonetaryValue, children[i].childNetIncome) &&
+        !isValidField(isValidMonetaryValue, children[i].childOtherIncome)
     ) {
       return false;
     }
@@ -247,7 +245,19 @@ function isValidDeductibleExpenses(data) {
     isValidField(isValidMonetaryValue, data.deductibleEducationExpenses);
 }
 
+function isValidAdditionalInformation(data) {
+  return validateIfDirty(data.facilityState, isNotBlank) &&
+    validateIfDirty(data.vaMedicalFacility, isNotBlank);
+}
+
+function isValidMedicareMedicaid(data) {
+  return isBlankDateField(data.medicarePartAEffectiveDate) ||
+    isValidDateField(data.medicarePartAEffectiveDate);
+}
+
 function isValidGeneralInsurance(data) {
+  isValidAdditionalInformation(data);
+  isValidMedicareMedicaid(data);
   const providers = data.providers;
   if (!data.isCoveredByHealthInsurance) {
     return true;
@@ -263,11 +273,6 @@ function isValidGeneralInsurance(data) {
   return true;
 }
 
-function isValidMedicareMedicaid(data) {
-  return isBlankDateField(data.medicarePartAEffectiveDate) ||
-    isValidDateField(data.medicarePartAEffectiveDate);
-}
-
 function isValidServiceInformation(data) {
   return (isBlankDateField(data.lastEntryDate) || isValidDateField(data.lastEntryDate)) &&
          (isBlankDateField(data.lastDischargeDate) || isValidDateField(data.lastDischargeDate));
@@ -275,28 +280,30 @@ function isValidServiceInformation(data) {
 
 function isValidSection(completePath, sectionData) {
   switch (completePath) {
-    case '/personal-information/name-and-general-information':
-      return isValidNameAndGeneralInformation(sectionData);
-    case '/personal-information/va-information':
-      return isValidVaInformation(sectionData);
-    case '/personal-information/additional-information':
-      return isValidAdditionalInformation(sectionData);
-    case '/personal-information/veteran-address':
+    case '/veteran-information/personal-information':
+      return isValidPersonalInfoSection(sectionData);
+    case '/veteran-information/demographic-information':
+      return isValidDemographicInformation(sectionData);
+    case '/veteran-information/veteran-address':
       return isValidVeteranAddress(sectionData);
-    case '/financial-assessment/spouse-information':
+    case '/military-service/service-information':
+      return isValidServiceInformation(sectionData);
+    case '/va-benefits/basic-information':
+      return isValidVaInformation(sectionData);
+    case '/household-information/spouse-information':
       return isValidSpouseInformation(sectionData);
-    case '/financial-assessment/child-information':
+    case '/household-information/child-information':
       return isValidChildren(sectionData);
-    case '/financial-assessment/annual-income':
+    case '/household-information/annual-income':
       return isValidAnnualIncome(sectionData);
-    case '/financial-assessment/deductible-expenses':
+    case '/household-information/deductible-expenses':
       return isValidDeductibleExpenses(sectionData);
+    case '/insurance-information/additional-information':
+      return isValidAdditionalInformation(sectionData);
     case '/insurance-information/general':
       return isValidGeneralInsurance(sectionData);
     case '/insurance-information/medicare-medicaid':
       return isValidMedicareMedicaid(sectionData);
-    case '/military-service/service-information':
-      return isValidServiceInformation(sectionData);
     default:
       return true;
   }
@@ -330,7 +337,7 @@ export {
   isValidAddress,
   isValidInsurancePolicy,
   isValidField,
-  isValidNameAndGeneralInformation,
+  isValidPersonalInfoSection,
   isValidVaInformation,
   isValidAdditionalInformation,
   isValidVeteranAddress,

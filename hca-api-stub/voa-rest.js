@@ -1,12 +1,13 @@
 const fs = require('fs');
 const loopback = require('loopback');
 const path = require('path');
+const veteranToSaveSubmitForm = require('../src/server/enrollment-system').veteranToSaveSubmitForm;
 
 // TODO: node.js did not like `securityArtifacts` being declared as `let`. Why?
 var securityArtifacts; // eslint-disable-line
 
 function attach(app) {
-  app.set('restApiRoot', '/api');
+  app.set('restApiRoot', '/v1/api');
 
   // TODO: use `NODE_ENV` should probably determining which endpoint is selected.
   const endpoint = {
@@ -87,8 +88,9 @@ function attach(app) {
     const VoaService = ds.createModel('VoaService', {});
 
     // Add the methods
+    // TODO(awong): Rename "form" to "veteran" uniformly. #210
     VoaService.submit = (form, cb) => {
-      VoaService.saveSubmitForm(form, (err, response) => {
+      VoaService.saveSubmitForm(veteranToSaveSubmitForm(form), (err, response) => {
         const result = response;
         cb(err, result);
       });
@@ -132,7 +134,7 @@ function attach(app) {
 
     // API explorer (if present)
     try {
-      const explorer = require('loopback-component-explorer')(app, { basePath: '/api', mountPath: '/explorer' });
+      const explorer = require('loopback-component-explorer')(app, { basePath: '/hca', mountPath: '/explorer' });
       app.once('started', (baseUrl) => {
         console.log('Browse your REST API at %s%s', baseUrl, explorer.route);
       });
