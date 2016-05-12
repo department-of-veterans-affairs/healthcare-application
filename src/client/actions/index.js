@@ -6,7 +6,6 @@ export const UPDATE_REVIEW_STATUS = 'UPDATE_REVIEW_STATUS';
 export const UPDATE_VERIFIED_STATUS = 'UPDATE_VERIFIED_STATUS';
 export const UPDATE_SPOUSE_ADDRESS = 'UPDATE_SPOUSE_ADDRESS';
 export const UPDATE_SUBMISSION_STATUS = 'UPDATE_SUBMISSION_STATUS';
-export const UPDATE_POST_STATUS = 'UPDATE_POST_STATUS';
 export const CREATE_CHILD_INCOME_FIELDS = 'CREATE_CHILD_INCOME_FIELDS';
 
 export function ensureFieldsInitialized(fields, parentNode) {
@@ -67,15 +66,6 @@ export function updateSubmissionStatus(field) {
   return {
     type: UPDATE_SUBMISSION_STATUS,
     field
-  };
-}
-
-export function updatePostStatus(status, error, response) {
-  return {
-    type: UPDATE_POST_STATUS,
-    status,
-    error,
-    response
   };
 }
 

@@ -76,12 +76,38 @@ class HealthCareApp extends React.Component {
     this.scrollToTop();
   }
 
-  handleSubmit(e){
+  handleSubmit(e) {
     e.preventDefault();
     const path = this.props.location.pathname;
+    const store = this.context.store;
+    const veteran = store.getState().veteran;
 
-    this.context.store.dispatch(updateSubmissionStatus('applicationSubmitted'));
-    this.context.store.dispatch(updateCompletedStatus(path));
+    store.dispatch(updateSubmissionStatus('submitPending'));
+    store.dispatch(updateCompletedStatus(path));
+
+    // Pretty-print the data that we're about to POST
+    console.log(JSON.stringify(veteran, null, 2));
+
+    // POST data to endpoint
+    fetch('/hca/', {
+      method: 'POST',
+      header: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      timeout: 10000, // 10 seconds
+      body: JSON.stringify(veteran)
+    }).then(response => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response;
+    }).then(response => {
+      store.dispatch(updateSubmissionStatus('submitSucceeded', response.json()));
+    }).catch(error => {
+      store.dispatch(updateSubmissionStatus('submitFailed', error));
+    });
+
     this.scrollToTop();
   }
 
