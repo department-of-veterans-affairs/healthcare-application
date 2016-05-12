@@ -101,8 +101,6 @@ class HealthCareApp extends React.Component {
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-      return response;
-    }).then(response => {
       store.dispatch(updateSubmissionStatus('submitSucceeded', response.json()));
     }).catch(error => {
       store.dispatch(updateSubmissionStatus('submitFailed', error));
