@@ -2,7 +2,7 @@ import React from 'react';
 import SkinDeep from 'skin-deep';
 import { expect } from 'chai';
 
-import { VeteranAddressSection } from '../../../../src/client/components/personal-information/VeteranAddressSection';
+import { VeteranAddressSection } from '../../../../src/client/components/veteran-information/VeteranAddressSection';
 import { makeField } from '../../../../src/client/reducers/fields';
 
 describe('<VeteranAddressSection>', () => {

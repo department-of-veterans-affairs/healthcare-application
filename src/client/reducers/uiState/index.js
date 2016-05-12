@@ -15,40 +15,20 @@ const ui = {
       verified: false,
       fields: []
     },
-    '/personal-information/name-and-general-information': {
+    '/veteran-information/personal-information': {
       complete: false,
       verified: false,
-      fields: ['veteranFullName', 'mothersMaidenName', 'veteranSocialSecurityNumber', 'gender', 'cityOfBirth', 'stateOfBirth', 'veteranDateOfBirth', 'maritalStatus']
+      fields: ['veteranFullName', 'mothersMaidenName', 'veteranSocialSecurityNumber', 'veteranDateOfBirth', 'cityOfBirth', 'stateOfBirth']
     },
-    '/personal-information/va-information': {
+    '/veteran-information/demographic-information': {
       complete: false,
       verified: false,
-      fields: ['isVaServiceConnected', 'compensableVaServiceConnected', 'receivesVaPension']
+      fields: ['gender', 'isSpanishHispanicLatino', 'isAmericanIndianOrAlaskanNative', 'isBlackOrAfricanAmerican', 'isNativeHawaiianOrOtherPacificIslander', 'isAsian', 'isWhite']
     },
-    '/personal-information/additional-information': {
-      complete: false,
-      verified: false,
-      fields: ['isEssentialAcaCoverage', 'facilityState', 'vaMedicalFacility', 'wantsInitialVaContact']
-    },
-    '/personal-information/demographic-information': {
-      complete: false,
-      verified: false,
-      fields: ['isSpanishHispanicLatino', 'isAmericanIndianOrAlaskanNative', 'isBlackOrAfricanAmerican', 'isNativeHawaiianOrOtherPacificIslander', 'isAsian', 'isWhite']
-    },
-    '/personal-information/veteran-address': {
+    '/veteran-information/veteran-address': {
       complete: false,
       verified: false,
       fields: ['veteranAddress', 'veteranCounty', 'email', 'emailConfirmation', 'homePhone', 'mobilePhone']
-    },
-    '/insurance-information/general': {
-      complete: false,
-      verified: false,
-      fields: ['isCoveredByHealthInsurance', 'providers']
-    },
-    '/insurance-information/medicare-medicaid': {
-      complete: false,
-      verified: false,
-      fields: ['isMedicaidEligible', 'isEnrolledMedicarePartA', 'medicarePartAEffectiveDate']
     },
     '/military-service/service-information': {
       complete: false,
@@ -60,30 +40,50 @@ const ui = {
       verified: false,
       fields: ['purpleHeartRecipient', 'isFormerPow', 'postNov111998Combat', 'disabledInLineOfDuty', 'swAsiaCombat', 'vietnamService', 'exposedToRadiation', 'radiumTreatments', 'campLejeune']
     },
-    '/financial-assessment/financial-disclosure': {
+    '/va-benefits/basic-information': {
+      complete: false,
+      verified: false,
+      fields: ['isVaServiceConnected', 'compensableVaServiceConnected', 'receivesVaPension']
+    },
+    '/household-information/financial-disclosure': {
       complete: false,
       verified: false,
       fields: ['provideFinancialInfo', 'understandsFinancialDisclosure']
     },
-    '/financial-assessment/spouse-information': {
-      completed: false,
+    '/household-information/spouse-information': {
+      complete: false,
       verified: false,
-      fields: ['spouseFullName', 'spouseSocialSecurityNumber', 'spouseDateOfBirth', 'dateOfMarriage', 'sameAddress', 'cohabitedLastYear', 'provideSupportLastYear', 'spouseAddress', 'spousePhone']
+      fields: ['maritalStatus', 'spouseFullName', 'spouseSocialSecurityNumber', 'spouseDateOfBirth', 'dateOfMarriage', 'sameAddress', 'cohabitedLastYear', 'provideSupportLastYear', 'spouseAddress', 'spousePhone']
     },
-    '/financial-assessment/child-information': {
+    '/household-information/child-information': {
       complete: false,
       verified: false,
       fields: ['hasChildrenToReport', 'children']
     },
-    '/financial-assessment/annual-income': {
+    '/household-information/annual-income': {
       complete: false,
       verified: false,
       fields: ['veteranGrossIncome', 'veteranNetIncome', 'veteranOtherIncome', 'spouseGrossIncome', 'spouseNetIncome', 'spouseOtherIncome', 'childrenIncome']
     },
-    '/financial-assessment/deductible-expenses': {
+    '/household-information/deductible-expenses': {
       complete: false,
       verified: false,
       fields: ['deductibleMedicalExpenses', 'deductibleFuneralExpenses', 'deductibleEducationExpenses']
+    },
+    '/insurance-information/medicare': {
+      complete: false,
+      verified: false,
+      fields: ['isMedicaidEligible', 'isEnrolledMedicarePartA', 'medicarePartAEffectiveDate']
+    },
+    '/insurance-information/general': {
+      complete: false,
+      verified: false,
+      fields: ['isCoveredByHealthInsurance', 'providers']
+    },
+    '/insurance-information/va-facility': {
+      complete: false,
+      verified: false,
+      fields: ['isEssentialAcaCoverage', 'facilityState', 'vaMedicalFacility', 'wantsInitialVaContact']
     },
     '/review-and-submit': {
       complete: false,
