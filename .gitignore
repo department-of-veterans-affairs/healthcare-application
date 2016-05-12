@@ -6,6 +6,12 @@ hca-api-stub/healthcare.application.key
 hca-api-stub/healthcare.application.key.gpg
 jsconfig.json
 
+*.gpg
+*.key
+*.crt
+jsconfig.json
+.vscode/
+
 #Compiled files.
 .sass-cache
 generated/
