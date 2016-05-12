@@ -2,7 +2,10 @@ sudo: required
 
 language: node_js
 node_js:
-  - "4"
+  - "4.4.4"
+before_install:
+  - npm install -g npm@3.8.9
+  - npm --version
 compiler: clang-3.6
 env:
   global:
