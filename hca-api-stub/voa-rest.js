@@ -44,10 +44,10 @@ function attach(app) {
       VoaService.submit, {
         accepts: [
           { arg: 'form', type: 'Object', required: true,
-            http: { source: 'query' } }
+            http: { source: 'body' } }
         ],
         returns: { arg: 'result', type: 'string', root: true },
-        http: { verb: 'get', path: '/submit' }
+        http: { verb: 'post', path: '/submit' }
       }
     );
 
