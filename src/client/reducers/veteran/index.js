@@ -231,7 +231,7 @@ export const completeVeteran = {
     },
     city: {
       value: 'Washington',
-      dirty: falseph
+      dirty: false
     },
     country: {
       value: 'USA',
