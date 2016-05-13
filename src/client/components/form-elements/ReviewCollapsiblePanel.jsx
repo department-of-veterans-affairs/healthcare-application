@@ -53,12 +53,12 @@ class ReviewCollapsiblePanel extends React.Component {
 
       editButton = (<button
           className="edit-btn"
-          onClick={this.handleEdit}>Edit</button>
+          onClick={this.handleEdit}>Edit Section</button>
       );
     } else {
       panelAction = (<button
           className="usa-button-outline"
-          onClick={this.handleSave}>Save</button>
+          onClick={this.handleSave}>Update Section</button>
         );
     }
 
@@ -79,7 +79,7 @@ class ReviewCollapsiblePanel extends React.Component {
     } else {
       if (this.props.uiData.sections[prevPath].verified || currentPath === '/veteran-information/personal-information') {
         hiddenSection = (
-          <div id={`collapsible-${this.id}`} aria-hidden="false" className="usa-accordion-content">
+          <div id={`collapsible-${this.id}`} className="usa-accordion-content">
               {this.props.component}
               {panelAction}
           </div>
@@ -95,10 +95,10 @@ class ReviewCollapsiblePanel extends React.Component {
         <ul className="usa-unstyled-list">
           <li>
             <div className="accordion-header" aria-expanded="true" aria-controls={`collapsible-${this.id}`}>
-              <div className="medium-9 columns">
+              <div className="medium-7 columns">
                 {this.props.sectionLabel} {verifiedLabel}
               </div>
-              <div className="medium-3 columns">
+              <div className="medium-5 columns">
                 {editButton}
               </div>
             </div>

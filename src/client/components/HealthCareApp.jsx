@@ -202,22 +202,22 @@ class HealthCareApp extends React.Component {
     return (
       <div>
         {devPanel}
-      <div className="row">
-        <Element name="topScrollElement"/>
-        <div className="medium-4 columns show-for-medium-up">
-          <Nav currentUrl={path}/>
-        </div>
-        <div className="medium-8 columns">
-          <div className="progress-box">
-          {/* TODO: Figure out why <form> adds fields to url, and change action to reflect actual action for form submission. */}
-            <div className={path === '/review-and-submit' ? '' : 'form-panel'}>
-              {children}
-              {buttons}
+        <div className="row">
+          <Element name="topScrollElement"/>
+          <div className="medium-4 columns show-for-medium-up">
+            <Nav currentUrl={path}/>
+          </div>
+          <div className="medium-8 columns">
+            <div className="progress-box">
+            {/* TODO: Figure out why <form> adds fields to url, and change action to reflect actual action for form submission. */}
+              <div className={path === '/review-and-submit' ? '' : 'form-panel'}>
+                {children}
+                {buttons}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     );
   }
 }
