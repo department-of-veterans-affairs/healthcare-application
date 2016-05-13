@@ -1,4 +1,5 @@
 export const ENSURE_FIELDS_INITIALIZED = 'ENSURE_FIELDS_INITIALIZED';
+export const VETERAN_OVERWRITE = 'VETERAN_OVERWRITE';
 export const VETERAN_FIELD_UPDATE = 'VETERAN_FIELD_UPDATE';
 export const UPDATE_COMPLETED_STATUS = 'UPDATE_COMPLETED_STATUS';
 export const UPDATE_INCOMPLETE_STATUS = 'UPDATE_INCOMPLETE_STATUS';
@@ -13,6 +14,13 @@ export function ensureFieldsInitialized(fields, parentNode) {
     type: ENSURE_FIELDS_INITIALIZED,
     fields,
     parentNode
+  };
+}
+
+export function veteranOverwrite(value) {
+  return {
+    type: VETERAN_OVERWRITE,
+    value
   };
 }
 

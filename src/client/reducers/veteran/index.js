@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import lodashDeep from 'lodash-deep';
 
-import { ENSURE_FIELDS_INITIALIZED, VETERAN_FIELD_UPDATE, UPDATE_SPOUSE_ADDRESS, CREATE_CHILD_INCOME_FIELDS } from '../../actions';
+import { ENSURE_FIELDS_INITIALIZED, VETERAN_FIELD_UPDATE, VETERAN_OVERWRITE, UPDATE_SPOUSE_ADDRESS, CREATE_CHILD_INCOME_FIELDS } from '../../actions';
 import { makeField, dirtyAllFields } from '../fields';
 
 // Add deep object manipulation routines to lodash.
@@ -139,6 +139,137 @@ const blankVeteran = {
 
 };
 
+export const completeVeteran = {
+  veteranFullName: {
+    first: makeField('FirstName', true),
+    middle: makeField('MiddleName', true),
+    last: makeField('LastName', true),
+    suffix: makeField('Jr.', true),
+  },
+  mothersMaidenName: makeField('Maiden', true),
+  veteranSocialSecurityNumber: makeField('111-11-1234', true),
+  gender: makeField('F', true),
+  cityOfBirth: makeField('Springfield', true),
+  stateOfBirth: makeField('AK', true),
+  veteranDateOfBirth: {
+    month: makeField('1', true),
+    day: makeField('2', true),
+    year: makeField('1923', true),
+  },
+  maritalStatus: makeField('Married'),
+
+  isVaServiceConnected: makeField(''),
+  compensableVaServiceConnected: makeField(''),
+  receivesVaPension: makeField(''),
+
+  isEssentialAcaCoverage: false,
+  facilityState: makeField(''),
+  vaMedicalFacility: makeField(''),
+  wantsInitialVaContact: false,
+
+  isSpanishHispanicLatino: false,
+  isAmericanIndianOrAlaskanNative: false,
+  isBlackOrAfricanAmerican: false,
+  isNativeHawaiianOrOtherPacificIslander: false,
+  isAsian: false,
+  isWhite: false,
+
+  veteranAddress: {
+    street: makeField('123 NW 5th St'),
+    city: makeField('Washington'),
+    country: makeField('USA'),
+    state: makeField('DC'),
+    zipcode: makeField('001234-1234'),
+  },
+  veteranCounty: makeField(''),
+  email: makeField('foo@example.com'),
+  emailConfirmation: makeField('foo@example.com'),
+  homePhone: makeField('123-124-1234'),
+  mobilePhone: makeField('123-555-1234'),
+
+  provideFinancialInfo: true,
+  understandsFinancialDisclosure: true,
+
+  spouseFullName: {
+    first: makeField(''),
+    middle: makeField(''),
+    last: makeField(''),
+    suffix: makeField(''),
+  },
+  spouseSocialSecurityNumber: makeField(''),
+  spouseDateOfBirth: {
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField(''),
+  },
+  dateOfMarriage: {
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField('')
+  },
+  sameAddress: false,
+  cohabitedLastYear: false,
+  provideSupportLastYear: false,
+  spouseAddress: {
+    street: makeField(''),
+    city: makeField(''),
+    country: makeField(''),
+    state: makeField(''),
+    zipcode: makeField(''),
+  },
+  spousePhone: makeField(''),
+
+  hasChildrenToReport: false,
+  children: [],
+
+  veteranGrossIncome: makeField(''),
+  veteranNetIncome: makeField(''),
+  veteranOtherIncome: makeField(''),
+  spouseGrossIncome: makeField(''),
+  spouseNetIncome: makeField(''),
+  spouseOtherIncome: makeField(''),
+  childrenIncome: [],
+
+  deductibleMedicalExpenses: makeField(''),
+  deductibleFuneralExpenses: makeField(''),
+  deductibleEducationExpenses: makeField(''),
+
+  isCoveredByHealthInsurance: false,
+  providers: [],
+
+  isMedicaidEligible: false,
+  isEnrolledMedicarePartA: false,
+  medicarePartAEffectiveDate: {
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField('')
+  },
+
+  lastServiceBranch: makeField(''),
+  lastEntryDate: {
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField('')
+  },
+  lastDischargeDate: {
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField('')
+  },
+  dischargeType: makeField(''),
+
+  purpleHeartRecipient: false,
+  isFormerPow: false,
+  postNov111998Combat: false,
+  disabledInLineOfDuty: false,
+  swAsiaCombat: false,
+  vietnamService: false,
+  exposedToRadiation: false,
+  radiumTreatments: false,
+  campLejeune: false
+
+};
+
 function createBlankChild() {
   return {
     childGrossIncome: makeField(''),
@@ -147,7 +278,7 @@ function createBlankChild() {
   };
 }
 
-function veteran(state = blankVeteran, action) {
+export default function veteran(state = blankVeteran, action) {
   let newState = undefined;
   switch (action.type) {
     case VETERAN_FIELD_UPDATE: {
@@ -173,6 +304,9 @@ function veteran(state = blankVeteran, action) {
 
       return newState;
     }
+
+    case VETERAN_OVERWRITE:
+      return action.value;
 
     // Copies the veteran's address into the spouse's address fields if they have the same address.
     // Clears the spouse's address fields if they do not.
@@ -210,6 +344,3 @@ function veteran(state = blankVeteran, action) {
       return state;
   }
 }
-
-export default veteran;
-
