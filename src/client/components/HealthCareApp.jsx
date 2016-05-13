@@ -88,11 +88,15 @@ class HealthCareApp extends React.Component {
     const store = this.context.store;
     const veteran = store.getState().veteran;
 
+    // Strip out unnecessary fields'
+    function reducer(key, value) {
+      return key === 'dirty' ? undefined : value;
+    }
+    const json = JSON.stringify(veteran, reducer, 4);
+    console.log(json);
+
     store.dispatch(updateSubmissionStatus('submitPending'));
     store.dispatch(updateCompletedStatus(path));
-
-    // Pretty-print the data that we're about to POST
-    console.log(JSON.stringify(veteran, null, 2));
 
     // POST data to endpoint
     fetch('/v1/api/submit', {
@@ -102,7 +106,7 @@ class HealthCareApp extends React.Component {
         'Content-Type': 'application/json'
       },
       timeout: 10000, // 10 seconds
-      body: JSON.stringify(veteran)
+      body: json
     }).then(response => {
       if (!response.ok) {
         throw new Error(response.statusText);
