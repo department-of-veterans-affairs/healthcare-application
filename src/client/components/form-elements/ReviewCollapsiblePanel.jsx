@@ -39,6 +39,7 @@ class ReviewCollapsiblePanel extends React.Component {
     let panelAction;
     let editButton;
     let verifiedLabel;
+    let hiddenSection;
     const currentPath = this.props.updatePath;
     const sectionsComplete = this.props.uiData.sections[currentPath].complete;
     const sectionsVerified = this.props.uiData.sections[currentPath].verified;
@@ -68,6 +69,27 @@ class ReviewCollapsiblePanel extends React.Component {
         </div>);
     }
 
+    const allSections = Object.keys(this.props.uiData.sections);
+    const sectionIndexes = allSections.indexOf(currentPath);
+    const prevPath = allSections[sectionIndexes - 1];
+
+
+    if (sectionsVerified) {
+      hiddenSection = (<div></div>);
+    } else {
+      if (this.props.uiData.sections[prevPath].verified || currentPath === '/veteran-information/personal-information') {
+        hiddenSection = (
+          <div id={`collapsible-${this.id}`} aria-hidden="false" className="usa-accordion-content">
+              {this.props.component}
+              {panelAction}
+          </div>
+        );
+      } else {
+        hiddenSection = (<div></div>);
+      }
+    }
+
+
     return (
       <div id={`${this.id}-collapsiblePanel`} className="usa-accordion-bordered hca-review-panel">
         <ul className="usa-unstyled-list">
@@ -80,10 +102,7 @@ class ReviewCollapsiblePanel extends React.Component {
                 {editButton}
               </div>
             </div>
-            <div id={`collapsible-${this.id}`} aria-hidden={`${sectionsVerified}`} className="usa-accordion-content">
-              {this.props.component}
-              {panelAction}
-            </div>
+            {hiddenSection}
           </li>
         </ul>
       </div>
