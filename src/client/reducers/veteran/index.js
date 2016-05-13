@@ -231,7 +231,7 @@ export const completeVeteran = {
     },
     city: {
       value: 'Washington',
-      dirty: false
+      dirty: falseph
     },
     country: {
       value: 'USA',
@@ -259,11 +259,11 @@ export const completeVeteran = {
     dirty: false
   },
   homePhone: {
-    value: '123-124-1234',
+    value: '1231241234',
     dirty: false
   },
   mobilePhone: {
-    value: '123-555-1234',
+    value: '1235551234',
     dirty: false
   },
   provideFinancialInfo: true,
