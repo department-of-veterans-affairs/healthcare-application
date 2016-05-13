@@ -123,6 +123,7 @@ class SpouseInformationSection extends React.Component {
     } else {
       content = (<fieldset>
         <legend>Spouse's Information</legend>
+        <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <p>Please fill these out to the best of your knowledge. The more accurate your responses, the faster your application can proceed.</p>
         <ErrorableSelect
             errorMessage={validateIfDirty(this.props.data.maritalStatus, isNotBlank) ? undefined : 'Please select a marital status'}
