@@ -1,6 +1,6 @@
 import React from 'react';
 import Scroll from 'react-scroll';
-import { hashHistory } from 'react-router';
+import _ from 'lodash';
 
 import fetch from 'isomorphic-fetch';
 
@@ -11,12 +11,18 @@ import { ensureFieldsInitialized, updateCompletedStatus, updateSubmissionStatus 
 
 import * as validations from '../utils/validations';
 
+// TODO(awong): Find some way to remove code when in production. It might require System.import()
+// and a promise.
+import PopulateVeteranButton from './debug/PopulateVeteranButton';
+import PerfPanel from './debug/PerfPanel';
+import RoutesDropdown from './debug/RoutesDropdown';
+
 const Element = Scroll.Element;
 const scroller = Scroll.scroller;
 
 class HealthCareApp extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleBack = this.handleBack.bind(this);
     this.handleContinue = this.handleContinue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -65,14 +71,14 @@ class HealthCareApp extends React.Component {
 
     this.context.store.dispatch(ensureFieldsInitialized(sectionFields));
     if (validations.isValidSection(path, formData)) {
-      hashHistory.push(this.getUrl('next'));
+      this.context.router.push(this.getUrl('next'));
       this.context.store.dispatch(updateCompletedStatus(path));
     }
     this.scrollToTop();
   }
 
   handleBack() {
-    hashHistory.push(this.getUrl('back'));
+    this.context.router.push(this.getUrl('back'));
     this.scrollToTop();
   }
 
@@ -173,19 +179,36 @@ class HealthCareApp extends React.Component {
         </div>
       );
     }
+    let devPanel = undefined;
+    if (__DEV__) {
+      const queryParams = _.fromPairs(
+        window.location.search.substring(1).split('&').map((v) => { return v.split('='); }));
+      if (queryParams.devPanel === '1') {
+        devPanel = (
+          <div className="row">
+            <RoutesDropdown/>
+            <PopulateVeteranButton/>
+            <PerfPanel/>
+          </div>
+        );
+      }
+    }
 
     return (
-      <div className="row">
-        <Element name="topScrollElement"/>
-        <div className="medium-4 columns show-for-medium-up">
-          <Nav currentUrl={this.props.location.pathname}/>
-        </div>
-        <div className="medium-8 columns">
-          <div className="progress-box">
-          {/* TODO: Figure out why <form> adds fields to url, and change action to reflect actual action for form submission. */}
-            <div className="form-panel">
-              {children}
-              {buttons}
+      <div>
+        {devPanel}
+        <div className="row">
+          <Element name="topScrollElement"/>
+          <div className="medium-4 columns show-for-medium-up">
+            <Nav currentUrl={this.props.location.pathname}/>
+          </div>
+          <div className="medium-8 columns">
+            <div className="progress-box">
+            {/* TODO: Figure out why <form> adds fields to url, and change action to reflect actual action for form submission. */}
+              <div className="form-panel">
+                {children}
+                {buttons}
+              </div>
             </div>
           </div>
         </div>
@@ -196,6 +219,9 @@ class HealthCareApp extends React.Component {
 
 // TODO(awong): Hack to allow access to the store for now while migrating.
 // All uses of this.context.store in this file are WRONG!!!
-HealthCareApp.contextTypes = { store: React.PropTypes.object };
+HealthCareApp.contextTypes = {
+  router: React.PropTypes.object.isRequired,
+  store: React.PropTypes.object
+};
 
 export default HealthCareApp;
