@@ -63,35 +63,97 @@ function veteranToPersonInfo(veteran) {
   };
 }
 
+function zeroPadNumber(number, padding) {
+  return (new Array(padding + 1).join('0') + number).slice(-padding);
+}
+
+function formDateToESDate(dateObject) {
+  if (dateObject.month >= 1 && dateObject.month <= 12 &&
+    dateObject.day >= 1 && dateObject.month <= 31 && // TODO: how robust does this need to be? Form validates as well.
+    dateObject.year > 1) {
+    return `${zeroPadNumber(dateObject.month, 2)}/${zeroPadNumber(dateObject.day, 2)}/${zeroPadNumber(dateObject.year, 4)}`;
+  }
+  return undefined;
+}
+
+function makeServiceBranch(serviceBranch) {
+  // NOTE the return codes are from VHA Standard Data Service (ADRDEV01) Service Branch List
+  // http://vaausesrapp80.aac.va.gov:7404/ds/List/ServiceBranch
+  switch (serviceBranch) {
+    case 'army':
+      return 1;
+    case 'air force':
+      return 2;
+    case 'navy':
+      return 3;
+    case 'marine corps':
+      return 4;
+    case 'coast guard':
+      return 5;
+    case 'merchant seaman':
+      return 7;
+    case 'noaa':
+      return 10;
+    case 'usphs':
+      return 9;
+    case 'f.commonwealth':
+      return 11;
+    case 'f.guerilla':
+      return 12;
+    case 'f.scouts new':
+      return 13;
+    case 'f.scouts old':
+      return 14;
+    default:
+      return 6; // OTHER
+  }
+}
+
+function makeDischargeType(dischargeType) {
+  // NOTE these codes are from VHA Standard Data Service (ADRDEV01) Service Discharge Code List
+  // http://vaausesrapp80.aac.va.gov:7404/ds/List/ServiceDischargeCode
+  switch (dischargeType) {
+    case 'honorable':
+      return 1;
+    case 'general':
+      return 3;
+    case 'bad-conduct':
+      return 6;
+    case 'dishonorable':
+      return 2;
+    case 'undesirable':
+      return 5;
+    default:
+      return '4'; // OTHER-THAN-HONORABLE
+  }
+}
+
 //  * militaryServiceInfo / disabilityRetirementIndicator, Not applicable, Not applicable, This question has been dropped from VOA.
 //  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / dischargeType, drop-down, Yes,
-//  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / endDate, mm/dd/yyyy, month & year required,
-//  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / serviceBranch, drop-down, Yes,
-//  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / serviceNumber, 1 to 15 digits, No,
+//  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / dischargeType, Cannot be a Null value, ,
+//  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / dischargeType, Not a valid reference value, ,
 //  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / startDate, mm/dd/yyyy, month & year required,
-//  * militaryServiceInfo/militaryServiceSiteRecordCollection/militaryServiceEpisodeCollection/militaryServiceEpisodeInfo/dischargeType, Cannot be a Null value, ,
-//  * militaryServiceInfo/militaryServiceSiteRecordCollection/militaryServiceEpisodeCollection/militaryServiceEpisodeInfo/dischargeType, Not a valid reference value, ,
-//  * militaryServiceInfo/militaryServiceSiteRecordCollection/militaryServiceEpisodeCollection/militaryServiceEpisodeInfo/endDate, Cannot be a Null value, ,
-//  * militaryServiceInfo/militaryServiceSiteRecordCollection/militaryServiceEpisodeCollection/militaryServiceEpisodeInfo/endDate, Check for format mm/yyyy or mm/dd/yyyy and cannot be a future date, ,
-//  * militaryServiceInfo/militaryServiceSiteRecordCollection/militaryServiceEpisodeCollection/militaryServiceEpisodeInfo/serviceBranch, Cannot be a Null value, ,
-//  * militaryServiceInfo/militaryServiceSiteRecordCollection/militaryServiceEpisodeCollection/militaryServiceEpisodeInfo/serviceBranch, Not a valid reference value, ,
-//  * militaryServiceInfo/militaryServiceSiteRecordCollection/militaryServiceEpisodeCollection/militaryServiceEpisodeInfo/serviceNumber, "Null value is allowed;  Only numbers are allowed if value is present - must be 1 to 10 digits in length", ,
-//  * militaryServiceInfo/militaryServiceSiteRecordCollection/militaryServiceEpisodeCollection/militaryServiceEpisodeInfo/startDate, Cannot be a Null value, ,
-//  * militaryServiceInfo/militaryServiceSiteRecordCollection/militaryServiceEpisodeCollection/militaryServiceEpisodeInfo/startDate, Check for format mm/yyyy or mm/dd/yyyy and cannot be a future date, ,
+//  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / startDate, Cannot be a Null value, ,
+//  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / startDate, Check for format mm/yyyy or mm/dd/yyyy and cannot be a future date, ,
+//  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / endDate, mm/dd/yyyy, month & year required,
+//  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / endDate, Cannot be a Null value, ,
+//  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / endDate, Check for format mm/yyyy or mm/dd/yyyy and cannot be a future date, ,
+//  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / serviceBranch, drop-down, Yes,
+//  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / serviceBranch, Cannot be a Null value, ,
+//  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / serviceBranch, Not a valid reference value, ,
+//  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / serviceNumber, "Null value is allowed;  Only numbers are allowed if value is present - must be 1 to 10 digits in length", ,
+//  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / serviceNumber, 1 to 15 digits, No,
 function veteranToMilitaryServiceInfo(veteran) {
   return {
-    disabilityRetirementIndicator: false, // FIX
-    dischargeDueToDisability: false, // FIX
-    militaryServiceSiteRecords: {
-      militaryServiceSiteRecord: {
-        militaryServiceEpisode: {
-          endDate: veteran.lastDischargeDate,
-          serviceBranch: veteran.lastServiceBranch,
-          startDate: veteran.lastEntryDate,
-          dischargeType: veteran.dischargeType,
+    militaryServiceSiteRecordCollection: {
+      militaryServiceEpisodeCollection: {
+        militaryServiceEpisodeInfo: {
+          dischargeType: makeDischargeType(veteran.dischargeType),
+          startDate: formDateToESDate(veteran.lastEntryDate),
+          endDate: formDateToESDate(veteran.lastDischargeDate),
+          serviceBranch: makeServiceBranch(veteran.lastServiceBranch),
         }
-      },
-      site: '565GC',  // FIX
+      }
     }
   };
 }
