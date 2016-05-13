@@ -1,6 +1,7 @@
 const loopback = require('loopback');
 const voaRest = require('../hca-api-stub/voa-rest');
 const express = require('express');
+const morgan = require('morgan');
 
 const port = 3000;
 
@@ -39,6 +40,7 @@ function makeServer() {
   }
 
   const server = express();
+  server.use(morgan('combined'));
   server.use('/', express.static('public'));
   server.use('/healthcare/apply', express.static('public'));
   server.use('/healthcare/apply/generated', express.static('generated'));
