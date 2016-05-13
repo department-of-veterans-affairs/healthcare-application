@@ -99,7 +99,7 @@ class HealthCareApp extends React.Component {
     store.dispatch(updateCompletedStatus(path));
 
     // POST data to endpoint
-    fetch('/v1/api/submit', {
+    fetch('/v1/api/VoaServices/submit', {
       method: 'POST',
       header: {
         Accept: 'application/json',
