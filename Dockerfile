@@ -5,7 +5,10 @@
 #
 # Our production deploy does not have any C/C++ library dependencies yet
 # so this is still easy to do.
-FROM mhart/alpine-node:4
+FROM mhart/alpine-node:4.4.4
+
+# Upgrade npm to npm LTS.
+RUN npm install -g npm@3.8.9
 
 # Snarf enough of the package config to do the library installs. This 
 # avoids creation of extra layers as the library installs update at a
