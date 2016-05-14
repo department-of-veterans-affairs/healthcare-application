@@ -55,9 +55,9 @@ function veteranToPersonInfo(veteran) {
     firstName: veteran.veteranFullName.first,
     middleName: veteran.veteranFullName.middle,
     lastName: veteran.veteranFullName.last,
-    ssnText: veteran.veteranSocialSecurityNumber,
+    ssnText: veteran.veteranSocialSecurityNumber.replace(/-/g, ''),
     gender: veteran.gender,
-    dob: veteran.veteranDateOfBirth,
+    dob: formDateToESDate(veteran.veteranDateOfBirth),
     mothersMaidenName: veteran.mothersMaidenName,
     placeOfBirthCity: veteran.cityOfBirth,
   };
@@ -145,14 +145,17 @@ function makeDischargeType(dischargeType) {
 //  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / serviceNumber, 1 to 15 digits, No,
 function veteranToMilitaryServiceInfo(veteran) {
   return {
-    militaryServiceSiteRecordCollection: {
-      militaryServiceEpisodeCollection: {
-        militaryServiceEpisodeInfo: {
-          dischargeType: makeDischargeType(veteran.dischargeType),
-          startDate: formDateToESDate(veteran.lastEntryDate),
-          endDate: formDateToESDate(veteran.lastDischargeDate),
-          serviceBranch: makeServiceBranch(veteran.lastServiceBranch),
-        }
+    militaryServiceSiteRecords: {
+      militaryServiceSiteRecord: {
+        militaryServiceEpisodes: {
+          militaryServiceEpisode: {
+            dischargeType: makeDischargeType(veteran.dischargeType),
+            startDate: formDateToESDate(veteran.lastEntryDate),
+            endDate: formDateToESDate(veteran.lastDischargeDate),
+            serviceBranch: makeServiceBranch(veteran.lastServiceBranch),
+          }
+        },
+        site: "565GC",  // FIX
       }
     }
   };
@@ -264,7 +267,7 @@ function veteranToEnrollmentDeterminationInfo(veteran) {
 
     //  * serviceConnectionawardInfo / serviceConnectedIndicator, Checkbox, No,
     serviceConnectionAward: {
-      serviceConnectedIndicator: veteran.isVaServiceConnected,
+      serviceConnectedIndicator: veteran.isVaServiceConnected === 'Y' ? true : false,
     },
 
     specialFactors: {
@@ -684,17 +687,20 @@ function veteranToAssociationCollection(_veteran) {
 function veteranToDemographicsInfo(veteran) {
   return {
     appointmentRequestResponse: true, // FIX
-    addresses: {
-      address: {
-        city: veteran.veteranAddress.city,
-        country: veteran.veteranAddress.country,
-        line1: veteran.veteranAddress.street,
-        state: veteran.veteranAddress.state,
-        zipcode: veteran.veteranAddress.zipcode,
-      }
+    contactInfo: {
+      addresses: {
+        address: {
+          city: veteran.veteranAddress.city,
+          country: veteran.veteranAddress.country,
+          line1: veteran.veteranAddress.street,
+          state: veteran.veteranAddress.state,
+          zipCode: veteran.veteranAddress.zipcode,
+          addressTypeCode: 'P',  // FIX
+        }
+      },
     },
     ethnicity: '2186-5', // FIX
-    maritalStatus: veteran.maritalStatus,
+    maritalStatus: 'M', // FIX: veteran.maritalStatus,
     preferredFacility: veteran.vaMedicalFacility,
     races: {
       race: '2106-3' // FIX
@@ -744,13 +750,14 @@ function veteranToSummary(veteran) {
     financialsInfo: veteranToFinancialsInfo(veteran),
     insuranceList: veteranToInsuranceCollection(veteran),
     militaryServiceInfo: veteranToMilitaryServiceInfo(veteran),
-    personInfo: veteranToPersonInfo(veteran),
 
     //  * "prisonerOfWarInfo / powIndicator", Checkbox, No,
     prisonerOfWarInfo: { powIndicator: veteran.isFormerPow },
 
     //  * purpleHeartInfo / indicator, Checkbox, No,
     purpleHeart: { indicator: veteran.purpleHeartRecipient },
+
+    personInfo: veteranToPersonInfo(veteran),
 
   };
 }
@@ -779,19 +786,28 @@ function veteranToSummary(veteran) {
  * @returns {Object} Object representing soap message for use with VoaService.saveSubmitForm.
  */
 function veteranToSaveSubmitForm(veteran) {
-  return Object.assign({}, formTemplate, {
-    summary: veteranToSummary(veteran),
-    applications: {
-      applicationInfo: {
-        // FIX. Use current date.
-        //  * form / applications / applicationInfo / appDate, "Application date cannot be a null value when the form identifier type is ""100 -- 1010EZ""", ,
-        //  * form / applications / applicationInfo / benefitType, "Neither Health Benefits or Dental is indicated,  at least one is required; both may be indicated.", ,
-        //  * form / applications / applicationInfo / benefitType, Checkboxes, Yes, This is one question of the form but is currently passed as 2 differerent values with a yes/no for each 1. Enrollment Health services and 2. Dental
-        appDate: '2015-12-21',
-        appMethod: '1'
-      }
+  const request = Object.assign({}, formTemplate);
+  request.form.summary = veteranToSummary(veteran);
+  request.form.applications = {
+    applicationInfo: {
+      // FIX. Use current date.
+      //  * form / applications / applicationInfo / appDate, "Application date cannot be a null value when the form identifier type is ""100 -- 1010EZ""", ,
+      //  * form / applications / applicationInfo / benefitType, "Neither Health Benefits or Dental is indicated,  at least one is required; both may be indicated.", ,
+      //  * form / applications / applicationInfo / benefitType, Checkboxes, Yes, This is one question of the form but is currently passed as 2 differerent values with a yes/no for each 1. Enrollment Health services and 2. Dental
+      appDate: '2016-05-13',
+      appMethod: '1'
     }
-  });
+  };
+  return JSON.parse(JSON.stringify(request, (i,d) => {
+    if (d === true) {
+      return "true";
+    } else if (d === false) {
+      return "false";
+    } else if (typeof (d) === 'number') {
+      return `${d}`;
+    }
+    return d;
+  }));
 }
 
 module.exports = { veteranToSaveSubmitForm };

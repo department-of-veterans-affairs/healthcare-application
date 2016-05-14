@@ -75,6 +75,8 @@ function attach(app) {
       remotingEnabled: true,
       wsdl: path.join(__dirname, './voa.wsdl'),
       url: endpoint.esPreprod,
+//      wsdl: endpoint.esDev + '?wsdl',
+//      url: endpoint.esDev,
       security: securityArtifacts,
       wsdl_options: securityArtifacts === null ? null : { // eslint-disable-line
         rejectUnauthorized: false,
@@ -88,9 +90,9 @@ function attach(app) {
     const VoaService = ds.createModel('VoaService', {});
 
     // Add the methods
-    // TODO(awong): Rename "form" to "veteran" uniformly. #210
     VoaService.submit = (form, cb) => {
-      VoaService.saveSubmitForm(veteranToSaveSubmitForm(form), (err, response) => {
+      const request = veteranToSaveSubmitForm(form);
+      VoaService.saveSubmitForm(request, (err, response) => {
         const result = response;
         cb(err, result);
       });
@@ -106,10 +108,7 @@ function attach(app) {
     // Map to REST/HTTP
     loopback.remoteMethod(
       VoaService.submit, {
-        accepts: [
-          { arg: 'form', type: 'Object', required: true,
-            http: { source: 'body' } }
-        ],
+        accepts: { arg: 'form', type: 'Object', http: {source: 'body'} },
         returns: { arg: 'result', type: 'string', root: true },
         http: { path: '/submit' }
       }
