@@ -27,6 +27,19 @@ const formTemplate = {
   }
 };
 
+function zeroPadNumber(number, padding) {
+  return (new Array(padding + 1).join('0') + number).slice(-padding);
+}
+
+function formDateToESDate(dateObject) {
+  if (dateObject.month >= 1 && dateObject.month <= 12 &&
+    dateObject.day >= 1 && dateObject.month <= 31 && // TODO: how robust does this need to be? Form validates as well.
+    dateObject.year > 1) {
+    return `${zeroPadNumber(dateObject.month, 2)}/${zeroPadNumber(dateObject.day, 2)}/${zeroPadNumber(dateObject.year, 4)}`;
+  }
+  return undefined;
+}
+
 //  * personInfo / dob, mm/dd/yyyy; cannot be in the future, Yes, "Element is accepted but not used as this element will not be stored in ADR,  it must come from MPI (the authoritative source)."
 //  * personInfo / firstName, alphanumeric (1-30), Yes, "Element is accepted but not used as this element will not be stored in ADR,  it must come from MPI (the authoritative source)."
 //  * personInfo / gender, drop-down, Yes, "Element is accepted but not used as this element will not be stored in ADR,  it must come from MPI (the authoritative source)."
@@ -61,19 +74,6 @@ function veteranToPersonInfo(veteran) {
     mothersMaidenName: veteran.mothersMaidenName,
     placeOfBirthCity: veteran.cityOfBirth,
   };
-}
-
-function zeroPadNumber(number, padding) {
-  return (new Array(padding + 1).join('0') + number).slice(-padding);
-}
-
-function formDateToESDate(dateObject) {
-  if (dateObject.month >= 1 && dateObject.month <= 12 &&
-    dateObject.day >= 1 && dateObject.month <= 31 && // TODO: how robust does this need to be? Form validates as well.
-    dateObject.year > 1) {
-    return `${zeroPadNumber(dateObject.month, 2)}/${zeroPadNumber(dateObject.day, 2)}/${zeroPadNumber(dateObject.year, 4)}`;
-  }
-  return undefined;
 }
 
 function makeServiceBranch(serviceBranch) {
@@ -155,7 +155,7 @@ function veteranToMilitaryServiceInfo(veteran) {
             serviceBranch: makeServiceBranch(veteran.lastServiceBranch),
           }
         },
-        site: "565GC",  // FIX
+        site: '565GC',  // FIX
       }
     }
   };
@@ -267,7 +267,7 @@ function veteranToEnrollmentDeterminationInfo(veteran) {
 
     //  * serviceConnectionawardInfo / serviceConnectedIndicator, Checkbox, No,
     serviceConnectionAward: {
-      serviceConnectedIndicator: veteran.isVaServiceConnected === 'Y' ? true : false,
+      serviceConnectedIndicator: veteran.isVaServiceConnected === 'Y',
     },
 
     specialFactors: {
@@ -798,11 +798,11 @@ function veteranToSaveSubmitForm(veteran) {
       appMethod: '1'
     }
   };
-  return JSON.parse(JSON.stringify(request, (i,d) => {
+  return JSON.parse(JSON.stringify(request, (i, d) => {
     if (d === true) {
-      return "true";
+      return 'true';
     } else if (d === false) {
-      return "false";
+      return 'false';
     } else if (typeof (d) === 'number') {
       return `${d}`;
     }
