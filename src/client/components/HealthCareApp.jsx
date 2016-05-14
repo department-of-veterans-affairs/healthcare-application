@@ -88,9 +88,9 @@ class HealthCareApp extends React.Component {
     const store = this.context.store;
     const veteran = store.getState().veteran;
 
-    // Strip out unnecessary fields'
-    function reducer(key, value) {
-      return key === 'dirty' ? undefined : value;
+    // Strip out unnecessary fields that track UI state
+    function reducer(i, d) {
+      return typeof d.value !== 'undefined' ? d.value : d;
     }
     const json = JSON.stringify(veteran, reducer, 4);
     console.log(json);
