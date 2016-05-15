@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const validations = require('./utils/validations');
 //
 // The Comments starting with "// *" that look like a bad CSV dump are copy-pasta-ed out the VOA
 // requirements documentation from the ES team. It's not authoritative for the field name and
@@ -66,7 +67,7 @@ function formDateToESDate(dateObject) {
 //  * personInfo/ssnText, Value not 9 digits and contains a non number., ,
 function veteranToPersonInfo(veteran) {
   return {
-    dob: veteran.veteranDateOfBirth,
+    dob: validations.dateOfBirth(veteran.veteranDateOfBirth),
     firstName: veteran.veteranFullName.first,
     gender: veteran.gender,
     lastName: veteran.veteranFullName.last,
@@ -74,7 +75,7 @@ function veteranToPersonInfo(veteran) {
     mothersMaidenName: veteran.mothersMaidenName,
     placeOfBirthCity: veteran.cityOfBirth,
     placeOfBirthState: veteran.stateOfBirth,
-    ssnText: veteran.veteranSocialSecurityNumber,
+    ssnText: veteran.veteranSocialSecurityNumber
   };
 }
 
