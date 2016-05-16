@@ -242,7 +242,7 @@ export const completeVeteran = {
       dirty: false
     },
     zipcode: {
-      value: '001234-1234',
+      value: '20005',
       dirty: false
     }
   },
@@ -518,7 +518,7 @@ export const completeVeteran = {
     }
   ],
   isMedicaidEligible: true,
-  isEnrolledMedicarePartA: true,
+  isEnrolledMedicarePartA: false,
   medicarePartAEffectiveDate: {
     month: {
       value: '10',

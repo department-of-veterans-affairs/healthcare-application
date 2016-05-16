@@ -92,21 +92,19 @@ class HealthCareApp extends React.Component {
     function reducer(i, d) {
       return typeof d.value !== 'undefined' ? d.value : d;
     }
-    const json = JSON.stringify(veteran, reducer, 4);
-    console.log(json);
 
     store.dispatch(updateSubmissionStatus('submitPending'));
     store.dispatch(updateCompletedStatus(path));
 
     // POST data to endpoint
-    fetch('/v1/api/VoaServices/submit', {
+    fetch('/api/hca/v1/VoaServices/submit', {
       method: 'POST',
-      header: {
+      headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
       timeout: 10000, // 10 seconds
-      body: json
+      body: JSON.stringify(veteran, reducer)
     }).then(response => {
       if (!response.ok) {
         throw new Error(response.statusText);
