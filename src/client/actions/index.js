@@ -70,10 +70,10 @@ export function updateSpouseAddress(propertyPath, value) {
   };
 }
 
-export function updateSubmissionStatus(field) {
+export function updateSubmissionStatus(value) {
   return {
     type: UPDATE_SUBMISSION_STATUS,
-    field
+    value
   };
 }
 

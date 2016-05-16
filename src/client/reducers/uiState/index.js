@@ -8,7 +8,7 @@ _.mixin(lodashDeep);
 
 
 const ui = {
-  applicationSubmitted: false,
+  submissionStatus: false,
   sections: {
     '/introduction': {
       complete: false,
@@ -128,7 +128,8 @@ function uiState(state = ui, action) {
 
     case UPDATE_SUBMISSION_STATUS:
       newState = Object.assign({}, state);
-      _.set(newState, action.field, true);
+      _.set(newState, 'submissionStatus', action.value);
+      console.log(newState);
       return newState;
 
     default:
