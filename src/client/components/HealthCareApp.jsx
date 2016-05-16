@@ -122,6 +122,7 @@ class HealthCareApp extends React.Component {
   render() {
     let children = this.props.children;
     let buttons;
+    const path = this.props.location.pathname;
 
     if (children === null) {
       // This occurs if the root route is hit. Default to IntroductionSection.
@@ -152,7 +153,7 @@ class HealthCareApp extends React.Component {
           buttonClass="usa-button-primary"/>
     );
 
-    if (this.props.location.pathname === '/review-and-submit') {
+    if (path === '/review-and-submit') {
       buttons = (
         <div className="row progress-buttons">
           <div className="small-6 medium-5 columns">
@@ -163,7 +164,7 @@ class HealthCareApp extends React.Component {
           </div>
         </div>
       );
-    } else if (this.props.location.pathname === '/introduction') {
+    } else if (path === '/introduction') {
       buttons = (
         <div className="row progress-buttons">
           <div className="small-6 medium-5 columns">
@@ -204,12 +205,12 @@ class HealthCareApp extends React.Component {
         <div className="row">
           <Element name="topScrollElement"/>
           <div className="medium-4 columns show-for-medium-up">
-            <Nav currentUrl={this.props.location.pathname}/>
+            <Nav currentUrl={path}/>
           </div>
           <div className="medium-8 columns">
             <div className="progress-box">
             {/* TODO: Figure out why <form> adds fields to url, and change action to reflect actual action for form submission. */}
-              <div className="form-panel">
+              <div className={path === '/review-and-submit' ? '' : 'form-panel'}>
                 {children}
                 {buttons}
               </div>

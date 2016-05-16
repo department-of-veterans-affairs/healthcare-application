@@ -5,6 +5,7 @@ import DateInput from '../form-elements/DateInput';
 import ErrorableSelect from '../form-elements/ErrorableSelect';
 import { branchesServed, dischargeTypes } from '../../utils/options-for-select.js';
 import { veteranUpdateField } from '../../actions';
+import { displayLabel } from '../../store/calculated';
 
 /**
  * Props:
@@ -12,15 +13,19 @@ import { veteranUpdateField } from '../../actions';
  * `reviewSection` - Boolean. Hides components that are only needed for ReviewAndSubmitSection.
  */
 class ServiceInformationSection extends React.Component {
+
   render() {
     let content;
+
+    const selectedLastServiceBranch = this.props.data.lastServiceBranch.value;
+    const selectedDischargeType = this.props.data.dischargeType.value;
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
       content = (<table className="review usa-table-borderless">
         <tbody>
           <tr>
             <td>Last branch of service:</td>
-            <td>{this.props.data.lastServiceBranch.value}</td>
+            <td>{displayLabel(branchesServed, selectedLastServiceBranch)}</td>
           </tr>
           <tr>
             <td>Last entry date:</td>
@@ -34,7 +39,7 @@ class ServiceInformationSection extends React.Component {
           </tr>
           <tr>
             <td>Discharge Type:</td>
-            <td>{this.props.data.dischargeType.value}</td>
+            <td>{displayLabel(dischargeTypes, selectedDischargeType)}</td>
           </tr>
         </tbody>
       </table>);
