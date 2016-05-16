@@ -73,7 +73,6 @@ class ReviewCollapsiblePanel extends React.Component {
     const sectionIndexes = allSections.indexOf(currentPath);
     const prevPath = allSections[sectionIndexes - 1];
 
-
     if (sectionsVerified) {
       hiddenSection = (<div></div>);
     } else {
