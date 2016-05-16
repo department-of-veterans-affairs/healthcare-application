@@ -22,13 +22,9 @@ class DemographicInformationSection extends React.Component {
               <td>Gender:</td>
               <td>{this.props.data.gender.value}</td>
             </tr>
-            <tr>
-              <td>Are you Spanish, Hispanic, or Latino?:</td>
-              <td>{`${this.props.data.isSpanishHispanicLatino ? 'Yes' : 'No'}`}</td>
-            </tr>
           </tbody>
         </table>
-        <h4>What is your race?</h4>
+        <h4>Which categories best describe you?</h4>
         <table className="review usa-table-borderless">
           <tbody>
             <tr>
@@ -51,6 +47,10 @@ class DemographicInformationSection extends React.Component {
               <td>White:</td>
               <td>{`${this.props.data.isWhite ? 'Yes' : ''}`}</td>
             </tr>
+            <tr>
+              <td>Spanish, Hispanic, or Latino:</td>
+              <td>{`${this.props.data.isSpanishHispanicLatino ? 'Yes' : ''}`}</td>
+            </tr>
           </tbody>
         </table>
       </div>);
@@ -61,14 +61,10 @@ class DemographicInformationSection extends React.Component {
           <Gender required
               value={this.props.data.gender}
               onUserInput={(update) => {this.props.onStateChange('gender', update);}}/>
-          <ErrorableCheckbox
-              label="Are you Spanish, Hispanic, or Latino?"
-              checked={this.props.data.isSpanishHispanicLatino}
-              onValueChange={(update) => {this.props.onStateChange('isSpanishHispanicLatino', update);}}/>
         </div>
 
         <div className="input-section">
-          <h4>What is your race?</h4>
+          <h4>Which categories best describe you?</h4>
           <span className="usa-form-hint">You may check more than one.</span>
           <ErrorableCheckbox
               label="American Indian or Alaksan Native"
@@ -94,6 +90,11 @@ class DemographicInformationSection extends React.Component {
               label="White"
               checked={this.props.data.isWhite}
               onValueChange={(update) => {this.props.onStateChange('isWhite', update);}}/>
+
+          <ErrorableCheckbox
+              label="Spanish, Hispanic, or Latino"
+              checked={this.props.data.isSpanishHispanicLatino}
+              onValueChange={(update) => {this.props.onStateChange('isSpanishHispanicLatino', update);}}/>
         </div>
       </fieldset>);
     }

@@ -199,16 +199,20 @@ button i.fa {
 }
 
 .hca-review-panel {
-  .accordion-header {
-    height: 8rem;
-    padding: 1rem;
-    .edit-btn {
+  button {
       background-color: $color-primary;
       color: $white;
       &:hover {
         background-color: $color-primary-darker;
+        color: $white;
       }
     }
+    .edit-btn { 
+      padding: 1.5rem 3.5rem 1.5rem 3rem;
+    }
+  .accordion-header {
+    height: 8rem;
+    padding: 1rem;
   }
 }
 

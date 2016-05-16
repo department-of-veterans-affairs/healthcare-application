@@ -5,8 +5,9 @@ import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import ErrorableSelect from '../form-elements/ErrorableSelect';
 import VaMedicalFacility from './VaMedicalFacility';
 import { veteranUpdateField } from '../../actions';
-import { states } from '../../utils/options-for-select';
+import { states, vaMedicalFacilities } from '../../utils/options-for-select';
 import { validateIfDirty, isNotBlank } from '../../utils/validations';
+import { displayLabel } from '../../store/calculated';
 
 /**
  * Props:
@@ -16,6 +17,9 @@ import { validateIfDirty, isNotBlank } from '../../utils/validations';
 class AdditionalInformationSection extends React.Component {
   render() {
     let content;
+    const selectedFacilityState = this.props.data.facilityState.value;
+    const FacilitiesWithinState = vaMedicalFacilities[selectedFacilityState];
+    const selectedVaMedicalFacility = this.props.data.vaMedicalFacility.value;
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
       content = (<table className="review usa-table-borderless">
@@ -26,7 +30,7 @@ class AdditionalInformationSection extends React.Component {
           </tr>
           <tr>
             <td>Preferred VA Medical Facility:</td>
-            <td>{this.props.data.vaMedicalFacility.value} in {this.props.data.facilityState.value}</td>
+            <td>{displayLabel(FacilitiesWithinState, selectedVaMedicalFacility)}</td>
           </tr>
           <tr>
             <td>Do you want VA to contact you to schedule your first appointment?:</td>

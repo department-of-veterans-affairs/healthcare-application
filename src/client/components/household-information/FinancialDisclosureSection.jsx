@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
+import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
+import { yesNo } from '../../utils/options-for-select';
+import { validateIfDirty, isNotBlank } from '../../utils/validations';
 import { veteranUpdateField } from '../../actions';
 
 /**
@@ -17,33 +19,42 @@ class FinancialDisclosureSection extends React.Component {
       content = (<table className="review usa-table-borderless">
         <tbody>
           <tr>
-            <td>I agree to provide my financial information so the VA can determine
-             my eligibility for VA healthcare and if I should be charged for copays and medication:
+            <td>I agree to provide my financial information so the VA can determine my eligibility
+             for VA healthcare and if I should be charged for copays and medication.:
             </td>
-            <td>{`${this.props.data.provideFinancialInfo ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.provideFinancialInfo === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
             <td>I understand VA is not currently enrolling new applicants who decline to
             provide their financial information unless they have other qualifying eligibility factors: </td>
-            <td>{`${this.props.data.understandsFinancialDisclosure ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.understandsFinancialDisclosure === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
         </tbody>
       </table>);
     } else {
       content = (<fieldset>
         <legend>Financial Disclosure</legend>
+        <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
-          <p>In the next 4 sections you will be asked to provide your financial information from the most recent tax year. This
-          information is used to determine your eligibility for health care. Your most recent
-          tax filing will have all the information you need in it.</p>
+          <p>You will now be asked to provide your financial information from the
+          most recent tax year. We ask for this information for 2 reasons:</p>
+
+          <ol>
+            <li>To determine your eligibility for healthcare if you do not have a
+            qualifying eligibility factor</li>
+            <li>To determine your eligibility for additional benefits, like travel
+            assistance, cost-free medications, and/or medical care unrelated to
+            military experience</li>
+          </ol>
+
           <p>
-            Veterans are not required to disclose their financial information; however,
-            <strong> VA is not currently enrolling new applicants who decline to provide their financial information unless
-            they have other qualifying eligibility factors.</strong>
+            You are not required to provide your financial information. However,
+            <strong> if you do not have a qualifying eligibility factor, providing
+            your financial information is the only way to determine your eligibility.</strong>
           </p>
 
-          <p>Qualifying Eligibility Factors:</p>
-          <ul>
+          {/* Move this list to a tooltip in reference above, create new tooltip component */}
+          <ul>The qualifying eligibility factors are:
             <li>discharged for a disability incurred or aggravated in the line of duty</li>
             <li>receiving monetary compensation for VA service-connected disability</li>
             <li>a former Prisoner of War</li>
@@ -53,24 +64,23 @@ class FinancialDisclosureSection extends React.Component {
             <li>a recently discharged Combat Veteran, discharged within the past 5 years</li>
           </ul>
 
-          <p>Veterans with qualifying eligibility factors may choose to provide their financial
-          information, to qualify for additional benefits like: travel assistance, cost-free medications
-          and/or medical care for services unrelated to military experience.</p>
-
           <div className="input-section">
-            <ErrorableCheckbox
-                label="I agree to provide my financial information so the VA can determine my eligibility for VA healthcare and if I should be charged for copays and medication."
-                checked={this.props.data.provideFinancialInfo}
-                onValueChange={(update) => {this.props.onStateChange('provideFinancialInfo', update);}}/>
-
-            <ErrorableCheckbox
-                label="I understand VA is not currently enrolling new applicants who decline to provide their financial information unless they have other qualifying eligibility factors."
-                checked={this.props.data.understandsFinancialDisclosure}
-                onValueChange={(update) => {this.props.onStateChange('understandsFinancialDisclosure', update);}}/>
+            <a target="_blank" href="http://www.va.gov/healthbenefits/cost/income_thresholds.asp">Click here</a> to view more information about the income thresholds and copayments.
           </div>
 
           <div className="input-section">
-            <a target="_blank" href="http://www.va.gov/healthbenefits/cost/income_thresholds.asp">Click here</a> to view more information about the income thresholds and copayments.
+            <ErrorableRadioButtons required
+                errorMessage={validateIfDirty(this.props.data.provideFinancialInfo, isNotBlank) ? '' : 'Please select a response'}
+                label="I agree to provide my financial information so the VA can determine my eligibility for VA healthcare and if I should be charged for copays and medication."
+                options={yesNo}
+                value={this.props.data.provideFinancialInfo}
+                onValueChange={(update) => {this.props.onStateChange('provideFinancialInfo', update);}}/>
+
+            <ErrorableRadioButtons
+                label="I understand VA is not currently enrolling new applicants who decline to provide their financial information unless they have other qualifying eligibility factors."
+                options={yesNo}
+                value={this.props.data.understandsFinancialDisclosure}
+                onValueChange={(update) => {this.props.onStateChange('understandsFinancialDisclosure', update);}}/>
           </div>
 
         </div>

@@ -73,6 +73,10 @@ function isValidDate(day, month, year) {
     return false;
   }
 
+  if (Number(year) < 1900) {
+    return false;
+  }
+
   return date.getDate() === Number(day) &&
     date.getMonth() === adjustedMonth &&
     date.getFullYear() === Number(year);
@@ -91,7 +95,7 @@ function isValidMonetaryValue(value) {
 
 // TODO: look into validation libraries (npm "validator")
 function isValidPhone(value) {
-  return /^\d{3}-\d{3}-\d{4}$/.test(value);
+  return /^\d{10}$/.test(value);
 }
 
 function isValidEmail(value) {
@@ -103,19 +107,15 @@ function isValidEmail(value) {
 //        2. 6 arguments to a function is ugly...
 //        3. argument order is now based on form order... using
 function isValidAddress(street, city, country, state, zipcode) {
-  // arbitraty use of field to keep linter happy until we answer #1
-  if (isNotBlank(street.value) && isNotBlank(city.value) && isNotBlank(country.value) && isNotBlank(state.value) && isNotBlank(zipcode.value)) {
-    return true;
-  }
-
-  return true;
+  return isNotBlank(street) && isNotBlank(city) && isNotBlank(country) && isNotBlank(state) && isNotBlank(zipcode);
 }
 
-function isValidInsurancePolicy(policyNumber, groupCode) {
-  if (policyNumber !== null || groupCode !== null) {
-    return isNotBlank(policyNumber) || isNotBlank(groupCode);
-  }
-  return true;
+function isBlankAddressField(field) {
+  return isBlank(field.street.value) &&
+    isBlank(field.city.value) &&
+    isBlank(field.country.value) &&
+    isBlank(field.state.value) &&
+    isBlank(field.zipcode.value);
 }
 
 function isValidField(validator, field) {
@@ -144,21 +144,56 @@ function isValidFullNameField(field) {
     isValidName(field.last.value);
 }
 
-function isBlankAddressField(field) {
-  return isBlank(field.street.value) &&
-    isBlank(field.city.value) &&
-    isBlank(field.country.value) &&
-    isBlank(field.state.value) &&
-    isBlank(field.zipcode.value);
-}
-
 function isValidAddressField(field) {
   return isValidAddress(field.street.value, field.city.value, field.country.value, field.state.value, field.zipcode.value);
 }
 
+function isValidInsurancePolicy(policyNumber, groupCode) {
+  if (policyNumber !== null || groupCode !== null) {
+    return isNotBlank(policyNumber) || isNotBlank(groupCode);
+  }
+  return true;
+}
+
+function isValidEntryDateField(date, dateOfBirth) {
+  let adjustedDate;
+  let adjustedDateOfBirth;
+
+  if (!isBlankDateField(date) && !isBlankDateField(dateOfBirth)) {
+    adjustedDate = new Date(date.year.value, date.month.value, date.day.value);
+    adjustedDateOfBirth = new Date(Number(dateOfBirth.year.value) + 15, dateOfBirth.month.value, dateOfBirth.day.value);
+
+    if (adjustedDate < adjustedDateOfBirth) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function isValidDischargeDateField(date, entryDate) {
+  let adjustedDate;
+  let adjustedEntryDate;
+  const today = new Date();
+
+  if (!isBlankDateField(date) && !isBlankDateField(entryDate)) {
+    adjustedDate = new Date(date.year.value, date.month.value, date.day.value);
+    adjustedEntryDate = new Date(entryDate.year.value, entryDate.month.value, entryDate.day.value);
+
+    if (adjustedDate < adjustedEntryDate || adjustedDate > today) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 function isValidPersonalInfoSection(data) {
-  return isValidFullNameField(data.veteranFullName) &&
-      isValidRequiredField(isValidSSN, data.veteranSocialSecurityNumber) &&
+  return isValidFullNameField(data.veteranFullName);
+}
+
+function isValidBirthInformationSection(data) {
+  return isValidRequiredField(isValidSSN, data.veteranSocialSecurityNumber) &&
       isValidDateField(data.veteranDateOfBirth);
 }
 
@@ -173,24 +208,33 @@ function isValidVaInformation(data) {
 }
 
 function isValidVeteranAddress(data) {
-  return isValidAddressField(data.veteranAddress) &&
-      isValidField(isValidEmail, data.email) &&
+  return isValidAddressField(data.veteranAddress);
+}
+
+function isValidContactInformationSection(data) {
+  return isValidField(isValidEmail, data.email) &&
       isValidField(isValidEmail, data.emailConfirmation) &&
       isValidField(isValidPhone, data.homePhone) &&
       isValidField(isValidPhone, data.mobilePhone);
 }
 
+function isValidFinancialDisclosure(data) {
+  return isNotBlank(data.provideFinancialInfo.value);
+}
+
 function isValidSpouseInformation(data) {
+  // TODO: Update once conditional logic in spouse section is in place
   return (isBlankFullNameField(data.spouseFullName) || isValidFullNameField(data.spouseFullName)) &&
       isValidField(isValidSSN, data.spouseSocialSecurityNumber) &&
       (isBlankDateField(data.spouseDateOfBirth) || isValidDateField(data.spouseDateOfBirth)) &&
       (isBlankDateField(data.dateOfMarriage) || isValidDateField(data.dateOfMarriage)) &&
       (isBlankAddressField(data.spouseAddress) || isValidAddressField(data.spouseAddress)) &&
       isValidField(isValidPhone, data.spousePhone) &&
-      isNotBlank(data.maritalStatus);
+      isNotBlank(data.maritalStatus.value);
 }
 
 function isValidChildInformationField(child) {
+  // TODO: add validation to check if DOB is before date of dependence
   return isValidFullNameField(child.childFullName) &&
     isNotBlank(child.childRelation.value) &&
     isValidRequiredField(isValidSSN, child.childSocialSecurityNumber) &&
@@ -245,19 +289,20 @@ function isValidDeductibleExpenses(data) {
     isValidField(isValidMonetaryValue, data.deductibleEducationExpenses);
 }
 
-function isValidAdditionalInformation(data) {
+function isValidVAFacility(data) {
   return validateIfDirty(data.facilityState, isNotBlank) &&
     validateIfDirty(data.vaMedicalFacility, isNotBlank);
 }
 
 function isValidMedicareMedicaid(data) {
-  return isBlankDateField(data.medicarePartAEffectiveDate) ||
-    isValidDateField(data.medicarePartAEffectiveDate);
+  return validateIfDirty(data.isMedicaidEligible, isNotBlank) &&
+    validateIfDirty(data.isEnrolledMedicarePartA, isNotBlank) &&
+    (isBlankDateField(data.medicarePartAEffectiveDate) ||
+    isValidDateField(data.medicarePartAEffectiveDate));
 }
 
 function isValidGeneralInsurance(data) {
-  isValidAdditionalInformation(data);
-  isValidMedicareMedicaid(data);
+  // TODO: validations not working correctly, check this out
   const providers = data.providers;
   if (!data.isCoveredByHealthInsurance) {
     return true;
@@ -274,22 +319,30 @@ function isValidGeneralInsurance(data) {
 }
 
 function isValidServiceInformation(data) {
-  return (isBlankDateField(data.lastEntryDate) || isValidDateField(data.lastEntryDate)) &&
-         (isBlankDateField(data.lastDischargeDate) || isValidDateField(data.lastDischargeDate));
+  return isNotBlank(data.lastServiceBranch.value) &&
+      (isValidDateField(data.lastEntryDate) && isValidEntryDateField(data.lastEntryDate, data.veteranDateOfBirth)) &&
+      (isValidDateField(data.lastDischargeDate) && isValidDischargeDateField(data.lastDischargeDate, data.lastEntryDate)) &&
+      isNotBlank(data.dischargeType.value);
 }
 
 function isValidSection(completePath, sectionData) {
   switch (completePath) {
     case '/veteran-information/personal-information':
       return isValidPersonalInfoSection(sectionData);
+    case '/veteran-information/birth-information':
+      return isValidBirthInformationSection(sectionData);
     case '/veteran-information/demographic-information':
       return isValidDemographicInformation(sectionData);
     case '/veteran-information/veteran-address':
       return isValidVeteranAddress(sectionData);
+    case '/veteran-information/contact-information':
+      return isValidContactInformationSection(sectionData);
     case '/military-service/service-information':
       return isValidServiceInformation(sectionData);
     case '/va-benefits/basic-information':
       return isValidVaInformation(sectionData);
+    case '/household-information/financial-disclosure':
+      return isValidFinancialDisclosure(sectionData);
     case '/household-information/spouse-information':
       return isValidSpouseInformation(sectionData);
     case '/household-information/child-information':
@@ -298,11 +351,11 @@ function isValidSection(completePath, sectionData) {
       return isValidAnnualIncome(sectionData);
     case '/household-information/deductible-expenses':
       return isValidDeductibleExpenses(sectionData);
-    case '/insurance-information/additional-information':
-      return isValidAdditionalInformation(sectionData);
+    case '/insurance-information/va-facility':
+      return isValidVAFacility(sectionData);
     case '/insurance-information/general':
       return isValidGeneralInsurance(sectionData);
-    case '/insurance-information/medicare-medicaid':
+    case '/insurance-information/medicare':
       return isValidMedicareMedicaid(sectionData);
     default:
       return true;
@@ -336,11 +389,15 @@ export {
   isValidEmail,
   isValidAddress,
   isValidInsurancePolicy,
+  isValidEntryDateField,
+  isValidDischargeDateField,
   isValidField,
   isValidPersonalInfoSection,
+  isValidBirthInformationSection,
   isValidVaInformation,
-  isValidAdditionalInformation,
+  isValidVAFacility,
   isValidVeteranAddress,
+  isValidContactInformationSection,
   isValidSpouseInformation,
   isValidChildren,
   isValidAnnualIncome,

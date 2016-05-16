@@ -56,8 +56,8 @@ const blankVeteran = {
   homePhone: makeField(''),
   mobilePhone: makeField(''),
 
-  provideFinancialInfo: false,
-  understandsFinancialDisclosure: false,
+  provideFinancialInfo: makeField(''),
+  understandsFinancialDisclosure: makeField(''),
 
   spouseFullName: {
     first: makeField(''),
@@ -106,8 +106,8 @@ const blankVeteran = {
   isCoveredByHealthInsurance: false,
   providers: [],
 
-  isMedicaidEligible: false,
-  isEnrolledMedicarePartA: false,
+  isMedicaidEligible: makeField(''),
+  isEnrolledMedicarePartA: makeField(''),
   medicarePartAEffectiveDate: {
     month: makeField(''),
     day: makeField(''),

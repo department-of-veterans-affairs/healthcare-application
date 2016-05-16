@@ -20,15 +20,15 @@ class VAInformationSection extends React.Component {
         <tbody>
           <tr>
             <td>Are you VA Service Connected 50% to 100% Disabled?:</td>
-            <td>{`${this.props.data.isVaServiceConnected === 'Y' ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.isVaServiceConnected.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
             <td>Are you compensable VA Service Connected 0% - 40%?:</td>
-            <td>{`${this.props.data.compensableVaServiceConnected === 'Y' ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.compensableVaServiceConnected.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
             <td>Do you receive a VA pension?:</td>
-            <td>{`${this.props.data.receivesVaPension === 'Y' ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.receivesVaPension.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
         </tbody>
       </table>

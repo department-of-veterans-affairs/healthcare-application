@@ -3,7 +3,7 @@ import React from 'react';
 class IntroductionSection extends React.Component {
   render() {
     return (
-      <div className="usa-form-width">
+      <div>
         <div className="row">
           <div className="small-12 columns">
             <h3>Apply online for health care with the 1010ez</h3>

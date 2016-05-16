@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import AdditionalInformationSection from './insurance-information/AdditionalInformationSection';
 import AdditionalMilitaryInformationSection from './military-service/AdditionalMilitaryInformationSection';
 import AnnualIncomeSection from './household-information/AnnualIncomeSection';
+import BirthInformationSection from './veteran-information/BirthInformationSection';
 import ChildInformationSection from './household-information/ChildInformationSection';
+import ContactInformationSection from './veteran-information/ContactInformationSection';
 import DeductibleExpensesSection from './household-information/DeductibleExpensesSection';
 import DemographicInformationSection from './veteran-information/DemographicInformationSection';
 import FinancialDisclosureSection from './household-information/FinancialDisclosureSection';
@@ -45,72 +47,82 @@ class ReviewAndSubmitSection extends React.Component {
 
         {/* TODO(crew): Change names of sections to real names. */}
         <ReviewCollapsiblePanel
-            sectionLabel="PersonalInfoSection"
+            sectionLabel="Personal Information"
             updatePath="/veteran-information/personal-information"
             component={<PersonalInfoSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="DemographicInformationSection"
+            sectionLabel="Birth Information"
+            updatePath="/veteran-information/birth-information"
+            component={<BirthInformationSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="Demographic Information"
             updatePath="/veteran-information/demographic-information"
             component={<DemographicInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="VeteranAddressSection"
+            sectionLabel="Veteran Address"
             updatePath="/veteran-information/veteran-address"
             component={<VeteranAddressSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="ServiceInformationSection"
+            sectionLabel="Contact Information"
+            updatePath="/veteran-information/contact-information"
+            component={<ContactInformationSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="Military Service Information"
             updatePath="/military-service/service-information"
             component={<ServiceInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="AdditionalMilitaryInformationSection"
+            sectionLabel="Additional Service Information"
             updatePath="/military-service/additional-information"
             component={<AdditionalMilitaryInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="VAInformationSection"
+            sectionLabel="VA Benefits Information"
             updatePath="/va-benefits/basic-information"
             component={<VAInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="FinancialDisclosureSection"
+            sectionLabel="Financial Disclosure"
             updatePath="/household-information/financial-disclosure"
             component={<FinancialDisclosureSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="SpouseInformationSection"
+            sectionLabel="Spouse Information"
             updatePath="/household-information/spouse-information"
             component={<SpouseInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="ChildInformationSection"
+            sectionLabel="Children Information"
             updatePath="/household-information/child-information"
             component={<ChildInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="AnnualIncomeSection"
+            sectionLabel="Annual Income Information"
             updatePath="/household-information/annual-income"
             component={<AnnualIncomeSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="DeductibleExpensesSection"
+            sectionLabel="Deductible Expenses"
             updatePath="/household-information/deductible-expenses"
             component={<DeductibleExpensesSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="MedicareMedicaidSection"
+            sectionLabel="Medicare/Medicaid Information"
             updatePath="/insurance-information/medicare"
             component={<MedicareMedicaidSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="InsuranceInformationSection"
+            sectionLabel="Insurance Information"
             updatePath="/insurance-information/general"
             component={<InsuranceInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="AdditionalInformationSection"
+            sectionLabel="Additional Information"
             updatePath="/insurance-information/va-facility"
             component={<AdditionalInformationSection reviewSection/>}/>
       </div>);
@@ -126,7 +138,7 @@ class ReviewAndSubmitSection extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    isApplicationSubmitted: state.uiState.applicationSubmitted
+    isApplicationSubmitted: state.uiState.applicationSubmitted,
   };
 }
 // TODO(awong): Remove the pure: false once we start using ImmutableJS.

@@ -18,7 +18,12 @@ const ui = {
     '/veteran-information/personal-information': {
       complete: false,
       verified: false,
-      fields: ['veteranFullName', 'mothersMaidenName', 'veteranSocialSecurityNumber', 'veteranDateOfBirth', 'cityOfBirth', 'stateOfBirth']
+      fields: ['veteranFullName', 'mothersMaidenName']
+    },
+    '/veteran-information/birth-information': {
+      complete: false,
+      verified: false,
+      fields: ['veteranSocialSecurityNumber', 'veteranDateOfBirth', 'cityOfBirth', 'stateOfBirth']
     },
     '/veteran-information/demographic-information': {
       complete: false,
@@ -28,7 +33,12 @@ const ui = {
     '/veteran-information/veteran-address': {
       complete: false,
       verified: false,
-      fields: ['veteranAddress', 'veteranCounty', 'email', 'emailConfirmation', 'homePhone', 'mobilePhone']
+      fields: ['veteranAddress']
+    },
+    '/veteran-information/contact-information': {
+      complete: false,
+      verified: false,
+      fields: ['email', 'emailConfirmation', 'homePhone', 'mobilePhone']
     },
     '/military-service/service-information': {
       complete: false,

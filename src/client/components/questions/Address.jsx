@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import ErrorableSelect from '../form-elements/ErrorableSelect';
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
-import { isValidAddress } from '../../utils/validations';
+import { isBlank, isNotBlank, validateIfDirty } from '../../utils/validations';
 import { countries, states } from '../../utils/options-for-select';
 
 /**
@@ -15,6 +15,7 @@ class Address extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
+    this.validateAddressField = this.validateAddressField.bind(this);
   }
 
   componentWillMount() {
@@ -37,58 +38,65 @@ class Address extends React.Component {
     this.props.onUserInput(address);
   }
 
-  render() {
-    const isValid = isValidAddress(
-      this.props.value.street,
-      this.props.value.city,
-      this.props.value.country,
-      this.props.value.state,
-      this.props.value.zipcode
-    );
+  validateAddressField(field) {
+    if (this.props.required) {
+      return validateIfDirty(field, isNotBlank);
+    }
 
+    return validateIfDirty(field, isBlank) || validateIfDirty(field, isNotBlank);
+  }
+
+  render() {
     let stateList = [];
     const selectedCountry = this.props.value.country.value;
-    if (selectedCountry) {
+    if (states[selectedCountry]) {
       stateList = states[selectedCountry];
+    } else {
+      stateList.push('Other');
     }
 
     return (
-      <div className={isValid ? undefined : 'usa-input-error'}>
-        <ErrorableTextInput errorMessage={isValid ? undefined : 'Please enter a valid street address'}
+      <div>
+        <ErrorableTextInput errorMessage={this.validateAddressField(this.props.value.street) ? undefined : 'Please enter a valid street address'}
             label="Street"
             name="address"
             autocomplete="street-address"
             field={this.props.value.street}
+            required={this.props.required}
             onValueChange={(update) => {this.handleChange('street', update);}}/>
 
-        <ErrorableTextInput errorMessage={isValid ? undefined : 'Please enter a valid city'}
+        <ErrorableTextInput errorMessage={this.validateAddressField(this.props.value.city) ? undefined : 'Please enter a valid city'}
             label="City"
             name="city"
             autocomplete="address-level2"
             field={this.props.value.city}
+            required={this.props.required}
             onValueChange={(update) => {this.handleChange('city', update);}}/>
 
-        <ErrorableSelect errorMessage={isValid ? undefined : 'Please enter a valid country'}
+        <ErrorableSelect errorMessage={this.validateAddressField(this.props.value.country) ? undefined : 'Please enter a valid country'}
             label="Country"
             name="country"
             autocomplete="country"
             options={countries}
             value={this.props.value.country}
+            required={this.props.required}
             onValueChange={(update) => {this.handleChange('country', update);}}/>
 
-        <ErrorableSelect errorMessage={isValid ? undefined : 'Please enter a valid state'}
+        <ErrorableSelect errorMessage={this.validateAddressField(this.props.value.state) ? undefined : 'Please enter a valid state'}
             label="State"
             name="state"
             autocomplete="address-level1"
             options={stateList}
             value={this.props.value.state}
+            required={this.props.required}
             onValueChange={(update) => {this.handleChange('state', update);}}/>
 
-        <ErrorableTextInput errorMessage={isValid ? undefined : 'Please enter a valid ZIP code'}
+        <ErrorableTextInput errorMessage={this.validateAddressField(this.props.value.zipcode) ? undefined : 'Please enter a valid ZIP code'}
             label="ZIP Code"
             name="zip"
             autocomplete="postal-code"
             field={this.props.value.zipcode}
+            required={this.props.required}
             onValueChange={(update) => {this.handleChange('zipcode', update);}}/>
       </div>
     );

@@ -14,7 +14,7 @@ class Provider extends React.Component {
         <div className="input-section">
           <ErrorableTextInput required
               errorMessage={validateIfDirty(this.props.data.insuranceName, isNotBlank) ? undefined : 'Please enter the insurer’s name'}
-              label="Name"
+              label="Name of Provider"
               field={this.props.data.insuranceName}
               onValueChange={(update) => {this.props.onValueChange('insuranceName', update);}}/>
 

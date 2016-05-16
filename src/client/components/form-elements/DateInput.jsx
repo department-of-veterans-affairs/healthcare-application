@@ -12,6 +12,8 @@ import { months, days } from '../../utils/options-for-select.js';
  *
  * Props:
  * `required` - boolean. Render marker indicating field is required.
+ * `errorMessage` - string. Specific error message to display.
+ * `validation` - function. Specific date validation to run if necessary.
  * `label` - string. Label for entire question.
  * `day` - number. Value of day.
  * `month` - number. Value of month.
@@ -42,6 +44,8 @@ class DateInput extends React.Component {
 
   render() {
     let isValid;
+    let errorSpanId;
+    let errorSpan = '';
     let daysForSelectedMonth = [];
     const day = this.props.day;
     const month = this.props.month;
@@ -52,10 +56,15 @@ class DateInput extends React.Component {
     }
 
     if (this.props.required) {
-      isValid = validateIfDirtyDate(day, month, year, isValidDate);
+      isValid = validateIfDirtyDate(day, month, year, isValidDate) && (this.props.validation !== undefined ? this.props.validation : true);
     } else {
       isValid = (isBlank(day.value) && isBlank(month.value) && isBlank(year.value)) ||
-          validateIfDirtyDate(day, month, year, isValidDate);
+        (validateIfDirtyDate(day, month, year, isValidDate) && (this.props.validation !== undefined ? this.props.validation : true));
+    }
+
+    if (!isValid && this.props.errorMessage) {
+      errorSpanId = `${this.inputId}-error-message`;
+      errorSpan = <span className="usa-input-error-message" id={`${errorSpanId}`}>{this.props.errorMessage}</span>;
     }
 
     // Calculate required.
@@ -71,6 +80,7 @@ class DateInput extends React.Component {
           {requiredSpan}
         </label>
         <span className="usa-form-hint usa-datefield-hint">For example: Apr 28 1986</span>
+        {errorSpan}
         <div className={isValid ? undefined : 'usa-input-error'}>
           <div className="usa-date-of-birth row">
             <div className="hca-datefield-month">
@@ -105,6 +115,8 @@ class DateInput extends React.Component {
 
 DateInput.propTypes = {
   required: React.PropTypes.bool,
+  errorMessage: React.PropTypes.string,
+  validation: React.PropTypes.func,
   label: React.PropTypes.string,
   day: React.PropTypes.shape({
     value: React.PropTypes.string,

@@ -2,9 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Address from '../questions/Address';
-import Email from '../questions/Email';
-import ErrorableTextInput from '../form-elements/ErrorableTextInput';
-import Phone from '../questions/Phone';
 import { veteranUpdateField } from '../../actions';
 
 /**
@@ -52,61 +49,19 @@ class VeteranAddressSection extends React.Component {
             <td>ZIP Code:</td>
             <td>{this.props.data.veteranAddress.zipcode.value}</td>
           </tr>
-          <tr>
-            <td>County:</td>
-            <td>{this.props.data.veteranCounty.value}</td>
-          </tr>
-          <tr>
-            <td>Email Address:</td>
-            <td>{this.props.data.email.value}</td>
-          </tr>
-          <tr>
-            <td>Re-enter Email address:</td>
-            <td>{this.props.data.emailConfirmation.value}</td>
-          </tr>
-          <tr>
-            <td>Home telephone number:</td>
-            <td>{this.props.data.homePhone.value}</td>
-          </tr>
-          <tr>
-            <td>Mobile telephone number:</td>
-            <td>{this.props.data.mobilePhone.value}</td>
-          </tr>
         </tbody>
       </table>);
     } else {
       content = (<fieldset>
         <legend>Permanent Address</legend>
+        <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
           <p>For locations outside the U.S., enter "City,Country" in the City field
               (e.g., "Paris,France"), and select Foreign Country for State.
           </p>
-
-          <Address value={this.props.data.veteranAddress}
+          <Address required
+              value={this.props.data.veteranAddress}
               onUserInput={(update) => {this.props.onStateChange('veteranAddress', update);}}/>
-
-          <ErrorableTextInput label="County"
-              field={this.props.data.veteranCounty}
-              onValueChange={(update) => {this.props.onStateChange('veteranCounty', update);}}/>
-
-          <Email label="Email address"
-              email={this.props.data.email}
-              onValueChange={(update) => {this.props.onStateChange('email', update);}}/>
-
-          <Email error={this.confirmEmail()}
-              label="Re-enter Email address"
-              email={this.props.data.emailConfirmation}
-              onValueChange={(update) => {this.props.onStateChange('emailConfirmation', update);}}/>
-          {/* TODO: Change validation to accept phone number without dashes. */}
-          <Phone required
-              label="Home telephone number"
-              value={this.props.data.homePhone}
-              onValueChange={(update) => {this.props.onStateChange('homePhone', update);}}/>
-
-          <Phone required
-              label="Mobile telephone number"
-              value={this.props.data.mobilePhone}
-              onValueChange={(update) => {this.props.onStateChange('mobilePhone', update);}}/>
         </div>
       </fieldset>);
     }

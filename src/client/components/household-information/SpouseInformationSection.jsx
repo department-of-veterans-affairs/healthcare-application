@@ -85,6 +85,10 @@ class SpouseInformationSection extends React.Component {
         <table className="review usa-table-borderless">
           <tbody>
             <tr>
+              <td>Martial Status:</td>
+              <td>{this.props.data.maritalStatus.value}</td>
+            </tr>
+            <tr>
               <td>Spouse Name:</td>
               <td>{this.props.data.spouseFullName.first.value} {this.props.data.spouseFullName.middle.value} {this.props.data.spouseFullName.last.value} {this.props.data.spouseFullName.suffix.value}</td>
             </tr>
@@ -119,6 +123,7 @@ class SpouseInformationSection extends React.Component {
     } else {
       content = (<fieldset>
         <legend>Spouse's Information</legend>
+        <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <p>Please fill these out to the best of your knowledge. The more accurate your responses, the faster your application can proceed.</p>
         <ErrorableSelect
             errorMessage={validateIfDirty(this.props.data.maritalStatus, isNotBlank) ? undefined : 'Please select a marital status'}
@@ -144,16 +149,16 @@ class SpouseInformationSection extends React.Component {
               year={this.props.data.spouseDateOfBirth.year}
               onValueChange={(update) => {this.props.onStateChange('spouseDateOfBirth', update);}}/>
 
-          <ErrorableCheckbox
-              label="Do you have the same address as your spouse?"
-              checked={this.props.data.sameAddress}
-              onValueChange={(update) => {this.props.onStateChange('sameAddress', update);}}/>
-
           <DateInput label="Date of Marriage"
               day={this.props.data.dateOfMarriage.day}
               month={this.props.data.dateOfMarriage.month}
               year={this.props.data.dateOfMarriage.year}
               onValueChange={(update) => {this.props.onStateChange('dateOfMarriage', update);}}/>
+
+          <ErrorableCheckbox
+              label="Do you have the same address as your spouse?"
+              checked={this.props.data.sameAddress}
+              onValueChange={(update) => {this.props.onStateChange('sameAddress', update);}}/>
 
           <ErrorableCheckbox
               label="Did your spouse live with you last year?"

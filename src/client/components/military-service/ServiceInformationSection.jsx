@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import DateInput from '../form-elements/DateInput';
 import ErrorableSelect from '../form-elements/ErrorableSelect';
 import { branchesServed, dischargeTypes } from '../../utils/options-for-select.js';
+import { validateIfDirty, isNotBlank, isValidDischargeDateField, isValidEntryDateField } from '../../utils/validations';
 import { veteranUpdateField } from '../../actions';
+import { displayLabel } from '../../store/calculated';
 
 /**
  * Props:
@@ -12,15 +14,19 @@ import { veteranUpdateField } from '../../actions';
  * `reviewSection` - Boolean. Hides components that are only needed for ReviewAndSubmitSection.
  */
 class ServiceInformationSection extends React.Component {
+
   render() {
     let content;
+
+    const selectedLastServiceBranch = this.props.data.lastServiceBranch.value;
+    const selectedDischargeType = this.props.data.dischargeType.value;
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
       content = (<table className="review usa-table-borderless">
         <tbody>
           <tr>
             <td>Last branch of service:</td>
-            <td>{this.props.data.lastServiceBranch.value}</td>
+            <td>{displayLabel(branchesServed, selectedLastServiceBranch)}</td>
           </tr>
           <tr>
             <td>Last entry date:</td>
@@ -34,33 +40,42 @@ class ServiceInformationSection extends React.Component {
           </tr>
           <tr>
             <td>Discharge Type:</td>
-            <td>{this.props.data.dischargeType.value}</td>
+            <td>{displayLabel(dischargeTypes, selectedDischargeType)}</td>
           </tr>
         </tbody>
       </table>);
     } else {
       content = (<fieldset>
         <legend>Service Information</legend>
+        <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
-          <ErrorableSelect
+          <ErrorableSelect required
+              errorMessage={validateIfDirty(this.props.data.lastServiceBranch, isNotBlank) ? undefined : 'Please select a service branch'}
               label="Last branch of service"
               options={branchesServed}
               value={this.props.data.lastServiceBranch}
               onValueChange={(update) => {this.props.onStateChange('lastServiceBranch', update);}}/>
 
-          <DateInput label="Last entry date"
+          <DateInput required
+              errorMessage="Entry date must be greater than 15 years of age"
+              validation={isValidEntryDateField(this.props.data.lastEntryDate, this.props.data.veteranDateOfBirth)}
+              label="Last entry date"
               day={this.props.data.lastEntryDate.day}
               month={this.props.data.lastEntryDate.month}
               year={this.props.data.lastEntryDate.year}
               onValueChange={(update) => {this.props.onStateChange('lastEntryDate', update);}}/>
 
-          <DateInput label="Last discharge date"
+          <DateInput required
+              errorMessage="Discharge date must be after entry date and before today"
+              validation={isValidDischargeDateField(this.props.data.lastDischargeDate, this.props.data.lastEntryDate)}
+              label="Last discharge date"
               day={this.props.data.lastDischargeDate.day}
               month={this.props.data.lastDischargeDate.month}
               year={this.props.data.lastDischargeDate.year}
               onValueChange={(update) => {this.props.onStateChange('lastDischargeDate', update);}}/>
 
-          <ErrorableSelect
+          <ErrorableSelect required
+              errorMessage={validateIfDirty(this.props.data.dischargeType, isNotBlank) ? undefined : 'Please select a discharge type'}
               label="Discharge Type"
               options={dischargeTypes}
               value={this.props.data.dischargeType}

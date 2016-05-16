@@ -39,6 +39,7 @@ class ReviewCollapsiblePanel extends React.Component {
     let panelAction;
     let editButton;
     let verifiedLabel;
+    let hiddenSection;
     const currentPath = this.props.updatePath;
     const sectionsComplete = this.props.uiData.sections[currentPath].complete;
     const sectionsVerified = this.props.uiData.sections[currentPath].verified;
@@ -52,12 +53,12 @@ class ReviewCollapsiblePanel extends React.Component {
 
       editButton = (<button
           className="edit-btn"
-          onClick={this.handleEdit}>Edit</button>
+          onClick={this.handleEdit}>Edit Section</button>
       );
     } else {
       panelAction = (<button
           className="usa-button-outline"
-          onClick={this.handleSave}>Save</button>
+          onClick={this.handleSave}>Update Section</button>
         );
     }
 
@@ -68,22 +69,39 @@ class ReviewCollapsiblePanel extends React.Component {
         </div>);
     }
 
+    const allSections = Object.keys(this.props.uiData.sections);
+    const sectionIndexes = allSections.indexOf(currentPath);
+    const prevPath = allSections[sectionIndexes - 1];
+
+    if (sectionsVerified) {
+      hiddenSection = (<div></div>);
+    } else {
+      if (this.props.uiData.sections[prevPath].verified || currentPath === '/veteran-information/personal-information') {
+        hiddenSection = (
+          <div id={`collapsible-${this.id}`} className="usa-accordion-content">
+              {this.props.component}
+              {panelAction}
+          </div>
+        );
+      } else {
+        hiddenSection = (<div></div>);
+      }
+    }
+
+
     return (
       <div id={`${this.id}-collapsiblePanel`} className="usa-accordion-bordered hca-review-panel">
         <ul className="usa-unstyled-list">
           <li>
             <div className="accordion-header" aria-expanded="true" aria-controls={`collapsible-${this.id}`}>
-              <div className="medium-9 columns">
+              <div className="medium-7 columns">
                 {this.props.sectionLabel} {verifiedLabel}
               </div>
-              <div className="medium-3 columns">
+              <div className="medium-5 columns">
                 {editButton}
               </div>
             </div>
-            <div id={`collapsible-${this.id}`} aria-hidden={`${sectionsVerified}`} className="usa-accordion-content">
-              {this.props.component}
-              {panelAction}
-            </div>
+            {hiddenSection}
           </li>
         </ul>
       </div>

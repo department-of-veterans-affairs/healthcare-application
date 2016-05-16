@@ -51,7 +51,6 @@ class ChildInformationSection extends React.Component {
     if (this.props.data.children) {
       const childList = this.props.data.children;
       let reactKey = 0;
-      let childNumber = 0;
       children = childList.map((obj) => {
         const childFirstName = obj.childFullName.first.value;
         const childMiddleName = obj.childFullName.middle.value;
@@ -73,15 +72,11 @@ class ChildInformationSection extends React.Component {
         return (<table key={++reactKey} className="review usa-table-borderless">
           <thead>
             <tr>
-              <td scope="col">Child {++childNumber}</td>
+              <td scope="col">Child - {childFirstName} {childMiddleName} {childLastName} {childSuffix}</td>
               <td scope="col"></td>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Name:</td>
-              <td>{childFirstName} {childMiddleName} {childLastName} {childSuffix}</td>
-            </tr>
             <tr>
               <td>Relationship to you:</td>
               <td>{childRelation}</td>
