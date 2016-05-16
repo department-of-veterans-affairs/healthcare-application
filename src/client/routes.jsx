@@ -4,7 +4,9 @@ import { Route } from 'react-router';
 import AdditionalInformationSection from './components/insurance-information/AdditionalInformationSection';
 import AdditionalMilitaryInformationSection from './components/military-service/AdditionalMilitaryInformationSection';
 import AnnualIncomeSection from './components/household-information/AnnualIncomeSection';
+import BirthInformationSection from './components/veteran-information/BirthInformationSection';
 import ChildInformationSection from './components/household-information/ChildInformationSection';
+import ContactInformationSection from './components/veteran-information/ContactInformationSection';
 import DeductibleExpensesSection from './components/household-information/DeductibleExpensesSection';
 import DemographicInformationSection from './components/veteran-information/DemographicInformationSection';
 import FinancialDisclosureSection from './components/household-information/FinancialDisclosureSection';
@@ -32,6 +34,10 @@ const routes = [
       key="/veteran-information/personal-information"
       path="/veteran-information/personal-information"/>,
   <Route
+      component={BirthInformationSection}
+      key="/veteran-information/birth-information"
+      path="/veteran-information/birth-information"/>,
+  <Route
       component={DemographicInformationSection}
       key="/veteran-information/demographic-information"
       path="/veteran-information/demographic-information"/>,
@@ -39,6 +45,10 @@ const routes = [
       component={VeteranAddressSection}
       key="/veteran-information/veteran-address"
       path="/veteran-information/veteran-address"/>,
+  <Route
+      component={ContactInformationSection}
+      key="/veteran-information/contact-information"
+      path="/veteran-information/contact-information"/>,
 
 // Military Service routes.
   <Route

@@ -157,8 +157,11 @@ function isValidAddressField(field) {
 }
 
 function isValidPersonalInfoSection(data) {
-  return isValidFullNameField(data.veteranFullName) &&
-      isValidRequiredField(isValidSSN, data.veteranSocialSecurityNumber) &&
+  return isValidFullNameField(data.veteranFullName);
+}
+
+function isValidBirthInformationSection(data) {
+  return isValidRequiredField(isValidSSN, data.veteranSocialSecurityNumber) &&
       isValidDateField(data.veteranDateOfBirth);
 }
 
@@ -173,8 +176,11 @@ function isValidVaInformation(data) {
 }
 
 function isValidVeteranAddress(data) {
-  return isValidAddressField(data.veteranAddress) &&
-      isValidField(isValidEmail, data.email) &&
+  return isValidAddressField(data.veteranAddress);
+}
+
+function isValidContactInformationSection(data) {
+  return isValidField(isValidEmail, data.email) &&
       isValidField(isValidEmail, data.emailConfirmation) &&
       isValidField(isValidPhone, data.homePhone) &&
       isValidField(isValidPhone, data.mobilePhone);
@@ -282,10 +288,14 @@ function isValidSection(completePath, sectionData) {
   switch (completePath) {
     case '/veteran-information/personal-information':
       return isValidPersonalInfoSection(sectionData);
+    case '/veteran-information/birth-information':
+      return isValidBirthInformationSection(sectionData);
     case '/veteran-information/demographic-information':
       return isValidDemographicInformation(sectionData);
     case '/veteran-information/veteran-address':
       return isValidVeteranAddress(sectionData);
+    case '/veteran-information/contact-information':
+      return isValidContactInformationSection(sectionData);
     case '/military-service/service-information':
       return isValidServiceInformation(sectionData);
     case '/va-benefits/basic-information':
@@ -338,9 +348,11 @@ export {
   isValidInsurancePolicy,
   isValidField,
   isValidPersonalInfoSection,
+  isValidBirthInformationSection,
   isValidVaInformation,
   isValidAdditionalInformation,
   isValidVeteranAddress,
+  isValidContactInformationSection,
   isValidSpouseInformation,
   isValidChildren,
   isValidAnnualIncome,

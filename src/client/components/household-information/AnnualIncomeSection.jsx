@@ -121,10 +121,10 @@ class AnnualIncomeSection extends React.Component {
           annual income of veteran, spouse and dependent children.
           </p>
 
-          <h6>Definitions</h6>
-          <p><strong>Gross annual income</strong>: Are you are currently employeed? If so, what was your gross (pre-tax) annual income last year?</p>
-          <p><strong>Net income</strong>: Do you get income from a farm, ranch, property or business? If so, what was your net income from your farm, ranch, property, or business last year?</p>
-          <p><strong>Other income</strong>: Do you receive income from anywhere else? (social security, compensation, pension, interest, dividens) If so, what was your gross income from these sources last year?</p>
+          <p><strong>Gross annual income</strong>: Gross (pre-tax) annual income last year</p>
+          <p><strong>Net income</strong>: Net income from a farm, ranch, property, or business last year</p>
+          <p><strong>Other income</strong>: Other sources of income, including retirement and pension income,
+          Social Security, VA disability compensation, unemployment, interest, and dividends</p>
 
           <div className="input-section">
             <h6>Veteran</h6>
