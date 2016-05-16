@@ -23,10 +23,22 @@ module.exports = {
     if (_.isEmpty(data) || !_.isString(data)) {
       return '';
     }
-    const upperFirstData = _.upperFirst(data);
+    const validatedString = _.upperFirst(data);
     if (count && _.isNumber(count)) {
-      return (upperFirstData.length > count) ? upperFirstData.slice(0, count) : upperFirstData;
+      return (validatedString.length > count) ? validatedString.slice(0, count) : validatedString;
     }
-    return upperFirstData;
+    return validatedString;
+  },
+  validateSsn: (inputSsn) => {
+    const validatedSsn = _.replace(inputSsn, /\D+/g, '');
+    if (validatedSsn.length !== 9
+      || (/^\d{3}-?\d{2}-?0{4}$/.test(validatedSsn)) ||
+      (/1{9}|2{9}|3{9}|4{9}|5{9}|6{9}|7{9}|8{9}|9{9}/.test(validatedSsn)) ||
+      (/^0{3}-?\d{2}-?\d{4}$/.test(validatedSsn)) || (/^\d{3}-?0{2}-?\d{4}$/.test(validatedSsn))
+      ) {
+      return '';
+    }
+    return validatedSsn;
   }
 };
+

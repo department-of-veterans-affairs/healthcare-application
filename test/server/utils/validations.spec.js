@@ -1,7 +1,7 @@
-const validations = require('../../src/server/utils/validations');
+const validations = require('../../../src/server/utils/validations');
 const chai = require('chai');
 chai.should();
-describe.only('validations', () => {
+describe('validations', () => {
   describe('dateOfBirth', () => {
     describe('should return an empty string', () => {
       it('if the date passed is an empty string', () => {
@@ -71,6 +71,52 @@ describe.only('validations', () => {
     describe('should return null', () => {
       it('if the string is empty and true is passed to the third parameter', () => {
         chai.expect(validations.validateString('', null, true)).to.be.null;
+      });
+    });
+  });
+  describe('validateSsn', () => {
+    describe('should return an empty string', () => {
+      it('if the data passed is an empty string', () => {
+        const convertedData = validations.validateSsn('');
+        convertedData.should.be.a('string');
+        convertedData.should.be.empty;
+      });
+      it('if the data passed in is an array', () => {
+        const convertedData = validations.validateSsn(['1234567890']);
+        convertedData.should.be.a('string');
+        convertedData.should.be.empty;
+      });
+      it('if the data passed in is a number', () => {
+        const convertedData = validations.validateSsn(12345);
+        convertedData.should.be.a('string');
+        convertedData.should.be.empty;
+      });
+      it('if the data passed in is 9 of the same number', () => {
+        const convertedData = validations.validateSsn(111111111);
+        convertedData.should.be.a('string');
+        convertedData.should.be.empty;
+      });
+      it('if the data passed in starts with 3 0s', () => {
+        const convertedData = validations.validateSsn('000111111');
+        convertedData.should.be.a('string');
+        convertedData.should.be.empty;
+      });
+    });
+    describe('should return a validated SSN', () => {
+      it('if the valid string that is passed in we should get converted string', () => {
+        const convertedData = validations.validateSsn('210438765');
+        convertedData.should.be.a('string');
+        convertedData.should.be.equal('210438765');
+      });
+      it('if the valid string with hyphens', () => {
+        const convertedData = validations.validateSsn('210-43-8765');
+        convertedData.should.be.a('string');
+        convertedData.should.be.equal('210438765');
+      });
+      it('if the string passed in is more then 9 numbers', () => {
+        const convertedData = validations.validateSsn('1112233334444');
+        convertedData.should.be.a('string');
+        convertedData.should.be.equal('');
       });
     });
   });
