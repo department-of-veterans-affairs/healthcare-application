@@ -68,12 +68,12 @@ function formDateToESDate(dateObject) {
 function veteranToPersonInfo(veteran) {
   return {
     dob: validations.dateOfBirth(veteran.veteranDateOfBirth),
-    firstName: veteran.veteranFullName.first,
+    firstName: validations.validateString(veteran.veteranFullName.first, 30),
     gender: veteran.gender,
-    lastName: veteran.veteranFullName.last,
-    middleName: veteran.veteranFullName.middle,
-    mothersMaidenName: veteran.mothersMaidenName,
-    placeOfBirthCity: veteran.cityOfBirth,
+    lastName: validations.validateString(veteran.veteranFullName.last, 30),
+    middleName: validations.validateString(veteran.veteranFullName.middle, 30, true),
+    mothersMaidenName: validations.validateString(veteran.mothersMaidenName, 35, true),
+    placeOfBirthCity: validations.validateString(veteran.cityOfBirth, 20, true),
     placeOfBirthState: veteran.stateOfBirth,
     ssnText: veteran.veteranSocialSecurityNumber
   };
