@@ -37,16 +37,140 @@ const formTemplate = {
   }
 };
 
+/**
+ * Returns a string left-padded with '0' of the given width.
+ *
+ * Warning: If 'number' is wider than 'width' characters, only the right-most 'width'
+ * characters are returned.
+ *
+ * TODO: should this explicitly check if 'number' and 'width' are actually numbers?
+ *
+ * @param {number} number The number you want left-padded with '0' characters.
+ * @param {number} width The width of the resulting string.
+ * @returns {String}
+ *
+ * @example
+ * // returns "0001"
+ * zeroPadNumber(1, 4);
+ * @example
+ * // returns "15"
+ * zeroPadNumber(31415, 2);
+ */
 // TODO(awong): Move to validations and add unittests.
 function zeroPadNumber(number, padding) {
   return (new Array(padding + 1).join('0') + number).slice(-padding);
 }
 
-// TODO(awong): Move to validations and add unittests.
+/**
+ * Returns true when the provided year is a leap-year in the Gregorian calendar.
+ *
+ * @param {number} year The year you want to test.
+ * @returns {boolean}
+ *
+ * @example
+ * // returns true
+ * isLeapYear(2012)
+ *
+ * @example
+ * // returns false
+ * isLeapYear(2011)
+ *
+ * @example
+ * // returns [ true, false, false, false, true, true, true ]
+ * [1600,1700,1899,1900,2000,2016,2012].map(isLeapYear)
+ */
+function isLeapYear(year) {
+  return ((year % 4 === 0) && (year % 100 !== 0) || (year % 400 === 0));
+}
+
+/**
+ * Returns true when the provided dateObject contains a valid date after 1583
+ * (based on the first full year of the Gregorian calendar).
+ *
+ * @param {Object} dateObject in the format of {month: 1, day: 30, year: 1980}
+ * @returns {boolean}
+ *
+ * @example
+ * // returns false
+ * isValidDateObject()
+ *
+ * @example
+ * // returns true
+ * isValidDateObject({month: 1, day: 30, year: 1980})
+ *
+ * @example
+ * // returns true
+ * isValidDateObject({month: 2, day: 29, year: 1980})
+ *
+ * @example
+ * // returns true
+ * isValidDateObject({month: 2, day: 32, year: 2012})
+ *
+ * @example
+ * // returns false
+ * isValidDateObject({month: 2, day: 32, year: 2011})
+ */
+function isValidDateObject(dateObject) {
+  if (typeof dateObject !== 'object' || dateObject === null) return false;
+  if (dateObject.hasOwnProperty('month') &&
+  dateObject.hasOwnProperty('day') &&
+  dateObject.hasOwnProperty('year')) {
+    if (dateObject.year < 1583) return false;
+    if (dateObject.day < 1 || dateObject.day > 31) return false;
+    switch (dateObject.month) {
+      // tests for 31 day months
+      case 1: // January
+      case 3: // March
+      case 5: // May
+      case 7: // July
+      case 8: // August
+      case 10: // October
+      case 12: // December
+        if (dateObject.day > 31) return false;
+        break;
+      // tests for February
+      case 2: // February
+        if (isLeapYear(dateObject.year) === true && dateObject.day > 29) return false;
+        if (isLeapYear(dateObject.year) === false && dateObject.day > 28) return false;
+        break;
+      // tests for 30 day months
+      case 4: // April
+      case 6: // June
+      case 9: // September
+      case 11: // November
+        if (dateObject.day > 30) return false;
+        break;
+      default:
+        return false;
+    }
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Returns a date string as given in examples from ES team
+ * ("01/30/1980"" in month, day, year order) OR undefined if
+ * the date object is invalid.
+ *
+ * This validation is stricter than what the XSD implies (which is the date can't be NULL
+ * but must have at least month and year with no future dates.)
+ *
+ * TODO: Accept dates w/o day and return in the format MM/YYYY.
+ *
+ * @param {Object} dateObject in the format of {month: 1, day: 30, year: 1980}
+ * @returns {String}
+ *
+ * @example
+ * // returns "01/01/1980"
+ * formDateToESDate({month: 1, day: 30, year: 1980})
+ *
+ * @example
+ * // returns undefined
+ * formDateToESDate(100)
+ */
 function formDateToESDate(dateObject) {
-  if (dateObject.month >= 1 && dateObject.month <= 12 &&
-    dateObject.day >= 1 && dateObject.month <= 31 && // TODO: how robust does this need to be? Form validates as well.
-    dateObject.year > 1) {
+  if (isValidDateObject(dateObject)) {
     return `${zeroPadNumber(dateObject.month, 2)}/${zeroPadNumber(dateObject.day, 2)}/${zeroPadNumber(dateObject.year, 4)}`;
   }
   return undefined;
@@ -342,9 +466,25 @@ function veteranToPersonInfo(veteran) {
   };
 }
 
-function makeServiceBranch(serviceBranch) {
-  // NOTE the return codes are from VHA Standard Data Service (ADRDEV01) Service Branch List
-  // http://vaausesrapp80.aac.va.gov:7404/ds/List/ServiceBranch
+/**
+ * Converts serviceBranch from the values in Veteran resource to
+ * VHA Standard Data Service code.
+ *
+ * Codes are from VHA Standard Data Service (ADRDEV01) Service Branch List
+ * http://vaausesrapp80.aac.va.gov:7404/ds/List/ServiceBranch
+ *
+ * @param {String} serviceBranch Branch of service. eg, 'army', 'air force'
+ * @returns {Number} VHA Standard Data Service
+ *
+ * @example
+ * // returns 6 (OTHER)
+ * serviceBranchToSDSCode()
+ *
+ * @example
+ * // returns 1 (ARMY)
+ * serviceBranchToSDSCode('army')
+ */
+function serviceBranchToSDSCode(serviceBranch) {
   switch (serviceBranch) {
     case 'army':
       return 1;
@@ -375,9 +515,25 @@ function makeServiceBranch(serviceBranch) {
   }
 }
 
-function makeDischargeType(dischargeType) {
-  // NOTE these codes are from VHA Standard Data Service (ADRDEV01) Service Discharge Code List
-  // http://vaausesrapp80.aac.va.gov:7404/ds/List/ServiceDischargeCode
+/**
+ * Converts dischargeType from the values in Veteran resource to
+ * VHA Standard Data Service code.
+ *
+ * Codes are from VHA Standard Data Service (ADRDEV01) Service Discharge Code List
+ * http://vaausesrapp80.aac.va.gov:7404/ds/List/ServiceDischargeCode
+ *
+ * @param {String} dischargeType Branch of service. eg, 'honorable', 'general'
+ * @returns {Number} VHA Standard Data Service code.
+ *
+ * @example
+ * // returns 6 (OTHER-THAN-HONORABLE)
+ * dischargeTypeToSDSCode()
+ *
+ * @example
+ * // returns 1 (HONORABLE)
+ * dischargeTypeToSDSCode('honorable')
+ */
+function dischargeTypeToSDSCode(dischargeType) {
   switch (dischargeType) {
     case 'honorable':
       return 1;
@@ -390,7 +546,7 @@ function makeDischargeType(dischargeType) {
     case 'undesirable':
       return 5;
     default:
-      return '4'; // OTHER-THAN-HONORABLE
+      return 4; // OTHER-THAN-HONORABLE
   }
 }
 
@@ -415,10 +571,10 @@ function veteranToMilitaryServiceInfo(veteran) {
       militaryServiceSiteRecord: {
         militaryServiceEpisodes: {
           militaryServiceEpisode: {
-            dischargeType: makeDischargeType(veteran.dischargeType),
+            dischargeType: dischargeTypeToSDSCode(veteran.dischargeType),
             startDate: formDateToESDate(veteran.lastEntryDate),
             endDate: formDateToESDate(veteran.lastDischargeDate),
-            serviceBranch: makeServiceBranch(veteran.lastServiceBranch),
+            serviceBranch: serviceBranchToSDSCode(veteran.lastServiceBranch),
           }
         },
         site: veteran.vaMedicalFacility,
