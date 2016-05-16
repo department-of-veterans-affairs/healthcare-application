@@ -76,7 +76,7 @@ const blankVeteran = {
     day: makeField(''),
     year: makeField('')
   },
-  sameAddress: false,
+  sameAddress: makeField(''),
   cohabitedLastYear: false,
   provideSupportLastYear: false,
   spouseAddress: {
@@ -629,8 +629,8 @@ export default function veteran(state = blankVeteran, action) {
         state: makeField(''),
         zipcode: makeField(''),
       };
-      if (action.value) {
-        _.set(newState, action.propertyPath, state.veteranAddress.address);
+      if (action.value.value === 'Y') {
+        _.set(newState, action.propertyPath, state.veteranAddress);
       } else {
         _.set(newState, action.propertyPath, emptyAddress);
       }

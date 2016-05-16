@@ -8,7 +8,7 @@ import FullName from '../questions/FullName';
 import SocialSecurityNumber from '../questions/SocialSecurityNumber';
 
 import { childRelationships } from '../../utils/options-for-select.js';
-import { isNotBlank, isValidField, isValidMonetaryValue, validateIfDirty } from '../../utils/validations';
+import { isNotBlank, isValidField, isValidMonetaryValue, validateIfDirty, isValidDependentDateField } from '../../utils/validations';
 
 // TODO: create unique nodes for each child in applicationData
 
@@ -54,22 +54,24 @@ class Child extends React.Component {
           <div className="row">
             <div className="small-12 columns">
               <DateInput required
-                  label="Date Child Became Dependent"
-                  day={this.props.data.childBecameDependent.day}
-                  month={this.props.data.childBecameDependent.month}
-                  year={this.props.data.childBecameDependent.year}
-                  onValueChange={(update) => {this.props.onValueChange('childBecameDependent', update);}}/>
+                  label="Child’s Date of Birth"
+                  day={this.props.data.childDateOfBirth.day}
+                  month={this.props.data.childDateOfBirth.month}
+                  year={this.props.data.childDateOfBirth.year}
+                  onValueChange={(update) => {this.props.onValueChange('childDateOfBirth', update);}}/>
             </div>
           </div>
 
           <div className="row">
             <div className="small-12 columns">
               <DateInput required
-                  label="Child’s Date of Birth"
-                  day={this.props.data.childDateOfBirth.day}
-                  month={this.props.data.childDateOfBirth.month}
-                  year={this.props.data.childDateOfBirth.year}
-                  onValueChange={(update) => {this.props.onValueChange('childDateOfBirth', update);}}/>
+                  errorMessage="Child cannot be a dependent before child's date of birth"
+                  validation={isValidDependentDateField(this.props.data.childBecameDependent, this.props.data.childDateOfBirth)}
+                  label="Date Child Became Dependent"
+                  day={this.props.data.childBecameDependent.day}
+                  month={this.props.data.childBecameDependent.month}
+                  year={this.props.data.childBecameDependent.year}
+                  onValueChange={(update) => {this.props.onValueChange('childBecameDependent', update);}}/>
             </div>
           </div>
 

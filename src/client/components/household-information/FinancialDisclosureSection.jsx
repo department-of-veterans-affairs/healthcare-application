@@ -14,6 +14,17 @@ import { veteranUpdateField } from '../../actions';
 class FinancialDisclosureSection extends React.Component {
   render() {
     let content;
+    let understandsFinancialDisclosure;
+
+    if (this.props.data.provideFinancialInfo.value === 'N') {
+      understandsFinancialDisclosure = (<div>
+        <ErrorableRadioButtons
+            label="I understand VA is not currently enrolling new applicants who decline to provide their financial information unless they have other qualifying eligibility factors."
+            options={yesNo}
+            value={this.props.data.understandsFinancialDisclosure}
+            onValueChange={(update) => {this.props.onStateChange('understandsFinancialDisclosure', update);}}/>
+      </div>);
+    }
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
       content = (<table className="review usa-table-borderless">
@@ -76,11 +87,7 @@ class FinancialDisclosureSection extends React.Component {
                 value={this.props.data.provideFinancialInfo}
                 onValueChange={(update) => {this.props.onStateChange('provideFinancialInfo', update);}}/>
 
-            <ErrorableRadioButtons
-                label="I understand VA is not currently enrolling new applicants who decline to provide their financial information unless they have other qualifying eligibility factors."
-                options={yesNo}
-                value={this.props.data.understandsFinancialDisclosure}
-                onValueChange={(update) => {this.props.onStateChange('understandsFinancialDisclosure', update);}}/>
+            {understandsFinancialDisclosure}
           </div>
 
         </div>
