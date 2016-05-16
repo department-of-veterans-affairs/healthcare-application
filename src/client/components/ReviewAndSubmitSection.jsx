@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import AdditionalInformationSection from './insurance-information/AdditionalInformationSection';
 import AdditionalMilitaryInformationSection from './military-service/AdditionalMilitaryInformationSection';
 import AnnualIncomeSection from './household-information/AnnualIncomeSection';
+import BirthInformationSection from './veteran-information/BirthInformationSection';
 import ChildInformationSection from './household-information/ChildInformationSection';
+import ContactInformationSection from './veteran-information/ContactInformationSection';
 import DeductibleExpensesSection from './household-information/DeductibleExpensesSection';
 import DemographicInformationSection from './veteran-information/DemographicInformationSection';
 import FinancialDisclosureSection from './household-information/FinancialDisclosureSection';
@@ -47,86 +49,82 @@ class ReviewAndSubmitSection extends React.Component {
         <ReviewCollapsiblePanel
             sectionLabel="Personal Information"
             updatePath="/veteran-information/personal-information"
-            component={<PersonalInfoSection reviewSection/>}
-            panelID="0"/>
+            component={<PersonalInfoSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="Birth Information"
+            updatePath="/veteran-information/birth-information"
+            component={<BirthInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
             sectionLabel="Demographic Information"
             updatePath="/veteran-information/demographic-information"
-            component={<DemographicInformationSection reviewSection/>}
-            panelID="1"/>
+            component={<DemographicInformationSection reviewSection/>}/>
+
+        <ReviewCollapsiblePanel
+            sectionLabel="Veteran Address"
+            updatePath="/veteran-information/veteran-address"
+            component={<VeteranAddressSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
             sectionLabel="Contact Information"
-            updatePath="/veteran-information/veteran-address"
-            component={<VeteranAddressSection reviewSection/>}
-            panelID="2"/>
+            updatePath="/veteran-information/contact-information"
+            component={<ContactInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
             sectionLabel="Military Service Information"
             updatePath="/military-service/service-information"
-            component={<ServiceInformationSection reviewSection/>}
-            panelID="3"/>
+            component={<ServiceInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
             sectionLabel="Additional Service Information"
             updatePath="/military-service/additional-information"
-            component={<AdditionalMilitaryInformationSection reviewSection/>}
-            panelID="4"/>
+            component={<AdditionalMilitaryInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
             sectionLabel="VA Benefits Information"
             updatePath="/va-benefits/basic-information"
-            component={<VAInformationSection reviewSection/>}
-            panelID="5"/>
+            component={<VAInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
             sectionLabel="Financial Disclosure"
             updatePath="/household-information/financial-disclosure"
-            component={<FinancialDisclosureSection reviewSection/>}
-            panelID="6"/>
+            component={<FinancialDisclosureSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
             sectionLabel="Spouse Information"
             updatePath="/household-information/spouse-information"
-            component={<SpouseInformationSection reviewSection/>}
-            panelID="7"/>
+            component={<SpouseInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
             sectionLabel="Children Information"
             updatePath="/household-information/child-information"
-            component={<ChildInformationSection reviewSection/>}
-            panelID="8"/>
+            component={<ChildInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
             sectionLabel="Annual Income Information"
             updatePath="/household-information/annual-income"
-            component={<AnnualIncomeSection reviewSection/>}
-            panelID="9"/>
+            component={<AnnualIncomeSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
             sectionLabel="Deductible Expenses"
             updatePath="/household-information/deductible-expenses"
-            component={<DeductibleExpensesSection reviewSection/>}
-            panelID="10"/>
+            component={<DeductibleExpensesSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
             sectionLabel="Medicare/Medicaid Information"
             updatePath="/insurance-information/medicare"
-            component={<MedicareMedicaidSection reviewSection/>}
-            panelID="11"/>
+            component={<MedicareMedicaidSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
             sectionLabel="Insurance Information"
             updatePath="/insurance-information/general"
-            component={<InsuranceInformationSection reviewSection/>}
-            panelID="12"/>
+            component={<InsuranceInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
             sectionLabel="Additional Information"
             updatePath="/insurance-information/va-facility"
-            component={<AdditionalInformationSection reviewSection/>}
-            panelID="13"/>
+            component={<AdditionalInformationSection reviewSection/>}/>
       </div>);
     }
     return (
