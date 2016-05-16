@@ -74,8 +74,8 @@ function veteranToPersonInfo(veteran) {
     middleName: validations.validateString(veteran.veteranFullName.middle, 30, true),
     mothersMaidenName: validations.validateString(veteran.mothersMaidenName, 35, true),
     placeOfBirthCity: validations.validateString(veteran.cityOfBirth, 20, true),
-    placeOfBirthState: veteran.stateOfBirth,
-    ssnText: veteran.veteranSocialSecurityNumber
+    placeOfBirthState: veteran.stateOfBirth, // todo(robbie) need to do this validation.
+    ssnText: validations.validateSsn(veteran.veteranSocialSecurityNumber)
   };
 }
 

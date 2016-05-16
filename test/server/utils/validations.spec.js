@@ -1,6 +1,7 @@
 const validations = require('../../../src/server/utils/validations');
 const chai = require('chai');
 chai.should();
+
 describe('validations', () => {
   describe('dateOfBirth', () => {
     describe('should return an empty string', () => {

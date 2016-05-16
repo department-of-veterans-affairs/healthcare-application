@@ -1,9 +1,13 @@
-'use strict';
+'use strict'; // eslint-disable-line
 const moment = require('moment');
 const _ = require('lodash');
 
-
-module.exports = {
+const validations = {
+  /**
+   * Validate a string as and convert to a valid format.
+   * @param {string} inputDob The date of birth string to validate / convert.
+   * @returns {string} If input was valid a valid SSN if not valid an empty string.
+   */
   dateOfBirth: (inputDob) => {
     let convertedDob = '';
     if (_.isEmpty(inputDob) || !_.isString(inputDob)) {
@@ -16,6 +20,13 @@ module.exports = {
     convertedDob = moment(parsedDob).format('MM/DD/YYYY');
     return convertedDob;
   },
+  /**
+   * Validate a string, that isn't empty and with conditional logic for
+   * trimming to a specific length or if the data is nullable.
+   * @param {string} data The string to validated.
+   * @param {number} count The character count for the length of the data param.
+   * @param {boolean} nullable The param for allowing if the data past in is nullable.
+   */
   validateString: (data, count, nullable) => {
     if (nullable && _.isEmpty(data)) {
       return null;
@@ -29,6 +40,19 @@ module.exports = {
     }
     return validatedString;
   },
+  /**
+   * Validate a string or number to meet the requirements offrom the original
+   * 1010ez pdf form.
+   * Conditions for valid SSN :
+   * '123456789' is not a valid SSN
+   * A value where the first 3 digits are 0 is not a valid SSN
+   * A value where the 4th and 5th digits are 0 is not a valid SSN
+   * A value where the last 4 digits are 0 is not a valid SSN
+   * A value with 3 digits, an optional -, 2 digits, an optional -, and 4 digits is a valid SSN
+   * 9 of the same digits (e.g., '111111111') is not a valid SSN
+   * @param {string|number} inputSsn The Social Security Number to validate.
+   * @returns {string} The 9 number SSN or empty string.
+   */
   validateSsn: (inputSsn) => {
     const validatedSsn = _.replace(inputSsn, /\D+/g, '');
     if (validatedSsn.length !== 9
@@ -41,4 +65,4 @@ module.exports = {
     return validatedSsn;
   }
 };
-
+module.exports = validations;

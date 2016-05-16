@@ -1,5 +1,6 @@
 const chai = require('chai');
 chai.should();
+
 const enrollmentSystem = require('../../src/server/enrollment-system');
 
 describe('enrollment-system base tests', () => {
