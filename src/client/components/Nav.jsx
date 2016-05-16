@@ -39,17 +39,23 @@ class Nav extends React.Component {
     return (
       <ol className="process hca-process">
         <li role="presentation" className={`one ${subnavStyles}
-         ${determinePanelStyles('/veteran-information', '/veteran-information/veteran-address')}`}>
+         ${determinePanelStyles('/veteran-information', '/veteran-information/contact-information')}`}>
           <div>
             <h5>Veteran Information</h5>
             <ul className="usa-unstyled-list">
               <li className={`${determineSectionStyles('/veteran-information/personal-information')}`}>
                 Personal Information
               </li>
+              <li className={`${determineSectionStyles('/veteran-information/birth-information')}`}>
+                Birth Information
+              </li>
               <li className={`${determineSectionStyles('/veteran-information/demographic-information')}`}>
                 Demographic Information
               </li>
               <li className={`${determineSectionStyles('/veteran-information/veteran-address')}`}>
+                Address
+              </li>
+              <li className={`${determineSectionStyles('/veteran-information/contact-information')}`}>
                 Contact Information
               </li>
             </ul>

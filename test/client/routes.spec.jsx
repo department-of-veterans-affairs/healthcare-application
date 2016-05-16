@@ -6,7 +6,9 @@ import { expect } from 'chai';
 
 import AdditionalMilitaryInformationSection from '../../src/client/components/military-service/AdditionalMilitaryInformationSection';
 import AnnualIncomeSection from '../../src/client/components/household-information/AnnualIncomeSection';
+import BirthInformationSection from '../../src/client/components/veteran-information/BirthInformationSection';
 import ChildInformationSection from '../../src/client/components/household-information/ChildInformationSection';
+import ContactInformationSection from '../../src/client/components/veteran-information/ContactInformationSection';
 import DeductibleExpensesSection from '../../src/client/components/household-information/DeductibleExpensesSection';
 import DemographicInformationSection from '../../src/client/components/veteran-information/DemographicInformationSection';
 import FinancialDisclosureSection from '../../src/client/components/household-information/FinancialDisclosureSection';
@@ -67,6 +69,11 @@ describe('routes', () => {
       expect(tree.dive(['RouterContext']).subTree(getName(PersonalInfoSection))).to.be.an('object');
     });
 
+    it('/veteran-information/birth-information', () => {
+      history.replace('/veteran-information/birth-information');
+      expect(tree.dive(['RouterContext']).subTree(getName(BirthInformationSection))).to.be.an('object');
+    });
+
     it('/veteran-information/demographic-information', () => {
       history.replace('/veteran-information/demographic-information');
       expect(tree.dive(['RouterContext']).subTree(getName(DemographicInformationSection))).to.be.an('object');
@@ -75,6 +82,11 @@ describe('routes', () => {
     it('/veteran-information/veteran-address', () => {
       history.replace('/veteran-information/veteran-address');
       expect(tree.dive(['RouterContext']).subTree(getName(VeteranAddressSection))).to.be.an('object');
+    });
+
+    it('/veteran-information/contact-information', () => {
+      history.replace('/veteran-information/contact-information');
+      expect(tree.dive(['RouterContext']).subTree(getName(ContactInformationSection))).to.be.an('object');
     });
 
     it('/military-service/service-information', () => {

@@ -148,16 +148,16 @@ class SpouseInformationSection extends React.Component {
               year={this.props.data.spouseDateOfBirth.year}
               onValueChange={(update) => {this.props.onStateChange('spouseDateOfBirth', update);}}/>
 
-          <ErrorableCheckbox
-              label="Do you have the same address as your spouse?"
-              checked={this.props.data.sameAddress}
-              onValueChange={(update) => {this.props.onStateChange('sameAddress', update);}}/>
-
           <DateInput label="Date of Marriage"
               day={this.props.data.dateOfMarriage.day}
               month={this.props.data.dateOfMarriage.month}
               year={this.props.data.dateOfMarriage.year}
               onValueChange={(update) => {this.props.onStateChange('dateOfMarriage', update);}}/>
+
+          <ErrorableCheckbox
+              label="Do you have the same address as your spouse?"
+              checked={this.props.data.sameAddress}
+              onValueChange={(update) => {this.props.onStateChange('sameAddress', update);}}/>
 
           <ErrorableCheckbox
               label="Did your spouse live with you last year?"
