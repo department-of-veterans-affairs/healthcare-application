@@ -110,14 +110,6 @@ function isValidAddress(street, city, country, state, zipcode) {
   return isNotBlank(street) && isNotBlank(city) && isNotBlank(country) && isNotBlank(state) && isNotBlank(zipcode);
 }
 
-function isBlankAddressField(field) {
-  return isBlank(field.street.value) &&
-    isBlank(field.city.value) &&
-    isBlank(field.country.value) &&
-    isBlank(field.state.value) &&
-    isBlank(field.zipcode.value);
-}
-
 function isValidField(validator, field) {
   return isBlank(field.value) || validator(field.value);
 }
@@ -132,10 +124,6 @@ function isBlankDateField(field) {
 
 function isValidDateField(field) {
   return isValidDate(field.day.value, field.month.value, field.year.value);
-}
-
-function isBlankFullNameField(field) {
-  return isBlank(field.first.value) && isBlank(field.middle.value) && isBlank(field.last.value);
 }
 
 function isValidFullNameField(field) {
@@ -188,6 +176,42 @@ function isValidDischargeDateField(date, entryDate) {
   return true;
 }
 
+function isValidDependentDateField(date, dateOfBirth) {
+  let adjustedDate;
+  let adjustedDateOfBirth;
+
+  if (!isBlankDateField(date) && !isBlankDateField(dateOfBirth)) {
+    adjustedDate = new Date(date.year.value, date.month.value, date.day.value);
+    adjustedDateOfBirth = new Date(dateOfBirth.year.value, dateOfBirth.month.value, dateOfBirth.day.value);
+
+    if (adjustedDate < adjustedDateOfBirth) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function isValidMarriageDate(date, dateOfBirth, spouseDateOfBirth) {
+  let adjustedDate;
+  let adjustedDateOfBirth;
+  let adjustedSpouseDateOfBirth;
+
+  if (!isBlankDateField(date) && !isBlankDateField(dateOfBirth) && !isBlankDateField(spouseDateOfBirth)) {
+    adjustedDate = new Date(date.year.value, date.month.value, date.day.value);
+    adjustedDateOfBirth = new Date(dateOfBirth.year.value, dateOfBirth.month.value, dateOfBirth.day.value);
+    adjustedSpouseDateOfBirth = new Date(spouseDateOfBirth.year.value, spouseDateOfBirth.month.value, spouseDateOfBirth.day.value);
+
+    if (adjustedDate < adjustedDateOfBirth) {
+      return false;
+    } else if (adjustedDate < adjustedSpouseDateOfBirth) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 function isValidPersonalInfoSection(data) {
   return isValidFullNameField(data.veteranFullName);
 }
@@ -223,14 +247,25 @@ function isValidFinancialDisclosure(data) {
 }
 
 function isValidSpouseInformation(data) {
-  // TODO: Update once conditional logic in spouse section is in place
-  return (isBlankFullNameField(data.spouseFullName) || isValidFullNameField(data.spouseFullName)) &&
+  let isValidSpouse = true;
+  let isValidSpouseAddress = true;
+
+  if (data.maritalStatus.value === 'Married' || data.maritalStatus.value === 'Separated') {
+    isValidSpouse = isValidFullNameField(data.spouseFullName) &&
       isValidField(isValidSSN, data.spouseSocialSecurityNumber) &&
-      (isBlankDateField(data.spouseDateOfBirth) || isValidDateField(data.spouseDateOfBirth)) &&
-      (isBlankDateField(data.dateOfMarriage) || isValidDateField(data.dateOfMarriage)) &&
-      (isBlankAddressField(data.spouseAddress) || isValidAddressField(data.spouseAddress)) &&
-      isValidField(isValidPhone, data.spousePhone) &&
-      isNotBlank(data.maritalStatus.value);
+      isValidDateField(data.spouseDateOfBirth) &&
+      isValidDateField(data.dateOfMarriage) &&
+      isNotBlank(data.sameAddress.value);
+  }
+
+  if (data.sameAddress === 'N') {
+    isValidSpouseAddress = isValidAddressField(data.spouseAddress) &&
+        isValidField(isValidPhone, data.spousePhone);
+  }
+
+  return isNotBlank(data.maritalStatus.value) &&
+      isValidSpouse &&
+      isValidSpouseAddress;
 }
 
 function isValidChildInformationField(child) {
@@ -238,8 +273,9 @@ function isValidChildInformationField(child) {
   return isValidFullNameField(child.childFullName) &&
     isNotBlank(child.childRelation.value) &&
     isValidRequiredField(isValidSSN, child.childSocialSecurityNumber) &&
-    isValidDateField(child.childBecameDependent) &&
     isValidDateField(child.childDateOfBirth) &&
+    isValidDateField(child.childBecameDependent) &&
+    isValidDependentDateField(child.childBecameDependent, child.childDateOfBirth) &&
     isValidField(isValidMonetaryValue, child.childEducationExpenses);
 }
 
@@ -302,15 +338,14 @@ function isValidMedicareMedicaid(data) {
 }
 
 function isValidGeneralInsurance(data) {
-  // TODO: validations not working correctly, check this out
   const providers = data.providers;
   if (!data.isCoveredByHealthInsurance) {
     return true;
   }
   for (let i = 0; i < providers.length; i++) {
-    if (!(isNotBlank(providers[i].insuranceName) &&
-        isNotBlank(providers[i].insurancePolicyHolderName) &&
-        isValidInsurancePolicy(providers[i].insurancePolicyNumber, providers[i].insuranceGroupCode))
+    if (!(isNotBlank(providers[i].insuranceName.value) &&
+        isNotBlank(providers[i].insurancePolicyHolderName.value) &&
+        isValidInsurancePolicy(providers[i].insurancePolicyNumber.value, providers[i].insuranceGroupCode.value))
     ) {
       return false;
     }
@@ -391,6 +426,8 @@ export {
   isValidInsurancePolicy,
   isValidEntryDateField,
   isValidDischargeDateField,
+  isValidDependentDateField,
+  isValidMarriageDate,
   isValidField,
   isValidPersonalInfoSection,
   isValidBirthInformationSection,
