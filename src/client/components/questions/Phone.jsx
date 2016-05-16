@@ -21,9 +21,9 @@ class Phone extends React.Component {
   render() {
     let errorMessage;
     if (this.props.required) {
-      errorMessage = validateIfDirty(this.props.value, isValidPhone) ? undefined : 'Please put your number in this format xxx-xxx-xxxx';
+      errorMessage = validateIfDirty(this.props.value, isValidPhone) ? undefined : 'Phone numbers must be 10 digits and include only numbers (no dashes)';
     } else {
-      errorMessage = isBlank(this.props.value.value) || validateIfDirty(this.props.value, isValidPhone) ? undefined : 'Please put your number in this format xxx-xxx-xxxx';
+      errorMessage = isBlank(this.props.value.value) || validateIfDirty(this.props.value, isValidPhone) ? undefined : 'Phone numbers must be 10 digits and include only numbers (no dashes)';
     }
 
     return (
@@ -33,7 +33,7 @@ class Phone extends React.Component {
             label={this.props.label}
             name="phone"
             autocomplete="tel"
-            placeholder="xxx-xxx-xxxx"
+            placeholder="xxxxxxxxxx"
             field={this.props.value}
             onValueChange={this.props.onValueChange}/>
       </div>

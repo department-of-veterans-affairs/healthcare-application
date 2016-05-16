@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
+import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
+import { yesNo } from '../../utils/options-for-select';
+import { validateIfDirty, isNotBlank } from '../../utils/validations';
 import { veteranUpdateField } from '../../actions';
 
 /**
@@ -20,18 +22,19 @@ class FinancialDisclosureSection extends React.Component {
             <td>I agree to provide my financial information so the VA can determine my eligibility
              for VA healthcare and if I should be charged for copays and medication.:
             </td>
-            <td>{`${this.props.data.provideFinancialInfo ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.provideFinancialInfo === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
-            <td>I understand VA is not currently enrolling new applicants who decline to provide
-            their financial information unless they have other qualifying eligibility factors.: </td>
-            <td>{`${this.props.data.understandsFinancialDisclosure ? 'Yes' : 'No'}`}</td>
+            <td>I understand VA is not currently enrolling new applicants who decline to
+            provide their financial information unless they have other qualifying eligibility factors: </td>
+            <td>{`${this.props.data.understandsFinancialDisclosure === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
         </tbody>
       </table>);
     } else {
       content = (<fieldset>
         <legend>Financial Disclosure</legend>
+        <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
           <p>You will now be asked to provide your financial information from the
           most recent tax year. We ask for this information for 2 reasons:</p>
@@ -66,14 +69,17 @@ class FinancialDisclosureSection extends React.Component {
           </div>
 
           <div className="input-section">
-            <ErrorableCheckbox
+            <ErrorableRadioButtons required
+                errorMessage={validateIfDirty(this.props.data.provideFinancialInfo, isNotBlank) ? '' : 'Please select a response'}
                 label="I agree to provide my financial information so the VA can determine my eligibility for VA healthcare and if I should be charged for copays and medication."
-                checked={this.props.data.provideFinancialInfo}
+                options={yesNo}
+                value={this.props.data.provideFinancialInfo}
                 onValueChange={(update) => {this.props.onStateChange('provideFinancialInfo', update);}}/>
 
-            <ErrorableCheckbox
+            <ErrorableRadioButtons
                 label="I understand VA is not currently enrolling new applicants who decline to provide their financial information unless they have other qualifying eligibility factors."
-                checked={this.props.data.understandsFinancialDisclosure}
+                options={yesNo}
+                value={this.props.data.understandsFinancialDisclosure}
                 onValueChange={(update) => {this.props.onStateChange('understandsFinancialDisclosure', update);}}/>
           </div>
 
