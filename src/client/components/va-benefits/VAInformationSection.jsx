@@ -35,31 +35,22 @@ class VAInformationSection extends React.Component {
         );
     } else {
       content = (<fieldset>
-        {/* TODO: Change the headings to something related to the questions. */}
-        <legend>Veteran</legend>
-        <p>
-          Please review the following list and select all the responses that apply to you.
-          This information will be used to determine which sections of the Application for
-          Health Benefits you should complete.
-        </p>
+        <legend>VA Benefits</legend>
         <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
           <ErrorableRadioButtons required
-              errorMessage={validateIfDirty(this.props.data.isVaServiceConnected, isNotBlank) ? '' : 'Please select a response'}
-              label="Are you VA Service Connected 50% to 100% Disabled?"
-              options={yesNo}
-              value={this.props.data.isVaServiceConnected}
-              onValueChange={(update) => {this.props.onStateChange('isVaServiceConnected', update);}}/>
-
-          <ErrorableRadioButtons required
               errorMessage={validateIfDirty(this.props.data.compensableVaServiceConnected, isNotBlank) ? '' : 'Please select a response'}
-              label="Are you compensable VA Service Connected 0% - 40%?"
+              label="Do you currently receive monetary compensation (pay) from the VA for a service-connected disability with a rating of 10, 20, 30, or 40 percent?"
               options={yesNo}
               value={this.props.data.compensableVaServiceConnected}
               onValueChange={(update) => {this.props.onStateChange('compensableVaServiceConnected', update);}}/>
-          <span>
-            A VA determination that a Service-connected disability is severe enough to warrant monetary compensation.
-          </span>
+
+          <ErrorableRadioButtons required
+              errorMessage={validateIfDirty(this.props.data.isVaServiceConnected, isNotBlank) ? '' : 'Please select a response'}
+              label="Do you currently receive monetary compensation (pay) from the VA for a service-connected disability with a rating of 50 percent or more?"
+              options={yesNo}
+              value={this.props.data.isVaServiceConnected}
+              onValueChange={(update) => {this.props.onStateChange('isVaServiceConnected', update);}}/>
 
           <ErrorableRadioButtons required
               errorMessage={validateIfDirty(this.props.data.receivesVaPension, isNotBlank) ? '' : 'Please select a response'}
@@ -99,4 +90,3 @@ function mapDispatchToProps(dispatch) {
 // TODO(awong): Remove the pure: false once we start using ImmutableJS.
 export default connect(mapStateToProps, mapDispatchToProps, undefined, { pure: false })(VAInformationSection);
 export { VAInformationSection };
-

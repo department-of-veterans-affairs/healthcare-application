@@ -17,19 +17,7 @@ function getErrorMessage(field, message) {
 class DeductibleExpensesSection extends React.Component {
   render() {
     const message = 'Please enter only numbers and a decimal point if necessary (no commas or currency signs)';
-    let notRequiredMessage;
     let content;
-
-    if (this.props.data.receivesVaPension === true) {
-      notRequiredMessage = (
-        <p>
-          <strong>
-            You are not required to enter financial information because you
-            indicated you are receiving a VA pension.
-          </strong>
-        </p>
-      );
-    }
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
       content = (<table className="review usa-table-borderless">
@@ -55,8 +43,6 @@ class DeductibleExpensesSection extends React.Component {
     } else {
       content = (<fieldset>
         <legend>Previous calendar year deductible expenses</legend>
-        {notRequiredMessage}
-
         <p>
           Tell us a bit about your expenses this past calendar year. Enter information for any expenses that apply to you.
         </p>

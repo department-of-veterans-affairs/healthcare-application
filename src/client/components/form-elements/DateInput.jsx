@@ -79,7 +79,6 @@ class DateInput extends React.Component {
           {this.props.label ? this.props.label : 'Date of Birth'}
           {requiredSpan}
         </label>
-        <span className="usa-form-hint usa-datefield-hint">For example: Apr 28 1986</span>
         {errorSpan}
         <div className={isValid ? undefined : 'usa-input-error'}>
           <div className="usa-date-of-birth row">
@@ -103,6 +102,7 @@ class DateInput extends React.Component {
                   max={new Date().getFullYear()}
                   min="1900"
                   pattern="[0-9]{4}"
+                  placeholder="yyyy"
                   field={this.props.year}
                   onValueChange={(update) => {this.handleChange('year', update);}}/>
             </div>
