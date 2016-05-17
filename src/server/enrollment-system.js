@@ -843,7 +843,7 @@ function veteranToSummary(veteran) {
  * @returns {Object} Object representing soap message for use with VoaService.saveSubmitForm.
  */
 function veteranToSaveSubmitForm(veteran) {
-  if (!veteran || !_.isObject(veteran) || _.isEmpty(veteran)) {
+  if (!veteran || !_.isPlainObject(veteran) || _.isEmpty(veteran)) {
     return {};
   }
   const request = Object.assign({}, formTemplate);

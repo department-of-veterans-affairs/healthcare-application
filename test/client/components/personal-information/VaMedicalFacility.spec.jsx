@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import { assert, expect } from 'chai';
 
 import VaMedicalFacility from '../../../../src/client/components/insurance-information/VaMedicalFacility';
-import { makeField } from '../../../../src/client/reducers/fields';
+import { makeField } from '../../../../src/common/fields';
 
 describe('<VaMedicalFacility>', () => {
   describe('propTypes', () => {

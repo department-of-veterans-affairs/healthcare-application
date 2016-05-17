@@ -3,7 +3,7 @@ import SkinDeep from 'skin-deep';
 import { expect } from 'chai';
 
 import { ContactInformationSection } from '../../../../src/client/components/veteran-information/ContactInformationSection';
-import { makeField } from '../../../../src/client/reducers/fields';
+import { makeField } from '../../../../src/common/fields';
 
 describe('<ContactInformationSection>', () => {
   const mockEmail = makeField('mock@aol.com', true);

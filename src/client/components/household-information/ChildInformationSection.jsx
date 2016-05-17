@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Child from './Child';
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import GrowableTable from '../form-elements/GrowableTable.jsx';
-import { makeField } from '../../reducers/fields';
+import { makeField } from '../../../common/fields';
 import { veteranUpdateField, ensureFieldsInitialized } from '../../actions';
 
 /**

@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import { expect } from 'chai';
 
 import ErrorableRadioButtons from '../../../../src/client/components/form-elements/ErrorableRadioButtons';
-import { makeField } from '../../../../src/client/reducers/fields';
+import { makeField } from '../../../../src/common/fields';
 
 describe('<ErrorableRadioButtons>', () => {
   const options = [{ value: 'yes', label: 'Yes' }, { value: 'no', label: 'No' }];
