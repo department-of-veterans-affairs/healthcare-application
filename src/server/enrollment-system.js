@@ -104,7 +104,7 @@ function isLeapYear(year) {
  * which is the first full year after the Gregorian calendar was introduced.
  *
  * The significance of the Gregorian calendar is because leap-year calculations
- * are only relevant for dates based on this calendar. 
+ * are only relevant for dates based on this calendar.
  *
  * This is based on the first full year the Gregorian calendar was introduced:
  * https://en.wikipedia.org/wiki/Gregorian_calendar
