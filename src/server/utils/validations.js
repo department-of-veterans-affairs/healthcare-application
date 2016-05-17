@@ -9,16 +9,14 @@ const validations = {
    * @returns {string} If input was valid a valid SSN if not valid an empty string.
    */
   dateOfBirth: (inputDob) => {
-    let convertedDob = '';
     if (_.isEmpty(inputDob) || !_.isString(inputDob)) {
-      return convertedDob;
+      return '';
     }
     const parsedDob = new Date(inputDob);
     if (moment().isBefore(parsedDob)) {
-      return convertedDob;
+      return '';
     }
-    convertedDob = moment(parsedDob).format('MM/DD/YYYY');
-    return convertedDob;
+    return moment(parsedDob).format('MM/DD/YYYY');
   },
   /**
    * Validate a string, that isn't empty and with conditional logic for
@@ -41,7 +39,7 @@ const validations = {
     return validatedString;
   },
   /**
-   * Validate a string or number to meet the requirements offrom the original
+   * Validate a string or number to meet the requirements from the original
    * 1010ez pdf form.
    * Conditions for valid SSN :
    * '123456789' is not a valid SSN
