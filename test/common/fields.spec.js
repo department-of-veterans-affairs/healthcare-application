@@ -1,6 +1,9 @@
-import { expect } from 'chai';
+const chai = require('chai');
+const expect = chai.expect;
 
-import { dirtyAllFields, makeField } from '../../../src/client/reducers/fields';
+const fields = require('../../src/common/fields');
+const dirtyAllFields = fields.dirtyAllFields;
+const makeField = fields.makeField;
 
 describe('fields model', () => {
   it('field creation method defaults to clean', () => {

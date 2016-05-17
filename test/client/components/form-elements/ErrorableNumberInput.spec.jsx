@@ -6,7 +6,7 @@ import sinon from 'sinon';
 import { default as chai, expect } from 'chai';
 
 import ErrorableNumberInput from '../../../../src/client/components/form-elements/ErrorableNumberInput';
-import { makeField } from '../../../../src/client/reducers/fields';
+import { makeField } from '../../../../src/common/fields';
 
 chai.use(chaiAsPromised);
 

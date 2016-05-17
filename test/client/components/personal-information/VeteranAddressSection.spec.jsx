@@ -3,7 +3,7 @@ import SkinDeep from 'skin-deep';
 import { expect } from 'chai';
 
 import { VeteranAddressSection } from '../../../../src/client/components/veteran-information/VeteranAddressSection';
-import { makeField } from '../../../../src/client/reducers/fields';
+import { makeField } from '../../../../src/common/fields';
 
 describe('<VeteranAddressSection>', () => {
   const nullAddress = {

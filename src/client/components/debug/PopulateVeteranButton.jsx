@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { completeVeteran } from '../../reducers/veteran';
+import { completeVeteran } from '../../../common/veteran';
 
 import { veteranOverwrite } from '../../actions';
 

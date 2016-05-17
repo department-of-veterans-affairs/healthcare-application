@@ -4,7 +4,7 @@ import SkinDeep from 'skin-deep';
 import { assert, expect } from 'chai';
 
 import MothersMaidenName from '../../../../src/client/components/veteran-information/MothersMaidenName';
-import { makeField } from '../../../../src/client/reducers/fields';
+import { makeField } from '../../../../src/common/fields';
 
 describe('<MothersMaidenName>', () => {
   let component = null;

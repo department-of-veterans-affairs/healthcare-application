@@ -1,5 +1,6 @@
 .DS_Store
 *.log
+*.sw[op]
 .vscode/
 hca-api-stub/healthcare.application.crt
 hca-api-stub/healthcare.application.key
