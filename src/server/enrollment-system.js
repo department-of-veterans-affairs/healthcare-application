@@ -126,7 +126,7 @@ function isLeapYear(year) {
  * isValidDateObject({month: 2, day: 29, year: 1980})
  *
  * @example
- * // returns true
+ * // returns false
  * isValidDateObject({month: 2, day: 32, year: 2012})
  *
  * @example
