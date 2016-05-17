@@ -70,10 +70,10 @@ class HealthCareApp extends React.Component {
     const formData = this.props.data;
     const sectionFields = this.props.uiState.sections[path].fields;
 
-    this.props.dispatch(ensureFieldsInitialized(sectionFields));
+    this.props.onFieldsInitialized(sectionFields);
     if (validations.isValidSection(path, formData)) {
       this.context.router.push(this.getUrl('next'));
-      this.props.dispatch(updateCompletedStatus(path));
+      this.props.onCompletedStatus(path);
     }
     this.scrollToTop();
   }
@@ -85,7 +85,6 @@ class HealthCareApp extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // const path = this.props.location.pathname;
     const veteran = this.props.data;
 
     // Strip out unnecessary fields'
@@ -93,10 +92,10 @@ class HealthCareApp extends React.Component {
       return key === 'dirty' ? undefined : value;
     }
 
-    // const json = JSON.stringify(veteran, reducer, 4);
+    const json = JSON.stringify(veteran, reducer, 4);
+    // console.log(json);
 
     this.props.onUpdateSubmissionStatus('submitPending');
-    // this.props.dispatch(updateCompletedStatus(path));
 
     // POST data to endpoint
     fetch('/api/hca/v1/VoaServices/submit', {
@@ -114,6 +113,10 @@ class HealthCareApp extends React.Component {
       setTimeout(() => {
         this.props.onUpdateSubmissionStatus('applicationSubmitted', response.json());
       }, 5000);
+      setTimeout(() => {
+        this.context.router.push(this.getUrl('next'));
+        this.scrollToTop();
+      }, 8000);
     }).catch(error => {
       setTimeout(() => {
         this.props.onUpdateSubmissionStatus('submitFailed', error);
@@ -127,9 +130,7 @@ class HealthCareApp extends React.Component {
     let children = this.props.children;
     let buttons;
     let submitButton;
-    let submitButtonText;
-    let submitButtonClass;
-    const submissionStatus = this.props.uiState.submissionStatus;
+    const submissionStatus = this.props.uiState.submission.status;
 
     if (children === null) {
       // This occurs if the root route is hit. Default to IntroductionSection.
@@ -168,8 +169,13 @@ class HealthCareApp extends React.Component {
             buttonClass="usa-button-disabled"/>
       );
     } else if (submissionStatus === 'applicationSubmitted') {
-      submitButtonText = 'Application Subbmitted';
-      submitButtonClass = 'usa-button-green';
+      submitButton = (
+        <ProgressButton
+            onButtonClick={this.handleSubmit}
+            buttonText="Submitted"
+            buttonClass="hca-button-green"
+            beforeText="&#10003;"/>
+      );
     } else {
       submitButton = (
         <ProgressButton
@@ -199,6 +205,14 @@ class HealthCareApp extends React.Component {
         <div className="row progress-buttons">
           <div className="small-6 medium-5 columns">
             {nextButton}
+          </div>
+        </div>
+      );
+    } else if (this.props.location.pathname === '/submit-message') {
+      buttons = (
+        <div className="row progress-buttons">
+          <div className="small-6 medium-5 columns">
+            <button className="usa-button-primary">Back to Main Page</button>
           </div>
         </div>
       );
@@ -269,12 +283,18 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onStateChange: (field, update) => {
+    // onStateChange: (field, update) => {
       // dispatch(veteranUpdateField(field, update));
-    },
+    // },
     onUpdateSubmissionStatus: (value) => {
       dispatch(updateSubmissionStatus(value));
-    }
+    },
+    onFieldsInitialized: (field) => {
+      dispatch(ensureFieldsInitialized(field));
+    },
+    onCompletedStatus: (route) => {
+      dispatch(updateCompletedStatus(route));
+    },
   };
 }
 
