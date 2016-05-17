@@ -29,10 +29,63 @@ const formTemplate = {
   }
 };
 
+/**
+ * Converts maritalStatus from the values in the Veteran resource to the VHA Standard Data Service code.
+ *
+ * maritalStatus comes from client/utils/options-for-select.js:maritalStatus.
+ *
+ * Codes are from the VHA Standard Data Service (ADRDEV01) HL7 24 Marital Status Map List.
+ *
+ * @param {String} maritalStatus (eg, 'Married', 'Never Married', etc.)
+ * @returns {String} VHA SDS code (eg, 'M', 'S', etc.)
+ */
+// TODO(awong): Move to validations and add unittests.
+function maritalStatusToSDSCode(maritalStatus) {
+  switch (maritalStatus) {
+    case 'Married':
+      return 'M';
+    case 'Never Married':
+      return 'S';
+    case 'Separated':
+      return 'A';
+    case 'Widowed':
+      return 'W';
+    case 'Divorced':
+      return 'D';
+    default:
+      return 'U';
+  }
+}
+
+/**
+ * Converts yesNo options to the VHA Standard Data Service code.
+ *
+ * yesNo values come from client/utils/options-for-select.js:yesNo.
+ *
+ * ES Service booleans expect the strings 'true' or 'false'.
+ *
+ * @param {String} A value from the yesNo property.
+ * @returns {String} 'true', 'false', or ''.
+ */
+// TODO(awong): Move to validations and add unittests.
+function yesNoToESBoolean(yesNo) {
+  switch (yesNo) {
+    case 'Y':
+      return 'true';
+    case 'N':
+      return 'false';
+    default:
+      // TODO(awong): What to do here?
+      return '';
+  }
+}
+
+// TODO(awong): Move to validations and add unittests.
 function zeroPadNumber(number, padding) {
   return (new Array(padding + 1).join('0') + number).slice(-padding);
 }
 
+// TODO(awong): Move to validations and add unittests.
 function formDateToESDate(dateObject) {
   if (dateObject.month >= 1 && dateObject.month <= 12 &&
     dateObject.day >= 1 && dateObject.month <= 31 && // TODO: how robust does this need to be? Form validates as well.
@@ -75,7 +128,8 @@ function veteranToPersonInfo(veteran) {
     mothersMaidenName: validations.validateString(veteran.mothersMaidenName, 35, true),
     placeOfBirthCity: validations.validateString(veteran.cityOfBirth, 20, true),
     placeOfBirthState: veteran.stateOfBirth, // todo(robbie) need to do this validation.
-    ssnText: validations.validateSsn(veteran.veteranSocialSecurityNumber)
+    ssnText: validations.validateSsn(veteran.veteranSocialSecurityNumber),
+    suffix: veteran.veteranFullName.suffix,
   };
 }
 
@@ -270,7 +324,7 @@ function veteranToEnrollmentDeterminationInfo(veteran) {
 
     //  * serviceConnectionawardInfo / serviceConnectedIndicator, Checkbox, No,
     serviceConnectionAward: {
-      serviceConnectedIndicator: veteran.isVaServiceConnected === 'Y',
+      serviceConnectedIndicator: yesNoToESBoolean(veteran.isVaServiceConnected),
     },
 
     specialFactors: {
@@ -703,7 +757,7 @@ function veteranToDemographicsInfo(veteran) {
       },
     },
     ethnicity: '2186-5', // FIX
-    maritalStatus: 'M', // FIX: veteran.maritalStatus,
+    maritalStatus: maritalStatusToSDSCode(veteran.maritalStatus),
     preferredFacility: veteran.vaMedicalFacility,
     races: {
       race: '2106-3' // FIX
