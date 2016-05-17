@@ -39,6 +39,7 @@ const formTemplate = {
  * @param {String} maritalStatus (eg, 'Married', 'Never Married', etc.)
  * @returns {String} VHA SDS code (eg, 'M', 'S', etc.)
  */
+// TODO(awong): Move to validations and add unittests.
 function maritalStatusToSDSCode(maritalStatus) {
   switch (maritalStatus) {
     case 'Married':
@@ -66,6 +67,7 @@ function maritalStatusToSDSCode(maritalStatus) {
  * @param {String} A value from the yesNo property.
  * @returns {String} 'true', 'false', or ''.
  */
+// TODO(awong): Move to validations and add unittests.
 function yesNoToESBoolean(yesNo) {
   switch (yesNo) {
     case 'Y':
@@ -78,10 +80,12 @@ function yesNoToESBoolean(yesNo) {
   }
 }
 
+// TODO(awong): Move to validations and add unittests.
 function zeroPadNumber(number, padding) {
   return (new Array(padding + 1).join('0') + number).slice(-padding);
 }
 
+// TODO(awong): Move to validations and add unittests.
 function formDateToESDate(dateObject) {
   if (dateObject.month >= 1 && dateObject.month <= 12 &&
     dateObject.day >= 1 && dateObject.month <= 31 && // TODO: how robust does this need to be? Form validates as well.
