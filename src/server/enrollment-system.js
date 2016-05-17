@@ -1,3 +1,5 @@
+const _ = require('lodash');
+const validations = require('./utils/validations');
 //
 // The Comments starting with "// *" that look like a bad CSV dump are copy-pasta-ed out the VOA
 // requirements documentation from the ES team. It's not authoritative for the field name and
@@ -65,14 +67,15 @@ function formDateToESDate(dateObject) {
 //  * personInfo/ssnText, Value not 9 digits and contains a non number., ,
 function veteranToPersonInfo(veteran) {
   return {
-    firstName: veteran.veteranFullName.first,
-    middleName: veteran.veteranFullName.middle,
-    lastName: veteran.veteranFullName.last,
-    ssnText: veteran.veteranSocialSecurityNumber.replace(/-/g, ''),
+    dob: validations.dateOfBirth(veteran.veteranDateOfBirth),
+    firstName: validations.validateString(veteran.veteranFullName.first, 30),
     gender: veteran.gender,
-    dob: formDateToESDate(veteran.veteranDateOfBirth),
-    mothersMaidenName: veteran.mothersMaidenName,
-    placeOfBirthCity: veteran.cityOfBirth,
+    lastName: validations.validateString(veteran.veteranFullName.last, 30),
+    middleName: validations.validateString(veteran.veteranFullName.middle, 30, true),
+    mothersMaidenName: validations.validateString(veteran.mothersMaidenName, 35, true),
+    placeOfBirthCity: validations.validateString(veteran.cityOfBirth, 20, true),
+    placeOfBirthState: veteran.stateOfBirth, // todo(robbie) need to do this validation.
+    ssnText: validations.validateSsn(veteran.veteranSocialSecurityNumber)
   };
 }
 
@@ -786,6 +789,9 @@ function veteranToSummary(veteran) {
  * @returns {Object} Object representing soap message for use with VoaService.saveSubmitForm.
  */
 function veteranToSaveSubmitForm(veteran) {
+  if (!veteran || typeof veteran !== Object || _.isEmpty(veteran)) {
+    return {};
+  }
   const request = Object.assign({}, formTemplate);
   request.form.summary = veteranToSummary(veteran);
   request.form.applications = {
