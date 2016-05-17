@@ -45,16 +45,16 @@ const formTemplate = {
  *
  * TODO: should this explicitly check if 'number' and 'width' are actually numbers?
  *
- * @param {number} number The number you want left-padded with '0' characters.
- * @param {number} width The width of the resulting string.
- * @returns {String}
- *
  * @example
  * // returns "0001"
  * zeroPadNumber(1, 4);
  * @example
  * // returns "15"
  * zeroPadNumber(31415, 2);
+ *
+ * @param {number} number The number you want left-padded with '0' characters.
+ * @param {number} width The width of the resulting string.
+ * @returns {String}
  */
 // TODO(awong): Move to validations and add unittests.
 function zeroPadNumber(number, padding) {
@@ -64,31 +64,54 @@ function zeroPadNumber(number, padding) {
 /**
  * Returns true when the provided year is a leap-year in the Gregorian calendar.
  *
+ * Based on "Introduction To Calendars" paragraph at http://aa.usno.navy.mil/faq/docs/calendars.php
+ * specifically, the paragraph:
+ *
+ * "The Gregorian Calendar has become the internationally accepted civil calendar. The
+ * leap year rule for the Gregorian Calendar differs slightly from one for the Julian
+ * Calendar. The Gregorian leap year rule is: Every year that is exactly divisible by four is
+ * a leap year, except for years that are exactly divisible by 100, but these centurial
+ * years are leap years if they are exactly divisible by 400. For example, the years 1700, 1800,
+ * and 1900 are not leap years, but the year 2000 is. ..."
+ *
+ * @example
+ * // returns:
+ * [ [ 1700, false ],
+ *   [ 1800, false ],
+ *   [ 1900, false ],
+ *   [ 2000, true ],
+ *   [ 2011, false ],
+ *   [ 2012, true ],
+ *   [ 2013, false ],
+ *   [ 2014, false ],
+ *   [ 2015, false ],
+ *   [ 2016, true ],
+ *   [ 2017, false ] ]
+ *
+ * [1700,1800,1900,2000,2011,2012,2013,2014,2015,2016,2017].map((a)=>{return [a,isLeapYear(a)]})
+ *
+ * TODO: Albert, please double check the date logic.
+ *
  * @param {number} year The year you want to test.
  * @returns {boolean}
- *
- * @example
- * // returns true
- * isLeapYear(2012)
- *
- * @example
- * // returns false
- * isLeapYear(2011)
- *
- * @example
- * // returns [ true, false, false, false, true, true, true ]
- * [1600,1700,1899,1900,2000,2016,2012].map(isLeapYear)
  */
 function isLeapYear(year) {
   return ((year % 4 === 0) && (year % 100 !== 0) || (year % 400 === 0));
 }
 
 /**
- * Returns true when the provided dateObject contains a valid date after 1583
- * (based on the first full year of the Gregorian calendar).
+ * Returns true when the provided dateObject contains a valid date after 1582
+ * which is the first full year after the Gregorian calendar was introduced.
  *
- * @param {Object} dateObject in the format of {month: 1, day: 30, year: 1980}
- * @returns {boolean}
+ * The significance of the Gregorian calendar is because leap-year calculations
+ * are only relevant for dates based on this calendar. 
+ *
+ * This is based on the first full year the Gregorian calendar was introduced:
+ * https://en.wikipedia.org/wiki/Gregorian_calendar
+ * specifically the paragraph:
+ * "The Gregorian calendar, also called the Western calendar and the Christian calendar, is
+ * internationally the most widely used civil calendar. It is named for Pope Gregory XIII, who
+ * introduced it in October 1582."
  *
  * @example
  * // returns false
@@ -109,6 +132,9 @@ function isLeapYear(year) {
  * @example
  * // returns false
  * isValidDateObject({month: 2, day: 32, year: 2011})
+ *
+ * @param {Object} dateObject in the format of {month: 1, day: 30, year: 1980}
+ * @returns {boolean}
  */
 function isValidDateObject(dateObject) {
   if (typeof dateObject !== 'object' || dateObject === null) return false;
@@ -158,9 +184,6 @@ function isValidDateObject(dateObject) {
  *
  * TODO: Accept dates w/o day and return in the format MM/YYYY.
  *
- * @param {Object} dateObject in the format of {month: 1, day: 30, year: 1980}
- * @returns {String}
- *
  * @example
  * // returns "01/01/1980"
  * formDateToESDate({month: 1, day: 30, year: 1980})
@@ -168,6 +191,9 @@ function isValidDateObject(dateObject) {
  * @example
  * // returns undefined
  * formDateToESDate(100)
+ *
+ * @param {Object} dateObject in the format of {month: 1, day: 30, year: 1980}
+ * @returns {String}
  */
 function formDateToESDate(dateObject) {
   if (isValidDateObject(dateObject)) {
@@ -473,9 +499,6 @@ function veteranToPersonInfo(veteran) {
  * Codes are from VHA Standard Data Service (ADRDEV01) Service Branch List
  * http://vaausesrapp80.aac.va.gov:7404/ds/List/ServiceBranch
  *
- * @param {String} serviceBranch Branch of service. eg, 'army', 'air force'
- * @returns {Number} VHA Standard Data Service
- *
  * @example
  * // returns 6 (OTHER)
  * serviceBranchToSDSCode()
@@ -483,6 +506,9 @@ function veteranToPersonInfo(veteran) {
  * @example
  * // returns 1 (ARMY)
  * serviceBranchToSDSCode('army')
+ *
+ * @param {String} serviceBranch Branch of service. eg, 'army', 'air force'
+ * @returns {Number} VHA Standard Data Service
  */
 function serviceBranchToSDSCode(serviceBranch) {
   switch (serviceBranch) {
@@ -522,9 +548,6 @@ function serviceBranchToSDSCode(serviceBranch) {
  * Codes are from VHA Standard Data Service (ADRDEV01) Service Discharge Code List
  * http://vaausesrapp80.aac.va.gov:7404/ds/List/ServiceDischargeCode
  *
- * @param {String} dischargeType Branch of service. eg, 'honorable', 'general'
- * @returns {Number} VHA Standard Data Service code.
- *
  * @example
  * // returns 6 (OTHER-THAN-HONORABLE)
  * dischargeTypeToSDSCode()
@@ -532,6 +555,9 @@ function serviceBranchToSDSCode(serviceBranch) {
  * @example
  * // returns 1 (HONORABLE)
  * dischargeTypeToSDSCode('honorable')
+ *
+ * @param {String} dischargeType Branch of service. eg, 'honorable', 'general'
+ * @returns {Number} VHA Standard Data Service code.
  */
 function dischargeTypeToSDSCode(dischargeType) {
   switch (dischargeType) {
