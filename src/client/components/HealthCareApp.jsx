@@ -87,13 +87,13 @@ class HealthCareApp extends React.Component {
     e.preventDefault();
     const veteran = this.props.data;
 
-    // Strip out unnecessary fields'
-    function reducer(key, value) {
-      return key === 'dirty' ? undefined : value;
+    // Strip out unnecessary fields that track UI state
+    function reducer(i, d) {
+      return typeof d.value !== 'undefined' ? d.value : d;
     }
 
     const json = JSON.stringify(veteran, reducer, 4);
-    // console.log(json);
+    console.log(json);
 
     this.props.onUpdateSubmissionStatus('submitPending');
 

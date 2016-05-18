@@ -19,6 +19,11 @@ select {
   background-image: url('../../../public/images/arrow-down.png');
 }
 
+.loading-message {
+  text-align: center;
+  padding: 2em 0;
+}
+
 legend {
   @extend h4;
 }
