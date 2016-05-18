@@ -43,6 +43,7 @@ class MedicareMedicaidSection extends React.Component {
     } else {
       content = (<fieldset>
         <legend>Medicare/Medicaid</legend>
+        <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
           <ErrorableRadioButtons required
               errorMessage={validateIfDirty(this.props.data.isMedicaidEligible, isNotBlank) ? '' : 'Please select a response'}

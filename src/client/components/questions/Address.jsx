@@ -52,7 +52,7 @@ class Address extends React.Component {
     if (states[selectedCountry]) {
       stateList = states[selectedCountry];
     } else {
-      stateList.push('Other');
+      stateList.push('Foreign Country');
     }
 
     return (

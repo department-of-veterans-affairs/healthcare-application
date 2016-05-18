@@ -33,7 +33,7 @@ class AdditionalMilitaryInformationSection extends React.Component {
             <td>{`${this.props.data.disabledInLineOfDuty ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
-            <td>Did you serve in SW Asia during the Gulf War between August 2, 1990 and Nov 11, 1998?:</td>
+            <td>Did you serve in Southwest Asia during the Gulf War between August 2, 1990 and Nov 11, 1998?:</td>
             <td>{`${this.props.data.swAsiaCombat ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
@@ -56,9 +56,8 @@ class AdditionalMilitaryInformationSection extends React.Component {
       </table>);
     } else {
       content = (<fieldset>
-        {/* TODO: Change the headings to something related to the questions. */}
         <legend>Service History</legend>
-        <p>Check all that apply to you:</p>
+        <p>Check all that apply to you.</p>
         <div className="input-section">
           <ErrorableCheckbox
               label="Purple Heart award recipient"
@@ -81,7 +80,7 @@ class AdditionalMilitaryInformationSection extends React.Component {
               onValueChange={(update) => {this.props.onStateChange('disabledInLineOfDuty', update);}}/>
 
           <ErrorableCheckbox
-              label="Served in SW Asia during the Gulf War between August 2, 1990 and Nov 11, 1998"
+              label="Served in Southwest Asia during the Gulf War between August 2, 1990 and Nov 11, 1998"
               checked={this.props.data.swAsiaCombat}
               onValueChange={(update) => {this.props.onStateChange('swAsiaCombat', update);}}/>
 
