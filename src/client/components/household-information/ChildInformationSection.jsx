@@ -2,9 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Child from './Child';
-import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
+import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
 import GrowableTable from '../form-elements/GrowableTable.jsx';
+import { yesNo } from '../../utils/options-for-select.js';
 import { makeField } from '../../../common/fields';
+import { isNotBlank, validateIfDirty } from '../../utils/validations';
 import { veteranUpdateField, ensureFieldsInitialized } from '../../actions';
 
 /**
@@ -118,7 +120,7 @@ class ChildInformationSection extends React.Component {
       });
     }
 
-    if (this.props.data.hasChildrenToReport === true) {
+    if (this.props.data.hasChildrenToReport.value === 'Y') {
       childrenContent = (
         <div className="input-section">
           <hr/>
@@ -150,11 +152,13 @@ class ChildInformationSection extends React.Component {
       content = (<fieldset>
         <legend>Children Information</legend>
         <div>
-          <p>Please fill these out to the best of your knowledge. The more accurate your responses, the faster your application can proceed.</p>
+          <p>Please fill this out to the best of your knowledge. The more accurate your responses, the faster your application can proceed.</p>
           <div className="input-section">
-            <ErrorableCheckbox
+            <ErrorableRadioButtons required
+                errorMessage={validateIfDirty(this.props.data.hasChildrenToReport, isNotBlank) ? '' : 'Please select a response'}
                 label="Do you have any children to report?"
-                checked={this.props.data.hasChildrenToReport}
+                options={yesNo}
+                value={this.props.data.hasChildrenToReport}
                 onValueChange={(update) => {this.props.onStateChange('hasChildrenToReport', update);}}/>
           </div>
           {childrenContent}

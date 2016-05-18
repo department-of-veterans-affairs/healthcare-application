@@ -32,6 +32,8 @@ class ErrorableSelect extends React.Component {
   }
 
   render() {
+    const selectedValue = this.props.value.value;
+
     // Calculate error state.
     let errorSpan = '';
     let errorSpanId = undefined;
@@ -61,6 +63,11 @@ class ErrorableSelect extends React.Component {
         label = obj.label;
         value = obj.value;
       }
+
+      if (value === selectedValue) {
+        return <option key={++reactKey} value={value} selected>{label}</option>;
+      }
+
       return <option key={++reactKey} value={value}>{label}</option>;
     });
 

@@ -57,6 +57,7 @@ class DemographicInformationSection extends React.Component {
     } else {
       content = (<fieldset>
         <legend>Demographic Information</legend>
+        <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
           <Gender required
               value={this.props.data.gender}
@@ -67,7 +68,7 @@ class DemographicInformationSection extends React.Component {
           <h4>Which categories best describe you?</h4>
           <span className="usa-form-hint">You may check more than one.</span>
           <ErrorableCheckbox
-              label="American Indian or Alaksan Native"
+              label="American Indian or Alaskan Native"
               checked={this.props.data.isAmericanIndianOrAlaskanNative}
               onValueChange={(update) => {this.props.onStateChange('isAmericanIndianOrAlaskanNative', update);}}/>
 

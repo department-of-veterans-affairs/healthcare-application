@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
+import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
 import GrowableTable from '../form-elements/GrowableTable.jsx';
 import Provider from './Provider.jsx';
+import { yesNo } from '../../utils/options-for-select.js';
+import { isNotBlank, validateIfDirty } from '../../utils/validations';
 import { veteranUpdateField, ensureFieldsInitialized } from '../../actions';
 
 import { makeField } from '../../../common/fields';
@@ -30,7 +32,7 @@ class InsuranceInformationSection extends React.Component {
     let providers;
     const fields = ['insuranceName', 'insurancePolicyHolderName', 'insurancePolicyNumber', 'insuranceGroupCode'];
 
-    if (this.props.data.isCoveredByHealthInsurance) {
+    if (this.props.data.isCoveredByHealthInsurance.value === 'Y') {
       providersTable = (
         <GrowableTable
             component={Provider}
@@ -92,9 +94,11 @@ class InsuranceInformationSection extends React.Component {
     } else {
       content = (<fieldset>
         <legend>Coverage Information</legend>
-        <ErrorableCheckbox
+        <ErrorableRadioButtons required
+            errorMessage={validateIfDirty(this.props.data.isCoveredByHealthInsurance, isNotBlank) ? '' : 'Please select a response'}
             label="Are you covered by health insurance? (Including coverage through a spouse or another person)"
-            checked={this.props.data.isCoveredByHealthInsurance}
+            options={yesNo}
+            value={this.props.data.isCoveredByHealthInsurance}
             onValueChange={(update) => {this.props.onStateChange('isCoveredByHealthInsurance', update);}}/>
         <hr/>
         {providersTable}

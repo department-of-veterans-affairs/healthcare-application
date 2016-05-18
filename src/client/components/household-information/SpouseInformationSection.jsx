@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import * as calculated from '../../store/calculated';
 import Address from '../questions/Address';
 import DateInput from '../form-elements/DateInput';
-import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import ErrorableSelect from '../form-elements/ErrorableSelect';
 import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
 import FullName from '../questions/FullName';
@@ -25,7 +23,6 @@ import { veteranUpdateField, updateSpouseAddress } from '../../actions';
  */
 class SpouseInformationSection extends React.Component {
   render() {
-    let noSpouseMessage;
     let content;
     let spouseInformationSummary;
     let spouseInformationFields;
@@ -100,23 +97,24 @@ class SpouseInformationSection extends React.Component {
               value={this.props.data.sameAddress}
               onValueChange={(update) => {this.props.onStateChange('sameAddress', update);}}/>
 
-          <ErrorableCheckbox
+          <ErrorableRadioButtons
               label="Did your spouse live with you last year?"
-              checked={this.props.data.cohabitedLastYear}
+              options={yesNo}
+              value={this.props.data.cohabitedLastYear}
               onValueChange={(update) => {this.props.onStateChange('cohabitedLastYear', update);}}/>
-          <hr/>
-          <p>You may count your spouse as your dependent even if you did not live
-          together, as long as you contributed support last calendar year.</p>
-          <hr/>
-          <ErrorableCheckbox
-              label="If your spouse did not live with you last year, did you provide support?"
-              checked={this.props.data.provideSupportLastYear}
+
+          <ErrorableRadioButtons
+              label="If your spouse did not live with you last year, did you provide financial support?"
+              options={yesNo}
+              value={this.props.data.provideSupportLastYear}
               onValueChange={(update) => {this.props.onStateChange('provideSupportLastYear', update);}}/>
         </div>
       );
     }
 
-    if (this.props.data.sameAddress.value === 'N') {
+    if (this.props.data.sameAddress.value === 'N' &&
+        (this.props.data.maritalStatus.value === 'Married' || this.props.data.maritalStatus.value === 'Separated')
+    ) {
       spouseAddressSummary = (
         <div>
           <h4>Spouse's Address and Telephone Number</h4>
@@ -193,22 +191,10 @@ class SpouseInformationSection extends React.Component {
               required
               value={this.props.data.maritalStatus}
               onValueChange={(update) => {this.props.onStateChange('maritalStatus', update);}}/>
-          {noSpouseMessage}
           {spouseInformationFields}
           {spouseAddressFields}
         </div>
       </fieldset>);
-    }
-
-    if (this.props.neverMarried === true) {
-      noSpouseMessage = (
-        <p>
-          <strong>
-            You are not required to enter financial information because you
-            indicated you've never had a spouse.
-          </strong>
-        </p>
-      );
     }
 
     return (
@@ -222,7 +208,6 @@ class SpouseInformationSection extends React.Component {
 function mapStateToProps(state) {
   return {
     data: state.veteran,
-    neverMarried: calculated.neverMarried(state),
     isSectionComplete: state.uiState.sections['/household-information/spouse-information'].complete
   };
 }
