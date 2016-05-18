@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { expect } from 'chai';
 
 import DateInput from '../../../../src/client/components/form-elements/DateInput';
-import { makeField } from '../../../../src/client/reducers/fields';
+import { makeField } from '../../../../src/common/fields';
 
 describe('<DateInput>', () => {
   describe('propTypes', () => {

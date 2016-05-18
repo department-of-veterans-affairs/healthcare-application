@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { expect } from 'chai';
 
 import SocialSecurityNumber from '../../../../src/client/components/questions/SocialSecurityNumber';
-import { makeField } from '../../../../src/client/reducers/fields';
+import { makeField } from '../../../../src/common/fields';
 
 describe('<SocialSecurityNumber>', () => {
   describe('propTypes', () => {

@@ -5,7 +5,7 @@ import sinon from 'sinon';
 import { assert, expect } from 'chai';
 
 import FullName from '../../../../src/client/components/questions/FullName';
-import { makeField } from '../../../../src/client/reducers/fields';
+import { makeField } from '../../../../src/common/fields';
 
 function makeName(first, middle, last, suffix) {
   return {

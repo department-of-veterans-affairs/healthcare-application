@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import { makeField } from '../../reducers/fields.js';
+import { makeField } from '../../../common/fields.js';
 
 /**
  * A radio button group with a label.

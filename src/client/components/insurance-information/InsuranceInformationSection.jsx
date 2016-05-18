@@ -6,7 +6,7 @@ import GrowableTable from '../form-elements/GrowableTable.jsx';
 import Provider from './Provider.jsx';
 import { veteranUpdateField, ensureFieldsInitialized } from '../../actions';
 
-import { makeField } from '../../reducers/fields';
+import { makeField } from '../../../common/fields';
 
 /**
  * Props:

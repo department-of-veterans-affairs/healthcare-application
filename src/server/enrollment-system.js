@@ -120,7 +120,7 @@ function formDateToESDate(dateObject) {
 //  * personInfo/ssnText, Value not 9 digits and contains a non number., ,
 function veteranToPersonInfo(veteran) {
   return {
-    dob: validations.dateOfBirth(veteran.veteranDateOfBirth),
+    dob: formDateToESDate(veteran.veteranDateOfBirth),
     firstName: validations.validateString(veteran.veteranFullName.first, 30),
     gender: veteran.gender,
     lastName: validations.validateString(veteran.veteranFullName.last, 30),
@@ -843,7 +843,7 @@ function veteranToSummary(veteran) {
  * @returns {Object} Object representing soap message for use with VoaService.saveSubmitForm.
  */
 function veteranToSaveSubmitForm(veteran) {
-  if (!veteran || typeof veteran !== Object || _.isEmpty(veteran)) {
+  if (!veteran || !_.isPlainObject(veteran) || _.isEmpty(veteran)) {
     return {};
   }
   const request = Object.assign({}, formTemplate);

@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { expect } from 'chai';
 
 import Email from '../../../../src/client/components/questions/Email';
-import { makeField } from '../../../../src/client/reducers/fields';
+import { makeField } from '../../../../src/common/fields';
 
 describe('<Email>', () => {
   describe('propTypes', () => {
