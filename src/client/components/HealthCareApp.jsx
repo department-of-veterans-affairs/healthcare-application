@@ -8,7 +8,7 @@ import fetch from 'isomorphic-fetch';
 import IntroductionSection from './IntroductionSection.jsx';
 import Nav from './Nav.jsx';
 import ProgressButton from './ProgressButton';
-import { ensureFieldsInitialized, updateCompletedStatus, updateSubmissionStatus } from '../actions';
+import { ensureFieldsInitialized, updateCompletedStatus, updateSubmissionStatus, updateSubmissionId, updateSubmissionTimestamp } from '../actions';
 
 import * as validations from '../utils/validations';
 
@@ -92,9 +92,6 @@ class HealthCareApp extends React.Component {
       return typeof d.value !== 'undefined' ? d.value : d;
     }
 
-    const json = JSON.stringify(veteran, reducer, 4);
-    console.log(json);
-
     this.props.onUpdateSubmissionStatus('submitPending');
 
     // POST data to endpoint
@@ -110,9 +107,12 @@ class HealthCareApp extends React.Component {
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-      setTimeout(() => {
-        this.props.onUpdateSubmissionStatus('applicationSubmitted', response.json());
-      }, 5000);
+      response.json().then(data => {
+        this.props.onUpdateSubmissionStatus('applicationSubmitted', data);
+        console.log('data', data);
+        this.props.onUpdateSubmissionId(data.formSubmissionId);
+        this.props.onUpdateSubmissionTimestamp(data.timeStamp);
+      });
       setTimeout(() => {
         this.context.router.push(this.getUrl('next'));
         this.scrollToTop();
@@ -288,6 +288,12 @@ function mapDispatchToProps(dispatch) {
     // },
     onUpdateSubmissionStatus: (value) => {
       dispatch(updateSubmissionStatus(value));
+    },
+    onUpdateSubmissionId: (value) => {
+      dispatch(updateSubmissionId(value));
+    },
+    onUpdateSubmissionTimestamp: (value) => {
+      dispatch(updateSubmissionTimestamp(value));
     },
     onFieldsInitialized: (field) => {
       dispatch(ensureFieldsInitialized(field));

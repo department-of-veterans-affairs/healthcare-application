@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 class SubmitMessage extends React.Component {
   render() {
+    const time = this.props.submission.timestamp;
     return (
       <div>
         <div className="medium-2 columns">
@@ -14,8 +16,8 @@ class SubmitMessage extends React.Component {
         <div>
           <p>We are processing your application. You should receive a phone call from the VA in the next week.</p>
           <div className="success-alert-box">
-            <p className="success-copy">Your Form Submission ID: 3623515904</p>
-            <p className="success-copy">Form Submitted At: 05/09/2016 10:11am</p>
+            <p className="success-copy">Your Form Submission ID: {this.props.submission.id}</p>
+            <p className="success-copy">Form Submitted At: {moment(time).format('MMMM Do YYYY, h:mm A')}</p>
           </div>
           <p>Please print this page for your records.</p>
           <p>If you do not receive a call from the VA within a week, or you have questions, call 1-877-222-VETS (8387).</p>
@@ -27,7 +29,7 @@ class SubmitMessage extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    isApplicationSubmitted: state.uiState.applicationSubmitted,
+    submission: state.uiState.submission
   };
 }
 // TODO(awong): Remove the pure: false once we start using ImmutableJS.
