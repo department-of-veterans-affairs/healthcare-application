@@ -1,3 +1,7 @@
+# Healthcare Application
+
+## Project Background
+
 ### Back-end
 
 The backend receives a JSON object from the front-end containing a Vet's 1010ez request and
@@ -14,10 +18,41 @@ connections and responses from end endpoint.
 
 (TODO: some words to go along with these diagrams)
 
-#### Development setup
+### Development setup
+
+#### Node.js
+
+##### The requirements for running this application are Node.js 4.4.4 and npm 3.8.9.
+You should use Node Version Manager (nvm) to manage the versions of node.js on your local machine.
+To install please visit: https://github.com/creationix/nvm
+_If you are on a mac and use [homebrew](http://brew.sh/), you can install nvm by typing: brew update && brew install nvm_
+
+Once you have nvm installed you should now install node.js version 4.4.4 by running: 
+
+```bash
+nvm install 4.4.4
 ```
-git clone https://github.com/department-of-veterans-affairs/healthcare-application.git
-cd healthcare-application
+
+Once you have node.js version 4.4.4 installed install npm version 3.8.9 by running:
+
+```bash
+npm i -g npm@3.8.9
+```
+##### Verify your local requirements are set
+```bash
+node --version // 4.4.4
+npm --version  // 3.8.9
+```
+
+Checkout the repository: 
+
+```bash
+git clone git@github.com:department-of-veterans-affairs/healthcare-application.git
+```
+
+Install the node.js project dependencies:
+
+```bash
 npm install
 ```
 
