@@ -87,6 +87,7 @@ const goldenFormOutput = {
         mothersMaidenName: 'Maiden',
         placeOfBirthCity: 'Springfield',
         placeOfBirthState: 'AK',
+        suffix: 'Jr.'
       }
     },
     applications: {
@@ -111,7 +112,6 @@ describe('enrollment-system base tests', () => {
         JSON.parse(JSON.stringify(veteran.completeVeteran, (i, d) => {
           return typeof d.value !== 'undefined' ? d.value : d;
         })));
-      console.log(JSON.stringify(result, null, 2));
       result.should.be.instanceOf(Object);
       result.should.deep.equal(goldenFormOutput);
     });
