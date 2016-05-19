@@ -17,6 +17,7 @@ import PersonalInfoSection from './components/veteran-information/PersonalInfoSe
 import ReviewAndSubmitSection from './components/ReviewAndSubmitSection.jsx';
 import ServiceInformationSection from './components/military-service/ServiceInformationSection';
 import SpouseInformationSection from './components/household-information/SpouseInformationSection';
+import SubmitMessage from './components/SubmitMessage.jsx';
 import VeteranAddressSection from './components/veteran-information/VeteranAddressSection';
 import VAInformationSection from './components/va-benefits/VAInformationSection';
 
@@ -106,7 +107,13 @@ const routes = [
   <Route
       component={ReviewAndSubmitSection}
       key="/review-and-submit"
-      path="/review-and-submit"/>
+      path="/review-and-submit"/>,
+
+ // Submit Message route.
+  <Route
+      component={SubmitMessage}
+      key="/submit-message"
+      path="/submit-message"/>
 ];
 
 export default routes;

@@ -74,7 +74,9 @@ function attach(app) {
       connector: require('loopback-connector-soap'),
       remotingEnabled: true,
       wsdl: path.join(__dirname, './voa.wsdl'),
-      url: endpoint.esDev,
+      url: endpoint.c7401,
+//      wsdl: endpoint.esDev + '?wsdl',
+//      url: endpoint.esDev,
       security: securityArtifacts,
       wsdl_options: securityArtifacts === null ? null : { // eslint-disable-line
         rejectUnauthorized: false,
@@ -106,7 +108,7 @@ function attach(app) {
     // Map to REST/HTTP
     loopback.remoteMethod(
       VoaService.submit, {
-        accepts: { arg: 'form', type: 'Object', http: {source: 'body'} },
+        accepts: { arg: 'form', type: 'Object', http: { source: 'body' } },
         returns: { arg: 'result', type: 'string', root: true },
         http: { path: '/submit' }
       }

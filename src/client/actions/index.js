@@ -7,6 +7,8 @@ export const UPDATE_REVIEW_STATUS = 'UPDATE_REVIEW_STATUS';
 export const UPDATE_VERIFIED_STATUS = 'UPDATE_VERIFIED_STATUS';
 export const UPDATE_SPOUSE_ADDRESS = 'UPDATE_SPOUSE_ADDRESS';
 export const UPDATE_SUBMISSION_STATUS = 'UPDATE_SUBMISSION_STATUS';
+export const UPDATE_SUBMISSION_ID = 'UPDATE_SUBMISSION_ID';
+export const UPDATE_SUBMISSION_TIMESTAMP = 'UPDATE_SUBMISSION_TIMESTAMP';
 export const CREATE_CHILD_INCOME_FIELDS = 'CREATE_CHILD_INCOME_FIELDS';
 
 export function ensureFieldsInitialized(fields, parentNode) {
@@ -70,10 +72,24 @@ export function updateSpouseAddress(propertyPath, value) {
   };
 }
 
-export function updateSubmissionStatus(field) {
+export function updateSubmissionStatus(value) {
   return {
     type: UPDATE_SUBMISSION_STATUS,
-    field
+    value
+  };
+}
+
+export function updateSubmissionId(value) {
+  return {
+    type: UPDATE_SUBMISSION_ID,
+    value
+  };
+}
+
+export function updateSubmissionTimestamp(value) {
+  return {
+    type: UPDATE_SUBMISSION_TIMESTAMP,
+    value
   };
 }
 
