@@ -52,8 +52,8 @@ const blankVeteran = {
   homePhone: makeField(''),
   mobilePhone: makeField(''),
 
-  provideFinancialInfo: false,
-  understandsFinancialDisclosure: false,
+  provideFinancialInfo: makeField(''),
+  understandsFinancialDisclosure: makeField(''),
 
   spouseFullName: {
     first: makeField(''),
@@ -72,9 +72,9 @@ const blankVeteran = {
     day: makeField(''),
     year: makeField('')
   },
-  sameAddress: false,
-  cohabitedLastYear: false,
-  provideSupportLastYear: false,
+  sameAddress: makeField(''),
+  cohabitedLastYear: makeField(''),
+  provideSupportLastYear: makeField(''),
   spouseAddress: {
     street: makeField(''),
     city: makeField(''),
@@ -84,7 +84,7 @@ const blankVeteran = {
   },
   spousePhone: makeField(''),
 
-  hasChildrenToReport: false,
+  hasChildrenToReport: makeField(''),
   children: [],
 
   veteranGrossIncome: makeField(''),
@@ -99,11 +99,11 @@ const blankVeteran = {
   deductibleFuneralExpenses: makeField(''),
   deductibleEducationExpenses: makeField(''),
 
-  isCoveredByHealthInsurance: false,
+  isCoveredByHealthInsurance: makeField(''),
   providers: [],
 
-  isMedicaidEligible: false,
-  isEnrolledMedicarePartA: false,
+  isMedicaidEligible: makeField(''),
+  isEnrolledMedicarePartA: makeField(''),
   medicarePartAEffectiveDate: {
     month: makeField(''),
     day: makeField(''),

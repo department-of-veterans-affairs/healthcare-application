@@ -280,16 +280,17 @@ function isValidChildInformationField(child) {
 }
 
 function isValidChildren(data) {
+  let allChildrenValid = true;
   const children = data.children;
-  if (!data.hasChildrenToReport) {
-    return true;
-  }
+
   for (let i = 0; i < children.length; i++) {
     if (!isValidChildInformationField(children[i])) {
-      return false;
+      allChildrenValid = false;
     }
   }
-  return true;
+
+  return isNotBlank(data.hasChildrenToReport.value) &&
+      allChildrenValid;
 }
 
 function isValidChildrenIncome(data) {
@@ -338,19 +339,20 @@ function isValidMedicareMedicaid(data) {
 }
 
 function isValidGeneralInsurance(data) {
+  let allProvidersValid = true;
   const providers = data.providers;
-  if (!data.isCoveredByHealthInsurance) {
-    return true;
-  }
+
   for (let i = 0; i < providers.length; i++) {
     if (!(isNotBlank(providers[i].insuranceName.value) &&
         isNotBlank(providers[i].insurancePolicyHolderName.value) &&
         isValidInsurancePolicy(providers[i].insurancePolicyNumber.value, providers[i].insuranceGroupCode.value))
     ) {
-      return false;
+      allProvidersValid = false;
     }
   }
-  return true;
+
+  return isNotBlank(data.isCoveredByHealthInsurance.value) &&
+      allProvidersValid;
 }
 
 function isValidServiceInformation(data) {

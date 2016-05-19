@@ -12,6 +12,7 @@ jsconfig.json
 *.crt
 jsconfig.json
 .vscode/
+npm-debug.log.*
 
 #Compiled files.
 .sass-cache

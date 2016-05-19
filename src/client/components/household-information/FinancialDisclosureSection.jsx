@@ -58,11 +58,15 @@ class FinancialDisclosureSection extends React.Component {
             military experience</li>
           </ol>
 
-          <p>
-            You are not required to provide your financial information. However,
-            <strong> if you do not have a qualifying eligibility factor, providing
-            your financial information is the only way to determine your eligibility.</strong>
-          </p>
+          <div className="usa-alert usa-alert-info">
+            <div className="hca-alert-body">
+              <p>
+                You are not required to provide your financial information. However,
+                <strong> if you do not have a qualifying eligibility factor, providing
+                your financial information is the only way to determine your eligibility.</strong>
+              </p>
+            </div>
+          </div>
 
           {/* Move this list to a tooltip in reference above, create new tooltip component */}
           <ul>The qualifying eligibility factors are:
@@ -76,7 +80,7 @@ class FinancialDisclosureSection extends React.Component {
           </ul>
 
           <div className="input-section">
-            <a target="_blank" href="http://www.va.gov/healthbenefits/cost/income_thresholds.asp">Click here</a> to view more information about the income thresholds and copayments.
+            <a target="_blank" href="http://www.va.gov/healthbenefits/cost/income_thresholds.asp">Learn more</a> about the income thresholds and copayments.
           </div>
 
           <div className="input-section">
