@@ -9,6 +9,14 @@ const validations = require('./utils/validations');
 // ES VOA SOAP endpoint and is therefore authoritative for the field structure and basic validations.
 //
 
+// http://vaausesrapp80.aac.va.gov:7404/ds/List/ServiceBranch
+
+// ====
+// == Fields not used by the ES system?
+//  veteran.compensableVaServiceConnected.  // Mehedi claims this doesn't map to ES
+//  veteran.receivesVaPension.  // Mehedi claims this doesn't map to ES
+// ====
+
 // Static for content for the 1010EZ.
 const formTemplate = {
   form: {
@@ -28,6 +36,21 @@ const formTemplate = {
     }
   }
 };
+
+// TODO(awong): Move to validations and add unittests.
+function zeroPadNumber(number, padding) {
+  return (new Array(padding + 1).join('0') + number).slice(-padding);
+}
+
+// TODO(awong): Move to validations and add unittests.
+function formDateToESDate(dateObject) {
+  if (dateObject.month >= 1 && dateObject.month <= 12 &&
+    dateObject.day >= 1 && dateObject.month <= 31 && // TODO: how robust does this need to be? Form validates as well.
+    dateObject.year > 1) {
+    return `${zeroPadNumber(dateObject.month, 2)}/${zeroPadNumber(dateObject.day, 2)}/${zeroPadNumber(dateObject.year, 4)}`;
+  }
+  return undefined;
+}
 
 /**
  * Converts maritalStatus from the values in the Veteran resource to the VHA Standard Data Service code.
@@ -58,6 +81,47 @@ function maritalStatusToSDSCode(maritalStatus) {
 }
 
 /**
+ * Returns SDS code representing the indication of Spanish/Hispanic/Latino ethnicity.
+ *
+ * Codes are from the VHA Standard Data Service (ADRDEV01) HL7 24 Ethnicity Map List.
+ *
+ * @param {Boolean} isSpanishHispanicLatino
+ * @returns {String} VHA ethnicity SDS code.
+ */
+// TODO(awong): Move to validations and add unittests.
+function spanishHispanicToSDSCode(isSpanishHispanicLatino) {
+  // from VHA Standard Data Service (ADRDEV01) HL7 24 Ethnicity Map List
+  switch (isSpanishHispanicLatino) {
+    case true:
+      return '2135-2';
+    case false:
+      return '2186-5';
+    default:
+      return '0000-0';  // TODO(awong): Should this just default to false?
+  }
+}
+
+/**
+ * Returns array of SDS codes representing the claimed races of the veteran.
+ *
+ * Codes are from the VHA Standard Data Service (ADRDEV01) HL7 24 Race Map List.
+ *
+ * @param {Object} veteran The veteran resource
+ * @returns {Array} Array of VHA Race SDS codes.
+ */
+// TODO(awong): Move to validations and add unittests.
+function veteranToRaces(veteran) {
+  // from VHA Standard Data Service (ADRDEV01) HL7 24 Race Map List
+  const races = [];
+  if (veteran.isAmericanIndianOrAlaskanNative) races.push({ race: '1002-5' });
+  if (veteran.isAsian) races.push({ race: '2028-9' });
+  if (veteran.isBlackOrAfricanAmerican) races.push({ race: '2054-5' });
+  if (veteran.isNativeHawaiianOrOtherPacificIslander) races.push({ race: '2076-8' });
+  if (veteran.isWhite) races.push({ race: '2106-3' });
+  return races;
+}
+
+/**
  * Converts yesNo options to the VHA Standard Data Service code.
  *
  * yesNo values come from client/utils/options-for-select.js:yesNo.
@@ -80,19 +144,133 @@ function yesNoToESBoolean(yesNo) {
   }
 }
 
-// TODO(awong): Move to validations and add unittests.
-function zeroPadNumber(number, padding) {
-  return (new Array(padding + 1).join('0') + number).slice(-padding);
-}
-
-// TODO(awong): Move to validations and add unittests.
-function formDateToESDate(dateObject) {
-  if (dateObject.month >= 1 && dateObject.month <= 12 &&
-    dateObject.day >= 1 && dateObject.month <= 31 && // TODO: how robust does this need to be? Form validates as well.
-    dateObject.year > 1) {
-    return `${zeroPadNumber(dateObject.month, 2)}/${zeroPadNumber(dateObject.day, 2)}/${zeroPadNumber(dateObject.year, 4)}`;
+/**
+ * Extracts a spouse object out of the veteran resource, if applicable.
+ *
+ * @param {Object} veteran The veteran resource
+ * @returns {Object} ES system spouseInfo message
+ */
+function veteranToSpouseInfo(veteran) {
+  if (veteran.maritalStatus !== 'Never Married') {
+    return {
+      dob: formDateToESDate(veteran.spouseDateOfBirth),
+      givenName: veteran.spouseFullName.first,
+      middleName: veteran.spouseFullName.middle,
+      familyName: veteran.spouseFullName.last,
+      suffix: veteran.spouseFullName.suffix,
+      ssns: {
+        ssn: {
+          ssnText: validations.validateSsn(veteran.spouseSocialSecurityNumber)
+        }
+      },
+      address: {
+        city: veteran.spouseAddress.city,
+        country: veteran.spouseAddress.country,
+        line1: veteran.spouseAddress.street,
+        state: veteran.spouseAddress.state,
+        zipCode: veteran.spouseAddress.zipcode
+      },
+      phoneNumber: veteran.spousePhone
+    };
   }
   return undefined;
+}
+
+/**
+ * Converts relationship from the values in the Veteran resource to the VHA Standard Data Service code.
+ *
+ * childRelationship comes from client/utils/options-for-select.js:childRelationships.
+ *
+ * Codes are from the VHA Standard Data Service (ADRDEV01) HL7 24 Relationship List.
+ *
+ * @param {String} childRelationship (eg, 'Daughter', 'Son', etc.)
+ * @returns {Integer} VHA SDS code (eg, '4', '3', etc.)
+ */
+function childRelationshipToSDSCode(childRelationship) {
+  // from VHA Standard Data Service (ADRDEV01) Relationship List
+  switch (childRelationship) {
+    case 'Daughter':
+      return 4;
+    case 'Son':
+      return 3;
+    case 'Stepson':
+      return 5;
+    case 'Stepdaughter':
+      return 6;
+    default:
+      return undefined;
+  }
+}
+
+/**
+ * Converts child resource to an ES dependentInfo message.
+ *
+ * @param {Object} child The child resource
+ * @returns {Object} ES system dependentInfo message
+ */
+function childToDependentInfo(child) {
+  return {
+    dob: formDateToESDate(child.childDateOfBirth),
+    givenName: child.childFullName.first,
+    middleName: child.childFullName.middle,
+    familyName: child.childFullName.last,
+    suffix: child.childFullName.suffix,
+    relationship: childRelationshipToSDSCode(child.childRelation),
+    ssns: {
+      ssn: {
+        ssnText: validations.validateSsn(child.childSocialSecurityNumber)
+      }
+    },
+    startDate: formDateToESDate(child.childBecameDependent)
+  };
+}
+
+/**
+ * Extracts a dependentFinancialsInfo object out of the veteran resource, if applicable.
+ *
+ * @param {Object} veteran The veteran resource
+ * @returns {Object} ES system dependentFinancialsInfo message
+ */
+function childToDependentFinancialsInfo(child) {
+  return {
+    incomes: undefined,  // TODO(awong): This maps to veteran.childrenIncome[i] based on ordinal of the child. Can we just insert into child?
+    dependentInfo: childToDependentInfo(child),
+    livedWithPatient: child.childCohabitedLastYear,
+    incapableOfSelfSupport: child.childDisabledBefore18,
+    attendedSchool: child.childAttendedSchoolLastYear,
+    contributedToSupport: child.childReceivedSupportLastYear,
+  };
+}
+
+/**
+ * Extracts a dependentFinancialsCollection object out of the veteran resource, if applicable.
+ *
+ * @param {Object} veteran The veteran resource
+ * @returns {Object} ES system dependentFinancialsCollection message
+ */
+function veteranToDependentFinancialsCollection(veteran) {
+  if (veteran.hasChildrenToReport) {
+    return veteran.children.map((child) => {
+      return { dependentFinancials: childToDependentFinancialsInfo(child) };
+    });
+  }
+  return undefined;
+}
+
+/**
+ * Extracts an insuranceInfo object out of the provider resource.
+ *
+ * @param {Object} provider The provider resource
+ * @returns {Object} ES system insuranceInfo message
+ */
+function providerToInsuranceInfo(provider) {
+  return {
+    companyName: provider.insuranceName,
+    policyHolderName: provider.insurancePolicyHolderName,
+    policyNumber: provider.insurancePolicyNumber,
+    groupNumber: provider.insuranceGroupCode,
+    insuranceMappingTypeName: 'PI', // TODO this code is from VHA Standard Data Service (ADRDEV01) Insurance Mapping List
+  };
 }
 
 //  * personInfo / dob, mm/dd/yyyy; cannot be in the future, Yes, "Element is accepted but not used as this element will not be stored in ADR,  it must come from MPI (the authoritative source)."
@@ -122,14 +300,14 @@ function veteranToPersonInfo(veteran) {
   return {
     dob: formDateToESDate(veteran.veteranDateOfBirth),
     firstName: validations.validateString(veteran.veteranFullName.first, 30),
-    gender: veteran.gender,
+    gender: veteran.gender,  // TODO(awong): need to restrict valid values.
     lastName: validations.validateString(veteran.veteranFullName.last, 30),
     middleName: validations.validateString(veteran.veteranFullName.middle, 30, true),
     mothersMaidenName: validations.validateString(veteran.mothersMaidenName, 35, true),
     placeOfBirthCity: validations.validateString(veteran.cityOfBirth, 20, true),
     placeOfBirthState: veteran.stateOfBirth, // todo(robbie) need to do this validation.
     ssnText: validations.validateSsn(veteran.veteranSocialSecurityNumber),
-    suffix: veteran.veteranFullName.suffix,
+    suffix: veteran.veteranFullName.suffix,  // TODO(awong): need to restrict valid values.
   };
 }
 
@@ -212,7 +390,7 @@ function veteranToMilitaryServiceInfo(veteran) {
             serviceBranch: makeServiceBranch(veteran.lastServiceBranch),
           }
         },
-        site: '565GC',  // FIX
+        site: '565GC' // todo(robbiethegeek): this is hardcoded and waiting on Josh's response.
       }
     }
   };
@@ -258,15 +436,24 @@ function veteranToMilitaryServiceInfo(veteran) {
 //  * "insuranceCollection/insuranceInfo/policyNumber insuranceCollection/insuranceInfo/groupNumber", Either Policy Number and Group Code is required , "Applies when ""insuranceMappingTypeName"" = ""PI""",
 //  * insuranceCollection/insuranceInfo/subscriber , Required if enrolled in Medicare Part A or Part B , "Applies when ""insuranceMappingTypeName"" = ""MDCR""",
 function veteranToInsuranceCollection(veteran) {
-  return {
-    // FIX. This is a sequence. What does that look like?
-    insurance: {
-      companyName: 'Medicare',
-      enrolledInPartA: veteran.isEnrolledMedicarePartA,
-      enrolledInPartB: false, // FIX
-      insuranceMappingTypeName: 'MDCR' // FIX
-    }
-  };
+  const insuranceCollection = veteran.providers.map((provider) => {
+    return { insurance: providerToInsuranceInfo(provider) };
+  });
+  if (veteran.isEnrolledMedicarePartA) {
+    insuranceCollection.push({
+      // FIX. This is a sequence. What does that look like?
+      insurance: {
+        companyName: 'Medicare',
+        enrolledInPartA: veteran.isEnrolledMedicarePartA,
+        insuranceMappingTypeName: 'MDCR', // TODO this code is from VHA Standard Data Service (ADRDEV01) Insurance Mapping List
+        partAEffectiveDate: formDateToESDate(veteran.medicarePartAEffectiveDate),
+      }
+    });
+  }
+
+  // TODO(awong): Return the whole collection when the bug with node-soap's wsdl.js that causes
+  // the namespace prefix to be dropped in this case is fixed.
+  return insuranceCollection[0];
 }
 
 // Produces an financialsInfo compatible type from a veteran resource.
@@ -328,8 +515,8 @@ function veteranToEnrollmentDeterminationInfo(veteran) {
     },
 
     specialFactors: {
-      agentOrangeInd: false, // FIX
-      envContaminantsInd: false, // FIX
+      agentOrangeInd: veteran.vietnamService,
+      envContaminantsInd: veteran.swAsiaCombat,
       campLejeuneInd: veteran.campLejeune,
       radiationExposureInd: veteran.exposedToRadiation,
     }
@@ -539,8 +726,25 @@ function veteranToEnrollmentDeterminationInfo(veteran) {
 //  * "financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / amountIncomeType=Net Income from Farm,   Ranch,  Property,  Business IncomeType=Net Income from Farm,   Ranch,  Property,  Business", "Dollar amounts:  0 <= 9999999.99", "Req if Marr/Sep,  or any 3 spouse questions answered on this Panel", This amount field must be accompanied by the income type.
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from employment.
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, "Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from FARM,  RANCH,  PROPERTY OR BUSINESS."
-function veteranToFinancialsInfo(_veteran) {
-  return undefined;
+function veteranToFinancialsInfo(veteran) {
+  return {
+    financialStatement: {
+      expenses: undefined, // TODO(awong): Fix.
+      incomes: undefined,  // TODO(awong): Fix.
+      spouseFinancialsList: {
+        spouseFinancials: {
+          incomes: undefined, // TODO(awong): Fix.
+          spouse: veteranToSpouseInfo(veteran),
+          contributedToSpouse: veteran.provideSupportLastYear,
+          marriedLastCalendarYear: veteran.maritalStatus === 'Married',
+          livedWithPatient: veteran.cohabitedLastYear,
+        },
+      },
+
+      dependentFinancialsList: veteranToDependentFinancialsCollection(veteran),
+      numberOfDependentChildren: veteran.children.length,
+    }
+  };
 }
 
 // Produces an employmentInfo compatible type from a veteran resource.
@@ -743,7 +947,7 @@ function veteranToAssociationCollection(_veteran) {
 //  * demographicsInfo/contactinfo/addressInfo/zipPlus4, "If country is USA,  check for format: 9999  Only numbers are allowed. ", ,
 function veteranToDemographicsInfo(veteran) {
   return {
-    appointmentRequestResponse: true, // FIX
+    appointmentRequestResponse: veteran.wantsInitialVaContact,
     contactInfo: {
       addresses: {
         address: {
@@ -752,17 +956,31 @@ function veteranToDemographicsInfo(veteran) {
           line1: veteran.veteranAddress.street,
           state: veteran.veteranAddress.state,
           zipCode: veteran.veteranAddress.zipcode,
-          addressTypeCode: 'P',  // FIX
-        }
+          addressTypeCode: 'P',  // TODO(awong): this code is from VHA Standard Data Service (ADRDEV01) Address Type List P==Permanent. Determine if we need it.
+        },
+        emails: [{
+          email: veteran.email,
+        }],
+        phones: [
+          {
+            phone: {
+              phoneNumber: veteran.homePhone,
+              type: '1', // TODO(awong): Magic number: Code is from VHA Standard Data Service (ADRDEV01) Phone Contact Type List
+            },
+          }, {
+            phone: {
+              phoneNumber: veteran.mobilePhone,
+              type: '4', // TODO(awong): Magic number: Code is from VHA Standard Data Service (ADRDEV01) Phone Contact Type List
+            }
+          }
+        ]
       },
     },
-    ethnicity: '2186-5', // FIX
+    ethnicity: spanishHispanicToSDSCode(veteran.isSpanishHispanicLatino),
     maritalStatus: maritalStatusToSDSCode(veteran.maritalStatus),
     preferredFacility: veteran.vaMedicalFacility,
-    races: {
-      race: '2106-3' // FIX
-    },
-    acaIndicator: veteran.isCoveredByHealthInsurance, // FIX
+    races: veteranToRaces(veteran),
+    acaIndicator: veteran.isEssentialAcaCoverage,
   };
 }
 
