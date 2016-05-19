@@ -92,38 +92,41 @@ class HealthCareApp extends React.Component {
       return typeof d.value !== 'undefined' ? d.value : d;
     }
 
-    this.props.onUpdateSubmissionStatus('submitPending');
+    if (validations.isValidForm(veteran)) {
+      this.props.onUpdateSubmissionStatus('submitPending');
 
-    // POST data to endpoint
-    fetch('/api/hca/v1/VoaServices/submit', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      timeout: 10000, // 10 seconds
-      body: JSON.stringify(veteran, reducer)
-    }).then(response => {
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      response.json().then(data => {
-        this.props.onUpdateSubmissionStatus('applicationSubmitted', data);
-        console.log('data', data);
-        this.props.onUpdateSubmissionId(data.formSubmissionId);
-        this.props.onUpdateSubmissionTimestamp(data.timeStamp);
+      // POST data to endpoint
+      fetch('/api/hca/v1/VoaServices/submit', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        timeout: 10000, // 10 seconds
+        body: JSON.stringify(veteran, reducer)
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        response.json().then(data => {
+          this.props.onUpdateSubmissionStatus('applicationSubmitted', data);
+          this.props.onUpdateSubmissionId(data.formSubmissionId);
+          this.props.onUpdateSubmissionTimestamp(data.timeStamp);
+        });
+        setTimeout(() => {
+          this.context.router.push(this.getUrl('next'));
+          this.scrollToTop();
+        }, 5000);
+      }).catch(error => {
+        // TODO(crew): Pass meaningful errors to the client.
+        setTimeout(() => {
+          this.props.onUpdateSubmissionStatus('submitFailed', error);
+        }, 5000);
       });
-      setTimeout(() => {
-        this.context.router.push(this.getUrl('next'));
-        this.scrollToTop();
-      }, 8000);
-    }).catch(error => {
-      setTimeout(() => {
-        this.props.onUpdateSubmissionStatus('submitFailed', error);
-      }, 5000);
-    });
-
-    // this.scrollToTop();
+    } else {
+      this.scrollToTop();
+      // TODO(crew): Decide on/add validation error message.
+    }
   }
 
   render() {
@@ -283,9 +286,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    // onStateChange: (field, update) => {
-      // dispatch(veteranUpdateField(field, update));
-    // },
     onUpdateSubmissionStatus: (value) => {
       dispatch(updateSubmissionStatus(value));
     },

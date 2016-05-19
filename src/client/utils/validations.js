@@ -362,6 +362,25 @@ function isValidServiceInformation(data) {
       isNotBlank(data.dischargeType.value);
 }
 
+function isValidForm(data) {
+  return isValidPersonalInfoSection(data) &&
+  isValidPersonalInfoSection(data) &&
+  isValidBirthInformationSection(data) &&
+  isValidDemographicInformation(data) &&
+  isValidVeteranAddress(data) &&
+  isValidContactInformationSection(data) &&
+  isValidServiceInformation(data) &&
+  isValidVaInformation(data) &&
+  isValidFinancialDisclosure(data) &&
+  isValidSpouseInformation(data) &&
+  isValidChildren(data) &&
+  isValidAnnualIncome(data) &&
+  isValidDeductibleExpenses(data) &&
+  isValidVAFacility(data) &&
+  isValidGeneralInsurance(data) &&
+  isValidMedicareMedicaid(data);
+}
+
 function isValidSection(completePath, sectionData) {
   switch (completePath) {
     case '/veteran-information/personal-information':
@@ -431,6 +450,7 @@ export {
   isValidDependentDateField,
   isValidMarriageDate,
   isValidField,
+  isValidForm,
   isValidPersonalInfoSection,
   isValidBirthInformationSection,
   isValidVaInformation,
