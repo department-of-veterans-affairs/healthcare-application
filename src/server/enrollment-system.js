@@ -113,11 +113,11 @@ function spanishHispanicToSDSCode(isSpanishHispanicLatino) {
 function veteranToRaces(veteran) {
   // from VHA Standard Data Service (ADRDEV01) HL7 24 Race Map List
   const races = [];
-  if (veteran.isAmericanIndianOrAlaskanNative) races.push('1002-5');
-  if (veteran.isAsian) races.push('2028-9');
-  if (veteran.isBlackOrAfricanAmerican) races.push('2054-5');
-  if (veteran.isNativeHawaiianOrOtherPacificIslander) races.push('2076-8');
-  if (veteran.isWhite) races.push('2106-3');
+  if (veteran.isAmericanIndianOrAlaskanNative) races.push({ race: '1002-5' });
+  if (veteran.isAsian) races.push({ race: '2028-9' });
+  if (veteran.isBlackOrAfricanAmerican) races.push({ race: '2054-5' });
+  if (veteran.isNativeHawaiianOrOtherPacificIslander) races.push({ race: '2076-8' });
+  if (veteran.isWhite) races.push({ race: '2106-3' });
   return races;
 }
 
@@ -390,6 +390,7 @@ function veteranToMilitaryServiceInfo(veteran) {
             serviceBranch: makeServiceBranch(veteran.lastServiceBranch),
           }
         },
+        site: '565GC' // todo(robbiethegeek): this is hardcoded and waiting on Josh's response.
       }
     }
   };
@@ -957,9 +958,9 @@ function veteranToDemographicsInfo(veteran) {
           zipCode: veteran.veteranAddress.zipcode,
           addressTypeCode: 'P',  // TODO(awong): this code is from VHA Standard Data Service (ADRDEV01) Address Type List P==Permanent. Determine if we need it.
         },
-        emails: {
+        emails: [{
           email: veteran.email,
-        },
+        }],
         phones: [
           {
             phone: {
