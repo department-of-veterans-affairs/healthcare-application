@@ -24,11 +24,11 @@ const blankVeteran = {
   maritalStatus: makeField(''),
 
   isVaServiceConnected: makeField(''),
-  compensableVaServiceConnected: makeField(''),
-  receivesVaPension: makeField(''),
+  compensableVaServiceConnected: makeField(''),  // TODO(awong): Ignored by ES System
+  receivesVaPension: makeField(''),  // TODO(awong): Ignored by ES System
 
   isEssentialAcaCoverage: false,
-  facilityState: makeField(''),
+  facilityState: makeField(''),  // TODO(awong): Ignored by ES System
   vaMedicalFacility: makeField(''),
   wantsInitialVaContact: false,
 
@@ -46,14 +46,13 @@ const blankVeteran = {
     state: makeField(''),
     zipcode: makeField(''),
   },
-  veteranCounty: makeField(''),
   email: makeField(''),
-  emailConfirmation: makeField(''),
+  emailConfirmation: makeField(''),  // TODO(awong): Ignored by ES System
   homePhone: makeField(''),
   mobilePhone: makeField(''),
 
-  provideFinancialInfo: makeField(''),
-  understandsFinancialDisclosure: makeField(''),
+  provideFinancialInfo: makeField(''),  // TODO(awong): Ignored by ES System
+  understandsFinancialDisclosure: makeField(''),  // TODO(awong): Ignored by ES System
 
   spouseFullName: {
     first: makeField(''),
@@ -68,13 +67,13 @@ const blankVeteran = {
     year: makeField(''),
   },
   dateOfMarriage: {
-    month: makeField(''),
-    day: makeField(''),
-    year: makeField('')
+    month: makeField(''),  // TODO(awong): Ignored by ES System
+    day: makeField(''),  // TODO(awong): Ignored by ES System
+    year: makeField('')  // TODO(awong): Ignored by ES System
   },
-  sameAddress: makeField(''),
-  cohabitedLastYear: makeField(''),
-  provideSupportLastYear: makeField(''),
+  sameAddress: makeField(''),  // TODO(awong): Not sure how to handle the mapping.
+  cohabitedLastYear: makeField(''),  // TODO(awong): This should be scoped to spouse.
+  provideSupportLastYear: makeField(''),  // TODO(awong): This should be scoped to spouse.
   spouseAddress: {
     street: makeField(''),
     city: makeField(''),
@@ -87,19 +86,19 @@ const blankVeteran = {
   hasChildrenToReport: makeField(''),
   children: [],
 
-  veteranGrossIncome: makeField(''),
-  veteranNetIncome: makeField(''),
-  veteranOtherIncome: makeField(''),
-  spouseGrossIncome: makeField(''),
-  spouseNetIncome: makeField(''),
-  spouseOtherIncome: makeField(''),
-  childrenIncome: [],
+  veteranGrossIncome: makeField(''),  // TODO(awong): Complex mapping still required.
+  veteranNetIncome: makeField(''),  // TODO(awong): Complex mapping still required.
+  veteranOtherIncome: makeField(''),  // TODO(awong): Complex mapping still required.
+  spouseGrossIncome: makeField(''),  // TODO(awong): Complex mapping still required.
+  spouseNetIncome: makeField(''),  // TODO(awong): Complex mapping still required.
+  spouseOtherIncome: makeField(''),  // TODO(awong): Complex mapping still required.
+  childrenIncome: [], // TODO(awong): Complex mapping still required.
 
-  deductibleMedicalExpenses: makeField(''),
-  deductibleFuneralExpenses: makeField(''),
-  deductibleEducationExpenses: makeField(''),
+  deductibleMedicalExpenses: makeField(''),  // TODO(awong): Complex mapping still required.
+  deductibleFuneralExpenses: makeField(''),  // TODO(awong): Complex mapping still required.
+  deductibleEducationExpenses: makeField(''),  // TODO(awong): Complex mapping still required.
 
-  isCoveredByHealthInsurance: makeField(''),
+  isCoveredByHealthInsurance: makeField(''),  // TODO(awong): Ignored by ES System
   providers: [],
 
   isMedicaidEligible: makeField(''),
@@ -125,8 +124,8 @@ const blankVeteran = {
 
   purpleHeartRecipient: false,
   isFormerPow: false,
-  postNov111998Combat: false,
-  disabledInLineOfDuty: false,
+  postNov111998Combat: false,  // TODO(awong): Ignored by ES System?
+  disabledInLineOfDuty: false,  // TODO(awong): Ignored by ES System?
   swAsiaCombat: false,
   vietnamService: false,
   exposedToRadiation: false,
@@ -242,10 +241,6 @@ const completeVeteran = {
       dirty: false
     }
   },
-  veteranCounty: {
-    value: 'USA',
-    dirty: true
-  },
   email: {
     value: 'foo@example.com',
     dirty: false
@@ -317,6 +312,28 @@ const completeVeteran = {
   sameAddress: true,
   cohabitedLastYear: true,
   provideSupportLastYear: false,
+  spouseAddress: {
+    street: {
+      value: '123 NW 8th St',
+      dirty: false
+    },
+    city: {
+      value: 'Dulles',
+      dirty: false
+    },
+    country: {
+      value: 'USA',
+      dirty: false
+    },
+    state: {
+      value: 'VA',
+      dirty: false
+    },
+    zipcode: {
+      value: '20101',
+      dirty: false
+    }
+  },
   spousePhone: {
     value: '',
     dirty: false

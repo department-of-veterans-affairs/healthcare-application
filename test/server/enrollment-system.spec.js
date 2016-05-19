@@ -22,15 +22,28 @@ const goldenFormOutput = {
               state: 'DC',
               zipCode: '20005',
               addressTypeCode: 'P',
+            },
+            emails: {
+              email: 'foo@example.com',
+            },
+            phones: {
+              phone: {
+                phoneNumber: '1235551234',
+                type: '4',
+              }
             }
           }
         },
-        ethnicity: '2186-5',
+        ethnicity: '2135-2',
         maritalStatus: 'M',
         preferredFacility: '689A4',
-        races: {
-          race: '2106-3',
-        },
+        races: [
+          '1002-5',
+          '2028-9',
+          '2054-5',
+          '2076-8',
+          '2106-3',
+        ],
         acaIndicator: 'true',
       },
       enrollmentDeterminationInfo: {
@@ -42,20 +55,91 @@ const goldenFormOutput = {
           serviceConnectedIndicator: 'false',
         },
         specialFactors: {
-          agentOrangeInd: 'false',
-          envContaminantsInd: 'false',
+          agentOrangeInd: 'true',
+          envContaminantsInd: 'true',
           campLejeuneInd: 'true',
           radiationExposureInd: 'true',
         }
       },
-      insuranceList: {
-        insurance: {
-          companyName: 'Medicare',
-          enrolledInPartA: 'false',
-          enrolledInPartB: 'false',
-          insuranceMappingTypeName: 'MDCR',
+      financialsInfo: {
+        financialStatement: {
+          dependentFinancialsList: [
+            {
+              dependentFinancials: {
+                attendedSchool: 'true',
+                contributedToSupport: 'false',
+                dependentInfo: {
+                  dob: '05/05/1982',
+                  familyName: 'LastChildA',
+                  givenName: 'FirstChildA',
+                  middleName: 'MiddleChildA',
+                  relationship: '5',
+                  ssns: {
+                    ssnText: '111229876',
+                  },
+                  suffix: '',
+                },
+                incapableOfSelfSupport: 'true',
+              }
+            },
+            {
+              dependentFinancials: {
+                attendedSchool: 'true',
+                contributedToSupport: 'true',
+                dependentInfo: {
+                  dob: '03/07/1996',
+                  familyName: 'LastChildB',
+                  givenName: 'FirstChildB',
+                  middleName: 'MiddleChildB',
+                  relationship: '6',
+                  ssns: {
+                    ssnText: '222111234',
+                  },
+                  suffix: 'Sr.',
+                },
+                incapableOfSelfSupport: 'false',
+              }
+            }
+          ],
+          numberOfDependentChildren: '2',
+          spouseFinancialsList: {
+            spouseFinancials: {
+              contributedToSpouse: 'false',
+              livedWithPatient: 'true',
+              marriedLastCalendarYear: 'true',
+              spouse: {
+                address: {
+                  city: 'Dulles',
+                  country: 'USA',
+                  line1: '123 NW 8th St',
+                  state: 'VA',
+                  zipCode: '20101',
+                },
+                dob: '04/06/1987',
+                familyName: 'LastSpouse',
+                givenName: 'FirstSpouse',
+                middleName: 'MiddleSpouse',
+                phoneNumber: '',
+                ssns: {
+                  ssnText: '111221234',
+                },
+                suffix: 'Sr.',
+              }
+            }
+          }
         }
       },
+      insuranceList: [
+        {
+          insurance: {
+            companyName: 'MyInsruance',
+            groupNumber: 'G1234',
+            insuranceMappingTypeName: 'PI',
+            policyHolderName: 'FirstName LastName',
+            policyNumber: 'P1234',
+          }
+        }
+      ],
       militaryServiceInfo: {
         militaryServiceSiteRecords: {
           militaryServiceSiteRecord: {
@@ -66,8 +150,7 @@ const goldenFormOutput = {
                 endDate: '07/08/1984',
                 serviceBranch: '7',
               }
-            },
-            site: '565GC',
+            }
           }
         }
       },
@@ -81,13 +164,13 @@ const goldenFormOutput = {
         firstName: 'FirstName',
         middleName: 'MiddleName',
         lastName: 'LastName',
+        suffix: 'Jr.',
         ssnText: '111111234',
         gender: 'F',
         dob: '01/02/1923',
         mothersMaidenName: 'Maiden',
         placeOfBirthCity: 'Springfield',
         placeOfBirthState: 'AK',
-        suffix: 'Jr.'
       }
     },
     applications: {
