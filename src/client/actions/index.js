@@ -9,7 +9,6 @@ export const UPDATE_SPOUSE_ADDRESS = 'UPDATE_SPOUSE_ADDRESS';
 export const UPDATE_SUBMISSION_STATUS = 'UPDATE_SUBMISSION_STATUS';
 export const UPDATE_SUBMISSION_ID = 'UPDATE_SUBMISSION_ID';
 export const UPDATE_SUBMISSION_TIMESTAMP = 'UPDATE_SUBMISSION_TIMESTAMP';
-export const CREATE_CHILD_INCOME_FIELDS = 'CREATE_CHILD_INCOME_FIELDS';
 
 export function ensureFieldsInitialized(fields, parentNode) {
   return {
@@ -90,12 +89,5 @@ export function updateSubmissionTimestamp(value) {
   return {
     type: UPDATE_SUBMISSION_TIMESTAMP,
     value
-  };
-}
-
-export function createChildIncomeFields(path) {
-  return {
-    type: CREATE_CHILD_INCOME_FIELDS,
-    path
   };
 }
