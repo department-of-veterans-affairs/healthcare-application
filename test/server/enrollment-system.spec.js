@@ -23,26 +23,41 @@ const goldenFormOutput = {
               zipCode: '20005',
               addressTypeCode: 'P',
             },
-            emails: {
-              email: 'foo@example.com',
-            },
-            phones: {
-              phone: {
-                phoneNumber: '1235551234',
-                type: '4',
+            emails: [
+              {
+                email: 'foo@example.com',
               }
-            }
+            ],
+            phones: [
+              {
+                phone: {
+                  phoneNumber: '1231241234',
+                  type: '1',
+                }
+              }, {
+                phone: {
+                  phoneNumber: '1235551234',
+                  type: '4',
+                }
+              }
+            ]
           }
         },
         ethnicity: '2135-2',
         maritalStatus: 'M',
         preferredFacility: '689A4',
         races: [
-          '1002-5',
-          '2028-9',
-          '2054-5',
-          '2076-8',
-          '2106-3',
+          {
+            race: '1002-5'
+          }, {
+            race: '2028-9'
+          }, {
+            race: '2054-5'
+          }, {
+            race: '2076-8'
+          }, {
+            race: '2106-3'
+          }
         ],
         acaIndicator: 'true',
       },
@@ -75,11 +90,15 @@ const goldenFormOutput = {
                   middleName: 'MiddleChildA',
                   relationship: '5',
                   ssns: {
-                    ssnText: '111229876',
+                    ssn: {
+                      ssnText: '111229876',
+                    }
                   },
+                  startDate: '04/07/1992',
                   suffix: '',
                 },
                 incapableOfSelfSupport: 'true',
+                livedWithPatient: 'true',
               }
             },
             {
@@ -93,11 +112,15 @@ const goldenFormOutput = {
                   middleName: 'MiddleChildB',
                   relationship: '6',
                   ssns: {
-                    ssnText: '222111234',
+                    ssn: {
+                      ssnText: '222111234',
+                    }
                   },
+                  startDate: '04/07/2003',
                   suffix: 'Sr.',
                 },
                 incapableOfSelfSupport: 'false',
+                livedWithPatient: 'false',
               }
             }
           ],
@@ -121,25 +144,26 @@ const goldenFormOutput = {
                 middleName: 'MiddleSpouse',
                 phoneNumber: '',
                 ssns: {
-                  ssnText: '111221234',
+                  ssn: {
+                    ssnText: '111221234',
+                  }
                 },
+                startDate: '05/10/1983',
                 suffix: 'Sr.',
               }
             }
           }
         }
       },
-      insuranceList: [
-        {
-          insurance: {
-            companyName: 'MyInsruance',
-            groupNumber: 'G1234',
-            insuranceMappingTypeName: 'PI',
-            policyHolderName: 'FirstName LastName',
-            policyNumber: 'P1234',
-          }
+      insuranceList: {
+        insurance: {
+          companyName: 'MyInsruance',
+          groupNumber: 'G1234',
+          insuranceMappingTypeName: 'PI',
+          policyHolderName: 'FirstName LastName',
+          policyNumber: 'P1234',
         }
-      ],
+      },
       militaryServiceInfo: {
         militaryServiceSiteRecords: {
           militaryServiceSiteRecord: {
@@ -150,7 +174,8 @@ const goldenFormOutput = {
                 endDate: '07/08/1984',
                 serviceBranch: '7',
               }
-            }
+            },
+            site: '689A4',
           }
         }
       },
