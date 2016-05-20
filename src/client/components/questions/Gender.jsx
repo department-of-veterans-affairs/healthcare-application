@@ -27,7 +27,10 @@ class Gender extends React.Component {
 
 Gender.propTypes = {
   required: React.PropTypes.bool,
-  value: React.PropTypes.string.isRequired,
+  value: React.PropTypes.shape({
+    value: React.PropTypes.string,
+    dirty: React.PropTypes.bool,
+  }).isRequired,
   onUserInput: React.PropTypes.func.isRequired,
 };
 

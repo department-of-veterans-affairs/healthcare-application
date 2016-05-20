@@ -44,7 +44,10 @@ class Phone extends React.Component {
 Phone.propTypes = {
   required: React.PropTypes.bool,
   label: React.PropTypes.string,
-  value: React.PropTypes.string.isRequired,
+  value: React.PropTypes.shape({
+    value: React.PropTypes.string,
+    dirty: React.PropTypes.bool,
+  }).isRequired,
   onValueChange: React.PropTypes.func.isRequired,
 };
 

@@ -105,6 +105,9 @@ ErrorableSelect.propTypes = {
       React.PropTypes.string,
       React.PropTypes.shape({
         label: React.PropTypes.string,
+        value: React.PropTypes.number }),
+      React.PropTypes.shape({
+        label: React.PropTypes.string,
         value: React.PropTypes.string }),
     ])).isRequired,
   required: React.PropTypes.bool,

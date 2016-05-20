@@ -103,10 +103,10 @@ ErrorableRadioButtons.propTypes = {
         ])
       })
     ])).isRequired,
-  value: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.bool
-  ]).isRequired,
+  value: React.PropTypes.shape({
+    value: React.PropTypes.string,
+    dirty: React.PropTypes.bool
+  }).isRequired,
   onValueChange: React.PropTypes.func.isRequired,
   required: React.PropTypes.bool,
 };
