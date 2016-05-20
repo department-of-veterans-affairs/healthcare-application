@@ -1,20 +1,12 @@
 import _ from 'lodash';
 import lodashDeep from 'lodash-deep';
 
-import { ENSURE_FIELDS_INITIALIZED, VETERAN_FIELD_UPDATE, VETERAN_OVERWRITE, UPDATE_SPOUSE_ADDRESS, CREATE_CHILD_INCOME_FIELDS } from '../../actions';
+import { ENSURE_FIELDS_INITIALIZED, VETERAN_FIELD_UPDATE, VETERAN_OVERWRITE, UPDATE_SPOUSE_ADDRESS } from '../../actions';
 import { makeField, dirtyAllFields } from '../../../common/fields';
 import { blankVeteran } from '../../../common/veteran';
 
 // Add deep object manipulation routines to lodash.
 _.mixin(lodashDeep);
-
-function createBlankChild() {
-  return {
-    childGrossIncome: makeField(''),
-    childNetIncome: makeField(''),
-    childOtherIncome: makeField('')
-  };
-}
 
 export default function veteran(state = blankVeteran, action) {
   let newState = undefined;
@@ -64,19 +56,6 @@ export default function veteran(state = blankVeteran, action) {
       }
       return newState;
     }
-
-    case CREATE_CHILD_INCOME_FIELDS:
-      newState = Object.assign({}, state);
-      // update children income from children info
-      newState.childrenIncome.splice(newState.children.length);
-      for (let i = 0; i < newState.children.length; i++) {
-        if (newState.childrenIncome[i] === undefined) {
-          newState.childrenIncome[i] = createBlankChild();
-        }
-      }
-
-      Object.assign(newState.childrenIncome, dirtyAllFields(newState.childrenIncome));
-      return newState;
 
     default:
       return state;

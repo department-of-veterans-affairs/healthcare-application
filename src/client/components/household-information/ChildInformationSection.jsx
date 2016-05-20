@@ -5,7 +5,7 @@ import Child from './Child';
 import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
 import GrowableTable from '../form-elements/GrowableTable.jsx';
 import { yesNo } from '../../utils/options-for-select.js';
-import { makeField } from '../../../common/fields';
+import { createBlankChild } from '../../../common/child';
 import { isNotBlank, validateIfDirty } from '../../utils/validations';
 import { veteranUpdateField, ensureFieldsInitialized } from '../../actions';
 
@@ -15,35 +15,6 @@ import { veteranUpdateField, ensureFieldsInitialized } from '../../actions';
  * `reviewSection` - Boolean. Hides components that are only needed for ReviewAndSubmitSection.
  */
 class ChildInformationSection extends React.Component {
-  // TODO(awong): Pull this out into a model.
-  createBlankChild() {
-    return {
-      childFullName: {
-        first: makeField(''),
-        middle: makeField(''),
-        last: makeField(''),
-        suffix: makeField('')
-      },
-      childRelation: makeField(''),
-      childSocialSecurityNumber: makeField(''),
-      childBecameDependent: {
-        month: makeField(''),
-        day: makeField(''),
-        year: makeField('')
-      },
-      childDateOfBirth: {
-        month: makeField(''),
-        day: makeField(''),
-        year: makeField('')
-      },
-      childDisabledBefore18: false,
-      childAttendedSchoolLastYear: false,
-      childEducationExpenses: makeField(''),
-      childCohabitedLastYear: false,
-      childReceivedSupportLastYear: false
-    };
-  }
-
   render() {
     let childrenContent;
     let content;
@@ -126,7 +97,7 @@ class ChildInformationSection extends React.Component {
           <hr/>
           <GrowableTable
               component={Child}
-              createRow={this.createBlankChild}
+              createRow={createBlankChild}
               data={this.props.data}
               initializeCurrentElement={() => {this.props.initializeFields(fields);}}
               onRowsUpdate={(update) => {this.props.onStateChange('children', update);}}
