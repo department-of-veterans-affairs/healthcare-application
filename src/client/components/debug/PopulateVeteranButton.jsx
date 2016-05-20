@@ -22,7 +22,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onClick: () => {
       dispatch(veteranOverwrite(completeVeteran));
-      routes.map((route) => {
+      routes.forEach((route) => {
         dispatch(updateCompletedStatus(route.props.path));
       });
     }

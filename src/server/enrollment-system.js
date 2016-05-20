@@ -263,12 +263,12 @@ function spanishHispanicToSDSCode(isSpanishHispanicLatino) {
 function veteranToRaces(veteran) {
   // from VHA Standard Data Service (ADRDEV01) HL7 24 Race Map List
   const races = [];
-  if (veteran.isAmericanIndianOrAlaskanNative) races.push({ race: '1002-5' });
-  if (veteran.isAsian) races.push({ race: '2028-9' });
-  if (veteran.isBlackOrAfricanAmerican) races.push({ race: '2054-5' });
-  if (veteran.isNativeHawaiianOrOtherPacificIslander) races.push({ race: '2076-8' });
-  if (veteran.isWhite) races.push({ race: '2106-3' });
-  return races;
+  if (veteran.isAmericanIndianOrAlaskanNative) races.push('1002-5');
+  if (veteran.isAsian) races.push('2028-9');
+  if (veteran.isBlackOrAfricanAmerican) races.push('2054-5');
+  if (veteran.isNativeHawaiianOrOtherPacificIslander) races.push('2076-8');
+  if (veteran.isWhite) races.push('2106-3');
+  return races.length > 0 ? { race: races } : undefined;
 }
 
 /**
@@ -684,13 +684,10 @@ function veteranToInsuranceCollection(veteran) {
   });
   if (veteran.isEnrolledMedicarePartA === 'Y') {
     insuranceCollection.push({
-      // FIX. This is a sequence. What does that look like?
-      insurance: {
-        companyName: 'Medicare',
-        enrolledInPartA: yesNoToESBoolean(veteran.isEnrolledMedicarePartA),
-        insuranceMappingTypeName: 'MDCR', // TODO this code is from VHA Standard Data Service (ADRDEV01) Insurance Mapping List
-        partAEffectiveDate: formDateToESDate(veteran.medicarePartAEffectiveDate),
-      }
+      companyName: 'Medicare',
+      enrolledInPartA: yesNoToESBoolean(veteran.isEnrolledMedicarePartA),
+      insuranceMappingTypeName: 'MDCR', // TODO this code is from VHA Standard Data Service (ADRDEV01) Insurance Mapping List
+      partAEffectiveDate: formDateToESDate(veteran.medicarePartAEffectiveDate),
     });
   }
 
@@ -1213,22 +1210,21 @@ function veteranToDemographicsInfo(veteran) {
           zipCode: veteran.veteranAddress.zipcode,
           addressTypeCode: 'P',  // TODO(awong): this code is from VHA Standard Data Service (ADRDEV01) Address Type List P==Permanent. Determine if we need it.
         },
-        emails: [{
+        emails: {
           email: veteran.email,
-        }],
-        phones: [
-          {
-            phone: {
+        },
+        phones: {
+          phone: [
+            {
               phoneNumber: veteran.homePhone,
               type: '1', // TODO(awong): Magic number: Code is from VHA Standard Data Service (ADRDEV01) Phone Contact Type List
             },
-          }, {
-            phone: {
+            {
               phoneNumber: veteran.mobilePhone,
               type: '4', // TODO(awong): Magic number: Code is from VHA Standard Data Service (ADRDEV01) Phone Contact Type List
             }
-          }
-        ]
+          ]
+        }
       },
     },
     ethnicity: spanishHispanicToSDSCode(veteran.isSpanishHispanicLatino),
