@@ -92,7 +92,6 @@ const blankVeteran = {
   spouseGrossIncome: makeField(''),  // TODO(awong): Complex mapping still required.
   spouseNetIncome: makeField(''),  // TODO(awong): Complex mapping still required.
   spouseOtherIncome: makeField(''),  // TODO(awong): Complex mapping still required.
-  childrenIncome: [], // TODO(awong): Complex mapping still required.
 
   deductibleMedicalExpenses: makeField(''),  // TODO(awong): Complex mapping still required.
   deductibleFuneralExpenses: makeField(''),  // TODO(awong): Complex mapping still required.
@@ -338,7 +337,10 @@ const completeVeteran = {
     value: '',
     dirty: false
   },
-  hasChildrenToReport: true,
+  hasChildrenToReport: {
+    value: 'Y',
+    dirty: false
+  },
   children: [
     {
       childFullName: {
@@ -403,6 +405,18 @@ const completeVeteran = {
       },
       childCohabitedLastYear: true,
       childReceivedSupportLastYear: false,
+      grossIncome: {
+        value: '991.9',
+        dirty: true
+      },
+      netIncome: {
+        value: '981.2',
+        dirty: true
+      },
+      otherIncome: {
+        value: '91.9',
+        dirty: true
+      },
       key: 'key-128'
     },
     {
@@ -468,6 +482,18 @@ const completeVeteran = {
       },
       childCohabitedLastYear: false,
       childReceivedSupportLastYear: true,
+      grossIncome: {
+        value: '791.9',
+        dirty: true
+      },
+      netIncome: {
+        value: '781.2',
+        dirty: true
+      },
+      otherIncome: {
+        value: '71.9',
+        dirty: true
+      },
       key: 'key-149'
     }
   ],
@@ -495,7 +521,6 @@ const completeVeteran = {
     value: '12.3',
     dirty: true
   },
-  childrenIncome: [],
   deductibleMedicalExpenses: {
     value: '33.3',
     dirty: true
@@ -527,7 +552,7 @@ const completeVeteran = {
         value: 'G1234',
         dirty: true
       },
-      key: 'key-174'
+      key: 'key-174'  // TODO(awong): All these keys are incorrect. They look like react keys. Where are they from?
     }
   ],
   isMedicaidEligible: true,

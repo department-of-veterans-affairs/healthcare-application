@@ -5,7 +5,7 @@ import ChildIncome from './ChildIncome';
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
 import FixedTable from '../form-elements/FixedTable.jsx';
 import { isValidField, isValidMonetaryValue } from '../../utils/validations';
-import { createChildIncomeFields, veteranUpdateField } from '../../actions';
+import { veteranUpdateField } from '../../actions';
 
 function getErrorMessage(field, message) {
   return isValidField(isValidMonetaryValue, field) ? undefined : message;
@@ -17,10 +17,6 @@ function getErrorMessage(field, message) {
  * `reviewSection` - Boolean. Hides components that are only needed for ReviewAndSubmitSection.
  */
 class AnnualIncomeSection extends React.Component {
-  componentWillMount() {
-    this.props.initializeChildIncomeFields();
-  }
-
   // TODO: Figure out best way to enable users to change their response to pension
   render() {
     const message = 'Please enter only numbers and a decimal point if necessary (no commas or currency signs)';
@@ -28,38 +24,35 @@ class AnnualIncomeSection extends React.Component {
     let childrenIncomeReview;
     let content;
 
-    if (this.props.data.hasChildrenToReport === true) {
+    if (this.props.data.hasChildrenToReport.value === 'Y') {
       childrenIncomeInput = (
         <div className="input-section">
           <FixedTable
               component={ChildIncome}
-              onRowsUpdate={(update) => {this.props.onStateChange('childrenIncome', update);}}
-              relatedData={this.props.data.children}
-              rows={this.props.data.childrenIncome}/>
+              onRowsUpdate={(update) => {this.props.onStateChange('children', update);}}
+              rows={this.props.data.children}/>
         </div>
       );
     }
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
-      const childrenData = this.props.data.children;
-      let reactKey = 0;
-      childrenIncomeReview = this.props.data.childrenIncome.map((obj, index) => {
+      childrenIncomeReview = this.props.data.children.map((child, index) => {
         return (
-          <div key={reactKey++}>
-            <h6>Child: {`${childrenData[index].childFullName.first.value} ${childrenData[index].childFullName.last.value}`}</h6>
+          <div key={`child-${index}`}>
+            <h6>Child: {`${child.childFullName.first.value} ${child.childFullName.last.value}`}</h6>
             <table className="review usa-table-borderless">
               <tbody>
                 <tr>
                   <td>Children Gross Income:</td>
-                  <td>{obj.childGrossIncome.value}</td>
+                  <td>{child.grossIncome.value}</td>
                 </tr>
                 <tr>
                   <td>Children Net Income:</td>
-                  <td>{obj.childNetIncome.value}</td>
+                  <td>{child.netIncome.value}</td>
                 </tr>
                 <tr>
                   <td>Children Other Income:</td>
-                  <td>{obj.childOtherIncome.value}</td>
+                  <td>{child.otherIncome.value}</td>
                 </tr>
               </tbody>
             </table>
@@ -194,9 +187,6 @@ function mapDispatchToProps(dispatch) {
     onStateChange: (field, update) => {
       dispatch(veteranUpdateField(field, update));
     },
-    initializeChildIncomeFields: () => {
-      dispatch(createChildIncomeFields('/household-information/annual-income'));
-    }
   };
 }
 
