@@ -256,8 +256,14 @@ const completeVeteran = {
     value: '1235551234',
     dirty: false
   },
-  provideFinancialInfo: true,
-  understandsFinancialDisclosure: true,
+  provideFinancialInfo: {
+    value: 'Y',
+    dirty: true
+  },
+  understandsFinancialDisclosure: {
+    value: 'Y',
+    dirty: true
+  },
   spouseFullName: {
     first: {
       value: 'FirstSpouse',
@@ -290,7 +296,7 @@ const completeVeteran = {
       dirty: true
     },
     year: {
-      value: '1987',
+      value: '1980',
       dirty: true
     }
   },
@@ -308,9 +314,18 @@ const completeVeteran = {
       dirty: true
     }
   },
-  sameAddress: true,
-  cohabitedLastYear: true,
-  provideSupportLastYear: false,
+  sameAddress: {
+    value: 'Y',
+    dirty: true
+  },
+  cohabitedLastYear: {
+    value: 'Y',
+    dirty: true
+  },
+  provideSupportLastYear: {
+    value: 'N',
+    dirty: true
+  },
   spouseAddress: {
     street: {
       value: '123 NW 8th St',
@@ -533,7 +548,10 @@ const completeVeteran = {
     value: '77.77',
     dirty: true
   },
-  isCoveredByHealthInsurance: true,
+  isCoveredByHealthInsurance: {
+    value: 'Y',
+    dirty: true
+  },
   providers: [
     {
       insuranceName: {
@@ -555,8 +573,14 @@ const completeVeteran = {
       key: 'key-174'  // TODO(awong): All these keys are incorrect. They look like react keys. Where are they from?
     }
   ],
-  isMedicaidEligible: true,
-  isEnrolledMedicarePartA: false,
+  isMedicaidEligible: {
+    value: 'Y',
+    dirty: true
+  },
+  isEnrolledMedicarePartA: {
+    value: 'Y',
+    dirty: true
+  },
   medicarePartAEffectiveDate: {
     month: {
       value: '10',
