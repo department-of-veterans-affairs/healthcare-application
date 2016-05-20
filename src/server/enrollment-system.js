@@ -158,6 +158,7 @@ function veteranToSpouseInfo(veteran) {
       middleName: veteran.spouseFullName.middle,
       familyName: veteran.spouseFullName.last,
       suffix: veteran.spouseFullName.suffix,
+      startDate: formDateToESDate(veteran.dateOfMarriage),
       ssns: {
         ssn: {
           ssnText: validations.validateSsn(veteran.spouseSocialSecurityNumber)
@@ -390,7 +391,7 @@ function veteranToMilitaryServiceInfo(veteran) {
             serviceBranch: makeServiceBranch(veteran.lastServiceBranch),
           }
         },
-        site: '565GC' // todo(robbiethegeek): this is hardcoded and waiting on Josh's response.
+        site: veteran.vaMedicalFacility,
       }
     }
   };
