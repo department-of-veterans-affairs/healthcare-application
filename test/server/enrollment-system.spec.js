@@ -98,6 +98,20 @@ const goldenFormOutput = {
                   suffix: '',
                 },
                 incapableOfSelfSupport: 'true',
+                incomes: [
+                  {
+                    amount: '991.9',
+                    type: '12'
+                  },
+                  {
+                    amount: '981.2',
+                    type: '13'
+                  },
+                  {
+                    amount: '91.9',
+                    type: '10'
+                  }
+                ],
                 livedWithPatient: 'true',
               }
             },
@@ -120,6 +134,20 @@ const goldenFormOutput = {
                   suffix: 'Sr.',
                 },
                 incapableOfSelfSupport: 'false',
+                incomes: [
+                  {
+                    amount: '791.9',
+                    type: '12'
+                  },
+                  {
+                    amount: '781.2',
+                    type: '13'
+                  },
+                  {
+                    amount: '71.9',
+                    type: '10'
+                  }
+                ],
                 livedWithPatient: 'false',
               }
             }
