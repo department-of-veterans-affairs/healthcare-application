@@ -1,0 +1,37 @@
+{
+  "src_folders" : ["./tests"],
+  "output_folder" : "./reports",
+  "live_output" : true,
+  "parallel_process_delay" : 10,
+  "disable_colors": false,
+  "test_workers" : false,
+
+  "test_settings" : {
+    "default" : {
+      "selenium_host" : "ondemand.saucelabs.com",
+      "selenium_port" : 80,
+      "username" : "SAUCELABS_USERNAME", 
+      "access_key" : "SAUCELABS_ACCESS_KEY",
+      "use_ssl" : true,
+      "silent" : false,
+      "output" : true,
+      "screenshots" : {
+        "enabled" : false,
+        "on_failure" : true,
+        "path" : ""
+      },
+      "desiredCapabilities": {
+        "name" : "test-example",
+        "browserName": "firefox"
+      },
+      "globals" : {
+        "myGlobal" : "some_sauce_global"
+      },
+      "selenium" : {
+        "start_process" : false
+      }
+    }
+  }
+}
+
+

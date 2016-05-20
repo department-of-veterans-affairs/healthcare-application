@@ -503,6 +503,13 @@ const faults = {
 };
 ```
 
+#### OPTIONAL: End-to-end tests
+
+We use [Nightwatch](https://github.com/nightwatchjs/nightwatch) and [SauceLabs](https://saucelabs.com) to run end-to-end tests on a variety of platforms.
+
+If you'd like to run end-to-end tests on your machine, you'll need to add the appropriate SauceLabs credentials to test/e2e/nightwatch.json.
+
+
 ### Docker
 #### Environment setup
 Docker is being used for production deploys of this application. The Dockerfile
