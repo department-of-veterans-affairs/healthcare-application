@@ -44,15 +44,15 @@ class AnnualIncomeSection extends React.Component {
               <tbody>
                 <tr>
                   <td>Children Gross Income:</td>
-                  <td>{child.income.grossIncome.value}</td>
+                  <td>{child.grossIncome.value}</td>
                 </tr>
                 <tr>
                   <td>Children Net Income:</td>
-                  <td>{child.income.netIncome.value}</td>
+                  <td>{child.netIncome.value}</td>
                 </tr>
                 <tr>
                   <td>Children Other Income:</td>
-                  <td>{child.income.otherIncome.value}</td>
+                  <td>{child.otherIncome.value}</td>
                 </tr>
               </tbody>
             </table>
