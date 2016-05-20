@@ -1,19 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { IndexRedirect, Route, Router, hashHistory } from 'react-router';
+import { createHistory } from 'history';
+import { IndexRedirect, Route, Router, useRouterHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 import HealthCareApp from './components/HealthCareApp.jsx';
+import config from '../../config';
 import reducer from './reducers';
 import routes from './routes.jsx';
 
 const store = createStore(reducer);
 
+const browserHistory = useRouterHistory(createHistory)({
+  basename: config.basePath
+});
+
 function init() {
   ReactDOM.render((
     <Provider store={store}>
-      <Router history={hashHistory}>
+      <Router history={browserHistory}>
         <Route path="/" component={HealthCareApp}>
           <IndexRedirect to="/introduction"/>
           {routes}
