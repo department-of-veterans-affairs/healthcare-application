@@ -354,7 +354,37 @@ function resourceToIncomeCollection(resource) {
     });
   }
 
-  return incomeCollection.length > 0 ? incomeCollection : undefined;
+  return incomeCollection.length > 0 ? { income: incomeCollection } : undefined;
+}
+
+/**
+ * Extracts an expenseCollection object out of an API resource (eg., veteran, child, spouse)
+ *
+ * @param {Object} resource The resource with expense data.
+ * @returns {Object} ES system expenseInfo message.
+ */
+function resourceToExpenseCollection(resource) {
+  const expenseCollection = [];
+  if (resource.educationExpense > 0) {
+    expenseCollection.push({
+      amount: resource.educationExpense,
+      expenseType: '3', // Veteran's Educational Expenses TODO is this right?
+    });
+  }
+  if (resource.funeralExpense > 0) {
+    expenseCollection.push({
+      amount: resource.funeralExpense,
+      expenseType: '19', // Funeral and Burial Expenses TODO is this right?
+    });
+  }
+  if (resource.medicalExpense > 0) {
+    expenseCollection.push({
+      amount: resource.medicalExpense,
+      expenseType: '18', // Total Non-Reimbursed Medical Expenses TODO is this right?
+    });
+  }
+
+  return expenseCollection.length > 0 ? { expense: expenseCollection } : undefined;
 }
 
 /**
@@ -650,7 +680,7 @@ function veteranToMilitaryServiceInfo(veteran) {
 //  * insuranceCollection/insuranceInfo/subscriber , Required if enrolled in Medicare Part A or Part B , "Applies when ""insuranceMappingTypeName"" = ""MDCR""",
 function veteranToInsuranceCollection(veteran) {
   const insuranceCollection = veteran.providers.map((provider) => {
-    return { insurance: providerToInsuranceInfo(provider) };
+    return providerToInsuranceInfo(provider);
   });
   if (veteran.isEnrolledMedicarePartA === 'Y') {
     insuranceCollection.push({
@@ -666,7 +696,7 @@ function veteranToInsuranceCollection(veteran) {
 
   // TODO(awong): Return the whole collection when the bug with node-soap's wsdl.js that causes
   // the namespace prefix to be dropped in this case is fixed.
-  return insuranceCollection[0];
+  return insuranceCollection.length > 0 ? { insurance: insuranceCollection } : undefined;
 }
 
 // Produces an financialsInfo compatible type from a veteran resource.
@@ -942,11 +972,23 @@ function veteranToEnrollmentDeterminationInfo(veteran) {
 function veteranToFinancialsInfo(veteran) {
   return {
     financialStatement: {
-      expenses: undefined, // TODO(awong): Fix.
-      incomes: undefined,  // TODO(awong): Fix.
+      expenses: resourceToExpenseCollection({
+        educationExpense: veteran.deductibleEducationExpenses,
+        funeralExpense: veteran.deductibleFuneralExpenses,
+        medicalExpense: veteran.deductibleMedicalExpenses
+      }),
+      incomes: resourceToIncomeCollection({
+        grossIncome: veteran.veteranGrossIncome,
+        netIncome: veteran.veteranNetIncome,
+        otherIncome: veteran.veteranOtherIncome
+      }),
       spouseFinancialsList: {
         spouseFinancials: {
-          incomes: undefined, // TODO(awong): Fix.
+          incomes: resourceToIncomeCollection({
+            grossIncome: veteran.spouseGrossIncome,
+            netIncome: veteran.spouseNetIncome,
+            otherIncome: veteran.spouseOtherIncome
+          }),
           spouse: veteranToSpouseInfo(veteran),
           contributedToSpouse: yesNoToESBoolean(veteran.provideSupportLastYear),
           marriedLastCalendarYear: veteran.maritalStatus === 'Married',
