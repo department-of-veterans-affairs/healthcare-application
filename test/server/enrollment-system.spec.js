@@ -166,7 +166,7 @@ const goldenFormOutput = {
                   state: 'VA',
                   zipCode: '20101',
                 },
-                dob: '04/06/1987',
+                dob: '04/06/1980',
                 familyName: 'LastSpouse',
                 givenName: 'FirstSpouse',
                 middleName: 'MiddleSpouse',

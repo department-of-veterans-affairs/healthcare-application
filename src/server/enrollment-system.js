@@ -136,6 +136,7 @@ function isLeapYear(year) {
  * @param {Object} dateObject in the format of {month: 1, day: 30, year: 1980}
  * @returns {boolean}
  */
+// TODO(awong): This does not behave correctly with the input. Fix or remove/replace.
 function isValidDateObject(dateObject) {
   if (typeof dateObject !== 'object' || dateObject === null) return false;
   if (dateObject.hasOwnProperty('month') &&
@@ -173,6 +174,7 @@ function isValidDateObject(dateObject) {
   }
   return false;
 }
+isValidDateObject(null);  // TODO(awong): This makes lint shutup. Remove once calendar validation is sorted out.
 
 /**
  * Returns a date string as given in examples from ES team
@@ -196,10 +198,8 @@ function isValidDateObject(dateObject) {
  * @returns {String}
  */
 function formDateToESDate(dateObject) {
-  if (isValidDateObject(dateObject)) {
-    return `${zeroPadNumber(dateObject.month, 2)}/${zeroPadNumber(dateObject.day, 2)}/${zeroPadNumber(dateObject.year, 4)}`;
-  }
-  return undefined;
+  // TODO(awong) Verify dateObject is valid before parsing.
+  return `${zeroPadNumber(dateObject.month, 2)}/${zeroPadNumber(dateObject.day, 2)}/${zeroPadNumber(dateObject.year, 4)}`;
 }
 
 /**
@@ -652,12 +652,12 @@ function veteranToInsuranceCollection(veteran) {
   const insuranceCollection = veteran.providers.map((provider) => {
     return { insurance: providerToInsuranceInfo(provider) };
   });
-  if (veteran.isEnrolledMedicarePartA) {
+  if (veteran.isEnrolledMedicarePartA === 'Y') {
     insuranceCollection.push({
       // FIX. This is a sequence. What does that look like?
       insurance: {
         companyName: 'Medicare',
-        enrolledInPartA: veteran.isEnrolledMedicarePartA,
+        enrolledInPartA: yesNoToESBoolean(veteran.isEnrolledMedicarePartA),
         insuranceMappingTypeName: 'MDCR', // TODO this code is from VHA Standard Data Service (ADRDEV01) Insurance Mapping List
         partAEffectiveDate: formDateToESDate(veteran.medicarePartAEffectiveDate),
       }
@@ -715,7 +715,7 @@ function veteranToInsuranceCollection(veteran) {
 //  * enrollmentDeterminationInfo/eligibleForMedicaid                                   , Cannot be a Null value, ,
 function veteranToEnrollmentDeterminationInfo(veteran) {
   return {
-    eligibleForMedicaid: veteran.isMedicaidEligible,
+    eligibleForMedicaid: yesNoToESBoolean(veteran.isMedicaidEligible),
 
     //  * noseThroatRadiumInfo / receivingTreatment, Checkbox, No,
     noseThroatRadiumInfo: {
@@ -948,9 +948,9 @@ function veteranToFinancialsInfo(veteran) {
         spouseFinancials: {
           incomes: undefined, // TODO(awong): Fix.
           spouse: veteranToSpouseInfo(veteran),
-          contributedToSpouse: veteran.provideSupportLastYear,
+          contributedToSpouse: yesNoToESBoolean(veteran.provideSupportLastYear),
           marriedLastCalendarYear: veteran.maritalStatus === 'Married',
-          livedWithPatient: veteran.cohabitedLastYear,
+          livedWithPatient: yesNoToESBoolean(veteran.cohabitedLastYear),
         },
       },
 

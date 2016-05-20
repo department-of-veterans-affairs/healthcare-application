@@ -78,7 +78,7 @@ const ui = {
     '/household-information/annual-income': {
       complete: false,
       verified: false,
-      fields: ['veteranGrossIncome', 'veteranNetIncome', 'veteranOtherIncome', 'spouseGrossIncome', 'spouseNetIncome', 'spouseOtherIncome', 'childrenIncome']
+      fields: ['veteranGrossIncome', 'veteranNetIncome', 'veteranOtherIncome', 'spouseGrossIncome', 'spouseNetIncome', 'spouseOtherIncome', 'children']
     },
     '/household-information/deductible-expenses': {
       complete: false,
