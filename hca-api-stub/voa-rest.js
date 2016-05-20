@@ -74,7 +74,7 @@ function attach(app) {
       connector: require('loopback-connector-soap'),
       remotingEnabled: true,
       wsdl: path.join(__dirname, './voa.wsdl'),
-      url: endpoint.c7401,
+      url: endpoint.esDev,
 //      wsdl: endpoint.esDev + '?wsdl',
 //      url: endpoint.esDev,
       security: securityArtifacts,

@@ -246,6 +246,13 @@ function isValidFinancialDisclosure(data) {
   return isNotBlank(data.provideFinancialInfo.value);
 }
 
+function isValidIncome(income) {
+  return isValidField(isValidMonetaryValue, income.grossIncome) &&
+      isValidField(isValidMonetaryValue, income.netIncome) &&
+      isValidField(isValidMonetaryValue, income.otherIncome);
+}
+
+
 function isValidSpouseInformation(data) {
   let isValidSpouse = true;
   let isValidSpouseAddress = true;
@@ -276,7 +283,8 @@ function isValidChildInformationField(child) {
     isValidDateField(child.childDateOfBirth) &&
     isValidDateField(child.childBecameDependent) &&
     isValidDependentDateField(child.childBecameDependent, child.childDateOfBirth) &&
-    isValidField(isValidMonetaryValue, child.childEducationExpenses);
+    isValidField(isValidMonetaryValue, child.childEducationExpenses) &&
+    isValidIncome(child);
 }
 
 function isValidChildren(data) {
@@ -293,23 +301,6 @@ function isValidChildren(data) {
       allChildrenValid;
 }
 
-function isValidChildrenIncome(data) {
-  const children = data.childrenIncome;
-  if (children.length === 0) {
-    return true;
-  }
-  for (let i = 0; i < children.length; i++) {
-    if (
-        !isValidField(isValidMonetaryValue, children[i].childGrossIncome) &&
-        !isValidField(isValidMonetaryValue, children[i].childNetIncome) &&
-        !isValidField(isValidMonetaryValue, children[i].childOtherIncome)
-    ) {
-      return false;
-    }
-  }
-  return true;
-}
-
 function isValidAnnualIncome(data) {
   return isValidField(isValidMonetaryValue, data.veteranGrossIncome) &&
     isValidField(isValidMonetaryValue, data.veteranNetIncome) &&
@@ -317,7 +308,7 @@ function isValidAnnualIncome(data) {
     isValidField(isValidMonetaryValue, data.spouseGrossIncome) &&
     isValidField(isValidMonetaryValue, data.spouseNetIncome) &&
     isValidField(isValidMonetaryValue, data.spouseOtherIncome) &&
-    isValidChildrenIncome(data);
+    isValidChildren(data);
 }
 
 function isValidDeductibleExpenses(data) {
@@ -460,7 +451,6 @@ export {
   isValidSpouseInformation,
   isValidChildren,
   isValidAnnualIncome,
-  isValidChildrenIncome,
   isValidDeductibleExpenses,
   isValidGeneralInsurance,
   isValidMedicareMedicaid,

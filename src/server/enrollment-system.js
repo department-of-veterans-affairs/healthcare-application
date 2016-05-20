@@ -177,6 +177,36 @@ function veteranToSpouseInfo(veteran) {
 }
 
 /**
+ * Extracts an incomeCollection object out of an API resource (eg., veteran, child, spouse)
+ *
+ * @param {Object} resource The resource with income data.
+ * @returns {Object} ES system incomeInfo message.
+ */
+function resourceToIncomeCollection(resource) {
+  const incomeCollection = [];
+  if (resource.grossIncome > 0) {
+    incomeCollection.push({
+      amount: resource.grossIncome,
+      type: 12, // Total Employment Income TODO is this right?
+    });
+  }
+  if (resource.netIncome > 0) {
+    incomeCollection.push({
+      amount: resource.netIncome,
+      type: 13, // Net Income TODO is this right?
+    });
+  }
+  if (resource.otherIncome > 0) {
+    incomeCollection.push({
+      ammount: resource.otherIncome,
+      type: 10, // All Other Income TODO is this right?
+    });
+  }
+
+  return incomeCollection.length > 0 ? incomeCollection : undefined;
+}
+
+/**
  * Converts relationship from the values in the Veteran resource to the VHA Standard Data Service code.
  *
  * childRelationship comes from client/utils/options-for-select.js:childRelationships.
@@ -233,7 +263,7 @@ function childToDependentInfo(child) {
  */
 function childToDependentFinancialsInfo(child) {
   return {
-    incomes: undefined,  // TODO(awong): This maps to veteran.childrenIncome[i] based on ordinal of the child. Can we just insert into child?
+    incomes: resourceToIncomeCollection(child),
     dependentInfo: childToDependentInfo(child),
     livedWithPatient: child.childCohabitedLastYear,
     incapableOfSelfSupport: child.childDisabledBefore18,
@@ -1076,6 +1106,7 @@ function veteranToSaveSubmitForm(veteran) {
       appMethod: '1'
     }
   };
+  // TODO(awong): Remove this function after validations translate all numbers and booleans to strings.
   return JSON.parse(JSON.stringify(request, (i, d) => {
     if (d === true) {
       return 'true';
