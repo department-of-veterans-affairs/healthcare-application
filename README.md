@@ -507,14 +507,16 @@ const faults = {
 
 We use [Nightwatch](https://github.com/nightwatchjs/nightwatch) and [SauceLabs](https://saucelabs.com) to run end-to-end tests on a variety of platforms.
 
-If you'd like to run end-to-end (e2e) tests on your machine, you'll need to add the appropriate SauceLabs credentials to test/e2e/nightwatch.json.
-
-##### You can also run the e2e tests locally if you install selenium and java
-
-Homebrew users run: 
+If you'd like to run end-to-end (e2e) tests locally, you'll need to install Selenium and Java: 
 
 ``` bash
 brew update && brew install Caskroom/cask/java && brew install selenium-server-standalone
+```
+
+Next, copy the configuration file:
+
+``` bash
+cp test/e2e/nightwatch.json.example test/e2e/nightwatch.json
 ```
 
 To get started you will need to start selenium server to do that run:

@@ -15,7 +15,7 @@
     "webpack-noopt": "webpack",
     "webpack-prod": "webpack -p --config webpack_prod.config.js",
     "webpack-prod-noopt": "webpack --config webpack_prod.config.js",
-    "tests:e2e": "nightwatch -c ./test/e2e/nightwatch.local --env local" 
+    "tests:e2e": "nightwatch -c ./test/e2e/nightwatch.json --env local" 
   },
   "repository": {
     "type": "git",
