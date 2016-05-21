@@ -277,14 +277,15 @@ function isValidSpouseInformation(data) {
 
 function isValidChildInformationField(child) {
   // TODO: add validation to check if DOB is before date of dependence
+  // TODO: should this check income? I don't think so because otherwise it blocks movement from the
+  // main ChildInformation component if there is a mistake from another component.
   return isValidFullNameField(child.childFullName) &&
     isNotBlank(child.childRelation.value) &&
     isValidRequiredField(isValidSSN, child.childSocialSecurityNumber) &&
     isValidDateField(child.childDateOfBirth) &&
     isValidDateField(child.childBecameDependent) &&
     isValidDependentDateField(child.childBecameDependent, child.childDateOfBirth) &&
-    isValidField(isValidMonetaryValue, child.childEducationExpenses) &&
-    isValidIncome(child);
+    isValidField(isValidMonetaryValue, child.childEducationExpenses);
 }
 
 function isValidChildren(data) {
@@ -301,6 +302,15 @@ function isValidChildren(data) {
       allChildrenValid;
 }
 
+function isValidChildrenIncome(children) {
+  for (let i = 0; i < children.length; i++) {
+    if (!isValidIncome(children[i])) {
+      return false;
+    }
+  }
+  return true;
+}
+
 function isValidAnnualIncome(data) {
   return isValidField(isValidMonetaryValue, data.veteranGrossIncome) &&
     isValidField(isValidMonetaryValue, data.veteranNetIncome) &&
@@ -308,7 +318,7 @@ function isValidAnnualIncome(data) {
     isValidField(isValidMonetaryValue, data.spouseGrossIncome) &&
     isValidField(isValidMonetaryValue, data.spouseNetIncome) &&
     isValidField(isValidMonetaryValue, data.spouseOtherIncome) &&
-    isValidChildren(data);
+    isValidChildrenIncome(data.children);
 }
 
 function isValidDeductibleExpenses(data) {
