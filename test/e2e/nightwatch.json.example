@@ -1,5 +1,5 @@
 {
-  "src_folders" : ["./tests"],
+  "src_folders" : ["./test/e2e/tests"],
   "output_folder" : "./reports",
   "live_output" : true,
   "parallel_process_delay" : 10,
@@ -8,11 +8,34 @@
 
   "test_settings" : {
     "default" : {
+      "launch_url": "https://ondemand.saucelabs.com",
       "selenium_host" : "ondemand.saucelabs.com",
-      "selenium_port" : 80,
-      "username" : "SAUCELABS_USERNAME", 
-      "access_key" : "SAUCELABS_ACCESS_KEY",
+      "selenium_port" : 443,
+      "username" : "USERNAME",
+      "access_key" : "ACCESS_KEY",
       "use_ssl" : true,
+      "silent" : true,
+      "output" : true,
+      "screenshots" : {
+        "enabled" : false,
+        "on_failure" : true,
+        "path" : ""
+      },
+      "globals": {
+        "waitForConditionTimeout": 10000
+      },
+      "desiredCapabilities": {
+        "name" : "test-example",
+        "browserName": "firefox"
+      },
+      "selenium" : {
+        "start_process" : false
+      }
+    },
+    "local" : {
+      "selenium_host" : "localhost",
+      "selenium_port" : 4444,
+      "use_ssl" : false,
       "silent" : false,
       "output" : true,
       "screenshots" : {
@@ -33,5 +56,3 @@
     }
   }
 }
-
-
