@@ -23,6 +23,10 @@ addons:
     packages:
       - clang-3.6
       - g++-4.8
+  sauce_connect:
+    username: "alexose"
+    access_key:
+      secure: "QtQxSF0wgv2ksYwf2+O4MM302xtfqBp/fycMJhm1Q5biA/ilezVJnFq1NZhM6bgX5C1wRFaeEQNy7MvhHRoPh9bN3/8NntPZA4QmsblYkTLE/pf4b8pnnqHE+tc174KFtTzvQ7sWZUTyur38GaE1/FgWUHY7fmVJxxbRigb8iHbq8bFw6G/lpfV8O4HEosvqMGUNERjWCTVB+/T3y6IXFJOZRM4+8WIAxD4NpYCJvKNFNEzc1rxbZu4yZuTZa4vAxHQ3P0F70qGD/4NF2jrV60JIjv7LD1f7mRzATkmLkVuIXEKREKmSUEIydbYBsxwkRFW4FsmGbv1b0GV/+t5pTUkirjlR36kWfJ/JFH1MDoQm3Dhc7AsGYYSvbUYLpLwXRBIxV1r2x20po9QWcaF0LFCwwVp3Dj5K14rSvfCRtgfIeryiOeH4FVTFDC+uKUf2X5Zsh12Pmo4ujB1plqRYZ71V0t5YTxLimoWvPLVJwSQnNWvhC8DmeAckIdle2T4mHIlP0SW78M7NnUBV4OnYTxwvAabB3MOloQd3fPobL4u0GIifE+wPsxiiHFCRaHoqb27GQYeRkQFUx20P0pSEPvh5ThciPD98Aqr1zn9hrhj8RDJtGOhpf7NPLpdUMPQtmwve9rnmsk/mcTd2FCLSdO7nmM1bCk/dwFsDx+U1o7k="
 cache:
   apt: true
   directories:
@@ -35,3 +39,4 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
+
