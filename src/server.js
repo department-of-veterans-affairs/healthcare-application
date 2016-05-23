@@ -3,7 +3,9 @@ const voaRest = require('../hca-api-stub/voa-rest');
 const express = require('express');
 const morgan = require('morgan');
 
-const port = 3000;
+const config = require('../config');
+
+const port = config.port;
 
 function makeServer() {
   if (process.env.BABEL_ENV === 'hot') {
@@ -42,8 +44,8 @@ function makeServer() {
   const server = express();
   server.use(morgan('combined'));
   server.use('/', express.static('public'));
-  server.use('/healthcare/apply', express.static('public'));
-  server.use('/healthcare/apply/generated', express.static('generated'));
+  server.use(config.basePath, express.static('public'));
+  server.use(`${config.basePath}/generated`, express.static('generated'));
   return server;
 }
 

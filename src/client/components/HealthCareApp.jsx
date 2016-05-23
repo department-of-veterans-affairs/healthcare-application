@@ -2,12 +2,13 @@ import React from 'react';
 import Scroll from 'react-scroll';
 import _ from 'lodash';
 
+import { connect } from 'react-redux';
 import fetch from 'isomorphic-fetch';
 
 import IntroductionSection from './IntroductionSection.jsx';
 import Nav from './Nav.jsx';
 import ProgressButton from './ProgressButton';
-import { ensureFieldsInitialized, updateCompletedStatus, updateSubmissionStatus } from '../actions';
+import { ensureFieldsInitialized, updateCompletedStatus, updateSubmissionStatus, updateSubmissionId, updateSubmissionTimestamp } from '../actions';
 
 import * as validations from '../utils/validations';
 
@@ -27,6 +28,15 @@ class HealthCareApp extends React.Component {
     this.handleContinue = this.handleContinue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getUrl = this.getUrl.bind(this);
+    this.redirect = this.redirect.bind(this);
+  }
+
+  componentWillMount() {
+    this.redirect();
+  }
+
+  componentDidUpdate() {
+    window.addEventListener('hashchange', this.redirect());
   }
 
   getUrl(direction) {
@@ -64,15 +74,36 @@ class HealthCareApp extends React.Component {
     });
   }
 
+  redirect() {
+    // TODO (anne): Refactor and add redirect message using query params
+    const previousPaths = [];
+    const currentPath = this.props.location.pathname;
+    const paths = _.keys(this.props.uiState.sections);
+
+    for (let i = 0; i < paths.length; i++) {
+      if (paths[i] === currentPath) {
+        break;
+      }
+      previousPaths.push(paths[i]);
+    }
+
+    for (let j = 0; j < previousPaths.length; j++) {
+      if (this.props.uiState.sections[previousPaths[j]].complete === false) {
+        this.context.router.push('/introduction');
+        break;
+      }
+    }
+  }
+
   handleContinue() {
     const path = this.props.location.pathname;
-    const formData = this.context.store.getState().veteran;
-    const sectionFields = this.context.store.getState().uiState.sections[path].fields;
+    const formData = this.props.data;
+    const sectionFields = this.props.uiState.sections[path].fields;
 
-    this.context.store.dispatch(ensureFieldsInitialized(sectionFields));
+    this.props.onFieldsInitialized(sectionFields);
     if (validations.isValidSection(path, formData)) {
       this.context.router.push(this.getUrl('next'));
-      this.context.store.dispatch(updateCompletedStatus(path));
+      this.props.onCompletedStatus(path);
     }
     this.scrollToTop();
   }
@@ -84,43 +115,55 @@ class HealthCareApp extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const path = this.props.location.pathname;
-    const store = this.context.store;
-    const veteran = store.getState().veteran;
+    const veteran = this.props.data;
 
     // Strip out unnecessary fields that track UI state
     function reducer(i, d) {
       return typeof d.value !== 'undefined' ? d.value : d;
     }
 
-    store.dispatch(updateSubmissionStatus('submitPending'));
-    store.dispatch(updateCompletedStatus(path));
+    if (validations.isValidForm(veteran)) {
+      this.props.onUpdateSubmissionStatus('submitPending');
 
-    // POST data to endpoint
-    fetch('/api/hca/v1/VoaServices/submit', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      timeout: 10000, // 10 seconds
-      body: JSON.stringify(veteran, reducer)
-    }).then(response => {
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      store.dispatch(updateSubmissionStatus('submitSucceeded', response.json()));
-    }).catch(error => {
-      store.dispatch(updateSubmissionStatus('submitFailed', error));
-    });
-
-    this.scrollToTop();
+      // POST data to endpoint
+      fetch('/api/hca/v1/VoaServices/submit', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        timeout: 10000, // 10 seconds
+        body: JSON.stringify(veteran, reducer)
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        response.json().then(data => {
+          this.props.onUpdateSubmissionStatus('applicationSubmitted', data);
+          this.props.onUpdateSubmissionId(data.formSubmissionId);
+          this.props.onUpdateSubmissionTimestamp(data.timeStamp);
+        });
+        setTimeout(() => {
+          this.context.router.push(this.getUrl('next'));
+          this.scrollToTop();
+        }, 5000);
+      }).catch(error => {
+        // TODO(crew): Pass meaningful errors to the client.
+        setTimeout(() => {
+          this.props.onUpdateSubmissionStatus('submitFailed', error);
+        }, 5000);
+      });
+    } else {
+      this.scrollToTop();
+      // TODO(crew): Decide on/add validation error message.
+    }
   }
 
   render() {
     let children = this.props.children;
     let buttons;
-    const path = this.props.location.pathname;
+    let submitButton;
+    const submissionStatus = this.props.uiState.submission.status;
 
     if (children === null) {
       // This occurs if the root route is hit. Default to IntroductionSection.
@@ -144,29 +187,65 @@ class HealthCareApp extends React.Component {
           afterText="»"/>
     );
 
-    const submitButton = (
-      <ProgressButton
-          onButtonClick={this.handleSubmit}
-          buttonText="Submit Application"
-          buttonClass="usa-button-primary"/>
-    );
+    if (submissionStatus === false) {
+      submitButton = (
+        <ProgressButton
+            onButtonClick={this.handleSubmit}
+            buttonText="Submit Application"
+            buttonClass="usa-button-primary"/>
+      );
+    } else if (submissionStatus === 'submitPending') {
+      submitButton = (
+        <ProgressButton
+            onButtonClick={this.handleSubmit}
+            buttonText="Sending..."
+            buttonClass="usa-button-disabled"/>
+      );
+    } else if (submissionStatus === 'applicationSubmitted') {
+      submitButton = (
+        <ProgressButton
+            onButtonClick={this.handleSubmit}
+            buttonText="Submitted"
+            buttonClass="hca-button-green"
+            beforeText="&#10003;"/>
+      );
+    } else {
+      submitButton = (
+        <ProgressButton
+            onButtonClick={this.handleSubmit}
+            buttonText="Send Failed"
+            buttonClass="usa-button-secondary"
+            beforeText="x"/>
+      );
+    }
 
-    if (path === '/review-and-submit') {
+    if (this.props.location.pathname === '/review-and-submit') {
       buttons = (
         <div className="row progress-buttons">
           <div className="small-6 medium-5 columns">
             {backButton}
           </div>
-          <div className="small-6 medium-5 end columns">
+          <div className="small-6 medium-5 columns">
             {submitButton}
+          </div>
+          <div className="small-1 medium-1 end columns">
+            <div className={this.state ? 'spinner' : 'hidden'}>&nbsp;</div>
           </div>
         </div>
       );
-    } else if (path === '/introduction') {
+    } else if (this.props.location.pathname === '/introduction') {
       buttons = (
         <div className="row progress-buttons">
           <div className="small-6 medium-5 columns">
             {nextButton}
+          </div>
+        </div>
+      );
+    } else if (this.props.location.pathname === '/submit-message') {
+      buttons = (
+        <div className="row progress-buttons">
+          <div className="small-6 medium-5 columns">
+            <button className="usa-button-primary">Back to Main Page</button>
           </div>
         </div>
       );
@@ -203,12 +282,12 @@ class HealthCareApp extends React.Component {
         <div className="row">
           <Element name="topScrollElement"/>
           <div className="medium-4 columns show-for-medium-up">
-            <Nav currentUrl={path}/>
+            <Nav currentUrl={this.props.location.pathname}/>
           </div>
           <div className="medium-8 columns">
             <div className="progress-box">
             {/* TODO: Figure out why <form> adds fields to url, and change action to reflect actual action for form submission. */}
-              <div className={path === '/review-and-submit' ? '' : 'form-panel'}>
+              <div className="form-panel">
                 {children}
                 {buttons}
               </div>
@@ -220,11 +299,41 @@ class HealthCareApp extends React.Component {
   }
 }
 
-// TODO(awong): Hack to allow access to the store for now while migrating.
-// All uses of this.context.store in this file are WRONG!!!
-HealthCareApp.contextTypes = {
-  router: React.PropTypes.object.isRequired,
-  store: React.PropTypes.object
+HealthCareApp.propTypes = {
+  currentUrl: React.PropTypes.string.isRequired
 };
 
-export default HealthCareApp;
+HealthCareApp.contextTypes = {
+  router: React.PropTypes.object.isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    data: state.veteran,
+    uiState: state.uiState,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onUpdateSubmissionStatus: (value) => {
+      dispatch(updateSubmissionStatus(value));
+    },
+    onUpdateSubmissionId: (value) => {
+      dispatch(updateSubmissionId(value));
+    },
+    onUpdateSubmissionTimestamp: (value) => {
+      dispatch(updateSubmissionTimestamp(value));
+    },
+    onFieldsInitialized: (field) => {
+      dispatch(ensureFieldsInitialized(field));
+    },
+    onCompletedStatus: (route) => {
+      dispatch(updateCompletedStatus(route));
+    },
+  };
+}
+
+// TODO(awong): Remove the pure: false once we start using ImmutableJS.
+export default connect(mapStateToProps, mapDispatchToProps, undefined, { pure: false })(HealthCareApp);
+export { HealthCareApp };

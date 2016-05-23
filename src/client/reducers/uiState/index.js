@@ -1,14 +1,19 @@
 import _ from 'lodash';
 import lodashDeep from 'lodash-deep';
 
-import { UPDATE_COMPLETED_STATUS, UPDATE_INCOMPLETE_STATUS, UPDATE_REVIEW_STATUS, UPDATE_VERIFIED_STATUS, UPDATE_SUBMISSION_STATUS } from '../../actions';
+import { UPDATE_COMPLETED_STATUS, UPDATE_INCOMPLETE_STATUS, UPDATE_REVIEW_STATUS, UPDATE_VERIFIED_STATUS, UPDATE_SUBMISSION_STATUS, UPDATE_SUBMISSION_ID, UPDATE_SUBMISSION_TIMESTAMP } from '../../actions';
 
 // Add deep object manipulation routines to lodash.
 _.mixin(lodashDeep);
 
 
 const ui = {
-  applicationSubmitted: false,
+  submission: {
+    status: false,
+    errorMessage: false,
+    id: false,
+    timestamp: false
+  },
   sections: {
     '/introduction': {
       complete: false,
@@ -73,7 +78,7 @@ const ui = {
     '/household-information/annual-income': {
       complete: false,
       verified: false,
-      fields: ['veteranGrossIncome', 'veteranNetIncome', 'veteranOtherIncome', 'spouseGrossIncome', 'spouseNetIncome', 'spouseOtherIncome', 'childrenIncome']
+      fields: ['veteranGrossIncome', 'veteranNetIncome', 'veteranOtherIncome', 'spouseGrossIncome', 'spouseNetIncome', 'spouseOtherIncome', 'children']
     },
     '/household-information/deductible-expenses': {
       complete: false,
@@ -128,7 +133,17 @@ function uiState(state = ui, action) {
 
     case UPDATE_SUBMISSION_STATUS:
       newState = Object.assign({}, state);
-      _.set(newState, action.field, true);
+      _.set(newState.submission, 'status', action.value);
+      return newState;
+
+    case UPDATE_SUBMISSION_ID:
+      newState = Object.assign({}, state);
+      _.set(newState.submission, 'id', action.value);
+      return newState;
+
+    case UPDATE_SUBMISSION_TIMESTAMP:
+      newState = Object.assign({}, state);
+      _.set(newState.submission, 'timestamp', action.value);
       return newState;
 
     default:

@@ -10,6 +10,14 @@ const validations = require('./utils/validations');
 // ES VOA SOAP endpoint and is therefore authoritative for the field structure and basic validations.
 //
 
+// http://vaausesrapp80.aac.va.gov:7404/ds/List/ServiceBranch
+
+// ====
+// == Fields not used by the ES system?
+//  veteran.compensableVaServiceConnected.  // Mehedi claims this doesn't map to ES
+//  veteran.receivesVaPension.  // Mehedi claims this doesn't map to ES
+// ====
+
 // Static for content for the 1010EZ.
 const formTemplate = {
   form: {
@@ -29,6 +37,171 @@ const formTemplate = {
     }
   }
 };
+
+/**
+ * Returns a string left-padded with '0' of the given width.
+ *
+ * Warning: If 'number' is wider than 'width' characters, only the right-most 'width'
+ * characters are returned.
+ *
+ * TODO: should this explicitly check if 'number' and 'width' are actually numbers?
+ *
+ * @example
+ * // returns "0001"
+ * zeroPadNumber(1, 4);
+ * @example
+ * // returns "15"
+ * zeroPadNumber(31415, 2);
+ *
+ * @param {number} number The number you want left-padded with '0' characters.
+ * @param {number} width The width of the resulting string.
+ * @returns {String}
+ */
+// TODO(awong): Move to validations and add unittests.
+function zeroPadNumber(number, padding) {
+  return (new Array(padding + 1).join('0') + number).slice(-padding);
+}
+
+/**
+ * Returns true when the provided year is a leap-year in the Gregorian calendar.
+ *
+ * Based on "Introduction To Calendars" paragraph at http://aa.usno.navy.mil/faq/docs/calendars.php
+ * specifically, the paragraph:
+ *
+ * "The Gregorian Calendar has become the internationally accepted civil calendar. The
+ * leap year rule for the Gregorian Calendar differs slightly from one for the Julian
+ * Calendar. The Gregorian leap year rule is: Every year that is exactly divisible by four is
+ * a leap year, except for years that are exactly divisible by 100, but these centurial
+ * years are leap years if they are exactly divisible by 400. For example, the years 1700, 1800,
+ * and 1900 are not leap years, but the year 2000 is. ..."
+ *
+ * @example
+ * // returns:
+ * [ [ 1700, false ],
+ *   [ 1800, false ],
+ *   [ 1900, false ],
+ *   [ 2000, true ],
+ *   [ 2011, false ],
+ *   [ 2012, true ],
+ *   [ 2013, false ],
+ *   [ 2014, false ],
+ *   [ 2015, false ],
+ *   [ 2016, true ],
+ *   [ 2017, false ] ]
+ *
+ * [1700,1800,1900,2000,2011,2012,2013,2014,2015,2016,2017].map((a)=>{return [a,isLeapYear(a)]})
+ *
+ * TODO: Albert, please double check the date logic.
+ *
+ * @param {number} year The year you want to test.
+ * @returns {boolean}
+ */
+function isLeapYear(year) {
+  return ((year % 4 === 0) && (year % 100 !== 0) || (year % 400 === 0));
+}
+
+/**
+ * Returns true when the provided dateObject contains a valid date after 1582
+ * which is the first full year after the Gregorian calendar was introduced.
+ *
+ * The significance of the Gregorian calendar is because leap-year calculations
+ * are only relevant for dates based on this calendar.
+ *
+ * This is based on the first full year the Gregorian calendar was introduced:
+ * https://en.wikipedia.org/wiki/Gregorian_calendar
+ * specifically the paragraph:
+ * "The Gregorian calendar, also called the Western calendar and the Christian calendar, is
+ * internationally the most widely used civil calendar. It is named for Pope Gregory XIII, who
+ * introduced it in October 1582."
+ *
+ * @example
+ * // returns false
+ * isValidDateObject()
+ *
+ * @example
+ * // returns true
+ * isValidDateObject({month: 1, day: 30, year: 1980})
+ *
+ * @example
+ * // returns true
+ * isValidDateObject({month: 2, day: 29, year: 1980})
+ *
+ * @example
+ * // returns false
+ * isValidDateObject({month: 2, day: 32, year: 2012})
+ *
+ * @example
+ * // returns false
+ * isValidDateObject({month: 2, day: 32, year: 2011})
+ *
+ * @param {Object} dateObject in the format of {month: 1, day: 30, year: 1980}
+ * @returns {boolean}
+ */
+// TODO(awong): This does not behave correctly with the input. Fix or remove/replace.
+function isValidDateObject(dateObject) {
+  if (typeof dateObject !== 'object' || dateObject === null) return false;
+  if (dateObject.hasOwnProperty('month') &&
+  dateObject.hasOwnProperty('day') &&
+  dateObject.hasOwnProperty('year')) {
+    if (dateObject.year < 1583) return false;
+    if (dateObject.day < 1 || dateObject.day > 31) return false;
+    switch (dateObject.month) {
+      // tests for 31 day months
+      case 1: // January
+      case 3: // March
+      case 5: // May
+      case 7: // July
+      case 8: // August
+      case 10: // October
+      case 12: // December
+        if (dateObject.day > 31) return false;
+        break;
+      // tests for February
+      case 2: // February
+        if (isLeapYear(dateObject.year) === true && dateObject.day > 29) return false;
+        if (isLeapYear(dateObject.year) === false && dateObject.day > 28) return false;
+        break;
+      // tests for 30 day months
+      case 4: // April
+      case 6: // June
+      case 9: // September
+      case 11: // November
+        if (dateObject.day > 30) return false;
+        break;
+      default:
+        return false;
+    }
+    return true;
+  }
+  return false;
+}
+isValidDateObject(null);  // TODO(awong): This makes lint shutup. Remove once calendar validation is sorted out.
+
+/**
+ * Returns a date string as given in examples from ES team
+ * ("01/30/1980"" in month, day, year order) OR undefined if
+ * the date object is invalid.
+ *
+ * This validation is stricter than what the XSD implies (which is the date can't be NULL
+ * but must have at least month and year with no future dates.)
+ *
+ * TODO: Accept dates w/o day and return in the format MM/YYYY.
+ *
+ * @example
+ * // returns "01/01/1980"
+ * formDateToESDate({month: 1, day: 30, year: 1980})
+ *
+ * @example
+ * // returns undefined
+ * formDateToESDate(100)
+ *
+ * @param {Object} dateObject in the format of {month: 1, day: 30, year: 1980}
+ * @returns {String}
+ */
+function formDateToESDate(dateObject) {
+  // TODO(awong) Verify dateObject is valid before parsing.
+  return `${zeroPadNumber(dateObject.month, 2)}/${zeroPadNumber(dateObject.day, 2)}/${zeroPadNumber(dateObject.year, 4)}`;
+}
 
 /**
  * Converts maritalStatus from the values in the Veteran resource to the VHA Standard Data Service code.
@@ -59,6 +232,47 @@ function maritalStatusToSDSCode(maritalStatus) {
 }
 
 /**
+ * Returns SDS code representing the indication of Spanish/Hispanic/Latino ethnicity.
+ *
+ * Codes are from the VHA Standard Data Service (ADRDEV01) HL7 24 Ethnicity Map List.
+ *
+ * @param {Boolean} isSpanishHispanicLatino
+ * @returns {String} VHA ethnicity SDS code.
+ */
+// TODO(awong): Move to validations and add unittests.
+function spanishHispanicToSDSCode(isSpanishHispanicLatino) {
+  // from VHA Standard Data Service (ADRDEV01) HL7 24 Ethnicity Map List
+  switch (isSpanishHispanicLatino) {
+    case true:
+      return '2135-2';
+    case false:
+      return '2186-5';
+    default:
+      return '0000-0';  // TODO(awong): Should this just default to false?
+  }
+}
+
+/**
+ * Returns array of SDS codes representing the claimed races of the veteran.
+ *
+ * Codes are from the VHA Standard Data Service (ADRDEV01) HL7 24 Race Map List.
+ *
+ * @param {Object} veteran The veteran resource
+ * @returns {Array} Array of VHA Race SDS codes.
+ */
+// TODO(awong): Move to validations and add unittests.
+function veteranToRaces(veteran) {
+  // from VHA Standard Data Service (ADRDEV01) HL7 24 Race Map List
+  const races = [];
+  if (veteran.isAmericanIndianOrAlaskanNative) races.push('1002-5');
+  if (veteran.isAsian) races.push('2028-9');
+  if (veteran.isBlackOrAfricanAmerican) races.push('2054-5');
+  if (veteran.isNativeHawaiianOrOtherPacificIslander) races.push('2076-8');
+  if (veteran.isWhite) races.push('2106-3');
+  return races.length > 0 ? { race: races } : undefined;
+}
+
+/**
  * Converts yesNo options to the VHA Standard Data Service code.
  *
  * yesNo values come from client/utils/options-for-select.js:yesNo.
@@ -81,19 +295,194 @@ function yesNoToESBoolean(yesNo) {
   }
 }
 
-// TODO(awong): Move to validations and add unittests.
-function zeroPadNumber(number, padding) {
-  return (new Array(padding + 1).join('0') + number).slice(-padding);
-}
-
-// TODO(awong): Move to validations and add unittests.
-function formDateToESDate(dateObject) {
-  if (dateObject.month >= 1 && dateObject.month <= 12 &&
-    dateObject.day >= 1 && dateObject.month <= 31 && // TODO: how robust does this need to be? Form validates as well.
-    dateObject.year > 1) {
-    return `${zeroPadNumber(dateObject.month, 2)}/${zeroPadNumber(dateObject.day, 2)}/${zeroPadNumber(dateObject.year, 4)}`;
+/**
+ * Extracts a spouse object out of the veteran resource, if applicable.
+ *
+ * @param {Object} veteran The veteran resource
+ * @returns {Object} ES system spouseInfo message
+ */
+function veteranToSpouseInfo(veteran) {
+  if (veteran.maritalStatus !== 'Never Married') {
+    return {
+      dob: formDateToESDate(veteran.spouseDateOfBirth),
+      givenName: veteran.spouseFullName.first,
+      middleName: veteran.spouseFullName.middle,
+      familyName: veteran.spouseFullName.last,
+      suffix: veteran.spouseFullName.suffix,
+      startDate: formDateToESDate(veteran.dateOfMarriage),
+      ssns: {
+        ssn: {
+          ssnText: validations.validateSsn(veteran.spouseSocialSecurityNumber)
+        }
+      },
+      address: {
+        city: veteran.spouseAddress.city,
+        country: veteran.spouseAddress.country,
+        line1: veteran.spouseAddress.street,
+        state: veteran.spouseAddress.state,
+        zipCode: veteran.spouseAddress.zipcode
+      },
+      phoneNumber: veteran.spousePhone
+    };
   }
   return undefined;
+}
+
+/**
+ * Extracts an incomeCollection object out of an API resource (eg., veteran, child, spouse)
+ *
+ * @param {Object} resource The resource with income data.
+ * @returns {Object} ES system incomeInfo message.
+ */
+function resourceToIncomeCollection(resource) {
+  const incomeCollection = [];
+  if (resource.grossIncome > 0) {
+    incomeCollection.push({
+      amount: resource.grossIncome,
+      type: 12, // Total Employment Income TODO is this right?
+    });
+  }
+  if (resource.netIncome > 0) {
+    incomeCollection.push({
+      amount: resource.netIncome,
+      type: 13, // Net Income TODO is this right?
+    });
+  }
+  if (resource.otherIncome > 0) {
+    incomeCollection.push({
+      amount: resource.otherIncome,
+      type: 10, // All Other Income TODO is this right?
+    });
+  }
+
+  return incomeCollection.length > 0 ? { income: incomeCollection } : undefined;
+}
+
+/**
+ * Extracts an expenseCollection object out of an API resource (eg., veteran, child, spouse)
+ *
+ * @param {Object} resource The resource with expense data.
+ * @returns {Object} ES system expenseInfo message.
+ */
+function resourceToExpenseCollection(resource) {
+  const expenseCollection = [];
+  if (resource.educationExpense > 0) {
+    expenseCollection.push({
+      amount: resource.educationExpense,
+      expenseType: '3', // Veteran's Educational Expenses TODO is this right?
+    });
+  }
+  if (resource.funeralExpense > 0) {
+    expenseCollection.push({
+      amount: resource.funeralExpense,
+      expenseType: '19', // Funeral and Burial Expenses TODO is this right?
+    });
+  }
+  if (resource.medicalExpense > 0) {
+    expenseCollection.push({
+      amount: resource.medicalExpense,
+      expenseType: '18', // Total Non-Reimbursed Medical Expenses TODO is this right?
+    });
+  }
+
+  return expenseCollection.length > 0 ? { expense: expenseCollection } : undefined;
+}
+
+/**
+ * Converts relationship from the values in the Veteran resource to the VHA Standard Data Service code.
+ *
+ * childRelationship comes from client/utils/options-for-select.js:childRelationships.
+ *
+ * Codes are from the VHA Standard Data Service (ADRDEV01) HL7 24 Relationship List.
+ *
+ * @param {String} childRelationship (eg, 'Daughter', 'Son', etc.)
+ * @returns {Integer} VHA SDS code (eg, '4', '3', etc.)
+ */
+function childRelationshipToSDSCode(childRelationship) {
+  // from VHA Standard Data Service (ADRDEV01) Relationship List
+  switch (childRelationship) {
+    case 'Daughter':
+      return 4;
+    case 'Son':
+      return 3;
+    case 'Stepson':
+      return 5;
+    case 'Stepdaughter':
+      return 6;
+    default:
+      return undefined;
+  }
+}
+
+/**
+ * Converts child resource to an ES dependentInfo message.
+ *
+ * @param {Object} child The child resource
+ * @returns {Object} ES system dependentInfo message
+ */
+function childToDependentInfo(child) {
+  return {
+    dob: formDateToESDate(child.childDateOfBirth),
+    givenName: child.childFullName.first,
+    middleName: child.childFullName.middle,
+    familyName: child.childFullName.last,
+    suffix: child.childFullName.suffix,
+    relationship: childRelationshipToSDSCode(child.childRelation),
+    ssns: {
+      ssn: {
+        ssnText: validations.validateSsn(child.childSocialSecurityNumber)
+      }
+    },
+    startDate: formDateToESDate(child.childBecameDependent)
+  };
+}
+
+/**
+ * Extracts a dependentFinancialsInfo object out of the veteran resource, if applicable.
+ *
+ * @param {Object} veteran The veteran resource
+ * @returns {Object} ES system dependentFinancialsInfo message
+ */
+function childToDependentFinancialsInfo(child) {
+  return {
+    incomes: resourceToIncomeCollection(child),
+    dependentInfo: childToDependentInfo(child),
+    livedWithPatient: child.childCohabitedLastYear,
+    incapableOfSelfSupport: child.childDisabledBefore18,
+    attendedSchool: child.childAttendedSchoolLastYear,
+    contributedToSupport: child.childReceivedSupportLastYear,
+  };
+}
+
+/**
+ * Extracts a dependentFinancialsCollection object out of the veteran resource, if applicable.
+ *
+ * @param {Object} veteran The veteran resource
+ * @returns {Object} ES system dependentFinancialsCollection message
+ */
+function veteranToDependentFinancialsCollection(veteran) {
+  if (veteran.hasChildrenToReport) {
+    return veteran.children.map((child) => {
+      return { dependentFinancials: childToDependentFinancialsInfo(child) };
+    });
+  }
+  return undefined;
+}
+
+/**
+ * Extracts an insuranceInfo object out of the provider resource.
+ *
+ * @param {Object} provider The provider resource
+ * @returns {Object} ES system insuranceInfo message
+ */
+function providerToInsuranceInfo(provider) {
+  return {
+    companyName: provider.insuranceName,
+    policyHolderName: provider.insurancePolicyHolderName,
+    policyNumber: provider.insurancePolicyNumber,
+    groupNumber: provider.insuranceGroupCode,
+    insuranceMappingTypeName: 'PI', // TODO this code is from VHA Standard Data Service (ADRDEV01) Insurance Mapping List
+  };
 }
 
 //  * personInfo / dob, mm/dd/yyyy; cannot be in the future, Yes, "Element is accepted but not used as this element will not be stored in ADR,  it must come from MPI (the authoritative source)."
@@ -123,20 +512,36 @@ function veteranToPersonInfo(veteran) {
   return {
     dob: formDateToESDate(veteran.veteranDateOfBirth),
     firstName: validations.validateString(veteran.veteranFullName.first, 30),
-    gender: veteran.gender,
+    gender: veteran.gender,  // TODO(awong): need to restrict valid values.
     lastName: validations.validateString(veteran.veteranFullName.last, 30),
     middleName: validations.validateString(veteran.veteranFullName.middle, 30, true),
     mothersMaidenName: validations.validateString(veteran.mothersMaidenName, 35, true),
     placeOfBirthCity: validations.validateString(veteran.cityOfBirth, 20, true),
     placeOfBirthState: veteran.stateOfBirth, // todo(robbie) need to do this validation.
     ssnText: validations.validateSsn(veteran.veteranSocialSecurityNumber),
-    suffix: veteran.veteranFullName.suffix,
+    suffix: veteran.veteranFullName.suffix,  // TODO(awong): need to restrict valid values.
   };
 }
 
-function makeServiceBranch(serviceBranch) {
-  // NOTE the return codes are from VHA Standard Data Service (ADRDEV01) Service Branch List
-  // http://vaausesrapp80.aac.va.gov:7404/ds/List/ServiceBranch
+/**
+ * Converts serviceBranch from the values in Veteran resource to
+ * VHA Standard Data Service code.
+ *
+ * Codes are from VHA Standard Data Service (ADRDEV01) Service Branch List
+ * http://vaausesrapp80.aac.va.gov:7404/ds/List/ServiceBranch
+ *
+ * @example
+ * // returns 6 (OTHER)
+ * serviceBranchToSDSCode()
+ *
+ * @example
+ * // returns 1 (ARMY)
+ * serviceBranchToSDSCode('army')
+ *
+ * @param {String} serviceBranch Branch of service. eg, 'army', 'air force'
+ * @returns {Number} VHA Standard Data Service
+ */
+function serviceBranchToSDSCode(serviceBranch) {
   switch (serviceBranch) {
     case 'army':
       return 1;
@@ -167,9 +572,25 @@ function makeServiceBranch(serviceBranch) {
   }
 }
 
-function makeDischargeType(dischargeType) {
-  // NOTE these codes are from VHA Standard Data Service (ADRDEV01) Service Discharge Code List
-  // http://vaausesrapp80.aac.va.gov:7404/ds/List/ServiceDischargeCode
+/**
+ * Converts dischargeType from the values in Veteran resource to
+ * VHA Standard Data Service code.
+ *
+ * Codes are from VHA Standard Data Service (ADRDEV01) Service Discharge Code List
+ * http://vaausesrapp80.aac.va.gov:7404/ds/List/ServiceDischargeCode
+ *
+ * @example
+ * // returns 6 (OTHER-THAN-HONORABLE)
+ * dischargeTypeToSDSCode()
+ *
+ * @example
+ * // returns 1 (HONORABLE)
+ * dischargeTypeToSDSCode('honorable')
+ *
+ * @param {String} dischargeType Branch of service. eg, 'honorable', 'general'
+ * @returns {Number} VHA Standard Data Service code.
+ */
+function dischargeTypeToSDSCode(dischargeType) {
   switch (dischargeType) {
     case 'honorable':
       return 1;
@@ -182,7 +603,7 @@ function makeDischargeType(dischargeType) {
     case 'undesirable':
       return 5;
     default:
-      return '4'; // OTHER-THAN-HONORABLE
+      return 4; // OTHER-THAN-HONORABLE
   }
 }
 
@@ -207,13 +628,13 @@ function veteranToMilitaryServiceInfo(veteran) {
       militaryServiceSiteRecord: {
         militaryServiceEpisodes: {
           militaryServiceEpisode: {
-            dischargeType: makeDischargeType(veteran.dischargeType),
+            dischargeType: dischargeTypeToSDSCode(veteran.dischargeType),
             startDate: formDateToESDate(veteran.lastEntryDate),
             endDate: formDateToESDate(veteran.lastDischargeDate),
-            serviceBranch: makeServiceBranch(veteran.lastServiceBranch),
+            serviceBranch: serviceBranchToSDSCode(veteran.lastServiceBranch),
           }
         },
-        site: '565GC',  // FIX
+        site: veteran.vaMedicalFacility,
       }
     }
   };
@@ -259,15 +680,21 @@ function veteranToMilitaryServiceInfo(veteran) {
 //  * "insuranceCollection/insuranceInfo/policyNumber insuranceCollection/insuranceInfo/groupNumber", Either Policy Number and Group Code is required , "Applies when ""insuranceMappingTypeName"" = ""PI""",
 //  * insuranceCollection/insuranceInfo/subscriber , Required if enrolled in Medicare Part A or Part B , "Applies when ""insuranceMappingTypeName"" = ""MDCR""",
 function veteranToInsuranceCollection(veteran) {
-  return {
-    // FIX. This is a sequence. What does that look like?
-    insurance: {
+  const insuranceCollection = veteran.providers.map((provider) => {
+    return providerToInsuranceInfo(provider);
+  });
+  if (veteran.isEnrolledMedicarePartA === 'Y') {
+    insuranceCollection.push({
       companyName: 'Medicare',
-      enrolledInPartA: veteran.isEnrolledMedicarePartA,
-      enrolledInPartB: false, // FIX
-      insuranceMappingTypeName: 'MDCR' // FIX
-    }
-  };
+      enrolledInPartA: yesNoToESBoolean(veteran.isEnrolledMedicarePartA),
+      insuranceMappingTypeName: 'MDCR', // TODO this code is from VHA Standard Data Service (ADRDEV01) Insurance Mapping List
+      partAEffectiveDate: formDateToESDate(veteran.medicarePartAEffectiveDate),
+    });
+  }
+
+  // TODO(awong): Return the whole collection when the bug with node-soap's wsdl.js that causes
+  // the namespace prefix to be dropped in this case is fixed.
+  return insuranceCollection.length > 0 ? { insurance: insuranceCollection } : undefined;
 }
 
 // Produces an financialsInfo compatible type from a veteran resource.
@@ -316,7 +743,7 @@ function veteranToInsuranceCollection(veteran) {
 //  * enrollmentDeterminationInfo/eligibleForMedicaid                                   , Cannot be a Null value, ,
 function veteranToEnrollmentDeterminationInfo(veteran) {
   return {
-    eligibleForMedicaid: veteran.isMedicaidEligible,
+    eligibleForMedicaid: yesNoToESBoolean(veteran.isMedicaidEligible),
 
     //  * noseThroatRadiumInfo / receivingTreatment, Checkbox, No,
     noseThroatRadiumInfo: {
@@ -329,8 +756,8 @@ function veteranToEnrollmentDeterminationInfo(veteran) {
     },
 
     specialFactors: {
-      agentOrangeInd: false, // FIX
-      envContaminantsInd: false, // FIX
+      agentOrangeInd: veteran.vietnamService,
+      envContaminantsInd: veteran.swAsiaCombat,
       campLejeuneInd: veteran.campLejeune,
       radiationExposureInd: veteran.exposedToRadiation,
     }
@@ -540,8 +967,37 @@ function veteranToEnrollmentDeterminationInfo(veteran) {
 //  * "financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / amountIncomeType=Net Income from Farm,   Ranch,  Property,  Business IncomeType=Net Income from Farm,   Ranch,  Property,  Business", "Dollar amounts:  0 <= 9999999.99", "Req if Marr/Sep,  or any 3 spouse questions answered on this Panel", This amount field must be accompanied by the income type.
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from employment.
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, "Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from FARM,  RANCH,  PROPERTY OR BUSINESS."
-function veteranToFinancialsInfo(_veteran) {
-  return undefined;
+function veteranToFinancialsInfo(veteran) {
+  return {
+    financialStatement: {
+      expenses: resourceToExpenseCollection({
+        educationExpense: veteran.deductibleEducationExpenses,
+        funeralExpense: veteran.deductibleFuneralExpenses,
+        medicalExpense: veteran.deductibleMedicalExpenses
+      }),
+      incomes: resourceToIncomeCollection({
+        grossIncome: veteran.veteranGrossIncome,
+        netIncome: veteran.veteranNetIncome,
+        otherIncome: veteran.veteranOtherIncome
+      }),
+      spouseFinancialsList: {
+        spouseFinancials: {
+          incomes: resourceToIncomeCollection({
+            grossIncome: veteran.spouseGrossIncome,
+            netIncome: veteran.spouseNetIncome,
+            otherIncome: veteran.spouseOtherIncome
+          }),
+          spouse: veteranToSpouseInfo(veteran),
+          contributedToSpouse: yesNoToESBoolean(veteran.provideSupportLastYear),
+          marriedLastCalendarYear: veteran.maritalStatus === 'Married',
+          livedWithPatient: yesNoToESBoolean(veteran.cohabitedLastYear),
+        },
+      },
+
+      dependentFinancialsList: veteranToDependentFinancialsCollection(veteran),
+      numberOfDependentChildren: veteran.children.length,
+    }
+  };
 }
 
 // Produces an employmentInfo compatible type from a veteran resource.
@@ -744,7 +1200,7 @@ function veteranToAssociationCollection(_veteran) {
 //  * demographicsInfo/contactinfo/addressInfo/zipPlus4, "If country is USA,  check for format: 9999  Only numbers are allowed. ", ,
 function veteranToDemographicsInfo(veteran) {
   return {
-    appointmentRequestResponse: true, // FIX
+    appointmentRequestResponse: veteran.wantsInitialVaContact,
     contactInfo: {
       addresses: {
         address: {
@@ -753,17 +1209,30 @@ function veteranToDemographicsInfo(veteran) {
           line1: veteran.veteranAddress.street,
           state: veteran.veteranAddress.state,
           zipCode: veteran.veteranAddress.zipcode,
-          addressTypeCode: 'P',  // FIX
+          addressTypeCode: 'P',  // TODO(awong): this code is from VHA Standard Data Service (ADRDEV01) Address Type List P==Permanent. Determine if we need it.
+        },
+        emails: {
+          email: veteran.email,
+        },
+        phones: {
+          phone: [
+            {
+              phoneNumber: veteran.homePhone,
+              type: '1', // TODO(awong): Magic number: Code is from VHA Standard Data Service (ADRDEV01) Phone Contact Type List
+            },
+            {
+              phoneNumber: veteran.mobilePhone,
+              type: '4', // TODO(awong): Magic number: Code is from VHA Standard Data Service (ADRDEV01) Phone Contact Type List
+            }
+          ]
         }
       },
     },
-    ethnicity: '2186-5', // FIX
+    ethnicity: spanishHispanicToSDSCode(veteran.isSpanishHispanicLatino),
     maritalStatus: maritalStatusToSDSCode(veteran.maritalStatus),
     preferredFacility: veteran.vaMedicalFacility,
-    races: {
-      race: '2106-3' // FIX
-    },
-    acaIndicator: veteran.isCoveredByHealthInsurance, // FIX
+    races: veteranToRaces(veteran),
+    acaIndicator: veteran.isEssentialAcaCoverage,
   };
 }
 
@@ -855,6 +1324,7 @@ function veteranToSaveSubmitForm(veteran) {
       appMethod: '1' // '1' for health, '2' for dental.  (It's always '1' here)
     }
   };
+  // TODO(awong): Remove this function after validations translate all numbers and booleans to strings.
   return JSON.parse(JSON.stringify(request, (i, d) => {
     if (d === true) {
       return 'true';

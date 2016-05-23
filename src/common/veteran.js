@@ -24,11 +24,11 @@ const blankVeteran = {
   maritalStatus: makeField(''),
 
   isVaServiceConnected: makeField(''),
-  compensableVaServiceConnected: makeField(''),
-  receivesVaPension: makeField(''),
+  compensableVaServiceConnected: makeField(''),  // TODO(awong): Ignored by ES System
+  receivesVaPension: makeField(''),  // TODO(awong): Ignored by ES System
 
   isEssentialAcaCoverage: false,
-  facilityState: makeField(''),
+  facilityState: makeField(''),  // TODO(awong): Ignored by ES System
   vaMedicalFacility: makeField(''),
   wantsInitialVaContact: false,
 
@@ -46,14 +46,13 @@ const blankVeteran = {
     state: makeField(''),
     zipcode: makeField(''),
   },
-  veteranCounty: makeField(''),
   email: makeField(''),
-  emailConfirmation: makeField(''),
+  emailConfirmation: makeField(''),  // TODO(awong): Ignored by ES System
   homePhone: makeField(''),
   mobilePhone: makeField(''),
 
-  provideFinancialInfo: makeField(''),
-  understandsFinancialDisclosure: makeField(''),
+  provideFinancialInfo: makeField(''),  // TODO(awong): Ignored by ES System
+  understandsFinancialDisclosure: makeField(''),  // TODO(awong): Ignored by ES System
 
   spouseFullName: {
     first: makeField(''),
@@ -72,9 +71,9 @@ const blankVeteran = {
     day: makeField(''),
     year: makeField('')
   },
-  sameAddress: makeField(''),
-  cohabitedLastYear: makeField(''),
-  provideSupportLastYear: makeField(''),
+  sameAddress: makeField(''),  // TODO(awong): Not sure how to handle the mapping.
+  cohabitedLastYear: makeField('N'),  // TODO(awong): This name should be scoped to spouse.
+  provideSupportLastYear: makeField(''),  // TODO(awong): This name should be scoped to spouse.
   spouseAddress: {
     street: makeField(''),
     city: makeField(''),
@@ -93,13 +92,12 @@ const blankVeteran = {
   spouseGrossIncome: makeField(''),
   spouseNetIncome: makeField(''),
   spouseOtherIncome: makeField(''),
-  childrenIncome: [],
 
   deductibleMedicalExpenses: makeField(''),
   deductibleFuneralExpenses: makeField(''),
   deductibleEducationExpenses: makeField(''),
 
-  isCoveredByHealthInsurance: makeField(''),
+  isCoveredByHealthInsurance: makeField(''),  // TODO(awong): Ignored by ES System
   providers: [],
 
   isMedicaidEligible: makeField(''),
@@ -125,8 +123,8 @@ const blankVeteran = {
 
   purpleHeartRecipient: false,
   isFormerPow: false,
-  postNov111998Combat: false,
-  disabledInLineOfDuty: false,
+  postNov111998Combat: false,  // TODO(awong): Verify against e-mail.
+  disabledInLineOfDuty: false,  // TODO(awong): Verify against e-mail.
   swAsiaCombat: false,
   vietnamService: false,
   exposedToRadiation: false,
@@ -242,10 +240,6 @@ const completeVeteran = {
       dirty: false
     }
   },
-  veteranCounty: {
-    value: 'USA',
-    dirty: true
-  },
   email: {
     value: 'foo@example.com',
     dirty: false
@@ -262,8 +256,14 @@ const completeVeteran = {
     value: '1235551234',
     dirty: false
   },
-  provideFinancialInfo: true,
-  understandsFinancialDisclosure: true,
+  provideFinancialInfo: {
+    value: 'Y',
+    dirty: true
+  },
+  understandsFinancialDisclosure: {
+    value: 'Y',
+    dirty: true
+  },
   spouseFullName: {
     first: {
       value: 'FirstSpouse',
@@ -296,7 +296,7 @@ const completeVeteran = {
       dirty: true
     },
     year: {
-      value: '1987',
+      value: '1980',
       dirty: true
     }
   },
@@ -314,14 +314,48 @@ const completeVeteran = {
       dirty: true
     }
   },
-  sameAddress: true,
-  cohabitedLastYear: true,
-  provideSupportLastYear: false,
+  sameAddress: {
+    value: 'Y',
+    dirty: true
+  },
+  cohabitedLastYear: {
+    value: 'Y',
+    dirty: true
+  },
+  provideSupportLastYear: {
+    value: 'N',
+    dirty: true
+  },
+  spouseAddress: {
+    street: {
+      value: '123 NW 8th St',
+      dirty: false
+    },
+    city: {
+      value: 'Dulles',
+      dirty: false
+    },
+    country: {
+      value: 'USA',
+      dirty: false
+    },
+    state: {
+      value: 'VA',
+      dirty: false
+    },
+    zipcode: {
+      value: '20101',
+      dirty: false
+    }
+  },
   spousePhone: {
     value: '',
     dirty: false
   },
-  hasChildrenToReport: true,
+  hasChildrenToReport: {
+    value: 'Y',
+    dirty: false
+  },
   children: [
     {
       childFullName: {
@@ -386,6 +420,18 @@ const completeVeteran = {
       },
       childCohabitedLastYear: true,
       childReceivedSupportLastYear: false,
+      grossIncome: {
+        value: '991.9',
+        dirty: true
+      },
+      netIncome: {
+        value: '981.2',
+        dirty: true
+      },
+      otherIncome: {
+        value: '91.9',
+        dirty: true
+      },
       key: 'key-128'
     },
     {
@@ -451,6 +497,18 @@ const completeVeteran = {
       },
       childCohabitedLastYear: false,
       childReceivedSupportLastYear: true,
+      grossIncome: {
+        value: '791.9',
+        dirty: true
+      },
+      netIncome: {
+        value: '781.2',
+        dirty: true
+      },
+      otherIncome: {
+        value: '71.9',
+        dirty: true
+      },
       key: 'key-149'
     }
   ],
@@ -478,7 +536,6 @@ const completeVeteran = {
     value: '12.3',
     dirty: true
   },
-  childrenIncome: [],
   deductibleMedicalExpenses: {
     value: '33.3',
     dirty: true
@@ -491,7 +548,10 @@ const completeVeteran = {
     value: '77.77',
     dirty: true
   },
-  isCoveredByHealthInsurance: true,
+  isCoveredByHealthInsurance: {
+    value: 'Y',
+    dirty: true
+  },
   providers: [
     {
       insuranceName: {
@@ -510,11 +570,17 @@ const completeVeteran = {
         value: 'G1234',
         dirty: true
       },
-      key: 'key-174'
+      key: 'key-174'  // TODO(awong): All these keys are incorrect. They look like react keys. Where are they from?
     }
   ],
-  isMedicaidEligible: true,
-  isEnrolledMedicarePartA: false,
+  isMedicaidEligible: {
+    value: 'Y',
+    dirty: true
+  },
+  isEnrolledMedicarePartA: {
+    value: 'Y',
+    dirty: true
+  },
   medicarePartAEffectiveDate: {
     month: {
       value: '10',

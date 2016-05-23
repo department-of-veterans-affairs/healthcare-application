@@ -246,6 +246,13 @@ function isValidFinancialDisclosure(data) {
   return isNotBlank(data.provideFinancialInfo.value);
 }
 
+function isValidIncome(income) {
+  return isValidField(isValidMonetaryValue, income.grossIncome) &&
+      isValidField(isValidMonetaryValue, income.netIncome) &&
+      isValidField(isValidMonetaryValue, income.otherIncome);
+}
+
+
 function isValidSpouseInformation(data) {
   let isValidSpouse = true;
   let isValidSpouseAddress = true;
@@ -270,6 +277,8 @@ function isValidSpouseInformation(data) {
 
 function isValidChildInformationField(child) {
   // TODO: add validation to check if DOB is before date of dependence
+  // TODO: should this check income? I don't think so because otherwise it blocks movement from the
+  // main ChildInformation component if there is a mistake from another component.
   return isValidFullNameField(child.childFullName) &&
     isNotBlank(child.childRelation.value) &&
     isValidRequiredField(isValidSSN, child.childSocialSecurityNumber) &&
@@ -293,17 +302,9 @@ function isValidChildren(data) {
       allChildrenValid;
 }
 
-function isValidChildrenIncome(data) {
-  const children = data.childrenIncome;
-  if (children.length === 0) {
-    return true;
-  }
+function isValidChildrenIncome(children) {
   for (let i = 0; i < children.length; i++) {
-    if (
-        !isValidField(isValidMonetaryValue, children[i].childGrossIncome) &&
-        !isValidField(isValidMonetaryValue, children[i].childNetIncome) &&
-        !isValidField(isValidMonetaryValue, children[i].childOtherIncome)
-    ) {
+    if (!isValidIncome(children[i])) {
       return false;
     }
   }
@@ -317,7 +318,7 @@ function isValidAnnualIncome(data) {
     isValidField(isValidMonetaryValue, data.spouseGrossIncome) &&
     isValidField(isValidMonetaryValue, data.spouseNetIncome) &&
     isValidField(isValidMonetaryValue, data.spouseOtherIncome) &&
-    isValidChildrenIncome(data);
+    isValidChildrenIncome(data.children);
 }
 
 function isValidDeductibleExpenses(data) {
@@ -360,6 +361,25 @@ function isValidServiceInformation(data) {
       (isValidDateField(data.lastEntryDate) && isValidEntryDateField(data.lastEntryDate, data.veteranDateOfBirth)) &&
       (isValidDateField(data.lastDischargeDate) && isValidDischargeDateField(data.lastDischargeDate, data.lastEntryDate)) &&
       isNotBlank(data.dischargeType.value);
+}
+
+function isValidForm(data) {
+  return isValidPersonalInfoSection(data) &&
+  isValidPersonalInfoSection(data) &&
+  isValidBirthInformationSection(data) &&
+  isValidDemographicInformation(data) &&
+  isValidVeteranAddress(data) &&
+  isValidContactInformationSection(data) &&
+  isValidServiceInformation(data) &&
+  isValidVaInformation(data) &&
+  isValidFinancialDisclosure(data) &&
+  isValidSpouseInformation(data) &&
+  isValidChildren(data) &&
+  isValidAnnualIncome(data) &&
+  isValidDeductibleExpenses(data) &&
+  isValidVAFacility(data) &&
+  isValidGeneralInsurance(data) &&
+  isValidMedicareMedicaid(data);
 }
 
 function isValidSection(completePath, sectionData) {
@@ -431,6 +451,7 @@ export {
   isValidDependentDateField,
   isValidMarriageDate,
   isValidField,
+  isValidForm,
   isValidPersonalInfoSection,
   isValidBirthInformationSection,
   isValidVaInformation,
@@ -440,7 +461,6 @@ export {
   isValidSpouseInformation,
   isValidChildren,
   isValidAnnualIncome,
-  isValidChildrenIncome,
   isValidDeductibleExpenses,
   isValidGeneralInsurance,
   isValidMedicareMedicaid,
