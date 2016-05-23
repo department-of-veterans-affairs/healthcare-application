@@ -1,0 +1,29 @@
+{
+  "src_folders" : ["./test/e2e/tests"],
+  "output_folder" : "./reports",
+  "live_output" : true,
+  "parallel_process_delay" : 10,
+  "disable_colors": false,
+  "test_workers" : false,
+  "test_settings" : {
+    "default" : {
+      "selenium_host" : "localhost",
+      "selenium_port" : 4444,
+      "use_ssl" : false,
+      "silent" : true,
+      "output" : true,
+      "screenshots" : {
+        "enabled" : false,
+        "on_failure" : true,
+        "path" : ""
+      },
+      "desiredCapabilities": {
+        "name" : "test-example",
+        "browserName": "firefox"
+      },
+      "selenium" : {
+        "start_process" : false
+      }
+    }
+  }
+}
