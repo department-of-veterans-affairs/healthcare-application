@@ -67,13 +67,13 @@ const blankVeteran = {
     year: makeField(''),
   },
   dateOfMarriage: {
-    month: makeField(''),  // TODO(awong): Ignored by ES System
-    day: makeField(''),  // TODO(awong): Ignored by ES System
-    year: makeField('')  // TODO(awong): Ignored by ES System
+    month: makeField(''),
+    day: makeField(''),
+    year: makeField('')
   },
   sameAddress: makeField(''),  // TODO(awong): Not sure how to handle the mapping.
-  cohabitedLastYear: makeField(''),  // TODO(awong): This should be scoped to spouse.
-  provideSupportLastYear: makeField(''),  // TODO(awong): This should be scoped to spouse.
+  cohabitedLastYear: makeField('N'),  // TODO(awong): This name should be scoped to spouse.
+  provideSupportLastYear: makeField(''),  // TODO(awong): This name should be scoped to spouse.
   spouseAddress: {
     street: makeField(''),
     city: makeField(''),
@@ -86,16 +86,16 @@ const blankVeteran = {
   hasChildrenToReport: makeField(''),
   children: [],
 
-  veteranGrossIncome: makeField(''),  // TODO(awong): Complex mapping still required.
-  veteranNetIncome: makeField(''),  // TODO(awong): Complex mapping still required.
-  veteranOtherIncome: makeField(''),  // TODO(awong): Complex mapping still required.
-  spouseGrossIncome: makeField(''),  // TODO(awong): Complex mapping still required.
-  spouseNetIncome: makeField(''),  // TODO(awong): Complex mapping still required.
-  spouseOtherIncome: makeField(''),  // TODO(awong): Complex mapping still required.
+  veteranGrossIncome: makeField(''),
+  veteranNetIncome: makeField(''),
+  veteranOtherIncome: makeField(''),
+  spouseGrossIncome: makeField(''),
+  spouseNetIncome: makeField(''),
+  spouseOtherIncome: makeField(''),
 
-  deductibleMedicalExpenses: makeField(''),  // TODO(awong): Complex mapping still required.
-  deductibleFuneralExpenses: makeField(''),  // TODO(awong): Complex mapping still required.
-  deductibleEducationExpenses: makeField(''),  // TODO(awong): Complex mapping still required.
+  deductibleMedicalExpenses: makeField(''),
+  deductibleFuneralExpenses: makeField(''),
+  deductibleEducationExpenses: makeField(''),
 
   isCoveredByHealthInsurance: makeField(''),  // TODO(awong): Ignored by ES System
   providers: [],
@@ -123,8 +123,8 @@ const blankVeteran = {
 
   purpleHeartRecipient: false,
   isFormerPow: false,
-  postNov111998Combat: false,  // TODO(awong): Ignored by ES System?
-  disabledInLineOfDuty: false,  // TODO(awong): Ignored by ES System?
+  postNov111998Combat: false,  // TODO(awong): Verify against e-mail.
+  disabledInLineOfDuty: false,  // TODO(awong): Verify against e-mail.
   swAsiaCombat: false,
   vietnamService: false,
   exposedToRadiation: false,

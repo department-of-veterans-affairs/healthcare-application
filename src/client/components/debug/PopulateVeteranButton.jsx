@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { completeVeteran } from '../../../common/veteran';
 
-import { veteranOverwrite } from '../../actions';
+import { updateCompletedStatus, veteranOverwrite } from '../../actions';
+import routes from '../../routes';
 
 /**
  * Button to auto-populate every field in the model with valid data.
@@ -21,6 +22,9 @@ function mapDispatchToProps(dispatch) {
   return {
     onClick: () => {
       dispatch(veteranOverwrite(completeVeteran));
+      routes.forEach((route) => {
+        dispatch(updateCompletedStatus(route.props.path));
+      });
     }
   };
 }
