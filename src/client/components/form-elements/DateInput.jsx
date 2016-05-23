@@ -51,7 +51,7 @@ class DateInput extends React.Component {
     const month = this.props.month;
     const year = this.props.year;
 
-    if (month) {
+    if (month.value) {
       daysForSelectedMonth = days[month.value];
     }
 
@@ -116,7 +116,7 @@ class DateInput extends React.Component {
 DateInput.propTypes = {
   required: React.PropTypes.bool,
   errorMessage: React.PropTypes.string,
-  validation: React.PropTypes.func,
+  validation: React.PropTypes.bool,
   label: React.PropTypes.string,
   day: React.PropTypes.shape({
     value: React.PropTypes.string,

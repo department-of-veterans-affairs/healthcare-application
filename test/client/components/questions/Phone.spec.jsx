@@ -22,9 +22,9 @@ describe('<Phone>', () => {
       sinon.assert.calledWithMatch(consoleStub, /Required prop `value` was not specified in `Phone`/);
     });
 
-    it('value must be a string', () => {
+    it('value must be an object', () => {
       SkinDeep.shallowRender(<Phone value/>);
-      sinon.assert.calledWithMatch(consoleStub, /Invalid prop `value` of type `boolean` supplied to `Phone`, expected `string`/);
+      sinon.assert.calledWithMatch(consoleStub, /Invalid prop `value` of type `boolean` supplied to `Phone`, expected `object`/);
     });
 
     // TODO(awong): Why in the world does this not work?!?!

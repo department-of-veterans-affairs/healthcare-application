@@ -84,11 +84,11 @@ ErrorableNumberInput.propTypes = {
   label: React.PropTypes.string.isRequired,
   min: React.PropTypes.oneOfType([
     React.PropTypes.string,
-    React.PropTypes.func
+    React.PropTypes.number
   ]),
   max: React.PropTypes.oneOfType([
     React.PropTypes.string,
-    React.PropTypes.func
+    React.PropTypes.number
   ]),
   pattern: React.PropTypes.string,
   placeholder: React.PropTypes.string,
