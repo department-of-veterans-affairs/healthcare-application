@@ -6,6 +6,7 @@ hca-api-stub/healthcare.application.crt
 hca-api-stub/healthcare.application.key
 hca-api-stub/healthcare.application.key.gpg
 jsconfig.json
+test/e2e/nightwatch.json
 
 *.gpg
 *.key
@@ -19,3 +20,5 @@ npm-debug.log.*
 generated/
 node_modules/
 typings*
+reports/
+test/e2e/reports/

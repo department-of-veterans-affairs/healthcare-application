@@ -503,6 +503,29 @@ const faults = {
 };
 ```
 
+#### OPTIONAL: End-to-end tests
+
+We use [Nightwatch](https://github.com/nightwatchjs/nightwatch) and [SauceLabs](https://saucelabs.com) to run end-to-end tests on a variety of platforms.
+
+If you'd like to run end-to-end (e2e) tests locally, you'll need to install Selenium and Java: 
+
+``` bash
+brew update && brew install Caskroom/cask/java && brew install selenium-server-standalone
+```
+
+To get started you will need to start selenium server to do that run:
+
+``` bash
+selenium-server -p 4444
+```
+
+Once selenium server is running, in a seperate terminal you should be able to run the e2e tests by running: 
+
+```bash
+npm run tests:e2e
+```
+ 
+
 ### Docker
 #### Environment setup
 Docker is being used for production deploys of this application. The Dockerfile

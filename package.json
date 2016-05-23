@@ -14,7 +14,8 @@
     "webpack": "webpack -p",
     "webpack-noopt": "webpack",
     "webpack-prod": "webpack -p --config webpack_prod.config.js",
-    "webpack-prod-noopt": "webpack --config webpack_prod.config.js"
+    "webpack-prod-noopt": "webpack --config webpack_prod.config.js",
+    "tests:e2e": "nightwatch -c ./test/e2e/nightwatch.local.json" 
   },
   "repository": {
     "type": "git",
@@ -68,6 +69,7 @@
     "mocha": "^2.4.5",
     "modernizr": "^3.3.1",
     "modernizr-loader": "0.0.4",
+    "nightwatch": "^0.8.18",
     "node-sass": "^3.6.0",
     "nodemon": "^1.9.1",
     "phantomjs-prebuilt": "^2.1.4",
