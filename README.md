@@ -513,12 +513,6 @@ If you'd like to run end-to-end (e2e) tests locally, you'll need to install Sele
 brew update && brew install Caskroom/cask/java && brew install selenium-server-standalone
 ```
 
-Next, copy the configuration file:
-
-``` bash
-cp test/e2e/nightwatch.json.example test/e2e/nightwatch.json
-```
-
 To get started you will need to start selenium server to do that run:
 
 ``` bash
