@@ -21,7 +21,6 @@ import SubmitMessage from './components/SubmitMessage.jsx';
 import VeteranAddressSection from './components/veteran-information/VeteranAddressSection';
 import VAInformationSection from './components/va-benefits/VAInformationSection';
 
-
 const routes = [
   // Introduction route.
   <Route

@@ -23,42 +23,34 @@ const goldenFormOutput = {
               zipCode: '20005',
               addressTypeCode: 'P',
             },
-            emails: [
-              {
-                email: 'foo@example.com',
-              }
-            ],
-            phones: [
-              {
-                phone: {
+            emails: {
+              email: 'foo@example.com',
+            },
+            phones: {
+              phone: [
+                {
                   phoneNumber: '1231241234',
                   type: '1',
-                }
-              }, {
-                phone: {
+                }, {
                   phoneNumber: '1235551234',
                   type: '4',
                 }
-              }
-            ]
+              ]
+            }
           }
         },
         ethnicity: '2135-2',
         maritalStatus: 'M',
         preferredFacility: '689A4',
-        races: [
-          {
-            race: '1002-5'
-          }, {
-            race: '2028-9'
-          }, {
-            race: '2054-5'
-          }, {
-            race: '2076-8'
-          }, {
-            race: '2106-3'
-          }
-        ],
+        races: {
+          race: [
+            '1002-5',
+            '2028-9',
+            '2054-5',
+            '2076-8',
+            '2106-3',
+          ]
+        },
         acaIndicator: 'true',
       },
       enrollmentDeterminationInfo: {
@@ -98,20 +90,22 @@ const goldenFormOutput = {
                   suffix: '',
                 },
                 incapableOfSelfSupport: 'true',
-                incomes: [
-                  {
-                    amount: '991.9',
-                    type: '12'
-                  },
-                  {
-                    amount: '981.2',
-                    type: '13'
-                  },
-                  {
-                    amount: '91.9',
-                    type: '10'
-                  }
-                ],
+                incomes: {
+                  income: [
+                    {
+                      amount: '991.9',
+                      type: '12'
+                    },
+                    {
+                      amount: '981.2',
+                      type: '13'
+                    },
+                    {
+                      amount: '91.9',
+                      type: '10'
+                    }
+                  ],
+                },
                 livedWithPatient: 'true',
               }
             },
@@ -134,28 +128,76 @@ const goldenFormOutput = {
                   suffix: 'Sr.',
                 },
                 incapableOfSelfSupport: 'false',
-                incomes: [
-                  {
-                    amount: '791.9',
-                    type: '12'
-                  },
-                  {
-                    amount: '781.2',
-                    type: '13'
-                  },
-                  {
-                    amount: '71.9',
-                    type: '10'
-                  }
-                ],
+                incomes: {
+                  income: [
+                    {
+                      amount: '791.9',
+                      type: '12'
+                    },
+                    {
+                      amount: '781.2',
+                      type: '13'
+                    },
+                    {
+                      amount: '71.9',
+                      type: '10'
+                    }
+                  ]
+                },
                 livedWithPatient: 'false',
               }
             }
           ],
           numberOfDependentChildren: '2',
+          expenses: {
+            expense: [
+              {
+                amount: '77.77',
+                expenseType: '3',
+              },
+              {
+                amount: '44.44',
+                expenseType: '19',
+              },
+              {
+                amount: '33.3',
+                expenseType: '18',
+              }
+            ]
+          },
+          incomes: {
+            income: [
+              {
+                amount: '123.33',
+                type: '12',
+              },
+              {
+                amount: '90.11',
+                type: '13',
+              },
+              {
+                amount: '10.1',
+                type: '10',
+              }
+            ]
+          },
           spouseFinancialsList: {
             spouseFinancials: {
               contributedToSpouse: 'false',
+              incomes: {
+                income: [
+                  {
+                    amount: '64.1',
+                    type: '12',
+                  }, {
+                    amount: '35.1',
+                    type: '13',
+                  }, {
+                    amount: '12.3',
+                    type: '10',
+                  }
+                ]
+              },
               livedWithPatient: 'true',
               marriedLastCalendarYear: 'true',
               spouse: {
@@ -184,13 +226,20 @@ const goldenFormOutput = {
         }
       },
       insuranceList: {
-        insurance: {
-          companyName: 'MyInsruance',
-          groupNumber: 'G1234',
-          insuranceMappingTypeName: 'PI',
-          policyHolderName: 'FirstName LastName',
-          policyNumber: 'P1234',
-        }
+        insurance: [
+          {
+            companyName: 'MyInsruance',
+            groupNumber: 'G1234',
+            insuranceMappingTypeName: 'PI',
+            policyHolderName: 'FirstName LastName',
+            policyNumber: 'P1234',
+          }, {
+            companyName: 'Medicare',
+            enrolledInPartA: 'true',
+            insuranceMappingTypeName: 'MDCR',
+            partAEffectiveDate: '10/16/1999'
+          }
+        ]
       },
       militaryServiceInfo: {
         militaryServiceSiteRecords: {
