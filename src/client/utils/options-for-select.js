@@ -1294,7 +1294,7 @@ const vaMedicalFacilities = {
   // top of the otherwise alphabetical-by-state ordered dataset.
   TT: [
     { value: '987', label: 'CHEY6 (987)' },
-    { value: '988', label: 'DAYT20 (988)' }
+//    { value: '988', label: 'DAYT20 (988)' }  // TODO(awong): This is a duplicate. Removing for now.
   ],
   TX: [
     { value: '519HC', label: 'ABILENE CBOC' },
@@ -1462,7 +1462,7 @@ const yesNo = [
   { label: 'No', value: 'N' }
 ];
 
-export {
+module.exports = {
   countries,
   maritalStatuses,
   branchesServed,

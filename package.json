@@ -7,6 +7,7 @@
     "karma": "karma start",
     "test:server": "mocha --recursive ./test/server ./test/common",
     "lint": "eslint --ext .js --ext .jsx lib src test",
+    "prestart": "npm run webpack-prod",
     "start": "node src/server.js",
     "test": "npm run lint && npm run karma -- --single-run",
     "watch": "npm run karma & BABEL_ENV=hot npm start & npm run watch-lint & npm run test:server",
@@ -95,21 +96,20 @@
   },
   "dependencies": {
     "18f-contrib-web-design-standards": "^1.0.1",
+    "ajv": "^4.0.6",
     "classlist-polyfill": "^1.0.2",
     "dataset": "^0.3.1",
     "express": "^4.13.4",
     "isomorphic-fetch": "^2.2.1",
+    "jsonschema": "^1.1.0",
     "lodash": "^4.5.1",
-    "loopback": "^2.26.2",
-    "loopback-component-explorer": "^2.0.2",
-    "loopback-connector-soap": "^2.3.0",
-    "loopback-datasource-juggler": "^2.44.0",
     "moment": "^2.13.0",
     "morgan": "^1.7.0",
     "polyfill-function-prototype-bind": "0.0.1",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
-    "react-router": "^2.0.0"
+    "react-router": "^2.0.0",
+    "soap": "http://registry.npmjs.org/soap/-/soap-0.13.0.tgz"
   },
   "optionalDependencies": {
     "fsevents": "^1.0.7"

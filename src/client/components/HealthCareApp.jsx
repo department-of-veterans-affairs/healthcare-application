@@ -9,8 +9,9 @@ import IntroductionSection from './IntroductionSection.jsx';
 import Nav from './Nav.jsx';
 import ProgressButton from './ProgressButton';
 import { ensureFieldsInitialized, updateCompletedStatus, updateSubmissionStatus, updateSubmissionId, updateSubmissionTimestamp } from '../actions';
-
+import { veteranToApplication } from '../../common/veteran';
 import * as validations from '../utils/validations';
+import config from '../../../config';
 
 // TODO(awong): Find some way to remove code when in production. It might require System.import()
 // and a promise.
@@ -117,23 +118,18 @@ class HealthCareApp extends React.Component {
     e.preventDefault();
     const veteran = this.props.data;
 
-    // Strip out unnecessary fields that track UI state
-    function reducer(i, d) {
-      return typeof d.value !== 'undefined' ? d.value : d;
-    }
-
     if (validations.isValidForm(veteran)) {
       this.props.onUpdateSubmissionStatus('submitPending');
 
       // POST data to endpoint
-      fetch('/api/hca/v1/VoaServices/submit', {
+      fetch(`${config.apiRoot}/applications`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json'
         },
         timeout: 10000, // 10 seconds
-        body: JSON.stringify(veteran, reducer)
+        body: veteranToApplication(veteran)
       }).then(response => {
         if (!response.ok) {
           throw new Error(response.statusText);

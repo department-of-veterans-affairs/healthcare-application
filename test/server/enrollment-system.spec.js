@@ -3,6 +3,10 @@ chai.should();
 
 const enrollmentSystem = require('../../src/server/enrollment-system');
 const veteran = require('../../src/common/veteran');
+const ajv = require('ajv');
+
+const ApplicationJsonSchema = require('../../src/common/schema/application');
+const validate = ajv({ allErrors: true, errorDataPath: 'property', removeAdditional: true, useDefaults: true }).compile(ApplicationJsonSchema);
 
 const goldenFormOutput = {
   form: {
@@ -212,7 +216,7 @@ const goldenFormOutput = {
                 familyName: 'LastSpouse',
                 givenName: 'FirstSpouse',
                 middleName: 'MiddleSpouse',
-                phoneNumber: '',
+                phoneNumber: '1112221234',
                 ssns: {
                   ssn: {
                     ssnText: '111221234',
@@ -293,10 +297,14 @@ const goldenFormOutput = {
 describe('enrollment-system base tests', () => {
   describe('characterization test', () => {
     it('should transform the debug veteran to a known output format', () => {
-      const result = enrollmentSystem.veteranToSaveSubmitForm(
-        JSON.parse(JSON.stringify(veteran.completeVeteran, (i, d) => {
-          return typeof d.value !== 'undefined' ? d.value : d;
-        })));
+      const completeVeteran = JSON.parse(veteran.veteranToApplication(veteran.completeVeteran));
+      const valid = validate(completeVeteran);
+      if (!valid) {
+        console.log(JSON.stringify(completeVeteran, null, 2));
+        console.log(validate.errors);
+        valid.should.be.true;
+      }
+      const result = enrollmentSystem.veteranToSaveSubmitForm(completeVeteran);
       result.should.be.instanceOf(Object);
       result.should.deep.equal(goldenFormOutput);
     });
