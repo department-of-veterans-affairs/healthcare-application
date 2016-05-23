@@ -46,6 +46,9 @@ const config = {
   // Base Path that the react application mounts on. Used to construct navigation links, etc.
   basePath: '/healthcare/apply',
 
+  // API root.
+  apiRoot: '/api/hca/v1',
+
   // Configuration of the soap protocol.
   soap: {
     // URL of the soap endpoint to connect to.
@@ -68,7 +71,9 @@ const config = {
     // be in PEM format.
     clientCertPath: path.join(__dirname, 'certs/soapclient.crt'),
     clientKeyPath: path.join(__dirname, 'certs/soapclient.key'),
-  }
+  },
+
+  environment: process.env.NODE_ENV || 'development',
 };
 
 module.exports = config;

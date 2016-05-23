@@ -1,3 +1,4 @@
+'use strict';  // eslint-disable-line
 // Veteran resource prototype objects. In common so server unittests can access.
 
 const fields = require('./fields');
@@ -349,7 +350,7 @@ const completeVeteran = {
     }
   },
   spousePhone: {
-    value: '',
+    value: '1112221234',
     dirty: false
   },
   hasChildrenToReport: {
@@ -642,4 +643,68 @@ const completeVeteran = {
   campLejeune: true
 };
 
-module.exports = { blankVeteran, completeVeteran };
+function veteranToApplication(veteran) {
+  // TODO(awong): Figure out how to do this w/o going through JSON.
+  return JSON.stringify(veteran, (key, value) => {
+    switch (key) {
+      // Convert radio buttons into booleans.
+      case 'isVaServiceConnected':
+      case 'compensableVaServiceConnected':
+      case 'provideSupportLastYear':
+      case 'receivesVaPension':
+      case 'provideFinancialInfo':
+      case 'understandsFinancialDisclosure':
+      case 'sameAddress':
+      case 'cohabitedLastYear':
+      case 'isCoveredByHealthInsurance':
+      case 'isMedicaidEligible':
+      case 'isEnrolledMedicarePartA':
+        return value.value === 'Y';
+
+      case 'veteranGrossIncome':
+      case 'veteranNetIncome':
+      case 'veteranOtherIncome':
+      case 'spouseGrossIncome':
+      case 'spouseNetIncome':
+      case 'spouseOtherIncome':
+      case 'grossIncome':
+      case 'netIncome':
+      case 'otherIncome':
+      case 'deductibleEducationExpenses':
+      case 'deductibleFuneralExpenses':
+      case 'deductibleMedicalExpenses':
+        return Number(value.value);
+
+      default:
+        // fall through.
+    }
+
+    // Turn date fields into ISO8601 dates.
+    if (value.day !== undefined && value.month !== undefined && value.year !== undefined) {
+      let iso8601date = value.year.value;
+      iso8601date += '-';
+      if (parseInt(value.month.value, 10) < 10) {
+        iso8601date += '0';
+      }
+      iso8601date += value.month.value;
+
+      iso8601date += '-';
+      if (parseInt(value.day.value, 10) < 10) {
+        iso8601date += '0';
+      }
+      iso8601date += value.day.value;
+
+      return iso8601date;
+    }
+
+    // Strip all the dirty flags out of the veteran and flatted it into a single atomic value.
+    // Do this last in the sequence as a sweep of all remaining objects that are not special cased.
+    if (value.value !== undefined && value.dirty !== undefined) {
+      return value.value;
+    }
+
+    return value;
+  });
+}
+
+module.exports = { blankVeteran, completeVeteran, veteranToApplication };

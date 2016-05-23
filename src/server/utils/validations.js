@@ -12,11 +12,22 @@ const validations = {
     if (_.isEmpty(inputDob) || !_.isString(inputDob)) {
       return '';
     }
-    const parsedDob = new Date(inputDob);
+    // Assume ISO8601 date format (YYYY-MM-DD) and append an explicit UTC time to force
+    // Date parsing into a known timezone regardless of javascript environment defaults.
+    //
+    // The moment format below can then be forced into utc() to ensure equivalent dates
+    // are retrieved.
+    //
+    // TODO(awong): Given the strict date input format, it seems better to not use date
+    // libraries with fuzzy parsing/timezone semantics and instead just treat the dates
+    // as strings. Since this is just for format conversion and not comparison or
+    // calculation, this is should be doable safely.
+    const parsedDob = new Date(`${inputDob}T00:00Z`);
     if (moment().isBefore(parsedDob)) {
+      // TODO(awong): Is this actually a necessary validation test?
       return '';
     }
-    return moment(parsedDob).format('MM/DD/YYYY');
+    return moment(parsedDob).utc().format('MM/DD/YYYY');
   },
   /**
    * Validate a string, that isn't empty and with conditional logic for

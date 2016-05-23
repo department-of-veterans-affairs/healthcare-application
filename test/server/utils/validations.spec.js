@@ -11,7 +11,7 @@ describe('validations', () => {
         convertedDate.should.be.empty;
       });
       it('if the date passed in is an array', () => {
-        const convertedDate = validations.dateOfBirth(['dec 1, 2016']);
+        const convertedDate = validations.dateOfBirth(['2016-12-01']);
         convertedDate.should.be.a('string');
         convertedDate.should.be.empty;
       });
@@ -21,14 +21,14 @@ describe('validations', () => {
         convertedDate.should.be.empty;
       });
       it('if the date passed in is a string after today', () => {
-        const convertedDate = validations.dateOfBirth('dec 1, 2016');
+        const convertedDate = validations.dateOfBirth('2016-12-01');
         convertedDate.should.be.a('string');
         convertedDate.should.be.empty;
       });
     });
     describe('should return a validated string', () => {
       it('if the date passed in is a string before today', () => {
-        const convertedDate = validations.dateOfBirth('dec 1, 1974');
+        const convertedDate = validations.dateOfBirth('1974-12-01');
         convertedDate.should.be.a('string');
         convertedDate.should.be.equal('12/01/1974');
       });

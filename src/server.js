@@ -1,13 +1,13 @@
-const loopback = require('loopback');
-const voaRest = require('../hca-api-stub/voa-rest');
 const express = require('express');
+const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
 const config = require('../config');
+const api = require('./server/api');
 
 const port = config.port;
 
-function makeServer() {
+function makeApp() {
   if (process.env.BABEL_ENV === 'hot') {
     // Set up webpack dev server.
     const webpack = require('webpack');
@@ -41,17 +41,17 @@ function makeServer() {
     });
   }
 
-  const server = express();
-  server.use(morgan('combined'));
-  server.use('/', express.static('public'));
-  server.use(config.basePath, express.static('public'));
-  server.use(`${config.basePath}/generated`, express.static('generated'));
-  return server;
+  const app = express();
+  app.use(morgan('combined'));
+  app.use('/', express.static('public'));
+  app.use(config.basePath, express.static('public'));
+  app.use(`${config.basePath}/generated`, express.static('generated'));
+  return app;
 }
 
-const server = makeServer();
-const api = loopback();
-voaRest.attach(api);
-server.use('/', api);
+const app = makeApp();
+app.use(bodyParser.json());
+app.post(`${config.apiRoot}/applications`, api.submitApplication);
+app.post(`${config.apiRoot}/application`, api.submitApplication);
 
-server.listen(port);
+app.listen(port);
