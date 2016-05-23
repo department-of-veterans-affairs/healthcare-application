@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const moment = require('moment');
 const validations = require('./utils/validations');
 //
 // The Comments starting with "// *" that look like a bad CSV dump are copy-pasta-ed out the VOA
@@ -1146,12 +1147,8 @@ function veteranToSaveSubmitForm(veteran) {
   request.form.summary = veteranToSummary(veteran);
   request.form.applications = {
     applicationInfo: {
-      // FIX. Use current date.
-      //  * form / applications / applicationInfo / appDate, "Application date cannot be a null value when the form identifier type is ""100 -- 1010EZ""", ,
-      //  * form / applications / applicationInfo / benefitType, "Neither Health Benefits or Dental is indicated,  at least one is required; both may be indicated.", ,
-      //  * form / applications / applicationInfo / benefitType, Checkboxes, Yes, This is one question of the form but is currently passed as 2 differerent values with a yes/no for each 1. Enrollment Health services and 2. Dental
-      appDate: '2016-05-13',
-      appMethod: '1'
+      appDate: moment().format('YYYY-MM-DD'),
+      appMethod: '1' // '1' for health, '2' for dental.  (It's always '1' here)
     }
   };
   // TODO(awong): Remove this function after validations translate all numbers and booleans to strings.

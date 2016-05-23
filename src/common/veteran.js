@@ -73,7 +73,7 @@ const blankVeteran = {
     year: makeField('')
   },
   sameAddress: makeField(''),  // TODO(awong): Not sure how to handle the mapping.
-  cohabitedLastYear: makeField(''),  // TODO(awong): This name should be scoped to spouse.
+  cohabitedLastYear: makeField('N'),  // TODO(awong): This name should be scoped to spouse.
   provideSupportLastYear: makeField(''),  // TODO(awong): This name should be scoped to spouse.
   spouseAddress: {
     street: makeField(''),
