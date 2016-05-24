@@ -37,7 +37,10 @@ soap.createClient(
       requestCert: true
     }
   },
-  (err, client) => { voaService = client; });
+  (err, client) => {
+    // TODO(awong): Handle error on connect so the server does not flap if the ES system is down.
+    voaService = client;
+  });
 
 // TODO(awong): Remove config.url.
 
@@ -48,7 +51,7 @@ function submitApplication(req, res) {
     return;
   }
 
-  console.log(JSON.stringify(req.body, null, 2));
+  debug(JSON.stringify(req.body, null, 2));
   const form = req.body;
   // TODO(awong): Use schema to sanitize input in addition to validation.
   const valid = validate(form, ApplicationJsonSchema, {});

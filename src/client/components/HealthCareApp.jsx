@@ -122,7 +122,7 @@ class HealthCareApp extends React.Component {
       this.props.onUpdateSubmissionStatus('submitPending');
 
       // POST data to endpoint
-      fetch(`${config.apiRoot}/applications`, {
+      fetch(`${config.apiRoot}/application`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
