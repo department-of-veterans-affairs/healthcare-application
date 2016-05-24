@@ -6,7 +6,6 @@ hca-api-stub/healthcare.application.crt
 hca-api-stub/healthcare.application.key
 hca-api-stub/healthcare.application.key.gpg
 jsconfig.json
-test/e2e/nightwatch.json
 
 *.gpg
 *.key
