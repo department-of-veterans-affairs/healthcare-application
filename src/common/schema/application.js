@@ -102,17 +102,6 @@ module.exports = {
       format: 'date',
       type: 'string'
     },
-    optionalDate: {
-      oneOf: [
-        {
-          format: 'date',
-          type: 'string'
-        }, {
-          type: 'string',
-          pattern: '^$'
-        }
-      ]
-    },
     fullName: {
       type: 'object',
       properties: {
@@ -126,14 +115,7 @@ module.exports = {
           type: 'string'
         },
         suffix: {
-          oneOf: [
-            {
-              'enum': options.suffixes
-            }, {
-              type: 'string',
-              pattern: '^$'
-            }
-          ]
+          'enum': options.suffixes
         },
       },
       required: [
@@ -198,7 +180,7 @@ module.exports = {
       type: 'string'
     },
     veteranSocialSecurityNumber: {
-      $ref: '#/definitions/requiredSsn'
+      $ref: '#/definitions/ssn'
     },
     gender: {
       'enum': options.genders.map(option => option.value)
@@ -210,7 +192,7 @@ module.exports = {
       $ref: '#/definitions/states'
     },
     veteranDateOfBirth: {
-      $ref: '#/definitions/requiredDate'
+      $ref: '#/definitions/date'
     },
     maritalStatus: {
       'enum': options.maritalStatuses
@@ -256,7 +238,7 @@ module.exports = {
     },
     email: {
       type: 'string',
-      pattern: '^(([a-zA-Z]|[0-9])|([-]|[_]|[.]))+[@](([a-zA-Z0-9])|([-])){2,63}[.](([a-zA-Z0-9]){2,63})+$|^$'
+      pattern: '^(([a-zA-Z]|[0-9])|([-]|[_]|[.]))+[@](([a-zA-Z0-9])|([-])){2,63}[.](([a-zA-Z0-9]){2,63})+$|^$' // Email pattern from RegEx 101 https://regex101.com/
     },
     homePhone: {
       $ref: '#/definitions/phone'
@@ -274,13 +256,13 @@ module.exports = {
       $ref: '#/definitions/fullName'
     },
     spouseSocialSecurityNumber: {
-      $ref: '#/definitions/optionalSsn'
+      $ref: '#/definitions/ssn'
     },
     spouseDateOfBirth: {
-      $ref: '#/definitions/optionalDate'
+      $ref: '#/definitions/date'
     },
     dateOfMarriage: {
-      $ref: '#/definitions/optionalDate'
+      $ref: '#/definitions/date'
     },
     sameAddress: {
       type: 'boolean'
@@ -346,16 +328,16 @@ module.exports = {
       type: 'boolean'
     },
     medicarePartAEffectiveDate: {
-      $ref: '#/definitions/optionalDate'
+      $ref: '#/definitions/date'
     },
     lastServiceBranch: {
       'enum': options.branchesServed.map(option => option.value)
     },
     lastEntryDate: {
-      $ref: '#/definitions/requiredDate'
+      $ref: '#/definitions/date'
     },
     lastDischargeDate: {
-      $ref: '#/definitions/requiredDate'
+      $ref: '#/definitions/date'
     },
     dischargeType: {
       'enum': options.dischargeTypes.map(option => option.value)

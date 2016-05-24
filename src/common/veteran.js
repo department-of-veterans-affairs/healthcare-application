@@ -682,11 +682,29 @@ function veteranToApplication(veteran) {
       case 'veteranOtherIncome':
         return Number(value.value);
 
+      // Optional Date fields
       case 'spouseDateOfBirth':
       case 'dateOfMarriage':
       case 'medicarePartAEffectiveDate':
-        if (value.day.value === '') { return undefined; }
+        if (value.day.value === '' && value.month.value === '' && value.year.value === '') {
+          return undefined;
+        }
         break;
+
+      // Optional String fields
+      case 'spouseSocialSecurityNumber':
+        if (value.value === '') {
+          return undefined;
+        }
+        break;
+
+      case 'veteranFullName':
+      case 'spouseFullName':
+        if (value.suffix.value === '') {
+          return undefined;
+        }
+        break;
+
       default:
         // fall through.
     }
