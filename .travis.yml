@@ -16,8 +16,9 @@ env:
   - secure: MyA8/1PCYKSm2/es3x8NWEwXDChKitQT+5Hf+ShI4yrUDC/8sCNZUJn4Pg3/eQJgNcUMYtBjjgHvFPux9pSPhy7zHW3kqMm0aN6ow4SnHBQptix5F/C/5BcdEEJKXQwqx6nwMb0vQiONS/zsYOkawwfdMvhRBkubAVuX5+RWnDLxnFs31fhLI4VrR7aZYZU3Mp9uGWWYdLAgPwZE5xXpYpv5TaPj5KSAhJSzGGiUNuja4eUzZUpP6eNQD96MV7t/0q4ugHD9CAV49722j6oZu+iYm4haZVhbLAW6RsL6BVZ27WS07eLvo+8bOmS/qvLAxwbHkBjSFCNivwnaY8+cm4x1bWO6MCK+WVRKxmCcvxf3j/8vGH+6SxT3u6/b2oVArKdIqLiYKYmib0dfUuS1iSJZ/ww4NygV7q7CI/PgSv4mZhPseavrqH4jAKekMTXg7sS9KjuVnFBhchrwJZkAZlG2eaGikpPNEU/NySBNr8FowxZc3YAffPeyXDx5+2iQETf3hA18ZATK/pi1tUVdsSOINVz6VchWuDNF6sMUMq9ecW5y5m4NcSKSEE1Um/K49pAXdnVjjjhwm1Qm68AhX2OW/IYHYtzA47qZ92qe82Y8PzLDhFMXyheFg7l1TfNFYzWfkUxJz3lh8SWmb4x2pUqyjpuoJ9i7EMdUslNfGic= # SAUCE_USERNAME
 services:
 - docker
+before_script:
+  npm start &
 script:
-  npm start
   nightwatch --config test/e2e/nightwatch.js --env travis
 addons:
   apt:
