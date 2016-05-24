@@ -54,6 +54,50 @@ module.exports = {
         'zipcode',
       ]
     },
+    child: {
+      type: 'object',
+      properties: {
+        childFullName: {
+          $ref: '#/definitions/fullName'
+        },
+        childRelation: {
+          'enum': options.childRelationships
+        },
+        childSocialSecurityNumber: {
+          $ref: '#/definitions/ssn'
+        },
+        childBecameDependent: {
+          $ref: '#/definitions/date'
+        },
+        childDateOfBirth: {
+          $ref: '#/definitions/date'
+        },
+        childDisabledBefore18: {
+          type: 'boolean'
+        },
+        childAttendedSchoolLastYear: {
+          type: 'boolean'
+        },
+        childEducationExpenses: {
+          $ref: '#/definitions/monetaryValue'
+        },
+        childCohabitedLastYear: {
+          type: 'boolean'
+        },
+        childReceivedSupportLastYear: {
+          type: 'boolean'
+        },
+        grossIncome: {
+          $ref: '#/definitions/monetaryValue'
+        },
+        netIncome: {
+          $ref: '#/definitions/monetaryValue'
+        },
+        otherIncome: {
+          $ref: '#/definitions/monetaryValue'
+        },
+      }
+    },
     date: {
       format: 'date',
       type: 'string'
@@ -87,6 +131,23 @@ module.exports = {
     phone: {
       type: 'string',
       pattern: '^[0-9]{10}$'
+    },
+    provider: {
+      type: 'object',
+      properties: {
+        insuranceName: {
+          type: 'string',
+        },
+        insurancePolicyHolderName: {
+          type: 'string',
+        },
+        insurancePolicyNumber: {
+          type: 'string',
+        },
+        insuranceGroupCode: {
+          type: 'string',
+        },
+      },
     },
     ssn: {
       oneOf: [
@@ -209,7 +270,10 @@ module.exports = {
       $ref: '#/definitions/phone'
     },
     children: {
-      type: 'array'
+      type: 'array',
+      items: {
+        $ref: '#/definitions/child'
+      },
     },
     veteranGrossIncome: {
       $ref: '#/definitions/monetaryValue'
@@ -240,6 +304,12 @@ module.exports = {
     },
     isCoveredByHealthInsurance: {
       type: 'boolean'
+    },
+    providers: {
+      type: 'array',
+      items: {
+        $ref: '#/definitions/provider'
+      },
     },
     isMedicaidEligible: {
       type: 'boolean'

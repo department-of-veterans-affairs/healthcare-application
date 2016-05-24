@@ -1147,7 +1147,7 @@ function veteranToSaveSubmitForm(veteran) {
   request.form.summary = veteranToSummary(veteran);
   request.form.applications = {
     applicationInfo: {
-      appDate: moment().format('YYYY-MM-DD'),
+      appDate: moment().utc().format('YYYY-MM-DD'),  // TODO(awong): Timezones are weird here again.
       appMethod: '1' // '1' for health, '2' for dental.  (It's always '1' here)
     }
   };
