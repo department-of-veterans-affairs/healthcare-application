@@ -4,6 +4,7 @@ const fs = require('fs');
 const soap = require('soap');
 const debug = require('debug')('hca:api');
 const ajv = require('ajv');
+const router = require('express').Router(); // eslint-disable-line
 
 const ApplicationJsonSchema = require('../common/schema/application');
 const validate = ajv({ allErrors: true, errorDataPath: 'property', removeAdditional: true, useDefaults: true }).compile(ApplicationJsonSchema);
@@ -71,5 +72,7 @@ function submitApplication(req, res) {
     res.status(400).json({ errors: validate.errors });
   }
 }
-
-module.exports = { submitApplication };
+router.post('/', (req, res) => {
+  submitApplication(req, res);
+});
+module.exports = router;
