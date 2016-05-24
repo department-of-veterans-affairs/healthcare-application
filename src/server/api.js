@@ -63,9 +63,9 @@ function submitApplication(req, res) {
       if (err) {
         debug(`voaService response had error ${err}`);
         // TODO(awong): This may leak server config info on error. Is that a problem?
-        res.status(500).send({ error: err });
+        res.status(500).json({ error: err });
       } else {
-        res.send({ response });
+        res.json({ response });
       }
     });
   } else {
@@ -86,9 +86,9 @@ function getApplicationStatus(req, res) {
     if (err) {
       debug(`voaService response had error ${err}`);
       // TODO(awong): This may leak server config info on error. Is that a problem?
-      res.status(500).send({ error: err });
+      res.status(500).json({ error: err });
     } else {
-      res.send({ response });
+      res.json({ response });
     }
   });
 }
