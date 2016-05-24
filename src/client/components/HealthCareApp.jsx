@@ -89,6 +89,8 @@ class HealthCareApp extends React.Component {
     const veteran = this.props.data;
     const path = this.props.location.pathname;
 
+    console.log(JSON.stringify(veteran));
+    console.log(veteranToApplication(veteran));
     if (validations.isValidForm(veteran)) {
       this.props.onUpdateSubmissionStatus('submitPending');
 
