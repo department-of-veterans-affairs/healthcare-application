@@ -102,6 +102,17 @@ module.exports = {
       format: 'date',
       type: 'string'
     },
+    optionalDate: {
+      oneOf: [
+        {
+          format: 'date',
+          type: 'string'
+        }, {
+          type: 'string',
+          pattern: '^$'
+        }
+      ]
+    },
     fullName: {
       type: 'object',
       properties: {
@@ -115,7 +126,14 @@ module.exports = {
           type: 'string'
         },
         suffix: {
-          'enum': options.suffixes
+          oneOf: [
+            {
+              'enum': options.suffixes
+            }, {
+              type: 'string',
+              pattern: '^$'
+            }
+          ]
         },
       },
       required: [
@@ -128,9 +146,19 @@ module.exports = {
       minimum: 0,
       maximum: 9999999.99,
     },
+    states: {
+      oneOf: [
+        {
+          'enum': states
+        }, {
+          type: 'string',
+          pattern: '^$'
+        }
+      ]
+    },
     phone: {
       type: 'string',
-      pattern: '^[0-9]{10}$'
+      pattern: '^[0-9]{10}$|^$'
     },
     provider: {
       type: 'object',
@@ -170,7 +198,7 @@ module.exports = {
       type: 'string'
     },
     veteranSocialSecurityNumber: {
-      $ref: '#/definitions/ssn'
+      $ref: '#/definitions/requiredSsn'
     },
     gender: {
       'enum': options.genders.map(option => option.value)
@@ -179,10 +207,10 @@ module.exports = {
       type: 'string'
     },
     stateOfBirth: {
-      'enum': states
+      $ref: '#/definitions/states'
     },
     veteranDateOfBirth: {
-      $ref: '#/definitions/date'
+      $ref: '#/definitions/requiredDate'
     },
     maritalStatus: {
       'enum': options.maritalStatuses
@@ -228,7 +256,7 @@ module.exports = {
     },
     email: {
       type: 'string',
-      format: 'email'
+      pattern: '^(([a-zA-Z]|[0-9])|([-]|[_]|[.]))+[@](([a-zA-Z0-9])|([-])){2,63}[.](([a-zA-Z0-9]){2,63})+$|^$'
     },
     homePhone: {
       $ref: '#/definitions/phone'
@@ -246,13 +274,13 @@ module.exports = {
       $ref: '#/definitions/fullName'
     },
     spouseSocialSecurityNumber: {
-      $ref: '#/definitions/ssn'
+      $ref: '#/definitions/optionalSsn'
     },
     spouseDateOfBirth: {
-      $ref: '#/definitions/date'
+      $ref: '#/definitions/optionalDate'
     },
     dateOfMarriage: {
-      $ref: '#/definitions/date'
+      $ref: '#/definitions/optionalDate'
     },
     sameAddress: {
       type: 'boolean'
@@ -318,16 +346,16 @@ module.exports = {
       type: 'boolean'
     },
     medicarePartAEffectiveDate: {
-      $ref: '#/definitions/date'
+      $ref: '#/definitions/optionalDate'
     },
     lastServiceBranch: {
       'enum': options.branchesServed.map(option => option.value)
     },
     lastEntryDate: {
-      $ref: '#/definitions/date'
+      $ref: '#/definitions/requiredDate'
     },
     lastDischargeDate: {
-      $ref: '#/definitions/date'
+      $ref: '#/definitions/requiredDate'
     },
     dischargeType: {
       'enum': options.dischargeTypes.map(option => option.value)

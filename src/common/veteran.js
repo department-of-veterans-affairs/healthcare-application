@@ -682,6 +682,11 @@ function veteranToApplication(veteran) {
       case 'veteranOtherIncome':
         return Number(value.value);
 
+      case 'spouseDateOfBirth':
+      case 'dateOfMarriage':
+      case 'medicarePartAEffectiveDate':
+        if (value.day.value === '') { return undefined; }
+        break;
       default:
         // fall through.
     }
@@ -710,7 +715,6 @@ function veteranToApplication(veteran) {
 
       return iso8601date;
     }
-
     // Strip all the dirty flags out of the veteran and flatted it into a single atomic value.
     // Do this last in the sequence as a sweep of all remaining objects that are not special cased.
     if (value.value !== undefined && value.dirty !== undefined) {
