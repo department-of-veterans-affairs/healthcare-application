@@ -15,8 +15,8 @@
     "watch-lint": "nodemon --watch src --watch test --ext js,jsx --exec 'npm run lint'",
     "webpack": "webpack -p",
     "webpack-noopt": "webpack",
-    "webpack-prod": "webpack -p --config webpack_prod.config.js",
-    "webpack-prod-noopt": "webpack --config webpack_prod.config.js",
+    "webpack-prod": "webpack -p --define process.env.NODE_ENV='\"production\"'",
+    "webpack-prod-noopt": "webpack --define process.env.NODE_ENV='\"production\"'",
     "tests:e2e": "nightwatch -c ./test/e2e/nightwatch.js"
   },
   "repository": {
