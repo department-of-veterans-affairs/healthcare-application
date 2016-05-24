@@ -72,7 +72,33 @@ function submitApplication(req, res) {
     res.status(400).json({ errors: validate.errors });
   }
 }
+
+function getApplicationStatus(req, res) {
+  const id = req.params.id;
+  if (id === undefined) {
+    // TODO(all) what should be returned here?
+    res.status(500).json({ error: 'need id' });
+  }
+  const request = {
+    formSubmissionId: id
+  };
+  voaService.getFormSubmissionStatus(request, (err, response) => {
+    if (err) {
+      debug(`voaService response had error ${err}`);
+      // TODO(awong): This may leak server config info on error. Is that a problem?
+      res.status(500).send({ error: err });
+    } else {
+      res.send({ response });
+    }
+  });
+}
+
 router.post('/', (req, res) => {
   submitApplication(req, res);
 });
+
+router.get('/:id', (req, res) => {
+  getApplicationStatus(req, res);
+});
+
 module.exports = router;
