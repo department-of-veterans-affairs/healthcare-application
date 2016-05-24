@@ -18,7 +18,7 @@ env:
 services:
 - docker
 before_script:
-  npm serve &
+  npm run serve &
 script:
   nightwatch --config test/e2e/nightwatch.js --env travis
 addons:
