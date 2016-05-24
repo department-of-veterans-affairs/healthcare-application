@@ -49,7 +49,9 @@ module.exports = {
       },
       "desiredCapabilities": {
         "name" : "test-example",
-        "browserName": "firefox"
+        "browserName": "firefox",
+        "build": `build-${process.env.TRAVIS_JOB_NUMBER}`,
+        "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER,
       },
       "selenium" : {
         "start_process" : false

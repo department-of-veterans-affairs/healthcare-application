@@ -1,3 +1,4 @@
+const report = require('../report');
 const config = require('../../../config');
 
 // FIXME: This should come in from a config variable
@@ -17,5 +18,6 @@ module.exports = {
       .setValue('input[name="fname"]', 'William')
       .setValue('input[name="lname"]', 'Shakespeare');
       // etc...
-  }
+  },
+  tearDown: report
 };
