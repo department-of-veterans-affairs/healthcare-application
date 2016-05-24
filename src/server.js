@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const winston = require('winston');
 
+const options = { logger: winston };
 const config = require('../config');
-const api = require('./server/api');
+const api = require('./server/api')(options);
 
 const port = config.port;
 
@@ -51,6 +53,6 @@ function makeApp() {
 
 const app = makeApp();
 app.use(bodyParser.json());
-app.post(`${config.apiRoot}/application`, api.submitApplication);
+app.use(`${config.apiRoot}/application`, api);
 
 app.listen(port);
