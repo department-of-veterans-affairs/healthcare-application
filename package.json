@@ -87,7 +87,6 @@
     "sinon": "^2.0.0-pre",
     "skin-deep": "^0.16.0",
     "style-loader": "^0.13.1",
-    "supertest": "^1.2.0",
     "url-loader": "^0.5.7",
     "uswds": "^0.9.1",
     "webpack": "^1.12.14",
