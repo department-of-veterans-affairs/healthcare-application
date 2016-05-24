@@ -51,7 +51,6 @@ function makeApp() {
 
 const app = makeApp();
 app.use(bodyParser.json());
-app.post(`${config.apiRoot}/applications`, api.submitApplication);
 app.post(`${config.apiRoot}/application`, api.submitApplication);
 
 app.listen(port);

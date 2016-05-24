@@ -7,5 +7,5 @@
 curl -X POST --header "Content-Type: application/json" \
   --header "Accept: application/json" \
   -d "$(cat $1)" \
-  "http://localhost:3000/api/hca/v1/VoaServices/submit"
+  "http://localhost:3000/api/hca/v1/application"
 echo

@@ -679,7 +679,14 @@ function veteranToApplication(veteran) {
         // fall through.
     }
 
-    // Turn date fields into ISO8601 dates.
+    // Turn date fields into ISO8601 dates. Doing this manually because the format is constricted
+    // enough that going through the Javascript Date object has no real benefit and instead
+    // just inserts runtime envrionment compatibility concerns with whether or not the date is
+    // read as localtime or UTC.
+    //
+    // Testing of this is tricky as it will only be noticeable if the runtime has different
+    // timezone from expectation and tests are run at a time of day where there might be
+    // an issue.
     if (value.day !== undefined && value.month !== undefined && value.year !== undefined) {
       let iso8601date = value.year.value;
       iso8601date += '-';
