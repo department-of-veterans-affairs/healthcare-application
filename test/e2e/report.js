@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 // Report nightwatch results to saucelabs
-// via https://medium.com/@mikaelberg/zero-to-hero-with-end-to-end-tests-using-nightwatch-saucelabs-and-travis-e932c8deb695
+// via https://medium.com/@mikaelberg/e932c8deb695 
 // and https://gist.github.com/mikberg/ce463e09d6adf46f987c
 const https = require('https');
 

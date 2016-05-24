@@ -17,6 +17,7 @@ env:
 services:
 - docker
 script:
+  npm start
   nightwatch --config test/e2e/nightwatch.js --env travis
 addons:
   apt:
