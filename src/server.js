@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const winston = require('winston');
 
+const options = { logger: winston };
 const config = require('../config');
-const api = require('./server/api');
+const api = require('./server/api')(options);
 
 const port = config.port;
 

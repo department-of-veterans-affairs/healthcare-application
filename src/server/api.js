@@ -11,94 +11,108 @@ const validate = ajv({ allErrors: true, errorDataPath: 'property', removeAdditio
 const veteranToSaveSubmitForm = require('./enrollment-system').veteranToSaveSubmitForm;
 const config = require('../../config');
 
-function readSecurityArtifacts() {
-  try {
-    fs.accessSync(config.soap.clientCertPath, fs.R_OK);
-    fs.accessSync(config.soap.clientKeyPath, fs.R_OK);
-    return {
-      scheme: 'ClientSSL',
-      certPath: config.soap.clientCertPath,
-      keyPath: config.soap.clientKeyPath
-    };
-  } catch (ex) {
-    debug("Can't read security artifacts. Starting without certificate and key.");
-    return undefined;
-  }
-}
-
-const securityArtifacts = readSecurityArtifacts();
-let voaService = null;
-soap.createClient(
-  config.soap.wsdl,
-  {
-    security: securityArtifacts,
-    wsdl_options: securityArtifacts === null ? null : { // eslint-disable-line
-      rejectUnauthorized: false,
-      strictSSL: false,
-      requestCert: true
+function returnRouter(options) {
+  function readSecurityArtifacts() {
+    try {
+      fs.accessSync(config.soap.clientCertPath, fs.R_OK);
+      fs.accessSync(config.soap.clientKeyPath, fs.R_OK);
+      return {
+        scheme: 'ClientSSL',
+        certPath: config.soap.clientCertPath,
+        keyPath: config.soap.clientKeyPath
+      };
+    } catch (ex) {
+      debug("Can't read security artifacts. Starting without certificate and key.");
+      options.logger.info("Can't read security artifacts. Starting without certificate and key.");
+      return undefined;
     }
-  },
-  (err, client) => {
-    // TODO(awong): Handle error on connect so the server does not flap if the ES system is down.
-    voaService = client;
-  });
-
-// TODO(awong): Remove config.url.
-
-function submitApplication(req, res) {
-  const contentType = req.get('Content-Type');
-  if (contentType !== 'application/json') {
-    res.status(400).json({ error: `Expects application/json content-type. Got "${contentType}"` });
-    return;
   }
 
-  debug(JSON.stringify(req.body, null, 2));
-  const form = req.body;
-  // TODO(awong): Use schema to sanitize input in addition to validation.
-  const valid = validate(form, ApplicationJsonSchema, {});
-
-  if (valid) {
-    const request = veteranToSaveSubmitForm(form);
-    voaService.saveSubmitForm(request, (err, response) => {
+  const securityArtifacts = readSecurityArtifacts();
+  let voaService = null;
+  soap.createClient(
+    config.soap.wsdl,
+    {
+      security: securityArtifacts,
+      wsdl_options: securityArtifacts === null ? null : { // eslint-disable-line
+        rejectUnauthorized: false,
+        strictSSL: false,
+        requestCert: true
+      }
+    },
+    (err, client) => {
+      // TODO(awong): Handle error on connect so the server does not flap if the ES system is down.
       if (err) {
+        options.logger.error('SOAP Client creation failed - ERROR', err);
+      }
+      voaService = client;
+    });
+
+  // TODO(awong): Remove config.url.
+
+  function submitApplication(req, res) {
+    const contentType = req.get('Content-Type');
+    if (contentType !== 'application/json') {
+      res.status(400).json({ error: `Expects application/json content-type. Got "${contentType}"` });
+      return;
+    }
+
+    debug(JSON.stringify(req.body, null, 2));
+    const form = req.body;
+    options.logger.info('Form Submission', form);
+    // TODO(awong): Use schema to sanitize input in addition to validation.
+    const valid = validate(form, ApplicationJsonSchema, {});
+
+    if (valid) {
+      const request = veteranToSaveSubmitForm(form);
+      voaService.saveSubmitForm(request, (err, response) => {
+        if (err) {
+          debug(`voaService response had error ${err}`);
+          options.logger.info('voaService response - error', err);
+          // TODO(awong): This may leak server config info on error. Is that a problem?
+          res.status(500).json({ error: err });
+        } else {
+          options.logger.info('voaService response - SUCCESS', response);
+          res.json({ response });
+        }
+      });
+    } else {
+      res.status(400).json({ errors: validate.errors });
+      options.logger.info('Form Validation - ERROR', validate.errors);
+    }
+  }
+
+  function getApplicationStatus(req, res) {
+    const id = req.params.id;
+    if (id === undefined) {
+      // TODO(all) what should be returned here?
+      options.logger.info('Get Application Status - ERROR - ID REQUIRED');
+      res.status(500).json({ error: 'need id' });
+    }
+    const request = {
+      formSubmissionId: id
+    };
+    voaService.getFormSubmissionStatus(request, (err, response) => {
+      if (err) {
+        options.logger.info('voaService response had error', err);
         debug(`voaService response had error ${err}`);
         // TODO(awong): This may leak server config info on error. Is that a problem?
         res.status(500).json({ error: err });
       } else {
+        options.logger.info('voaService response - SUCCESS', response);
         res.json({ response });
       }
     });
-  } else {
-    res.status(400).json({ errors: validate.errors });
   }
-}
 
-function getApplicationStatus(req, res) {
-  const id = req.params.id;
-  if (id === undefined) {
-    // TODO(all) what should be returned here?
-    res.status(500).json({ error: 'need id' });
-  }
-  const request = {
-    formSubmissionId: id
-  };
-  voaService.getFormSubmissionStatus(request, (err, response) => {
-    if (err) {
-      debug(`voaService response had error ${err}`);
-      // TODO(awong): This may leak server config info on error. Is that a problem?
-      res.status(500).json({ error: err });
-    } else {
-      res.json({ response });
-    }
+  router.post('/', (req, res) => {
+    submitApplication(req, res);
   });
+
+  router.get('/:id', (req, res) => {
+    getApplicationStatus(req, res);
+  });
+  return router;
 }
 
-router.post('/', (req, res) => {
-  submitApplication(req, res);
-});
-
-router.get('/:id', (req, res) => {
-  getApplicationStatus(req, res);
-});
-
-module.exports = router;
+module.exports = returnRouter;

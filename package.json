@@ -16,7 +16,7 @@
     "webpack-noopt": "webpack",
     "webpack-prod": "webpack -p --config webpack_prod.config.js",
     "webpack-prod-noopt": "webpack --config webpack_prod.config.js",
-    "tests:e2e": "nightwatch -c ./test/e2e/nightwatch.local.json" 
+    "tests:e2e": "nightwatch -c ./test/e2e/nightwatch.local.json"
   },
   "repository": {
     "type": "git",
@@ -109,7 +109,8 @@
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
     "react-router": "^2.0.0",
-    "soap": "http://registry.npmjs.org/soap/-/soap-0.13.0.tgz"
+    "soap": "http://registry.npmjs.org/soap/-/soap-0.13.0.tgz",
+    "winston": "^2.2.0"
   },
   "optionalDependencies": {
     "fsevents": "^1.0.7"
