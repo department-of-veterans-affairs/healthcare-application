@@ -295,10 +295,6 @@ class HealthCareApp extends React.Component {
   }
 }
 
-HealthCareApp.propTypes = {
-  currentUrl: React.PropTypes.string.isRequired
-};
-
 HealthCareApp.contextTypes = {
   router: React.PropTypes.object.isRequired
 };

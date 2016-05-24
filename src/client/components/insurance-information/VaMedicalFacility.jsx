@@ -53,8 +53,14 @@ class VaMedicalFacility extends React.Component {
 
 VaMedicalFacility.propTypes = {
   required: React.PropTypes.bool,
-  value: React.PropTypes.string.isRequired,
-  facilityState: React.PropTypes.string.isRequired,
+  value: React.PropTypes.shape({
+    value: React.PropTypes.string,
+    dirty: React.PropTypes.bool
+  }).isRequired,
+  facilityState: React.PropTypes.shape({
+    value: React.PropTypes.string,
+    dirty: React.PropTypes.bool
+  }).isRequired,
   onValueChange: React.PropTypes.func.isRequired,
 };
 
