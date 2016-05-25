@@ -10,7 +10,6 @@
     "prestart": "npm run webpack-prod",
     "start": "node src/server.js",
     "test": "npm run lint && npm run test:server && npm run karma -- --single-run",
-    "serve": "node src/server.js",
     "watch": "npm run karma & BABEL_ENV=hot npm start & npm run watch-lint & npm run test:server",
     "watch-lint": "nodemon --watch src --watch test --ext js,jsx --exec 'npm run lint'",
     "webpack": "webpack -p",
