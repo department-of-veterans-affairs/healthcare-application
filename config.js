@@ -67,8 +67,12 @@ const config = {
 
     // Paths to Client TLS certificate in key files if using Client TLS authentication. Files should
     // be in PEM format.
-    clientCertPath: path.join(__dirname, 'certs/VA Healthcare Application - chain.pem'),
-    clientKeyPath: path.join(__dirname, 'certs/VA Healthcare Application.key'),
+    //
+    // Client certificate and keys are only needed for `prod` and `preprod`. Note that the
+    // key is not checked into source control because it is sekret.
+    //
+    // clientCertPath: path.join(__dirname, 'certs/VA Healthcare Application - chain.pem'),
+    // clientKeyPath: path.join(__dirname, 'certs/VA Healthcare Application.key'),
   },
 
   environment: process.env.NODE_ENV || 'development',
