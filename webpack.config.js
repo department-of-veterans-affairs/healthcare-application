@@ -9,11 +9,11 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var config = {
   entry: { app: ['./src/client.js'] },
   output: {
-    path: path.join(__dirname, 'generated/dev'),
-    publicPath: '/healthcare/apply/generated/dev/',
+    path: path.join(__dirname, 'generated'),
+    publicPath: '/healthcare/apply/generated/',
     filename: 'bundle.js'
   },
-  devtool: '#cheap-module-eval-source-map',
+  devtool: process.env.NODE_ENV === 'production' ? '#source-map' : '#cheap-module-eval-source-map',
   module: {
     loaders: [
       {
