@@ -58,227 +58,135 @@ npm install
 
 #### Development example of interaction with ES servers
 
-* Make sure you have `healthcare.application.crt` and `healthcare.application.key` in `hca-api-stub`
-* Choose which endpoint you want to use in `hca-api-stub/voa-rest.js:20` (the `url` entry).
-* Start backend-via `npm start`
-* On a web-browser, navigate to http://localhost:3000/explorer/
-* Click on _VoaService_
+There are multiple environments for the ES servers. To use any of them, you must
+be on a machien that can access the VA internal network. Without this, the UI will
+work but all submissions will end in a failure at the SOAP layer.
+
+The 4 environments used are `dev`, `sqa`, `preProd`, and `prod`.  For `preProd`,
+and `prod` you will need a certificate/key that has been registered by the ES team
+for each of those environments. As a developer YOU WILL NOT LIKELY BE GIVEN ACCESS
+TO THE NEEDED KEY. The `preProd` and `prod` endpoints are used on the deployed
+staging and production servers. During normal development, test against `dev`
+or `sqa`.
+
+##### Selecting an ES endpoint
+
+The server endpoints are configured in `config.json` via the
+`config.soap.endpoint` and `config.soap.wsdl` keys.  See the `endpoint` object
+for a list of the common server endpoints to use.
+
+The configuration default is https SOAP requests sent to `esDev`. This should
+just work when you are on the VA network.
 
 ##### Submit a form
-* Find and click on _GET /VoaServices/submit_ to expand section
-* In the _form_ field, enter:
-```json
-{
-  "form": {
-    "formIdentifier": {
-      "type": "100",
-      "value": "1010EZ"
-    },
-    "summary": {
-      "demographics": {
-        "appointmentRequestResponse": "true",
-        "contactInfo": {
-          "addresses": {
-            "address": {
-              "city": "Jacksonville",
-              "country": "USA",
-              "line1": "232 FAKE Dr",
-              "state": "NC",
-              "zipCode": "28540",
-              "addressTypeCode": "P"
-            }
-          }
-        },
-        "ethnicity": "2186-5",
-        "maritalStatus": "M",
-        "preferredFacility": "608",
-        "races": {
-          "race": "2106-3"
-        },
-        "acaIndicator": "false"
-      },
-      "enrollmentDeterminationInfo": {
-        "eligibleForMedicaid": "false",
-        "noseThroatRadiumInfo": {
-          "receivingTreatment": "false"
-        },
-        "serviceConnectionAward": {
-          "serviceConnectedIndicator": "false"
-        },
-        "specialFactors": {
-          "agentOrangeInd": "false",
-          "envContaminantsInd": "false",
-          "campLejeuneInd": "false",
-          "radiationExposureInd": "false"
-        }
-      },
-      "insuranceList": {
-        "insurance": {
-          "companyName": "Medicare",
-          "enrolledInPartA": "false",
-          "enrolledInPartB": "false",
-          "insuranceMappingTypeName": "MDCR"
-        }
-      },
-      "militaryServiceInfo": {
-        "disabilityRetirementIndicator": "false",
-        "dischargeDueToDisability": "false",
-        "militaryServiceSiteRecords": {
-          "militaryServiceSiteRecord": {
-            "militaryServiceEpisodes": {
-              "militaryServiceEpisode": {
-                "endDate": "06/28/2015",
-                "serviceBranch": "4",
-                "startDate": "08/08/2004",
-                "dischargeType": "1"
-              }
-            },
-            "site": "565GC"
-          }
-        }
-      },
-      "prisonerOfWarInfo": {
-        "powIndicator": "false"
-      },
-      "purpleHeart": {
-        "indicator": "false"
-      },
-      "personInfo": {
-        "firstName": "JOE",
-        "middleName": "F",
-        "lastName": "SNUFFY",
-        "ssnText": "101111001",
-        "gender": "F",
-        "dob": "12/31/1969",
-        "mothersMaidenName": "Young",
-        "placeOfBirthCity": "Mt Vernon",
-        "placeOfBirthState": "MO"
-      }
-    },
-    "applications": {
-      "applicationInfo": {
-        "appDate": "2015-12-21",
-        "appMethod": "1"
-      }
-    }
-  },
-  "identity": {
-    "authenticationLevel": {
-      "type": "100",
-      "value": "anonymous"
-    }
-  }
-}
+You can either submit a form via the UI or by using CURL.
+
+For the UI, visit:
 ```
-* Click _Try it out!_
-* If the submit succeeds, you should see a section called _Response Body_ with a JSON response similar to:
-```json
-{
-  "status": "100",
-  "formSubmissionId": 3623515904,
-  "message": {
-    "type": "Form successfully received for EE processing"
-  },
-  "timeStamp": "2016-05-11T15:48:24.216-05:00"
-}
+http://localhost:3000/healthcare/apply
 ```
+
+and then complete the form like a normal user. The SOAP request is sent when
+the final "submit" is clicked.
+
+Alternately, in development environments, you can enable the development
+panel by adding `?devPanel=1` that adds some widgets for auto-populating
+fields and jumping around the navigation flow.
+
+```
+http://localhost:3000/healthcare/apply?devPanel=1
+```
+
+For pure server development, it is often easier to write directly to the
+REST API using curl.  This can be done with
+
+```
+scripts/submit.sh test/data/fake-application.json
+```
+
+If the submit succeeds, you should see a section a log line similar to:
+```
+node-soap Http response body: "<?xml version='1.0' encoding='UTF-8'?><S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\"><S:Body><submitFormResponse xmlns:ns2=\"http://jaxws.webservices.esr.med.va.gov/schemas\" xmlns=\"http://va.gov/schema/esr/voa/v1\"><status>100</status><formSubmissionId>40124668140</formSubmissionId><message><type>Form successfully received for EE processing</type></message><timeStamp>2016-05-25T04:59:39.345-05:00</timeStamp></submitFormResponse></S:Body></S:Envelope>"
+```
+
+##### WSDL vs endpoint
+Note that per WSDL spec, the WSDL file actually specifies the endpoint to use
+so having the `wsdl` file location be a separete config from `endpoint` is
+actually overriding the normal behavior.
+
+In the current configuraiton, a snapshot of the WSDL config from the ES
+development server has been committed into the codebase and modified such that
+all remote resources are stored locally.
+
+This is done intentionally because reading the wsdl file and then the associated
+schema from the server is really slow. Also, in the absence of a network
+connection, failure to read this file leads to an inability to create the soap
+client object which makes many parts of the server code inaccessible.
+
+On the down side, it means that when the server updates their WSDL our code
+will not see the change.
+
+To use the server WSDL, *remove* the `config.soap.wsdl` key. If `config.soap.wsdl`
+is not defined, then the server will try to fetch the latest WSDL from the endpoint
+using a GET request with a query string of `?wsdl`.
 
 ##### Retrieve a status
-* Find and click on _GET /VoaServices/status_ to expand section
-* In the _request_ field, enter `{"formSubmissionId":3623515904}` (this is the value that came from the previous _submit)
-* Click _Try it out!_
-* If the request succeeds, you should see a section called _Response Body_ with a JSON response similar to:
-```json
-{
-  "status": "104",
-  "formSubmissionId": 3623515904,
-  "timeStamp": "2016-05-11T15:49:10.885-05:00"
-}
+
+Status can be retrieved from the commandline using
+
+```
+scripts/status.sh [submisison number]
 ```
 
-##### Get a fault code from a form submission
-* Find and click on _GET /VoaServices/submit_ to expand section
-* From copy the form from the previous _submit_ example and change `"dob": "12/31/1969"` to `"dob": "1/1/1969"`
-* Click _Try it out!_
-* You should see a section called _Response Body_ with a JSON response similar to:
-```json
-{
-  "error": {
-    "name": "Error",
-    "status": 500,
-    "message": "S:Server: formSubmissionException",
-    "root": {
-      "Envelope": {
-        "Body": {
-          "Fault": {
-            "faultcode": "S:Server",
-            "faultstring": "formSubmissionException",
-            "detail": {
-              "VoaFaultException": {
-                "faultExceptions": {
-                  "faultException": {
-                    "code": "VOA_0238",
-                    "message": "Invalid Veteran date of birth."
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "response": {
-      "statusCode": 500,
-      "body": "<?xml version='1.0' encoding='UTF-8'?><S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\"><S:Body><S:Fault xmlns:ns4=\"http://www.w3.org/2003/05/soap-envelope\"><faultcode>S:Server</faultcode><faultstring>formSubmissionException</faultstring><detail><VoaFaultException:VoaFaultException xmlns:ns2=\"http://jaxws.webservices.esr.med.va.gov/schemas\" xmlns=\"http://va.gov/schema/esr/voa/v1\" xmlns:VoaFaultException=\"http://va.gov/schema/esr/voa/v1\"><faultExceptions><faultException><code>VOA_0238</code><message>Invalid Veteran date of birth.</message></faultException></faultExceptions></VoaFaultException:VoaFaultException></detail></S:Fault></S:Body></S:Envelope>",
-      "headers": {
-        "date": "Wed, 11 May 2016 20:50:19 GMT",
-        "server": "Apache/2.2.3 (Red Hat) DAV/2 mod_auth_pgsql/2.0.3 PHP/5.1.6 mod_python/3.2.8 Python/2.4.3 mod_ssl/2.2.3 OpenSSL/0.9.8e-fips-rhel5 SVN/1.6.11 mod_perl/2.0.4 Perl/v5.8.8",
-        "x-wily-servlet": "Clear appServerIp=10.224.132.209&agentName=MS01&servletName=WSServlet&agentHost=vhaesrapp4&agentProcess=WebLogic",
-        "x-powered-by": "Servlet/2.5 JSP/2.1",
-        "x-wily-info": "Clear guid=A195A4110AE084D159BE1CDFAD15F0D4",
-        "connection": "close",
-        "transfer-encoding": "chunked",
-        "content-type": "text/xml; charset=utf-8"
-      },
-      "request": {
-        "uri": {
-          "protocol": "https:",
-          "slashes": true,
-          "auth": null,
-          "host": "vaww.esrpre-prod.aac.va.gov",
-          "port": 443,
-          "hostname": "vaww.esrpre-prod.aac.va.gov",
-          "hash": null,
-          "search": null,
-          "query": null,
-          "pathname": "/voa/voaSvc",
-          "path": "/voa/voaSvc",
-          "href": "https://vaww.esrpre-prod.aac.va.gov/voa/voaSvc"
-        },
-        "method": "POST",
-        "headers": {
-          "User-Agent": "loopback-connector-soap/2.4.0",
-          "Accept": "text/html,application/xhtml+xml,application/xml,text/xml;q=0.9,*/*;q=0.8",
-          "Accept-Encoding": "none",
-          "Accept-Charset": "utf-8",
-          "Connection": "close",
-          "Host": "vaww.esrpre-prod.aac.va.gov",
-          "Content-Length": 4769,
-          "Content-Type": "text/xml; charset=utf-8",
-          "SOAPAction": "\"\""
-        }
-      }
-    },
-    "body": "<?xml version='1.0' encoding='UTF-8'?><S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\"><S:Body><S:Fault xmlns:ns4=\"http://www.w3.org/2003/05/soap-envelope\"><faultcode>S:Server</faultcode><faultstring>formSubmissionException</faultstring><detail><VoaFaultException:VoaFaultException xmlns:ns2=\"http://jaxws.webservices.esr.med.va.gov/schemas\" xmlns=\"http://va.gov/schema/esr/voa/v1\" xmlns:VoaFaultException=\"http://va.gov/schema/esr/voa/v1\"><faultExceptions><faultException><code>VOA_0238</code><message>Invalid Veteran date of birth.</message></faultException></faultExceptions></VoaFaultException:VoaFaultException></detail></S:Fault></S:Body></S:Envelope>",
-    "stack": "Error: S:Server: formSubmissionException\n    at WSDL.xmlToObject (/Users/vhaisbstewaj/hca/wha/healthcare-application/node_modules/loopback-connector-soap/node_modules/soap/lib/wsdl.js:1449:19)\n    at /Users/vhaisbstewaj/hca/wha/healthcare-application/node_modules/loopback-connector-soap/node_modules/soap/lib/client.js:270:25\n    at /Users/vhaisbstewaj/hca/wha/healthcare-application/node_modules/loopback-datasource-juggler/lib/observer.js:171:22\n    at doNotify (/Users/vhaisbstewaj/hca/wha/healthcare-application/node_modules/loopback-datasource-juggler/lib/observer.js:98:49)\n    at SOAPConnector.ObserverMixin._notifyBaseObservers (/Users/vhaisbstewaj/hca/wha/healthcare-application/node_modules/loopback-datasource-juggler/lib/observer.js:121:5)\n    at SOAPConnector.ObserverMixin.notifyObserversOf (/Users/vhaisbstewaj/hca/wha/healthcare-application/node_modules/loopback-datasource-juggler/lib/observer.js:96:8)\n    at cbForWork (/Users/vhaisbstewaj/hca/wha/healthcare-application/node_modules/loopback-datasource-juggler/lib/observer.js:161:14)\n    at Request._callback (/Users/vhaisbstewaj/hca/wha/healthcare-application/node_modules/loopback-connector-soap/lib/http.js:93:9)\n    at Request.self.callback (/Users/vhaisbstewaj/hca/wha/healthcare-application/node_modules/loopback-connector-soap/node_modules/request/request.js:200:22)\n    at emitTwo (events.js:87:13)"
-  }
-}
-```
+##### Certificates and trust stores.
+Trust stores come into play in 2 situations:
+  1. Our server's validation of the ES SOAP endpoint server TLS certificate
+  2. [in preProd/prod] the ES SOAP endpoint's validation of our client certificate
 
-Fault codes can be found in the spreadsheet: `Copy.of.VOA.Data.Elements.and.Validation.4.1.xlsx`. (In github as:
-https://github.com/department-of-veterans-affairs/vets.gov-team/tree/master/Products/HealthApplication/Discovery/spelunking )
+For (1), the ES SOAP endpoint, for various reasons, sometimes presents a non-standard
+trust chain where the end server certificate is signed by an issuer that is NOT
+in the chain. In this situation, the `config.soap.serverCA` variable MUST
+contain the issuer that immediately preceeds the end server certificate, and
+it must also contain all certificates in the chain presented by the server
+terminating in a self-signed CA certificate.
 
-##### `faults.js`
+VA has 2 such chains, one rooted off the `VA Internal Root CA` and one rooted
+off of `Federal Common Policy CA`. A different combination of these must be
+used depending on the presented certificate.
+
+Failing to present the right combination will either yield a `get local issuer certificate`
+warning (means one of the certificates in the chain that is NOT the end certificate has
+an issuer which is not specified in `config.soap.serverCA`) or
+`unable to verify first certificate` which occurs if the first issuer is both not inside
+the trust chain presented by the server and is not provided inside `config.soap.serverCA`.
+
+If the server is correctly configured, `config.soap.serverCA` should really only contain
+one entry for the last self-signed CA certificate that roots the whole chain, but that
+is not how these servers are currently set up.
+
+For (2), the ES system must to the equivalent of the above for us. On our side, we
+must present a end certificate with the full trust chain up to our root certificate.
+An example of this can be found in `certs/VA Healthcare Application - chain.pem`. Note
+that the associated key is NOT commited into source control so this certificate is
+not usable by itself. Without access to the server key, it is mostly interesting as a
+format reference.
+
+The common trust chain configurations can be found in config.js under the
+`vaInternalChain` and `vaFederalCommonPolicyChain` constants.  The `ca` constant
+maps envrionments to the needed chains to validate a SERVER (scenario #1 above).
+
+##### ES Fault codes
+The ES system validates data fields in addition to the validation done by our
+own logic. Ideally the two should be in sync, but in the even they are not,
+the ES system will respond with a soap error that lists a fault code
+and a (generally correct) test description of the problem.
+
+
+Fault codes can be found in the spreadsheet: `docs/VOA Data Elements and Validations.xlsx`. 
+
+###### `faults.js`
+This is a javascript mapping of a snapshot of the fault codes from the given spreadsheet.
+
 ```javascript
 const faults = {
   "Fault Code": "Fault Text",

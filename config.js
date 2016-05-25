@@ -1,32 +1,5 @@
 const path = require('path');
 
-// TODO: use `NODE_ENV` should probably determining which endpoint is selected.
-/*
-    TODO: there are alleged certificate chain issues that may cause the following error
-    when posting to the endpoint (this is related to self-signed certificates):
-
-      {
-        "error": {
-          "name": "Error",
-          "status": 500,
-          "message": "unable to verify the first certificate",
-          "code": "UNABLE_TO_VERIFY_LEAF_SIGNATURE",
-          "stack": "Error: unable to verify the first certificate\n    at Error (native)\n    at TLSSocket.<anonymous> (_tls_wrap.js:1003:38)\n    at emitNone (events.js:67:13)\n    at TLSSocket.emit (events.js:166:7)\n    at TLSSocket._finishInit (_tls_wrap.js:570:8)"
-        }
-      }
-
-    The short-term work-around is to set an environment variable that influences the TLS library:
-
-      export NODE_TLS_REJECT_UNAUTHORIZED="0"
-
-    an alternative is to set this in `src/server.js` as:
-
-      process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
-
-      ...although this feels icky.
-
-   For testing, I've set this in my `lauch.json`'s `env` section.
-*/
 const endpoint = {
   // ES "unofficial" (provided by Joshua) endpoints for development
   c7401: 'http://vaausesrapp803.aac.va.gov:7401/voa/voaSvc',
@@ -38,6 +11,24 @@ const endpoint = {
   esPreprod: 'https://vaww.esrpre-prod.aac.va.gov/voa/voaSvc',
   esProd: 'https://vaww.esr.aac.va.gov/voa/voaSvc'
 };
+
+const vaInternalChain = [
+  'certs/VA Internal Subordinate CA 1.pem',
+  'certs/VA Internal Root CA.pem'
+];
+
+const vaFederalCommonPolicyChain = [
+  'certs/Veterans Affairs Device CA B2.pem',
+  'certs/Betrusted Production SSP CA A1.pem',
+  'certs/Federal Common Policy CA.pem'
+];
+
+const ca = {
+  esDev: vaFederalCommonPolicyChain,
+  esPreprod: vaFederalCommonPolicyChain,
+  esSqa: vaFederalCommonPolicyChain,
+  esProd: vaInternalChain
+}
 
 const config = {
   // The port the server listens on.
@@ -52,25 +43,36 @@ const config = {
   // Configuration of the soap protocol.
   soap: {
     // URL of the soap endpoint to connect to.
-    url: endpoint.esDev,
+    endpoint: endpoint.esDev,
 
     // Override the default wsdl URL. By default the wsdl file is expected to be at `url?wsdl`.
     // Set to undefined for the default.
     //
     // Current set to a local version of the file so the server will start even if off the network.
+    //
+    // TODO(awong): Figure out how to safely use this fallback on the local version of the wsdl.
     wsdl: path.join(__dirname, 'hca-api-stub/voa.wsdl'),
 
-    // Path to PEM file containing a certificate to use as the root of trust for the SOAP endpoint
-    // this connects to. Note that this can only be one cert. If the server has an certificate chain
-    // that does not conform with the RFC (this is a common misconfiguration) then this must be the
-    // issuer of final certificate in the chain before non-compliant ordering occurs. Often, this
-    // means it must be the issuer of the first cert in the chain.
-    serverCAPath: undefined,
+    // Path or Array of paths to PEM file containing certificates that should be trusted for the SOAP
+    // endpoint server TLS negotation.
+    //
+    // Normally this should be one cert corresponding to the final self-signed certificate at the
+    // end of the certificate chain presented by the server. However, if the server has a
+    // misconfigured trust chain (eg., it has unnecessary certificates that aren't trusted, or
+    // an issuer is missing from the chain) it becomes necessary to explicilty include all the
+    // missing issuers and extraneous (untrusted) certificates here directly.
+    //
+    // @type {Array|String}
+    serverCA: ca.esDev,
 
     // Paths to Client TLS certificate in key files if using Client TLS authentication. Files should
     // be in PEM format.
-    clientCertPath: path.join(__dirname, 'certs/soapclient.crt'),
-    clientKeyPath: path.join(__dirname, 'certs/soapclient.key'),
+    //
+    // Client certificate and keys are only needed for `prod` and `preprod`. Note that the
+    // key is not checked into source control because it is sekret.
+    //
+    // clientCertPath: path.join(__dirname, 'certs/VA Healthcare Application - chain.pem'),
+    // clientKeyPath: path.join(__dirname, 'certs/VA Healthcare Application.key'),
   },
 
   environment: process.env.NODE_ENV || 'development',
