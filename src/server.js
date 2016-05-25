@@ -15,7 +15,7 @@ function makeApp() {
     const webpack = require('webpack');
     const WebpackDevServer = require('webpack-dev-server');
     const webpackConfig = require('../webpack.config');
-    webpackConfig.entry.app.unshift(
+    webpackConfig.entry.unshift(
       `webpack-dev-server/client?http://localhost:${port}/`,
       'webpack/hot/dev-server');
     webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
