@@ -1,10 +1,10 @@
 'use strict'; // eslint-disable-line
 
-const fs = require('fs');
-const soap = require('soap');
-const debug = require('debug')('hca:api');
 const ajv = require('ajv');
+const fs = require('fs');
+const request = require('request');
 const router = require('express').Router(); // eslint-disable-line
+const soap = require('soap');
 
 const ApplicationJsonSchema = require('../common/schema/application');
 const validate = ajv({ allErrors: true, errorDataPath: 'property', removeAdditional: true, useDefaults: true }).compile(ApplicationJsonSchema);
@@ -12,43 +12,47 @@ const veteranToSaveSubmitForm = require('./enrollment-system').veteranToSaveSubm
 const config = require('../../config');
 
 function returnRouter(options) {
-  function readSecurityArtifacts() {
-    try {
-      fs.accessSync(config.soap.clientCertPath, fs.R_OK);
-      fs.accessSync(config.soap.clientKeyPath, fs.R_OK);
-      return {
-        scheme: 'ClientSSL',
-        certPath: config.soap.clientCertPath,
-        keyPath: config.soap.clientKeyPath
-      };
-    } catch (ex) {
-      debug("Can't read security artifacts. Starting without certificate and key.");
-      options.logger.info("Can't read security artifacts. Starting without certificate and key.");
-      return undefined;
-    }
-  }
+  const readTLSArtifacts = () => {
+    const artifacts = {};
 
-  const securityArtifacts = readSecurityArtifacts();
+    // If either the client cert or key is set, try to read both and die hard if
+    // either fails. It's nonsensical to have one without the other and it's hard to
+    // debug a server that doesn't have a cert/key when you think it does so
+    // hard dying is good here on a configuration error.
+    if (config.soap.clientKeyPath || config.soap.clientCertPath) {
+      artifacts.key = fs.readFileSync(config.soap.clientKeyPath);
+      artifacts.cert = fs.readFileSync(config.soap.clientCertPath);
+    }
+
+    // The server CA is all public information and should always be checked in.
+    if (Array.isArray(config.soap.serverCA)) {
+      artifacts.ca = config.soap.serverCA.map((path) => fs.readFileSync(path));
+    } else {
+      artifacts.ca = fs.readFileSync(config.soap.serverCA);
+    }
+
+    return artifacts;
+  };
+
+  const tlsArtifacts = readTLSArtifacts();
+
+  const wsdlUri = config.soap.wsdl || `${config.soap.endpoint}?wsdl`;
   let voaService = null;
   soap.createClient(
-    config.soap.wsdl,
+    wsdlUri,
     {
-      security: securityArtifacts,
-      wsdl_options: securityArtifacts === null ? null : { // eslint-disable-line
-        rejectUnauthorized: false,
-        strictSSL: false,
-        requestCert: true
-      }
+      request: request.defaults(tlsArtifacts),
+      endpoint: config.soap.endpoint,
+      wsdl_options: tlsArtifacts  // eslint-disable-line
     },
     (err, client) => {
       // TODO(awong): Handle error on connect so the server does not flap if the ES system is down.
       if (err) {
         options.logger.error('SOAP Client creation failed - ERROR', err);
+        throw new Error('Unable to connect to VoaService');
       }
       voaService = client;
     });
-
-  // TODO(awong): Remove config.url.
 
   function submitApplication(req, res) {
     const contentType = req.get('Content-Type');
@@ -57,17 +61,15 @@ function returnRouter(options) {
       return;
     }
 
-    debug(JSON.stringify(req.body, null, 2));
     const form = req.body;
-    options.logger.info('Form Submission', form);
+    options.logger.verbose('Form Submission', form);
     // TODO(awong): Use schema to sanitize input in addition to validation.
     const valid = validate(form, ApplicationJsonSchema, {});
 
     if (valid) {
-      const request = veteranToSaveSubmitForm(form);
-      voaService.saveSubmitForm(request, (err, response) => {
+      const saveSubmitFormMsg = veteranToSaveSubmitForm(form);
+      voaService.saveSubmitForm(saveSubmitFormMsg, (err, response) => {
         if (err) {
-          debug(`voaService response had error ${err}`);
           options.logger.info('voaService response - error', err);
           // TODO(awong): This may leak server config info on error. Is that a problem?
           res.status(500).json({ error: err });
@@ -89,13 +91,12 @@ function returnRouter(options) {
       options.logger.info('Get Application Status - ERROR - ID REQUIRED');
       res.status(500).json({ error: 'need id' });
     }
-    const request = {
+    const getFormSubmissionStatusMsg = {
       formSubmissionId: id
     };
-    voaService.getFormSubmissionStatus(request, (err, response) => {
+    voaService.getFormSubmissionStatus(getFormSubmissionStatusMsg, (err, response) => {
       if (err) {
         options.logger.info('voaService response had error', err);
-        debug(`voaService response had error ${err}`);
         // TODO(awong): This may leak server config info on error. Is that a problem?
         res.status(500).json({ error: err });
       } else {
