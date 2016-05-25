@@ -373,7 +373,7 @@ const completeVeteran = {
           dirty: true
         },
         suffix: {
-          value: '',
+          value: 'Jr.',
           dirty: true
         }
       },
@@ -432,8 +432,7 @@ const completeVeteran = {
       otherIncome: {
         value: '91.9',
         dirty: true
-      },
-      key: 'key-128'
+      }
     },
     {
       childFullName: {
@@ -459,7 +458,7 @@ const completeVeteran = {
         dirty: true
       },
       childSocialSecurityNumber: {
-        value: '222-11-1234',
+        value: '222111234',
         dirty: true
       },
       childBecameDependent: {
@@ -509,8 +508,7 @@ const completeVeteran = {
       otherIncome: {
         value: '71.9',
         dirty: true
-      },
-      key: 'key-149'
+      }
     }
   ],
   veteranGrossIncome: {
@@ -570,8 +568,7 @@ const completeVeteran = {
       insuranceGroupCode: {
         value: 'G1234',
         dirty: true
-      },
-      key: 'key-174'  // TODO(awong): All these keys are incorrect. They look like react keys. Where are they from?
+      }
     }
   ],
   isMedicaidEligible: {
@@ -644,8 +641,17 @@ const completeVeteran = {
 };
 
 function veteranToApplication(veteran) {
-  // TODO(awong): Figure out how to do this w/o going through JSON.
   return JSON.stringify(veteran, (key, value) => {
+    // Remove properties that are not interesting to the API.
+    switch (key) {
+      case 'emailConfirmation':
+      case 'hasChildrenToReport':
+        return undefined;
+
+      default:
+        // fall through.
+    }
+
     switch (key) {
       // Convert radio buttons into booleans.
       case 'isVaServiceConnected':
@@ -661,18 +667,19 @@ function veteranToApplication(veteran) {
       case 'isEnrolledMedicarePartA':
         return value.value === 'Y';
 
-      case 'veteranGrossIncome':
-      case 'veteranNetIncome':
-      case 'veteranOtherIncome':
-      case 'spouseGrossIncome':
-      case 'spouseNetIncome':
-      case 'spouseOtherIncome':
-      case 'grossIncome':
-      case 'netIncome':
-      case 'otherIncome':
+      case 'childEducationExpenses':
       case 'deductibleEducationExpenses':
       case 'deductibleFuneralExpenses':
       case 'deductibleMedicalExpenses':
+      case 'grossIncome':
+      case 'netIncome':
+      case 'otherIncome':
+      case 'spouseGrossIncome':
+      case 'spouseNetIncome':
+      case 'spouseOtherIncome':
+      case 'veteranGrossIncome':
+      case 'veteranNetIncome':
+      case 'veteranOtherIncome':
         return Number(value.value);
 
       default:
