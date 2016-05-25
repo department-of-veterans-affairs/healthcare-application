@@ -52,7 +52,7 @@ function makeApp() {
 }
 
 if (process.env.NODE_TLS_REJECT_UNAUTHORIZED === '0') {
-  throw new Error('Use the right values in config.soap.serverCA instead of disable TLS cert validation!');
+  throw new Error('Use the right values in config.soap.serverCA instead of disabling TLS cert validation!');
 }
 
 const app = makeApp();

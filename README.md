@@ -75,8 +75,8 @@ The server endpoints are configured in `config.json` via the
 `config.soap.endpoint` and `config.soap.wsdl` keys.  See the `endpoint` object
 for a list of the common server endpoints to use.
 
-The configuration default s https SOAP request sent to `esDev`. By default,
-this should just work when you are on the VA network.
+The configuration default is https SOAP requests sent to `esDev`. This should
+just work when you are on the VA network.
 
 ##### Submit a form
 You can either submit a form via the UI or by using CURL.
