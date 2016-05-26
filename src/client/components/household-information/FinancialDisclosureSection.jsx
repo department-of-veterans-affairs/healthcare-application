@@ -33,12 +33,12 @@ class FinancialDisclosureSection extends React.Component {
             <td>I agree to provide my financial information so the VA can determine my eligibility
              for VA healthcare and if I should be charged for copays and medication.:
             </td>
-            <td>{`${this.props.data.provideFinancialInfo === 'Y' ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.provideFinancialInfo.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
             <td>I understand VA is not currently enrolling new applicants who decline to
             provide their financial information unless they have other qualifying eligibility factors: </td>
-            <td>{`${this.props.data.understandsFinancialDisclosure === 'Y' ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.understandsFinancialDisclosure.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
         </tbody>
       </table>);
