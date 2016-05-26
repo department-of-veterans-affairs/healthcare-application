@@ -1,24 +1,36 @@
 {
   // Javascript settings.
-  'presets': ['es2015'],
-
+  "presets": [
+    "es2015"
+  ],
   // Share polyfills between files.
-  'plugins': ['transform-runtime'],
-
-  'env': {
-    'hot': {
-      'plugins': [
-        ['react-transform', {
-          'transforms': [{
-            'transform': 'react-transform-hmr',
-            // see transform docs for 'imports' and 'locals' dependencies
-            'imports': ['react'],
-            'locals': ['module']
-          }, {
-            'transform': 'react-transform-catch-errors',
-            'imports': ['react', 'redbox-react']
-          }]
-        }],
+  "env": {
+    "hot": {
+      "plugins": [
+        [
+          "react-transform",
+          {
+            "transforms": [
+              {
+                "transform": "react-transform-hmr",
+                // see transform docs for "imports" and "locals" dependencies
+                "imports": [
+                  "react"
+                ],
+                "locals": [
+                  "module"
+                ]
+              },
+              {
+                "transform": "react-transform-catch-errors",
+                "imports": [
+                  "react",
+                  "redbox-react"
+                ]
+              }
+            ]
+          }
+        ],
       ]
     }
   },

@@ -5,9 +5,10 @@ var webpack = require('webpack');
 var bourbon = require('bourbon').includePaths;
 var neat = require('bourbon-neat').includePaths;
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+require('babel-polyfill');
 
 var config = {
-  entry: { app: ['./src/client.js'] },
+  entry: ['babel-polyfill', './src/client.js'],
   output: {
     path: path.join(__dirname, 'generated'),
     publicPath: '/healthcare/apply/generated/',
