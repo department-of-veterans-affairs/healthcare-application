@@ -25,27 +25,22 @@ frame "VA Network" {
 note right of es_sqa_soap
 https://vaww.esrstage1a.aac.va.gov/voa/voaSvc
 vaww.esrstage1a.aac.va.gov is an alias for
-vhaesrweb6.aac.va.gov.
 vhaesrweb6.aac.va.gov
-has address 10.224.132.152
 end note
 
 note right of es_preprod_soap
 https://vaww.esrpre-prod.aac.va.gov/voa/voaSvc
 vaww.esrpre-prod.aac.va.gov
-has address 10.224.51.10
 end note
 
 note right of es_prod_soap
 https://vaww.esr.aac.va.gov/voa/voaSvc
 vaww.esr.aac.va.gov
-has address 10.224.132.39
 end note
 
 note right of es_dev_soap
 https://vaww.esrdev30.aac.va.gov:8432/voa/voaSvc
 vaww.esrdev30.aac.va.gov
-has address 10.224.132.131
 end note
 
 frame "DSVA developers on VA Network" {
