@@ -693,6 +693,12 @@ function veteranToApplication(veteran) {
 
       // Optional String fields
       case 'spouseSocialSecurityNumber':
+      case 'cityOfBirth':
+      case 'stateOfBirth':
+      case 'email':
+      case 'homePhone':
+      case 'mobilePhone':
+      case 'spousePhone':
         if (value.value === '') {
           return undefined;
         }
@@ -701,7 +707,9 @@ function veteranToApplication(veteran) {
       case 'veteranFullName':
       case 'spouseFullName':
         if (value.suffix.value === '') {
-          return undefined;
+          const field = value;
+          field.suffix.value = undefined;
+          return field;
         }
         break;
 
@@ -733,6 +741,7 @@ function veteranToApplication(veteran) {
 
       return iso8601date;
     }
+
     // Strip all the dirty flags out of the veteran and flatted it into a single atomic value.
     // Do this last in the sequence as a sweep of all remaining objects that are not special cased.
     if (value.value !== undefined && value.dirty !== undefined) {

@@ -128,19 +128,9 @@ module.exports = {
       minimum: 0,
       maximum: 9999999.99,
     },
-    states: {
-      oneOf: [
-        {
-          'enum': states
-        }, {
-          type: 'string',
-          pattern: '^$'
-        }
-      ]
-    },
     phone: {
       type: 'string',
-      pattern: '^[0-9]{10}$|^$'
+      pattern: '^[0-9]{10}$'
     },
     provider: {
       type: 'object',
@@ -189,7 +179,7 @@ module.exports = {
       type: 'string'
     },
     stateOfBirth: {
-      $ref: '#/definitions/states'
+      'enum': states
     },
     veteranDateOfBirth: {
       $ref: '#/definitions/date'
@@ -238,7 +228,7 @@ module.exports = {
     },
     email: {
       type: 'string',
-      pattern: '^(([a-zA-Z]|[0-9])|([-]|[_]|[.]))+[@](([a-zA-Z0-9])|([-])){2,63}[.](([a-zA-Z0-9]){2,63})+$|^$' // Email pattern from RegEx 101 https://regex101.com/
+      pattern: '^(([a-zA-Z]|[0-9])|([-]|[_]|[.]))+[@](([a-zA-Z0-9])|([-])){2,63}[.](([a-zA-Z0-9]){2,63})+$' // Email pattern from RegEx 101 https://regex101.com/
     },
     homePhone: {
       $ref: '#/definitions/phone'
