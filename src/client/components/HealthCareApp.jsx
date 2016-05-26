@@ -32,14 +32,6 @@ class HealthCareApp extends React.Component {
     this.redirect = this.redirect.bind(this);
   }
 
-  componentWillMount() {
-    this.redirect();
-  }
-
-  componentDidUpdate() {
-    window.addEventListener('hashchange', this.redirect());
-  }
-
   getUrl(direction) {
     const routes = this.props.route.childRoutes;
     const panels = [];
@@ -73,27 +65,6 @@ class HealthCareApp extends React.Component {
       delay: 0,
       smooth: true,
     });
-  }
-
-  redirect() {
-    // TODO (anne): Refactor and add redirect message using query params
-    const previousPaths = [];
-    const currentPath = this.props.location.pathname;
-    const paths = _.keys(this.props.uiState.sections);
-
-    for (let i = 0; i < paths.length; i++) {
-      if (paths[i] === currentPath) {
-        break;
-      }
-      previousPaths.push(paths[i]);
-    }
-
-    for (let j = 0; j < previousPaths.length; j++) {
-      if (this.props.uiState.sections[previousPaths[j]].complete === false) {
-        this.context.router.push('/introduction');
-        break;
-      }
-    }
   }
 
   handleContinue() {
