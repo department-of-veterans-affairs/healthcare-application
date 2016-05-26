@@ -21,6 +21,7 @@ class FinancialDisclosureSection extends React.Component {
       understandsFinancialDisclosure = (<div>
         <ErrorableRadioButtons
             label="I understand VA is not currently enrolling new applicants who decline to provide their financial information unless they have other qualifying eligibility factors."
+            name="understandsFinancialDisclosure"
             options={yesNo}
             value={this.props.data.understandsFinancialDisclosure}
             onValueChange={(update) => {this.props.onStateChange('understandsFinancialDisclosure', update);}}/>
@@ -92,6 +93,7 @@ class FinancialDisclosureSection extends React.Component {
             <ErrorableRadioButtons required
                 errorMessage={validateIfDirty(this.props.data.provideFinancialInfo, isNotBlank) ? '' : 'Please select a response'}
                 label="I agree to provide my financial information so the VA can determine my eligibility for VA healthcare and if I should be charged for copays and medication."
+                name="provideFinancialInfo"
                 options={yesNo}
                 value={this.props.data.provideFinancialInfo}
                 onValueChange={(update) => {this.props.onStateChange('provideFinancialInfo', update);}}/>

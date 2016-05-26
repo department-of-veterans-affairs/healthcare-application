@@ -41,6 +41,7 @@ class VAInformationSection extends React.Component {
           <ErrorableRadioButtons required
               errorMessage={validateIfDirty(this.props.data.compensableVaServiceConnected, isNotBlank) ? '' : 'Please select a response'}
               label="Do you currently receive monetary compensation (pay) from the VA for a service-connected disability with a rating of 10, 20, 30, or 40 percent?"
+              name="compensableVaServiceConnected"
               options={yesNo}
               value={this.props.data.compensableVaServiceConnected}
               onValueChange={(update) => {this.props.onStateChange('compensableVaServiceConnected', update);}}/>
@@ -48,6 +49,7 @@ class VAInformationSection extends React.Component {
           <ErrorableRadioButtons required
               errorMessage={validateIfDirty(this.props.data.isVaServiceConnected, isNotBlank) ? '' : 'Please select a response'}
               label="Do you currently receive monetary compensation (pay) from the VA for a service-connected disability with a rating of 50 percent or more?"
+              name="isVaServiceConnected"
               options={yesNo}
               value={this.props.data.isVaServiceConnected}
               onValueChange={(update) => {this.props.onStateChange('isVaServiceConnected', update);}}/>
@@ -55,6 +57,7 @@ class VAInformationSection extends React.Component {
           <ErrorableRadioButtons required
               errorMessage={validateIfDirty(this.props.data.receivesVaPension, isNotBlank) ? '' : 'Please select a response'}
               label="Do you receive a VA pension?"
+              name="receivesVaPension"
               options={yesNo}
               value={this.props.data.receivesVaPension}
               onValueChange={(update) => {this.props.onStateChange('receivesVaPension', update);}}/>

@@ -36,6 +36,7 @@ class SocialSecurityNumber extends React.Component {
         <ErrorableTextInput
             errorMessage={errorMessage}
             label={this.props.label || 'Social Security Number'}
+            name="ssn"
             placeholder="xxx-xx-xxxx"
             required={this.props.required !== undefined ? this.props.required : true}
             field={this.props.ssn}

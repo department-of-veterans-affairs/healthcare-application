@@ -17,6 +17,7 @@ class Gender extends React.Component {
         <ErrorableSelect required={this.props.required}
             errorMessage={validateIfDirty(this.props.value, isNotBlank) ? undefined : 'Please select a gender'}
             label="Gender"
+            name="gender"
             options={genders}
             value={this.props.value}
             onValueChange={this.props.onUserInput}/>
