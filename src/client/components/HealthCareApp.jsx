@@ -117,6 +117,7 @@ class HealthCareApp extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const veteran = this.props.data;
+    const path = this.props.location.pathname;
 
     if (validations.isValidForm(veteran)) {
       this.props.onUpdateSubmissionStatus('submitPending');
@@ -136,6 +137,7 @@ class HealthCareApp extends React.Component {
         }
         response.json().then(data => {
           this.props.onUpdateSubmissionStatus('applicationSubmitted', data);
+          this.props.onCompletedStatus(path);
           this.props.onUpdateSubmissionId(data.formSubmissionId);
           this.props.onUpdateSubmissionTimestamp(data.timeStamp);
         });
