@@ -29,7 +29,6 @@ class HealthCareApp extends React.Component {
     this.handleContinue = this.handleContinue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getUrl = this.getUrl.bind(this);
-    this.redirect = this.redirect.bind(this);
   }
 
   getUrl(direction) {

@@ -43,6 +43,9 @@ class ReviewCollapsiblePanel extends React.Component {
     const currentPath = this.props.updatePath;
     const sectionsComplete = this.props.uiData.sections[currentPath].complete;
     const sectionsVerified = this.props.uiData.sections[currentPath].verified;
+    const allSections = Object.keys(this.props.uiData.sections);
+    const sectionIndexes = allSections.indexOf(currentPath);
+    const prevPath = allSections[sectionIndexes - 1];
 
 
     if (sectionsComplete) {
@@ -69,10 +72,6 @@ class ReviewCollapsiblePanel extends React.Component {
         </div>);
     }
 
-    const allSections = Object.keys(this.props.uiData.sections);
-    const sectionIndexes = allSections.indexOf(currentPath);
-    const prevPath = allSections[sectionIndexes - 1];
-
     if (sectionsVerified) {
       hiddenSection = (<div></div>);
     } else {
@@ -85,6 +84,8 @@ class ReviewCollapsiblePanel extends React.Component {
         );
       } else {
         hiddenSection = (<div></div>);
+
+        editButton = (<div></div>);
       }
     }
 
