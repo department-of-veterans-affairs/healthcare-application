@@ -29,15 +29,6 @@ class HealthCareApp extends React.Component {
     this.handleContinue = this.handleContinue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getUrl = this.getUrl.bind(this);
-    this.redirect = this.redirect.bind(this);
-  }
-
-  componentWillMount() {
-    this.redirect();
-  }
-
-  componentDidUpdate() {
-    window.addEventListener('hashchange', this.redirect());
   }
 
   getUrl(direction) {
@@ -75,27 +66,6 @@ class HealthCareApp extends React.Component {
     });
   }
 
-  redirect() {
-    // TODO (anne): Refactor and add redirect message using query params
-    const previousPaths = [];
-    const currentPath = this.props.location.pathname;
-    const paths = _.keys(this.props.uiState.sections);
-
-    for (let i = 0; i < paths.length; i++) {
-      if (paths[i] === currentPath) {
-        break;
-      }
-      previousPaths.push(paths[i]);
-    }
-
-    for (let j = 0; j < previousPaths.length; j++) {
-      if (this.props.uiState.sections[previousPaths[j]].complete === false) {
-        this.context.router.push('/introduction');
-        break;
-      }
-    }
-  }
-
   handleContinue() {
     const path = this.props.location.pathname;
     const formData = this.props.data;
@@ -117,6 +87,7 @@ class HealthCareApp extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const veteran = this.props.data;
+    const path = this.props.location.pathname;
 
     if (validations.isValidForm(veteran)) {
       this.props.onUpdateSubmissionStatus('submitPending');
@@ -136,6 +107,7 @@ class HealthCareApp extends React.Component {
         }
         response.json().then(data => {
           this.props.onUpdateSubmissionStatus('applicationSubmitted', data);
+          this.props.onCompletedStatus(path);
           this.props.onUpdateSubmissionId(data.formSubmissionId);
           this.props.onUpdateSubmissionTimestamp(data.timeStamp);
         });
