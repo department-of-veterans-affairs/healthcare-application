@@ -6,10 +6,10 @@ const request = require('request');
 const router = require('express').Router(); // eslint-disable-line
 const soap = require('soap');
 
-const ApplicationJsonSchema = require('../common/schema/application');
+const ApplicationJsonSchema = require('../../common/schema/application');
 const validate = ajv({ allErrors: true, errorDataPath: 'property', removeAdditional: true, useDefaults: true }).compile(ApplicationJsonSchema);
-const veteranToSaveSubmitForm = require('./enrollment-system').veteranToSaveSubmitForm;
-const config = require('../../config');
+const veteranToSaveSubmitForm = require('../enrollment-system').veteranToSaveSubmitForm;
+const config = require('../../../config');
 
 function returnRouter(options) {
   const readTLSArtifacts = () => {
