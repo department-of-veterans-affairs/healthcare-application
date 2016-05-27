@@ -4,10 +4,9 @@ const tk = require('timekeeper');
 
 const enrollmentSystem = require('../../src/server/enrollment-system');
 const fakeApplication = require('../data/fake-application');
-const ajv = require('ajv');
 
 const ApplicationJsonSchema = require('../../src/common/schema/application');
-const validate = ajv({ allErrors: true, errorDataPath: 'property', removeAdditional: true, useDefaults: true }).compile(ApplicationJsonSchema);
+const validate = require('../../src/common/schema/validator').compile(ApplicationJsonSchema);
 
 const goldenSoapSubmission = require('../data/golden-soap-submission.json');
 

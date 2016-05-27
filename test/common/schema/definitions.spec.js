@@ -1,4 +1,4 @@
-const ajv = require('ajv');
+const jsonValidator = require('../../../src/common/schema/validator');
 const applicationSchema = require('../../../src/common/schema/application');
 const chai = require('chai');
 const expect = chai.expect;
@@ -13,7 +13,7 @@ function definitionValidator(field) {
   };
 
   return function validator(value) {
-    const fn = ajv({ allErrors: true, errorDataPath: 'property', removeAdditional: 'failing', useDefaults: true }).compile(tinySchema);
+    const fn = jsonValidator.compile(tinySchema);
     return fn({ field: value });
   };
 }
