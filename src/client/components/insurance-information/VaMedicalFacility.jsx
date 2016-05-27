@@ -43,6 +43,7 @@ class VaMedicalFacility extends React.Component {
         <ErrorableSelect required={this.props.required}
             errorMessage={validateIfDirty(this.props.value, isNotBlank) ? undefined : 'Please select a medical facility'}
             label="Center/Clinic"
+            name="vaMedicalFacility"
             options={clinicList}
             value={this.props.value}
             onValueChange={this.handleChange}/>

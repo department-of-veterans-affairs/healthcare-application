@@ -77,6 +77,7 @@ class FullName extends React.Component {
 
         <ErrorableSelect
             label="Suffix"
+            name="suffix"
             options={suffixes}
             value={this.props.name.suffix}
             onValueChange={(update) => {this.handleChange('suffix', update);}}/>

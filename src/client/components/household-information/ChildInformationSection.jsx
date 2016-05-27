@@ -128,6 +128,7 @@ class ChildInformationSection extends React.Component {
             <ErrorableRadioButtons required
                 errorMessage={validateIfDirty(this.props.data.hasChildrenToReport, isNotBlank) ? '' : 'Please select a response'}
                 label="Do you have any children to report?"
+                name="hasChildrenToReport"
                 options={yesNo}
                 value={this.props.data.hasChildrenToReport}
                 onValueChange={(update) => {this.props.onStateChange('hasChildrenToReport', update);}}/>

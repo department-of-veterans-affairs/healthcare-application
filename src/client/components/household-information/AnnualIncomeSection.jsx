@@ -124,18 +124,21 @@ class AnnualIncomeSection extends React.Component {
             <ErrorableTextInput
                 errorMessage={getErrorMessage(this.props.data.veteranGrossIncome, message)}
                 label="Veteran Gross Income"
+                name="veteranGrossIncome"
                 field={this.props.data.veteranGrossIncome}
                 onValueChange={(update) => {this.props.onStateChange('veteranGrossIncome', update);}}/>
 
             <ErrorableTextInput
                 errorMessage={getErrorMessage(this.props.data.veteranNetIncome, message)}
                 label="Veteran Net Income"
+                name="veteranNetIncome"
                 field={this.props.data.veteranNetIncome}
                 onValueChange={(update) => {this.props.onStateChange('veteranNetIncome', update);}}/>
 
             <ErrorableTextInput
                 errorMessage={getErrorMessage(this.props.data.veteranOtherIncome, message)}
                 label="Veteran Other Income"
+                name="veteranOtherIncome"
                 field={this.props.data.veteranOtherIncome}
                 onValueChange={(update) => {this.props.onStateChange('veteranOtherIncome', update);}}/>
           </div>
@@ -145,18 +148,21 @@ class AnnualIncomeSection extends React.Component {
             <ErrorableTextInput
                 errorMessage={getErrorMessage(this.props.data.spouseGrossIncome, message)}
                 label="Spouse Gross Income"
+                name="spouseGrossIncome"
                 field={this.props.data.spouseGrossIncome}
                 onValueChange={(update) => {this.props.onStateChange('spouseGrossIncome', update);}}/>
 
             <ErrorableTextInput
                 errorMessage={getErrorMessage(this.props.data.spouseNetIncome, message)}
                 label="Spouse Net Income"
+                name="spouseNetIncome"
                 field={this.props.data.spouseNetIncome}
                 onValueChange={(update) => {this.props.onStateChange('spouseNetIncome', update);}}/>
 
             <ErrorableTextInput
                 errorMessage={getErrorMessage(this.props.data.spouseOtherIncome, message)}
                 label="Spouse Other Income"
+                name="spouseOtherIncome"
                 field={this.props.data.spouseOtherIncome}
                 onValueChange={(update) => {this.props.onStateChange('spouseOtherIncome', update);}}/>
           </div>
