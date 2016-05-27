@@ -25,6 +25,7 @@ function makeApp() {
       contentBase: 'public',
       hot: true,
       publicPath: webpackConfig.output.publicPath,
+      historyApiFallback: true,
       stats: {
         hash: true,
         version: true,
@@ -45,10 +46,11 @@ function makeApp() {
   }
 
   const app = express();
-  app.use(morgan('combined'));
-  app.use('/', express.static('public'));
-  app.use(config.basePath, express.static('public'));
   app.use(`${config.basePath}/generated`, express.static('generated'));
+  app.use(`${config.basePath}/*`, express.static('public/index.html'));
+  app.use(config.basePath, express.static('public'));
+  app.use('/', express.static('public'));
+
   return app;
 }
 
@@ -57,6 +59,7 @@ if (process.env.NODE_TLS_REJECT_UNAUTHORIZED === '0') {
 }
 
 const app = makeApp();
+app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(`${config.apiRoot}/application`, application);
 app.use(`${config.apiRoot}/status`, status);
