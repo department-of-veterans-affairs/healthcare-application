@@ -10,6 +10,7 @@ import { makeField } from '../../../common/fields.js';
  * `errorMessage` - Error string to display in the component.
  *                  When defined, indicates input has a validation error.
  * `label` - String for the input field label.
+ * `name` - String for name attribute.
  * `max` - String or function.
  * `min` - String or function.
  * `pattern` - String specifying the pattern for the input.
@@ -63,6 +64,7 @@ class ErrorableNumberInput extends React.Component {
         <input
             aria-describedby={errorSpanId}
             id={this.inputId}
+            name={this.props.name}
             max={this.props.max}
             min={this.props.min}
             pattern={this.props.pattern}
@@ -82,6 +84,7 @@ ErrorableNumberInput.propTypes = {
     dirty: React.PropTypes.bool
   }).isRequired,
   label: React.PropTypes.string.isRequired,
+  name: React.PropTypes.string,
   min: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number

@@ -9,6 +9,7 @@ import { makeField } from '../../../common/fields.js';
  * Validation has the following props.
 
  * `label` - String for the group field label.
+ * `name` - String for the name attribute.
  * `options` - Array of options to populate group.
  * `required` - is this field required.
  * `value` - string. Value of the select field.
@@ -63,7 +64,7 @@ class ErrorableRadioButtons extends React.Component {
           <input
               checked={checked}
               id={`${this.inputId}-${index}`}
-              name={this.inputId}
+              name={`${this.props.name}-${index}`}
               type="radio"
               value={optionValue}
               onChange={this.handleChange}/>
@@ -92,6 +93,7 @@ class ErrorableRadioButtons extends React.Component {
 ErrorableRadioButtons.propTypes = {
   errorMessage: React.PropTypes.string,
   label: React.PropTypes.string.isRequired,
+  name: React.PropTypes.string,
   options: React.PropTypes.arrayOf(
     React.PropTypes.oneOfType([
       React.PropTypes.string,

@@ -51,18 +51,21 @@ class DeductibleExpensesSection extends React.Component {
           <ErrorableTextInput
               errorMessage={getErrorMessage(this.props.data.deductibleMedicalExpenses, message)}
               label="Amount you or your spouse paid in non-reimbursable medical expenses this past year."
+              name="deductibleMedicalExpenses"
               field={this.props.data.deductibleMedicalExpenses}
               onValueChange={(update) => {this.props.onStateChange('deductibleMedicalExpenses', update);}}/>
 
           <ErrorableTextInput
               errorMessage={getErrorMessage(this.props.data.deductibleFuneralExpenses, message)}
               label="Amount you paid in funeral or burial expenses for a deceased spouse or child this past year."
+              name="deductibleFuneralExpenses"
               field={this.props.data.deductibleFuneralExpenses}
               onValueChange={(update) => {this.props.onStateChange('deductibleFuneralExpenses', update);}}/>
 
           <ErrorableTextInput
               errorMessage={getErrorMessage(this.props.data.deductibleEducationExpenses, message)}
               label="Amount you paid for anything related to your own education (college or vocational) this past year. Do not list your dependent's educational expenses."
+              name="deductibleEducationExpenses"
               field={this.props.data.deductibleEducationExpenses}
               onValueChange={(update) => {this.props.onStateChange('deductibleEducationExpenses', update);}}/>
         </div>
