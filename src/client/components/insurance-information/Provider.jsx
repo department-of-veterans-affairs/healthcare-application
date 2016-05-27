@@ -15,12 +15,14 @@ class Provider extends React.Component {
           <ErrorableTextInput required
               errorMessage={validateIfDirty(this.props.data.insuranceName, isNotBlank) ? undefined : 'Please enter the insurer’s name'}
               label="Name of Provider"
+              name="insuranceName"
               field={this.props.data.insuranceName}
               onValueChange={(update) => {this.props.onValueChange('insuranceName', update);}}/>
 
           <ErrorableTextInput required
               errorMessage={validateIfDirty(this.props.data.insurancePolicyHolderName, isNotBlank) ? undefined : 'Please enter the name of the policy holder'}
               label="Name of Policy Holder"
+              name="insurancePolicyHolderName"
               field={this.props.data.insurancePolicyHolderName}
               onValueChange={(update) => {this.props.onValueChange('insurancePolicyHolderName', update);}}/>
 
@@ -29,12 +31,14 @@ class Provider extends React.Component {
           <ErrorableTextInput required
               errorMessage={validateIfDirtyProvider(this.props.data.insurancePolicyNumber, this.props.data.insuranceGroupCode, isValidInsurancePolicy) ? undefined : 'Please enter the policy number or group code'}
               label="Policy Number"
+              name="insurancePolicyNumber"
               field={this.props.data.insurancePolicyNumber}
               onValueChange={(update) => {this.props.onValueChange('insurancePolicyNumber', update);}}/>
 
           <ErrorableTextInput required
               errorMessage={validateIfDirtyProvider(this.props.data.insurancePolicyNumber, this.props.data.insuranceGroupCode, isValidInsurancePolicy) ? undefined : 'Please enter the policy number or group code'}
               label="Group Code"
+              name="insuranceGroupCode"
               field={this.props.data.insuranceGroupCode}
               onValueChange={(update) => {this.props.onValueChange('insuranceGroupCode', update);}}/>
         </div>

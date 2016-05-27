@@ -76,6 +76,7 @@ class SpouseInformationSection extends React.Component {
 
           <DateInput required
               label="Spouse’s Date of Birth"
+              name="spouseBirth"
               day={this.props.data.spouseDateOfBirth.day}
               month={this.props.data.spouseDateOfBirth.month}
               year={this.props.data.spouseDateOfBirth.year}
@@ -85,6 +86,7 @@ class SpouseInformationSection extends React.Component {
               errorMessage="Date of marriage cannot be before veteran's or spouse's date of birth"
               validation={isValidMarriageDate(this.props.data.dateOfMarriage, this.props.data.veteranDateOfBirth, this.props.data.spouseDateOfBirth)}
               label="Date of Marriage"
+              name="marriage"
               day={this.props.data.dateOfMarriage.day}
               month={this.props.data.dateOfMarriage.month}
               year={this.props.data.dateOfMarriage.year}
@@ -93,18 +95,21 @@ class SpouseInformationSection extends React.Component {
           <ErrorableRadioButtons required
               errorMessage={validateIfDirty(this.props.data.sameAddress, isNotBlank) ? '' : 'Please select a response'}
               label="Do you have the same address as your spouse?"
+              name="sameAddress"
               options={yesNo}
               value={this.props.data.sameAddress}
               onValueChange={(update) => {this.props.onStateChange('sameAddress', update);}}/>
 
           <ErrorableRadioButtons
               label="Did your spouse live with you last year?"
+              name="cohabitedLastYear"
               options={yesNo}
               value={this.props.data.cohabitedLastYear}
               onValueChange={(update) => {this.props.onStateChange('cohabitedLastYear', update);}}/>
 
           <ErrorableRadioButtons
               label="If your spouse did not live with you last year, did you provide financial support?"
+              name="provideSupportLastYear"
               options={yesNo}
               value={this.props.data.provideSupportLastYear}
               onValueChange={(update) => {this.props.onStateChange('provideSupportLastYear', update);}}/>
@@ -187,6 +192,7 @@ class SpouseInformationSection extends React.Component {
           <ErrorableSelect
               errorMessage={validateIfDirty(this.props.data.maritalStatus, isNotBlank) ? undefined : 'Please select a marital status'}
               label="Current Marital Status"
+              name="maritalStatus"
               options={maritalStatuses}
               required
               value={this.props.data.maritalStatus}

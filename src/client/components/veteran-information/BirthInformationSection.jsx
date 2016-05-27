@@ -40,6 +40,7 @@ class BirthInformationSection extends React.Component {
         <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
           <DateInput required
+              name="veteranBirth"
               day={this.props.data.veteranDateOfBirth.day}
               month={this.props.data.veteranDateOfBirth.month}
               year={this.props.data.veteranDateOfBirth.year}
@@ -51,10 +52,12 @@ class BirthInformationSection extends React.Component {
         <div className="input-section">
           <h4>Place of Birth</h4>
           <ErrorableTextInput label="City"
+              name="cityOfBirth"
               field={this.props.data.cityOfBirth}
               autocomplete="off"
               onValueChange={(update) => {this.props.onStateChange('cityOfBirth', update);}}/>
           <ErrorableSelect label="State"
+              name="stateOfBirth"
               options={states.USA}
               autocomplete="off"
               value={this.props.data.stateOfBirth}
