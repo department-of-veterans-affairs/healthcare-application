@@ -76,7 +76,7 @@ const browsers = {
 // Merge environment settings for each browser.  This is necessary in order to test multiple browsers in parallel.
 // See: https://github.com/nightwatchjs/nightwatch-docs/blob/master/guide/running-tests/run-parallel.md
 for (var name in browsers){
-  const environment = {
+  var environment = {
     desiredCapabilities : {
       name: name,
       browserName: browsers[name].browserName,
