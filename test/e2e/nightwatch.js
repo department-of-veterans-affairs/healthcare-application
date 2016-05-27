@@ -89,6 +89,4 @@ for (var name in browsers){
   settings.saucelabs_environments.push(name); 
 }
 
-console.log(settings);
-
 module.exports = settings;
