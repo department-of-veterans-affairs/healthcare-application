@@ -5,7 +5,8 @@ const winston = require('winston');
 
 const options = { logger: winston };
 const config = require('../config');
-const api = require('./server/api')(options);
+const application = require('./server/routes/application')(options);
+const status = require('./server/routes/status')(options);
 
 const port = config.port;
 
@@ -57,6 +58,7 @@ if (process.env.NODE_TLS_REJECT_UNAUTHORIZED === '0') {
 
 const app = makeApp();
 app.use(bodyParser.json());
-app.use(`${config.apiRoot}/application`, api);
+app.use(`${config.apiRoot}/application`, application);
+app.use(`${config.apiRoot}/status`, status);
 
 app.listen(port);
