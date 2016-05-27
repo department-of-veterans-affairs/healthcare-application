@@ -9,6 +9,7 @@ import _ from 'lodash';
  * `errorMessage` - Error string to display in the component.
  *                  When defined, indicates checkbox has a validation error.
  * `label` - String for the checkbox label.
+ * `name` - String for name attribute.
  * `onValueChange` - a function with this prototype: (newValue)
  * `required` - boolean. Render marker indicating field is required.
  */
@@ -48,6 +49,7 @@ class ErrorableCheckbox extends React.Component {
             aria-describedby={errorSpanId}
             checked={this.props.checked}
             id={this.inputId}
+            name={this.props.name}
             type="checkbox"
             onChange={this.handleChange}/>
         <label
@@ -65,6 +67,7 @@ class ErrorableCheckbox extends React.Component {
 ErrorableCheckbox.propTypes = {
   checked: React.PropTypes.bool,
   errorMessage: React.PropTypes.string,
+  name: React.PropTypes.string,
   label: React.PropTypes.string.isRequired,
   onValueChange: React.PropTypes.func.isRequired,
   required: React.PropTypes.bool,

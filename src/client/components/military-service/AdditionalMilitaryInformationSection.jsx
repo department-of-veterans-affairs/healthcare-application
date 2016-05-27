@@ -61,46 +61,55 @@ class AdditionalMilitaryInformationSection extends React.Component {
         <div className="input-section">
           <ErrorableCheckbox
               label="Purple Heart award recipient"
+              name="purpleHeartRecipient"
               checked={this.props.data.purpleHeartRecipient}
               onValueChange={(update) => {this.props.onStateChange('purpleHeartRecipient', update);}}/>
 
           <ErrorableCheckbox
               label="Former prisoner of war"
+              name="isFormerPow"
               checked={this.props.data.isFormerPow}
               onValueChange={(update) => {this.props.onStateChange('isFormerPow', update);}}/>
 
           <ErrorableCheckbox
               label="Served in combat theater of operations after November 11, 1998"
+              name="postNov111998Combat"
               checked={this.props.data.postNov111998Combat}
               onValueChange={(update) => {this.props.onStateChange('postNov111998Combat', update);}}/>
 
           <ErrorableCheckbox
               label="Discharged or retired from the military for a disability incurred in the line of duty"
+              name="disabledInLineOfDuty"
               checked={this.props.data.disabledInLineOfDuty}
               onValueChange={(update) => {this.props.onStateChange('disabledInLineOfDuty', update);}}/>
 
           <ErrorableCheckbox
               label="Served in Southwest Asia during the Gulf War between August 2, 1990 and Nov 11, 1998"
+              name="swAsiaCombat"
               checked={this.props.data.swAsiaCombat}
               onValueChange={(update) => {this.props.onStateChange('swAsiaCombat', update);}}/>
 
           <ErrorableCheckbox
               label="Served in Vietnam between January 9, 1962 and May 7, 1975"
+              name="vietnamService"
               checked={this.props.data.vietnamService}
               onValueChange={(update) => {this.props.onStateChange('vietnamService', update);}}/>
 
           <ErrorableCheckbox
               label="Exposed to radiation while in the military"
+              name="exposedToRadiation"
               checked={this.props.data.exposedToRadiation}
               onValueChange={(update) => {this.props.onStateChange('exposedToRadiation', update);}}/>
 
           <ErrorableCheckbox
               label="Received nose/throat radium treatments while in the military"
+              name="radiumTreatments"
               checked={this.props.data.radiumTreatments}
               onValueChange={(update) => {this.props.onStateChange('radiumTreatments', update);}}/>
 
           <ErrorableCheckbox
               label="Served on active duty at least 30 days at Camp LeJeune from January 1, 1957 through December 31, 1987"
+              name="campLejeune"
               checked={this.props.data.campLejeune}
               onValueChange={(update) => {this.props.onStateChange('campLejeune', update);}}/>
         </div>

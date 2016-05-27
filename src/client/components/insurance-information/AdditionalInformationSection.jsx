@@ -46,6 +46,7 @@ class AdditionalInformationSection extends React.Component {
         <div className="input-section">
           <ErrorableCheckbox
               label="I am enrolling to obtain minimal essential coverage under the affordable care act"
+              name="isEssentialAcaCoverage"
               checked={this.props.data.isEssentialAcaCoverage}
               onValueChange={(update) => {this.props.onStateChange('isEssentialAcaCoverage', update);}}/>
         </div>
@@ -55,6 +56,7 @@ class AdditionalInformationSection extends React.Component {
           <ErrorableSelect required
               errorMessage={validateIfDirty(this.props.data.facilityState, isNotBlank) ? undefined : 'Please select a state'}
               label="State"
+              name="state"
               options={states.USA}
               value={this.props.data.facilityState}
               onValueChange={(update) => {this.props.onStateChange('facilityState', update);}}/>
@@ -68,6 +70,7 @@ class AdditionalInformationSection extends React.Component {
         <div className="input-section">
           <ErrorableCheckbox
               label="Do you want VA to contact you to schedule your first appointment?"
+              name="wantsInitialVaContact"
               checked={this.props.data.wantsInitialVaContact}
               onValueChange={(update) => {this.props.onStateChange('wantsInitialVaContact', update);}}/>
         </div>

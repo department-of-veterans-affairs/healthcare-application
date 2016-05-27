@@ -97,6 +97,7 @@ class InsuranceInformationSection extends React.Component {
         <ErrorableRadioButtons required
             errorMessage={validateIfDirty(this.props.data.isCoveredByHealthInsurance, isNotBlank) ? '' : 'Please select a response'}
             label="Are you covered by health insurance? (Including coverage through a spouse or another person)"
+            name="isCoveredByHealthInsurance"
             options={yesNo}
             value={this.props.data.isCoveredByHealthInsurance}
             onValueChange={(update) => {this.props.onStateChange('isCoveredByHealthInsurance', update);}}/>

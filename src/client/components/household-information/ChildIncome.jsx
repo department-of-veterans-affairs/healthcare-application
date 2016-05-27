@@ -21,16 +21,19 @@ class ChildIncome extends React.Component {
         <ErrorableTextInput
             errorMessage={validateIfDirty(this.props.data.grossIncome, isBlank) || validateIfDirty(this.props.data.grossIncome, isValidMonetaryValue) ? undefined : message}
             label="Gross Income"
+            name="childGrossIncome"
             field={this.props.data.grossIncome}
             onValueChange={(update) => {this.props.onValueChange('grossIncome', update);}}/>
         <ErrorableTextInput
             errorMessage={validateIfDirty(this.props.data.netIncome, isBlank) || validateIfDirty(this.props.data.netIncome, isValidMonetaryValue) ? undefined : message}
             label="Net Income"
+            name="childNetIncome"
             field={this.props.data.netIncome}
             onValueChange={(update) => {this.props.onValueChange('netIncome', update);}}/>
         <ErrorableTextInput
             errorMessage={validateIfDirty(this.props.data.otherIncome, isBlank) || validateIfDirty(this.props.data.otherIncome, isValidMonetaryValue) ? undefined : message}
             label="Other Income"
+            name="ChildOtherIncome"
             field={this.props.data.otherIncome}
             onValueChange={(update) => {this.props.onValueChange('otherIncome', update);}}/>
       </div>

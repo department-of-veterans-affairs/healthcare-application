@@ -48,6 +48,7 @@ class MedicareMedicaidSection extends React.Component {
           <ErrorableRadioButtons required
               errorMessage={validateIfDirty(this.props.data.isMedicaidEligible, isNotBlank) ? '' : 'Please select a response'}
               label="Are you eligible for Medicaid?"
+              name="isMedicaidEligible"
               options={yesNo}
               value={this.props.data.isMedicaidEligible}
               onValueChange={(update) => {this.props.onStateChange('isMedicaidEligible', update);}}/>
@@ -57,6 +58,7 @@ class MedicareMedicaidSection extends React.Component {
           <ErrorableRadioButtons required
               errorMessage={validateIfDirty(this.props.data.isEnrolledMedicarePartA, isNotBlank) ? '' : 'Please select a response'}
               label="Are you enrolled in Medicare Part A (hospital insurance)?"
+              name="isEnrolledMedicarePartA"
               options={yesNo}
               value={this.props.data.isEnrolledMedicarePartA}
               onValueChange={(update) => {this.props.onStateChange('isEnrolledMedicarePartA', update);}}/>
@@ -65,6 +67,7 @@ class MedicareMedicaidSection extends React.Component {
           65 and over, or who meet special criteria.</div>
 
           <DateInput label="If so, what is your Medicare Part A effective date?"
+              name="medicarePartAEffective"
               day={this.props.data.medicarePartAEffectiveDate.day}
               month={this.props.data.medicarePartAEffectiveDate.month}
               year={this.props.data.medicarePartAEffectiveDate.year}

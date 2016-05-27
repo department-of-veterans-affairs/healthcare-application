@@ -69,31 +69,37 @@ class DemographicInformationSection extends React.Component {
           <span className="usa-form-hint">You may check more than one.</span>
           <ErrorableCheckbox
               label="American Indian or Alaskan Native"
+              name="isAmericanIndianOrAlaskanNative"
               checked={this.props.data.isAmericanIndianOrAlaskanNative}
               onValueChange={(update) => {this.props.onStateChange('isAmericanIndianOrAlaskanNative', update);}}/>
 
           <ErrorableCheckbox
               label="Black or African American"
+              name="isBlackOrAfricanAmerican"
               checked={this.props.data.isBlackOrAfricanAmerican}
               onValueChange={(update) => {this.props.onStateChange('isBlackOrAfricanAmerican', update);}}/>
 
           <ErrorableCheckbox
               label="Native Hawaiian or Other Pacific Islander"
+              name="isNativeHawaiianOrOtherPacificIslander"
               checked={this.props.data.isNativeHawaiianOrOtherPacificIslander}
               onValueChange={(update) => {this.props.onStateChange('isNativeHawaiianOrOtherPacificIslander', update);}}/>
 
           <ErrorableCheckbox
               label="Asian"
+              name="isAsian"
               checked={this.props.data.isAsian}
               onValueChange={(update) => {this.props.onStateChange('isAsian', update);}}/>
 
           <ErrorableCheckbox
               label="White"
+              name="isWhite"
               checked={this.props.data.isWhite}
               onValueChange={(update) => {this.props.onStateChange('isWhite', update);}}/>
 
           <ErrorableCheckbox
               label="Spanish, Hispanic, or Latino"
+              name="isSpanishHispanicLatino"
               checked={this.props.data.isSpanishHispanicLatino}
               onValueChange={(update) => {this.props.onStateChange('isSpanishHispanicLatino', update);}}/>
         </div>

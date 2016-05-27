@@ -52,6 +52,7 @@ class ServiceInformationSection extends React.Component {
           <ErrorableSelect required
               errorMessage={validateIfDirty(this.props.data.lastServiceBranch, isNotBlank) ? undefined : 'Please select a service branch'}
               label="Last branch of service"
+              name="lastServiceBranch"
               options={branchesServed}
               value={this.props.data.lastServiceBranch}
               onValueChange={(update) => {this.props.onStateChange('lastServiceBranch', update);}}/>
@@ -60,6 +61,7 @@ class ServiceInformationSection extends React.Component {
               errorMessage="Entry date must be greater than 15 years of age"
               validation={isValidEntryDateField(this.props.data.lastEntryDate, this.props.data.veteranDateOfBirth)}
               label="Last entry date"
+              name="lastEntry"
               day={this.props.data.lastEntryDate.day}
               month={this.props.data.lastEntryDate.month}
               year={this.props.data.lastEntryDate.year}
@@ -69,6 +71,7 @@ class ServiceInformationSection extends React.Component {
               errorMessage="Discharge date must be after entry date and before today"
               validation={isValidDischargeDateField(this.props.data.lastDischargeDate, this.props.data.lastEntryDate)}
               label="Last discharge date"
+              name="lastDischarge"
               day={this.props.data.lastDischargeDate.day}
               month={this.props.data.lastDischargeDate.month}
               year={this.props.data.lastDischargeDate.year}
@@ -77,6 +80,7 @@ class ServiceInformationSection extends React.Component {
           <ErrorableSelect required
               errorMessage={validateIfDirty(this.props.data.dischargeType, isNotBlank) ? undefined : 'Please select a discharge type'}
               label="Discharge Type"
+              name="dischargeType"
               options={dischargeTypes}
               value={this.props.data.dischargeType}
               onValueChange={(update) => {this.props.onStateChange('dischargeType', update);}}/>

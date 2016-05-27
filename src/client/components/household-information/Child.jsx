@@ -36,6 +36,7 @@ class Child extends React.Component {
               <ErrorableSelect required
                   errorMessage={validateIfDirty(this.props.data.childRelation, isNotBlank) ? undefined : 'Please select an option'}
                   label="Child’s relationship to you"
+                  name="childRelation"
                   options={childRelationships}
                   value={this.props.data.childRelation}
                   onValueChange={(update) => {this.props.onValueChange('childRelation', update);}}/>
@@ -55,6 +56,7 @@ class Child extends React.Component {
             <div className="small-12 columns">
               <DateInput required
                   label="Child’s Date of Birth"
+                  name="childBirth"
                   day={this.props.data.childDateOfBirth.day}
                   month={this.props.data.childDateOfBirth.month}
                   year={this.props.data.childDateOfBirth.year}
@@ -68,6 +70,7 @@ class Child extends React.Component {
                   errorMessage="Child cannot be a dependent before child's date of birth"
                   validation={isValidDependentDateField(this.props.data.childBecameDependent, this.props.data.childDateOfBirth)}
                   label="Date Child Became Dependent"
+                  name="childBecameDependent"
                   day={this.props.data.childBecameDependent.day}
                   month={this.props.data.childBecameDependent.month}
                   year={this.props.data.childBecameDependent.year}
@@ -79,6 +82,7 @@ class Child extends React.Component {
             <div className="small-12 columns">
               <ErrorableCheckbox
                   label="Was child permanently and totally disabled before the age of 18?"
+                  name="childDisabledBefore18"
                   checked={this.props.data.childDisabledBefore18}
                   onValueChange={(update) => {this.props.onValueChange('childDisabledBefore18', update);}}/>
             </div>
@@ -88,6 +92,7 @@ class Child extends React.Component {
             <div className="small-12 columns">
               <ErrorableCheckbox
                   label="If child is between 18 and 23 years of age, did child attend school last calendar year?"
+                  name="childAttendedSchoolLastYear"
                   checked={this.props.data.childAttendedSchoolLastYear}
                   onValueChange={(update) => {this.props.onValueChange('childAttendedSchoolLastYear', update);}}/>
             </div>
@@ -99,6 +104,7 @@ class Child extends React.Component {
                   errorMessage={isValidField(isValidMonetaryValue, this.props.data.childEducationExpenses) ? undefined : message}
                   label="Expenses paid by your dependent child for college, vocational rehabilitation or training
                       (e.g., tuition, books, materials)?"
+                  name="childEducationExpenses"
                   field={this.props.data.childEducationExpenses}
                   onValueChange={(update) => {this.props.onValueChange('childEducationExpenses', update);}}/>
             </div>
@@ -108,6 +114,7 @@ class Child extends React.Component {
             <div className="small-12 columns">
               <ErrorableCheckbox
                   label="Did your child live with you last year?"
+                  name="childCohabitedLastYear"
                   checked={this.props.data.childCohabitedLastYear}
                   onValueChange={(update) => {this.props.onValueChange('childCohabitedLastYear', update);}}/>
             </div>
@@ -124,6 +131,7 @@ class Child extends React.Component {
             <div className="small-12 columns">
               <ErrorableCheckbox
                   label="If your dependent child did not live with you last year, did you provide support?"
+                  name="childReceivedSupportLastYear"
                   checked={this.props.data.childReceivedSupportLastYear}
                   onValueChange={(update) => {this.props.onValueChange('childReceivedSupportLastYear', update);}}/>
             </div>

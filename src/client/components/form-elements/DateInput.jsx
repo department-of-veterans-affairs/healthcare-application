@@ -15,6 +15,7 @@ import { months, days } from '../../utils/options-for-select.js';
  * `errorMessage` - string. Specific error message to display.
  * `validation` - function. Specific date validation to run if necessary.
  * `label` - string. Label for entire question.
+ * `name` - string. Used to create unique name attributes for each input.
  * `day` - number. Value of day.
  * `month` - number. Value of month.
  * `year` - number. Value of year.
@@ -85,6 +86,7 @@ class DateInput extends React.Component {
             <div className="hca-datefield-month">
               <ErrorableSelect errorMessage={isValid ? undefined : ''}
                   label="Month"
+                  name={`${this.props.name}Month`}
                   options={months}
                   value={this.props.month}
                   onValueChange={(update) => {this.handleChange('month', update);}}/>
@@ -92,6 +94,7 @@ class DateInput extends React.Component {
             <div className="hca-datefield-day">
               <ErrorableSelect errorMessage={isValid ? undefined : ''}
                   label="Day"
+                  name={`${this.props.name}Day`}
                   options={daysForSelectedMonth}
                   value={this.props.day}
                   onValueChange={(update) => {this.handleChange('day', update);}}/>
@@ -99,6 +102,7 @@ class DateInput extends React.Component {
             <div className="usa-datefield usa-form-group usa-form-group-year">
               <ErrorableNumberInput errorMessage={isValid ? undefined : ''}
                   label="Year"
+                  name={`${this.props.name}Year`}
                   max={new Date().getFullYear()}
                   min="1900"
                   pattern="[0-9]{4}"
@@ -118,6 +122,7 @@ DateInput.propTypes = {
   errorMessage: React.PropTypes.string,
   validation: React.PropTypes.bool,
   label: React.PropTypes.string,
+  name: React.PropTypes.string.isRequired,
   day: React.PropTypes.shape({
     value: React.PropTypes.string,
     dirty: React.PropTypes.bool,
