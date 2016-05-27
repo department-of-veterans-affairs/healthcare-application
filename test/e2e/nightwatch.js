@@ -60,15 +60,15 @@ const browsers = {
     browserName: 'chrome'
   },
   ie9: {
-    browserName: 'internetExplorer',
+    browserName: 'internet explorer',
     version: '9'
   },
   ie10: {
-    browserName: 'internetExplorer',
+    browserName: 'internet explorer',
     version: '10'
   },
   ie11: {
-    browserName: 'internetExplorer',
+    browserName: 'internet explorer',
     version: '11'
   }
 };
