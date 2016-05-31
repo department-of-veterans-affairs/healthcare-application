@@ -83,7 +83,7 @@ You can either submit a form via the UI or by using CURL.
 
 For the UI, visit:
 ```
-http://localhost:3000/healthcare/apply
+http://localhost:3000/healthcare/apply/application
 ```
 
 and then complete the form like a normal user. The SOAP request is sent when
@@ -94,7 +94,7 @@ panel by adding `?devPanel=1` that adds some widgets for auto-populating
 fields and jumping around the navigation flow.
 
 ```
-http://localhost:3000/healthcare/apply?devPanel=1
+http://localhost:3000/healthcare/apply/application?devPanel=1
 ```
 
 For pure server development, it is often easier to write directly to the
