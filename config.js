@@ -35,7 +35,7 @@ const config = {
   port: 3000,
 
   // Base Path that the react application mounts on. Used to construct navigation links, etc.
-  basePath: '/healthcare/apply',
+  basePath: '/healthcare/apply/application',
 
   // API root.
   apiRoot: '/api/hca/v1',

@@ -16,7 +16,7 @@ participant "vaww.esr.aac.va.gov/voa/voaSvc\n(SOAP endpoint)" as vetsoap
 end box
 
 vet -> browser : opens URL
-browser -> vetsgov : GET /healthcare/apply
+browser -> vetsgov : GET /healthcare/apply/application
 vetsgov -> browser : returns form
 vet -> vet : fills out form
 vet -> browser : presses "submit"

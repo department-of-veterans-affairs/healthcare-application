@@ -11,7 +11,7 @@ var config = {
   entry: ['babel-polyfill', './src/client.js'],
   output: {
     path: path.join(__dirname, 'generated'),
-    publicPath: '/healthcare/apply/generated/',
+    publicPath: '/healthcare/apply/application/generated/',
     filename: 'bundle.js'
   },
   devtool: process.env.NODE_ENV === 'production' ? '#source-map' : '#cheap-module-eval-source-map',
