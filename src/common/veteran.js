@@ -141,7 +141,7 @@ const completeVeteran = {
       dirty: true
     },
     middle: {
-      value: 'MiddleName',
+      value: '',
       dirty: true
     },
     last: {
@@ -149,12 +149,12 @@ const completeVeteran = {
       dirty: true
     },
     suffix: {
-      value: 'Jr.',
+      value: '',
       dirty: true
     }
   },
   mothersMaidenName: {
-    value: 'Maiden',
+    value: '',
     dirty: true
   },
   veteranSocialSecurityNumber: {
@@ -166,11 +166,11 @@ const completeVeteran = {
     dirty: true
   },
   cityOfBirth: {
-    value: 'Springfield',
+    value: '',
     dirty: true
   },
   stateOfBirth: {
-    value: 'AK',
+    value: '',
     dirty: true
   },
   veteranDateOfBirth: {
@@ -188,7 +188,7 @@ const completeVeteran = {
     }
   },
   maritalStatus: {
-    value: 'Married',
+    value: 'Never Married',
     dirty: false
   },
   isVaServiceConnected: {
@@ -200,10 +200,10 @@ const completeVeteran = {
     dirty: true
   },
   receivesVaPension: {
-    value: 'Y',
+    value: 'N',
     dirty: true
   },
-  isEssentialAcaCoverage: true,
+  isEssentialAcaCoverage: false,
   facilityState: {
     value: 'CT',
     dirty: true
@@ -212,49 +212,49 @@ const completeVeteran = {
     value: '689A4',
     dirty: true
   },
-  wantsInitialVaContact: true,
-  isSpanishHispanicLatino: true,
-  isAmericanIndianOrAlaskanNative: true,
-  isBlackOrAfricanAmerican: true,
-  isNativeHawaiianOrOtherPacificIslander: true,
-  isAsian: true,
-  isWhite: true,
+  wantsInitialVaContact: false,
+  isSpanishHispanicLatino: false,
+  isAmericanIndianOrAlaskanNative: false,
+  isBlackOrAfricanAmerican: false,
+  isNativeHawaiianOrOtherPacificIslander: false,
+  isAsian: false,
+  isWhite: false,
   veteranAddress: {
     street: {
       value: '123 NW 5th St',
-      dirty: false
+      dirty: true
     },
     city: {
       value: 'Washington',
-      dirty: false
+      dirty: true
     },
     country: {
       value: 'USA',
-      dirty: false
+      dirty: true
     },
     state: {
       value: 'DC',
-      dirty: false
+      dirty: true
     },
     zipcode: {
       value: '20005',
-      dirty: false
+      dirty: true
     }
   },
   email: {
-    value: 'foo@example.com',
+    value: '',
     dirty: false
   },
   emailConfirmation: {
-    value: 'foo@example.com',
+    value: '',
     dirty: false
   },
   homePhone: {
-    value: '1231241234',
+    value: '',
     dirty: false
   },
   mobilePhone: {
-    value: '1235551234',
+    value: '',
     dirty: false
   },
   provideFinancialInfo: {
@@ -262,334 +262,162 @@ const completeVeteran = {
     dirty: true
   },
   understandsFinancialDisclosure: {
-    value: 'Y',
-    dirty: true
+    value: '',
+    dirty: false
   },
   spouseFullName: {
     first: {
-      value: 'FirstSpouse',
-      dirty: true
+      value: '',
+      dirty: false
     },
     middle: {
-      value: 'MiddleSpouse',
-      dirty: true
+      value: '',
+      dirty: false
     },
     last: {
-      value: 'LastSpouse',
-      dirty: true
+      value: '',
+      dirty: false
     },
     suffix: {
-      value: 'Sr.',
-      dirty: true
+      value: '',
+      dirty: false
     }
   },
   spouseSocialSecurityNumber: {
-    value: '111-22-1234',
-    dirty: true
+    value: '',
+    dirty: false
   },
   spouseDateOfBirth: {
     month: {
-      value: '4',
-      dirty: true
+      value: '',
+      dirty: false
     },
     day: {
-      value: '6',
-      dirty: true
+      value: '',
+      dirty: false
     },
     year: {
-      value: '1980',
-      dirty: true
+      value: '',
+      dirty: false
     }
   },
   dateOfMarriage: {
     month: {
-      value: '5',
-      dirty: true
+      value: '',
+      dirty: false
     },
     day: {
-      value: '10',
-      dirty: true
+      value: '',
+      dirty: false
     },
     year: {
-      value: '1983',
-      dirty: true
+      value: '',
+      dirty: false
     }
   },
   sameAddress: {
-    value: 'Y',
-    dirty: true
+    value: '',
+    dirty: false
   },
   cohabitedLastYear: {
-    value: 'Y',
-    dirty: true
+    value: '',
+    dirty: false
   },
   provideSupportLastYear: {
-    value: 'N',
-    dirty: true
+    value: '',
+    dirty: false
   },
   spouseAddress: {
     street: {
-      value: '123 NW 8th St',
+      value: '',
       dirty: false
     },
     city: {
-      value: 'Dulles',
+      value: '',
       dirty: false
     },
     country: {
-      value: 'USA',
+      value: '',
       dirty: false
     },
     state: {
-      value: 'VA',
+      value: '',
       dirty: false
     },
     zipcode: {
-      value: '20101',
+      value: '',
       dirty: false
     }
   },
   spousePhone: {
-    value: '1112221234',
+    value: '',
     dirty: false
   },
   hasChildrenToReport: {
-    value: 'Y',
+    value: 'N',
     dirty: false
   },
-  children: [
-    {
-      childFullName: {
-        first: {
-          value: 'FirstChildA',
-          dirty: true
-        },
-        middle: {
-          value: 'MiddleChildA',
-          dirty: true
-        },
-        last: {
-          value: 'LastChildA',
-          dirty: true
-        },
-        suffix: {
-          value: 'Jr.',
-          dirty: true
-        }
-      },
-      childRelation: {
-        value: 'Stepson',
-        dirty: true
-      },
-      childSocialSecurityNumber: {
-        value: '111-22-9876',
-        dirty: true
-      },
-      childBecameDependent: {
-        month: {
-          value: '4',
-          dirty: true
-        },
-        day: {
-          value: '7',
-          dirty: true
-        },
-        year: {
-          value: '1992',
-          dirty: true
-        }
-      },
-      childDateOfBirth: {
-        month: {
-          value: '5',
-          dirty: true
-        },
-        day: {
-          value: '5',
-          dirty: true
-        },
-        year: {
-          value: '1982',
-          dirty: true
-        }
-      },
-      childDisabledBefore18: true,
-      childAttendedSchoolLastYear: true,
-      childEducationExpenses: {
-        value: '45.2',
-        dirty: true
-      },
-      childCohabitedLastYear: true,
-      childReceivedSupportLastYear: false,
-      grossIncome: {
-        value: '991.9',
-        dirty: true
-      },
-      netIncome: {
-        value: '981.2',
-        dirty: true
-      },
-      otherIncome: {
-        value: '91.9',
-        dirty: true
-      }
-    },
-    {
-      childFullName: {
-        first: {
-          value: 'FirstChildB',
-          dirty: true
-        },
-        middle: {
-          value: 'MiddleChildB',
-          dirty: true
-        },
-        last: {
-          value: 'LastChildB',
-          dirty: true
-        },
-        suffix: {
-          value: 'Sr.',
-          dirty: true
-        }
-      },
-      childRelation: {
-        value: 'Stepdaughter',
-        dirty: true
-      },
-      childSocialSecurityNumber: {
-        value: '222111234',
-        dirty: true
-      },
-      childBecameDependent: {
-        month: {
-          value: '4',
-          dirty: true
-        },
-        day: {
-          value: '7',
-          dirty: true
-        },
-        year: {
-          value: '2003',
-          dirty: true
-        }
-      },
-      childDateOfBirth: {
-        month: {
-          value: '3',
-          dirty: true
-        },
-        day: {
-          value: '7',
-          dirty: true
-        },
-        year: {
-          value: '1996',
-          dirty: true
-        }
-      },
-      childDisabledBefore18: false,
-      childAttendedSchoolLastYear: true,
-      childEducationExpenses: {
-        value: '1198.11',
-        dirty: true
-      },
-      childCohabitedLastYear: false,
-      childReceivedSupportLastYear: true,
-      grossIncome: {
-        value: '791.9',
-        dirty: true
-      },
-      netIncome: {
-        value: '781.2',
-        dirty: true
-      },
-      otherIncome: {
-        value: '71.9',
-        dirty: true
-      }
-    }
-  ],
+  children: [],
   veteranGrossIncome: {
-    value: '123.33',
+    value: '',
     dirty: true
   },
   veteranNetIncome: {
-    value: '90.11',
+    value: '',
     dirty: true
   },
   veteranOtherIncome: {
-    value: '10.1',
+    value: '',
     dirty: true
   },
   spouseGrossIncome: {
-    value: '64.1',
+    value: '',
     dirty: true
   },
   spouseNetIncome: {
-    value: '35.1',
+    value: '',
     dirty: true
   },
   spouseOtherIncome: {
-    value: '12.3',
+    value: '',
     dirty: true
   },
   deductibleMedicalExpenses: {
-    value: '33.3',
+    value: '',
     dirty: true
   },
   deductibleFuneralExpenses: {
-    value: '44.44',
+    value: '',
     dirty: true
   },
   deductibleEducationExpenses: {
-    value: '77.77',
+    value: '',
     dirty: true
   },
   isCoveredByHealthInsurance: {
-    value: 'Y',
+    value: 'N',
     dirty: true
   },
-  providers: [
-    {
-      insuranceName: {
-        value: 'MyInsruance',
-        dirty: true
-      },
-      insurancePolicyHolderName: {
-        value: 'FirstName LastName',
-        dirty: true
-      },
-      insurancePolicyNumber: {
-        value: 'P1234',
-        dirty: true
-      },
-      insuranceGroupCode: {
-        value: 'G1234',
-        dirty: true
-      }
-    }
-  ],
+  providers: [],
   isMedicaidEligible: {
-    value: 'Y',
+    value: 'N',
     dirty: true
   },
   isEnrolledMedicarePartA: {
-    value: 'Y',
+    value: 'N',
     dirty: true
   },
   medicarePartAEffectiveDate: {
     month: {
-      value: '10',
+      value: '',
       dirty: true
     },
     day: {
-      value: '16',
+      value: '',
       dirty: true
     },
     year: {
-      value: '1999',
+      value: '',
       dirty: true
     }
   },
@@ -630,18 +458,19 @@ const completeVeteran = {
     dirty: true
   },
   purpleHeartRecipient: false,
-  isFormerPow: true,
-  postNov111998Combat: true,
-  disabledInLineOfDuty: true,
-  swAsiaCombat: true,
-  vietnamService: true,
-  exposedToRadiation: true,
-  radiumTreatments: true,
-  campLejeune: true
+  isFormerPow: false,
+  postNov111998Combat: false,
+  disabledInLineOfDuty: false,
+  swAsiaCombat: false,
+  vietnamService: false,
+  exposedToRadiation: false,
+  radiumTreatments: false,
+  campLejeune: false
 };
 
 function veteranToApplication(veteran) {
   return JSON.stringify(veteran, (key, value) => {
+
     // Remove properties that are not interesting to the API.
     switch (key) {
       case 'emailConfirmation':
@@ -704,14 +533,12 @@ function veteranToApplication(veteran) {
         }
         break;
 
-      case 'veteranFullName':
-      case 'spouseFullName':
-        if (value.suffix.value === '') {
-          const field = value;
-          field.suffix.value = undefined;
-          return field;
-        }
-        break;
+      // case 'veteranFullName':
+      // case 'spouseFullName':
+      //   if (value.suffix.value === '') {
+      //     value.suffix.value = undefined;
+      //   }
+      //   return value;
 
       default:
         // fall through.
@@ -748,6 +575,7 @@ function veteranToApplication(veteran) {
       return value.value;
     }
 
+    console.log(value);
     return value;
   });
 }
