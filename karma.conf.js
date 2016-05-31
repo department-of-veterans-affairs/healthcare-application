@@ -9,7 +9,7 @@ webpackConfig.devtool = 'inline-source-map';
 webpackConfig.plugins.push(new webpack.IgnorePlugin(/ReactContext|react\/addons/));
 
 module.exports = function(config) {
-  config.set({
+  var options = {
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -45,6 +45,7 @@ module.exports = function(config) {
       noInfo: true
     },
 
+
     // test results reporter to use
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['mocha'],
@@ -68,7 +69,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
 
 
     // enable / disable watching file and executing tests whenever any file changes
@@ -90,6 +91,8 @@ module.exports = function(config) {
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: false,
 
+    captureTimeout: 120000,
+
     // to avoid DISCONNECTED messages when connecting
     // TODO(awong): look into why browser was timing out
     browserNoActivityTimeout: 60000, //default 10000
@@ -100,5 +103,33 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity
-  });
+  };
+
+  // If saucelabs credentials are set, then configure a sauce labs run instead
+  // of a phantomjs run.
+  if (process.env.SAUCE_USERNAME) {
+    options.customLaunchers = {
+      'SL_Chrome': {
+        base: 'SauceLabs',
+        browserName: 'chrome',
+      }
+    }
+
+    options.reporters.push('saucelabs');
+    options.captureTimeout = 120000;
+    options.browsers = Object.keys(options.customLaunchers);
+    options.singleRun = true;
+
+    options.sauceLabs = {
+      testName: 'HCA Karma Tests',
+      username: process.env.SAUCE_USERNAME,
+      accessKey: process.env.SAUCE_ACCESS_KEY,
+    };
+    if (process.env.TRAVIS_JOB_NUMBER) {
+      options.sauceLabs.tunnelIdentifier = process.env.TRAVIS_JOB_NUMBER;
+      options.sauceLabs.startConnect = false;
+    }
+  }
+
+  config.set(options);
 };

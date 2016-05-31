@@ -1,0 +1,16 @@
+# This Dockerfile for builds an image on travis that has the checked out source code
+# copied into the Docker image. The resulting image can be used as a runtime for
+# executing tests.
+FROM dsva/healthcare-application:build-cached
+
+WORKDIR /src/healthcare-application
+
+# Ensure any deltas in package.json are reflected.
+COPY package.json package.json
+COPY npm-shrinkwrap.json npm-shrinkwrap.json
+
+ENV NODE_ENV development
+RUN npm install
+
+# Copy all the source into the build image.
+ADD . .
