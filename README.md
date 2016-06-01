@@ -432,7 +432,29 @@ Once selenium server is running, in a seperate terminal you should be able to ru
 ```bash
 npm run tests:e2e
 ```
- 
+
+##### Mocking the API for e2e tests
+The backend API is a pass-through to a soap service which is not accessible during testing.
+To facilitate complete end-to-end tests, the API server can be placed into mock mode by setting
+the `HCA_MOCK_API=1` environment variable.
+
+```
+HCA_MOCK_API=1 npm run watch
+```
+
+is possibly a way to develop against it.
+
+End-to-end tests can then configure the mock by POSTing short configuration command to
+the `api/hca/v1/mock` endpoint.  Commands are are `application/json` POST bodies with the
+following structure:
+
+```
+{ resource: 'endpoint', value: '{more_json:1}', verb: 'get' }
+```
+
+POSTing this to command would make GET requests to `/api/hca/v1/endpoint` return `{more_json:1}`.
+Note that the verb can be left out and it will default to `get`. The verb is case insensitive.
+
 
 ### Docker
 #### Environment setup
