@@ -1,6 +1,7 @@
 'use strict';  // eslint-disable-line
 // Veteran resource prototype objects. In common so server unittests can access.
 
+const _ = require('lodash');
 const fields = require('./fields');
 const makeField = fields.makeField;
 
@@ -682,6 +683,28 @@ function veteranToApplication(veteran) {
       case 'veteranOtherIncome':
         return Number(value.value);
 
+      // Optional Date fields
+      case 'spouseDateOfBirth':
+      case 'dateOfMarriage':
+      case 'medicarePartAEffectiveDate':
+        if (value.day.value === '' && value.month.value === '' && value.year.value === '') {
+          return undefined;
+        }
+        break;
+
+      // Optional String fields
+      case 'spouseSocialSecurityNumber':
+      case 'cityOfBirth':
+      case 'stateOfBirth':
+      case 'email':
+      case 'homePhone':
+      case 'mobilePhone':
+      case 'spousePhone':
+        if (value.value === '') {
+          return undefined;
+        }
+        break;
+
       default:
         // fall through.
     }
@@ -709,6 +732,12 @@ function veteranToApplication(veteran) {
       iso8601date += value.day.value;
 
       return iso8601date;
+    }
+
+    // Strips out suffix if the user does not enter it.
+    // TODO: Strip out other fields that are passing empty string.
+    if (value.suffix !== undefined && value.suffix.value === '') {
+      return _.omit(value, ['suffix']);
     }
 
     // Strip all the dirty flags out of the veteran and flatted it into a single atomic value.

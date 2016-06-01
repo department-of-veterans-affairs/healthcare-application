@@ -228,7 +228,7 @@ module.exports = {
     },
     email: {
       type: 'string',
-      format: 'email'
+      pattern: '^(([a-zA-Z]|[0-9])|([-]|[_]|[.]))+[@](([a-zA-Z0-9])|([-])){2,63}[.](([a-zA-Z0-9]){2,63})+$' // Email pattern from RegEx 101 https://regex101.com/
     },
     homePhone: {
       $ref: '#/definitions/phone'
