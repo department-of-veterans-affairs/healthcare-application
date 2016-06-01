@@ -438,6 +438,12 @@ The backend API is a pass-through to a soap service which is not accessible duri
 To facilitate complete end-to-end tests, the API server can be placed into mock mode by setting
 the `HCA_MOCK_API=1` environment variable.
 
+```
+HCA_MOCK_API=1 npm run watch
+```
+
+is possibly a way to develop against it.
+
 End-to-end tests can then configure the mock by POSTing short configuration command to
 the `api/hca/v1/mock` endpoint.  Commands are are `application/json` POST bodies with the
 following structure:
