@@ -2,7 +2,7 @@
 # For running integration tests in travis.  This should happen any time we merge to staging.
 
 # Run webpack-prod and start server
-npm start &
+HCA_MOCK_API=1 npm start &
 
 # Wait for server to begin accepting connections
 # via http://unix.stackexchange.com/questions/5277
