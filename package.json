@@ -10,6 +10,7 @@
     "production-start": "node src/server.js",
     "start": "node src/server.js",
     "test": "npm run lint && npm run test:server && npm run karma -- --single-run",
+
     "test:server": "mocha --recursive ./test/server ./test/common",
     "tests:e2e": "nightwatch -c ./test/e2e/nightwatch.js",
     "watch": "npm run karma & BABEL_ENV=hot npm start & npm run watch-lint & npm run test:server",
