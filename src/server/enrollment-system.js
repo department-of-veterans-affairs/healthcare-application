@@ -1039,7 +1039,12 @@ function veteranToDemographicsInfo(veteran) {
           addressTypeCode: 'P',  // TODO(awong): this code is from VHA Standard Data Service (ADRDEV01) Address Type List P==Permanent. Determine if we need it.
         },
         emails: {
-          email: veteran.email,
+          email: [
+            {
+              address: veteran.email,
+              type: '1'
+            }
+          ]
         },
         phones: {
           phone: [
