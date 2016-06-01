@@ -12,6 +12,7 @@ const timeouts = {
   normal: 500,     // The normal timeout to use. For most opreations w/o a server roundtrip, this should be more than fast enough.
   slow: 1000,      // A slow timeout incase the page is doing something complex.
   molasses: 5000,  // A really really slow timeout. This should rarely be used.
+  submission: 10000 // Only to be used for submission.
 };
 
 // TODO(awong): Move this into a custom command or assertion that can be used with client.expect.element().
@@ -211,10 +212,12 @@ module.exports = {
     // Review and Submit Page.
     client.expect.element('button.edit-btn').to.be.visible;
     client.click('.form-panel .usa-button-primary');
-    expectNavigateAwayFrom(client, '/review-and-submit');
+    // expectNavigateAwayFrom(client, '/review-and-submit');
+    client.expect.element('.js-test-location').attribute('data-location')
+      .to.not.contain('/review-and-submit').before(timeouts.submission);
 
     // Submit message
-    client.expect.element('.success-alert-body').to.be.visible;
+    client.expect.element('.success-alert-box').to.be.visible;
 
 
     client.end();
