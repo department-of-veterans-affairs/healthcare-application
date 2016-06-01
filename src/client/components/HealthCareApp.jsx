@@ -262,6 +262,7 @@ class HealthCareApp extends React.Component {
             </div>
           </div>
         </div>
+        <span className="js-test-location hidden" data-location={this.props.location.pathname} hidden></span>
       </div>
     );
   }
