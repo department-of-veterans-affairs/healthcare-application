@@ -1,4 +1,5 @@
 /* eslint-disable */
+"use strict";
 const _ = require('lodash');
 
 // Default settings for local Selenium installation
@@ -75,7 +76,7 @@ const browsers = {
 
 // Merge environment settings for each browser.  This is necessary in order to test multiple browsers in parallel.
 // See: https://github.com/nightwatchjs/nightwatch-docs/blob/master/guide/running-tests/run-parallel.md
-for (let name of browsers){
+for (let name in browsers){
   var environment = {
     desiredCapabilities : {
       name: name,
