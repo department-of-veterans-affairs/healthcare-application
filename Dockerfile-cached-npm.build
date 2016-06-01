@@ -1,0 +1,35 @@
+# This Dockerfile builds a skeletal enviornment for building and testing
+# HCA. It is meant to be built from a tar ball of the node_modules created
+# via Dockerfile.build.
+
+
+# Use Alpine-node as a base image because it is much smaller.
+#
+# Base image size for mhart/alpine-node:4 is 13 MB
+# Base image for standard node:4 is 253 MB.
+#
+# Our production deploy does not have any C/C++ library dependencies yet
+# so this is still easy to do.
+FROM mhart/alpine-node:4.4.4
+
+# Upgrade npm to npm LTS.
+RUN npm install -g npm@3.8.9
+
+# Create the skeleton directory for the healthcare-application code.
+RUN mkdir -p /src/healthcare-application
+WORKDIR /src/healthcare-application
+
+# Take tarball of node_modules a image created by Dockerfile.build and
+# insert it into our images. This removes all the various build dependencies
+# and libraries installed via apk which saves a few hundred megabytes.
+#
+# Alpine Linux with musl seems to build everything statically so this
+# should be safe.  A buzz-saw verification of this can be obtained with
+# the following huge shell pipeline:
+#
+# for i in $(find node_modules -type f -perm /u=x,g=x,o=x | grep -v '.js$' | grep -v '.sh' | grep -v 'yml' | grep -v '.png' | grep -v '.ttf' | grep -v .md | grep -v .woff | grep -v .eot | grep -v .svg | grep -v .ico); do echo "$i"; ldd "$i"; done
+#
+# It should show that all executables are not dynamic, and for the
+# couple that are, those should be covered by adding/extending a `apk add`
+# command to the start of this file for the necessary runtime shared libraries.
+ADD docker-travis-build/node_modules.tar .
