@@ -6,14 +6,16 @@ const url = 'http://localhost:' + config.port; // eslint-disable-line
 
 // Test timeout constants
 // TODO(awong): Move to a common file usable for all tests.
-const defaultTimeout = 500;   // The normal timeout to use. For most opreations w/o a server roundtrip, this should be more than fast enough.
-const slowTimeout = 1000;     // A slow timeout incase the page is doing something complex.
-const molassesTimeout = 5000; // A really really slow timeout. This should rarely be used.
+const timeouts = {
+  normal: 500,     // The normal timeout to use. For most opreations w/o a server roundtrip, this should be more than fast enough.
+  slow: 1000,      // A slow timeout incase the page is doing something complex.
+  molasses: 5000,  // A really really slow timeout. This should rarely be used.
+};
 
 // TODO(awong): Move this into a custom command or assertion that can be used with client.expect.element().
-function expectNavigateAwayFrom(client, url) {
-    client.expect.element('.js-test-location').attribute('data-location')
-      .to.not.contain(url).before(defaultTimeout);
+function expectNavigateAwayFrom(client, urlSubstring) {
+  client.expect.element('.js-test-location').attribute('data-location')
+    .to.not.contain(urlSubstring).before(timeouts.normal);
 }
 
 module.exports = {
@@ -23,9 +25,9 @@ module.exports = {
     // Ensure introduction page renders.
     client
       .url(url)
-      .waitForElementVisible('body', defaultTimeout)
+      .waitForElementVisible('body', timeouts.normal)
       .assert.title('Apply for Health Care: Vets.gov')
-      .waitForElementVisible('.form-panel', slowTimeout)  // First render of React may be slow.
+      .waitForElementVisible('.form-panel', timeouts.slow)  // First render of React may be slow.
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/introduction');
 
@@ -111,8 +113,8 @@ module.exports = {
     client.expect.element('select[name="maritalStatus"]').to.be.visible;
     client
       .setValue('select[name="maritalStatus"]', 'Married')
-      .click('.form-panel')
-    client.expect.element('input[name="fname"]').to.be.visible.before(defaultTimeout);
+      .click('.form-panel');
+    client.expect.element('input[name="fname"]').to.be.visible.before(timeouts.normal);
 
     client
       .setValue('input[name="fname"]', 'Anne')
@@ -125,7 +127,7 @@ module.exports = {
       .setValue('select[name="marriageDay"]', '1')
       .setValue('input[name="marriageYear"]', '2010')
       .click('input[name="sameAddress-1"] + label');
-    client.expect.element('input[name="address"]').to.be.visible.before(defaultTimeout);
+    client.expect.element('input[name="address"]').to.be.visible.before(timeouts.normal);
 
     client
       .setValue('input[name="address"]', '115 S Michigan Ave')
@@ -140,7 +142,7 @@ module.exports = {
     // Child Information Page.
     client.expect.element('input[name="hasChildrenToReport-0"] + label').to.be.visible;
     client.click('input[name="hasChildrenToReport-0"] + label');
-    client.expect.element('input[name="fname"]').to.be.visible.before(defaultTimeout);
+    client.expect.element('input[name="fname"]').to.be.visible.before(timeouts.normal);
     client
       .setValue('input[name="fname"]', 'Hamnet')
       .setValue('input[name="lname"]', 'Shakespeare')
@@ -176,7 +178,7 @@ module.exports = {
     // Insurance Information Page.
     client.expect.element('input[name="isCoveredByHealthInsurance-0"] + label').to.be.visible;
     client.click('input[name="isCoveredByHealthInsurance-0"] + label');
-    client.expect.element('input[name="insuranceName"]').to.be.visible.before(defaultTimeout);
+    client.expect.element('input[name="insuranceName"]').to.be.visible.before(timeouts.normal);
     client
       .setValue('input[name="insuranceName"]', 'BCBS')
       .setValue('input[name="insurancePolicyHolderName"]', 'William Shakespeare')
