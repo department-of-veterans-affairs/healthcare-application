@@ -7,7 +7,7 @@ const express = require('express');
 const app = express();
 
 app.use('/status', status);
-describe.only('v1', () => {
+describe('v1', () => {
   describe('/status', () => {
     it('should return a 501 error', (done) => {
       request(app)
