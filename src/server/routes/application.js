@@ -1,13 +1,12 @@
 'use strict'; // eslint-disable-line
 
-const ajv = require('ajv');
 const fs = require('fs');
 const request = require('request');
 const router = require('express').Router(); // eslint-disable-line
 const soap = require('soap');
 
 const ApplicationJsonSchema = require('../../common/schema/application');
-const validate = ajv({ allErrors: true, errorDataPath: 'property', removeAdditional: true, useDefaults: true }).compile(ApplicationJsonSchema);
+const validate = require('../../common/schema/validator').compile(ApplicationJsonSchema);
 const veteranToSaveSubmitForm = require('../enrollment-system').veteranToSaveSubmitForm;
 const config = require('../../../config');
 
