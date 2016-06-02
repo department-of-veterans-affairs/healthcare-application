@@ -21,7 +21,7 @@ COPY npm-shrinkwrap.json npm-shrinkwrap.json
 # Install the library using a production configuration.
 ENV NODE_ENV production
 RUN npm install
-RUN npm run webpack-prod
+
 # Add the source code.
 ADD . .
 
