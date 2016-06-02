@@ -5,8 +5,9 @@ const winston = require('winston');
 
 const options = { logger: winston };
 const config = require('../config');
-const application = require('./server/routes/application')(options);
-const status = require('./server/routes/status')(options);
+const application = require('./server/routes/application');
+const status = require('./server/routes/status');
+const mockapi = require('./server/routes/mockapi');
 
 const port = config.port;
 
@@ -61,7 +62,11 @@ if (process.env.NODE_TLS_REJECT_UNAUTHORIZED === '0') {
 const app = makeApp();
 app.use(morgan('combined'));
 app.use(bodyParser.json());
-app.use(`${config.apiRoot}/application`, application);
-app.use(`${config.apiRoot}/status`, status);
+if (process.env.HCA_MOCK_API !== '1') {
+  app.use(`${config.apiRoot}/application`, application(options));
+  app.use(`${config.apiRoot}/status`, status(options));
+} else {
+  app.use(`${config.apiRoot}`, mockapi(options));
+}
 
 app.listen(port);
