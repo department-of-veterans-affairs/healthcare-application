@@ -65,7 +65,7 @@ var config = {
         loader: ExtractTextPlugin.extract('style-loader', 'css!resolve-url!sass?includePaths[]=' + bourbon + '&includePaths[]=' + neat + '&includePaths[]=' + '~/uswds/src/stylesheets' + '&sourceMap')
       },
       { test: /\.(jpe?g|png|gif|svg)$/i,
-        loader: 'url?limit=10000!img?progressive=true'
+        loader: 'url?limit=10000!img?progressive=true&-minimize'
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
