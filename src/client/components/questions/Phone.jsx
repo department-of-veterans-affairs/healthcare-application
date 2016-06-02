@@ -15,6 +15,8 @@ import { validateIfDirty, isBlank, isValidPhone } from '../../utils/validations.
  *            ErrorableTextInput
  * `required` - Boolean. Render marker indicating field is required.
  * `value` - String. Stores the phone number.
+ * `additionalClass` - Extra attribute for use by CSS selector, specifically
+ *                     by tests
  * `onValueChange` - a function with this prototype: (newValue)
  */
 class Phone extends React.Component {
@@ -35,6 +37,7 @@ class Phone extends React.Component {
             autocomplete="tel"
             placeholder="xxxxxxxxxx"
             field={this.props.value}
+            additionalClass={this.props.additionalClass}
             onValueChange={this.props.onValueChange}/>
       </div>
     );
@@ -48,6 +51,7 @@ Phone.propTypes = {
     value: React.PropTypes.string,
     dirty: React.PropTypes.bool,
   }).isRequired,
+  additionalClass: React.PropTypes.string,
   onValueChange: React.PropTypes.func.isRequired,
 };
 
