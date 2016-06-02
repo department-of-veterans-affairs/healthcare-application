@@ -42,7 +42,7 @@ module.exports = {
       .url(url)
       .waitForElementVisible('body', timeouts.normal)
       .assert.title('Apply for Health Care: Vets.gov')
-      .waitForElementVisible('.form-panel', timeouts.slow)  // First render of React may be slow.
+      .waitForElementVisible('.form-panel', timeouts.submission)  // First render of React may be slow.
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/introduction');
 
