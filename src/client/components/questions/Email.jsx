@@ -14,6 +14,8 @@ import { isBlank, validateIfDirty, isValidEmail } from '../../utils/validations.
  * `error` - String. If set, it is rendered as the error for the input field.
  * `label` - String.
  * `value` - String. Stores the email address.
+ * `additionalClass` - Extra attribute for use by CSS selector, specifically
+ *                     by tests
  * `onValueChange` - a function with this prototype: (newValue)
  */
 class Email extends React.Component {
@@ -36,6 +38,7 @@ class Email extends React.Component {
             autocomplete="email"
             placeholder="x@x.xxx"
             field={this.props.email}
+            additionalClass={this.props.additionalClass}
             onValueChange={this.props.onValueChange}/>
       </div>
     );
@@ -49,6 +52,7 @@ Email.propTypes = {
     value: React.PropTypes.string,
     dirty: React.PropTypes.bool
   }).isRequired,
+  additionalClass: React.PropTypes.string,
   onValueChange: React.PropTypes.func.isRequired,
 };
 
