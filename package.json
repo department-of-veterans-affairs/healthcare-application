@@ -7,7 +7,6 @@
     "karma": "karma start",
     "test:server": "mocha --recursive ./test/server ./test/common",
     "lint": "eslint --ext .js --ext .jsx lib src test",
-    "prestart": "npm run webpack-prod",
     "start": "node src/server.js",
     "test": "npm run lint && npm run test:server && npm run karma -- --single-run",
     "watch": "npm run karma & BABEL_ENV=hot npm start & npm run watch-lint & npm run test:server",
