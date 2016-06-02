@@ -15,6 +15,8 @@ import { makeField } from '../../../common/fields.js';
  * `placeholder` - placeholder string for input field.
  * `required` - boolean. Render marker indicating field is required.
  * `field` - string. Value of the input field.
+ * `additionalClass` - Extra attribute for use by CSS selector, specifically
+ *                     by tests
  * `onValueChange` - a function with this prototype: (newValue)
  */
 class ErrorableTextInput extends React.Component {
@@ -60,6 +62,7 @@ class ErrorableTextInput extends React.Component {
         </label>
         {errorSpan}
         <input
+            className={this.props.additionalClass}
             aria-describedby={errorSpanId}
             id={this.inputId}
             placeholder={this.props.placeholder}
@@ -84,6 +87,7 @@ ErrorableTextInput.propTypes = {
     value: React.PropTypes.string,
     dirty: React.PropTypes.bool
   }).isRequired,
+  additionalClass: React.PropTypes.string,
   onValueChange: React.PropTypes.func.isRequired,
 };
 

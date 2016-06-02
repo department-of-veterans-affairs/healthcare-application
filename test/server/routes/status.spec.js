@@ -1,12 +1,11 @@
+const express = require('express');
 const request = require('supertest');
 
-const status = require('../../../src/server/routes/status')();
-
-const express = require('express');
+const status = require('../../../src/server/routes/status');
 
 const app = express();
+app.use('/status', status());
 
-app.use('/status', status);
 describe('v1', () => {
   describe('/status', () => {
     it('should return a 501 error', (done) => {
