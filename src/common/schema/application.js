@@ -24,7 +24,9 @@ countryStateProperites.push(
         }
       },
       state: {
-        type: 'string'
+        type: 'string',
+        minLength: 1,
+        maxLength: 51
       },
     },
   });
@@ -37,13 +39,19 @@ module.exports = {
       oneOf: countryStateProperites,
       properties: {
         street: {
-          type: 'string'
+          type: 'string',
+          minLength: 1,
+          maxLength: 50
         },
         city: {
-          type: 'string'
+          type: 'string',
+          minLength: 1,
+          maxLength: 51
         },
         zipcode: {
-          type: 'string'
+          type: 'string',
+          minLength: 1,
+          maxLength: 50
         }
       },
       required: [
@@ -106,13 +114,19 @@ module.exports = {
       type: 'object',
       properties: {
         first: {
-          type: 'string'
+          type: 'string',
+          minLength: 1,
+          maxLength: 30
         },
         middle: {
-          type: 'string'
+          type: 'string',
+          minLength: 1,
+          maxLength: 30
         },
         last: {
-          type: 'string'
+          type: 'string',
+          minLength: 1,
+          maxLength: 30
         },
         suffix: {
           'enum': options.suffixes
@@ -167,7 +181,9 @@ module.exports = {
       $ref: '#/definitions/fullName'
     },
     mothersMaidenName: {
-      type: 'string'
+      type: 'string',
+      minLength: 2,
+      maxLength: 35
     },
     veteranSocialSecurityNumber: {
       $ref: '#/definitions/ssn'
@@ -176,7 +192,9 @@ module.exports = {
       'enum': options.genders.map(option => option.value)
     },
     cityOfBirth: {
-      type: 'string'
+      type: 'string',
+      minLength: 2,
+      maxLength: 20
     },
     stateOfBirth: {
       'enum': states
@@ -359,5 +377,21 @@ module.exports = {
     campLejeune: {
       type: 'boolean'
     }
-  }
+  },
+  required: [
+    'veteranFullName',
+    'veteranSocialSecurityNumber',
+    'veteranDateOfBirth',
+    'gender',
+    'maritalStatus',
+    'vaMedicalFacility',
+    'isSpanishHispanicLatino',
+    'veteranAddress',
+    'isMedicaidEligible',
+    'isEnrolledMedicarePartA',
+    'lastServiceBranch',
+    'lastEntryDate',
+    'lastDischargeDate',
+    'dischargeType'
+  ]
 };
