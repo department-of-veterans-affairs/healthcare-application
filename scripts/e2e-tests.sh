@@ -1,6 +1,8 @@
 #!/bin/sh
 # For running integration tests in travis.  This should happen any time we merge to staging.
 
+npm run webpack-prod
+
 # Run webpack-prod and start server
 HCA_MOCK_API=1 npm start &
 
