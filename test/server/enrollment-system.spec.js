@@ -8,7 +8,12 @@ const fakeApplication = require('../data/fake-application');
 const ApplicationJsonSchema = require('../../src/common/schema/application');
 const validate = require('../../src/common/schema/validator').compile(ApplicationJsonSchema);
 
-const goldenSoapSubmission = require('../data/golden-soap-submission.json');
+const goldenJsonSubmission = require('../data/golden-soap-submission.json');
+
+const soap = require('soap');
+const config = require('../../config.js');
+const xsdValidator = require('libxml-xsd');
+const fs = require('fs');
 
 describe('enrollment-system base tests', () => {
   describe('characterization tests', () => {
@@ -22,12 +27,44 @@ describe('enrollment-system base tests', () => {
       tk.reset();
     });
 
-    it('should transform the fake applicaiton to a known good soap message', () => {
+    it('should transform the fake applicaiton to a known good json structure', () => {
       const valid = validate(fakeApplication);
       chai.assert.isTrue(valid, JSON.stringify([validate.errors, fakeApplication], null, 2));
       const result = enrollmentSystem.veteranToSaveSubmitForm(fakeApplication);
       result.should.be.instanceOf(Object);
-      result.should.deep.equal(goldenSoapSubmission);
+      result.should.deep.equal(goldenJsonSubmission);
+    });
+
+    it('should become a valid SOAP request', (done) => {
+      // build the json to be sent through the SOAP service
+      const result = enrollmentSystem.veteranToSaveSubmitForm(fakeApplication);
+      // read in the base XSD file
+      const xsdContents = fs.readFileSync('hca-api-stub/voa-voaSvc-xsd-2.xml', 'utf8');
+      // we need to change directories because the xsd validator
+      // loads a secondary file (voa-voaSvc-xsd-1.xml) by a path
+      // relative to the process' cwd.
+      process.chdir('./hca-api-stub');
+      const schema = xsdValidator.parse(xsdContents);
+      // reset the path
+      process.chdir('../');
+
+      // create a soap client
+      soap.createClient(config.soap.wsdl, {}, (_soapError, client) => {
+        // when the client sends a message, look at the body
+        client.on('message', (messageBody) => {
+          // validate the message body against the XSD schema
+          schema.validate(messageBody, (_validationError, validationErrors) => {
+            if (validationErrors.length > 0) {
+              console.error(validationErrors);
+            }
+            validationErrors.should.be.empty;
+            // tell chai that we're done
+            done();
+          });
+        });
+        // trigger the call
+        client.saveSubmitForm(result, (_submitError, _result) => {});
+      });
     });
   });
 
