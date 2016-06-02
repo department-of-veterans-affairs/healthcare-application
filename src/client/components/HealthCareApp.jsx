@@ -106,7 +106,6 @@ class HealthCareApp extends React.Component {
           throw new Error(response.statusText);
         }
         response.json().then(data => {
-          console.log(data.response);
           this.props.onUpdateSubmissionStatus('applicationSubmitted', data);
           this.props.onCompletedStatus(path);
           this.props.onUpdateSubmissionId(data.response.formSubmissionId);

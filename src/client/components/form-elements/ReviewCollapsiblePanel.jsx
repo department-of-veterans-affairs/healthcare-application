@@ -3,7 +3,8 @@ import Scroll from 'react-scroll';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { updateIncompleteStatus, updateVerifiedStatus, updateCompletedStatus } from '../../actions';
+import { ensureFieldsInitialized, updateIncompleteStatus, updateVerifiedStatus, updateCompletedStatus } from '../../actions';
+import * as validations from '../../utils/validations';
 
 const Element = Scroll.Element;
 const scroller = Scroll.scroller;
@@ -37,7 +38,13 @@ class ReviewCollapsiblePanel extends React.Component {
 
   handleSave() {
     const currentPath = this.props.updatePath;
-    this.props.onUpdateSaveStatus(currentPath);
+    const formData = this.props.data;
+    const sectionFields = this.props.uiData.sections[currentPath].fields;
+
+    this.props.onFieldsInitialized(sectionFields);
+    if (validations.isValidSection(currentPath, formData)) {
+      this.props.onUpdateSaveStatus(currentPath);
+    }
     this.scrollToTop();
   }
 
@@ -45,8 +52,7 @@ class ReviewCollapsiblePanel extends React.Component {
     const currentPath = this.props.updatePath;
     this.props.onUpdateVerifiedStatus(currentPath, true);
     // TODO: find a better solution for this or a different implementation.
-    const delay = 100; // 0.1 second
-    setTimeout(() => this.scrollToTop(), delay);
+    setTimeout(() => this.scrollToTop(), 100);
   }
 
   handleEdit() {
@@ -68,25 +74,25 @@ class ReviewCollapsiblePanel extends React.Component {
     const sectionIndexes = allSections.indexOf(currentPath);
     const prevPath = allSections[sectionIndexes - 1];
 
-    const ButtonEdit = (
+    const buttonEdit = (
       <button
           className="edit-btn primary-outline"
-          onClick={this.handleEdit}><i className="fa fa-pencil"></i> Edit</button>
+          onClick={this.handleEdit}><i className="fa before-text fa-pencil"></i>Edit</button>
     );
 
-    const ButtonNext = (
+    const buttonNext = (
       <button
           className="edit-btn"
-          onClick={this.handleNext}>Next <i className="fa fa-angle-double-right"></i></button>
+          onClick={this.handleNext}>Next<i className="fa after-text fa-angle-double-right"></i></button>
     );
 
     if (sectionsComplete) {
       buttonGroup = (<div>
         <div className="medium-6 columns">
-          {ButtonEdit}
+          {buttonEdit}
         </div>
         <div className="medium-6 columns">
-          {ButtonNext}
+          {buttonNext}
         </div>
       </div>
       );
@@ -100,10 +106,8 @@ class ReviewCollapsiblePanel extends React.Component {
     if (sectionsVerified) {
       hiddenSection = (<div></div>);
       buttonGroup = (<div>
-        <div className="medium-6 columns">
-        </div>
-        <div className="medium-6 columns">
-          {ButtonEdit}
+        <div className="medium-6 medium-offset-6 columns">
+          {buttonEdit}
         </div>
       </div>
       );
@@ -153,6 +157,7 @@ ReviewCollapsiblePanel.propTypes = {
 
 function mapStateToProps(state) {
   return {
+    data: state.veteran,
     uiData: state.uiState
   };
 }
@@ -167,6 +172,9 @@ function mapDispatchToProps(dispatch) {
     },
     onUpdateVerifiedStatus: (path, update) => {
       dispatch(updateVerifiedStatus(path, update));
+    },
+    onFieldsInitialized: (field) => {
+      dispatch(ensureFieldsInitialized(field));
     }
   };
 }
