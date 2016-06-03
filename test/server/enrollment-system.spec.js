@@ -53,14 +53,12 @@ describe('enrollment-system base tests', () => {
         // when the client sends a message, look at the body
         client.on('message', (messageBody) => {
           // validate the message body against the XSD schema
-          schema.validate(messageBody, (_validationError, validationErrors) => {
-            if (validationErrors.length > 0) {
-              console.error(validationErrors);
-            }
-            validationErrors.should.be.empty;
-            // tell chai that we're done
-            done();
-          });
+          const validationErrors = schema.validate(messageBody);
+          if (validationErrors) {
+            chai.assert.fail(validationErrors, null, validationErrors.join('\t'));
+          }
+          // tell chai that we're done
+          done();
         });
         // trigger the call
         client.saveSubmitForm(result, (_submitError, _result) => {});
