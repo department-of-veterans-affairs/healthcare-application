@@ -52,6 +52,7 @@ class ReviewCollapsiblePanel extends React.Component {
       panelAction = (<ErrorableCheckbox
           label="I certify that all information above is correct to the best of my knowledge."
           checked={this.props.value}
+          additionalClass={this.props.additionalClass}
           onValueChange={(update) => {this.props.onUpdateVerifiedStatus(currentPath, update);}}/>);
 
       editButton = (<button
@@ -59,9 +60,13 @@ class ReviewCollapsiblePanel extends React.Component {
           onClick={this.handleEdit}>Edit Section</button>
       );
     } else {
-      panelAction = (<button
-          className="usa-button-outline"
-          onClick={this.handleSave}>Update Section</button>
+      panelAction = (
+        <span className={this.props.additionalClass}>
+          <button
+              className="usa-button-outline"
+              onClick={this.handleSave}>Update Section
+          </button>
+        </span>
         );
     }
 
@@ -113,7 +118,8 @@ class ReviewCollapsiblePanel extends React.Component {
 ReviewCollapsiblePanel.propTypes = {
   sectionLabel: React.PropTypes.string.isRequired,
   updatePath: React.PropTypes.string.isRequired,
-  component: React.PropTypes.object.isRequired
+  component: React.PropTypes.object.isRequired,
+  additionalClass: React.PropTypes.string
 };
 
 function mapStateToProps(state) {
