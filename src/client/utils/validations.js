@@ -148,8 +148,9 @@ function isValidEntryDateField(date, dateOfBirth) {
   let adjustedDateOfBirth;
 
   if (!isBlankDateField(date) && !isBlankDateField(dateOfBirth)) {
-    adjustedDate = new Date(date.year.value, date.month.value, date.day.value);
-    adjustedDateOfBirth = new Date(Number(dateOfBirth.year.value) + 15, dateOfBirth.month.value, dateOfBirth.day.value);
+    const adjustedBirthYear = Number(dateOfBirth.year.value) + 15;
+    adjustedDate = new Date(`${date.month.value}/${date.day.value}/${date.year.value}`);
+    adjustedDateOfBirth = new Date(`${dateOfBirth.month.value}/${dateOfBirth.day.value}/${adjustedBirthYear}`);
 
     if (adjustedDate < adjustedDateOfBirth) {
       return false;
