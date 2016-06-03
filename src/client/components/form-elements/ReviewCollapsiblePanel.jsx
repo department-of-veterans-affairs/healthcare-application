@@ -119,7 +119,7 @@ ReviewCollapsiblePanel.propTypes = {
   sectionLabel: React.PropTypes.string.isRequired,
   updatePath: React.PropTypes.string.isRequired,
   component: React.PropTypes.object.isRequired,
-  additionalClass: React.PropTypes.string,
+  additionalClass: React.PropTypes.string
 };
 
 function mapStateToProps(state) {
