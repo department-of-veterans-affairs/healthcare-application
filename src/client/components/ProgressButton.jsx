@@ -35,7 +35,7 @@ ProgressButton.propTypes = {
   buttonText: React.PropTypes.string.isRequired,
   buttonClass: React.PropTypes.string.isRequired,
   beforeText: React.PropTypes.string,
-  afterText: React.PropTypes.string
+  afterText: React.PropTypes.string,
 };
 
 export default ProgressButton;

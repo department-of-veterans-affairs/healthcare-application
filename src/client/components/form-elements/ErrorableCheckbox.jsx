@@ -11,6 +11,8 @@ import _ from 'lodash';
  * `label` - String for the checkbox label.
  * `name` - String for name attribute.
  * `onValueChange` - a function with this prototype: (newValue)
+ * `additionalClass` - Extra attribute for use by CSS selector, specifically
+ *                     by tests
  * `required` - boolean. Render marker indicating field is required.
  */
 class ErrorableCheckbox extends React.Component {
@@ -46,6 +48,7 @@ class ErrorableCheckbox extends React.Component {
     return (
       <div className={`${this.props.errorMessage ? 'usa-input-error' : ''} ${this.props.className}`}>
         <input
+            className={this.props.additionalClass}
             aria-describedby={errorSpanId}
             checked={this.props.checked}
             id={this.inputId}
@@ -70,6 +73,7 @@ ErrorableCheckbox.propTypes = {
   name: React.PropTypes.string,
   label: React.PropTypes.string.isRequired,
   onValueChange: React.PropTypes.func.isRequired,
+  additionalClass: React.PropTypes.string,
   required: React.PropTypes.bool,
 };
 
