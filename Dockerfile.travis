@@ -3,14 +3,35 @@
 # executing tests.
 FROM dsva/healthcare-application:build-cached
 
+# HACK HACK HACK
+# Workaround for https://github.com/npm/npm/issues/9863. In Docker, the underlying
+# filesystem is aufs which causes problems for atomic renames across filesystem
+# layers. This breaks npm because npm depends on the renaming to synchronize
+# its internal logic. The npm devs are NOT prioritizing fixing this saying
+# it's too Docker specific (...guess everyone is on updated NFS? this used break
+# NFSv3 BADLY.). The community has come up with a hack where the filesyste layer
+# notices the error and changes from a move to a copy. The following line
+# directly patches the npm install replacing fs.move with a version that resorts
+# to a copy on a failure. It relies on the fact that a docker build has no
+# concurrency.
+#
+# Is this hack ugly? yes. Is the problem its fixing uglier? Yes. I hate computers.
+#
+# TODO(awong): Move this into the main build image so it's default for all our
+# docker images.
+RUN cd $(npm root -g)/npm \
+  && npm install fs-extra \
+  && sed -i -e s/graceful-fs/fs-extra/ -e s/fs.rename/fs.move/ ./lib/utils/rename.js
+
 WORKDIR /src/healthcare-application
 
 # Ensure any deltas in package.json are reflected.
 COPY package.json package.json
 COPY npm-shrinkwrap.json npm-shrinkwrap.json
+COPY webpack.config.js webpack.config.js
 
 ENV NODE_ENV development
 RUN npm install
-
+RUN npm run webpack-prod
 # Copy all the source into the build image.
 ADD . .

@@ -22,6 +22,8 @@ class AnnualIncomeSection extends React.Component {
     const message = 'Please enter only numbers and a decimal point if necessary (no commas or currency signs)';
     let childrenIncomeInput;
     let childrenIncomeReview;
+    let spouseIncomeInput;
+    let spouseIncomeReview;
     let content;
 
     if (this.props.data.hasChildrenToReport.value === 'Y') {
@@ -33,9 +35,7 @@ class AnnualIncomeSection extends React.Component {
               rows={this.props.data.children}/>
         </div>
       );
-    }
 
-    if (this.props.isSectionComplete && this.props.reviewSection) {
       childrenIncomeReview = this.props.data.children.map((child, index) => {
         return (
           <div key={`child-${index}`}>
@@ -59,7 +59,58 @@ class AnnualIncomeSection extends React.Component {
           </div>
         );
       });
+    }
 
+    if (this.props.data.maritalStatus.value === 'Married' || this.props.data.maritalStatus.value === 'Separated') {
+      spouseIncomeInput = (
+        <div className="input-section">
+          <h6>Spouse</h6>
+          <ErrorableTextInput
+              errorMessage={getErrorMessage(this.props.data.spouseGrossIncome, message)}
+              label="Spouse Gross Income"
+              name="spouseGrossIncome"
+              field={this.props.data.spouseGrossIncome}
+              onValueChange={(update) => {this.props.onStateChange('spouseGrossIncome', update);}}/>
+
+          <ErrorableTextInput
+              errorMessage={getErrorMessage(this.props.data.spouseNetIncome, message)}
+              label="Spouse Net Income"
+              name="spouseNetIncome"
+              field={this.props.data.spouseNetIncome}
+              onValueChange={(update) => {this.props.onStateChange('spouseNetIncome', update);}}/>
+
+          <ErrorableTextInput
+              errorMessage={getErrorMessage(this.props.data.spouseOtherIncome, message)}
+              label="Spouse Other Income"
+              name="spouseOtherIncome"
+              field={this.props.data.spouseOtherIncome}
+              onValueChange={(update) => {this.props.onStateChange('spouseOtherIncome', update);}}/>
+        </div>
+      );
+
+      spouseIncomeReview = (
+        <div>
+          <h6>Spouse</h6>
+          <table className="review usa-table-borderless">
+            <tbody>
+              <tr>
+                <td>Spouse Gross Income:</td>
+                <td>{this.props.data.spouseGrossIncome.value}</td>
+              </tr>
+              <tr>
+                <td>Spouse Net Income:</td>
+                <td>{this.props.data.spouseNetIncome.value}</td>
+              </tr>
+              <tr>
+                <td>Spouse Other Income:</td>
+                <td>{this.props.data.spouseOtherIncome.value}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>);
+    }
+
+    if (this.props.isSectionComplete && this.props.reviewSection) {
       content = (
         <div>
           <h6>Veteran</h6>
@@ -79,23 +130,8 @@ class AnnualIncomeSection extends React.Component {
               </tr>
             </tbody>
           </table>
-          <h6>Spouse</h6>
-          <table className="review usa-table-borderless">
-            <tbody>
-              <tr>
-                <td>Spouse Gross Income:</td>
-                <td>{this.props.data.spouseGrossIncome.value}</td>
-              </tr>
-              <tr>
-                <td>Spouse Net Income:</td>
-                <td>{this.props.data.spouseNetIncome.value}</td>
-              </tr>
-              <tr>
-                <td>Spouse Other Income:</td>
-                <td>{this.props.data.spouseOtherIncome.value}</td>
-              </tr>
-            </tbody>
-          </table>
+
+          {spouseIncomeReview}
 
           {childrenIncomeReview}
 
@@ -143,29 +179,7 @@ class AnnualIncomeSection extends React.Component {
                 onValueChange={(update) => {this.props.onStateChange('veteranOtherIncome', update);}}/>
           </div>
 
-          <div className="input-section">
-            <h6>Spouse</h6>
-            <ErrorableTextInput
-                errorMessage={getErrorMessage(this.props.data.spouseGrossIncome, message)}
-                label="Spouse Gross Income"
-                name="spouseGrossIncome"
-                field={this.props.data.spouseGrossIncome}
-                onValueChange={(update) => {this.props.onStateChange('spouseGrossIncome', update);}}/>
-
-            <ErrorableTextInput
-                errorMessage={getErrorMessage(this.props.data.spouseNetIncome, message)}
-                label="Spouse Net Income"
-                name="spouseNetIncome"
-                field={this.props.data.spouseNetIncome}
-                onValueChange={(update) => {this.props.onStateChange('spouseNetIncome', update);}}/>
-
-            <ErrorableTextInput
-                errorMessage={getErrorMessage(this.props.data.spouseOtherIncome, message)}
-                label="Spouse Other Income"
-                name="spouseOtherIncome"
-                field={this.props.data.spouseOtherIncome}
-                onValueChange={(update) => {this.props.onStateChange('spouseOtherIncome', update);}}/>
-          </div>
+          {spouseIncomeInput}
 
           {childrenIncomeInput}
 
