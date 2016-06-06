@@ -147,9 +147,9 @@ function veteranToSpouseInfo(veteran) {
         country: veteran.spouseAddress.country,
         line1: veteran.spouseAddress.street,
         state: veteran.spouseAddress.state,
-        zipCode: veteran.spouseAddress.zipcode
+        zipCode: veteran.spouseAddress.zipcode,
+        phoneNumber: veteran.spousePhone,
       },
-      phoneNumber: veteran.spousePhone
     };
   }
   return undefined;
@@ -289,9 +289,11 @@ function childToDependentFinancialsInfo(child) {
  */
 function veteranToDependentFinancialsCollection(veteran) {
   if (veteran.children.length > 0) {
-    return veteran.children.map((child) => {
-      return { dependentFinancials: childToDependentFinancialsInfo(child) };
-    });
+    return {
+      dependentFinancials: veteran.children.map((child) => {
+        return childToDependentFinancialsInfo(child);
+      })
+    };
   }
   return undefined;
 }
@@ -337,16 +339,16 @@ function providerToInsuranceInfo(provider) {
 //  * personInfo/ssnText, Value not 9 digits and contains a non number., ,
 function veteranToPersonInfo(veteran) {
   return {
-    dob: validations.dateOfBirth(veteran.veteranDateOfBirth),
     firstName: validations.validateString(veteran.veteranFullName.first, 30),
-    gender: veteran.gender,  // TODO(awong): need to restrict valid values.
-    lastName: validations.validateString(veteran.veteranFullName.last, 30),
     middleName: validations.validateString(veteran.veteranFullName.middle, 30, true),
+    lastName: validations.validateString(veteran.veteranFullName.last, 30),
+    suffix: veteran.veteranFullName.suffix,  // TODO(awong): need to restrict valid values.
+    ssnText: validations.validateSsn(veteran.veteranSocialSecurityNumber),
+    gender: veteran.gender,  // TODO(awong): need to restrict valid values.
+    dob: validations.dateOfBirth(veteran.veteranDateOfBirth),
     mothersMaidenName: validations.validateString(veteran.mothersMaidenName, 35, true),
     placeOfBirthCity: validations.validateString(veteran.cityOfBirth, 20, true),
     placeOfBirthState: veteran.stateOfBirth, // todo(robbie) need to do this validation.
-    ssnText: validations.validateSsn(veteran.veteranSocialSecurityNumber),
-    suffix: veteran.veteranFullName.suffix,  // TODO(awong): need to restrict valid values.
   };
 }
 
@@ -815,12 +817,13 @@ function veteranToFinancialsInfo(veteran) {
             otherIncome: veteran.spouseOtherIncome
           }),
           spouse: veteranToSpouseInfo(veteran),
-          contributedToSpouse: yesNoToESBoolean(veteran.provideSupportLastYear),
-          marriedLastCalendarYear: veteran.maritalStatus === 'Married',
+          // TODO(awong): Verify this is right field. There is also contributionToSpouse in financialStatementInfo.
+          contributedToSpousalSupport: yesNoToESBoolean(veteran.provideSupportLastYear),
           livedWithPatient: yesNoToESBoolean(veteran.cohabitedLastYear),
         },
       },
 
+      marriedLastCalendarYear: veteran.maritalStatus === 'Married',
       dependentFinancialsList: veteranToDependentFinancialsCollection(veteran),
       numberOfDependentChildren: veteran.children.length,
     }
@@ -1038,26 +1041,26 @@ function veteranToDemographicsInfo(veteran) {
           zipCode: veteran.veteranAddress.zipcode,
           addressTypeCode: 'P',  // TODO(awong): this code is from VHA Standard Data Service (ADRDEV01) Address Type List P==Permanent. Determine if we need it.
         },
-        emails: {
-          email: [
-            {
-              address: veteran.email,
-              type: '1'
-            }
-          ]
-        },
-        phones: {
-          phone: [
-            {
-              phoneNumber: veteran.homePhone,
-              type: '1', // TODO(awong): Magic number: Code is from VHA Standard Data Service (ADRDEV01) Phone Contact Type List
-            },
-            {
-              phoneNumber: veteran.mobilePhone,
-              type: '4', // TODO(awong): Magic number: Code is from VHA Standard Data Service (ADRDEV01) Phone Contact Type List
-            }
-          ]
-        }
+      },
+      emails: {
+        email: [
+          {
+            address: veteran.email,
+            type: '1'
+          }
+        ]
+      },
+      phones: {
+        phone: [
+          {
+            phoneNumber: veteran.homePhone,
+            type: '1', // TODO(awong): Magic number: Code is from VHA Standard Data Service (ADRDEV01) Phone Contact Type List
+          },
+          {
+            phoneNumber: veteran.mobilePhone,
+            type: '4', // TODO(awong): Magic number: Code is from VHA Standard Data Service (ADRDEV01) Phone Contact Type List
+          }
+        ]
       },
     },
     ethnicity: spanishHispanicToSDSCode(veteran.isSpanishHispanicLatino),
