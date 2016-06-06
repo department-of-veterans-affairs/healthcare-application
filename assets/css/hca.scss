@@ -92,7 +92,12 @@ button.usa-button-outline {
 
 button i.fa {
   font-size: 0.75em;
-  margin-right: 0.5em;
+  &.before-text {
+    margin-right: 0.5em;
+  }
+  &.after-text {
+    margin-left: 0.5em;
+  }
 }
 
 button.hca-button-green {
@@ -236,10 +241,19 @@ button.hca-button-green {
       }
     }
     .edit-btn { 
-      padding: 1.5rem 3.5rem 1.5rem 3rem;
+      padding: 1rem;
+      &.primary-outline {
+        background-color: transparent;
+        border: 1px solid $color-primary;
+        color: $color-primary;
+        &:hover {
+        border: 1px solid $color-primary-darker;
+        color: $color-primary-darker;
+        }
+      }
     }
   .accordion-header {
-    height: 8rem;
+    height: 7rem;
     padding: 1rem;
   }
 }

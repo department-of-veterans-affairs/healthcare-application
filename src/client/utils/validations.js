@@ -368,7 +368,6 @@ function isValidServiceInformation(data) {
 
 function isValidForm(data) {
   return isValidPersonalInfoSection(data) &&
-  isValidPersonalInfoSection(data) &&
   isValidBirthInformationSection(data) &&
   isValidDemographicInformation(data) &&
   isValidVeteranAddress(data) &&
