@@ -705,6 +705,11 @@
       "from": "binary-extensions@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/binary-extensions/-/binary-extensions-1.4.1.tgz"
     },
+    "bindings": {
+      "version": "1.2.1",
+      "from": "bindings@>=1.2.1 <2.0.0",
+      "resolved": "https://registry.npmjs.org/bindings/-/bindings-1.2.1.tgz"
+    },
     "bl": {
       "version": "1.1.2",
       "from": "bl@>=1.1.2 <1.2.0",
@@ -3947,6 +3952,16 @@
       "version": "0.3.0",
       "from": "levn@>=0.3.0 <0.4.0",
       "resolved": "http://registry.npmjs.org/levn/-/levn-0.3.0.tgz"
+    },
+    "libxml-xsd": {
+      "version": "0.5.2",
+      "from": "libxml-xsd@>=0.5.2 <0.6.0",
+      "resolved": "https://registry.npmjs.org/libxml-xsd/-/libxml-xsd-0.5.2.tgz"
+    },
+    "libxmljs-mt": {
+      "version": "0.16.1",
+      "from": "libxmljs-mt@0.16.1",
+      "resolved": "https://registry.npmjs.org/libxmljs-mt/-/libxmljs-mt-0.16.1.tgz"
     },
     "load-json-file": {
       "version": "1.1.0",
