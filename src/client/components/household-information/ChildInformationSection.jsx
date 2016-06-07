@@ -105,6 +105,8 @@ class ChildInformationSection extends React.Component {
               rows={this.props.data.children}/>
         </div>
       );
+    } else {
+      this.props.data.children.length = 0;
     }
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
