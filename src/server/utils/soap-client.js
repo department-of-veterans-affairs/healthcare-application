@@ -3,10 +3,9 @@ const fs = require('fs');
 const request = require('request');
 const soap = require('soap');
 
-const config = require('../../../config');
-
 const soapClient = (options) => {
-  let voaService = null;
+
+  const config = options.config;
   const readTLSArtifacts = () => {
     const artifacts = {};
 
@@ -32,7 +31,6 @@ const soapClient = (options) => {
   const tlsArtifacts = readTLSArtifacts();
 
   const wsdlUri = config.soap.wsdl || `${config.soap.endpoint}?wsdl`;
-
   soap.createClient(
     wsdlUri,
     {
@@ -46,9 +44,8 @@ const soapClient = (options) => {
         options.logger.error('SOAP Client creation failed - ERROR', err);
         throw new Error('Unable to connect to VoaService');
       }
-      voaService = client;
+      return client;
     });
-  return voaService;
 };
 
 module.exports = soapClient;

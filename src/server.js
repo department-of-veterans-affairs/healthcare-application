@@ -3,12 +3,14 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const winston = require('winston');
 
+const config = require('../config');
+const soapClient = require('./server/utils/soap-client')({ logger: winston, config })
 const options = {
-  config: require('../config'),
+  config,
   logger: winston,
-  soapClient: require('./server/utils/soap-client')({ logger: winston })
+  soapClient
 };
-const config = options.config;
+
 const application = require('./server/routes/application');
 const status = require('./server/routes/status');
 const mockapi = require('./server/routes/mockapi');

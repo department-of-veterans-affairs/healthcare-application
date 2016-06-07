@@ -18,6 +18,7 @@ function returnRouter(options) {
     const valid = validate(form, ApplicationJsonSchema, {});
 
     if (valid) {
+      console.log(options.soapClient);
       const saveSubmitFormMsg = veteranToSaveSubmitForm(form);
       options.soapClient.saveSubmitForm(saveSubmitFormMsg, (err, response) => {
         if (err) {
