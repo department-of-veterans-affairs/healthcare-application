@@ -1,10 +1,11 @@
 const express = require('express');
 const request = require('supertest');
 
+const config = require('../../../config');
 const status = require('../../../src/server/routes/status');
 
 const app = express();
-app.use('/status', status());
+app.use('/status', status({ config }));
 
 describe('v1', () => {
   describe('/status', () => {

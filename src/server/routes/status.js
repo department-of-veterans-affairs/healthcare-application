@@ -1,3 +1,7 @@
+'use strict'; // eslint-disable-line
+const soap = require('soap');
+const request = require('request');
+
 const validIdForEnv = (env) => {
   switch (env) {
   // SQA
@@ -15,6 +19,28 @@ const validIdForEnv = (env) => {
 
 const returnRouter = (options) => {
   const router = require('express').Router(); // eslint-disable-line
+  const config = options.config;
+  let soapClient = null;
+  const readTLSArtifacts = require('../utils/tls')(config).readTLSArtifacts;
+  const tlsArtifacts = readTLSArtifacts();
+
+  const wsdlUri = config.soap.wsdl || `${config.soap.endpoint}?wsdl`;
+  soap.createClient(
+    wsdlUri,
+    {
+      request: request.defaults(tlsArtifacts),
+      endpoint: config.soap.endpoint,
+      wsdl_options: tlsArtifacts  // eslint-disable-line
+    },
+    (err, client) => {
+      // TODO(awong): Handle error on connect so the server does not flap if the ES system is down.
+      if (err) {
+        options.logger.error('SOAP Client creation failed - ERROR', err);
+        throw new Error('Unable to connect to VoaService');
+      }
+      soapClient = client;
+    });
+
   router.get('/', (req, res) => {
     res.status(501).end();
   });
@@ -32,7 +58,7 @@ const returnRouter = (options) => {
     const getFormSubmissionStatusMsg = {
       formSubmissionId: id
     };
-    options.soapClient.getFormSubmissionStatus(getFormSubmissionStatusMsg, (err, response) => {
+    soapClient.getFormSubmissionStatus(getFormSubmissionStatusMsg, (err, response) => {
       if (err) {
         options.logger.info('voaService response had error', err);
         res.status(500).end();

@@ -1,14 +1,14 @@
+'use strict'; // eslint-disable-line
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const winston = require('winston');
 
 const config = require('../config');
-const soapClient = require('./server/utils/soap-client')({ logger: winston, config })
+
 const options = {
   config,
-  logger: winston,
-  soapClient
+  logger: winston
 };
 
 const application = require('./server/routes/application');

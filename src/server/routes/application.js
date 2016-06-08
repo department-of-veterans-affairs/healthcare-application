@@ -1,3 +1,6 @@
+'use strict'; // eslint-disable-line
+const soap = require('soap');
+const request = require('request');
 const router = require('express').Router(); // eslint-disable-line
 
 const ApplicationJsonSchema = require('../../common/schema/application');
@@ -5,22 +8,42 @@ const validate = require('../../common/schema/validator').compile(ApplicationJso
 const veteranToSaveSubmitForm = require('../enrollment-system').veteranToSaveSubmitForm;
 
 function returnRouter(options) {
+  const config = options.config;
+  const readTLSArtifacts = require('../utils/tls')(config).readTLSArtifacts;
+  let soapClient = null;
+
+  const tlsArtifacts = readTLSArtifacts();
+
+  const wsdlUri = config.soap.wsdl || `${config.soap.endpoint}?wsdl`;
+  soap.createClient(
+    wsdlUri,
+    {
+      request: request.defaults(tlsArtifacts),
+      endpoint: config.soap.endpoint,
+      wsdl_options: tlsArtifacts  // eslint-disable-line
+    },
+    (err, client) => {
+      // TODO(awong): Handle error on connect so the server does not flap if the ES system is down.
+      if (err) {
+        options.logger.error('SOAP Client creation failed - ERROR', err);
+        throw new Error('Unable to connect to VoaService');
+      }
+      soapClient = client;
+    });
   function submitApplication(req, res) {
     const contentType = req.get('Content-Type');
     if (contentType !== 'application/json') {
       res.status(400).json({ error: `Expects application/json content-type. Got "${contentType}"` });
       return;
     }
-
     const form = req.body;
     options.logger.verbose('Form Submission', form);
     // TODO(awong): Use schema to sanitize input in addition to validation.
     const valid = validate(form, ApplicationJsonSchema, {});
 
     if (valid) {
-      console.log(options.soapClient);
       const saveSubmitFormMsg = veteranToSaveSubmitForm(form);
-      options.soapClient.saveSubmitForm(saveSubmitFormMsg, (err, response) => {
+      soapClient.saveSubmitForm(saveSubmitFormMsg, (err, response) => {
         if (err) {
           options.logger.info('voaService response - error', err);
           // TODO(awong): This may leak server config info on error. Is that a problem?
@@ -46,7 +69,7 @@ function returnRouter(options) {
     const getFormSubmissionStatusMsg = {
       formSubmissionId: id
     };
-    options.soapClient.getFormSubmissionStatus(getFormSubmissionStatusMsg, (err, response) => {
+    soapClient.getFormSubmissionStatus(getFormSubmissionStatusMsg, (err, response) => {
       if (err) {
         options.logger.info('voaService response had error', err);
         // TODO(awong): This may leak server config info on error. Is that a problem?
