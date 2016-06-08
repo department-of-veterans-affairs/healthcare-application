@@ -4,18 +4,12 @@ const config = require('../../../config');
 // FIXME: This should come in from a config variable
 const url = 'http://localhost:' + config.port; // eslint-disable-line
 
-// Test timeout constants
-// TODO(awong): Move to a common file usable for all tests.
-const timeouts = {
-  normal: 500,     // The normal timeout to use. For most opreations w/o a server roundtrip, this should be more than fast enough.
-  slow: 1000,      // A slow timeout incase the page is doing something complex.
-  molasses: 5000,  // A really really slow timeout. This should rarely be used.
-};
+const common = require('../utils/common.js');
 
 // TODO(awong): Move this into a custom command or assertion that can be used with client.expect.element().
 function expectNavigateAwayFrom(client, urlSubstring) {
   client.expect.element('.js-test-location').attribute('data-location')
-    .to.not.contain(urlSubstring).before(timeouts.normal);
+    .to.not.contain(urlSubstring).before(common.timeouts.normal);
 }
 
 module.exports = {
@@ -25,21 +19,16 @@ module.exports = {
     // Ensure introduction page renders.
     client
       .url(url)
-      .waitForElementVisible('body', timeouts.normal)
+      .waitForElementVisible('body', common.timeouts.normal)
       .assert.title('Apply for Health Care: Vets.gov')
-      .waitForElementVisible('.form-panel', timeouts.slow)  // First render of React may be slow.
+      .waitForElementVisible('.form-panel', common.timeouts.slow)  // First render of React may be slow.
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/introduction');
 
     // Personal Information page.
     client.expect.element('input[name="fname"]').to.be.visible;
-    client
-      .setValue('input[name="fname"]', 'William')
-      .setValue('input[name="mname"]', 'Swan')
-      .setValue('input[name="lname"]', 'Shakespeare')
-      .setValue('select[name="suffix"]', 'Jr.')
-      .setValue('input[name="mothersMaidenName"]', 'Arden')
-      .click('.form-panel .usa-button-primary');
+    common.completePersonalInformation(client, common.testValues, false);
+    client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/veteran-information/personal-information');
 
     // Birth information page.
@@ -139,7 +128,7 @@ module.exports = {
     client
       .setValue('select[name="maritalStatus"]', 'Married')
       .click('.form-panel');
-    client.expect.element('input[name="fname"]').to.be.visible.before(timeouts.normal);
+    client.expect.element('input[name="fname"]').to.be.visible.before(common.timeouts.normal);
 
     client
       .setValue('input[name="fname"]', 'Anne')
@@ -154,7 +143,7 @@ module.exports = {
       .setValue('select[name="marriageDay"]', '1')
       .setValue('input[name="marriageYear"]', '2010')
       .click('input[name="sameAddress-1"] + label');
-    client.expect.element('input[name="address"]').to.be.visible.before(timeouts.normal);
+    client.expect.element('input[name="address"]').to.be.visible.before(common.timeouts.normal);
 
     client
       .setValue('input[name="address"]', '115 S Michigan Ave')
@@ -171,7 +160,7 @@ module.exports = {
     // Child Information Page.
     client.expect.element('input[name="hasChildrenToReport-0"] + label').to.be.visible;
     client.click('input[name="hasChildrenToReport-0"] + label');
-    client.expect.element('input[name="fname"]').to.be.visible.before(timeouts.normal);
+    client.expect.element('input[name="fname"]').to.be.visible.before(common.timeouts.normal);
     client
       .setValue('input[name="fname"]', 'Hamnet')
       .setValue('input[name="mname"]', 'Dirtbike')
@@ -231,7 +220,7 @@ module.exports = {
     // Insurance Information Page.
     client.expect.element('input[name="isCoveredByHealthInsurance-0"] + label').to.be.visible;
     client.click('input[name="isCoveredByHealthInsurance-0"] + label');
-    client.expect.element('input[name="insuranceName"]').to.be.visible.before(timeouts.normal);
+    client.expect.element('input[name="insuranceName"]').to.be.visible.before(common.timeouts.normal);
     client
       .setValue('input[name="insuranceName"]', 'BCBS')
       .setValue('input[name="insurancePolicyHolderName"]', 'William Shakespeare')
