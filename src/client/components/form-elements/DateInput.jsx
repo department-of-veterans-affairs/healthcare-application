@@ -4,6 +4,8 @@ import _ from 'lodash';
 import ErrorableSelect from '../form-elements/ErrorableSelect';
 import ErrorableNumberInput from '../form-elements/ErrorableNumberInput';
 
+import ToolTip from '../form-elements/ToolTip';
+
 import { validateIfDirtyDate, isBlank, isValidDate } from '../../utils/validations';
 import { months, days } from '../../utils/options-for-select.js';
 
@@ -16,6 +18,8 @@ import { months, days } from '../../utils/options-for-select.js';
  * `validation` - function. Specific date validation to run if necessary.
  * `label` - string. Label for entire question.
  * `name` - string. Used to create unique name attributes for each input.
+ * `toolTipText` - String with help text for user.
+ * `tabIndex` - Number for keyboard tab order.
  * `day` - number. Value of day.
  * `month` - number. Value of month.
  * `year` - number. Value of year.
@@ -68,6 +72,16 @@ class DateInput extends React.Component {
       errorSpan = <span className="usa-input-error-message" id={`${errorSpanId}`}>{this.props.errorMessage}</span>;
     }
 
+    // Adds ToolTip if text is provided.
+    let toolTip;
+    if (this.props.toolTipText) {
+      toolTip = (
+        <ToolTip
+            tabIndex={this.props.tabIndex}
+            toolTipText={this.props.toolTipText}/>
+      );
+    }
+
     // Calculate required.
     let requiredSpan = undefined;
     if (this.props.required) {
@@ -111,6 +125,7 @@ class DateInput extends React.Component {
                   onValueChange={(update) => {this.handleChange('year', update);}}/>
             </div>
           </div>
+          {toolTip}
         </div>
       </div>
     );
