@@ -1,3 +1,5 @@
+const request = require('request');
+
 const report = require('../report');
 const config = require('../../../config');
 
@@ -14,7 +16,18 @@ function expectNavigateAwayFrom(client, urlSubstring) {
 
 module.exports = {
   'Begin application': (client) => {
-    console.log(url);
+    request({
+      uri: `${url}/api/hca/v1/mock`,
+      method: 'POST',
+      json: {
+        resource: 'application',
+        verb: 'post',
+        value: {
+          formSubmissionId: '123fake-submission-id-567',
+          timeStamp: '2016-05-16'
+        }
+      }
+    });
 
     // Ensure introduction page renders.
     client
@@ -241,9 +254,11 @@ module.exports = {
     // Review and Submit Page.
     client.expect.element('button.edit-btn').to.be.visible;
     client.click('.form-panel .usa-button-primary');
-    // TODO: test that submission works and they are redirect to the confirmation page. Uncomment
-    // this expectation when that works.
-    // expectNavigateAwayFrom(client, '/review-and-submit');
+    client.expect.element('.js-test-location').attribute('data-location')
+      .to.not.contain('/review-and-submit').before(common.timeouts.submission);
+
+    // Submit message
+    client.expect.element('.success-alert-box').to.be.visible;
 
 
     client.end();
