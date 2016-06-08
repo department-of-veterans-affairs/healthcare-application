@@ -108,10 +108,10 @@ class GrowableTable extends React.Component {
                   })}
               </div>
               <div className="small-3 columns">
-                <button className="usa-button-outline short" onClick={(event) => this.handleEdit(event)} data-key={obj.key}><i className="fa fa-pencil"></i>Edit</button>
+                <button className="usa-button-outline short" onClick={(event) => this.handleEdit(event)} data-key={obj.key}><i className="fa before-text fa-pencil"></i>Edit</button>
               </div>
               <div className="small-3 columns">
-                <button className="usa-button-outline short" onClick={this.handleRemove} data-index={index}><i className="fa fa-trash-o"></i>Remove</button>
+                <button className="usa-button-outline short" onClick={this.handleRemove} data-index={index}><i className="fa before-text fa-trash-o"></i>Remove</button>
               </div>
             </div>
             <hr/>
@@ -122,7 +122,7 @@ class GrowableTable extends React.Component {
           <div key={reactKey++}>
             <div className="row">
               <div className="small-3 right columns">
-                <button className="usa-button-outline short" onClick={this.handleRemove} data-index={index}><i className="fa fa-trash-o"></i>Remove</button>
+                <button className="usa-button-outline short" onClick={this.handleRemove} data-index={index}><i className="fa before-text fa-trash-o"></i>Remove</button>
               </div>
             </div>
             <div className="row" key={obj.key}>
@@ -142,7 +142,7 @@ class GrowableTable extends React.Component {
             </div>
             <div className="row">
               <div className="small-3 right columns">
-                <button className="short" onClick={(event) => this.handleSave(event)} data-key={obj.key}><i className="fa fa-check"></i>Save</button>
+                <button className="short" onClick={(event) => this.handleSave(event)} data-key={obj.key}><i className="fa before-text fa-check"></i>Save</button>
               </div>
             </div>
             <hr/>
@@ -159,7 +159,7 @@ class GrowableTable extends React.Component {
         {rowElements}
         <div className="row">
           <div className="small-3 small-centered columns">
-            <button className="usa-button-outline short" onClick={this.handleAdd}><i className="fa fa-plus"></i>Add</button>
+            <button className="usa-button-outline short" onClick={this.handleAdd}><i className="fa before-text fa-plus"></i>Add</button>
           </div>
         </div>
       </div>

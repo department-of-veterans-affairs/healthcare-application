@@ -108,8 +108,8 @@ class HealthCareApp extends React.Component {
         response.json().then(data => {
           this.props.onUpdateSubmissionStatus('applicationSubmitted', data);
           this.props.onCompletedStatus(path);
-          this.props.onUpdateSubmissionId(data.formSubmissionId);
-          this.props.onUpdateSubmissionTimestamp(data.timeStamp);
+          this.props.onUpdateSubmissionId(data.response.formSubmissionId);
+          this.props.onUpdateSubmissionTimestamp(data.response.timeStamp);
         });
         setTimeout(() => { // eslint-disable-line scanjs-rules/call_setTimeout
           this.context.router.push(this.getUrl('next'));
