@@ -2,21 +2,6 @@
 const soap = require('soap');
 const request = require('request');
 
-const validIdForEnv = (env) => {
-  switch (env) {
-  // SQA
-  // 382363508
-    case 'development':
-      return '377609264';
-    case 'staging':
-      return '3623520284';
-    case 'production':
-      return '19831620752';
-    default:
-      return undefined;
-  }
-};
-
 const returnRouter = (options) => {
   const router = require('express').Router(); // eslint-disable-line
   const config = options.config;
@@ -48,7 +33,7 @@ const returnRouter = (options) => {
     res.status(200).end();
   });
   router.get('/healthcheck/es', (req, res) => {
-    const id = validIdForEnv(options.config.environment);
+    const id = config.validFormSubmissionId;
 
     if (id === undefined) {
       options.logger.info('Get Application Status - ERROR - ID REQUIRED');
