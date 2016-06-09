@@ -62,14 +62,15 @@ class ContactInformationSection extends React.Component {
               email={this.props.data.emailConfirmation}
               additionalClass="second-email"
               onValueChange={(update) => {this.props.onStateChange('emailConfirmation', update);}}/>
+
           {/* TODO: Change validation to accept phone number without dashes. */}
-          <Phone required
+          <Phone
               label="Home telephone number"
               value={this.props.data.homePhone}
               additionalClass="home-phone"
               onValueChange={(update) => {this.props.onStateChange('homePhone', update);}}/>
 
-          <Phone required
+          <Phone
               label="Mobile telephone number"
               value={this.props.data.mobilePhone}
               additionalClass="mobile-phone"
