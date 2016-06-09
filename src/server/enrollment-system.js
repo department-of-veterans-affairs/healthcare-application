@@ -88,6 +88,37 @@ function spanishHispanicToSDSCode(isSpanishHispanicLatino) {
 }
 
 /**
+ * Returns SDS code representing the indication of Spanish/Hispanic/Latino ethnicity.
+ *
+ * Codes are from the VHA Standard Data Service (ADRDEV01) HL7 24 Ethnicity Map List.
+ *
+ * @param {Boolean} isSpanishHispanicLatino
+ * @returns {String} VHA ethnicity SDS code.
+ */
+// TODO(awong): Move to validations and add unittests.
+function phoneNumberFromVeteran(veteran) {
+  if (!veteran.homePhone && !veteran.mobilePhone) {
+    return undefined;
+  }
+  const phone = [];
+  if (veteran.homePhone) {
+    phone.push({
+      phoneNumber: veteran.homePhone,
+      type: '1'
+    });
+  }
+  if (veteran.mobilePhone) {
+    phone.push({
+      phoneNumber: veteran.mobilePhone,
+      type: '4'
+    });
+  }
+  return {
+    phone
+  };
+}
+
+/**
  * Returns array of SDS codes representing the claimed races of the veteran.
  *
  * Codes are from the VHA Standard Data Service (ADRDEV01) HL7 24 Race Map List.
@@ -1050,18 +1081,7 @@ function veteranToDemographicsInfo(veteran) {
           }
         ]
       },
-      phones: {
-        phone: [
-          {
-            phoneNumber: veteran.homePhone,
-            type: '1', // TODO(awong): Magic number: Code is from VHA Standard Data Service (ADRDEV01) Phone Contact Type List
-          },
-          {
-            phoneNumber: veteran.mobilePhone,
-            type: '4', // TODO(awong): Magic number: Code is from VHA Standard Data Service (ADRDEV01) Phone Contact Type List
-          }
-        ]
-      },
+      phones: phoneNumberFromVeteran(veteran),
     },
     ethnicity: spanishHispanicToSDSCode(veteran.isSpanishHispanicLatino),
     maritalStatus: maritalStatusToSDSCode(veteran.maritalStatus),

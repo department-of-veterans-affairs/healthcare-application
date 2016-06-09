@@ -50,8 +50,8 @@ const testValues = {
   },
   email: 'bills@bard.com',
   emailConfirmation: 'bills@bard.com',
-  homePhone: '555-111-2323',
-  mobilePhone: '555-111-4545',
+  homePhone: '5551112323',
+  mobilePhone: '5551114545',
 
   provideFinancialInfo: '',
   understandsFinancialDisclosure: '',

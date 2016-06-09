@@ -178,10 +178,9 @@ module.exports = {
     veteranFullName: {
       $ref: '#/definitions/fullName'
     },
+    //  Revisit how to validate that this is either empty or a string between 2 and 35 characters
     mothersMaidenName: {
-      type: 'string',
-      pattern: '^\w{0}$|^\w{2,35}$'
-
+      type: 'string'
     },
     veteranSocialSecurityNumber: {
       $ref: '#/definitions/ssn'
