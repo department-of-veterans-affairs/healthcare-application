@@ -88,14 +88,12 @@ function spanishHispanicToSDSCode(isSpanishHispanicLatino) {
 }
 
 /**
- * Returns SDS code representing the indication of Spanish/Hispanic/Latino ethnicity.
+ * Validates the phone number fields for the veteran and returns the validated form or undefined
+ * since no phone number is required for the ES System.
  *
- * Codes are from the VHA Standard Data Service (ADRDEV01) HL7 24 Ethnicity Map List.
- *
- * @param {Boolean} isSpanishHispanicLatino
- * @returns {String} VHA ethnicity SDS code.
+ * @param {Object} veteran The veteran resource
+ * @returns undefined|{Array} Undefined or an object containing the array of phone numbers
  */
-// TODO(awong): Move to validations and add unittests.
 function phoneNumberFromVeteran(veteran) {
   if (!veteran.homePhone && !veteran.mobilePhone) {
     return undefined;
