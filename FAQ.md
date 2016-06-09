@@ -1,13 +1,23 @@
 # Questions no one asked (yet)
 
-## What development environment do I need beyond what is in `README.md`?
+## Q. I get an error during `npm install`
 
-### OSX
+If you get an error like:
 
-#### Yosemite 10.10.5
+```
+  SOLINK(target) Release/xmljs.node
+ld: library not found for -lgcc_s.10.5
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+```
 
-Installing Xcode Version 7.2.1 (7C1002) should yield the following tools
-and files:
+...you might have a mis-installed tool chain.
+
+On OSX Yosemite 10.10.5, you can fix this by uninstalling Xcode.
+
+To do this, remove Xcode from the `/Applications` folder then delete the folder via:
+`rm -rf /Library/Developer/CommandLineTools/`
+
+After installation, you should have the following versions:
 
 ```bash
 $ find /usr/lib -name '*gcc_s*'
@@ -31,15 +41,4 @@ Configured with: --prefix=/Applications/Xcode.app/Contents/Developer/usr --with-
 Apple LLVM version 7.0.2 (clang-700.1.81)
 Target: x86_64-apple-darwin14.5.0
 Thread model: posix
-```
-
-#### El Capitan 10.11.5
-
-```bash
-$ gcc --version
-Configured with: --prefix=/Library/Developer/CommandLineTools/usr --with-gxx-include-dir=/usr/include/c++/4.2.1
-Apple LLVM version 7.3.0 (clang-703.0.31)
-Target: x86_64-apple-darwin15.5.0
-Thread model: posix
-InstalledDir: /Library/Developer/CommandLineTools/usr/bin
 ```
