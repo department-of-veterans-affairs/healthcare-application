@@ -52,7 +52,7 @@ class ReviewCollapsiblePanel extends React.Component {
     const currentPath = this.props.updatePath;
     this.props.onUpdateVerifiedStatus(currentPath, true);
     // TODO: find a better solution for this or a different implementation.
-    setTimeout(() => this.scrollToTop(), 100);
+    setTimeout(() => this.scrollToTop(), 100);  // eslint-disable-line scanjs-rules/call_setTimeout
   }
 
   handleEdit() {
