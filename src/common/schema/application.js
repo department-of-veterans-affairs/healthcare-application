@@ -119,9 +119,7 @@ module.exports = {
           maxLength: 30
         },
         middle: {
-          type: 'string',
-          minLength: 1,
-          maxLength: 30
+          type: 'string'
         },
         last: {
           type: 'string',
@@ -182,8 +180,8 @@ module.exports = {
     },
     mothersMaidenName: {
       type: 'string',
-      minLength: 2,
-      maxLength: 35
+      pattern: '^\w{0}$|^\w{2,35}$'
+
     },
     veteranSocialSecurityNumber: {
       $ref: '#/definitions/ssn'
