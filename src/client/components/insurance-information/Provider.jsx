@@ -7,6 +7,7 @@ class Provider extends React.Component {
   render() {
     let content;
 
+    // TODO: to look into why provider data isn't getting updated in the store as it's being entered
     if (this.props.view === 'collapsed') {
       content = this.props.data.insuranceName.value;
     } else {

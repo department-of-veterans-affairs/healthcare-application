@@ -17,6 +17,7 @@ class Child extends React.Component {
     const message = 'Please enter only numbers and a decimal point if necessary (no commas or currency signs)';
     let content;
 
+    // TODO: to look into why children data isn't getting updated in the store as it's being entered
     if (this.props.view === 'collapsed') {
       content = `${this.props.data.childFullName.first.value} ${this.props.data.childFullName.last.value}`;
     } else {

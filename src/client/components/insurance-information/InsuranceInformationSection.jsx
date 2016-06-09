@@ -43,6 +43,8 @@ class InsuranceInformationSection extends React.Component {
             path="/insurance-information/general"
             rows={this.props.data.providers}/>
       );
+    } else {
+      this.props.data.providers.length = 0;
     }
 
 

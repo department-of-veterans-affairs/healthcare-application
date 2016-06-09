@@ -148,8 +148,9 @@ function isValidEntryDateField(date, dateOfBirth) {
   let adjustedDateOfBirth;
 
   if (!isBlankDateField(date) && !isBlankDateField(dateOfBirth)) {
-    adjustedDate = new Date(date.year.value, date.month.value, date.day.value);
-    adjustedDateOfBirth = new Date(Number(dateOfBirth.year.value) + 15, dateOfBirth.month.value, dateOfBirth.day.value);
+    const adjustedBirthYear = Number(dateOfBirth.year.value) + 15;
+    adjustedDate = new Date(`${date.month.value}/${date.day.value}/${date.year.value}`);
+    adjustedDateOfBirth = new Date(`${dateOfBirth.month.value}/${dateOfBirth.day.value}/${adjustedBirthYear}`);
 
     if (adjustedDate < adjustedDateOfBirth) {
       return false;
@@ -162,13 +163,15 @@ function isValidEntryDateField(date, dateOfBirth) {
 function isValidDischargeDateField(date, entryDate) {
   let adjustedDate;
   let adjustedEntryDate;
-  const today = new Date();
+  const d = new Date();
+  const today = new Date(d.setHours(0, 0, 0, 0));
 
   if (!isBlankDateField(date) && !isBlankDateField(entryDate)) {
-    adjustedDate = new Date(date.year.value, date.month.value, date.day.value);
-    adjustedEntryDate = new Date(entryDate.year.value, entryDate.month.value, entryDate.day.value);
+    adjustedDate = new Date(`${date.month.value}/${date.day.value}/${date.year.value}`);
+    adjustedEntryDate = new Date(`${entryDate.month.value}/${entryDate.day.value}/${entryDate.year.value}`);
 
-    if (adjustedDate < adjustedEntryDate || adjustedDate > today) {
+    // Validation Rule: Discharge date must be after entry date and before today
+    if (adjustedDate < adjustedEntryDate || adjustedDate >= today) {
       return false;
     }
   }
@@ -365,7 +368,6 @@ function isValidServiceInformation(data) {
 
 function isValidForm(data) {
   return isValidPersonalInfoSection(data) &&
-  isValidPersonalInfoSection(data) &&
   isValidBirthInformationSection(data) &&
   isValidDemographicInformation(data) &&
   isValidVeteranAddress(data) &&
