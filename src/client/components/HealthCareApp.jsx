@@ -114,7 +114,7 @@ class HealthCareApp extends React.Component {
         setTimeout(() => { // eslint-disable-line scanjs-rules/call_setTimeout
           this.context.router.push(this.getUrl('next'));
           this.scrollToTop();
-        }, 5000);
+        }, 1000);
       }).catch(error => {
         // TODO(crew): Pass meaningful errors to the client.
         setTimeout(() => { // eslint-disable-line scanjs-rules/call_setTimeout
