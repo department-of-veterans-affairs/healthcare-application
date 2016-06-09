@@ -205,7 +205,11 @@ class HealthCareApp extends React.Component {
       buttons = (
         <div className="row progress-buttons">
           <div className="small-6 medium-5 columns">
-            {nextButton}
+            <ProgressButton
+                onButtonClick={this.handleContinue}
+                buttonText="Get Started"
+                buttonClass="usa-button-primary"
+                afterText="»"/>
           </div>
         </div>
       );
@@ -213,7 +217,10 @@ class HealthCareApp extends React.Component {
       buttons = (
         <div className="row progress-buttons">
           <div className="small-6 medium-5 columns">
-            <button className="usa-button-primary">Back to Main Page</button>
+            {/* TODO: Figure out where this button should take the user. */}
+            <a href="www.vets.gov">
+              <button className="usa-button-primary">Back to Main Page</button>
+            </a>
           </div>
         </div>
       );

@@ -20,7 +20,7 @@ class IntroductionSection extends React.Component {
             </p>
             <p>
               <strong>
-                Note: You will not be able to save once you have started the form. Please complete this form in one session.
+                Note: You will not be able to save your progress once you have started the form.
               </strong>
             </p>
           </div>
