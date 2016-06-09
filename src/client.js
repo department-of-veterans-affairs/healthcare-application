@@ -24,7 +24,7 @@ require('polyfill-function-prototype-bind');
 // require('foundation-sites');
 
 const ReactEntry = require('./client/react-entry.jsx');
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => { // eslint-disable-line scanjs-rules/call_addEventListener
   ReactEntry.init();
 });
 window.ReactEntry = ReactEntry;  // Attach to window for easy debugging.
