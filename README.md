@@ -458,7 +458,7 @@ Note that the verb can be left out and it will default to `get`. The verb is cas
 
 ### Docker
 #### Environment setup
-Docker is being used for production deploys of this application. The Dockerfile
+Docker is being used for Travis deploys of this application. The Dockerfile
 builds an Alpine Linux based node environment.
 
 On OsX and Windows, Docker does not yet have native kernel support. Instead, a
