@@ -17,7 +17,7 @@ class ContactInformationSection extends React.Component {
   }
 
   confirmEmail() {
-    if (this.props.data.email.value !== this.props.data.emailConfirmation.value) {
+    if (this.props.data.email.value.toLowerCase() !== this.props.data.emailConfirmation.value.toLowerCase()) {
       return 'Please ensure your entries match';
     }
 
