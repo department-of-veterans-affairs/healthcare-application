@@ -2,7 +2,8 @@
   "form": {
     "formIdentifier": {
       "type": "100",
-      "value": "1010EZ"
+      "value": "1010EZ",
+      "version": "1986360435"
     },
     "summary": {
       "demographics": {
