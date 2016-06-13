@@ -17,7 +17,7 @@ class ContactInformationSection extends React.Component {
   }
 
   confirmEmail() {
-    if (this.props.data.email.value !== this.props.data.emailConfirmation.value) {
+    if (this.props.data.email.value.toLowerCase() !== this.props.data.emailConfirmation.value.toLowerCase()) {
       return 'Please ensure your entries match';
     }
 
@@ -50,7 +50,7 @@ class ContactInformationSection extends React.Component {
       </table>);
     } else {
       content = (<fieldset>
-        <legend>Permanent Address</legend>
+        <legend>Contact Information</legend>
         <div className="input-section">
           <Email label="Email address"
               email={this.props.data.email}
@@ -62,14 +62,15 @@ class ContactInformationSection extends React.Component {
               email={this.props.data.emailConfirmation}
               additionalClass="second-email"
               onValueChange={(update) => {this.props.onStateChange('emailConfirmation', update);}}/>
+
           {/* TODO: Change validation to accept phone number without dashes. */}
-          <Phone required
+          <Phone
               label="Home telephone number"
               value={this.props.data.homePhone}
               additionalClass="home-phone"
               onValueChange={(update) => {this.props.onStateChange('homePhone', update);}}/>
 
-          <Phone required
+          <Phone
               label="Mobile telephone number"
               value={this.props.data.mobilePhone}
               additionalClass="mobile-phone"

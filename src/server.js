@@ -1,10 +1,16 @@
+'use strict'; // eslint-disable-line
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const winston = require('winston');
 
-const options = { logger: winston };
 const config = require('../config');
+
+const options = {
+  config,
+  logger: winston
+};
+
 const application = require('./server/routes/application');
 const status = require('./server/routes/status');
 const mockapi = require('./server/routes/mockapi');

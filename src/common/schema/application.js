@@ -119,9 +119,7 @@ module.exports = {
           maxLength: 30
         },
         middle: {
-          type: 'string',
-          minLength: 1,
-          maxLength: 30
+          type: 'string'
         },
         last: {
           type: 'string',
@@ -180,10 +178,9 @@ module.exports = {
     veteranFullName: {
       $ref: '#/definitions/fullName'
     },
+    //  Revisit how to validate that this is either empty or a string between 2 and 35 characters
     mothersMaidenName: {
-      type: 'string',
-      minLength: 2,
-      maxLength: 35
+      type: 'string'
     },
     veteranSocialSecurityNumber: {
       $ref: '#/definitions/ssn'
