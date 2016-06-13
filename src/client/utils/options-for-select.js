@@ -377,7 +377,10 @@ const states = {
 
 const suffixes = [
   'Jr.',
-  'Sr.'
+  'Sr.',
+  'II',
+  'III',
+  'IV'
 ];
 
 const genders = [
