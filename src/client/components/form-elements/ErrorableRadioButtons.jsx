@@ -1,6 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 
+import ToolTip from '../form-elements/ToolTip';
+
 import { makeField } from '../../../common/fields.js';
 
 /**
@@ -10,6 +12,8 @@ import { makeField } from '../../../common/fields.js';
 
  * `label` - String for the group field label.
  * `name` - String for the name attribute.
+ * `toolTipText` - String with help text for user.
+ * `tabIndex` - Number for keyboard tab order.
  * `options` - Array of options to populate group.
  * `required` - is this field required.
  * `value` - string. Value of the select field.
@@ -37,6 +41,16 @@ class ErrorableRadioButtons extends React.Component {
     if (this.props.errorMessage) {
       errorSpanId = `${this.inputId}-error-message`;
       errorSpan = <span className="usa-input-error-message" id={`${errorSpanId}`}>{this.props.errorMessage}</span>;
+    }
+
+    // Addes ToolTip if text is provided.
+    let toolTip;
+    if (this.props.toolTipText) {
+      toolTip = (
+        <ToolTip
+            tabIndex={this.props.tabIndex}
+            toolTipText={this.props.toolTipText}/>
+      );
     }
 
     // Calculate required.
@@ -85,6 +99,7 @@ class ErrorableRadioButtons extends React.Component {
         </label>
         {errorSpan}
         {optionElements}
+        {toolTip}
       </div>
     );
   }
