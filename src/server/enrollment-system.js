@@ -24,7 +24,10 @@ const formTemplate = {
     //  * form / formIdentifier / type, Not Applicable, Yes, "Data element is not a form captured element but provides the type of form submitted  (e.g., . 1010EZ)"
     formIdentifier: {
       type: '100',
-      value: '1010EZ'
+      value: '1010EZ',
+      // Version can act as a marker in the XML stored in ES that this request came from vets.gov
+      // "vets".each_byte.map{|b| b.to_s(16) }.join.to_i(16)
+      version: 1986360435
     },
     //  * identity / authenticationLevel / type, Not Applicable, No, Data element is not a form captured element but provides the  level of the Veterans' authentication.
     //  * identity / veteranIdentifier / type, Not Applicable, Yes, "Data element is not a form captured element but provides the Veteran Identifer type (e.g,  EDIPI)"
