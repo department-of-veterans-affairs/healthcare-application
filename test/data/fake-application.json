@@ -2,7 +2,7 @@
   "veteranFullName": {
     "first": "FirstName",
     "middle": "MiddleName",
-    "last": "LastName",
+    "last": "ZZTEST",
     "suffix": "Jr."
   },
   "mothersMaidenName": "Maiden",
@@ -112,7 +112,7 @@
   "providers": [
     {
       "insuranceName": "MyInsruance",
-      "insurancePolicyHolderName": "FirstName LastName",
+      "insurancePolicyHolderName": "FirstName ZZTEST",
       "insurancePolicyNumber": "P1234",
       "insuranceGroupCode": "G1234"
     }

@@ -10,7 +10,7 @@ const testValues = {
   veteranFullName: {
     first: 'William',
     middle: 'John',
-    last: 'Shakespeare',
+    last: 'ZZTEST',
     suffix: 'Jr.'
   },
   mothersMaidenName: 'Arden',
@@ -133,7 +133,7 @@ const testValues = {
   providers: [
     {
       insuranceName: 'BCBS',
-      insurancePolicyHolderName: 'William Shakespeare',
+      insurancePolicyHolderName: 'William ZZTEST',
       insurancePolicyNumber: '100',
       insuranceGroupCode: '200'
     }
