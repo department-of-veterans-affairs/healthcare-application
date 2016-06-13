@@ -19,7 +19,7 @@ function returnRouter(options) {
     const verbResponses = mockResponses[verb];
     let result = null;
     if (verbResponses) {
-      result = verbResponses[req.params.resource];
+      result = { response: verbResponses[req.params.resource] };
     }
 
     if (!result) {
