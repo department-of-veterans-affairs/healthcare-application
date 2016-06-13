@@ -273,3 +273,15 @@ button.hca-button-green {
   text-transform: capitalize;
 }
 
+.hca-tooltip {
+  max-width: 46rem;
+  width: 100%;
+  button {
+    background: transparent;
+    color: $color-primary;
+    text-decoration: underline;
+    padding: 0;
+    font-weight: 400;
+    text-align: left;
+  }
+}
