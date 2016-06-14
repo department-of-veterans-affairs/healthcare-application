@@ -1,6 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 
+import ToolTip from '../form-elements/ToolTip';
+
 import { makeField } from '../../../common/fields.js';
 
 /**
@@ -11,6 +13,8 @@ import { makeField } from '../../../common/fields.js';
  *                  When defined, indicates select has a validation error.
  * `label` - String for the select field label.
  * `name` - String for the select name attribute.
+ * `toolTipText` - String with help text for user.
+ * `tabIndex` - Number for keyboard tab order.
  * `autocomplete` - String for the select autocomplete attribute.
  * `options` - Array of options to populate select.
  * `required` - boolean. Render marker indicating field is required.
@@ -40,6 +44,16 @@ class ErrorableSelect extends React.Component {
     if (this.props.errorMessage) {
       errorSpanId = `${this.selectId}-error-message`;
       errorSpan = <span className="usa-input-error-message" id={`${errorSpanId}`}>{this.props.errorMessage}</span>;
+    }
+
+  // Addes ToolTip if text is provided.
+    let toolTip;
+    if (this.props.toolTipText) {
+      toolTip = (
+        <ToolTip
+            tabIndex={this.props.tabIndex}
+            toolTipText={this.props.toolTipText}/>
+      );
     }
 
     // Calculate required.
@@ -90,6 +104,7 @@ class ErrorableSelect extends React.Component {
           <option value=""></option>
           {optionElements}
         </select>
+        {toolTip}
       </div>
     );
   }

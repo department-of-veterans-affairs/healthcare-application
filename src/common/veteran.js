@@ -145,7 +145,7 @@ const completeVeteran = {
       dirty: true
     },
     last: {
-      value: 'LastName',
+      value: 'ZZTEST',
       dirty: true
     },
     suffix: {
@@ -558,7 +558,7 @@ const completeVeteran = {
         dirty: true
       },
       insurancePolicyHolderName: {
-        value: 'FirstName LastName',
+        value: 'FirstName ZZTEST',
         dirty: true
       },
       insurancePolicyNumber: {

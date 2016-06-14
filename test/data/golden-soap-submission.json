@@ -232,7 +232,7 @@
             "companyName": "MyInsruance",
             "groupNumber": "G1234",
             "insuranceMappingTypeName": "PI",
-            "policyHolderName": "FirstName LastName",
+            "policyHolderName": "FirstName ZZTEST",
             "policyNumber": "P1234"
           },
           {
@@ -267,7 +267,7 @@
       "personInfo": {
         "firstName": "FirstName",
         "middleName": "MiddleName",
-        "lastName": "LastName",
+        "lastName": "ZZTEST",
         "suffix": "Jr.",
         "ssnText": "111111234",
         "gender": "F",

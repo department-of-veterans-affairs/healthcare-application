@@ -1,6 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 
+import ToolTip from '../form-elements/ToolTip';
+
 import { makeField } from '../../../common/fields.js';
 
 /**
@@ -11,6 +13,8 @@ import { makeField } from '../../../common/fields.js';
  *                  When defined, indicates input has a validation error.
  * `label` - String for the input field label.
  * `name` - String for the input name attribute.
+ * `toolTipText` - String with help text for user.
+ * `tabIndex` - Number for keyboard tab order.
  * `autocomplete` - String for the input autocomplete attribute.
  * `placeholder` - placeholder string for input field.
  * `required` - boolean. Render marker indicating field is required.
@@ -46,6 +50,16 @@ class ErrorableTextInput extends React.Component {
       labelErrorClass = 'usa-input-error-label';
     }
 
+    // Addes ToolTip if text is provided.
+    let toolTip;
+    if (this.props.toolTipText) {
+      toolTip = (
+        <ToolTip
+            tabIndex={this.props.tabIndex}
+            toolTipText={this.props.toolTipText}/>
+      );
+    }
+
     // Calculate required.
     let requiredSpan = undefined;
     if (this.props.required) {
@@ -67,10 +81,12 @@ class ErrorableTextInput extends React.Component {
             id={this.inputId}
             placeholder={this.props.placeholder}
             name={this.props.name}
+            tabIndex={this.props.tabIndex}
             autoComplete={this.props.autocomplete}
             type="text"
             value={this.props.field.value}
             onChange={this.handleChange}/>
+            {toolTip}
       </div>
     );
   }
