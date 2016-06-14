@@ -641,6 +641,10 @@ const completeVeteran = {
 };
 
 function veteranToApplication(veteran) {
+  if (_.includes(['Never Married', 'Widowed', 'Divorced'], veteran.maritalStatus.value)) {
+    delete veteran.spouseAddress; // eslint-disable-line no-param-reassign
+  }
+
   return JSON.stringify(veteran, (key, value) => {
     // Remove properties that are not interesting to the API.
     switch (key) {
