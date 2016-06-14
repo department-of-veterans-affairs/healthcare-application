@@ -53,7 +53,6 @@ class FullName extends React.Component {
             errorMessage={this.validateRequiredFields(this.props.name.first, this.props.required) ? undefined : 'Please enter a valid name'}
             label="First Name"
             name="fname"
-            tabIndex="1"
             autocomplete="given-name"
             required={this.props.required}
             field={this.props.name.first}
@@ -63,7 +62,6 @@ class FullName extends React.Component {
             errorMessage={this.validateRequiredFields(this.props.name.middle, false) ? undefined : 'Please enter a valid name'}
             label="Middle Name"
             name="mname"
-            tabIndex="2"
             autocomplete="additional-name"
             field={this.props.name.middle}
             onValueChange={(update) => {this.handleChange('middle', update);}}/>
@@ -72,7 +70,6 @@ class FullName extends React.Component {
             errorMessage={this.validateRequiredFields(this.props.name.last, this.props.required) ? undefined : 'Please enter a valid name'}
             label="Last Name"
             name="lname"
-            tabIndex="3"
             autocomplete="family-name"
             required={this.props.required}
             field={this.props.name.last}
@@ -81,7 +78,6 @@ class FullName extends React.Component {
         <ErrorableSelect
             label="Suffix"
             name="suffix"
-            tabIndex="4"
             options={suffixes}
             value={this.props.name.suffix}
             onValueChange={(update) => {this.handleChange('suffix', update);}}/>
