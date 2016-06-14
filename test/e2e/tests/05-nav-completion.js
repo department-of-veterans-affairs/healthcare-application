@@ -67,7 +67,7 @@ module.exports = {
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/veteran-information/contact-information');
 
-    client.assert.cssClassPresent('.hca-process li.step:nth-child(1)', 'section-complete')
+    client.assert.cssClassPresent('.hca-process li.step:nth-child(1)', 'section-complete');
 
     // Military Service Information Page.
     client.expect.element('select[name="lastServiceBranch"]').to.be.visible;
@@ -80,7 +80,7 @@ module.exports = {
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/military-service/additional-information');
 
-    client.assert.cssClassPresent('.hca-process li.step:nth-child(2)', 'section-complete')
+    client.assert.cssClassPresent('.hca-process li.step:nth-child(2)', 'section-complete');
 
     // VA Benefits Basic Info page.
     client.expect.element('input[name="compensableVaServiceConnected-0"] + label').to.be.visible;
@@ -88,7 +88,7 @@ module.exports = {
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/va-benefits/basic-information');
 
-    client.assert.cssClassPresent('.hca-process li.step:nth-child(3)', 'section-complete')
+    client.assert.cssClassPresent('.hca-process li.step:nth-child(3)', 'section-complete');
 
     // Financial disclosure page.
     client.expect.element('input[name="provideFinancialInfo-0"] + label').to.be.visible;
@@ -118,7 +118,7 @@ module.exports = {
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/deductible-expenses');
 
-    client.assert.cssClassPresent('.hca-process li.step:nth-child(4)', 'section-complete')
+    client.assert.cssClassPresent('.hca-process li.step:nth-child(4)', 'section-complete');
 
     // Medicare and Medicaid Page.
     client.expect.element('input[name="isMedicaidEligible-0"] + label').to.be.visible;
@@ -138,7 +138,7 @@ module.exports = {
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/insurance-information/va-facility');
 
-    client.assert.cssClassPresent('.hca-process li.step:nth-child(5)', 'section-complete')
+    client.assert.cssClassPresent('.hca-process li.step:nth-child(5)', 'section-complete');
 
     // Review and Submit Page.
     client.expect.element('button.edit-btn').to.be.visible;
