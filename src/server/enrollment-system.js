@@ -485,6 +485,7 @@ function dischargeTypeToSDSCode(dischargeType) {
 //  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / serviceNumber, 1 to 15 digits, No,
 function veteranToMilitaryServiceInfo(veteran) {
   return {
+    dischargeDueToDisability: veteran.disabledInLineOfDuty,
     militaryServiceSiteRecords: {
       militaryServiceSiteRecord: {
         militaryServiceEpisodes: {

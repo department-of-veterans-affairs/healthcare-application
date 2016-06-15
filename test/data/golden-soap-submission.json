@@ -244,6 +244,7 @@
         ]
       },
       "militaryServiceInfo": {
+        "dischargeDueToDisability": "true",
         "militaryServiceSiteRecords": {
           "militaryServiceSiteRecord": {
             "militaryServiceEpisodes": {
