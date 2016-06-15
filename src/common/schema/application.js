@@ -251,9 +251,6 @@ module.exports = {
     mobilePhone: {
       $ref: '#/definitions/phone'
     },
-    provideFinancialInfo: {
-      type: 'boolean'
-    },
     understandsFinancialDisclosure: {
       type: 'boolean'
     },

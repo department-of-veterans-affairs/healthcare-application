@@ -188,6 +188,17 @@ function veteranToSpouseInfo(veteran) {
 }
 
 /**
+ * Adds discloseFinancialInformation if financial data exists in the field
+*/
+function optionalIncomeTest(hasData) {
+  if (hasData) {
+    return { discloseFinancialInformation: true };
+  }
+  return undefined;
+}
+
+
+/**
  * Extracts an incomeCollection object out of an API resource (eg., veteran, child, spouse)
  *
  * @param {Object} resource The resource with income data.
@@ -485,6 +496,7 @@ function dischargeTypeToSDSCode(dischargeType) {
 //  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / serviceNumber, 1 to 15 digits, No,
 function veteranToMilitaryServiceInfo(veteran) {
   return {
+    dischargeDueToDisability: veteran.disabledInLineOfDuty,
     militaryServiceSiteRecords: {
       militaryServiceSiteRecord: {
         militaryServiceEpisodes: {
@@ -829,25 +841,33 @@ function veteranToEnrollmentDeterminationInfo(veteran) {
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from employment.
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, "Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from FARM,  RANCH,  PROPERTY OR BUSINESS."
 function veteranToFinancialsInfo(veteran) {
+  const expenses = resourceToExpenseCollection({
+    educationExpense: veteran.deductibleEducationExpenses,
+    funeralExpense: veteran.deductibleFuneralExpenses,
+    medicalExpense: veteran.deductibleMedicalExpenses
+  });
+  const incomes = resourceToIncomeCollection({
+    grossIncome: veteran.veteranGrossIncome,
+    netIncome: veteran.veteranNetIncome,
+    otherIncome: veteran.veteranOtherIncome
+  });
+  const spouseIncome = resourceToIncomeCollection({
+    grossIncome: veteran.spouseGrossIncome,
+    netIncome: veteran.spouseNetIncome,
+    otherIncome: veteran.spouseOtherIncome
+  });
+  const dependentFinancials = veteranToDependentFinancialsCollection(veteran);
+
+  const hasIncomeData = expenses || incomes || spouseIncome || dependentFinancials;
+
   return {
+    incomeTest: optionalIncomeTest(hasIncomeData),
     financialStatement: {
-      expenses: resourceToExpenseCollection({
-        educationExpense: veteran.deductibleEducationExpenses,
-        funeralExpense: veteran.deductibleFuneralExpenses,
-        medicalExpense: veteran.deductibleMedicalExpenses
-      }),
-      incomes: resourceToIncomeCollection({
-        grossIncome: veteran.veteranGrossIncome,
-        netIncome: veteran.veteranNetIncome,
-        otherIncome: veteran.veteranOtherIncome
-      }),
+      expenses,
+      incomes,
       spouseFinancialsList: {
         spouseFinancials: {
-          incomes: resourceToIncomeCollection({
-            grossIncome: veteran.spouseGrossIncome,
-            netIncome: veteran.spouseNetIncome,
-            otherIncome: veteran.spouseOtherIncome
-          }),
+          incomes: spouseIncome,
           spouse: veteranToSpouseInfo(veteran),
           // TODO(awong): Verify this is right field. There is also contributionToSpouse in financialStatementInfo.
           contributedToSpousalSupport: yesNoToESBoolean(veteran.provideSupportLastYear),
@@ -856,7 +876,7 @@ function veteranToFinancialsInfo(veteran) {
       },
 
       marriedLastCalendarYear: veteran.maritalStatus === 'Married',
-      dependentFinancialsList: veteranToDependentFinancialsCollection(veteran),
+      dependentFinancialsList: dependentFinancials,
       numberOfDependentChildren: veteran.children.length,
     }
   };
