@@ -53,7 +53,6 @@ const testValues = {
   homePhone: '5551112323',
   mobilePhone: '5551114545',
 
-  provideFinancialInfo: '',
   understandsFinancialDisclosure: '',
 
   spouseFullName: {
@@ -263,11 +262,10 @@ function completeVaBenefits(client, data, onlyRequiredFields) {
 }
 
 function completeFinancialDisclosure(client, data, onlyRequiredFields) {
-  client
-    .click('input[name="provideFinancialInfo-0"] + label');
+  client.click('input[name="understandsFinancialDisclosure-0"] + label');
 
   if (!onlyRequiredFields) {
-    client.click('input[name="understandsFinancialDisclosure-0"] + label');
+    onlyRequiredFields;
   }
 }
 

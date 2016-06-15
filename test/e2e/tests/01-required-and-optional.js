@@ -129,9 +129,8 @@ module.exports = {
     expectNavigateAwayFrom(client, '/va-benefits/basic-information');
 
     // Financial disclosure page.
-    client.expect.element('input[name="provideFinancialInfo-1"] + label').to.be.visible;
+    client.expect.element('input[name="understandsFinancialDisclosure-0"] + label').to.be.visible;
     client
-      .click('input[name="provideFinancialInfo-1"] + label')
       .click('input[name="understandsFinancialDisclosure-0"] + label')
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/financial-disclosure');
