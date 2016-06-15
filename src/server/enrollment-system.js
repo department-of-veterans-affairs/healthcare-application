@@ -841,33 +841,33 @@ function veteranToEnrollmentDeterminationInfo(veteran) {
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from employment.
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, "Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from FARM,  RANCH,  PROPERTY OR BUSINESS."
 function veteranToFinancialsInfo(veteran) {
-  const _expenses = resourceToExpenseCollection({
+  const expenses = resourceToExpenseCollection({
     educationExpense: veteran.deductibleEducationExpenses,
     funeralExpense: veteran.deductibleFuneralExpenses,
     medicalExpense: veteran.deductibleMedicalExpenses
   });
-  const _incomes = resourceToIncomeCollection({
+  const incomes = resourceToIncomeCollection({
     grossIncome: veteran.veteranGrossIncome,
     netIncome: veteran.veteranNetIncome,
     otherIncome: veteran.veteranOtherIncome
   });
-  const _spouseIncome = resourceToIncomeCollection({
+  const spouseIncome = resourceToIncomeCollection({
     grossIncome: veteran.spouseGrossIncome,
     netIncome: veteran.spouseNetIncome,
     otherIncome: veteran.spouseOtherIncome
   });
-  const _dependentFinancials = veteranToDependentFinancialsCollection(veteran);
+  const dependentFinancials = veteranToDependentFinancialsCollection(veteran);
 
-  const hasIncomeData = _expenses || _incomes || _spouseIncome || _dependentFinancials;
+  const hasIncomeData = expenses || incomes || spouseIncome || dependentFinancials;
 
   return {
     incomeTest: optionalIncomeTest(hasIncomeData),
     financialStatement: {
-      expenses: _expenses,
-      incomes: _incomes,
+      expenses,
+      incomes,
       spouseFinancialsList: {
         spouseFinancials: {
-          incomes: _spouseIncome,
+          incomes: spouseIncome,
           spouse: veteranToSpouseInfo(veteran),
           // TODO(awong): Verify this is right field. There is also contributionToSpouse in financialStatementInfo.
           contributedToSpousalSupport: yesNoToESBoolean(veteran.provideSupportLastYear),
@@ -876,7 +876,7 @@ function veteranToFinancialsInfo(veteran) {
       },
 
       marriedLastCalendarYear: veteran.maritalStatus === 'Married',
-      dependentFinancialsList: _dependentFinancials,
+      dependentFinancialsList: dependentFinancials,
       numberOfDependentChildren: veteran.children.length,
     }
   };
