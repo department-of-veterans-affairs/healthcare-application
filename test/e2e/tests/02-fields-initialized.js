@@ -144,10 +144,7 @@ module.exports = {
     expectNavigateAwayFrom(client, '/va-benefits/basic-information');
 
     // Financial disclosure page.
-    client.expect.element('input[name="provideFinancialInfo-0"] + label').to.be.visible;
-    expectInputToNotBeSelected(client, 'input[name="provideFinancialInfo-0"]');
-    expectInputToNotBeSelected(client, 'input[name="provideFinancialInfo-1"]');
-    client.click('input[name="provideFinancialInfo-1"] + label');
+    client.expect.element('input[name="understandsFinancialDisclosure-0"] + label').to.be.visible;
     expectInputToNotBeSelected(client, 'input[name="understandsFinancialDisclosure-0"]');
     expectInputToNotBeSelected(client, 'input[name="understandsFinancialDisclosure-1"]');
     common.completeFinancialDisclosure(client, common.testValues, true);

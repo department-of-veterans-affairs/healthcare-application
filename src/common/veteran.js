@@ -53,7 +53,6 @@ const blankVeteran = {
   homePhone: makeField(''),
   mobilePhone: makeField(''),
 
-  provideFinancialInfo: makeField(''),  // TODO(awong): Ignored by ES System
   understandsFinancialDisclosure: makeField(''),  // TODO(awong): Ignored by ES System
 
   spouseFullName: {
@@ -256,10 +255,6 @@ const completeVeteran = {
   mobilePhone: {
     value: '1235551234',
     dirty: false
-  },
-  provideFinancialInfo: {
-    value: 'Y',
-    dirty: true
   },
   understandsFinancialDisclosure: {
     value: 'Y',
@@ -662,7 +657,6 @@ function veteranToApplication(veteran) {
       case 'compensableVaServiceConnected':
       case 'provideSupportLastYear':
       case 'receivesVaPension':
-      case 'provideFinancialInfo':
       case 'understandsFinancialDisclosure':
       case 'sameAddress':
       case 'cohabitedLastYear':
