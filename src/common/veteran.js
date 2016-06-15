@@ -637,7 +637,16 @@ const completeVeteran = {
 
 function veteranToApplication(veteran) {
   if (_.includes(['Never Married', 'Widowed', 'Divorced'], veteran.maritalStatus.value)) {
-    delete veteran.spouseAddress; // eslint-disable-line no-param-reassign
+    /* eslint-disable no-param-reassign*/
+    delete veteran.spouseAddress;
+    delete veteran.spouseFullName;
+    delete veteran.spouseGrossIncome;
+    delete veteran.spouseNetIncome;
+    delete veteran.spouseOtherIncome;
+    delete veteran.spouseSocialSecurityNumber;
+    delete veteran.spouseDateOfBirth;
+    delete veteran.spousePhone;
+    /* eslint-enable no-param-reassign */
   }
 
   return JSON.stringify(veteran, (key, value) => {
