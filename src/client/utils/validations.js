@@ -115,7 +115,7 @@ function isValidField(validator, field) {
 }
 
 function isValidRequiredField(validator, field) {
-  return isNotBlank(field.value) || validator(field.value);
+  return isNotBlank(field.value) && validator(field.value);
 }
 
 function isBlankDateField(field) {
