@@ -37,8 +37,7 @@ class FinancialDisclosureSection extends React.Component {
             <li>To determine your eligibility for healthcare if you do not have a
             qualifying eligibility factor</li>
             <li>To determine your eligibility for additional benefits, like travel
-            assistance, cost-free medications, and/or medical care unrelated to
-            military experience</li>
+            assistance, cost-free medications, and/or waiver of travel deductible</li>
             <li>To determine whether you should be charged for copays and medication</li>
           </ol>
 
