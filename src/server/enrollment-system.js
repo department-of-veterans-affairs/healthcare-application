@@ -161,7 +161,7 @@ function yesNoToESBoolean(yesNo) {
  * @returns {Object} ES system spouseInfo message
  */
 function veteranToSpouseInfo(veteran) {
-  if (veteran.maritalStatus !== 'Never Married') {
+  if (_.includes(['Married', 'Separated'], veteran.maritalStatus)) {
     return {
       dob: validations.dateOfBirth(veteran.spouseDateOfBirth),
       givenName: veteran.spouseFullName.first,
