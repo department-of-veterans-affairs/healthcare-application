@@ -173,7 +173,7 @@ module.exports = {
     expectInputToNotBeSelected(client, 'input[name="sameAddress-0"]');
     expectInputToNotBeSelected(client, 'input[name="sameAddress-1"]');
 
-    client.click('input[name="sameAddress-1"] + label');
+    client.click('input[name="sameAddress-1"]');
     client.expect.element('input[name="address"]').to.be.visible.before(common.timeouts.normal);
     expectValueToBeBlank(client, 'input[name="address"]');
     expectValueToBeBlank(client, 'input[name="city"]');
@@ -191,7 +191,7 @@ module.exports = {
     expectInputToNotBeSelected(client, 'input[name="hasChildrenToReport-0"]');
     expectInputToNotBeSelected(client, 'input[name="hasChildrenToReport-1"]');
 
-    client.click('input[name="hasChildrenToReport-0"] + label');
+    client.click('input[name="hasChildrenToReport-0"]');
     expectValueToBeBlank(client, 'input[name="fname"]');
     expectValueToBeBlank(client, 'input[name="mname"]');
     expectValueToBeBlank(client, 'input[name="lname"]');
@@ -254,7 +254,7 @@ module.exports = {
     expectInputToNotBeSelected(client, 'input[name="isCoveredByHealthInsurance-0"]');
     expectInputToNotBeSelected(client, 'input[name="isCoveredByHealthInsurance-1"]');
 
-    client.click('input[name="isCoveredByHealthInsurance-0"] + label');
+    client.click('input[name="isCoveredByHealthInsurance-0"]');
     expectValueToBeBlank(client, 'input[name="insuranceName"]');
     expectValueToBeBlank(client, 'input[name="insurancePolicyHolderName"]');
     expectValueToBeBlank(client, 'input[name="insurancePolicyNumber"]');
