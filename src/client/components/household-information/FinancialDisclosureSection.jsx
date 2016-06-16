@@ -53,13 +53,16 @@ class FinancialDisclosureSection extends React.Component {
 
           {/* Move this list to a tooltip in reference above, create new tooltip component */}
           <ul>The qualifying eligibility factors are:
-            <li>discharged for a disability incurred or aggravated in the line of duty</li>
-            <li>receiving monetary compensation for VA service-connected disability</li>
             <li>a former Prisoner of War</li>
-            <li>in receipt of a Purple Heart</li>
-            <li>receiving VA pension</li>
-            <li>in receipt of Medicaid benefits</li>
-            <li>a recently discharged Combat Veteran, discharged within the past 5 years</li>
+            <li>those in receipt of a Purple Heart</li>
+            <li>a recently discharged Combat Veteran</li>
+            <li>those discharged for a disability incurred or aggravated in the line of duty</li>
+            <li>those receiving VA SC disability compensation</li>
+            <li>those receiving VA pension</li>
+            <li>those in receipt of Medicaid benefits</li>
+            <li>those who served in Vietnam between January 9, 1962 and May 7, 1975</li>
+            <li>those who served in SW Asia during the Gulf War between August 2, 1990 and November 11, 1998</li>
+            <li>those who served at least 30 days at Camp Lejeune between August 1, 1953 and December 31, 1987.</li>
           </ul>
 
           <div className="input-section">
