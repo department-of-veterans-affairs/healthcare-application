@@ -54,7 +54,8 @@
     "sinon": "^2.0.0-pre",
     "skin-deep": "^0.16.0",
     "supertest": "^1.2.0",
-    "timekeeper": "0.0.5"
+    "timekeeper": "0.0.5",
+    "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
     "18f-contrib-web-design-standards": "^1.0.1",
@@ -78,7 +79,7 @@
     "dataset": "^0.3.1",
     "eslint-plugin-no-unsafe-innerhtml": "^1.0.14",
     "eslint-plugin-scanjs-rules": "^0.1.4",
-    "express": "^4.13.4",
+    "express": "^4.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "font-awesome": "^4.6.1",
@@ -117,7 +118,6 @@
     "uswds": "^0.9.1",
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.6.1",
-    "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.10.0",
     "winston": "^2.2.0"
   },
