@@ -34,11 +34,12 @@ class FinancialDisclosureSection extends React.Component {
           most recent tax year. We ask for this information for 2 reasons:</p>
 
           <ol>
-            <li>To determine your eligibility for healthcare, and copay responsibility, if you do not have a
+            <li>To determine your eligibility for healthcare if you do not have a
             qualifying eligibility factor</li>
             <li>To determine your eligibility for additional benefits, like travel
             assistance, cost-free medications, and/or medical care unrelated to
             military experience</li>
+            <li>To determine whether you should be charged for copays and medication</li>
           </ol>
 
           <div className="usa-alert usa-alert-info">
