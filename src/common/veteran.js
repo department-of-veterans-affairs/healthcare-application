@@ -53,7 +53,6 @@ const blankVeteran = {
   homePhone: makeField(''),
   mobilePhone: makeField(''),
 
-  provideFinancialInfo: makeField(''),  // TODO(awong): Ignored by ES System
   understandsFinancialDisclosure: makeField(''),  // TODO(awong): Ignored by ES System
 
   spouseFullName: {
@@ -132,7 +131,6 @@ const blankVeteran = {
   exposedToRadiation: false,
   radiumTreatments: false,
   campLejeune: false
-
 };
 
 const completeVeteran = {
@@ -146,7 +144,7 @@ const completeVeteran = {
       dirty: true
     },
     last: {
-      value: 'LastName',
+      value: 'ZZTEST',
       dirty: true
     },
     suffix: {
@@ -257,10 +255,6 @@ const completeVeteran = {
   mobilePhone: {
     value: '1235551234',
     dirty: false
-  },
-  provideFinancialInfo: {
-    value: 'Y',
-    dirty: true
   },
   understandsFinancialDisclosure: {
     value: 'Y',
@@ -559,7 +553,7 @@ const completeVeteran = {
         dirty: true
       },
       insurancePolicyHolderName: {
-        value: 'FirstName LastName',
+        value: 'FirstName ZZTEST',
         dirty: true
       },
       insurancePolicyNumber: {
@@ -642,6 +636,19 @@ const completeVeteran = {
 };
 
 function veteranToApplication(veteran) {
+  if (_.includes(['Never Married', 'Widowed', 'Divorced'], veteran.maritalStatus.value)) {
+    /* eslint-disable no-param-reassign*/
+    delete veteran.spouseAddress;
+    delete veteran.spouseFullName;
+    delete veteran.spouseGrossIncome;
+    delete veteran.spouseNetIncome;
+    delete veteran.spouseOtherIncome;
+    delete veteran.spouseSocialSecurityNumber;
+    delete veteran.spouseDateOfBirth;
+    delete veteran.spousePhone;
+    /* eslint-enable no-param-reassign */
+  }
+
   return JSON.stringify(veteran, (key, value) => {
     // Remove properties that are not interesting to the API.
     switch (key) {
@@ -659,7 +666,6 @@ function veteranToApplication(veteran) {
       case 'compensableVaServiceConnected':
       case 'provideSupportLastYear':
       case 'receivesVaPension':
-      case 'provideFinancialInfo':
       case 'understandsFinancialDisclosure':
       case 'sameAddress':
       case 'cohabitedLastYear':

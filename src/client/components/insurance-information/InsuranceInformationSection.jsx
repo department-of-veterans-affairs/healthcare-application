@@ -43,6 +43,8 @@ class InsuranceInformationSection extends React.Component {
             path="/insurance-information/general"
             rows={this.props.data.providers}/>
       );
+    } else {
+      this.props.data.providers.length = 0;
     }
 
 
@@ -85,7 +87,7 @@ class InsuranceInformationSection extends React.Component {
           <tbody>
             <tr>
               <td>Are you covered by health insurance? (Including coverage through a spouse or another person):</td>
-              <td>{`${this.props.data.isCoveredByHealthInsurance ? 'Yes' : 'No'}`}</td>
+              <td>{`${this.props.data.isCoveredByHealthInsurance.value === 'Y' ? 'Yes' : 'No'}`}</td>
             </tr>
           </tbody>
         </table>

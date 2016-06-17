@@ -2,7 +2,8 @@
   "form": {
     "formIdentifier": {
       "type": "100",
-      "value": "1010EZ"
+      "value": "1010EZ",
+      "version": "1986360435"
     },
     "summary": {
       "demographics": {
@@ -16,27 +17,27 @@
               "state": "DC",
               "zipCode": "20005",
               "addressTypeCode": "P"
-            },
-            "emails": {
-              "email": [
-                {
-                  "address": "foo@example.com",
-                  "type": "1"
-                }
-              ]
-            },
-            "phones": {
-              "phone": [
-                {
-                  "phoneNumber": "1231241234",
-                  "type": "1"
-                },
-                {
-                  "phoneNumber": "1235551234",
-                  "type": "4"
-                }
-              ]
             }
+          },
+          "emails": [
+            {
+              "email": {
+                "address": "foo@example.com",
+                "type": "1"
+              }  
+            }
+          ],
+          "phones": {
+            "phone": [
+              {
+                "phoneNumber": "1231241234",
+                "type": "1"
+              },
+              {
+                "phoneNumber": "1235551234",
+                "type": "4"
+              }
+            ]
           }
         },
         "ethnicity": "2135-2",
@@ -70,9 +71,9 @@
       },
       "financialsInfo": {
         "financialStatement": {
-          "dependentFinancialsList": [
-            {
-              "dependentFinancials": {
+          "dependentFinancialsList": {
+            "dependentFinancials": [
+              {
                 "attendedSchool": "true",
                 "contributedToSupport": "false",
                 "dependentInfo": {
@@ -107,10 +108,8 @@
                   ]
                 },
                 "livedWithPatient": "true"
-              }
-            },
-            {
-              "dependentFinancials": {
+              },
+              {
                 "attendedSchool": "true",
                 "contributedToSupport": "true",
                 "dependentInfo": {
@@ -146,8 +145,9 @@
                 },
                 "livedWithPatient": "false"
               }
-            }
-          ],
+            ]
+          },
+          "marriedLastCalendarYear": "true",
           "numberOfDependentChildren": "2",
           "expenses": {
             "expense": [
@@ -183,7 +183,7 @@
           },
           "spouseFinancialsList": {
             "spouseFinancials": {
-              "contributedToSpouse": "false",
+              "contributedToSpousalSupport": "false",
               "incomes": {
                 "income": [
                   {
@@ -201,20 +201,19 @@
                 ]
               },
               "livedWithPatient": "true",
-              "marriedLastCalendarYear": "true",
               "spouse": {
                 "address": {
                   "city": "Dulles",
                   "country": "USA",
                   "line1": "123 NW 8th St",
                   "state": "VA",
-                  "zipCode": "20101"
+                  "zipCode": "20101",
+                  "phoneNumber": "1112221234"
                 },
                 "dob": "04/06/1980",
                 "familyName": "LastSpouse",
                 "givenName": "FirstSpouse",
                 "middleName": "MiddleSpouse",
-                "phoneNumber": "1112221234",
                 "ssns": {
                   "ssn": {
                     "ssnText": "111221234"
@@ -225,6 +224,9 @@
               }
             }
           }
+        },
+        "incomeTest": {
+          "discloseFinancialInformation": "true"
         }
       },
       "insuranceList": {
@@ -233,7 +235,7 @@
             "companyName": "MyInsruance",
             "groupNumber": "G1234",
             "insuranceMappingTypeName": "PI",
-            "policyHolderName": "FirstName LastName",
+            "policyHolderName": "FirstName ZZTEST",
             "policyNumber": "P1234"
           },
           {
@@ -245,6 +247,7 @@
         ]
       },
       "militaryServiceInfo": {
+        "dischargeDueToDisability": "true",
         "militaryServiceSiteRecords": {
           "militaryServiceSiteRecord": {
             "militaryServiceEpisodes": {
@@ -268,7 +271,7 @@
       "personInfo": {
         "firstName": "FirstName",
         "middleName": "MiddleName",
-        "lastName": "LastName",
+        "lastName": "ZZTEST",
         "suffix": "Jr.",
         "ssnText": "111111234",
         "gender": "F",

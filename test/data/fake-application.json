@@ -2,7 +2,7 @@
   "veteranFullName": {
     "first": "FirstName",
     "middle": "MiddleName",
-    "last": "LastName",
+    "last": "ZZTEST",
     "suffix": "Jr."
   },
   "mothersMaidenName": "Maiden",
@@ -35,7 +35,6 @@
   "email": "foo@example.com",
   "homePhone": "1231241234",
   "mobilePhone": "1235551234",
-  "provideFinancialInfo": true,
   "understandsFinancialDisclosure": true,
   "spouseFullName": {
     "first": "FirstSpouse",
@@ -112,7 +111,7 @@
   "providers": [
     {
       "insuranceName": "MyInsruance",
-      "insurancePolicyHolderName": "FirstName LastName",
+      "insurancePolicyHolderName": "FirstName ZZTEST",
       "insurancePolicyNumber": "P1234",
       "insuranceGroupCode": "G1234"
     }

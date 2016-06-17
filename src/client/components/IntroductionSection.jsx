@@ -18,6 +18,11 @@ class IntroductionSection extends React.Component {
             <p>
               All of the information you submit is used to determine your eligibility and to help us provide the best service to you.
             </p>
+            <p>
+              <strong>
+                Note: You will not be able to save your progress once you have started the form.
+              </strong>
+            </p>
           </div>
         </div>
       </div>

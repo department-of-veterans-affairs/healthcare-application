@@ -15,6 +15,7 @@ function expectNavigateAwayFrom(client, urlSubstring) {
 }
 
 module.exports = {
+  '@tags': ['first'],
   'Begin application': (client) => {
     request({
       uri: `${url}/api/hca/v1/mock`,
@@ -132,8 +133,11 @@ module.exports = {
 
     // Review and Submit Page.
     client.expect.element('button.edit-btn').to.be.visible;
+
+    client.expect.element('.form-panel .usa-button-primary').text.to.equal('Submit Application');
     client.click('.form-panel .usa-button-primary');
-    // expectNavigateAwayFrom(client, '/review-and-submit');
+    client.expect.element('.form-panel .hca-button-green').text.to.equal('✓ Submitted');
+
     client.expect.element('.js-test-location').attribute('data-location')
       .to.not.contain('/review-and-submit').before(common.timeouts.submission);
 

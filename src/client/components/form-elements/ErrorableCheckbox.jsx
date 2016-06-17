@@ -1,6 +1,9 @@
 import React from 'react';
 import _ from 'lodash';
 
+import ToolTip from '../form-elements/ToolTip';
+
+
 /**
  * A form checkbox with a label that can display error messages.
  *
@@ -10,6 +13,8 @@ import _ from 'lodash';
  *                  When defined, indicates checkbox has a validation error.
  * `label` - String for the checkbox label.
  * `name` - String for name attribute.
+ * `toolTipText` - String with help text for user.
+ * `tabIndex` - Number for keyboard tab order.
  * `onValueChange` - a function with this prototype: (newValue)
  * `required` - boolean. Render marker indicating field is required.
  */
@@ -37,6 +42,16 @@ class ErrorableCheckbox extends React.Component {
       errorSpan = <span className="usa-input-error-message" id={`${errorSpanId}`}>{this.props.errorMessage}</span>;
     }
 
+    // Addes ToolTip if text is provided.
+    let toolTip;
+    if (this.props.toolTipText) {
+      toolTip = (
+        <ToolTip
+            tabIndex={this.props.tabIndex}
+            toolTipText={this.props.toolTipText}/>
+      );
+    }
+
     // Calculate required.
     let requiredSpan = undefined;
     if (this.props.required) {
@@ -59,6 +74,7 @@ class ErrorableCheckbox extends React.Component {
               {requiredSpan}
         </label>
         {errorSpan}
+        {toolTip}
       </div>
     );
   }

@@ -105,6 +105,8 @@ class ChildInformationSection extends React.Component {
               rows={this.props.data.children}/>
         </div>
       );
+    } else {
+      this.props.data.children.length = 0;
     }
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
@@ -113,7 +115,7 @@ class ChildInformationSection extends React.Component {
           <tbody>
             <tr>
               <td>Do you have any children to report?:</td>
-              <td>{`${this.props.data.hasChildrenToReport ? 'Yes' : 'No'}`}</td>
+              <td>{`${this.props.data.hasChildrenToReport.value === 'Y' ? 'Yes' : 'No'}`}</td>
             </tr>
           </tbody>
         </table>
