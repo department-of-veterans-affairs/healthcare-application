@@ -63,7 +63,7 @@ const ui = {
     '/household-information/financial-disclosure': {
       complete: false,
       verified: false,
-      fields: ['provideFinancialInfo', 'understandsFinancialDisclosure']
+      fields: ['understandsFinancialDisclosure']
     },
     '/household-information/spouse-information': {
       complete: false,

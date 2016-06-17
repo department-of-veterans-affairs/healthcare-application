@@ -115,7 +115,7 @@ function isValidField(validator, field) {
 }
 
 function isValidRequiredField(validator, field) {
-  return isNotBlank(field.value) || validator(field.value);
+  return isNotBlank(field.value) && validator(field.value);
 }
 
 function isBlankDateField(field) {
@@ -246,7 +246,7 @@ function isValidContactInformationSection(data) {
 }
 
 function isValidFinancialDisclosure(data) {
-  return isNotBlank(data.provideFinancialInfo.value);
+  return isNotBlank(data.understandsFinancialDisclosure.value);
 }
 
 function isValidIncome(income) {
@@ -255,14 +255,13 @@ function isValidIncome(income) {
       isValidField(isValidMonetaryValue, income.otherIncome);
 }
 
-
 function isValidSpouseInformation(data) {
   let isValidSpouse = true;
   let isValidSpouseAddress = true;
 
   if (data.maritalStatus.value === 'Married' || data.maritalStatus.value === 'Separated') {
     isValidSpouse = isValidFullNameField(data.spouseFullName) &&
-      isValidField(isValidSSN, data.spouseSocialSecurityNumber) &&
+      isValidSSN(data.spouseSocialSecurityNumber.value) &&
       isValidDateField(data.spouseDateOfBirth) &&
       isValidDateField(data.dateOfMarriage) &&
       isNotBlank(data.sameAddress.value);

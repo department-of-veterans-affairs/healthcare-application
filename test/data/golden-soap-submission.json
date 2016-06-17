@@ -19,14 +19,14 @@
               "addressTypeCode": "P"
             }
           },
-          "emails": {
-            "email": [
-              {
+          "emails": [
+            {
+              "email": {
                 "address": "foo@example.com",
                 "type": "1"
-              }
-            ]
-          },
+              }  
+            }
+          ],
           "phones": {
             "phone": [
               {
@@ -224,6 +224,9 @@
               }
             }
           }
+        },
+        "incomeTest": {
+          "discloseFinancialInformation": "true"
         }
       },
       "insuranceList": {
@@ -244,6 +247,7 @@
         ]
       },
       "militaryServiceInfo": {
+        "dischargeDueToDisability": "true",
         "militaryServiceSiteRecords": {
           "militaryServiceSiteRecord": {
             "militaryServiceEpisodes": {

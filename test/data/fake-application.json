@@ -35,7 +35,6 @@
   "email": "foo@example.com",
   "homePhone": "1231241234",
   "mobilePhone": "1235551234",
-  "provideFinancialInfo": true,
   "understandsFinancialDisclosure": true,
   "spouseFullName": {
     "first": "FirstSpouse",

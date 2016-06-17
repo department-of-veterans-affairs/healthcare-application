@@ -53,7 +53,6 @@ const testValues = {
   homePhone: '5551112323',
   mobilePhone: '5551114545',
 
-  provideFinancialInfo: '',
   understandsFinancialDisclosure: '',
 
   spouseFullName: {
@@ -203,12 +202,12 @@ function completeDemographicInformation(client, data, onlyRequiredFields) {
 
   if (!onlyRequiredFields) {
     client
-      .click('input[name="isAmericanIndianOrAlaskanNative"] + label')
-      .click('input[name="isBlackOrAfricanAmerican"] + label')
-      .click('input[name="isNativeHawaiianOrOtherPacificIslander"] + label')
-      .click('input[name="isAsian"] + label')
-      .click('input[name="isWhite"] + label')
-      .click('input[name="isSpanishHispanicLatino"] + label');
+      .click('input[name="isAmericanIndianOrAlaskanNative"]')
+      .click('input[name="isBlackOrAfricanAmerican"]')
+      .click('input[name="isNativeHawaiianOrOtherPacificIslander"]')
+      .click('input[name="isAsian"]')
+      .click('input[name="isWhite"]')
+      .click('input[name="isSpanishHispanicLatino"]');
   }
 }
 
@@ -253,9 +252,9 @@ function completeMilitaryService(client, data, onlyRequiredFields) {
 
 function completeVaBenefits(client, data, onlyRequiredFields) {
   client
-    .click('input[name="compensableVaServiceConnected-0"] + label')
-    .click('input[name="isVaServiceConnected-0"] + label')
-    .click('input[name="receivesVaPension-0"] + label');
+    .click('input[name="compensableVaServiceConnected-0"]')
+    .click('input[name="isVaServiceConnected-0"]')
+    .click('input[name="receivesVaPension-0"]');
 
   if (!onlyRequiredFields) {
     onlyRequiredFields;
@@ -263,11 +262,10 @@ function completeVaBenefits(client, data, onlyRequiredFields) {
 }
 
 function completeFinancialDisclosure(client, data, onlyRequiredFields) {
-  client
-    .click('input[name="provideFinancialInfo-0"] + label');
+  client.click('input[name="understandsFinancialDisclosure-0"]');
 
   if (!onlyRequiredFields) {
-    client.click('input[name="understandsFinancialDisclosure-0"] + label');
+    onlyRequiredFields;
   }
 }
 
@@ -287,7 +285,7 @@ function completeSpouseInformation(client, data, onlyRequiredFields) {
     .setValue('select[name="marriageMonth"]', data.dateOfMarriage.month)
     .setValue('select[name="marriageDay"]', data.dateOfMarriage.day)
     .setValue('input[name="marriageYear"]', data.dateOfMarriage.year)
-    .click('input[name="sameAddress-1"] + label');
+    .click('input[name="sameAddress-1"]');
   client.expect.element('input[name="address"]').to.be.visible.before(timeouts.normal);
 
   client
@@ -301,14 +299,14 @@ function completeSpouseInformation(client, data, onlyRequiredFields) {
     client
       .setValue('input[name="mname"]', 'Jacqueline')
       .setValue('select[name="suffix"]', 'Sr.')
-      .click('input[name="sameAddress-1"] + label')
-      .click('input[name="cohabitedLastYear-0"] + label')
-      .click('input[name="provideSupportLastYear-0"] + label');
+      .click('input[name="sameAddress-1"]')
+      .click('input[name="cohabitedLastYear-0"]')
+      .click('input[name="provideSupportLastYear-0"]');
   }
 }
 
 function completeChildInformation(client, data, onlyRequiredFields) {
-  client.click('input[name="hasChildrenToReport-0"] + label');
+  client.click('input[name="hasChildrenToReport-0"]');
   client.expect.element('input[name="fname"]').to.be.visible.before(timeouts.normal);
   client
     .setValue('input[name="fname"]', data.children[0].childFullName.first)
@@ -326,18 +324,18 @@ function completeChildInformation(client, data, onlyRequiredFields) {
     client
       .setValue('input[name="mname"]', 'Dirtbike')
       .setValue('select[name="suffix"]', 'Jr.')
-      .click('input[name="childDisabledBefore18"] + label')
-      .click('input[name="childAttendedSchoolLastYear"] + label')
+      .click('input[name="childDisabledBefore18"]')
+      .click('input[name="childAttendedSchoolLastYear"]')
       .setValue('input[name="childEducationExpenses"]', '6000')
-      .click('input[name="childCohabitedLastYear"] + label')
-      .click('input[name="childReceivedSupportLastYear"] + label');
+      .click('input[name="childCohabitedLastYear"]')
+      .click('input[name="childReceivedSupportLastYear"]');
   }
 }
 
 function completeMedicareAndMedicaid(client, data, onlyRequiredFields) {
   client
-    .click('input[name="isMedicaidEligible-1"] + label')
-    .click('input[name="isEnrolledMedicarePartA-1"] + label');
+    .click('input[name="isMedicaidEligible-1"]')
+    .click('input[name="isEnrolledMedicarePartA-1"]');
 
   if (!onlyRequiredFields) {
     client
@@ -348,7 +346,7 @@ function completeMedicareAndMedicaid(client, data, onlyRequiredFields) {
 }
 
 function completeInsuranceInformation(client, data, onlyRequiredFields) {
-  client.click('input[name="isCoveredByHealthInsurance-0"] + label');
+  client.click('input[name="isCoveredByHealthInsurance-0"]');
   client.expect.element('input[name="insuranceName"]').to.be.visible.before(timeouts.normal);
   client
     .setValue('input[name="insuranceName"]', data.providers[0].insuranceName)
@@ -367,8 +365,8 @@ function completeVaInsuranceInformation(client, data, onlyRequiredFields) {
 
   if (!onlyRequiredFields) {
     client
-      .click('input[name="isEssentialAcaCoverage"] + label')
-      .click('input[name="wantsInitialVaContact"] + label');
+      .click('input[name="isEssentialAcaCoverage"]')
+      .click('input[name="wantsInitialVaContact"]');
   }
 }
 

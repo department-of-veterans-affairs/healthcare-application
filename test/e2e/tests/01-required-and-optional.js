@@ -60,12 +60,12 @@ module.exports = {
     client.expect.element('select[name="gender"]').to.be.visible;
     client
       .setValue('select[name="gender"]', 'M')
-      .click('input[name="isAmericanIndianOrAlaskanNative"] + label')
-      .click('input[name="isBlackOrAfricanAmerican"] + label')
-      .click('input[name="isNativeHawaiianOrOtherPacificIslander"] + label')
-      .click('input[name="isAsian"] + label')
-      .click('input[name="isWhite"] + label')
-      .click('input[name="isSpanishHispanicLatino"] + label')
+      .click('input[name="isAmericanIndianOrAlaskanNative"]')
+      .click('input[name="isBlackOrAfricanAmerican"]')
+      .click('input[name="isNativeHawaiianOrOtherPacificIslander"]')
+      .click('input[name="isAsian"]')
+      .click('input[name="isWhite"]')
+      .click('input[name="isSpanishHispanicLatino"]')
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/veteran-information/demographic-information');
 
@@ -107,32 +107,31 @@ module.exports = {
     // Military Service Additional Information Page.
     client.expect.element('input[name="purpleHeartRecipient"] + label').to.be.visible;
     client
-      .click('input[name="purpleHeartRecipient"] + label')
-      .click('input[name="isFormerPow"] + label')
-      .click('input[name="postNov111998Combat"] + label')
-      .click('input[name="disabledInLineOfDuty"] + label')
-      .click('input[name="swAsiaCombat"] + label')
-      .click('input[name="vietnamService"] + label')
-      .click('input[name="exposedToRadiation"] + label')
-      .click('input[name="radiumTreatments"] + label')
-      .click('input[name="campLejeune"] + label')
+      .click('input[name="purpleHeartRecipient"]')
+      .click('input[name="isFormerPow"]')
+      .click('input[name="postNov111998Combat"]')
+      .click('input[name="disabledInLineOfDuty"]')
+      .click('input[name="swAsiaCombat"]')
+      .click('input[name="vietnamService"]')
+      .click('input[name="exposedToRadiation"]')
+      .click('input[name="radiumTreatments"]')
+      .click('input[name="campLejeune"]')
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/military-service/additional-information');
 
     // VA Benefits Basic Info page.
     client.expect.element('input[name="compensableVaServiceConnected-0"] + label').to.be.visible;
     client
-      .click('input[name="compensableVaServiceConnected-0"] + label')
-      .click('input[name="isVaServiceConnected-0"] + label')
-      .click('input[name="receivesVaPension-0"] + label')
+      .click('input[name="compensableVaServiceConnected-0"]')
+      .click('input[name="isVaServiceConnected-0"]')
+      .click('input[name="receivesVaPension-0"]')
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/va-benefits/basic-information');
 
     // Financial disclosure page.
-    client.expect.element('input[name="provideFinancialInfo-1"] + label').to.be.visible;
+    client.expect.element('input[name="understandsFinancialDisclosure-0"] + label').to.be.visible;
     client
-      .click('input[name="provideFinancialInfo-1"] + label')
-      .click('input[name="understandsFinancialDisclosure-0"] + label')
+      .click('input[name="understandsFinancialDisclosure-0"]')
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/financial-disclosure');
 
@@ -155,7 +154,7 @@ module.exports = {
       .setValue('select[name="marriageMonth"]', 'Jun')
       .setValue('select[name="marriageDay"]', '1')
       .setValue('input[name="marriageYear"]', '2010')
-      .click('input[name="sameAddress-1"] + label');
+      .click('input[name="sameAddress-1"]');
     client.expect.element('input[name="address"]').to.be.visible.before(common.timeouts.normal);
 
     client
@@ -164,15 +163,15 @@ module.exports = {
       .setValue('select[name="country"]', 'USA')
       .setValue('select[name="state"]', 'IL')
       .setValue('input[name="zip"]', '60603')
-      .click('input[name="cohabitedLastYear-0"] + label')
-      .click('input[name="provideSupportLastYear-0"] + label')
+      .click('input[name="cohabitedLastYear-0"]')
+      .click('input[name="provideSupportLastYear-0"]')
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/spouse-information');
 
 
     // Child Information Page.
     client.expect.element('input[name="hasChildrenToReport-0"] + label').to.be.visible;
-    client.click('input[name="hasChildrenToReport-0"] + label');
+    client.click('input[name="hasChildrenToReport-0"]');
     client.expect.element('input[name="fname"]').to.be.visible.before(common.timeouts.normal);
     client
       .setValue('input[name="fname"]', 'Hamnet')
@@ -187,11 +186,11 @@ module.exports = {
       .setValue('select[name="childBecameDependentMonth"]', 'Feb')
       .setValue('select[name="childBecameDependentDay"]', '2')
       .setValue('input[name="childBecameDependentYear"]', '2012')
-      .click('input[name="childDisabledBefore18"] + label')
-      .click('input[name="childAttendedSchoolLastYear"] + label')
+      .click('input[name="childDisabledBefore18"]')
+      .click('input[name="childAttendedSchoolLastYear"]')
       .setValue('input[name="childEducationExpenses"]', '6000')
-      .click('input[name="childCohabitedLastYear"] + label')
-      .click('input[name="childReceivedSupportLastYear"] + label')
+      .click('input[name="childCohabitedLastYear"]')
+      .click('input[name="childReceivedSupportLastYear"]')
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/child-information');
 
@@ -222,8 +221,8 @@ module.exports = {
     // Medicare and Medicaid Page.
     client.expect.element('input[name="isMedicaidEligible-0"] + label').to.be.visible;
     client
-      .click('input[name="isMedicaidEligible-1"] + label')
-      .click('input[name="isEnrolledMedicarePartA-1"] + label')
+      .click('input[name="isMedicaidEligible-1"]')
+      .click('input[name="isEnrolledMedicarePartA-1"]')
       .setValue('select[name="medicarePartAEffectiveMonth"]', 'Apr')
       .setValue('select[name="medicarePartAEffectiveDay"]', '23')
       .setValue('input[name="medicarePartAEffectiveYear"]', '1980')
@@ -232,7 +231,7 @@ module.exports = {
 
     // Insurance Information Page.
     client.expect.element('input[name="isCoveredByHealthInsurance-0"] + label').to.be.visible;
-    client.click('input[name="isCoveredByHealthInsurance-0"] + label');
+    client.click('input[name="isCoveredByHealthInsurance-0"]');
     client.expect.element('input[name="insuranceName"]').to.be.visible.before(common.timeouts.normal);
     client
       .setValue('input[name="insuranceName"]', 'BCBS')
@@ -244,10 +243,10 @@ module.exports = {
     // Additional VA Insurance Information Page.
     client.expect.element('select[name="state"]').to.be.visible;
     client
-      .click('input[name="isEssentialAcaCoverage"] + label')
+      .click('input[name="isEssentialAcaCoverage"]')
       .setValue('select[name="state"]', 'IL')
       .setValue('select[name="vaMedicalFacility"]', 'EVANSTON CBOC')
-      .click('input[name="wantsInitialVaContact"] + label')
+      .click('input[name="wantsInitialVaContact"]')
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/insurance-information/va-facility');
 

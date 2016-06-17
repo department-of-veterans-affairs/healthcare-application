@@ -53,7 +53,6 @@ const blankVeteran = {
   homePhone: makeField(''),
   mobilePhone: makeField(''),
 
-  provideFinancialInfo: makeField(''),  // TODO(awong): Ignored by ES System
   understandsFinancialDisclosure: makeField(''),  // TODO(awong): Ignored by ES System
 
   spouseFullName: {
@@ -256,10 +255,6 @@ const completeVeteran = {
   mobilePhone: {
     value: '1235551234',
     dirty: false
-  },
-  provideFinancialInfo: {
-    value: 'Y',
-    dirty: true
   },
   understandsFinancialDisclosure: {
     value: 'Y',
@@ -642,7 +637,16 @@ const completeVeteran = {
 
 function veteranToApplication(veteran) {
   if (_.includes(['Never Married', 'Widowed', 'Divorced'], veteran.maritalStatus.value)) {
-    delete veteran.spouseAddress; // eslint-disable-line no-param-reassign
+    /* eslint-disable no-param-reassign*/
+    delete veteran.spouseAddress;
+    delete veteran.spouseFullName;
+    delete veteran.spouseGrossIncome;
+    delete veteran.spouseNetIncome;
+    delete veteran.spouseOtherIncome;
+    delete veteran.spouseSocialSecurityNumber;
+    delete veteran.spouseDateOfBirth;
+    delete veteran.spousePhone;
+    /* eslint-enable no-param-reassign */
   }
 
   return JSON.stringify(veteran, (key, value) => {
@@ -662,7 +666,6 @@ function veteranToApplication(veteran) {
       case 'compensableVaServiceConnected':
       case 'provideSupportLastYear':
       case 'receivesVaPension':
-      case 'provideFinancialInfo':
       case 'understandsFinancialDisclosure':
       case 'sameAddress':
       case 'cohabitedLastYear':

@@ -120,6 +120,28 @@ function phoneNumberFromVeteran(veteran) {
 }
 
 /**
+ * Validates the email field for the veteran and returns the validated form or undefined
+ * since no email is required for the ES System.
+ *
+ * @param {Object} veteran The veteran resource
+ * @returns undefined|{Array} Undefined or an object containing the email wrapped in an array
+ */
+function emailFromVeteran(veteran) {
+  if (!veteran.email) {
+    return undefined;
+  }
+
+  return [
+    {
+      email: {
+        address: veteran.email,
+        type: '1'
+      }
+    }
+  ];
+}
+
+/**
  * Returns array of SDS codes representing the claimed races of the veteran.
  *
  * Codes are from the VHA Standard Data Service (ADRDEV01) HL7 24 Race Map List.
@@ -161,7 +183,7 @@ function yesNoToESBoolean(yesNo) {
  * @returns {Object} ES system spouseInfo message
  */
 function veteranToSpouseInfo(veteran) {
-  if (veteran.maritalStatus !== 'Never Married') {
+  if (_.includes(['Married', 'Separated'], veteran.maritalStatus)) {
     return {
       dob: validations.dateOfBirth(veteran.spouseDateOfBirth),
       givenName: veteran.spouseFullName.first,
@@ -186,6 +208,17 @@ function veteranToSpouseInfo(veteran) {
   }
   return undefined;
 }
+
+/**
+ * Adds discloseFinancialInformation if financial data exists in the field
+*/
+function optionalIncomeTest(hasData) {
+  if (hasData) {
+    return { discloseFinancialInformation: true };
+  }
+  return undefined;
+}
+
 
 /**
  * Extracts an incomeCollection object out of an API resource (eg., veteran, child, spouse)
@@ -485,6 +518,7 @@ function dischargeTypeToSDSCode(dischargeType) {
 //  * militaryServiceInfo / militaryServiceSiteRecordCollection / militaryServiceEpisodeCollection / militaryServiceEpisodeInfo / serviceNumber, 1 to 15 digits, No,
 function veteranToMilitaryServiceInfo(veteran) {
   return {
+    dischargeDueToDisability: veteran.disabledInLineOfDuty,
     militaryServiceSiteRecords: {
       militaryServiceSiteRecord: {
         militaryServiceEpisodes: {
@@ -829,25 +863,33 @@ function veteranToEnrollmentDeterminationInfo(veteran) {
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from employment.
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, "Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from FARM,  RANCH,  PROPERTY OR BUSINESS."
 function veteranToFinancialsInfo(veteran) {
+  const expenses = resourceToExpenseCollection({
+    educationExpense: veteran.deductibleEducationExpenses,
+    funeralExpense: veteran.deductibleFuneralExpenses,
+    medicalExpense: veteran.deductibleMedicalExpenses
+  });
+  const incomes = resourceToIncomeCollection({
+    grossIncome: veteran.veteranGrossIncome,
+    netIncome: veteran.veteranNetIncome,
+    otherIncome: veteran.veteranOtherIncome
+  });
+  const spouseIncome = resourceToIncomeCollection({
+    grossIncome: veteran.spouseGrossIncome,
+    netIncome: veteran.spouseNetIncome,
+    otherIncome: veteran.spouseOtherIncome
+  });
+  const dependentFinancials = veteranToDependentFinancialsCollection(veteran);
+
+  const hasIncomeData = expenses || incomes || spouseIncome || dependentFinancials;
+
   return {
+    incomeTest: optionalIncomeTest(hasIncomeData),
     financialStatement: {
-      expenses: resourceToExpenseCollection({
-        educationExpense: veteran.deductibleEducationExpenses,
-        funeralExpense: veteran.deductibleFuneralExpenses,
-        medicalExpense: veteran.deductibleMedicalExpenses
-      }),
-      incomes: resourceToIncomeCollection({
-        grossIncome: veteran.veteranGrossIncome,
-        netIncome: veteran.veteranNetIncome,
-        otherIncome: veteran.veteranOtherIncome
-      }),
+      expenses,
+      incomes,
       spouseFinancialsList: {
         spouseFinancials: {
-          incomes: resourceToIncomeCollection({
-            grossIncome: veteran.spouseGrossIncome,
-            netIncome: veteran.spouseNetIncome,
-            otherIncome: veteran.spouseOtherIncome
-          }),
+          incomes: spouseIncome,
           spouse: veteranToSpouseInfo(veteran),
           // TODO(awong): Verify this is right field. There is also contributionToSpouse in financialStatementInfo.
           contributedToSpousalSupport: yesNoToESBoolean(veteran.provideSupportLastYear),
@@ -856,7 +898,7 @@ function veteranToFinancialsInfo(veteran) {
       },
 
       marriedLastCalendarYear: veteran.maritalStatus === 'Married',
-      dependentFinancialsList: veteranToDependentFinancialsCollection(veteran),
+      dependentFinancialsList: dependentFinancials,
       numberOfDependentChildren: veteran.children.length,
     }
   };
@@ -1074,14 +1116,7 @@ function veteranToDemographicsInfo(veteran) {
           addressTypeCode: 'P',  // TODO(awong): this code is from VHA Standard Data Service (ADRDEV01) Address Type List P==Permanent. Determine if we need it.
         },
       },
-      emails: {
-        email: [
-          {
-            address: veteran.email,
-            type: '1'
-          }
-        ]
-      },
+      emails: emailFromVeteran(veteran),
       phones: phoneNumberFromVeteran(veteran),
     },
     ethnicity: spanishHispanicToSDSCode(veteran.isSpanishHispanicLatino),
