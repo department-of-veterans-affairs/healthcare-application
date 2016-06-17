@@ -15,6 +15,7 @@ function expectNavigateAwayFrom(client, urlSubstring) {
 }
 
 module.exports = {
+  '@tags': ['first'],
   'Begin application': (client) => {
     request({
       uri: `${url}/api/hca/v1/mock`,
