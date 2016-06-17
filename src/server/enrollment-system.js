@@ -904,42 +904,18 @@ function veteranToFinancialsInfo(veteran) {
     netIncome: veteran.veteranNetIncome,
     otherIncome: veteran.veteranOtherIncome
   });
-<<<<<<< HEAD
-  const spouseIncome = resourceToIncomeCollection({
-    grossIncome: veteran.spouseGrossIncome,
-    netIncome: veteran.spouseNetIncome,
-    otherIncome: veteran.spouseOtherIncome
-  });
-  const dependentFinancials = veteranToDependentFinancialsCollection(veteran);
-
-  const hasIncomeData = expenses || incomes || spouseIncome || dependentFinancials;
-=======
-
+  
   const dependentFinancials = veteranToDependentFinancialsCollection(veteran);
   const spouseFinancials = veteranToSpouseFinancials(veteran);
 
   const hasIncomeData = expenses || incomes || spouseFinancials || dependentFinancials;
->>>>>>> origin/master
 
   return {
     incomeTest: optionalIncomeTest(hasIncomeData),
     financialStatement: {
       expenses,
       incomes,
-<<<<<<< HEAD
-      spouseFinancialsList: {
-        spouseFinancials: {
-          incomes: spouseIncome,
-          spouse: veteranToSpouseInfo(veteran),
-          // TODO(awong): Verify this is right field. There is also contributionToSpouse in financialStatementInfo.
-          contributedToSpousalSupport: yesNoToESBoolean(veteran.provideSupportLastYear),
-          livedWithPatient: yesNoToESBoolean(veteran.cohabitedLastYear),
-        },
-      },
-
-=======
       spouseFinancialsList: spouseFinancials,
->>>>>>> origin/master
       marriedLastCalendarYear: veteran.maritalStatus === 'Married',
       dependentFinancialsList: dependentFinancials,
       numberOfDependentChildren: veteran.children.length,
