@@ -50,15 +50,15 @@ class SpouseInformationSection extends React.Component {
           </tr>
           <tr>
             <td>Do you have the same address as your spouse?:</td>
-            <td>{`${this.props.data.sameAddress ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.sameAddress.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
             <td>Did your spouse live with you last year?:</td>
-            <td>{`${this.props.data.cohabitedLastYear ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.cohabitedLastYear.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
             <td>If your spouse did not live with you last year, did you provide support?:</td>
-            <td>{`${this.props.data.provideSupportLastYear ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.provideSupportLastYear.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
         </tbody>
       );
