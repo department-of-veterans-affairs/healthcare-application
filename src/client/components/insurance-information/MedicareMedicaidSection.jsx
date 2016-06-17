@@ -31,11 +31,11 @@ class MedicareMedicaidSection extends React.Component {
         <tbody>
           <tr>
             <td>Are you eligible for Medicaid?:</td>
-            <td>{`${this.props.data.isMedicaidEligible ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.isMedicaidEligible.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
             <td>Are you enrolled in Medicare Part A (hospital insurance):</td>
-            <td>{`${this.props.data.isEnrolledMedicarePartA ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.isEnrolledMedicarePartA.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
           {medicarePartA}
         </tbody>
