@@ -49,7 +49,7 @@ class AdditionalMilitaryInformationSection extends React.Component {
             <td>{`${this.props.data.radiumTreatments ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
-            <td>Did you serve on active duty at least 30 days at Camp LeJeune from January 1, 1957 through December 31, 1987?:</td>
+            <td>Did you serve on active duty at least 30 days at Camp LeJeune from January 1, 1953 through December 31, 1987?:</td>
             <td>{`${this.props.data.campLejeune ? 'Yes' : 'No'}`}</td>
           </tr>
         </tbody>
@@ -108,7 +108,7 @@ class AdditionalMilitaryInformationSection extends React.Component {
               onValueChange={(update) => {this.props.onStateChange('radiumTreatments', update);}}/>
 
           <ErrorableCheckbox
-              label="Served on active duty at least 30 days at Camp LeJeune from January 1, 1957 through December 31, 1987"
+              label="Served on active duty at least 30 days at Camp LeJeune from January 1, 1953 through December 31, 1987"
               name="campLejeune"
               checked={this.props.data.campLejeune}
               onValueChange={(update) => {this.props.onStateChange('campLejeune', update);}}/>

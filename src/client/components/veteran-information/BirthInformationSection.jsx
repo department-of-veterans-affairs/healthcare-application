@@ -21,12 +21,12 @@ class BirthInformationSection extends React.Component {
       content = (<table className="review usa-table-borderless">
         <tbody>
           <tr>
-            <td>Social Security Number:</td>
-            <td>{this.props.data.veteranSocialSecurityNumber.value}</td>
-          </tr>
-          <tr>
             <td>Date of Birth:</td>
             <td>{this.props.data.veteranDateOfBirth.month.value}/{this.props.data.veteranDateOfBirth.day.value}/{this.props.data.veteranDateOfBirth.year.value}</td>
+          </tr>
+          <tr>
+            <td>Social Security Number:</td>
+            <td>{this.props.data.veteranSocialSecurityNumber.value}</td>
           </tr>
           <tr>
             <td>Place of Birth:</td>

@@ -120,6 +120,28 @@ function phoneNumberFromVeteran(veteran) {
 }
 
 /**
+ * Validates the email field for the veteran and returns the validated form or undefined
+ * since no email is required for the ES System.
+ *
+ * @param {Object} veteran The veteran resource
+ * @returns undefined|{Array} Undefined or an object containing the email wrapped in an array
+ */
+function emailFromVeteran(veteran) {
+  if (!veteran.email) {
+    return undefined;
+  }
+
+  return [
+    {
+      email: {
+        address: veteran.email,
+        type: '1'
+      }
+    }
+  ];
+}
+
+/**
  * Returns array of SDS codes representing the claimed races of the veteran.
  *
  * Codes are from the VHA Standard Data Service (ADRDEV01) HL7 24 Race Map List.
@@ -161,7 +183,7 @@ function yesNoToESBoolean(yesNo) {
  * @returns {Object} ES system spouseInfo message
  */
 function veteranToSpouseInfo(veteran) {
-  if (veteran.maritalStatus !== 'Never Married') {
+  if (_.includes(['Married', 'Separated'], veteran.maritalStatus)) {
     return {
       dob: validations.dateOfBirth(veteran.spouseDateOfBirth),
       givenName: veteran.spouseFullName.first,
@@ -1094,14 +1116,7 @@ function veteranToDemographicsInfo(veteran) {
           addressTypeCode: 'P',  // TODO(awong): this code is from VHA Standard Data Service (ADRDEV01) Address Type List P==Permanent. Determine if we need it.
         },
       },
-      emails: {
-        email: [
-          {
-            address: veteran.email,
-            type: '1'
-          }
-        ]
-      },
+      emails: emailFromVeteran(veteran),
       phones: phoneNumberFromVeteran(veteran),
     },
     ethnicity: spanishHispanicToSDSCode(veteran.isSpanishHispanicLatino),
