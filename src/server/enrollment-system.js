@@ -336,14 +336,19 @@ function childToDependentInfo(child) {
  * @returns {Object} ES system dependentFinancialsInfo message
  */
 function childToDependentFinancialsInfo(child) {
-  return {
-    incomes: resourceToIncomeCollection(child),
-    dependentInfo: childToDependentInfo(child),
-    livedWithPatient: child.childCohabitedLastYear,
-    incapableOfSelfSupport: child.childDisabledBefore18,
-    attendedSchool: child.childAttendedSchoolLastYear,
-    contributedToSupport: child.childReceivedSupportLastYear,
-  };
+  const incomes = resourceToIncomeCollection(child);
+  if (incomes) {
+    return {
+      incomes,
+      dependentInfo: childToDependentInfo(child),
+      livedWithPatient: child.childCohabitedLastYear,
+      incapableOfSelfSupport: child.childDisabledBefore18,
+      attendedSchool: child.childAttendedSchoolLastYear,
+      contributedToSupport: child.childReceivedSupportLastYear,
+    };
+  }
+
+  return undefined;
 }
 
 /**
@@ -354,10 +359,36 @@ function childToDependentFinancialsInfo(child) {
  */
 function veteranToDependentFinancialsCollection(veteran) {
   if (veteran.children.length > 0) {
+    const dependentFinancials = _.compact(veteran.children.map((child) => { return childToDependentFinancialsInfo(child); }));
+    if (dependentFinancials.length > 0) {
+      return { dependentFinancials };
+    }
+  }
+  return undefined;
+}
+
+/**
+ * Extracts a veteranSpouseFinancial object out of the veteran resource, if applicable.
+ *
+ * @param {Object} veteran The veteran resource
+ * @returns {Object} ES system dependentFinancialsCollection message
+ */
+function veteranToSpouseFinancials(veteran) {
+  const spouseIncome = resourceToIncomeCollection({
+    grossIncome: veteran.spouseGrossIncome,
+    netIncome: veteran.spouseNetIncome,
+    otherIncome: veteran.spouseOtherIncome
+  });
+
+  if (spouseIncome) {
     return {
-      dependentFinancials: veteran.children.map((child) => {
-        return childToDependentFinancialsInfo(child);
-      })
+      spouseFinancials: {
+        incomes: spouseIncome,
+        spouse: veteranToSpouseInfo(veteran),
+        // TODO(awong): Verify this is right field. There is also contributionToSpouse in financialStatementInfo.
+        contributedToSpousalSupport: yesNoToESBoolean(veteran.provideSupportLastYear),
+        livedWithPatient: yesNoToESBoolean(veteran.cohabitedLastYear),
+      },
     };
   }
   return undefined;
@@ -873,30 +904,18 @@ function veteranToFinancialsInfo(veteran) {
     netIncome: veteran.veteranNetIncome,
     otherIncome: veteran.veteranOtherIncome
   });
-  const spouseIncome = resourceToIncomeCollection({
-    grossIncome: veteran.spouseGrossIncome,
-    netIncome: veteran.spouseNetIncome,
-    otherIncome: veteran.spouseOtherIncome
-  });
-  const dependentFinancials = veteranToDependentFinancialsCollection(veteran);
 
-  const hasIncomeData = expenses || incomes || spouseIncome || dependentFinancials;
+  const dependentFinancials = veteranToDependentFinancialsCollection(veteran);
+  const spouseFinancials = veteranToSpouseFinancials(veteran);
+
+  const hasIncomeData = expenses || incomes || spouseFinancials || dependentFinancials;
 
   return {
     incomeTest: optionalIncomeTest(hasIncomeData),
     financialStatement: {
       expenses,
       incomes,
-      spouseFinancialsList: {
-        spouseFinancials: {
-          incomes: spouseIncome,
-          spouse: veteranToSpouseInfo(veteran),
-          // TODO(awong): Verify this is right field. There is also contributionToSpouse in financialStatementInfo.
-          contributedToSpousalSupport: yesNoToESBoolean(veteran.provideSupportLastYear),
-          livedWithPatient: yesNoToESBoolean(veteran.cohabitedLastYear),
-        },
-      },
-
+      spouseFinancialsList: spouseFinancials,
       marriedLastCalendarYear: veteran.maritalStatus === 'Married',
       dependentFinancialsList: dependentFinancials,
       numberOfDependentChildren: veteran.children.length,
