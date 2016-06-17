@@ -89,6 +89,8 @@ class HealthCareApp extends React.Component {
     const veteran = this.props.data;
     const path = this.props.location.pathname;
 
+    window.dataLayer.push({ event: 'submit-button-clicked' });
+
     if (validations.isValidForm(veteran)) {
       this.props.onUpdateSubmissionStatus('submitPending');
 
@@ -115,11 +117,15 @@ class HealthCareApp extends React.Component {
           this.context.router.push(this.getUrl('next'));
           this.scrollToTop();
         }, 1000);
+
+        window.dataLayer.push({ event: 'submission-successful' });
       }).catch(error => {
         // TODO(crew): Pass meaningful errors to the client.
         setTimeout(() => { // eslint-disable-line scanjs-rules/call_setTimeout
           this.props.onUpdateSubmissionStatus('submitFailed', error);
         }, 5000);
+
+        window.dataLayer.push({ event: 'submission-failed' });
       });
     } else {
       this.scrollToTop();
