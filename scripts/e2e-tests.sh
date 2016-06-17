@@ -13,4 +13,4 @@ while ! echo exit | nc localhost 3000; do sleep 1; done
 # Grab list of test environments from nightwatch.js
 environments=$(node -e "console.log(require('./test/e2e/nightwatch.js').saucelabs_environments.join())")
 
-nightwatch --config test/e2e/nightwatch.js --env $environments
+./node_modules/nightwatch/bin/nightwatch --config ./test/e2e/nightwatch.js --env $environments
