@@ -115,7 +115,7 @@ class ChildInformationSection extends React.Component {
           <tbody>
             <tr>
               <td>Do you have any children to report?:</td>
-              <td>{`${this.props.data.hasChildrenToReport ? 'Yes' : 'No'}`}</td>
+              <td>{`${this.props.data.hasChildrenToReport.value === 'Y' ? 'Yes' : 'No'}`}</td>
             </tr>
           </tbody>
         </table>
