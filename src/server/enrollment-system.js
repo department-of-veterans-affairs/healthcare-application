@@ -904,7 +904,7 @@ function veteranToFinancialsInfo(veteran) {
     netIncome: veteran.veteranNetIncome,
     otherIncome: veteran.veteranOtherIncome
   });
-  
+
   const dependentFinancials = veteranToDependentFinancialsCollection(veteran);
   const spouseFinancials = veteranToSpouseFinancials(veteran);
 
