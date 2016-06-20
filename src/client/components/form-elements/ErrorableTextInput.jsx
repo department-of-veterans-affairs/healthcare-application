@@ -40,6 +40,7 @@ class ErrorableTextInput extends React.Component {
   render() {
     // Calculate error state.
     let errorSpan = '';
+    let maxCharacters;
     let errorSpanId = undefined;
     let inputErrorClass = undefined;
     let labelErrorClass = undefined;
@@ -66,6 +67,10 @@ class ErrorableTextInput extends React.Component {
       requiredSpan = <span className="hca-required-span">*</span>;
     }
 
+    if (this.props.charMax) {
+      maxCharacters = (<small>(Max. {this.props.charMax} characters)</small>);
+    }
+
     return (
       <div className={inputErrorClass}>
         <label
@@ -84,8 +89,10 @@ class ErrorableTextInput extends React.Component {
             tabIndex={this.props.tabIndex}
             autoComplete={this.props.autocomplete}
             type="text"
+            maxLength={this.props.charMax}
             value={this.props.field.value}
             onChange={this.handleChange}/>
+            {maxCharacters}
             {toolTip}
       </div>
     );
@@ -104,6 +111,7 @@ ErrorableTextInput.propTypes = {
     dirty: React.PropTypes.bool
   }).isRequired,
   additionalClass: React.PropTypes.string,
+  charMax: React.PropTypes.number,
   onValueChange: React.PropTypes.func.isRequired,
 };
 
