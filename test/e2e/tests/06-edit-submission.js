@@ -152,22 +152,24 @@ module.exports = {
     const vetInfoCopy = _.cloneDeep(common.testValues);
 
     // Edit personal info
-    vetInfoCopy.veteranFullName = { first: 'John', last: '' };
+    vetInfoCopy.veteranFullName = {
+      first: 'John',
+      last: 'Doe'
+    };
     editSection(client);
-    client.clearValue('input[name="lname"]').clearValue('input[name="fname"]');
     common.completePersonalInformation(client, vetInfoCopy, true);
-    verifyEdit(client, 'John ZZTEST');
+    verifyEdit(client, 'John Doe');
 
     // Edit birth info
     vetInfoCopy.veteranDateOfBirth = {
       month: 'Jan',
-      day: '23',
-      year: '1980'
+      day: '20',
+      year: ''
     };
     editSection(client);
     client.clearValue('input[name="veteranBirthYear"]');
     common.completeBirthInformation(client, vetInfoCopy, true);
-    verifyEdit(client, '1/23/1980');
+    verifyEdit(client, '1/20/1980');
 
     // Edit demographic info
     vetInfoCopy.gender = 'F';
@@ -186,6 +188,8 @@ module.exports = {
 
     // Edit service branch
     vetInfoCopy.lastServiceBranch = 'coast guard';
+    vetInfoCopy.lastDischargeDate.year = '';
+    vetInfoCopy.lastEntryDate.year = '';
     editSection(client);
     common.completeMilitaryService(client, vetInfoCopy, true);
     verifyEdit(client, 'Coast Guard');
@@ -196,6 +200,8 @@ module.exports = {
 
     // Edit spouse information
     vetInfoCopy.maritalStatus = 'Separated';
+    vetInfoCopy.dateOfMarriage.year = '';
+    vetInfoCopy.spouseDateOfBirth.year = '';
     editSection(client);
     common.completeSpouseInformation(client, vetInfoCopy, true);
     verifyEdit(client, 'Separated');
