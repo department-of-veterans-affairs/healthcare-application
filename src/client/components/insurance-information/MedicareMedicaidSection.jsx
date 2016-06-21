@@ -15,10 +15,10 @@ import { veteranUpdateField } from '../../actions';
 class MedicareMedicaidSection extends React.Component {
   render() {
     let content;
-    let medicarePartA;
+    let medicarePartADate;
 
-    if (this.props.data.isEnrolledMedicarePartA) {
-      medicarePartA = (<tr>
+    if (this.props.data.isEnrolledMedicarePartA.value === 'Y') {
+      medicarePartADate = (<tr>
         <td>If so, what is your Medicare Part A effective date?:</td>
         <td>{this.props.data.medicarePartAEffectiveDate.month.value}
         /{this.props.data.medicarePartAEffectiveDate.day.value}/
@@ -37,7 +37,7 @@ class MedicareMedicaidSection extends React.Component {
             <td>Are you enrolled in Medicare Part A (hospital insurance):</td>
             <td>{`${this.props.data.isEnrolledMedicarePartA.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
-          {medicarePartA}
+          {medicarePartADate}
         </tbody>
       </table>);
     } else {
