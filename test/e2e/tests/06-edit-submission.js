@@ -151,6 +151,12 @@ module.exports = {
     // create copy obj so that all defaults remain except what we explicitly change
     const vetInfoCopy = _.cloneDeep(common.testValues);
 
+    // TODO: investigate issue with clearing/setting year fields
+    // currently, setting a year after clearing removing the second number, eg. 1980 becomes 180
+    // setting it to blank clears it and fills in with the original value
+    // leaving for now as may be a bug, this test gets us the desired e2e test (can edit in final step and save)
+
+
     // Edit personal info
     vetInfoCopy.veteranFullName = {
       first: 'John',
