@@ -335,10 +335,15 @@ function isValidVAFacility(data) {
 }
 
 function isValidMedicareMedicaid(data) {
+  let isValidEffectiveDate = true;
+
+  if (data.isEnrolledMedicarePartA.value === 'Y') {
+    isValidEffectiveDate = isValidDateField(data.medicarePartAEffectiveDate);
+  }
+
   return validateIfDirty(data.isMedicaidEligible, isNotBlank) &&
     validateIfDirty(data.isEnrolledMedicarePartA, isNotBlank) &&
-    (isBlankDateField(data.medicarePartAEffectiveDate) ||
-    isValidDateField(data.medicarePartAEffectiveDate));
+    isValidEffectiveDate;
 }
 
 function isValidGeneralInsurance(data) {
