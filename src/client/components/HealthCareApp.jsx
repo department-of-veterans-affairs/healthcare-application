@@ -224,7 +224,7 @@ class HealthCareApp extends React.Component {
         <div className="row progress-buttons">
           <div className="small-6 medium-5 columns">
             {/* TODO: Figure out where this button should take the user. */}
-            <a href="www.vets.gov">
+            <a href="/">
               <button className="usa-button-primary">Back to Main Page</button>
             </a>
           </div>
