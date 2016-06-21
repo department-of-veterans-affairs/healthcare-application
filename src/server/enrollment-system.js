@@ -210,17 +210,6 @@ function veteranToSpouseInfo(veteran) {
 }
 
 /**
- * Adds discloseFinancialInformation if financial data exists in the field
-*/
-function optionalIncomeTest(hasData) {
-  if (hasData) {
-    return { discloseFinancialInformation: true };
-  }
-  return undefined;
-}
-
-
-/**
  * Extracts an incomeCollection object out of an API resource (eg., veteran, child, spouse)
  *
  * @param {Object} resource The resource with income data.
@@ -910,17 +899,23 @@ function veteranToFinancialsInfo(veteran) {
 
   const hasIncomeData = expenses || incomes || spouseFinancials || dependentFinancials;
 
-  return {
-    incomeTest: optionalIncomeTest(hasIncomeData),
-    financialStatement: {
-      expenses,
-      incomes,
-      spouseFinancialsList: spouseFinancials,
-      marriedLastCalendarYear: veteran.maritalStatus === 'Married',
-      dependentFinancialsList: dependentFinancials,
-      numberOfDependentChildren: veteran.children.length,
-    }
-  };
+  if (hasIncomeData) {
+    return {
+      incomeTest: {
+        discloseFinancialInformation: true
+      },
+      financialStatement: {
+        expenses,
+        incomes,
+        spouseFinancialsList: spouseFinancials,
+        marriedLastCalendarYear: veteran.maritalStatus === 'Married',
+        dependentFinancialsList: dependentFinancials,
+        numberOfDependentChildren: veteran.children.length,
+      }
+    };
+  }
+
+  return undefined;
 }
 
 // Produces an employmentInfo compatible type from a veteran resource.
