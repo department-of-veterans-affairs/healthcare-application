@@ -239,8 +239,19 @@ function isValidVeteranAddress(data) {
 }
 
 function isValidContactInformationSection(data) {
+  let emailConfirmationValid = true;
+
+  if (isNotBlank(data.email.value) && isBlank(data.emailConfirmation.value)) {
+    emailConfirmationValid = false;
+  }
+
+  if (data.email.value.toLowerCase() !== data.emailConfirmation.value.toLowerCase()) {
+    emailConfirmationValid = false;
+  }
+
   return isValidField(isValidEmail, data.email) &&
       isValidField(isValidEmail, data.emailConfirmation) &&
+      emailConfirmationValid &&
       isValidField(isValidPhone, data.homePhone) &&
       isValidField(isValidPhone, data.mobilePhone);
 }

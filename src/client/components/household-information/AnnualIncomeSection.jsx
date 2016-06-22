@@ -102,7 +102,7 @@ class AnnualIncomeSection extends React.Component {
                 <td>{this.props.data.spouseGrossIncome.value}</td>
               </tr>
               <tr>
-                <td>Spouse Other Income AmountS:</td>
+                <td>Spouse Other Income Amount:</td>
                 <td>{this.props.data.spouseGrossIncome.value}</td>
               </tr>
             </tbody>
@@ -125,7 +125,7 @@ class AnnualIncomeSection extends React.Component {
                 <td>{this.props.data.veteranNetIncome.value}</td>
               </tr>
               <tr>
-                <td>Veteran Other Income AmountS:</td>
+                <td>Veteran Other Income Amount:</td>
                 <td>{this.props.data.veteranOtherIncome.value}</td>
               </tr>
             </tbody>
