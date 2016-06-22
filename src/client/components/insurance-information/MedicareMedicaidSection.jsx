@@ -15,15 +15,29 @@ import { veteranUpdateField } from '../../actions';
 class MedicareMedicaidSection extends React.Component {
   render() {
     let content;
-    let medicarePartA;
+    let medicarePartADateInput;
+    let medicarePartADateReview;
+    let dateRequired;
 
-    if (this.props.data.isEnrolledMedicarePartA) {
-      medicarePartA = (<tr>
+    if (this.props.data.isEnrolledMedicarePartA.value === 'Y') {
+      medicarePartADateReview = (<tr>
         <td>If so, what is your Medicare Part A effective date?:</td>
         <td>{this.props.data.medicarePartAEffectiveDate.month.value}
         /{this.props.data.medicarePartAEffectiveDate.day.value}/
         {this.props.data.medicarePartAEffectiveDate.year.value}</td>
       </tr>);
+
+      dateRequired = true;
+
+      medicarePartADateInput = (
+        <DateInput required={dateRequired}
+            errorMessage="Please enter a vaild date."
+            label="If so, what is your Medicare Part A effective date?"
+            name="medicarePartAEffective"
+            day={this.props.data.medicarePartAEffectiveDate.day}
+            month={this.props.data.medicarePartAEffectiveDate.month}
+            year={this.props.data.medicarePartAEffectiveDate.year}
+            onValueChange={(update) => {this.props.onStateChange('medicarePartAEffectiveDate', update);}}/>);
     }
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
@@ -37,7 +51,7 @@ class MedicareMedicaidSection extends React.Component {
             <td>Are you enrolled in Medicare Part A (hospital insurance):</td>
             <td>{`${this.props.data.isEnrolledMedicarePartA.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
-          {medicarePartA}
+          {medicarePartADateReview}
         </tbody>
       </table>);
     } else {
@@ -65,13 +79,7 @@ class MedicareMedicaidSection extends React.Component {
           <div>Medicare is a social insurance program administered by the United
           States government, providing health insurance coverage to people aged
           65 and over, or who meet special criteria.</div>
-
-          <DateInput label="If so, what is your Medicare Part A effective date?"
-              name="medicarePartAEffective"
-              day={this.props.data.medicarePartAEffectiveDate.day}
-              month={this.props.data.medicarePartAEffectiveDate.month}
-              year={this.props.data.medicarePartAEffectiveDate.year}
-              onValueChange={(update) => {this.props.onStateChange('medicarePartAEffectiveDate', update);}}/>
+          {medicarePartADateInput}
         </div>
       </fieldset>);
     }

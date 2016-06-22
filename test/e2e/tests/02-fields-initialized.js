@@ -242,6 +242,9 @@ module.exports = {
     expectInputToNotBeSelected(client, 'input[name="isMedicaidEligible-1"]');
     expectInputToNotBeSelected(client, 'input[name="isEnrolledMedicarePartA-0"]');
     expectInputToNotBeSelected(client, 'input[name="isEnrolledMedicarePartA-1"]');
+
+    client.click('input[name="isEnrolledMedicarePartA-0"]');
+
     expectValueToBeBlank(client, 'select[name="medicarePartAEffectiveMonth"]');
     expectValueToBeBlank(client, 'select[name="medicarePartAEffectiveDay"]');
     expectValueToBeBlank(client, 'input[name="medicarePartAEffectiveYear"]');
