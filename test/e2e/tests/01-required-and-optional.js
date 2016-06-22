@@ -222,7 +222,7 @@ module.exports = {
     client.expect.element('input[name="isMedicaidEligible-0"] + label').to.be.visible;
     client
       .click('input[name="isMedicaidEligible-1"]')
-      .click('input[name="isEnrolledMedicarePartA-1"]')
+      .click('input[name="isEnrolledMedicarePartA-0"]')
       .setValue('select[name="medicarePartAEffectiveMonth"]', 'Apr')
       .setValue('select[name="medicarePartAEffectiveDay"]', '23')
       .setValue('input[name="medicarePartAEffectiveYear"]', '1980')
