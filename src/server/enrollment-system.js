@@ -910,17 +910,23 @@ function veteranToFinancialsInfo(veteran) {
 
   const hasIncomeData = expenses || incomes || spouseFinancials || dependentFinancials;
 
-  return {
-    incomeTest: optionalIncomeTest(hasIncomeData),
-    financialStatement: {
-      expenses,
-      incomes,
-      spouseFinancialsList: spouseFinancials,
-      marriedLastCalendarYear: veteran.maritalStatus === 'Married',
-      dependentFinancialsList: dependentFinancials,
-      numberOfDependentChildren: veteran.children.length,
-    }
-  };
+  if (hasIncomeData) {
+    return {
+      incomeTest: {
+        discloseFinancialInformation: true
+      },
+      financialStatement: {
+        expenses,
+        incomes,
+        spouseFinancialsList: spouseFinancials,
+        marriedLastCalendarYear: veteran.maritalStatus === 'Married',
+        dependentFinancialsList: dependentFinancials,
+        numberOfDependentChildren: veteran.children.length,
+      }
+    };
+  }
+
+  return undefined;
 }
 
 // Produces an employmentInfo compatible type from a veteran resource.

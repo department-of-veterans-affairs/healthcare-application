@@ -31,7 +31,7 @@ class FinancialDisclosureSection extends React.Component {
         <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
           <p>You will now be asked to provide your financial information from the
-          most recent tax year. We ask for this information for 2 reasons:</p>
+          most recent tax year. We ask for this information for two reasons:</p>
 
           <ol>
             <li>To determine your eligibility for healthcare if you do not have a

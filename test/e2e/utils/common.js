@@ -172,7 +172,9 @@ const testValues = {
 
 function completePersonalInformation(client, data, onlyRequiredFields) {
   client
+    .clearValue('input[name="fname"]')
     .setValue('input[name="fname"]', data.veteranFullName.first)
+    .clearValue('input[name="lname"]')
     .setValue('input[name="lname"]', data.veteranFullName.last);
 
   if (!onlyRequiredFields) {
@@ -185,9 +187,13 @@ function completePersonalInformation(client, data, onlyRequiredFields) {
 
 function completeBirthInformation(client, data, onlyRequiredFields) {
   client
+    .clearValue('select[name="veteranBirthMonth"]')
     .setValue('select[name="veteranBirthMonth"]', data.veteranDateOfBirth.month)
+    .clearValue('select[name="veteranBirthDay"]')
     .setValue('select[name="veteranBirthDay"]', data.veteranDateOfBirth.day)
+    .clearValue('input[name="veteranBirthYear"]')
     .setValue('input[name="veteranBirthYear"]', data.veteranDateOfBirth.year)
+    .clearValue('input[name="ssn"]')
     .setValue('input[name="ssn"]', data.veteranSocialSecurityNumber);
 
   if (!onlyRequiredFields) {
@@ -213,10 +219,15 @@ function completeDemographicInformation(client, data, onlyRequiredFields) {
 
 function completeVeteranAddress(client, data, onlyRequiredFields) {
   client
+    .clearValue('input[name="address"]')
     .setValue('input[name="address"]', data.veteranAddress.street)
+    .clearValue('input[name="city"]')
     .setValue('input[name="city"]', data.veteranAddress.city)
+    .clearValue('select[name="country"]')
     .setValue('select[name="country"]', data.veteranAddress.country)
+    .clearValue('select[name="state"]')
     .setValue('select[name="state"]', data.veteranAddress.state)
+    .clearValue('input[name="zip"]')
     .setValue('input[name="zip"]', data.veteranAddress.zipcode);
 
   if (!onlyRequiredFields) {
@@ -236,13 +247,21 @@ function completeVeteranContactInformation(client, data, onlyRequiredFields) {
 
 function completeMilitaryService(client, data, onlyRequiredFields) {
   client
+    .clearValue('select[name="lastServiceBranch"]')
     .setValue('select[name="lastServiceBranch"]', data.lastServiceBranch)
+    .clearValue('select[name="lastEntryMonth"]')
     .setValue('select[name="lastEntryMonth"]', data.lastEntryDate.month)
+    .clearValue('select[name="lastEntryDay"]')
     .setValue('select[name="lastEntryDay"]', data.lastEntryDate.day)
+    .clearValue('input[name="lastEntryYear"]')
     .setValue('input[name="lastEntryYear"]', data.lastEntryDate.year)
+    .clearValue('select[name="lastDischargeMonth"]')
     .setValue('select[name="lastDischargeMonth"]', data.lastDischargeDate.month)
+    .clearValue('select[name="lastDischargeDay"]')
     .setValue('select[name="lastDischargeDay"]', data.lastDischargeDate.day)
+    .clearValue('input[name="lastDischargeYear"]')
     .setValue('input[name="lastDischargeYear"]', data.lastDischargeDate.year)
+    .clearValue('select[name="dischargeType"]')
     .setValue('select[name="dischargeType"]', data.dischargeType);
 
   if (!onlyRequiredFields) {
@@ -271,28 +290,43 @@ function completeFinancialDisclosure(client, data, onlyRequiredFields) {
 
 function completeSpouseInformation(client, data, onlyRequiredFields) {
   client
+    .clearValue('select[name="maritalStatus"]')
     .setValue('select[name="maritalStatus"]', data.maritalStatus)
     .click('.form-panel');
   client.expect.element('input[name="fname"]').to.be.visible.before(timeouts.normal);
 
   client
+    .clearValue('input[name="fname"]')
     .setValue('input[name="fname"]', data.spouseFullName.first)
+    .clearValue('input[name="lname"]')
     .setValue('input[name="lname"]', data.spouseFullName.last)
+    .clearValue('input[name="ssn"]')
     .setValue('input[name="ssn"]', data.spouseSocialSecurityNumber)
+    .clearValue('select[name="spouseBirthMonth"]')
     .setValue('select[name="spouseBirthMonth"]', data.spouseDateOfBirth.month)
+    .clearValue('select[name="spouseBirthDay"]')
     .setValue('select[name="spouseBirthDay"]', data.spouseDateOfBirth.day)
+    .clearValue('input[name="spouseBirthYear"]')
     .setValue('input[name="spouseBirthYear"]', data.spouseDateOfBirth.year)
+    .clearValue('select[name="marriageMonth"]')
     .setValue('select[name="marriageMonth"]', data.dateOfMarriage.month)
+    .clearValue('select[name="marriageDay"]')
     .setValue('select[name="marriageDay"]', data.dateOfMarriage.day)
+    .clearValue('input[name="marriageYear"]')
     .setValue('input[name="marriageYear"]', data.dateOfMarriage.year)
     .click('input[name="sameAddress-1"]');
   client.expect.element('input[name="address"]').to.be.visible.before(timeouts.normal);
 
   client
+    .clearValue('input[name="address"]')
     .setValue('input[name="address"]', data.spouseAddress.street)
+    .clearValue('input[name="city"]')
     .setValue('input[name="city"]', data.spouseAddress.city)
+    .clearValue('select[name="country"]')
     .setValue('select[name="country"]', data.spouseAddress.country)
+    .clearValue('select[name="state"]')
     .setValue('select[name="state"]', data.spouseAddress.state)
+    .clearValue('input[name="zip"]')
     .setValue('input[name="zip"]', data.spouseAddress.zipcode);
 
   if (!onlyRequiredFields) {
