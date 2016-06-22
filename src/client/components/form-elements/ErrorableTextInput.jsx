@@ -61,14 +61,17 @@ class ErrorableTextInput extends React.Component {
       );
     }
 
+    // Calculate max characters and display '(Max. XX characters)' when max is hit.
+    if (this.props.field.value) {
+      if (this.props.charMax === this.props.field.value.length) {
+        maxCharacters = (<small>(Max. {this.props.charMax} characters)</small>);
+      }
+    }
+
     // Calculate required.
     let requiredSpan = undefined;
     if (this.props.required) {
       requiredSpan = <span className="hca-required-span">*</span>;
-    }
-
-    if (this.props.charMax) {
-      maxCharacters = (<small>(Max. {this.props.charMax} characters)</small>);
     }
 
     return (

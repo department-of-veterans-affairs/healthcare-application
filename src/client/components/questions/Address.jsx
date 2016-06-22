@@ -106,4 +106,3 @@ class Address extends React.Component {
 }
 
 export default Address;
-
