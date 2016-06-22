@@ -27,18 +27,16 @@ class Provider extends React.Component {
               field={this.props.data.insurancePolicyHolderName}
               onValueChange={(update) => {this.props.onValueChange('insurancePolicyHolderName', update);}}/>
 
-          <p>Either the provider's policy number or group code is required.</p>
-
           <ErrorableTextInput required
               errorMessage={validateIfDirtyProvider(this.props.data.insurancePolicyNumber, this.props.data.insuranceGroupCode, isValidInsurancePolicy) ? undefined : 'Please enter the policy number or group code'}
-              label="Policy Number"
+              label="Policy Number (either this or group code is required)"
               name="insurancePolicyNumber"
               field={this.props.data.insurancePolicyNumber}
               onValueChange={(update) => {this.props.onValueChange('insurancePolicyNumber', update);}}/>
 
           <ErrorableTextInput required
               errorMessage={validateIfDirtyProvider(this.props.data.insurancePolicyNumber, this.props.data.insuranceGroupCode, isValidInsurancePolicy) ? undefined : 'Please enter the policy number or group code'}
-              label="Group Code"
+              label="Group Code (either this or policy number is required)"
               name="insuranceGroupCode"
               field={this.props.data.insuranceGroupCode}
               onValueChange={(update) => {this.props.onValueChange('insuranceGroupCode', update);}}/>
