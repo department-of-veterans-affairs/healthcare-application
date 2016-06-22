@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import ErrorableSelect from '../form-elements/ErrorableSelect';
+import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
 import VaMedicalFacility from './VaMedicalFacility';
+import { yesNo } from '../../utils/options-for-select';
 import { veteranUpdateField } from '../../actions';
 import { states, vaMedicalFacilities } from '../../utils/options-for-select';
 import { validateIfDirty, isNotBlank } from '../../utils/validations';
@@ -68,10 +70,11 @@ class AdditionalInformationSection extends React.Component {
         </div>
 
         <div className="input-section">
-          <ErrorableCheckbox
+          <ErrorableRadioButtons
               label="Do you want VA to contact you to schedule your first appointment?"
               name="wantsInitialVaContact"
-              checked={this.props.data.wantsInitialVaContact}
+              options={yesNo}
+              value={this.props.data.wantsInitialVaContact}
               onValueChange={(update) => {this.props.onStateChange('wantsInitialVaContact', update);}}/>
         </div>
       </fieldset>);
