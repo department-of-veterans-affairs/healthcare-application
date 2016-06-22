@@ -43,15 +43,15 @@ class AnnualIncomeSection extends React.Component {
             <table className="review usa-table-borderless">
               <tbody>
                 <tr>
-                  <td>Children Gross Income:</td>
+                  <td>Child Gross Annual Income from Employment:</td>
                   <td>{child.grossIncome.value}</td>
                 </tr>
                 <tr>
-                  <td>Children Net Income:</td>
+                  <td>Child Net Income from your Farm, Ranch, Property or Business:</td>
                   <td>{child.netIncome.value}</td>
                 </tr>
                 <tr>
-                  <td>Children Other Income:</td>
+                  <td>Child Other Income Amount:</td>
                   <td>{child.otherIncome.value}</td>
                 </tr>
               </tbody>
@@ -67,21 +67,21 @@ class AnnualIncomeSection extends React.Component {
           <h6>Spouse</h6>
           <ErrorableTextInput
               errorMessage={getErrorMessage(this.props.data.spouseGrossIncome, message)}
-              label="Spouse Gross Income"
+              label="Spouse Gross Annual Income from Employment"
               name="spouseGrossIncome"
               field={this.props.data.spouseGrossIncome}
               onValueChange={(update) => {this.props.onStateChange('spouseGrossIncome', update);}}/>
 
           <ErrorableTextInput
               errorMessage={getErrorMessage(this.props.data.spouseNetIncome, message)}
-              label="Spouse Net Income"
+              label="Spouse Net Income from your Farm, Ranch, Property or Business"
               name="spouseNetIncome"
               field={this.props.data.spouseNetIncome}
               onValueChange={(update) => {this.props.onStateChange('spouseNetIncome', update);}}/>
 
           <ErrorableTextInput
               errorMessage={getErrorMessage(this.props.data.spouseOtherIncome, message)}
-              label="Spouse Other Income"
+              label="Spouse Other Income Amount"
               name="spouseOtherIncome"
               field={this.props.data.spouseOtherIncome}
               onValueChange={(update) => {this.props.onStateChange('spouseOtherIncome', update);}}/>
@@ -94,16 +94,16 @@ class AnnualIncomeSection extends React.Component {
           <table className="review usa-table-borderless">
             <tbody>
               <tr>
-                <td>Spouse Gross Income:</td>
+                <td>Spouse Gross Annual Income from Employment :</td>
                 <td>{this.props.data.spouseGrossIncome.value}</td>
               </tr>
               <tr>
-                <td>Spouse Net Income:</td>
-                <td>{this.props.data.spouseNetIncome.value}</td>
+                <td>Spouse Net Income from your Farm, Ranch, Property or Business :</td>
+                <td>{this.props.data.spouseGrossIncome.value}</td>
               </tr>
               <tr>
-                <td>Spouse Other Income:</td>
-                <td>{this.props.data.spouseOtherIncome.value}</td>
+                <td>Spouse Other Income AmountS:</td>
+                <td>{this.props.data.spouseGrossIncome.value}</td>
               </tr>
             </tbody>
           </table>
@@ -117,15 +117,15 @@ class AnnualIncomeSection extends React.Component {
           <table className="review usa-table-borderless">
             <tbody>
               <tr>
-                <td>Veteran Gross Income:</td>
+                <td>Veteran Gross Annual Income from Employment :</td>
                 <td>{this.props.data.veteranGrossIncome.value}</td>
               </tr>
               <tr>
-                <td>Veteran Net Income:</td>
+                <td>Veteran Net Income from your Farm, Ranch, Property or Business :</td>
                 <td>{this.props.data.veteranNetIncome.value}</td>
               </tr>
               <tr>
-                <td>Veteran Other Income:</td>
+                <td>Veteran Other Income AmountS:</td>
                 <td>{this.props.data.veteranOtherIncome.value}</td>
               </tr>
             </tbody>
@@ -150,30 +150,29 @@ class AnnualIncomeSection extends React.Component {
           annual income of veteran, spouse and dependent children.
           </p>
 
-          <p><strong>Gross annual income</strong>: Gross (pre-tax) annual income last year</p>
-          <p><strong>Net income</strong>: Net income from a farm, ranch, property, or business last year</p>
-          <p><strong>Other income</strong>: Other sources of income, including retirement and pension income,
-          Social Security, VA disability compensation, unemployment, interest, and dividends</p>
+          <p><strong>Gross annual income</strong> from employment, except for income from your farm, ranch, property or business. Include your wages, bonuses, tips, severance pay and other accrued benefits and your child's income information if it could have been used to pay your household expenses.</p>
+          <p><strong>Net income</strong> from your farm, ranch, property, or business.</p>
+          <p><strong>Other income</strong> amounts, including retirement and pension income, Social Security Retirement and Social Security Disability income, compensation benefits such as VA disability, unemployment, Workers and black lung, cash gifts, interest and dividends, including tax exempt earnings and distributions from Individual Retirement Accounts (IRAs) or annuities.</p>
 
           <div className="input-section">
             <h6>Veteran</h6>
             <ErrorableTextInput
                 errorMessage={getErrorMessage(this.props.data.veteranGrossIncome, message)}
-                label="Veteran Gross Income"
+                label="Veteran Gross Annual Income from Employment"
                 name="veteranGrossIncome"
                 field={this.props.data.veteranGrossIncome}
                 onValueChange={(update) => {this.props.onStateChange('veteranGrossIncome', update);}}/>
 
             <ErrorableTextInput
                 errorMessage={getErrorMessage(this.props.data.veteranNetIncome, message)}
-                label="Veteran Net Income"
+                label="Veteran Net Income from your Farm, Ranch, Property or Business"
                 name="veteranNetIncome"
                 field={this.props.data.veteranNetIncome}
                 onValueChange={(update) => {this.props.onStateChange('veteranNetIncome', update);}}/>
 
             <ErrorableTextInput
                 errorMessage={getErrorMessage(this.props.data.veteranOtherIncome, message)}
-                label="Veteran Other Income"
+                label="Veteran Other Income Amount"
                 name="veteranOtherIncome"
                 field={this.props.data.veteranOtherIncome}
                 onValueChange={(update) => {this.props.onStateChange('veteranOtherIncome', update);}}/>

@@ -20,19 +20,19 @@ class ChildIncome extends React.Component {
         <h6>Child: {`${this.props.data.childFullName.first.value} ${this.props.data.childFullName.last.value}`}</h6>
         <ErrorableTextInput
             errorMessage={validateIfDirty(this.props.data.grossIncome, isBlank) || validateIfDirty(this.props.data.grossIncome, isValidMonetaryValue) ? undefined : message}
-            label="Gross Income"
+            label="Child Gross Annual Income from Employment"
             name="childGrossIncome"
             field={this.props.data.grossIncome}
             onValueChange={(update) => {this.props.onValueChange('grossIncome', update);}}/>
         <ErrorableTextInput
             errorMessage={validateIfDirty(this.props.data.netIncome, isBlank) || validateIfDirty(this.props.data.netIncome, isValidMonetaryValue) ? undefined : message}
-            label="Net Income"
+            label="Child Net Income from your Farm, Ranch, Property or Business"
             name="childNetIncome"
             field={this.props.data.netIncome}
             onValueChange={(update) => {this.props.onValueChange('netIncome', update);}}/>
         <ErrorableTextInput
             errorMessage={validateIfDirty(this.props.data.otherIncome, isBlank) || validateIfDirty(this.props.data.otherIncome, isValidMonetaryValue) ? undefined : message}
-            label="Other Income"
+            label="Child Other Income Amount"
             name="ChildOtherIncome"
             field={this.props.data.otherIncome}
             onValueChange={(update) => {this.props.onValueChange('otherIncome', update);}}/>

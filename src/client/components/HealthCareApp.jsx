@@ -89,6 +89,8 @@ class HealthCareApp extends React.Component {
     const veteran = this.props.data;
     const path = this.props.location.pathname;
 
+    window.dataLayer.push({ event: 'submit-button-clicked' });
+
     if (validations.isValidForm(veteran)) {
       this.props.onUpdateSubmissionStatus('submitPending');
 
@@ -115,11 +117,15 @@ class HealthCareApp extends React.Component {
           this.context.router.push(this.getUrl('next'));
           this.scrollToTop();
         }, 1000);
+
+        window.dataLayer.push({ event: 'submission-successful' });
       }).catch(error => {
         // TODO(crew): Pass meaningful errors to the client.
         setTimeout(() => { // eslint-disable-line scanjs-rules/call_setTimeout
           this.props.onUpdateSubmissionStatus('submitFailed', error);
         }, 5000);
+
+        window.dataLayer.push({ event: 'submission-failed' });
       });
     } else {
       this.scrollToTop();
@@ -218,7 +224,7 @@ class HealthCareApp extends React.Component {
         <div className="row progress-buttons">
           <div className="small-6 medium-5 columns">
             {/* TODO: Figure out where this button should take the user. */}
-            <a href="www.vets.gov">
+            <a href="/">
               <button className="usa-button-primary">Back to Main Page</button>
             </a>
           </div>
