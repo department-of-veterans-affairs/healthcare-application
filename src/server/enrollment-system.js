@@ -210,17 +210,6 @@ function veteranToSpouseInfo(veteran) {
 }
 
 /**
- * Adds discloseFinancialInformation if financial data exists in the field
-*/
-function optionalIncomeTest(hasData) {
-  if (hasData) {
-    return { discloseFinancialInformation: true };
-  }
-  return undefined;
-}
-
-
-/**
  * Extracts an incomeCollection object out of an API resource (eg., veteran, child, spouse)
  *
  * @param {Object} resource The resource with income data.
