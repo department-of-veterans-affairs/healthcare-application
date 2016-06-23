@@ -35,7 +35,7 @@ class AdditionalInformationSection extends React.Component {
           </tr>
           <tr>
             <td>Do you want VA to contact you to schedule your first appointment?:</td>
-            <td>{`${this.props.data.wantsInitialVaContact ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.wantsInitialVaContact.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
         </tbody>
       </table>);
