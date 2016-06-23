@@ -32,7 +32,7 @@ const blankVeteran = {
   isEssentialAcaCoverage: false,
   facilityState: makeField(''),  // TODO(awong): Ignored by ES System
   vaMedicalFacility: makeField(''),
-  wantsInitialVaContact: false,
+  wantsInitialVaContact: makeField(''),
 
   isSpanishHispanicLatino: false,
   isAmericanIndianOrAlaskanNative: false,
@@ -73,7 +73,7 @@ const blankVeteran = {
     year: makeField('')
   },
   sameAddress: makeField(''),  // TODO(awong): Not sure how to handle the mapping.
-  cohabitedLastYear: makeField('N'),  // TODO(awong): This name should be scoped to spouse.
+  cohabitedLastYear: makeField(''),  // TODO(awong): This name should be scoped to spouse.
   provideSupportLastYear: makeField(''),  // TODO(awong): This name should be scoped to spouse.
   spouseAddress: {
     street: makeField(''),
@@ -211,7 +211,10 @@ const completeVeteran = {
     value: '689A4',
     dirty: true
   },
-  wantsInitialVaContact: true,
+  wantsInitialVaContact: {
+    value: 'Y',
+    dirty: true
+  },
   isSpanishHispanicLatino: true,
   isAmericanIndianOrAlaskanNative: true,
   isBlackOrAfricanAmerican: true,
@@ -672,6 +675,7 @@ function veteranToApplication(veteran) {
       case 'isCoveredByHealthInsurance':
       case 'isMedicaidEligible':
       case 'isEnrolledMedicarePartA':
+      case 'wantsInitialVaContact':
         return value.value === 'Y';
 
       case 'childEducationExpenses':
