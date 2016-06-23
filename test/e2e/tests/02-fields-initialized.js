@@ -271,7 +271,8 @@ module.exports = {
     expectInputToNotBeSelected(client, 'input[name="isEssentialAcaCoverage"]');
     expectValueToBeBlank(client, 'select[name="state"]');
     expectValueToBeBlank(client, 'select[name="vaMedicalFacility"]');
-    expectInputToNotBeSelected(client, 'input[name="wantsInitialVaContact"]');
+    expectInputToNotBeSelected(client, 'input[name="wantsInitialVaContact-0"]');
+    expectInputToNotBeSelected(client, 'input[name="wantsInitialVaContact-1"]');
     common.completeVaInsuranceInformation(client, common.testValues, true);
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/insurance-information/va-facility');
