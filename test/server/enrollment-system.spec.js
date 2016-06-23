@@ -1,6 +1,7 @@
 const chai = require('chai');
 chai.should();
 const tk = require('timekeeper');
+const _ = require('lodash');
 
 const enrollmentSystem = require('../../src/server/enrollment-system');
 const fakeApplication = require('../data/fake-application');
@@ -91,6 +92,26 @@ describe('enrollment-system base tests', () => {
       const result = enrollmentSystem.veteranToSaveSubmitForm(1);
       result.should.be.empty;
       result.should.be.instanceOf(Object);
+    });
+  });
+
+  describe('livedWithPatient', () => {
+    it('should be set to false if cohabitedLastYear is not present', () => {
+      const application = _.cloneDeep(fakeApplication);
+      application.cohabitedLastYear = undefined;
+      const result = enrollmentSystem.veteranToSaveSubmitForm(application);
+      const spouseFinancials = result.form.summary.financialsInfo
+        .financialStatement.spouseFinancialsList.spouseFinancials;
+      spouseFinancials.livedWithPatient.should.equal('false');
+    });
+
+    it('should be set to false if cohabitedLastYear is empty string', () => {
+      const application = _.cloneDeep(fakeApplication);
+      application.cohabitedLastYear = '';
+      const result = enrollmentSystem.veteranToSaveSubmitForm(application);
+      const spouseFinancials = result.form.summary.financialsInfo
+        .financialStatement.spouseFinancialsList.spouseFinancials;
+      spouseFinancials.livedWithPatient.should.equal('false');
     });
   });
 });
