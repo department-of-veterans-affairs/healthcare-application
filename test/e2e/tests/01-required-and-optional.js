@@ -246,11 +246,7 @@ module.exports = {
       .click('input[name="isEssentialAcaCoverage"]')
       .setValue('select[name="state"]', 'IL')
       .setValue('select[name="vaMedicalFacility"]', 'EVANSTON CBOC')
-<<<<<<< HEAD
-      .click('input[name="wantsInitialVaContact"]')
-=======
       .click('input[name="wantsInitialVaContact-0"]')
->>>>>>> 55a3c8ffa50abfecaae42cf49a388d6a65efee24
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/insurance-information/va-facility');
 
