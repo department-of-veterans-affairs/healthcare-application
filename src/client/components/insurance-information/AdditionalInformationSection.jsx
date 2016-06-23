@@ -5,9 +5,8 @@ import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import ErrorableSelect from '../form-elements/ErrorableSelect';
 import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
 import VaMedicalFacility from './VaMedicalFacility';
-import { yesNo } from '../../utils/options-for-select';
 import { veteranUpdateField } from '../../actions';
-import { states, vaMedicalFacilities } from '../../utils/options-for-select';
+import { states, vaMedicalFacilities, yesNo } from '../../utils/options-for-select';
 import { validateIfDirty, isNotBlank } from '../../utils/validations';
 import { displayLabel } from '../../store/calculated';
 
