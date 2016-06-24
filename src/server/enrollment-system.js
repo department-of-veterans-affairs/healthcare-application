@@ -328,18 +328,14 @@ function childToDependentInfo(child) {
  */
 function childToDependentFinancialsInfo(child) {
   const incomes = resourceToIncomeCollection(child);
-  if (incomes) {
-    return {
-      incomes,
-      dependentInfo: childToDependentInfo(child),
-      livedWithPatient: child.childCohabitedLastYear,
-      incapableOfSelfSupport: child.childDisabledBefore18,
-      attendedSchool: child.childAttendedSchoolLastYear,
-      contributedToSupport: child.childReceivedSupportLastYear,
-    };
-  }
-
-  return undefined;
+  return {
+    incomes,
+    dependentInfo: childToDependentInfo(child),
+    livedWithPatient: child.childCohabitedLastYear,
+    incapableOfSelfSupport: child.childDisabledBefore18,
+    attendedSchool: child.childAttendedSchoolLastYear,
+    contributedToSupport: child.childReceivedSupportLastYear,
+  };
 }
 
 /**
@@ -371,24 +367,21 @@ function veteranToSpouseFinancials(veteran) {
     otherIncome: veteran.spouseOtherIncome
   });
 
-  if (spouseIncome) {
-    // set cohabitedLastYear to false if not present or empty string
-    let cohabitedLastYear = veteran.cohabitedLastYear;
-    if (!cohabitedLastYear) {
-      cohabitedLastYear = false;
-    }
-
-    return {
-      spouseFinancials: {
-        incomes: spouseIncome,
-        spouse: veteranToSpouseInfo(veteran),
-        // TODO(awong): Verify this is right field. There is also contributionToSpouse in financialStatementInfo.
-        contributedToSpousalSupport: yesNoToESBoolean(veteran.provideSupportLastYear),
-        livedWithPatient: yesNoToESBoolean(cohabitedLastYear),
-      },
-    };
+  // set cohabitedLastYear to false if not present or empty string
+  let cohabitedLastYear = veteran.cohabitedLastYear;
+  if (!cohabitedLastYear) {
+    cohabitedLastYear = false;
   }
-  return undefined;
+
+  return {
+    spouseFinancials: {
+      incomes: spouseIncome,
+      spouse: veteranToSpouseInfo(veteran),
+      // TODO(awong): Verify this is right field. There is also contributionToSpouse in financialStatementInfo.
+      contributedToSpousalSupport: yesNoToESBoolean(veteran.provideSupportLastYear),
+      livedWithPatient: yesNoToESBoolean(cohabitedLastYear),
+    },
+  };
 }
 
 /**
@@ -890,6 +883,14 @@ function veteranToEnrollmentDeterminationInfo(veteran) {
 //  * "financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / amountIncomeType=Net Income from Farm,   Ranch,  Property,  Business IncomeType=Net Income from Farm,   Ranch,  Property,  Business", "Dollar amounts:  0 <= 9999999.99", "Req if Marr/Sep,  or any 3 spouse questions answered on this Panel", This amount field must be accompanied by the income type.
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from employment.
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, "Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from FARM,  RANCH,  PROPERTY OR BUSINESS."
+
+function booleanToIncomeTest(hasIncomeData) {
+  if (hasIncomeData) {
+    return { discloseFinancialInformation: true };
+  }
+  return undefined;
+}
+
 function veteranToFinancialsInfo(veteran) {
   const expenses = resourceToExpenseCollection({
     educationExpense: veteran.deductibleEducationExpenses,
@@ -903,28 +904,24 @@ function veteranToFinancialsInfo(veteran) {
   });
 
   const dependentFinancials = veteranToDependentFinancialsCollection(veteran);
+  const hasDependentFinancials = _.compact(dependentFinancials.dependentFinancials.map((child) => { return child.income; })).length > 0;
   const spouseFinancials = veteranToSpouseFinancials(veteran);
 
-  const hasIncomeData = expenses || incomes || spouseFinancials || dependentFinancials;
+  const hasIncomeData = expenses || incomes || spouseFinancials.incomes || hasDependentFinancials;
 
-  if (hasIncomeData) {
-    return {
-      incomeTest: {
-        discloseFinancialInformation: true
-      },
-      financialStatement: {
-        expenses,
-        incomes,
-        spouseFinancialsList: spouseFinancials,
-        marriedLastCalendarYear: veteran.maritalStatus === 'Married',
-        dependentFinancialsList: dependentFinancials,
-        numberOfDependentChildren: veteran.children.length,
-      }
-    };
-  }
-
-  return undefined;
+  return {
+    incomeTest: booleanToIncomeTest(hasIncomeData),
+    financialStatement: {
+      expenses,
+      incomes,
+      spouseFinancialsList: spouseFinancials,
+      marriedLastCalendarYear: veteran.maritalStatus === 'Married',
+      dependentFinancialsList: dependentFinancials,
+      numberOfDependentChildren: veteran.children.length,
+    }
+  };
 }
+
 
 // Produces an employmentInfo compatible type from a veteran resource.
 //
