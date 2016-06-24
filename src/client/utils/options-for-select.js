@@ -48,7 +48,7 @@ const countries = [
   { value: 'COL', label: 'Colombia' },
   { value: 'COM', label: 'Comoros' },
   { value: 'COG', label: 'Congo' },
-  { value: 'COD', label: 'Democratic Republic of the Congo	' },
+  { value: 'COD', label: 'Democratic Republic of the Congo' },
   { value: 'COK', label: 'Islands' },
   { value: 'CRI', label: 'Costa Rica' },
   { value: 'CIV', label: 'Ivory Coast' },
