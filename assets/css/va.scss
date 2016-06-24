@@ -2189,103 +2189,358 @@ button[class*="usa-button-"] {
 
 /* Overlay style */
 
+.va-overlay-close {
+  @media #{$medium} {
+    display: none;
+  }
+  &--icon {
+    display: inline;
+    margin: 0;
+    padding: 1rem;
+    width: auto;
+    
+    &:hover {
+      background: transparent;
+    }
+  }
+}
+
+
+@media #{$medium} {
+  .va-overlay-close {
+    display: none;
+  }
+}
+
 @media #{$small-only} {
-
-  .overlay {
-  	position: fixed;
-  	width: 100%;
-  	height: 100%;
-  	top: 0;
-  	left: 0;
+  .va-overlay {
+    background: rgba($color-primary-darkest, .95);
+    height: 100%;
+    left: 0;
+    -webkit-transition: opacity 0.5s, visibility 0s 0.5s;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    transition: opacity 0.5s, visibility 0s 0.5s;
+    visibility: hidden;
+    width: 100%;
     z-index: 800;
-  	background: rgba($color-primary-darkest, .95);
+  
+    input[type="text"] {
+      -webkit-appearance: none;
+      border-radius: 3px 0 0 3px;
+    }
   }
-
-  /* Overlay closing cross */
-  .overlay .overlay-close {
-    display: block;
-    border: none;
-  	outline: none;
-  	z-index: 100;
+  
+  .va-mobile-searchclose  {
+    border-radius: 0;
+    display: block !important;
+    width: 100% !important;
+    margin: 0;
+    width: auto;
+    background: $color-primary;
   }
-
-
-  button#trigger-overlay {
+    
+  .va-mobile-searchtrigger {
     padding: .5em;
     margin-top: 0;
     border-radius: .15em;
   }
 
-  /* Effects */
-  .overlay-fullscreen {
-  	opacity: 0;
-  	visibility: hidden;
-  	-webkit-transition: opacity 0.5s, visibility 0s 0.5s;
-  	transition: opacity 0.5s, visibility 0s 0.5s;
+  .va-overlay--open {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s;
 
-    button {
-      border-radius: 0;
-      display: block;
-      width: 100% !important;
-      margin: 0;
-      width: auto;
-      background: $color-primary;
-
-    }
-
-    input[type="text"] {
-      -webkit-appearance: none;
-      border-radius: 3px 0 0 3px;
-    }
-
-  }
-
-  .overlay-fullscreen.open {
-  	opacity: 1;
-  	visibility: visible;
-  	-webkit-transition: opacity 0.5s;
-  	transition: opacity 0.5s;
     .columns {
       padding: 0;
     }
   }
 
-  .overlay-fullscreen .menu {
-  	-webkit-perspective: 1200px;
-  	perspective: 1200px;
+  .va-overlay .menu {
+    -webkit-perspective: 1200px;
+    perspective: 1200px;
     padding: 1em 1em;
   }
 
-  .overlay-fullscreen form {
-  	opacity: 0.4;
-  	-webkit-transform: translateY(-25%) rotateX(35deg);
-  	transform: translateY(-25%) rotateX(35deg);
-  	-webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
-  	transition: transform 0.5s, opacity 0.5s;
+  .va-overlay form {
+    opacity: 0.4;
+    -webkit-transform: translateY(-25%) rotateX(35deg);
+    transform: translateY(-25%) rotateX(35deg);
+    -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+    transition: transform 0.5s, opacity 0.5s;
   }
 
-  .overlay-fullscreen.open form {
-  	opacity: 1;
-  	-webkit-transform: rotateX(0deg);
-  	transform: rotateX(0deg);
+  .va-overlay--open form {
+    opacity: 1;
+    -webkit-transform: rotateX(0deg);
+    transform: rotateX(0deg);
   }
 
-  .overlay-fullscreen.close form {
-  	-webkit-transform: translateY(25%) rotateX(-35deg);
-  	transform: translateY(25%) rotateX(-35deg);
+  .va-overlay--closed form {
+    -webkit-transform: translateY(25%) rotateX(-35deg);
+    transform: translateY(25%) rotateX(-35deg);
+  }
+  .va-overlay--closed {
+    display: block;
+    border: none;
+    outline: none;
+    z-index: 100;
   }
 
+  .va-overlay-body {
+    margin: 1rem auto;
+  }
+  
   @media screen and (max-height: 30.5em) {
-  	.overlay form {
-  		height: 70%;
-  	}
-
+    .overlay form {
+      height: 70%;
+    }
   }
-
 }
 
-.overlay-close {
-  display: none;
+// TODO: Remove !important when .footer a selector gets simplified
+
+.va-crisis-panel {
+  color: $color-primary-darkest;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 2;
+  
+  a {
+    padding: 0;
+    background-image: none;
+  }
+}
+
+.va-crisis-panel-body {
+  background: $color-gray-lightest;
+  list-style: inherit;
+  margin: 0;
+  padding: 0;
+
+  p {
+    margin: 0;
+    padding: 2.5rem;
+    font-size: 1.4rem;
+  }
+
+  ul {
+    font-size: 1.7rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+}
+
+.va-crisis-panel--notouch {
+  bottom: 0;
+  right: 0; 
+  width: 33rem;
+  position: absolute;
+  
+  -webkit-transform: translateY(243px);
+      -ms-transform: translateY(243px);
+          transform: translateY(243px);
+  
+    -webkit-transition: transform 250ms;
+            transition: transform 250ms;
+           
+  li {
+    padding: 2.5rem 0 0;
+  }
+  
+  @media #{$small-only} {
+    display: none;
+  }
+}
+
+.va-crisis-panel--open {
+  -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+          transform: translateY(0);
+}
+
+.va-crisis-line {
+  background-color: $color-gold;
+  color: rgb(0,0,0);
+  display: block;
+  font-weight: bold !important;
+  margin: 0 auto; 
+  padding: .25rem 0;
+  text-align: center;
+  text-decoration: none !important;
+  
+  span {
+    font-weight: bold;
+  }
+  
+  &:hover {
+    background-color: $color-gold;
+    border-bottom: none;
+    color: rgb(0,0,0);
+    text-decoration: none;
+  }
+  
+  @media #{$small-only} {
+    padding: .25em 0;
+  }
+}
+
+//===== VA CRISIS LINE BUTTONS 
+.va-crisis-line--touch {
+  border-radius: .2em;
+  margin: 2.5em 0;
+}
+
+.va-crisis-line--notouch {
+  background: $color-gold url(/assets/images/arrow-up.svg) no-repeat 97% center;
+  background-size: .8em auto;
+  border-radius: .2em .2em 0 0;
+  font-size: 1.7rem;
+  margin: 0;
+  padding: 1.25rem;
+  text-align: left;
+  width: 100%;
+  
+  .va-crisis-panel--open & {
+    background-image: url(/assets/images/arrow-down.svg);
+  }
+}
+
+//==== Small viewport panel touch
+.va-crisis-panel--touch {
+  padding: 0 2rem;
+  position: relative; 
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+            
+  .va-crisis-panel-body {
+    height: auto;
+    max-height: 100%;
+  }
+  
+  li {
+    &:nth-child(odd) {
+      border-top: 1px solid $color-gray-lighter;
+      border-bottom: 1px solid $color-gray-lighter;
+    }
+    
+    a {
+      color: $color-base;
+      display: block;
+      padding: 1.5rem 0;
+      text-decoration: none; 
+    }
+  }
+  
+  p:last-child {
+    font-size: .85em;
+  }
+  
+  .va-crisis-line {
+    font-size: inherit;
+    padding: 1.25rem;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.va-list--linkgroup {
+  margin: 2em 0 0 0;
+  
+  @media #{$small} {
+    margin: 2em 0 1.5em 0;
+  }
+    
+  a {
+    background: none;
+    color: #fff;
+    display: block;
+    font-size: 1em;
+    font-weight: 400;
+    margin: .25em 0;
+    text-decoration: underline; 
+    
+    &:hover {
+      color: $color-gold;
+    }
+  }
+   
+  dd {
+    padding: .25em 0;
+  }
+}
+
+.va-list--linkgroup-title {
+  -webkit-font-smoothing: antialiased;
+  font-weight: 700;
+  display: block;
+  font-size: .95em;
+  padding: 0 0 1em 0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.va-list--linkgroup--inline {
+    list-style: none;
+    margin: 0 auto;
+    padding: 1.5em 0 0 0;
+    text-align: center;
+      @media #{$large} {
+        text-align: left;
+      }
+    width: 100%;
+
+    &:after {
+       visibility: hidden;
+       display: block;
+       font-size: 0;
+       content: " ";
+       clear: both;
+       height: 0;
+    }
+
+    li {
+      padding: 0;
+      display: inline-block;
+      
+      &:after {
+        content:"|";
+        padding: 0 .15em;
+      }
+      
+      &:last-child {
+        margin-right: 0;
+        
+        &::after {
+          padding: 0;
+          content: "";
+        }
+      }       
+    }
+ 
+    a {
+      background: none;
+      color: inherit;
+      font-weight: 400;
+      display: inline-block;
+      padding: .35em;
+      margin: .25em 0;
+      &:hover {color: $color-gold;}
+    }
+}
+  
+@media #{$medium} {
+  .va-crisis-panel--touch,
+  .va-crisis-line--touch {
+    display: none;
+  }
 }
 
 // List overrides
