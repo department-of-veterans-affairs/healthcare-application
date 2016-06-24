@@ -1,3 +1,5 @@
+'use strict'; // eslint-disable-line
+
 const _ = require('lodash');
 const moment = require('moment');
 const validations = require('./utils/validations');
@@ -370,13 +372,19 @@ function veteranToSpouseFinancials(veteran) {
   });
 
   if (spouseIncome) {
+    // set cohabitedLastYear to false if not present or empty string
+    let cohabitedLastYear = veteran.cohabitedLastYear;
+    if (!cohabitedLastYear) {
+      cohabitedLastYear = false;
+    }
+
     return {
       spouseFinancials: {
         incomes: spouseIncome,
         spouse: veteranToSpouseInfo(veteran),
         // TODO(awong): Verify this is right field. There is also contributionToSpouse in financialStatementInfo.
         contributedToSpousalSupport: yesNoToESBoolean(veteran.provideSupportLastYear),
-        livedWithPatient: yesNoToESBoolean(veteran.cohabitedLastYear),
+        livedWithPatient: yesNoToESBoolean(cohabitedLastYear),
       },
     };
   }
