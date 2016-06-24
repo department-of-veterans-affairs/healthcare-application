@@ -14,7 +14,7 @@ describe('<ContactInformationSection>', () => {
     expect(vdom.props.children).to.exist;
   });
 
-  describe('Email confimration', () => {
+  describe('Email confirmation', () => {
     it('does not include `error` prop when matches Email', () => {
       const tree = SkinDeep.shallowRender(
         <ContactInformationSection data={{ email: mockEmail, emailConfirmation: mockEmail }}/>);
