@@ -109,7 +109,7 @@ const countries = [
   { value: 'KEN', label: 'Kenya' },
   { value: 'KIR', label: 'Kiribati' },
   { value: 'PRK', label: 'North Korea' },
-  { value: 'KOR', label: 'South Korea,' },
+  { value: 'KOR', label: 'South Korea' },
   { value: 'KWT', label: 'Kuwait' },
   { value: 'KGZ', label: 'Kyrgyzstan' },
   { value: 'LAO', label: 'Laos' },
