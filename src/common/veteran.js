@@ -411,7 +411,10 @@ const completeVeteran = {
           dirty: true
         }
       },
-      childDisabledBefore18: true,
+      childDisabledBefore18: {
+        value: 'Y',
+        dirty: true
+      },
       childAttendedSchoolLastYear: true,
       childEducationExpenses: {
         value: '45.2',
@@ -487,7 +490,10 @@ const completeVeteran = {
           dirty: true
         }
       },
-      childDisabledBefore18: false,
+      childDisabledBefore18: {
+        value: 'N',
+        dirty: true
+      },
       childAttendedSchoolLastYear: true,
       childEducationExpenses: {
         value: '1198.11',
@@ -676,6 +682,7 @@ function veteranToApplication(veteran) {
       case 'isMedicaidEligible':
       case 'isEnrolledMedicarePartA':
       case 'wantsInitialVaContact':
+      case 'childDisabledBefore18':
         return value.value === 'Y';
 
       case 'childEducationExpenses':

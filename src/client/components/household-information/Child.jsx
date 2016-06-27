@@ -3,11 +3,12 @@ import React from 'react';
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import ErrorableSelect from '../form-elements/ErrorableSelect';
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
+import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
 import DateInput from '../form-elements/DateInput';
 import FullName from '../questions/FullName';
 import SocialSecurityNumber from '../questions/SocialSecurityNumber';
 
-import { childRelationships } from '../../utils/options-for-select.js';
+import { childRelationships, yesNo } from '../../utils/options-for-select.js';
 import { isNotBlank, isValidField, isValidMonetaryValue, validateIfDirty, isValidDependentDateField } from '../../utils/validations';
 
 // TODO: create unique nodes for each child in applicationData
@@ -81,10 +82,11 @@ class Child extends React.Component {
 
           <div className="row">
             <div className="small-12 columns">
-              <ErrorableCheckbox
+              <ErrorableRadioButtons
                   label="Was child permanently and totally disabled before the age of 18?"
                   name="childDisabledBefore18"
-                  checked={this.props.data.childDisabledBefore18}
+                  options={yesNo}
+                  value={this.props.data.childDisabledBefore18}
                   onValueChange={(update) => {this.props.onValueChange('childDisabledBefore18', update);}}/>
             </div>
           </div>
