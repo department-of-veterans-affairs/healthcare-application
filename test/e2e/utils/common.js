@@ -358,11 +358,11 @@ function completeChildInformation(client, data, onlyRequiredFields) {
     client
       .setValue('input[name="mname"]', 'Dirtbike')
       .setValue('select[name="suffix"]', 'Jr.')
-      .click('input[name="childDisabledBefore18"]')
-      .click('input[name="childAttendedSchoolLastYear"]')
+      .click('input[name="childDisabledBefore18-0"]')
+      .click('input[name="childAttendedSchoolLastYear-0"]')
       .setValue('input[name="childEducationExpenses"]', '6000')
-      .click('input[name="childCohabitedLastYear"]')
-      .click('input[name="childReceivedSupportLastYear"]');
+      .click('input[name="childCohabitedLastYear-0"]')
+      .click('input[name="childReceivedSupportLastYear-0"]');
   }
 }
 
@@ -400,7 +400,7 @@ function completeVaInsuranceInformation(client, data, onlyRequiredFields) {
   if (!onlyRequiredFields) {
     client
       .click('input[name="isEssentialAcaCoverage"]')
-      .click('input[name="wantsInitialVaContact"]');
+      .click('input[name="wantsInitialVaContact-1"]');
   }
 }
 
