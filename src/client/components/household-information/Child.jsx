@@ -1,6 +1,5 @@
 import React from 'react';
 
-import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import ErrorableSelect from '../form-elements/ErrorableSelect';
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
 import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
@@ -93,10 +92,11 @@ class Child extends React.Component {
 
           <div className="row">
             <div className="small-12 columns">
-              <ErrorableCheckbox
+              <ErrorableRadioButtons
                   label="If child is between 18 and 23 years of age, did child attend school last calendar year?"
                   name="childAttendedSchoolLastYear"
-                  checked={this.props.data.childAttendedSchoolLastYear}
+                  options={yesNo}
+                  value={this.props.data.childAttendedSchoolLastYear}
                   onValueChange={(update) => {this.props.onValueChange('childAttendedSchoolLastYear', update);}}/>
             </div>
           </div>
@@ -115,10 +115,11 @@ class Child extends React.Component {
 
           <div className="row">
             <div className="small-12 columns">
-              <ErrorableCheckbox
+              <ErrorableRadioButtons
                   label="Did your child live with you last year?"
                   name="childCohabitedLastYear"
-                  checked={this.props.data.childCohabitedLastYear}
+                  options={yesNo}
+                  value={this.props.data.childCohabitedLastYear}
                   onValueChange={(update) => {this.props.onValueChange('childCohabitedLastYear', update);}}/>
             </div>
           </div>
@@ -132,10 +133,11 @@ class Child extends React.Component {
 
           <div className="row">
             <div className="small-12 columns">
-              <ErrorableCheckbox
+              <ErrorableRadioButtons
                   label="If your dependent child did not live with you last year, did you provide support?"
                   name="childReceivedSupportLastYear"
-                  checked={this.props.data.childReceivedSupportLastYear}
+                  options={yesNo}
+                  value={this.props.data.childReceivedSupportLastYear}
                   onValueChange={(update) => {this.props.onValueChange('childReceivedSupportLastYear', update);}}/>
             </div>
           </div>

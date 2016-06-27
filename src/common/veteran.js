@@ -415,13 +415,22 @@ const completeVeteran = {
         value: 'Y',
         dirty: true
       },
-      childAttendedSchoolLastYear: true,
+      childAttendedSchoolLastYear: {
+        value: 'Y',
+        dirty: true
+      },
       childEducationExpenses: {
         value: '45.2',
         dirty: true
       },
-      childCohabitedLastYear: true,
-      childReceivedSupportLastYear: false,
+      childCohabitedLastYear: {
+        value: 'Y',
+        dirty: true
+      },
+      childReceivedSupportLastYear: {
+        value: 'N',
+        dirty: true
+      },
       grossIncome: {
         value: '991.9',
         dirty: true
@@ -494,13 +503,22 @@ const completeVeteran = {
         value: 'N',
         dirty: true
       },
-      childAttendedSchoolLastYear: true,
+      childAttendedSchoolLastYear: {
+        value: 'Y',
+        dirty: true
+      },
       childEducationExpenses: {
         value: '1198.11',
         dirty: true
       },
-      childCohabitedLastYear: false,
-      childReceivedSupportLastYear: true,
+      childCohabitedLastYear: {
+        value: 'N',
+        dirty: true
+      },
+      childReceivedSupportLastYear: {
+        value: 'Y',
+        dirty: true
+      },
       grossIncome: {
         value: '791.9',
         dirty: true
@@ -683,6 +701,9 @@ function veteranToApplication(veteran) {
       case 'isEnrolledMedicarePartA':
       case 'wantsInitialVaContact':
       case 'childDisabledBefore18':
+      case 'childAttendedSchoolLastYear':
+      case 'childCohabitedLastYear':
+      case 'childReceivedSupportLastYear':
         return value.value === 'Y';
 
       case 'childEducationExpenses':

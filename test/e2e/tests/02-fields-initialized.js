@@ -206,10 +206,13 @@ module.exports = {
     expectValueToBeBlank(client, 'input[name="childBecameDependentYear"]');
     expectInputToNotBeSelected(client, 'input[name="childDisabledBefore18-0"]');
     expectInputToNotBeSelected(client, 'input[name="childDisabledBefore18-1"]');
-    expectInputToNotBeSelected(client, 'input[name="childAttendedSchoolLastYear"]');
+    expectInputToNotBeSelected(client, 'input[name="childAttendedSchoolLastYear-0"]');
+    expectInputToNotBeSelected(client, 'input[name="childAttendedSchoolLastYear-1"]');
     expectValueToBeBlank(client, 'input[name="childEducationExpenses"]');
-    expectInputToNotBeSelected(client, 'input[name="childCohabitedLastYear"]');
-    expectInputToNotBeSelected(client, 'input[name="childReceivedSupportLastYear"]');
+    expectInputToNotBeSelected(client, 'input[name="childCohabitedLastYear-0"]');
+    expectInputToNotBeSelected(client, 'input[name="childCohabitedLastYear-1"]');
+    expectInputToNotBeSelected(client, 'input[name="childReceivedSupportLastYear-0"]');
+    expectInputToNotBeSelected(client, 'input[name="childReceivedSupportLastYear-1"]');
 
     common.completeChildInformation(client, common.testValues, true);
     client.click('.form-panel .usa-button-primary');
