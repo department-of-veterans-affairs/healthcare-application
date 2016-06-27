@@ -16,7 +16,7 @@ class SubmitMessage extends React.Component {
         <div>
           <p>We are processing your application. You should receive a phone call from the VA in the next week.</p>
           <div className="success-alert-box">
-            <p className="success-copy">Your Form Submission ID: {this.props.submission.id}</p>
+            <p className="success-copy">Your Form Submission ID: <span className="js-form-submission-id">{this.props.submission.id}</span></p>
             <p className="success-copy">Form Submitted At: {moment(time).format('MMMM Do YYYY, h:mm A')}</p>
           </div>
           <p>Please print this page for your records.</p>
