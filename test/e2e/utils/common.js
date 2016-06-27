@@ -105,11 +105,11 @@ const testValues = {
         day: '2',
         year: '2012'
       },
-      childDisabledBefore18: false,
-      childAttendedSchoolLastYear: false,
+      childDisabledBefore18: '',
+      childAttendedSchoolLastYear: '',
       childEducationExpenses: '6000',
-      childCohabitedLastYear: false,
-      childReceivedSupportLastYear: false,
+      childCohabitedLastYear: '',
+      childReceivedSupportLastYear: '',
       grossIncome: '4000',
       netIncome: '3000',
       otherIncome: '2000'
