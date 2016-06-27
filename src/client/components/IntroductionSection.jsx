@@ -20,13 +20,14 @@ class IntroductionSection extends React.Component {
             </p>
             <p>
               Federal law provides criminal penalties, including a fine and/or imprisonment for up to 5 years, for concealing a material fact or making a materially false statement. (See <a href="https://www.justice.gov/usam/criminal-resource-manual-903-false-statements-concealment-18-usc-1001" target="_blank">18 U.S.C. 1001</a>)</p>
-            <p>
+            <div className="usa-alert usa-alert-info">
               <strong>
                 Note: You will not be able to save your progress once you have started the form.
               </strong>
-            </p>
+            </div>
           </div>
         </div>
+        <br/>
       </div>
     );
   }
