@@ -37,11 +37,11 @@ class ChildInformationSection extends React.Component {
         const childDateOfBirthMonth = obj.childDateOfBirth.month.value;
         const childDateOfBirthDay = obj.childDateOfBirth.day.value;
         const childDateOfBirthYear = obj.childDateOfBirth.year.value;
-        const childDisabledBefore18 = obj.childDisabledBefore18;
-        const childAttendedSchoolLastYear = obj.childAttendedSchoolLastYear;
+        const childDisabledBefore18 = obj.childDisabledBefore18.value;
+        const childAttendedSchoolLastYear = obj.childAttendedSchoolLastYear.value;
         const childEducationExpenses = obj.childEducationExpenses.value;
-        const childCohabitedLastYear = obj.childCohabitedLastYear;
-        const childReceivedSupportLastYear = obj.childReceivedSupportLastYear;
+        const childCohabitedLastYear = obj.childCohabitedLastYear.value;
+        const childReceivedSupportLastYear = obj.childReceivedSupportLastYear.value;
         return (<table key={++reactKey} className="review usa-table-borderless">
           <thead>
             <tr>
@@ -68,11 +68,11 @@ class ChildInformationSection extends React.Component {
             </tr>
             <tr>
               <td>Was child permanently and totally disabled before the age of 18?:</td>
-              <td>{`${childDisabledBefore18 ? 'Yes' : 'No'}`}</td>
+              <td>{`${childDisabledBefore18 === 'Y' ? 'Yes' : 'No'}`}</td>
             </tr>
             <tr>
               <td>If child is between 18 and 23 years of age, did child attend school last calendar year?:</td>
-              <td>{`${childAttendedSchoolLastYear ? 'Yes' : 'No'}`}</td>
+              <td>{`${childAttendedSchoolLastYear === 'Y' ? 'Yes' : 'No'}`}</td>
             </tr>
             <tr>
               <td>Expenses paid by your dependent child for college, vocational rehabilitation or training (e.g., tuition, books, materials):</td>
@@ -80,11 +80,11 @@ class ChildInformationSection extends React.Component {
             </tr>
             <tr>
               <td>Did your child live with you last year?:</td>
-              <td>{`${childCohabitedLastYear ? 'Yes' : 'No'}`}</td>
+              <td>{`${childCohabitedLastYear === 'Y' ? 'Yes' : 'No'}`}</td>
             </tr>
             <tr>
               <td>If your dependent child did not live with you last year, did you provide support?:</td>
-              <td>{`${childReceivedSupportLastYear ? 'Yes' : 'No'}`}</td>
+              <td>{`${childReceivedSupportLastYear === 'Y' ? 'Yes' : 'No'}`}</td>
             </tr>
           </tbody>
         </table>);
