@@ -14,13 +14,12 @@ class SubmitMessage extends React.Component {
           <h4 className="success-copy">You have successfully submitted your application for health care!</h4>
         </div>
         <div>
-          <p>We are processing your application. You should receive a phone call from the VA in the next week.</p>
+          <p>We are processing your application.  Upon completion of our review, the Department of Veterans Affairs will contact you.</p>
           <div className="success-alert-box">
-            <p className="success-copy">Your Form Submission ID: {this.props.submission.id}</p>
             <p className="success-copy">Form Submitted At: {moment(time).format('MMMM Do YYYY, h:mm A')}</p>
           </div>
           <p>Please print this page for your records.</p>
-          <p>If you do not hear from the VA within 7 business days, or you have questions, call 1-877-222-VETS (8387) option 2.</p>
+          <p>If you have questions, call 1-877-222-VETS (8387) and select option 2.</p>
         </div>
       </div>
     );

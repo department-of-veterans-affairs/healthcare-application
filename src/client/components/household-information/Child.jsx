@@ -1,13 +1,13 @@
 import React from 'react';
 
-import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
 import ErrorableSelect from '../form-elements/ErrorableSelect';
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
+import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
 import DateInput from '../form-elements/DateInput';
 import FullName from '../questions/FullName';
 import SocialSecurityNumber from '../questions/SocialSecurityNumber';
 
-import { childRelationships } from '../../utils/options-for-select.js';
+import { childRelationships, yesNo } from '../../utils/options-for-select.js';
 import { isNotBlank, isValidField, isValidMonetaryValue, validateIfDirty, isValidDependentDateField } from '../../utils/validations';
 
 // TODO: create unique nodes for each child in applicationData
@@ -81,20 +81,22 @@ class Child extends React.Component {
 
           <div className="row">
             <div className="small-12 columns">
-              <ErrorableCheckbox
+              <ErrorableRadioButtons
                   label="Was child permanently and totally disabled before the age of 18?"
                   name="childDisabledBefore18"
-                  checked={this.props.data.childDisabledBefore18}
+                  options={yesNo}
+                  value={this.props.data.childDisabledBefore18}
                   onValueChange={(update) => {this.props.onValueChange('childDisabledBefore18', update);}}/>
             </div>
           </div>
 
           <div className="row">
             <div className="small-12 columns">
-              <ErrorableCheckbox
+              <ErrorableRadioButtons
                   label="If child is between 18 and 23 years of age, did child attend school last calendar year?"
                   name="childAttendedSchoolLastYear"
-                  checked={this.props.data.childAttendedSchoolLastYear}
+                  options={yesNo}
+                  value={this.props.data.childAttendedSchoolLastYear}
                   onValueChange={(update) => {this.props.onValueChange('childAttendedSchoolLastYear', update);}}/>
             </div>
           </div>
@@ -113,10 +115,11 @@ class Child extends React.Component {
 
           <div className="row">
             <div className="small-12 columns">
-              <ErrorableCheckbox
+              <ErrorableRadioButtons
                   label="Did your child live with you last year?"
                   name="childCohabitedLastYear"
-                  checked={this.props.data.childCohabitedLastYear}
+                  options={yesNo}
+                  value={this.props.data.childCohabitedLastYear}
                   onValueChange={(update) => {this.props.onValueChange('childCohabitedLastYear', update);}}/>
             </div>
           </div>
@@ -130,10 +133,11 @@ class Child extends React.Component {
 
           <div className="row">
             <div className="small-12 columns">
-              <ErrorableCheckbox
+              <ErrorableRadioButtons
                   label="If your dependent child did not live with you last year, did you provide support?"
                   name="childReceivedSupportLastYear"
-                  checked={this.props.data.childReceivedSupportLastYear}
+                  options={yesNo}
+                  value={this.props.data.childReceivedSupportLastYear}
                   onValueChange={(update) => {this.props.onValueChange('childReceivedSupportLastYear', update);}}/>
             </div>
           </div>

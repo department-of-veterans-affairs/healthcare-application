@@ -54,6 +54,7 @@ class FullName extends React.Component {
             label="First Name"
             name="fname"
             autocomplete="given-name"
+            charMax={30}
             required={this.props.required}
             field={this.props.name.first}
             onValueChange={(update) => {this.handleChange('first', update);}}/>
@@ -63,6 +64,7 @@ class FullName extends React.Component {
             label="Middle Name"
             name="mname"
             autocomplete="additional-name"
+            charMax={30}
             field={this.props.name.middle}
             onValueChange={(update) => {this.handleChange('middle', update);}}/>
 
@@ -71,6 +73,7 @@ class FullName extends React.Component {
             label="Last Name"
             name="lname"
             autocomplete="family-name"
+            charMax={30}
             required={this.props.required}
             field={this.props.name.last}
             onValueChange={(update) => {this.handleChange('last', update);}}/>
