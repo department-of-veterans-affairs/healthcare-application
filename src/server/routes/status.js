@@ -27,7 +27,7 @@ const returnRouter = (options) => {
     });
 
   router.get('/', (req, res) => {
-    res.status(501).end();
+    res.status(200).send(process.env.BUILD_VERSION || 'Unknown build');
   });
   router.get('/healthcheck', (req, res) => {
     res.status(200).end();
