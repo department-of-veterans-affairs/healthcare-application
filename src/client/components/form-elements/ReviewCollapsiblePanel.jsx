@@ -88,10 +88,10 @@ class ReviewCollapsiblePanel extends React.Component {
 
     if (sectionsComplete) {
       buttonGroup = (<div>
-        <div className="medium-6 columns">
+        <div className="small-6 columns">
           {buttonEdit}
         </div>
-        <div className="medium-6 columns">
+        <div className="small-6 columns">
           {buttonNext}
         </div>
       </div>
@@ -133,8 +133,8 @@ class ReviewCollapsiblePanel extends React.Component {
         {scrollHelper}
         <ul className="usa-unstyled-list">
           <li>
-            <div className="accordion-header" aria-expanded="true" aria-controls={`collapsible-${this.id}`}>
-              <div className="medium-5 columns">
+            <div className="accordion-header clearfix" aria-expanded="true" aria-controls={`collapsible-${this.id}`}>
+              <div className="medium-5 columns section-label">
                 {this.props.sectionLabel}
               </div>
               <div className="medium-7 columns">
