@@ -61,6 +61,7 @@ class Address extends React.Component {
             label="Street"
             name="address"
             autocomplete="street-address"
+            charMax={30}
             field={this.props.value.street}
             required={this.props.required}
             onValueChange={(update) => {this.handleChange('street', update);}}/>
@@ -69,6 +70,7 @@ class Address extends React.Component {
             label="City"
             name="city"
             autocomplete="address-level2"
+            charMax={30}
             field={this.props.value.city}
             required={this.props.required}
             onValueChange={(update) => {this.handleChange('city', update);}}/>
@@ -104,4 +106,3 @@ class Address extends React.Component {
 }
 
 export default Address;
-

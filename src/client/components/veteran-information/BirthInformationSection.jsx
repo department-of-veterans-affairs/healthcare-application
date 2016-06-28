@@ -55,6 +55,7 @@ class BirthInformationSection extends React.Component {
               name="cityOfBirth"
               field={this.props.data.cityOfBirth}
               autocomplete="off"
+              charMax={20}
               onValueChange={(update) => {this.props.onStateChange('cityOfBirth', update);}}/>
           <ErrorableSelect label="State"
               name="stateOfBirth"

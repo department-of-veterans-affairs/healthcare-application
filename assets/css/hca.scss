@@ -9,8 +9,8 @@ body .row {
 
 @media screen and (min-width: 600px) {
   form {
-    max-width: 32em; 
-  } 
+    max-width: 32em;
+  }
 }
 
 // TODO: Look into why svgs aren't rendering
@@ -134,7 +134,7 @@ button.hca-button-green {
 }
 
 .input-section {
-  margin-bottom: 2em; 
+  margin-bottom: 2em;
 
   .row {
     margin: 0;
@@ -240,7 +240,7 @@ button.hca-button-green {
         color: $white;
       }
     }
-    .edit-btn { 
+    .edit-btn {
       padding: 1rem;
       &.primary-outline {
         background-color: transparent;
@@ -253,8 +253,11 @@ button.hca-button-green {
       }
     }
   .accordion-header {
-    height: 7rem;
+    min-height: 7rem;
     padding: 1rem;
+  }
+  .section-label {
+    padding-bottom: 1rem;
   }
 }
 
