@@ -189,8 +189,8 @@ class HealthCareApp extends React.Component {
       );
     } else {
       submitMessage = (<div className="usa-alert usa-alert-error">
-        <p><strong>We regret we weren't able to process your application at this time. We recommend trying again later.</strong></p>
-        <p>You may call 1-877-222-VETS(8387) option 2 for help completing this application over the phone.</p>
+        <p><strong>Due to a system error, we weren't able to process your application. Please try again later.</strong></p>
+        <p>We apologize for the inconvenience. If you'd like to complete this form by phone, please call 877-222-VETS (8387) option 2.</p>
       </div>);
       submitButton = (
         <ProgressButton
