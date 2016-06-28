@@ -1566,8 +1566,6 @@ const vaMedicalFacilities = {
   ],
 };
 
-
-
 const childRelationships = [
   'Daughter',
   'Son',
