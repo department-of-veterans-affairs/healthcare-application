@@ -400,11 +400,7 @@ function completeVaInsuranceInformation(client, data, onlyRequiredFields) {
   if (!onlyRequiredFields) {
     client
       .click('input[name="isEssentialAcaCoverage"]')
-<<<<<<< HEAD
-      .click('input[name="wantsInitialVaContact"]');
-=======
       .click('input[name="wantsInitialVaContact-1"]');
->>>>>>> master
   }
 }
 
