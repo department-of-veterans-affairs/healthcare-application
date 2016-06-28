@@ -39,7 +39,6 @@ describe('enrollment-system base tests', () => {
 
     const checks = ['child-financial', 'no-financial', 'spouse-financial'];
     for (const filename of checks) {
-      console.log(filename);
       it(`should serialize ${filename} correctly`, (done) => {
         const application = require(`../data/conformance/${filename}`);
         const input = enrollmentSystem.veteranToSaveSubmitForm(application);
