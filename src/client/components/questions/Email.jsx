@@ -37,6 +37,7 @@ class Email extends React.Component {
             name="email"
             autocomplete="email"
             placeholder="x@x.xxx"
+            charMax={50}
             field={this.props.email}
             additionalClass={this.props.additionalClass}
             onValueChange={this.props.onValueChange}/>
