@@ -904,7 +904,11 @@ function veteranToFinancialsInfo(veteran) {
   });
 
   const dependentFinancials = veteranToDependentFinancialsCollection(veteran);
-  const hasDependentFinancials = _.compact(dependentFinancials.dependentFinancials.map((child) => { return child.incomes; })).length > 0;
+  let hasDependentFinancials = false;
+  if (dependentFinancials) {
+    hasDependentFinancials = _.compact(dependentFinancials.dependentFinancials.map((child) => { return child.incomes; })).length > 0;
+  }
+
   const spouseFinancials = veteranToSpouseFinancials(veteran);
 
   const hasIncomeData = expenses || incomes || spouseFinancials.spouseFinancials.incomes || hasDependentFinancials;
