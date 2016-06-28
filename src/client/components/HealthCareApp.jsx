@@ -185,11 +185,9 @@ class HealthCareApp extends React.Component {
             beforeText="&#10003;"/>
       );
     } else {
-      submitMessage = (<div>
-        <p className="hca-alert-copy"><strong>We regret we weren't able to process your application at this time. We recommend trying again later.</strong></p>
-        <div className="usa-alert usa-alert-info">
-          <p>You may call 1-877-222-VETS(8387) option 2 for help completing this application over the phone.</p>
-        </div>
+      submitMessage = (<div className="usa-alert usa-alert-error">
+        <p><strong>We regret we weren't able to process your application at this time. We recommend trying again later.</strong></p>
+        <p>You may call 1-877-222-VETS(8387) option 2 for help completing this application over the phone.</p>
       </div>);
       submitButton = (
         <ProgressButton
