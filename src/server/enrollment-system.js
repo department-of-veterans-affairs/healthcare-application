@@ -223,7 +223,7 @@ function resourceToIncomeCollection(resource) {
   if (resource.grossIncome > 0) {
     incomeCollection.push({
       amount: resource.grossIncome,
-      type: 7, // Total Employment Income TODO is this right?
+      type: 7,
     });
   }
   if (resource.netIncome > 0) {
