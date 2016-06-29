@@ -325,12 +325,19 @@ function isValidChildrenIncome(children) {
 }
 
 function isValidAnnualIncome(data) {
+  let isValidSpouseIncomeFields = true;
+
+  if (data.spouseGrossIncome && data.spouseNetIncome && data.spouseOtherIncome) {
+    isValidSpouseIncomeFields = 
+      isValidField(isValidMonetaryValue, data.spouseGrossIncome) &&
+      isValidField(isValidMonetaryValue, data.spouseNetIncome) &&
+      isValidField(isValidMonetaryValue, data.spouseOtherIncome);
+  }
+
   return isValidField(isValidMonetaryValue, data.veteranGrossIncome) &&
     isValidField(isValidMonetaryValue, data.veteranNetIncome) &&
     isValidField(isValidMonetaryValue, data.veteranOtherIncome) &&
-    isValidField(isValidMonetaryValue, data.spouseGrossIncome) &&
-    isValidField(isValidMonetaryValue, data.spouseNetIncome) &&
-    isValidField(isValidMonetaryValue, data.spouseOtherIncome) &&
+    isValidSpouseIncomeFields &&
     isValidChildrenIncome(data.children);
 }
 
