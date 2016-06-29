@@ -2300,6 +2300,92 @@ button[class*="usa-button-"] {
   }
 }
 
+.va-crisis-line {
+  background-color: $color-gold;
+  color: rgb(0,0,0);
+  display: block;
+  font-weight: bold !important;
+  margin: 0 auto; 
+  padding: .25rem 0;
+  text-align: center;
+  text-decoration: none !important;
+  
+  span {
+    font-weight: bold;
+  }
+  
+  &:hover {
+    background-color: $color-gold;
+    border-bottom: none;
+    color: rgb(0,0,0);
+    text-decoration: none;
+  }
+  
+  @media #{$small-only} {
+    padding: .25em 0;
+  }
+}
+
+//===== VA CRISIS LINE BUTTONS 
+.va-crisis-line--touch {
+  border-radius: .2em;
+  margin: 2.5em 0;
+}
+
+.va-crisis-line--notouch {
+  background: $color-gold url(/assets/images/arrow-up.svg) no-repeat 97% center;
+  background-size: .8em auto;
+  border-radius: .2em .2em 0 0;
+  font-size: 1.7rem;
+  margin: 0;
+  padding: 1.25rem;
+  text-align: left;
+  width: 100%;
+  
+  .va-crisis-panel--open & {
+    background-image: url(/assets/images/arrow-down.svg);
+  }
+}
+
+//==== Small viewport panel touch
+.va-crisis-panel--touch {
+  padding: 0 2rem;
+  position: relative; 
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+            
+  .va-crisis-panel-body {
+    height: auto;
+    max-height: 100%;
+  }
+  
+  li {
+    &:nth-child(odd) {
+      border-top: 1px solid $color-gray-lighter;
+      border-bottom: 1px solid $color-gray-lighter;
+    }
+    
+    a {
+      color: $color-base;
+      display: block;
+      padding: 1.5rem 0;
+      text-decoration: none; 
+    }
+  }
+  
+  p:last-child {
+    font-size: .85em;
+  }
+  
+  .va-crisis-line {
+    font-size: inherit;
+    padding: 1.25rem;
+    text-align: center;
+    width: 100%;
+  }
+}
+
 .va-list--linkgroup {
   margin: 2em 0 0 0;
   
@@ -2385,6 +2471,13 @@ button[class*="usa-button-"] {
     }
 }
   
+@media #{$medium} {
+  .va-crisis-panel--touch,
+  .va-crisis-line--touch {
+    display: none;
+  }
+}
+
 // List overrides
 
 ul li p {
