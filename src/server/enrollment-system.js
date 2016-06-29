@@ -366,7 +366,7 @@ function veteranToSpouseFinancials(veteran) {
     grossIncome: veteran.spouseGrossIncome,
     netIncome: veteran.spouseNetIncome,
     otherIncome: veteran.spouseOtherIncome
-  }, { grossIncomeType: 7 });
+  });
 
   // set cohabitedLastYear to false if not present or empty string
   let cohabitedLastYear = veteran.cohabitedLastYear;
