@@ -112,16 +112,17 @@ class HealthCareApp extends React.Component {
           this.props.onCompletedStatus(path);
           this.props.onUpdateSubmissionId(data.response.formSubmissionId);
           this.props.onUpdateSubmissionTimestamp(data.response.timeStamp);
+
+          window.dataLayer.push({
+            event: 'submission-successful',
+            submissionID: data.response.formSubmissionId
+          });
         });
+
         setTimeout(() => { // eslint-disable-line scanjs-rules/call_setTimeout
           this.context.router.push(this.getUrl('next'));
           this.scrollToTop();
         }, 1000);
-
-        window.dataLayer.push({
-          event: 'submission-successful',
-          submissionID: this.props.uiState.submission.id
-        });
       }).catch(error => {
         // TODO(crew): Pass meaningful errors to the client.
         setTimeout(() => { // eslint-disable-line scanjs-rules/call_setTimeout
