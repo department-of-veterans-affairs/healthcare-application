@@ -328,7 +328,7 @@ function isValidAnnualIncome(data) {
   let isValidSpouseIncomeFields = true;
 
   if (data.spouseGrossIncome && data.spouseNetIncome && data.spouseOtherIncome) {
-    isValidSpouseIncomeFields = 
+    isValidSpouseIncomeFields =
       isValidField(isValidMonetaryValue, data.spouseGrossIncome) &&
       isValidField(isValidMonetaryValue, data.spouseNetIncome) &&
       isValidField(isValidMonetaryValue, data.spouseOtherIncome);
