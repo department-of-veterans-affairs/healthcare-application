@@ -140,6 +140,7 @@ class HealthCareApp extends React.Component {
     let children = this.props.children;
     let buttons;
     let submitButton;
+    let submitMessage;
     const submissionStatus = this.props.uiState.submission.status;
 
     if (children === null) {
@@ -187,6 +188,10 @@ class HealthCareApp extends React.Component {
             beforeText="&#10003;"/>
       );
     } else {
+      submitMessage = (<div className="usa-alert usa-alert-error">
+        <p><strong>Due to a system error, we weren't able to process your application. Please try again later.</strong></p>
+        <p>We apologize for the inconvenience. If you'd like to complete this form by phone, please call 877-222-VETS (8387) press 2, M-F 7:00 a.m.to 7:00 p.m. (CST), Sat 9:00 a.m. to 5:30 p.m. (CST).</p>
+      </div>);
       submitButton = (
         <ProgressButton
             onButtonClick={this.handleSubmit}
@@ -197,7 +202,7 @@ class HealthCareApp extends React.Component {
     }
 
     if (this.props.location.pathname === '/review-and-submit') {
-      buttons = (
+      buttons = (<div>
         <div className="row progress-buttons">
           <div className="small-6 medium-5 columns">
             {backButton}
@@ -209,7 +214,12 @@ class HealthCareApp extends React.Component {
             <div className={this.state ? 'spinner' : 'hidden'}>&nbsp;</div>
           </div>
         </div>
-      );
+        <div className="row">
+          <div className="medium-12 columns">
+          {submitMessage}
+          </div>
+        </div>
+      </div>);
     } else if (this.props.location.pathname === '/introduction') {
       buttons = (
         <div className="row progress-buttons">

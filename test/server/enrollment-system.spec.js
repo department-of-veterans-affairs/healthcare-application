@@ -36,6 +36,23 @@ describe('enrollment-system base tests', () => {
       result.should.deep.equal(goldenJsonSubmission);
     });
 
+
+    const checks = ['child-financial', 'no-financial', 'spouse-financial', 'no-children'];
+    for (const filename of checks) {
+      it(`should serialize ${filename} correctly`, (done) => {
+        const application = require(`../data/conformance/${filename}`);
+        const input = enrollmentSystem.veteranToSaveSubmitForm(application);
+        const result = fs.readFileSync(`test/data/conformance/${filename}.xml`, 'utf8');
+        soap.createClient(config.soap.wsdl, {}, (_soapError, client) => {
+          client.on('message', (messageBody) => {
+            chai.assert.equal(result, messageBody);
+            done();
+          });
+          client.saveSubmitForm(input, (_submitError, _result) => {});
+        });
+      });
+    }
+
     it('should become a valid SOAP request', (done) => {
       // build the json to be sent through the SOAP service
       const result = enrollmentSystem.veteranToSaveSubmitForm(fakeApplication);
