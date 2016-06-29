@@ -192,6 +192,7 @@ function veteranToSpouseInfo(veteran) {
       middleName: veteran.spouseFullName.middle,
       familyName: veteran.spouseFullName.last,
       suffix: veteran.spouseFullName.suffix,
+      relationship: 2,
       startDate: validations.dateOfBirth(veteran.dateOfMarriage),
       ssns: {
         ssn: {
@@ -222,7 +223,7 @@ function resourceToIncomeCollection(resource) {
   if (resource.grossIncome > 0) {
     incomeCollection.push({
       amount: resource.grossIncome,
-      type: 12, // Total Employment Income TODO is this right?
+      type: 7,
     });
   }
   if (resource.netIncome > 0) {
