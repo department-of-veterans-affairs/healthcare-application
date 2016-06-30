@@ -19,7 +19,7 @@ class SubmitMessage extends React.Component {
             <p className="success-copy">Form Submitted At: {moment(time).format('MMMM Do YYYY, h:mm A')}</p>
           </div>
           <p>Please print this page for your records.</p>
-          <p>If you have questions, call 1-877-222-VETS (8387) and select option 2.</p>
+          <p>If you have questions, call 1-877-222-VETS (8387) and press 2.</p>
         </div>
       </div>
     );
