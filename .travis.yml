@@ -16,7 +16,7 @@ services:
   - docker
 script:
   - docker run --rm -p 9876:9876 -e SAUCE_USERNAME -e SAUCE_ACCESS_KEY -e TRAVIS_JOB_NUMBER -it travis-image npm test
-  - docker run --rm -p 3000:3000 -e SAUCE_USERNAME -e SAUCE_ACCESS_KEY -e TRAVIS_JOB_NUMBER -it travis-image scripts/e2e-tests.sh
+  - travis_retry docker run --rm -p 3000:3000 -e SAUCE_USERNAME -e SAUCE_ACCESS_KEY -e TRAVIS_JOB_NUMBER -it travis-image scripts/e2e-tests.sh
 addons:
   sauce_connect:
     username: dsva 
