@@ -197,7 +197,7 @@ class HealthCareApp extends React.Component {
         <ProgressButton
             onButtonClick={this.handleSubmit}
             buttonText="Send Failed"
-            buttonClass="usa-button-secondary"
+            buttonClass="usa-button-secondary hca-button-disabled"
             beforeText="x"/>
       );
     }
