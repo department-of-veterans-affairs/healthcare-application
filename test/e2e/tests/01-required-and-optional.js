@@ -163,7 +163,7 @@ module.exports = {
       .setValue('select[name="country"]', 'USA')
       .setValue('select[name="state"]', 'IL')
       .setValue('input[name="zip"]', '60603')
-      .click('input[name="cohabitedLastYear-0"]')
+      .click('input[name="cohabitedLastYear-1"]')
       .click('input[name="provideSupportLastYear-0"]')
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/spouse-information');
