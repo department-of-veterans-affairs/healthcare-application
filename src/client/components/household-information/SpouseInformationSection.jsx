@@ -28,6 +28,25 @@ class SpouseInformationSection extends React.Component {
     let spouseInformationFields;
     let spouseAddressSummary;
     let spouseAddressFields;
+    let livedWithSpouseSummary;
+    let livedWithSpouseFields;
+
+    if (this.props.data.cohabitedLastYear.value === 'N') {
+      livedWithSpouseSummary = (
+        <tr>
+          <td>If your spouse did not live with you last year, did you provide support?:</td>
+          <td>{`${this.props.data.provideSupportLastYear.value === 'Y' ? 'Yes' : 'No'}`}</td>
+        </tr>
+      );
+      livedWithSpouseFields = (
+        <ErrorableRadioButtons
+            label="If your spouse did not live with you last year, did you provide financial support?"
+            name="provideSupportLastYear"
+            options={yesNo}
+            value={this.props.data.provideSupportLastYear}
+            onValueChange={(update) => {this.props.onStateChange('provideSupportLastYear', update);}}/>
+      );
+    }
 
     if (this.props.data.maritalStatus.value === 'Married' || this.props.data.maritalStatus.value === 'Separated') {
       spouseInformationSummary = (
@@ -56,10 +75,7 @@ class SpouseInformationSection extends React.Component {
             <td>Did your spouse live with you last year?:</td>
             <td>{`${this.props.data.cohabitedLastYear.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
-          <tr>
-            <td>If your spouse did not live with you last year, did you provide support?:</td>
-            <td>{`${this.props.data.provideSupportLastYear.value === 'Y' ? 'Yes' : 'No'}`}</td>
-          </tr>
+          {livedWithSpouseSummary}
         </tbody>
       );
 
@@ -106,13 +122,7 @@ class SpouseInformationSection extends React.Component {
               options={yesNo}
               value={this.props.data.cohabitedLastYear}
               onValueChange={(update) => {this.props.onStateChange('cohabitedLastYear', update);}}/>
-
-          <ErrorableRadioButtons
-              label="If your spouse did not live with you last year, did you provide financial support?"
-              name="provideSupportLastYear"
-              options={yesNo}
-              value={this.props.data.provideSupportLastYear}
-              onValueChange={(update) => {this.props.onStateChange('provideSupportLastYear', update);}}/>
+          {livedWithSpouseFields}
         </div>
       );
     }
