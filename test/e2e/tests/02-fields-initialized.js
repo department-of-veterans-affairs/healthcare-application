@@ -180,6 +180,8 @@ module.exports = {
     expectValueToBeBlank(client, 'select[name="country"]');
     expectValueToBeBlank(client, 'select[name="state"]');
     expectValueToBeBlank(client, 'input[name="zip"]');
+
+    client.click('input[name="cohabitedLastYear-1"]');
     expectInputToNotBeSelected(client, 'input[name="provideSupportLastYear-0"]');
     expectInputToNotBeSelected(client, 'input[name="provideSupportLastYear-1"]');
     common.completeSpouseInformation(client, common.testValues, true);
