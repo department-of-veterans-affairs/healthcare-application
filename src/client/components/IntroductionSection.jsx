@@ -6,7 +6,7 @@ class IntroductionSection extends React.Component {
       <div>
         <div className="row">
           <div className="small-12 columns">
-            <h3>Apply online for health care with the 1010ez</h3>
+            <h3>Apply online for health care with the 1010ez (OMB No. 2900-0091)</h3>
           </div>
         </div>
 

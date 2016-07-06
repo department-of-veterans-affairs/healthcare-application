@@ -108,6 +108,10 @@ button.hca-button-green {
   background: $color-green;
 }
 
+button.hca-button-disabled {
+  pointer-events: none;
+}
+
 .progress-box {
   padding: 1rem 2rem;
   margin: 1.5rem 0  ;
