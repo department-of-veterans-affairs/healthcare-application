@@ -2397,3 +2397,49 @@ pre[class*="language-"]  {
   font-size: .9em;
   line-height: inherit !important;
 }
+
+// Breadcrumbs
+.va-nav-breadcrumbs {
+  background: $color-white;
+  color: $color-primary;
+  font-size: inherit;
+  padding: 1em 0;
+
+  
+  li {
+    display: inline-block;
+    margin: .25em 0;
+    //outline: 1px dashed #6c6;
+    padding: .25em 0 .25em 0;
+    vertical-align: middle;
+
+    &:after {
+      content: " › "; 
+      display: inline-block; 
+      padding: 0 .35em;
+    }
+
+    &.active {
+      font-weight: bold;
+      padding: .3em 0;
+
+      &:after {
+        content: '';
+      }
+    }
+  }
+  a {
+    color: $color-primary;
+    display: inline-block;
+    padding: 2px;
+
+    &:hover {
+      background: rgba(0,0,0,.1); 
+    }
+  }
+}
+
+.va-nav-breadcrumbs-list {
+  @extend .columns;
+  float: none;
+}
