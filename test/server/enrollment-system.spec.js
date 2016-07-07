@@ -37,7 +37,7 @@ describe('enrollment-system base tests', () => {
     });
 
 
-    const checks = ['child-financial', 'no-financial', 'spouse-financial', 'no-children'];
+    const checks = ['child-financial', 'no-financial', 'spouse-financial', 'no-children', 'no-spouse', 'only-vet'];
     for (const filename of checks) {
       it(`should serialize ${filename} correctly`, (done) => {
         const application = require(`../data/conformance/${filename}`);
