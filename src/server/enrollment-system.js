@@ -185,31 +185,28 @@ function yesNoToESBoolean(yesNo) {
  * @returns {Object} ES system spouseInfo message
  */
 function veteranToSpouseInfo(veteran) {
-  if (_.includes(['Married', 'Separated'], veteran.maritalStatus)) {
-    return {
-      dob: validations.dateOfBirth(veteran.spouseDateOfBirth),
-      givenName: veteran.spouseFullName.first,
-      middleName: veteran.spouseFullName.middle,
-      familyName: veteran.spouseFullName.last,
-      suffix: veteran.spouseFullName.suffix,
-      relationship: 2,
-      startDate: validations.dateOfBirth(veteran.dateOfMarriage),
-      ssns: {
-        ssn: {
-          ssnText: validations.validateSsn(veteran.spouseSocialSecurityNumber)
-        }
-      },
-      address: {
-        city: veteran.spouseAddress.city,
-        country: veteran.spouseAddress.country,
-        line1: veteran.spouseAddress.street,
-        state: veteran.spouseAddress.state,
-        zipCode: veteran.spouseAddress.zipcode,
-        phoneNumber: veteran.spousePhone,
-      },
-    };
-  }
-  return undefined;
+  return {
+    dob: validations.dateOfBirth(veteran.spouseDateOfBirth),
+    givenName: veteran.spouseFullName.first,
+    middleName: veteran.spouseFullName.middle,
+    familyName: veteran.spouseFullName.last,
+    suffix: veteran.spouseFullName.suffix,
+    relationship: 2,
+    startDate: validations.dateOfBirth(veteran.dateOfMarriage),
+    ssns: {
+      ssn: {
+        ssnText: validations.validateSsn(veteran.spouseSocialSecurityNumber)
+      }
+    },
+    address: {
+      city: veteran.spouseAddress.city,
+      country: veteran.spouseAddress.country,
+      line1: veteran.spouseAddress.street,
+      state: veteran.spouseAddress.state,
+      zipCode: veteran.spouseAddress.zipcode,
+      phoneNumber: veteran.spousePhone,
+    },
+  };
 }
 
 /**
@@ -362,6 +359,10 @@ function veteranToDependentFinancialsCollection(veteran) {
  * @returns {Object} ES system dependentFinancialsCollection message
  */
 function veteranToSpouseFinancials(veteran) {
+  if (!_.includes(['Married', 'Separated'], veteran.maritalStatus)) {
+    return undefined;
+  }
+
   const spouseIncome = resourceToIncomeCollection({
     grossIncome: veteran.spouseGrossIncome,
     netIncome: veteran.spouseNetIncome,
@@ -910,8 +911,9 @@ function veteranToFinancialsInfo(veteran) {
     hasDependentFinancials = _.compact(dependentFinancials.dependentFinancials.map((child) => { return child.incomes; })).length > 0;
   }
   const spouseFinancials = veteranToSpouseFinancials(veteran);
+  const hasSpouseIncome = spouseFinancials && spouseFinancials.spouseFinancials.incomes;
 
-  const hasIncomeData = expenses || incomes || spouseFinancials.spouseFinancials.incomes || hasDependentFinancials;
+  const hasIncomeData = expenses || incomes || hasSpouseIncome || hasDependentFinancials;
 
   return {
     incomeTest: booleanToIncomeTest(hasIncomeData),
