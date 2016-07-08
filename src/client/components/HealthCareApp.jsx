@@ -29,6 +29,28 @@ class HealthCareApp extends React.Component {
     this.handleContinue = this.handleContinue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getUrl = this.getUrl.bind(this);
+    this.onbeforeunload = this.onbeforeunload.bind(this);
+    this.removeOnbeforeunload = this.removeOnbeforeunload.bind(this);
+  }
+
+  componentWillMount() {
+    window.addEventListener('beforeunload', this.onbeforeunload);
+  }
+
+  componentWillUnmount() {
+    this.removeOnbeforeunload();
+  }
+
+  onbeforeunload(e) {
+    if (this.props.location.pathname != '/introduction') {
+      const message = 'Are you sure you wish to leave this application? All progress will be lost.';
+      e.returnValue = message;     // Gecko, Trident, Chrome 34+
+      return message;              // Gecko, WebKit, Chrome <34
+    }
+  }
+
+  removeOnbeforeunload() {
+    window.removeEventListener('beforeunload', this.onbeforeunload);
   }
 
   getUrl(direction) {
@@ -107,6 +129,10 @@ class HealthCareApp extends React.Component {
         if (!response.ok) {
           throw new Error(response.statusText);
         }
+
+        // remove event listener
+        this.removeOnbeforeunload();
+
         response.json().then(data => {
           this.props.onUpdateSubmissionStatus('applicationSubmitted', data);
           this.props.onCompletedStatus(path);
