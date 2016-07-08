@@ -204,7 +204,8 @@ function completeBirthInformation(client, data, onlyRequiredFields) {
 }
 
 function completeDemographicInformation(client, data, onlyRequiredFields) {
-  client.setValue('select[name="gender"]', data.gender);
+  client.setValue('select[name="gender"]', data.gender)
+        .setValue('select[name="maritalStatus"]', data.maritalStatus);
 
   if (!onlyRequiredFields) {
     client
@@ -289,10 +290,6 @@ function completeFinancialDisclosure(client, data, onlyRequiredFields) {
 }
 
 function completeSpouseInformation(client, data, onlyRequiredFields) {
-  client
-    .clearValue('select[name="maritalStatus"]')
-    .setValue('select[name="maritalStatus"]', data.maritalStatus)
-    .click('.form-panel');
   client.expect.element('input[name="fname"]').to.be.visible.before(timeouts.normal);
 
   client

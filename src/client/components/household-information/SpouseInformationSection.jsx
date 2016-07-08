@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 
 import Address from '../questions/Address';
 import DateInput from '../form-elements/DateInput';
-import ErrorableSelect from '../form-elements/ErrorableSelect';
 import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
 import FullName from '../questions/FullName';
 import Phone from '../questions/Phone';
 import SocialSecurityNumber from '../questions/SocialSecurityNumber';
-import { maritalStatuses, yesNo } from '../../utils/options-for-select.js';
+import { yesNo } from '../../utils/options-for-select.js';
 import { isNotBlank, validateIfDirty, isValidMarriageDate } from '../../utils/validations';
 import { veteranUpdateField, updateSpouseAddress } from '../../actions';
 
@@ -183,12 +182,6 @@ class SpouseInformationSection extends React.Component {
     if (this.props.isSectionComplete && this.props.reviewSection) {
       content = (<div>
         <table className="review usa-table-borderless">
-          <tbody>
-            <tr>
-              <td>Martial Status:</td>
-              <td>{this.props.data.maritalStatus.value}</td>
-            </tr>
-          </tbody>
           {spouseInformationSummary}
         </table>
         {spouseAddressSummary}
@@ -199,14 +192,6 @@ class SpouseInformationSection extends React.Component {
         <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <p>Please fill this out to the best of your knowledge. The more accurate your responses, the faster your application can proceed.</p>
         <div className="input-section">
-          <ErrorableSelect
-              errorMessage={validateIfDirty(this.props.data.maritalStatus, isNotBlank) ? undefined : 'Please select a marital status'}
-              label="Current Marital Status"
-              name="maritalStatus"
-              options={maritalStatuses}
-              required
-              value={this.props.data.maritalStatus}
-              onValueChange={(update) => {this.props.onStateChange('maritalStatus', update);}}/>
           {spouseInformationFields}
           {spouseAddressFields}
         </div>

@@ -225,7 +225,8 @@ function isValidBirthInformationSection(data) {
 }
 
 function isValidDemographicInformation(data) {
-  return isNotBlank(data.gender.value);
+  return isNotBlank(data.gender.value) &&
+    isNotBlank(data.maritalStatus.value);
 }
 
 function isValidVaInformation(data) {
@@ -283,8 +284,7 @@ function isValidSpouseInformation(data) {
         isValidField(isValidPhone, data.spousePhone);
   }
 
-  return isNotBlank(data.maritalStatus.value) &&
-      isValidSpouse &&
+  return isValidSpouse &&
       isValidSpouseAddress;
 }
 
