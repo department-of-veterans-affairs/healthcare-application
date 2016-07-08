@@ -10,6 +10,8 @@ import config from '../../config';
 import reducer from './reducers';
 import routes from './routes.jsx';
 
+import menu from '../../assets/js/vendor/menu.js'; // eslint-disable-line
+
 const store = createStore(reducer);
 
 const browserHistory = useRouterHistory(createHistory)({
