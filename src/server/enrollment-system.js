@@ -920,7 +920,6 @@ function veteranToFinancialsInfo(veteran) {
     return undefined;
   }
 
->>>>>>> 264574d5a606cee8c4ed9dde25205b757b872550
   return {
     incomeTest: booleanToIncomeTest(hasIncomeData),
     financialStatement: {
