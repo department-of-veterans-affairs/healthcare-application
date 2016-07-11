@@ -983,6 +983,32 @@ function veteranToFinancialsInfo(veteran) {
 //
 // TODO(awong): Do we collect employment info? I don't think so...
 
+
+function childToAssociation(child) {
+  return {
+    dob: validations.dateOfBirth(child.childDateOfBirth),
+    givenName: child.childFullName.first,
+    middleName: child.childFullName.middle,
+    familyName: child.childFullName.last,
+    suffix: child.childFullName.suffix,
+    relationship: child.childRelation
+  };
+}
+
+function spouseToAssociation(veteran) {
+  if (_.includes(['Married', 'Separated'], veteran.maritalStatus)) {
+    return {
+      dob: validations.dateOfBirth(veteran.spouseDateOfBirth),
+      givenName: veteran.spouseFullName.first,
+      middleName: veteran.spouseFullName.middle,
+      familyName: veteran.spouseFullName.last,
+      suffix: veteran.spouseFullName.suffix,
+      relationship: 'SPOUSE'
+    };
+  }
+  return undefined;
+}
+
 // Produces an associationCollection compatible type from a veteran resource.
 //
 // <xs:complexType name="associationCollection">
@@ -1062,8 +1088,19 @@ function veteranToFinancialsInfo(veteran) {
 //  * associationCollection/associationInfo/relationship, Only alphanumeric characters are allowed., Contact type code = 1,
 //  * associationCollection/associationInfo/relationship, Cannot be a Null value; , Contact type code = 3,
 //  * associationCollection/associationInfo/relationship, Only alphanumeric characters are allowed., Contact type code = 3,
-function veteranToAssociationCollection(_veteran) {
-  return undefined;
+function veteranToAssociationCollection(veteran) {
+  const associations = [];
+  const children = _.compact(veteran.children.map((child) => { return childToAssociation(child); }));
+  const spouse = spouseToAssociation(veteran);
+  associations.concat(children);
+  if (spouse) { associations.push(spouse); }
+
+  if (_.isEmpty(associations)) {
+    return undefined;
+  }
+  const result = associations.map((association) => { return { association }; });
+  console.log(result);
+  return result;
 }
 
 // Produces an demographicInfo compatible type from a veteran resource.
