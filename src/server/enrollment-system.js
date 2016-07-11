@@ -986,7 +986,6 @@ function veteranToFinancialsInfo(veteran) {
 
 function childToAssociation(child) {
   return {
-    dob: validations.dateOfBirth(child.childDateOfBirth),
     givenName: child.childFullName.first,
     middleName: child.childFullName.middle,
     familyName: child.childFullName.last,
@@ -998,7 +997,6 @@ function childToAssociation(child) {
 function spouseToAssociation(veteran) {
   if (_.includes(['Married', 'Separated'], veteran.maritalStatus)) {
     return {
-      dob: validations.dateOfBirth(veteran.spouseDateOfBirth),
       givenName: veteran.spouseFullName.first,
       middleName: veteran.spouseFullName.middle,
       familyName: veteran.spouseFullName.last,
@@ -1094,13 +1092,11 @@ function veteranToAssociationCollection(veteran) {
   const spouse = spouseToAssociation(veteran);
   associations.concat(children);
   if (spouse) { associations.push(spouse); }
-
   if (_.isEmpty(associations)) {
     return undefined;
   }
-  const result = associations.map((association) => { return { association }; });
-  console.log(result);
-  return result;
+  const result = associations.length === 1 ? associations.pop() : associations;
+  return { association: result };
 }
 
 // Produces an demographicInfo compatible type from a veteran resource.
