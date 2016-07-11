@@ -79,19 +79,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <h1 role="banner" class="va-header-logo"><a href="/">Vets.gov</a></h1>
     </div>
 
-
-
-
       <!-- Mobile search button -->
       <div class="hide-for-medium-up search-button">
-        <button id="trigger-overlay" type="button" class="usa-button usa-button-outline-inverse" aria-controls="mobile-menu" aria-flowto="mobile-menu">Search</button>
+        <button data-show="#mobile-menu" class="va-overlay-trigger va-mobile-searchtrigger usa-button usa-button-outline-inverse" aria-controls="mobile-menu" aria-flowto="mobile-menu">Search</button>
       </div>
 
-
-
-      <div id="mobile-menu" class="overlay overlay-fullscreen" role="dialog">
+      <div id="mobile-menu" class="va-overlay va-overlay-fullscreen" role="dialog">
         <div class="medium-5 medium-offset-3 text-right columns">
-          <button type="button" class="overlay-close" aria-label="close search form - mobile only">Close</button>
+          <button type="button" class="va-mobile-searchclose va-overlay-close" aria-label="close search form - mobile only">Close</button>
           <div class="menu">
             <form accept-charset="UTF-8" action="https://search.usa.gov/search" id="search_form" method="get">
               <div style="margin:0;padding:0;display:inline">
@@ -117,6 +112,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h2 class="sr-only">Apply for Health Care</h2>
 
 <div id="content" class="interior ">
+  
+  
   <div class="splash">
   <div class="row">
     <div class="small-12 columns">
@@ -128,7 +125,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </div>
 </div>
 
-
+<!-- HCA Application Start -->
 <div class="main" role="main">
   <div class="section">
     <div id="react-root">
@@ -139,7 +136,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
   </div>
 </div>
+<!-- HCA Application End -->
 
+<!-- Maintenance Page Start -->
+
+<!--<div class="main home" role="main">
+  <div class="section main-menu">
+    <div class="row">
+      <div class="small-12 columns">
+        <div style="padding: 2em 0;">
+        <h3>We're sorry. The healthcare application is currently down while we fix a few things. We will be back up as soon as we can.</h3>
+        <h4>In the meantime, you can still call 1-877-222-VETS(8387) and press 2 to complete this application over the phone.</h4>
+        <a href="/"><button>Go back to Vets.gov</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->
+<!-- Maintenance Page End -->
 
 
 </div>
@@ -155,35 +169,35 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </div>
 </div>
 
-
-<div class="footer" role="contentinfo">
+<footer class="footer" role="contentinfo">
   <div class="row wow fadeIn animated">
     <div class="small-12 medium-3 columns">
-      <dl>
-        <dt>Benefits</dt>
+      <dl class="va-list--linkgroup">
+        <dt class="va-list--linkgroup-title">Benefits</dt>
         <dd><a href="/disability-benefits/">Disability Benefits</a></dd>
         <dd><a href="/education/">Education &amp; Training</a></dd>
       </dl>
     </div>
     <div class="small-12 medium-3 columns">
-      <dl>
-        <dt>Resources</dt>
-        <dd><a class="vets-app" href="/veterans-employment-center/">Veterans Employment Center&trade;</a></dd>
-        <dd><a class="vets-app" href="/facility-locator">Facility Locator</a></dd>
-        <dd><a class="vets-app" href="/gi-bill-comparison-tool/">GI Bill Comparison Tool</a></dd>
+      <dl class="va-list--linkgroup">
+        <dt class="va-list--linkgroup-title">Resources</dt>
+        <dd><a href="/veterans-employment-center/">Veterans Employment Center&trade;</a></dd>
+        <dd><a href="/facility-locator">Facility Locator</a></dd>
+        <dd><a href="/gi-bill-comparison-tool/">GI Bill Comparison Tool</a></dd>
       </dl>
     </div>
     <!--Use with Signup <div class="small-12 medium-2 columns"> -->
     <div class="small-12 medium-3 columns">
-      <dl>
-        <dt>Creating Vets.gov</dt>
+      <dl class="va-list--linkgroup">
+        <dt class="va-list--linkgroup-title">Creating Vets.gov</dt>
         <dd><a href="/playbook/">Playbook</a></dd>
         <dd><a href="/experience/">Blog</a></dd>
+        <dd><a href="/2015/11/11/why-we-are-designing-in-beta.html">Message from the Secretary</a></dd>
       </dl>
     </div>
     <div class="small-12 medium-3 columns">
       <dl class="usa-social-links">
-        <dt>Connect</dt>
+        <dt class="va-list--linkgroup-title">Connect</dt>
         <dd>
             <a class="facebook" target="_blank" href="https://www.facebook.com/VeteransAffairs">
               Facebook
@@ -203,7 +217,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <div class="row">
 
     <div class="large-8 columns">
-      <ul class="final-list">
+      <ul class="va-list--linkgroup--inline">
         <li><a target="_blank" href="http://www.va.gov/">VA.gov</a></li>
         <li><a target="_blank" href="http://www.va.gov/oig/">Inspector General</a></li>
         <li><a target="_blank" href="http://www.section508.va.gov/">Accessibility</a></li>
@@ -211,7 +225,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <li><a target="_blank" href="http://usa.gov">USA.gov</a></li>
       </ul>
     </div>
-
+    
     <div class="large-4 columns text-right">
       <div class="footer-crisis text-center touch">
        <a href="tel:1-800-273-8255"><span>Veterans Crisis Line</span> <span class="tel" id="crisis-line">1-800-273-8255</span> <span aria-desicribedby="crisis-line">(Press 1)</span></a>
@@ -232,25 +246,35 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
       </div>
 
-      <div class="small-12 medium-8 columns text-right">
-        <a href="/2015/11/11/why-we-are-designing-in-beta.html" class="usa-button usa-button-outline-inverse">Help Us Create vets.gov: A Message from Secretary Robert McDonald</a>
-      </div>
-
       </div>
 
   </div>
 
-  <div data-alert class="va-notice--banner va-notice--banner--alt">
+  <div class="va-notice--banner va-notice--banner--alt">
     <div class="row">
       <div class="small-12 columns">
         <a id="feedback-tool" class="feedback-widget" tabindex="0" href="http://veterans.uservoice.com" data-uv-trigger="smartvote">
           <span class="icon"></span>
           <span class="text">Provide feedback on vets.gov</span>
         </a>
+        
+        <a href="https://veterans.uservoice.com/" class="feedback-widget">Visit the feedback forum</a>
       </div>
     </div>
   </div>
-</div>
+
+</footer>
+
+
+<script>
+
+UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/NDkEKHU7ZuU64RQKkUL9Q.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+
+UserVoice.push(['identify', {
+}]);
+
+UserVoice.push(['autoprompt', {}]);
+</script>
 
 <!--
 "To care for him who shall have borne the battle and for his widow, and his orphan."

@@ -89,6 +89,7 @@
     "img-loader": "^1.2.2",
     "imports-loader": "^0.6.5",
     "isomorphic-fetch": "^2.2.1",
+    "jquery": "^2.2.0",
     "jsonschema": "^1.1.0",
     "less": "^2.7.1",
     "lodash": "^4.5.1",

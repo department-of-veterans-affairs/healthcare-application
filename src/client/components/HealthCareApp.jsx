@@ -134,7 +134,10 @@ class HealthCareApp extends React.Component {
           this.props.onUpdateSubmissionStatus('submitFailed', error);
         }, 5000);
 
-        window.dataLayer.push({ event: 'submission-failed' });
+        window.dataLayer.push({
+          event: 'submission-failed',
+          submissionError: error
+        });
       });
     } else {
       this.scrollToTop();

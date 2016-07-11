@@ -916,6 +916,10 @@ function veteranToFinancialsInfo(veteran) {
 
   const hasIncomeData = expenses || incomes || hasSpouseIncome || hasDependentFinancials;
 
+  if (!hasIncomeData) {
+    return undefined;
+  }
+
   return {
     incomeTest: booleanToIncomeTest(hasIncomeData),
     financialStatement: {
