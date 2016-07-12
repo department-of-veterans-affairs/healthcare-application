@@ -1087,16 +1087,15 @@ function spouseToAssociation(veteran) {
 //  * associationCollection/associationInfo/relationship, Cannot be a Null value; , Contact type code = 3,
 //  * associationCollection/associationInfo/relationship, Only alphanumeric characters are allowed., Contact type code = 3,
 function veteranToAssociationCollection(veteran) {
-  const associations = [];
+  let associations = [];
   const children = _.compact(veteran.children.map((child) => { return childToAssociation(child); }));
   const spouse = spouseToAssociation(veteran);
-  associations.concat(children);
+  associations = associations.concat(children);
   if (spouse) { associations.push(spouse); }
   if (_.isEmpty(associations)) {
     return undefined;
   }
-  const result = associations.length === 1 ? associations.pop() : associations;
-  return { association: result };
+  return { association: associations };
 }
 
 // Produces an demographicInfo compatible type from a veteran resource.
