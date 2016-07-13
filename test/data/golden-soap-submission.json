@@ -6,6 +6,31 @@
       "version": "1986360435"
     },
     "summary": {
+      "associations": {
+        "association": [
+          {
+            "familyName": "LastChildA",
+            "givenName": "FirstChildA",
+            "middleName": "MiddleChildA",
+            "relationship": "Stepson",
+            "suffix": "Jr."
+          },
+          {
+            "familyName": "LastChildB",
+            "givenName": "FirstChildB",
+            "middleName": "MiddleChildB",
+            "relationship": "Stepdaughter",
+            "suffix": "Sr."
+          },
+          {
+            "familyName": "LastSpouse",
+            "givenName": "FirstSpouse",
+            "middleName": "MiddleSpouse",
+            "relationship": "SPOUSE",
+            "suffix": "Sr."
+          }
+        ]
+      },
       "demographics": {
         "appointmentRequestResponse": "true",
         "contactInfo": {
