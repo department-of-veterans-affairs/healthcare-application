@@ -36,6 +36,7 @@ class VaMedicalFacility extends React.Component {
     const selectedState = this.props.facilityState.value;
     if (selectedState) {
       clinicList = vaMedicalFacilities[selectedState];
+      clinicList = _.sortBy(clinicList, 'label');
     }
 
     return (
