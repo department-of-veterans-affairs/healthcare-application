@@ -23,7 +23,7 @@ class VAInformationSection extends React.Component {
             <td>{`${this.props.data.isVaServiceConnected.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
-            <td>Are you compensable VA Service Connected 0% - 40%?:</td>
+            <td>Do you currently receive monetary compensation (pay) from the VA for a service-connected disability with a rating of 10%, 20%, 30%, or 40%?:</td>
             <td>{`${this.props.data.compensableVaServiceConnected.value === 'Y' ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
@@ -40,7 +40,7 @@ class VAInformationSection extends React.Component {
         <div className="input-section">
           <ErrorableRadioButtons required
               errorMessage={validateIfDirty(this.props.data.compensableVaServiceConnected, isNotBlank) ? '' : 'Please select a response'}
-              label="Do you currently receive monetary compensation (pay) from the VA for a service-connected disability with a rating of 10, 20, 30, or 40 percent?"
+              label="Do you currently receive monetary compensation (pay) from the VA for a service-connected disability with a rating of 10%, 20%, 30%, or 40%?"
               name="compensableVaServiceConnected"
               options={yesNo}
               value={this.props.data.compensableVaServiceConnected}
@@ -48,7 +48,7 @@ class VAInformationSection extends React.Component {
 
           <ErrorableRadioButtons required
               errorMessage={validateIfDirty(this.props.data.isVaServiceConnected, isNotBlank) ? '' : 'Please select a response'}
-              label="Do you currently receive monetary compensation (pay) from the VA for a service-connected disability with a rating of 50 percent or more?"
+              label="Do you currently receive monetary compensation (pay) from the VA for a service-connected disability with a rating of 50% or more?"
               name="isVaServiceConnected"
               options={yesNo}
               value={this.props.data.isVaServiceConnected}

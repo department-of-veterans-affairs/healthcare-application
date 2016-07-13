@@ -66,8 +66,7 @@ class MedicareMedicaidSection extends React.Component {
               options={yesNo}
               value={this.props.data.isMedicaidEligible}
               onValueChange={(update) => {this.props.onStateChange('isMedicaidEligible', update);}}/>
-          <div>Medicaid is a United States Health program for eligible individuals and
-          families with low income and resources.</div>
+          <div>Medicaid is a United States health program for eligible individuals and families with low income and few resources.</div>
 
           <ErrorableRadioButtons required
               errorMessage={validateIfDirty(this.props.data.isEnrolledMedicarePartA, isNotBlank) ? '' : 'Please select a response'}
@@ -76,9 +75,7 @@ class MedicareMedicaidSection extends React.Component {
               options={yesNo}
               value={this.props.data.isEnrolledMedicarePartA}
               onValueChange={(update) => {this.props.onStateChange('isEnrolledMedicarePartA', update);}}/>
-          <div>Medicare is a social insurance program administered by the United
-          States government, providing health insurance coverage to people aged
-          65 and over, or who meet special criteria.</div>
+          <div>Medicare is a social insurance program administered by the United States government, providing health insurance coverage to people aged 65 and over or who meet special criteria.</div>
           {medicarePartADateInput}
         </div>
       </fieldset>);
