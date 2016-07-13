@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 import ChildIncome from './ChildIncome';
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
@@ -17,6 +18,45 @@ function getErrorMessage(field, message) {
  * `reviewSection` - Boolean. Hides components that are only needed for ReviewAndSubmitSection.
  */
 class AnnualIncomeSection extends React.Component {
+
+  hasIncome(data) {
+    const income = [
+      data.veteranGrossIncome,
+      data.veteranNetIncome,
+      data.veteranOtherIncome
+    ];
+    const incomeValues = _.some(income, 'value');
+    return incomeValues || data.hasChildrenToReport.value === 'Y' ||
+      data.maritalStatus.value === 'Married' || data.maritalStatus.value === 'Separated';
+  }
+
+  veteranIncomeTable(data) {
+    let veteranTable;
+    if (this.hasIncome(data)) {
+      veteranTable = (<tbody>
+        <tr>
+          <td>Veteran Gross Annual Income from Employment :</td>
+          <td>{data.veteranGrossIncome.value}</td>
+        </tr>
+        <tr>
+          <td>Veteran Net Income from your Farm, Ranch, Property or Business :</td>
+          <td>{data.veteranNetIncome.value}</td>
+        </tr>
+        <tr>
+          <td>Veteran Other Income Amount:</td>
+          <td>{data.veteranOtherIncome.value}</td>
+        </tr>
+      </tbody>);
+    } else {
+      veteranTable = (<tbody>
+        <tr>
+          <td>No income information was entered</td>
+        </tr>
+      </tbody>);
+    }
+    return veteranTable;
+  }
+
   // TODO: Figure out best way to enable users to change their response to pension
   render() {
     const message = 'Please enter only numbers and a decimal point if necessary (no commas or currency signs)';
@@ -115,20 +155,7 @@ class AnnualIncomeSection extends React.Component {
         <div>
           <h6>Veteran</h6>
           <table className="review usa-table-borderless">
-            <tbody>
-              <tr>
-                <td>Veteran Gross Annual Income from Employment :</td>
-                <td>{this.props.data.veteranGrossIncome.value}</td>
-              </tr>
-              <tr>
-                <td>Veteran Net Income from your Farm, Ranch, Property or Business :</td>
-                <td>{this.props.data.veteranNetIncome.value}</td>
-              </tr>
-              <tr>
-                <td>Veteran Other Income Amount:</td>
-                <td>{this.props.data.veteranOtherIncome.value}</td>
-              </tr>
-            </tbody>
+            {this.veteranIncomeTable(this.props.data)}
           </table>
 
           {spouseIncomeReview}
