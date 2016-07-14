@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const winston = require('winston');
+const _ = require('lodash');
 
 const config = require('../config');
 
@@ -10,6 +11,15 @@ const options = {
   config,
   logger: winston
 };
+
+// Check for config overrides.  These are used by ansible in staging and production only.
+try {
+  const overrides = require('../config.extra.js');
+  options.logger.info('Adding extra config file...');
+  _.merge(options.config, overrides);
+} catch (e) {
+  // No overrides found
+}
 
 const application = require('./server/routes/application');
 const status = require('./server/routes/status');
