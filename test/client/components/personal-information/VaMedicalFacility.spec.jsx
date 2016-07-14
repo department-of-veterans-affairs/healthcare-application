@@ -80,4 +80,16 @@ describe('<VaMedicalFacility>', () => {
     const options = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'option');
     expect(options.length).to.be.above(1);
   });
+
+  it('has sorted options if facilityState is specified', () => {
+    const component = ReactTestUtils.renderIntoDocument(
+      <VaMedicalFacility value={makeField('test')} facilityState={makeField('DC')}/>
+    );
+
+    const options = ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'option');
+    const optionsText = options.map((option) => {
+      return option.text;
+    });
+    expect(optionsText).to.eql(['', 'FRANKLIN STREET VA CLINIC', 'SOUTHEAST WASHINGTON VA CLINIC', 'WASHINGTON VA MEDICAL CENTER']);
+  });
 });
