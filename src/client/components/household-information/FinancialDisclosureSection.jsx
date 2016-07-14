@@ -70,7 +70,7 @@ class FinancialDisclosureSection extends React.Component {
 
           <div className="input-section">
             <ErrorableCheckbox required
-                errorMessage={isValidFinancialDisclosure(this.props.data) ? '' : 'Please select a response'}
+                errorMessage={isValidFinancialDisclosure(this.props.data) ? '' : 'Please acknowledge this requirement'}
                 label="I understand VA is not currently enrolling new applicants who decline to provide their financial information unless they have other qualifying eligibility factors."
                 name="understandsFinancialDisclosure"
                 checked={this.props.data.understandsFinancialDisclosure}
