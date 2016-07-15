@@ -212,6 +212,8 @@ module.exports = {
     expectValueToBeBlank(client, 'input[name="childEducationExpenses"]');
     expectInputToNotBeSelected(client, 'input[name="childCohabitedLastYear-0"]');
     expectInputToNotBeSelected(client, 'input[name="childCohabitedLastYear-1"]');
+
+    client.click('input[name="childCohabitedLastYear-1"]');
     expectInputToNotBeSelected(client, 'input[name="childReceivedSupportLastYear-0"]');
     expectInputToNotBeSelected(client, 'input[name="childReceivedSupportLastYear-1"]');
 
