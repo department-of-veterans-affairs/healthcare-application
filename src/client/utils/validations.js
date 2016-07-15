@@ -257,7 +257,7 @@ function isValidContactInformationSection(data) {
 }
 
 function isValidFinancialDisclosure(data) {
-  return isNotBlank(data.understandsFinancialDisclosure.value);
+  return data.understandsFinancialDisclosure;
 }
 
 function isValidIncome(income) {
@@ -475,6 +475,7 @@ export {
   isValidDependentDateField,
   isValidMarriageDate,
   isValidField,
+  isValidFinancialDisclosure,
   isValidForm,
   isValidPersonalInfoSection,
   isValidBirthInformationSection,
