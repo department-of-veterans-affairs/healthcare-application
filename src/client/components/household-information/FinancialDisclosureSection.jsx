@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
-import { yesNo } from '../../utils/options-for-select';
-import { validateIfDirty, isNotBlank } from '../../utils/validations';
+import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
+import { isValidFinancialDisclosure } from '../../utils/validations';
 import { veteranUpdateField } from '../../actions';
 
 /**
@@ -21,7 +20,7 @@ class FinancialDisclosureSection extends React.Component {
           <tr>
             <td>I understand VA is not currently enrolling new applicants who decline to
             provide their financial information unless they have other qualifying eligibility factors: </td>
-            <td>{`${this.props.data.understandsFinancialDisclosure.value === 'Y' ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.understandsFinancialDisclosure ? 'Yes' : 'No'}`}</td>
           </tr>
         </tbody>
       </table>);
@@ -70,12 +69,11 @@ class FinancialDisclosureSection extends React.Component {
           </div>
 
           <div className="input-section">
-            <ErrorableRadioButtons required
-                errorMessage={validateIfDirty(this.props.data.understandsFinancialDisclosure, isNotBlank) ? '' : 'Please select a response'}
+            <ErrorableCheckbox required
+                errorMessage={isValidFinancialDisclosure(this.props.data) ? '' : 'Please acknowledge this requirement'}
                 label="I understand VA is not currently enrolling new applicants who decline to provide their financial information unless they have other qualifying eligibility factors."
                 name="understandsFinancialDisclosure"
-                options={yesNo}
-                value={this.props.data.understandsFinancialDisclosure}
+                checked={this.props.data.understandsFinancialDisclosure}
                 onValueChange={(update) => {this.props.onStateChange('understandsFinancialDisclosure', update);}}/>
           </div>
 
