@@ -56,6 +56,17 @@ Install the node.js project dependencies:
 npm install
 ```
 
+##### Starting the server
+
+To start a local development server:
+
+```bash
+npm run watch
+```
+
+View your local server at `http://localhost:3000/` or `http://127.0.0.1:3000/`
+
+
 #### Development example of interaction with ES servers
 
 There are multiple environments for the ES servers. To use any of them, you must

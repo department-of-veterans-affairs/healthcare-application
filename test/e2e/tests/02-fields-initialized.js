@@ -144,9 +144,8 @@ module.exports = {
     expectNavigateAwayFrom(client, '/va-benefits/basic-information');
 
     // Financial disclosure page.
-    client.expect.element('input[name="understandsFinancialDisclosure-0"] + label').to.be.visible;
-    expectInputToNotBeSelected(client, 'input[name="understandsFinancialDisclosure-0"]');
-    expectInputToNotBeSelected(client, 'input[name="understandsFinancialDisclosure-1"]');
+    client.expect.element('input[name="understandsFinancialDisclosure"] + label').to.be.visible;
+    expectInputToNotBeSelected(client, 'input[name="understandsFinancialDisclosure"]');
     common.completeFinancialDisclosure(client, common.testValues, true);
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/financial-disclosure');
@@ -213,6 +212,8 @@ module.exports = {
     expectValueToBeBlank(client, 'input[name="childEducationExpenses"]');
     expectInputToNotBeSelected(client, 'input[name="childCohabitedLastYear-0"]');
     expectInputToNotBeSelected(client, 'input[name="childCohabitedLastYear-1"]');
+
+    client.click('input[name="childCohabitedLastYear-1"]');
     expectInputToNotBeSelected(client, 'input[name="childReceivedSupportLastYear-0"]');
     expectInputToNotBeSelected(client, 'input[name="childReceivedSupportLastYear-1"]');
 
