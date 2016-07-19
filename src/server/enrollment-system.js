@@ -187,10 +187,10 @@ function yesNoToESBoolean(yesNo) {
 function veteranToSpouseInfo(veteran) {
   return {
     dob: validations.dateOfBirth(veteran.spouseDateOfBirth),
-    givenName: veteran.spouseFullName.first,
-    middleName: veteran.spouseFullName.middle,
-    familyName: veteran.spouseFullName.last,
-    suffix: veteran.spouseFullName.suffix,
+    givenName: validations.validateName(veteran.spouseFullName.first),
+    middleName: validations.validateName(veteran.spouseFullName.middle),
+    familyName: validations.validateName(veteran.spouseFullName.last),
+    suffix: validations.validateName(veteran.spouseFullName.suffix),
     relationship: 2,
     startDate: validations.dateOfBirth(veteran.dateOfMarriage),
     ssns: {
@@ -304,10 +304,10 @@ function childRelationshipToSDSCode(childRelationship) {
 function childToDependentInfo(child) {
   return {
     dob: validations.dateOfBirth(child.childDateOfBirth),
-    givenName: child.childFullName.first,
-    middleName: child.childFullName.middle,
-    familyName: child.childFullName.last,
-    suffix: child.childFullName.suffix,
+    givenName: validations.validateName(child.childFullName.first),
+    middleName: validations.validateName(child.childFullName.middle),
+    familyName: validations.validateName(child.childFullName.last),
+    suffix: validations.validateName(child.childFullName.suffix),
     relationship: childRelationshipToSDSCode(child.childRelation),
     ssns: {
       ssn: {
@@ -427,10 +427,10 @@ function providerToInsuranceInfo(provider) {
 //  * personInfo/ssnText, Value not 9 digits and contains a non number., ,
 function veteranToPersonInfo(veteran) {
   return {
-    firstName: validations.validateString(veteran.veteranFullName.first, 30),
-    middleName: validations.validateString(veteran.veteranFullName.middle, 30, true),
-    lastName: validations.validateString(veteran.veteranFullName.last, 30),
-    suffix: veteran.veteranFullName.suffix,  // TODO(awong): need to restrict valid values.
+    firstName: validations.validateName(veteran.veteranFullName.first, 30),
+    middleName: validations.validateName(veteran.veteranFullName.middle, 30, true),
+    lastName: validations.validateName(veteran.veteranFullName.last, 30),
+    suffix: validations.validateName(veteran.veteranFullName.suffix),  // TODO(awong): need to restrict valid values.
     ssnText: validations.validateSsn(veteran.veteranSocialSecurityNumber),
     gender: veteran.gender,  // TODO(awong): need to restrict valid values.
     dob: validations.dateOfBirth(veteran.veteranDateOfBirth),
@@ -986,10 +986,10 @@ function veteranToFinancialsInfo(veteran) {
 
 function childToAssociation(child) {
   return {
-    givenName: child.childFullName.first,
-    middleName: child.childFullName.middle,
-    familyName: child.childFullName.last,
-    suffix: child.childFullName.suffix,
+    givenName: validations.validateName(child.childFullName.first),
+    middleName: validations.validateName(child.childFullName.middle),
+    familyName: validations.validateName(child.childFullName.last),
+    suffix: validations.validateName(child.childFullName.suffix),
     relationship: child.childRelation
   };
 }
@@ -997,10 +997,10 @@ function childToAssociation(child) {
 function spouseToAssociation(veteran) {
   if (_.includes(['Married', 'Separated'], veteran.maritalStatus)) {
     return {
-      givenName: veteran.spouseFullName.first,
-      middleName: veteran.spouseFullName.middle,
-      familyName: veteran.spouseFullName.last,
-      suffix: veteran.spouseFullName.suffix,
+      givenName: validations.validateName(veteran.spouseFullName.first),
+      middleName: validations.validateName(veteran.spouseFullName.middle),
+      familyName: validations.validateName(veteran.spouseFullName.last),
+      suffix: validations.validateName(veteran.spouseFullName.suffix),
       relationship: 'SPOUSE'
     };
   }

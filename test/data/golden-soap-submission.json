@@ -9,25 +9,25 @@
       "associations": {
         "association": [
           {
-            "familyName": "LastChildA",
-            "givenName": "FirstChildA",
-            "middleName": "MiddleChildA",
+            "familyName": "LASTCHILDA",
+            "givenName": "FIRSTCHILDA",
+            "middleName": "MIDDLECHILDA",
             "relationship": "Stepson",
-            "suffix": "Jr."
+            "suffix": "JR."
           },
           {
-            "familyName": "LastChildB",
-            "givenName": "FirstChildB",
-            "middleName": "MiddleChildB",
+            "familyName": "LASTCHILDB",
+            "givenName": "FIRSTCHILDB",
+            "middleName": "MIDDLECHILDB",
             "relationship": "Stepdaughter",
-            "suffix": "Sr."
+            "suffix": "SR."
           },
           {
-            "familyName": "LastSpouse",
-            "givenName": "FirstSpouse",
-            "middleName": "MiddleSpouse",
+            "familyName": "LASTSPOUSE",
+            "givenName": "FIRSTSPOUSE",
+            "middleName": "MIDDLESPOUSE",
             "relationship": "SPOUSE",
-            "suffix": "Sr."
+            "suffix": "SR."
           }
         ]
       },
@@ -103,9 +103,9 @@
                 "contributedToSupport": "false",
                 "dependentInfo": {
                   "dob": "05/05/1982",
-                  "familyName": "LastChildA",
-                  "givenName": "FirstChildA",
-                  "middleName": "MiddleChildA",
+                  "familyName": "LASTCHILDA",
+                  "givenName": "FIRSTCHILDA",
+                  "middleName": "MIDDLECHILDA",
                   "relationship": "5",
                   "ssns": {
                     "ssn": {
@@ -113,7 +113,7 @@
                     }
                   },
                   "startDate": "04/07/1992",
-                  "suffix": "Jr."
+                  "suffix": "JR."
                 },
                 "incapableOfSelfSupport": "true",
                 "incomes": {
@@ -139,9 +139,9 @@
                 "contributedToSupport": "true",
                 "dependentInfo": {
                   "dob": "03/07/1996",
-                  "familyName": "LastChildB",
-                  "givenName": "FirstChildB",
-                  "middleName": "MiddleChildB",
+                  "familyName": "LASTCHILDB",
+                  "givenName": "FIRSTCHILDB",
+                  "middleName": "MIDDLECHILDB",
                   "relationship": "6",
                   "ssns": {
                     "ssn": {
@@ -149,7 +149,7 @@
                     }
                   },
                   "startDate": "04/07/2003",
-                  "suffix": "Sr."
+                  "suffix": "SR."
                 },
                 "incapableOfSelfSupport": "false",
                 "incomes": {
@@ -236,9 +236,9 @@
                   "phoneNumber": "1112221234"
                 },
                 "dob": "04/06/1980",
-                "familyName": "LastSpouse",
-                "givenName": "FirstSpouse",
-                "middleName": "MiddleSpouse",
+                "familyName": "LASTSPOUSE",
+                "givenName": "FIRSTSPOUSE",
+                "middleName": "MIDDLESPOUSE",
                 "relationship": "2",
                 "ssns": {
                   "ssn": {
@@ -246,7 +246,7 @@
                   }
                 },
                 "startDate": "05/10/1983",
-                "suffix": "Sr."
+                "suffix": "SR."
               }
             }
           }
@@ -295,10 +295,10 @@
         "indicator": "false"
       },
       "personInfo": {
-        "firstName": "FirstName",
-        "middleName": "MiddleName",
+        "firstName": "FIRSTNAME",
+        "middleName": "MIDDLENAME",
         "lastName": "ZZTEST",
-        "suffix": "Jr.",
+        "suffix": "JR.",
         "ssnText": "111111234",
         "gender": "F",
         "dob": "01/02/1923",
