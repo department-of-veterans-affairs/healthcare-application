@@ -259,7 +259,10 @@ const completeVeteran = {
     value: '1235551234',
     dirty: false
   },
-  understandsFinancialDisclosure: makeField(true),
+  understandsFinancialDisclosure: {
+    value: true,
+    dirty: false
+  },
   spouseFullName: {
     first: {
       value: 'FirstSpouse',
