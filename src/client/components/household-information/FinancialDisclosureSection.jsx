@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
-import { isValidFinancialDisclosure } from '../../utils/validations';
+import { validateIfDirty } from '../../utils/validations';
 import { veteranUpdateField } from '../../actions';
 
 /**
@@ -11,6 +12,20 @@ import { veteranUpdateField } from '../../actions';
  * `reviewSection` - Boolean. Hides components that are only needed for ReviewAndSubmitSection.
  */
 class FinancialDisclosureSection extends React.Component {
+  errorMessage(data) {
+    const field = this.props.data.understandsFinancialDisclosure;
+    let error;
+
+    // check if true only if dirty (prevents error message on first load of section)
+    if (validateIfDirty(field, _.identity)) {
+      error = '';
+    } else {
+      error = 'Please acknowledge this requirement';
+    }
+
+    return error;
+  }
+
   render() {
     let content;
 
@@ -20,7 +35,7 @@ class FinancialDisclosureSection extends React.Component {
           <tr>
             <td>I understand VA is not currently enrolling new applicants who decline to
             provide their financial information unless they have other qualifying eligibility factors: </td>
-            <td>{`${this.props.data.understandsFinancialDisclosure ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.understandsFinancialDisclosure.value ? 'Yes' : 'No'}`}</td>
           </tr>
         </tbody>
       </table>);
@@ -70,11 +85,11 @@ class FinancialDisclosureSection extends React.Component {
 
           <div className="input-section">
             <ErrorableCheckbox required
-                errorMessage={isValidFinancialDisclosure(this.props.data) ? '' : 'Please acknowledge this requirement'}
+                errorMessage={this.errorMessage(this.props.data)}
                 label="I understand VA is not currently enrolling new applicants who decline to provide their financial information unless they have other qualifying eligibility factors."
                 name="understandsFinancialDisclosure"
-                checked={this.props.data.understandsFinancialDisclosure}
-                onValueChange={(update) => {this.props.onStateChange('understandsFinancialDisclosure', update);}}/>
+                checked={this.props.data.understandsFinancialDisclosure.value}
+                onValueChange={(update) => {this.props.onStateChange('understandsFinancialDisclosure', { value: update, dirty: false });}}/>
           </div>
 
         </div>

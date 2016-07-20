@@ -257,7 +257,7 @@ function isValidContactInformationSection(data) {
 }
 
 function isValidFinancialDisclosure(data) {
-  return data.understandsFinancialDisclosure;
+  return data.understandsFinancialDisclosure.value;
 }
 
 function isValidIncome(income) {
