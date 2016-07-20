@@ -20,7 +20,7 @@ class FinancialDisclosureSection extends React.Component {
           <tr>
             <td>I understand VA is not currently enrolling new applicants who decline to
             provide their financial information unless they have other qualifying eligibility factors: </td>
-            <td>{`${this.props.data.understandsFinancialDisclosure ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.understandsFinancialDisclosure.value ? 'Yes' : 'No'}`}</td>
           </tr>
         </tbody>
       </table>);
@@ -73,8 +73,8 @@ class FinancialDisclosureSection extends React.Component {
                 errorMessage={isValidFinancialDisclosure(this.props.data) ? '' : 'Please acknowledge this requirement'}
                 label="I understand VA is not currently enrolling new applicants who decline to provide their financial information unless they have other qualifying eligibility factors."
                 name="understandsFinancialDisclosure"
-                checked={this.props.data.understandsFinancialDisclosure}
-                onValueChange={(update) => {this.props.onStateChange('understandsFinancialDisclosure', update);}}/>
+                checked={this.props.data.understandsFinancialDisclosure.value}
+                onValueChange={(update) => {this.props.onStateChange('understandsFinancialDisclosure', { value: update, dirty: false });}}/>
           </div>
 
         </div>
