@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
-import { validateIfDirty } from '../../utils/validations';
+import { isValidFinancialDisclosure } from '../../utils/validations';
 import { veteranUpdateField } from '../../actions';
 
 /**
@@ -12,20 +12,6 @@ import { veteranUpdateField } from '../../actions';
  * `reviewSection` - Boolean. Hides components that are only needed for ReviewAndSubmitSection.
  */
 class FinancialDisclosureSection extends React.Component {
-  errorMessage(data) {
-    const field = data.understandsFinancialDisclosure;
-    let error;
-
-    // check if true only if dirty (prevents error message on first load of section)
-    if (validateIfDirty(field, _.identity)) {
-      error = '';
-    } else {
-      error = 'Please acknowledge this requirement';
-    }
-
-    return error;
-  }
-
   render() {
     let content;
 
@@ -85,7 +71,7 @@ class FinancialDisclosureSection extends React.Component {
 
           <div className="input-section">
             <ErrorableCheckbox required
-                errorMessage={this.errorMessage(this.props.data)}
+                errorMessage={isValidFinancialDisclosure(this.props.data) ? '' : 'Please acknowledge this requirement'}
                 label="I understand VA is not currently enrolling new applicants who decline to provide their financial information unless they have other qualifying eligibility factors."
                 name="understandsFinancialDisclosure"
                 checked={this.props.data.understandsFinancialDisclosure.value}
