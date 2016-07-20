@@ -13,7 +13,7 @@ import { veteranUpdateField } from '../../actions';
  */
 class FinancialDisclosureSection extends React.Component {
   errorMessage(data) {
-    const field = this.props.data.understandsFinancialDisclosure;
+    const field = data.understandsFinancialDisclosure;
     let error;
 
     // check if true only if dirty (prevents error message on first load of section)
