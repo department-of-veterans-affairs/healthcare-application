@@ -16,6 +16,22 @@ class Child extends React.Component {
   render() {
     const message = 'Please enter only numbers and a decimal point if necessary (no commas or currency signs)';
     let content;
+    let livedWithChildField;
+
+    if (this.props.data.childCohabitedLastYear.value === 'N') {
+      livedWithChildField = (
+        <div className="row">
+          <div className="small-12 columns">
+            <ErrorableRadioButtons
+                label="If your dependent child did not live with you last year, did you provide support?"
+                name="childReceivedSupportLastYear"
+                options={yesNo}
+                value={this.props.data.childReceivedSupportLastYear}
+                onValueChange={(update) => {this.props.onValueChange('childReceivedSupportLastYear', update);}}/>
+          </div>
+        </div>
+      );
+    }
 
     // TODO: to look into why children data isn't getting updated in the store as it's being entered
     if (this.props.view === 'collapsed') {
@@ -130,17 +146,7 @@ class Child extends React.Component {
               can include tuition payments or payments of medical bills.</p>
             </div>
           </div>
-
-          <div className="row">
-            <div className="small-12 columns">
-              <ErrorableRadioButtons
-                  label="If your dependent child did not live with you last year, did you provide support?"
-                  name="childReceivedSupportLastYear"
-                  options={yesNo}
-                  value={this.props.data.childReceivedSupportLastYear}
-                  onValueChange={(update) => {this.props.onValueChange('childReceivedSupportLastYear', update);}}/>
-            </div>
-          </div>
+          {livedWithChildField}
         </fieldset>
       );
     }

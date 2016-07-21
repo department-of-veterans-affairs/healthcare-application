@@ -65,7 +65,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 <div class="header">
-  <div data-alert class="va-notice--banner">
+  <div class="va-notice--banner">
     <div class="row full">
       <div class="small-12 message">
         <p><strong>This site is a <a target="_blank" href="https://www.vets.gov/playbook/design/">work in progress.</a></strong> If you don&rsquo;t find what you need, visit <a target="_blank" href="http://www.va.gov">VA.gov</a>.</p>
@@ -73,7 +73,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
   </div>
 
-  <!-- /header alert box -->
+   <!-- /header alert box -->
   <div class="row full">
     <div class="small-6 medium-4 columns">
       <h1 role="banner" class="va-header-logo"><a href="/">Vets.gov</a></h1>
@@ -84,14 +84,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <button data-show="#mobile-menu" class="va-overlay-trigger va-mobile-searchtrigger usa-button usa-button-outline-inverse" aria-controls="mobile-menu" aria-flowto="mobile-menu">Search</button>
       </div>
 
-      <div id="mobile-menu" class="va-overlay va-overlay-fullscreen" role="dialog">
+      <div id="mobile-menu" class="va-overlay" role="dialog">
         <div class="medium-5 medium-offset-3 text-right columns">
           <button type="button" class="va-mobile-searchclose va-overlay-close" aria-label="close search form - mobile only">Close</button>
           <div class="menu">
-            <form accept-charset="UTF-8" action="https://search.usa.gov/search" id="search_form" method="get">
+            <form accept-charset="UTF-8" action="https://search.vets.gov/search" id="search_form" method="get">
               <div style="margin:0;padding:0;display:inline">
                 <input name="utf8" type="hidden" value="&#x2713;" /></div>
-              <input id="affiliate" name="affiliate" type="hidden" value="vets.gov_staging" />
+              <input id="affiliate" name="affiliate" type="hidden" value="vets.gov_search" />
               <label for="mobile-query">Search:</label>
               <div class="row collapse">
                 <div class="small-9 columns">
@@ -105,28 +105,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
         </div>
       </div>
-
+    
   </div>
 </div>
 
 <h2 class="sr-only">Apply for Health Care</h2>
 
 <div id="content" class="interior ">
-  
-  
-  <div class="splash">
-  <div class="row">
-    <div class="small-12 columns">
-      <ul class="breadcrumbs" role="menubar" aria-label="Primary">
-        <li class="parent"><a href="/health-care/">Health Care</a></li>
-        <li class="active">Apply for Health Care</li>
-      </ul>
-    </div>
-  </div>
-</div>
 
 <!-- HCA Application Start -->
+
 <div class="main" role="main">
+
+<nav class="va-nav-breadcrumbs">
+    <ul class="row va-nav-breadcrumbs-list" role="menubar" aria-label="Primary">
+ <li><a href="/">Home</a></li>
+ <li><a href="/healthcare/">Health Care</a></li>
+<li class="parent"><a href="/healthcare/apply/">Apply for VA Health Care</a></li>
+<li class="active">Apply Online</li>
+    </ul>
+</nav>
+
+
+
   <div class="section">
     <div id="react-root">
       <div class="loading-message">
@@ -181,7 +182,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <div class="small-12 medium-3 columns">
       <dl class="va-list--linkgroup">
         <dt class="va-list--linkgroup-title">Resources</dt>
-        <dd><a href="/veterans-employment-center/">Veterans Employment Center&trade;</a></dd>
+        <dd><a href="/employment/">Veterans Employment Center</a></dd>
         <dd><a href="/facility-locator">Facility Locator</a></dd>
         <dd><a href="/gi-bill-comparison-tool/">GI Bill Comparison Tool</a></dd>
       </dl>
@@ -226,14 +227,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </ul>
     </div>
     
-    <div class="large-4 columns text-right">
-      <div class="footer-crisis text-center touch">
-       <a href="tel:1-800-273-8255"><span>Veterans Crisis Line</span> <span class="tel" id="crisis-line">1-800-273-8255</span> <span aria-desicribedby="crisis-line">(Press 1)</span></a>
-      </div>
+    <div class="large-4 columns">
+     
+      <a href="#modal-crisisline" class="va-crisis-line va-crisis-line--touch va-overlay-trigger">Get help from Veterans Crisis Line</a>
+      
+      <!-- End mobile crisis line overlay. See desktop overlay at end of footer -->  
+      <div id="modal-crisisline" class="va-overlay" role="dialog">
+          <div class="va-crisis-panel va-crisis-panel--touch">
+            <div class="va-overlay-body va-crisis-panel-body">
+              <h4 class="va-crisis-line">Get help from Veterans Crisis Line</h4>
 
-       <div class="footer-crisis text-center no-touch">
-         <a target="_blank" href="https://www.veteranscrisisline.net/"><span>Veterans Crisis Line</span> 1-800-273-8255 (Press 1)</a>
-       </div>
+              <ul>
+                <li><a href="tel:18002738255">Call <strong>1-800-273-8255 (Press 1)</strong></a></li>
+                <li><a href="sms:838255">Text to <b>838255</b></a></li>
+                <li><a href="https://www.veteranscrisisline.net/mobile/ChatTermsOfService.aspx?account=Veterans%20Chat">Chat <b>confidentially now</b></a></li>
+              </ul> 
+            
+              <p>If you are in crisis or having thoughts of suicide, 
+  visit <a href="https://www.veteranscrisisline.net/">VeteransCrisisLine.net</a> for more resources.</p>
+            </div>
+            
+            <p><button type="button" class="va-overlay-close">Close</button></p>
+            
+          </div>
+        </div>   
+      <!-- End mobile crisis line overlay -->  
+    
     </div>
 
   </div>
@@ -263,6 +282,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
   </div>
 
+  <div class="row va-util-rel"> <!-- VA Panel no touch screens -->
+  <div class="va-crisis-panel va-crisis-panel--notouch">
+    <button class="va-crisis-line va-crisis-line--notouch">Get help from Veterans Crisis Line</button>
+    <div  class="va-crisis-panel-body">
+      <ul>
+        <li>Call <strong>1-800-273-8255 (Press 1)</strong></li>
+        <li>Text to <b>838255</b></li>
+        <li><a href="https://www.veteranscrisisline.net/ChatTermsOfService.aspx?account=Veterans%20Chat">Chat confidentially now</a></li>
+      </ul>
+      <p>If you are in crisis or having thoughts of suicide, 
+visit <a href="https://www.veteranscrisisline.net/">VeteransCrisisLine.net</a> for more resources.</p>
+    </div>      
+  </div> 
+ <!--END VA Panel no touch screens -->   </div>
 </footer>
 
 

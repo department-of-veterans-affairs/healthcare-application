@@ -5,7 +5,7 @@ if (window.parent !== window) {
   window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.parent.__REACT_DEVTOOLS_GLOBAL_HOOK__;
 }
 
-require('../assets/css/main.scss');
+require('../assets/css/main.scss'); // All style assets for this project.
 
 // Get our browser up to date with polyfills.
 const Modernizr = require('modernizr');
@@ -28,3 +28,5 @@ document.addEventListener('DOMContentLoaded', () => { // eslint-disable-line sca
   ReactEntry.init();
 });
 window.ReactEntry = ReactEntry;  // Attach to window for easy debugging.
+
+require('../assets/js/vendor/toggle-veterans-crisis-line.js');
