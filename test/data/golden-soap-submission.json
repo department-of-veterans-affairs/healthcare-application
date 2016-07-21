@@ -9,6 +9,7 @@
       "associations": {
         "association": [
           {
+            "contactType": "11",
             "familyName": "LastChildA",
             "givenName": "FirstChildA",
             "middleName": "MiddleChildA",
@@ -16,6 +17,7 @@
             "suffix": "Jr."
           },
           {
+            "contactType": "11",
             "familyName": "LastChildB",
             "givenName": "FirstChildB",
             "middleName": "MiddleChildB",
@@ -23,6 +25,7 @@
             "suffix": "Sr."
           },
           {
+            "contactType": "10",
             "familyName": "LastSpouse",
             "givenName": "FirstSpouse",
             "middleName": "MiddleSpouse",

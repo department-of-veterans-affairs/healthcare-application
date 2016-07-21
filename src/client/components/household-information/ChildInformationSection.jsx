@@ -20,6 +20,7 @@ class ChildInformationSection extends React.Component {
     let content;
     let children;
     const fields = ['childFullName', 'childRelation', 'childSocialSecurityNumber', 'childBecameDependent', 'childDateOfBirth', 'childDisabledBefore18', 'childAttendedSchoolLastYear', 'childEducationExpenses', 'childCohabitedLastYear', 'childReceivedSupportLastYear'];
+    let livedWithChildReview;
 
     if (this.props.data.children) {
       const childList = this.props.data.children;
@@ -42,6 +43,16 @@ class ChildInformationSection extends React.Component {
         const childEducationExpenses = obj.childEducationExpenses.value;
         const childCohabitedLastYear = obj.childCohabitedLastYear.value;
         const childReceivedSupportLastYear = obj.childReceivedSupportLastYear.value;
+
+        if (childCohabitedLastYear === 'N') {
+          livedWithChildReview = (
+            <tr>
+              <td>If your dependent child did not live with you last year, did you provide support?:</td>
+              <td>{`${childReceivedSupportLastYear === 'Y' ? 'Yes' : 'No'}`}</td>
+            </tr>
+          );
+        }
+
         return (<table key={++reactKey} className="review usa-table-borderless">
           <thead>
             <tr>
@@ -82,10 +93,7 @@ class ChildInformationSection extends React.Component {
               <td>Did your child live with you last year?:</td>
               <td>{`${childCohabitedLastYear === 'Y' ? 'Yes' : 'No'}`}</td>
             </tr>
-            <tr>
-              <td>If your dependent child did not live with you last year, did you provide support?:</td>
-              <td>{`${childReceivedSupportLastYear === 'Y' ? 'Yes' : 'No'}`}</td>
-            </tr>
+            {livedWithChildReview}
           </tbody>
         </table>);
       });

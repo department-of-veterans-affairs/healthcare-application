@@ -911,7 +911,6 @@ function veteranToFinancialsInfo(veteran) {
     hasDependentFinancials = _.compact(dependentFinancials.dependentFinancials.map((child) => { return child.incomes; })).length > 0;
   }
   const spouseFinancials = veteranToSpouseFinancials(veteran);
-
   const hasSpouseIncome = spouseFinancials && spouseFinancials.spouseFinancials.incomes;
 
   const hasIncomeData = expenses || incomes || hasSpouseIncome || hasDependentFinancials;
@@ -985,12 +984,43 @@ function veteranToFinancialsInfo(veteran) {
 // TODO(awong): Do we collect employment info? I don't think so...
 
 
+function relationshipToContactType(relationship) {
+  switch (relationship) {
+    case 'Primary Next of Kin':
+      return 1;
+    case 'Other Next of Kin':
+      return 2;
+    case 'Emergency Contact':
+      return 3;
+    case 'Other emergency contact':
+      return 4;
+    case 'Designee':
+      return 5;
+    case 'Beneficiary Representative':
+      return 6;
+    case 'Power of Attorney':
+      return 7;
+    case 'Guardian VA':
+      return 8;
+    case 'Guardian Civil':
+      return 9;
+    case 'Spouse':
+      return 10;
+    case 'Dependent':
+      return 11;
+    default:
+      return undefined;
+  }
+}
+
+
 function childToAssociation(child) {
   return {
     givenName: child.childFullName.first,
     middleName: child.childFullName.middle,
     familyName: child.childFullName.last,
     suffix: child.childFullName.suffix,
+    contactType: relationshipToContactType('Dependent'),
     relationship: child.childRelation
   };
 }
@@ -1002,6 +1032,7 @@ function spouseToAssociation(veteran) {
       middleName: veteran.spouseFullName.middle,
       familyName: veteran.spouseFullName.last,
       suffix: veteran.spouseFullName.suffix,
+      contactType: relationshipToContactType('Spouse'),
       relationship: 'SPOUSE'
     };
   }

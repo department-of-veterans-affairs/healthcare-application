@@ -43,7 +43,7 @@ describe('enrollment-system base tests', () => {
       it(`should serialize ${filename} correctly`, (done) => {
         const application = require(`../data/conformance/${filename}`);
         const input = enrollmentSystem.veteranToSaveSubmitForm(application);
-        const result = fs.readFileSync(`test/data/conformance/${filename}.xml`, 'utf8').trim();
+        const result = fs.readFileSync(`test/data/conformance/${filename}.xml`, 'utf8');
         soap.createClient(config.soap.wsdl, {}, (_soapError, client) => {
           client.on('message', (messageBody) => {
             chai.assert.equal(result, messageBody);
