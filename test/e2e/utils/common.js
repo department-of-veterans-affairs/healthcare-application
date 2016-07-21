@@ -54,7 +54,6 @@ const testValues = {
   mobilePhone: '5551114545',
 
   understandsFinancialDisclosure: false,
-  understandsFinancialDisclosure: false,
 
   spouseFullName: {
     first: 'Anne',
