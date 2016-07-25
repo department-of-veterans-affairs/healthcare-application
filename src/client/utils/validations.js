@@ -106,12 +106,12 @@ function isValidEmail(value) {
 // TODO:  1. what is a valid address?
 //        2. 6 arguments to a function is ugly...
 //        3. argument order is now based on form order... using
-function isValidAddress(street, city, country, state, zipcode) {
+function isValidAddress(street, city, country, state, zipcode, postalCode) {
   const initialOk = isNotBlank(street) && isNotBlank(city) && isNotBlank(country);
   if (country === 'USA') {
     return initialOk && isNotBlank(state) && isNotBlank(zipcode);
   }
-  return initialOk;
+  return initialOk && (isNotBlank(zipcode) || isNotBlank(postalCode));
 }
 
 function isValidField(validator, field) {
@@ -137,7 +137,7 @@ function isValidFullNameField(field) {
 }
 
 function isValidAddressField(field) {
-  return isValidAddress(field.street.value, field.city.value, field.country.value, field.state.value, field.zipcode.value);
+  return isValidAddress(field.street.value, field.city.value, field.country.value, field.state.value, field.zipcode.value, field.postalCode.value);
 }
 
 function isValidInsurancePolicy(policyNumber, groupCode) {

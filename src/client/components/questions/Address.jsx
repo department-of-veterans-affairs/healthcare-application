@@ -107,15 +107,15 @@ class Address extends React.Component {
               autocomplete="address-level1"
               options={stateList}
               value={this.props.value.state}
-              required={this.state.requireStateZip ? this.props.required : false}
+              required={this.props.required}
               onValueChange={(update) => {this.handleChange('state', update);}}/>
 
           <ErrorableTextInput errorMessage={this.validateAddressField(this.props.value.zipcode) ? undefined : 'Please enter a valid ZIP code'}
-              label={this.state.requireStateZip ? 'ZIP Code' : 'Postal Code'}
+              label="ZIP Code"
               name="zip"
               autocomplete="postal-code"
               field={this.props.value.zipcode}
-              required={this.state.requireStateZip ? this.props.required : false}
+              required={this.props.required}
               onValueChange={(update) => {this.handleChange('zipcode', update);}}/>
         </div>
       );
