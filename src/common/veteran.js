@@ -231,19 +231,19 @@ const completeVeteran = {
       dirty: false
     },
     city: {
-      value: 'Washington',
+      value: 'Ontario',
       dirty: false
     },
     country: {
-      value: 'USA',
+      value: 'CAN',
       dirty: false
     },
     state: {
-      value: 'DC',
+      value: 'ON',
       dirty: false
     },
     zipcode: {
-      value: '20005',
+      value: '13AA',
       dirty: false
     }
   },
@@ -347,7 +347,7 @@ const completeVeteran = {
       dirty: false
     },
     zipcode: {
-      value: '20101',
+      value: '20101-0101',
       dirty: false
     }
   },

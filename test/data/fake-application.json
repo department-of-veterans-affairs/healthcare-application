@@ -27,10 +27,10 @@
   "isWhite": true,
   "veteranAddress": {
     "street": "123 NW 5th St",
-    "city": "Washington",
-    "country": "USA",
-    "state": "DC",
-    "zipcode": "20005"
+    "city": "Ontario",
+    "country": "CAN",
+    "state": "ON",
+    "zipcode": "13AA"
   },
   "email": "foo@example.com",
   "homePhone": "1231241234",
@@ -53,7 +53,7 @@
     "city": "Dulles",
     "country": "USA",
     "state": "VA",
-    "zipcode": "20101"
+    "zipcode": "20101-0101"
   },
   "spousePhone": "1112221234",
   "children": [

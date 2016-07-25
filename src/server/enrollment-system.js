@@ -52,7 +52,9 @@ function formatAddress(address) {
   };
   if (address.country === 'USA') {
     formatted.state = address.state;
-    formatted.zipCode = address.zipcode;
+    const splitZip = address.zipcode.split('-');
+    formatted.zipCode = splitZip[0];
+    formatted.zipPlus4 = validations.validateString(splitZip[1], 20, true) || undefined;
   } else {
     formatted.provinceCode = address.state || address.provinceCode;
     formatted.postalCode = address.zipcode || address.postalCode;
