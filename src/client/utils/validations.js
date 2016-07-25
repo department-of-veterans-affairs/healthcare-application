@@ -107,7 +107,11 @@ function isValidEmail(value) {
 //        2. 6 arguments to a function is ugly...
 //        3. argument order is now based on form order... using
 function isValidAddress(street, city, country, state, zipcode) {
-  return isNotBlank(street) && isNotBlank(city) && isNotBlank(country) && isNotBlank(state) && isNotBlank(zipcode);
+  const initialOk = isNotBlank(street) && isNotBlank(city) && isNotBlank(country);
+  if (country === 'USA') {
+    return initialOk && isNotBlank(state) && isNotBlank(zipcode);
+  }
+  return initialOk;
 }
 
 function isValidField(validator, field) {

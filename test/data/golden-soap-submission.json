@@ -26,6 +26,13 @@
           },
           {
             "contactType": "10",
+            "address": {
+              "city": "Dulles",
+              "country": "USA",
+              "line1": "123 NW 8th St",
+              "state": "VA",
+              "zipCode": "20101"
+            },
             "familyName": "LastSpouse",
             "givenName": "FirstSpouse",
             "middleName": "MiddleSpouse",

@@ -46,7 +46,9 @@ const blankVeteran = {
     city: makeField(''),
     country: makeField(''),
     state: makeField(''),
+    provinceCode: makeField(''),
     zipcode: makeField(''),
+    postalCode: makeField(''),
   },
   email: makeField(''),
   emailConfirmation: makeField(''),  // TODO(awong): Ignored by ES System
@@ -80,7 +82,9 @@ const blankVeteran = {
     city: makeField(''),
     country: makeField(''),
     state: makeField(''),
+    provinceCode: makeField(''),
     zipcode: makeField(''),
+    postalCode: makeField(''),
   },
   spousePhone: makeField(''),
 
