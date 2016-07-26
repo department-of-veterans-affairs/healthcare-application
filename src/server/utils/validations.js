@@ -49,6 +49,14 @@ const validations = {
     }
     return validatedString;
   },
+
+  validateName: (data, count, nullable) => {
+    const formattedName = validations.validateString(data, count, nullable);
+    if (_.isEmpty(formattedName)) {
+      return formattedName;
+    }
+    return formattedName.toUpperCase();
+  },
   /**
    * Validate a string or number to meet the requirements from the original
    * 1010ez pdf form.
