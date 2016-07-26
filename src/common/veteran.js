@@ -242,7 +242,15 @@ const completeVeteran = {
       value: 'ON',
       dirty: false
     },
+    provinceCode: {
+      value: 'ProvinceName',
+      dirty: false
+    },
     zipcode: {
+      value: '21231',
+      dirty: false
+    },
+    postalCode: {
       value: '13AA',
       dirty: false
     }
@@ -346,8 +354,16 @@ const completeVeteran = {
       value: 'VA',
       dirty: false
     },
+    provinceCode: {
+      value: 'ProvinceName',
+      dirty: false
+    },
     zipcode: {
       value: '20101-0101',
+      dirty: false
+    },
+    postalCode: {
+      value: '13AA',
       dirty: false
     }
   },

@@ -14,9 +14,6 @@ import { countries, states } from '../../utils/options-for-select';
 class Address extends React.Component {
   constructor() {
     super();
-    this.state = {
-      requireStateZip: false
-    };
     this.handleChange = this.handleChange.bind(this);
     this.validateAddressField = this.validateAddressField.bind(this);
   }
@@ -28,12 +25,6 @@ class Address extends React.Component {
   // TODO: Look into if this is the best way to update address,
   // it is incredibly slow right now
   handleChange(path, update) {
-    // if the country is US, Canada, or Mexico, then the
-    // state/provice + postal is required
-    if (path === 'country') {
-      this.setState({ requireStateZip: _.hasIn(states, update.value) });
-    }
-
     const address = {
       street: this.props.value.street,
       city: this.props.value.city,
@@ -98,7 +89,7 @@ class Address extends React.Component {
       );
 
     let secondaryForm = null;
-    if (this.state.requireStateZip) {
+    if (_.hasIn(states, this.props.value.country.value)) {
       secondaryForm = (
         <div>
           <ErrorableSelect errorMessage={this.validateAddressField(this.props.value.state) ? undefined : 'Please enter a valid state'}
@@ -129,7 +120,7 @@ class Address extends React.Component {
               required={false}
               onValueChange={(update) => {this.handleChange('provinceCode', update);}}/>
 
-          <ErrorableTextInput
+          <ErrorableTextInput errorMessage={this.validateAddressField(this.props.value.postalCode) ? undefined : 'Please enter a valid Postal code'}
               label="Postal Code"
               name="postalCode"
               autocomplete="postal-code"
