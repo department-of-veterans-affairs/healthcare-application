@@ -53,7 +53,7 @@ const blankVeteran = {
   homePhone: makeField(''),
   mobilePhone: makeField(''),
 
-  understandsFinancialDisclosure: false,  // TODO(awong): Ignored by ES System
+  understandsFinancialDisclosure: makeField(false),  // TODO(awong): Ignored by ES System
 
   spouseFullName: {
     first: makeField(''),
@@ -259,7 +259,10 @@ const completeVeteran = {
     value: '1235551234',
     dirty: false
   },
-  understandsFinancialDisclosure: true,
+  understandsFinancialDisclosure: {
+    value: true,
+    dirty: false
+  },
   spouseFullName: {
     first: {
       value: 'FirstSpouse',

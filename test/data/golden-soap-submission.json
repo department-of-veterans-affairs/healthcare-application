@@ -9,6 +9,7 @@
       "associations": {
         "association": [
           {
+            "contactType": "11",
             "familyName": "LASTCHILDA",
             "givenName": "FIRSTCHILDA",
             "middleName": "MIDDLECHILDA",
@@ -16,6 +17,7 @@
             "suffix": "JR."
           },
           {
+            "contactType": "11",
             "familyName": "LASTCHILDB",
             "givenName": "FIRSTCHILDB",
             "middleName": "MIDDLECHILDB",
@@ -23,6 +25,7 @@
             "suffix": "SR."
           },
           {
+            "contactType": "10",
             "familyName": "LASTSPOUSE",
             "givenName": "FIRSTSPOUSE",
             "middleName": "MIDDLESPOUSE",
