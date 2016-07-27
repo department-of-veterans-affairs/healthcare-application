@@ -15,7 +15,6 @@ const countryStateProperites = _.map(options.states, (value, key) => ({
     },
     zipcode: {
       type: 'string',
-      minLength: 1,
       maxLength: 50
     }
   }
@@ -30,12 +29,10 @@ countryStateProperites.push(
       },
       provinceCode: {
         type: 'string',
-        minLength: 1,
         maxLength: 51
       },
       postalCode: {
         type: 'string',
-        minLength: 1,
         maxLength: 51
       },
     },
