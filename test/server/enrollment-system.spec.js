@@ -45,6 +45,9 @@ describe('enrollment-system base tests', () => {
     for (const filename of checks) {
       it(`should serialize ${filename} correctly`, (done) => {
         const application = require(`../data/conformance/${filename}`);
+        const valid = validate(application);
+        chai.assert.isTrue(valid, JSON.stringify([validate.errors, application], null, 2));
+
         const input = enrollmentSystem.veteranToSaveSubmitForm(application);
         const result = fs.readFileSync(`test/data/conformance/${filename}.xml`, 'utf8');
         soap.createClient(config.soap.wsdl, {}, (_soapError, client) => {

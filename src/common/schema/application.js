@@ -13,6 +13,11 @@ const countryStateProperites = _.map(options.states, (value, key) => ({
     state: {
       'enum': value.map(x => x.value)
     },
+    zipcode: {
+      type: 'string',
+      minLength: 1,
+      maxLength: 50
+    }
   }
 }));
 countryStateProperites.push(
@@ -23,7 +28,12 @@ countryStateProperites.push(
           'enum': countriesWithAnyState
         }
       },
-      state: {
+      provinceCode: {
+        type: 'string',
+        minLength: 1,
+        maxLength: 51
+      },
+      postalCode: {
         type: 'string',
         minLength: 1,
         maxLength: 51
@@ -47,19 +57,12 @@ module.exports = {
           type: 'string',
           minLength: 1,
           maxLength: 51
-        },
-        zipcode: {
-          type: 'string',
-          minLength: 1,
-          maxLength: 50
         }
       },
       required: [
         'street',
         'city',
-        'country',
-        'state',
-        'zipcode',
+        'country'
       ]
     },
     child: {
