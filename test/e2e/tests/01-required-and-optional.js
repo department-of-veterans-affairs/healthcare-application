@@ -73,9 +73,12 @@ module.exports = {
     client.expect.element('input[name="address"]').to.be.visible;
     client
       .setValue('input[name="address"]', '111 S Michigan Ave')
-      .setValue('input[name="city"]', 'Chicago')
-      .setValue('select[name="country"]', 'USA')
-      .setValue('select[name="state"]', 'IL')
+      .setValue('input[name="city"]', 'Chicago');
+
+    common.selectDropdown(client, 'country', 'USA');
+    common.selectDropdown(client, 'country', 'IL');
+
+    client
       .setValue('input[name="zip"]', '60603')
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/veteran-information/veteran-address');
@@ -159,9 +162,12 @@ module.exports = {
 
     client
       .setValue('input[name="address"]', '115 S Michigan Ave')
-      .setValue('input[name="city"]', 'Chicago')
-      .setValue('select[name="country"]', 'USA')
-      .setValue('select[name="state"]', 'IL')
+      .setValue('input[name="city"]', 'Chicago');
+
+    common.selectDropdown(client, 'country', 'USA');
+    common.selectDropdown(client, 'country', 'IL');
+
+    client
       .setValue('input[name="zip"]', '60603')
       .click('input[name="cohabitedLastYear-1"]')
       .click('input[name="provideSupportLastYear-0"]')
