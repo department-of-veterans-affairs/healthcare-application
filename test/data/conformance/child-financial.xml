@@ -24,6 +24,13 @@
           <eeSummary:relationship>Stepdaughter</eeSummary:relationship>
         </eeSummary:association>
         <eeSummary:association>
+          <eeSummary:address>
+            <eeSummary:city>Dulles</eeSummary:city>
+            <eeSummary:country>USA</eeSummary:country>
+            <eeSummary:line1>123 NW 8th St</eeSummary:line1>
+            <eeSummary:state>VA</eeSummary:state>
+            <eeSummary:zipCode>20101</eeSummary:zipCode>
+          </eeSummary:address>
           <eeSummary:givenName>FIRSTSPOUSE</eeSummary:givenName>
           <eeSummary:middleName>MIDDLESPOUSE</eeSummary:middleName>
           <eeSummary:familyName>LASTSPOUSE</eeSummary:familyName>

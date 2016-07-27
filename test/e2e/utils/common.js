@@ -1,9 +1,9 @@
 // Test timeout constants
 const timeouts = {
   normal: 500,     // The normal timeout to use. For most opreations w/o a server roundtrip, this should be more than fast enough.
-  slow: 1000,      // A slow timeout incase the page is doing something complex.
+  slow: 1500,      // A slow timeout incase the page is doing something complex.
   molasses: 5000,  // A really really slow timeout. This should rarely be used.
-  submission: 10000 // Only to be used for submission.
+  submission: 15000 // Only to be used for submission.
 };
 
 const testValues = {
@@ -170,6 +170,12 @@ const testValues = {
   campLejeune: false
 };
 
+function selectDropdown(client, field, value) {
+  client.click(`select[name='${field}']`)
+    .click(`select option[value='${value}']`)
+    .keys(['\uE006']);
+}
+
 function completePersonalInformation(client, data, onlyRequiredFields) {
   client
     .clearValue('input[name="fname"]')
@@ -222,11 +228,12 @@ function completeVeteranAddress(client, data, onlyRequiredFields) {
     .clearValue('input[name="address"]')
     .setValue('input[name="address"]', data.veteranAddress.street)
     .clearValue('input[name="city"]')
-    .setValue('input[name="city"]', data.veteranAddress.city)
-    .clearValue('select[name="country"]')
-    .setValue('select[name="country"]', data.veteranAddress.country)
-    .clearValue('select[name="state"]')
-    .setValue('select[name="state"]', data.veteranAddress.state)
+    .setValue('input[name="city"]', data.veteranAddress.city);
+
+  selectDropdown(client, 'country', data.veteranAddress.country);
+  selectDropdown(client, 'state', data.veteranAddress.state);
+
+  client
     .clearValue('input[name="zip"]')
     .setValue('input[name="zip"]', data.veteranAddress.zipcode);
 
@@ -321,11 +328,12 @@ function completeSpouseInformation(client, data, onlyRequiredFields) {
     .clearValue('input[name="address"]')
     .setValue('input[name="address"]', data.spouseAddress.street)
     .clearValue('input[name="city"]')
-    .setValue('input[name="city"]', data.spouseAddress.city)
-    .clearValue('select[name="country"]')
-    .setValue('select[name="country"]', data.spouseAddress.country)
-    .clearValue('select[name="state"]')
-    .setValue('select[name="state"]', data.spouseAddress.state)
+    .setValue('input[name="city"]', data.spouseAddress.city);
+
+  selectDropdown(client, 'country', data.spouseAddress.country);
+  selectDropdown(client, 'state', data.spouseAddress.state);
+
+  client
     .clearValue('input[name="zip"]')
     .setValue('input[name="zip"]', data.spouseAddress.zipcode);
 
@@ -419,5 +427,6 @@ module.exports = {
   completeChildInformation,
   completeMedicareAndMedicaid,
   completeInsuranceInformation,
-  completeVaInsuranceInformation
+  completeVaInsuranceInformation,
+  selectDropdown
 };

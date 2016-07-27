@@ -26,6 +26,14 @@
           },
           {
             "contactType": "10",
+            "address": {
+              "city": "Dulles",
+              "country": "USA",
+              "line1": "123 NW 8th St",
+              "state": "VA",
+              "zipCode": "20101",
+              "zipPlus4": "0101"
+            },
             "familyName": "LASTSPOUSE",
             "givenName": "FIRSTSPOUSE",
             "middleName": "MIDDLESPOUSE",
@@ -39,11 +47,11 @@
         "contactInfo": {
           "addresses": {
             "address": {
-              "city": "Washington",
-              "country": "USA",
+              "city": "Ontario",
+              "country": "CAN",
               "line1": "123 NW 5th St",
-              "state": "DC",
-              "zipCode": "20005",
+              "provinceCode": "ON",
+              "postalCode": "21231",
               "addressTypeCode": "P"
             }
           },
@@ -236,6 +244,7 @@
                   "line1": "123 NW 8th St",
                   "state": "VA",
                   "zipCode": "20101",
+                  "zipPlus4": "0101",
                   "phoneNumber": "1112221234"
                 },
                 "dob": "04/06/1980",

@@ -77,11 +77,6 @@ class ErrorableSelect extends React.Component {
         label = obj.label;
         value = obj.value;
       }
-
-      if (value === selectedValue) {
-        return <option key={++reactKey} value={value} selected>{label}</option>;
-      }
-
       return <option key={++reactKey} value={value}>{label}</option>;
     });
 
@@ -99,7 +94,7 @@ class ErrorableSelect extends React.Component {
             id={this.selectId}
             name={this.props.name}
             autoComplete={this.props.autocomplete}
-            value={this.props.value.value}
+            value={selectedValue}
             onChange={this.handleChange}>
           <option value=""></option>
           {optionElements}

@@ -46,7 +46,9 @@ const blankVeteran = {
     city: makeField(''),
     country: makeField(''),
     state: makeField(''),
+    provinceCode: makeField(''),
     zipcode: makeField(''),
+    postalCode: makeField(''),
   },
   email: makeField(''),
   emailConfirmation: makeField(''),  // TODO(awong): Ignored by ES System
@@ -80,7 +82,9 @@ const blankVeteran = {
     city: makeField(''),
     country: makeField(''),
     state: makeField(''),
+    provinceCode: makeField(''),
     zipcode: makeField(''),
+    postalCode: makeField(''),
   },
   spousePhone: makeField(''),
 
@@ -227,19 +231,27 @@ const completeVeteran = {
       dirty: false
     },
     city: {
-      value: 'Washington',
+      value: 'Ontario',
       dirty: false
     },
     country: {
-      value: 'USA',
+      value: 'CAN',
       dirty: false
     },
     state: {
-      value: 'DC',
+      value: 'ON',
+      dirty: false
+    },
+    provinceCode: {
+      value: 'ProvinceName',
       dirty: false
     },
     zipcode: {
-      value: '20005',
+      value: '21231',
+      dirty: false
+    },
+    postalCode: {
+      value: '13AA',
       dirty: false
     }
   },
@@ -342,8 +354,16 @@ const completeVeteran = {
       value: 'VA',
       dirty: false
     },
+    provinceCode: {
+      value: 'ProvinceName',
+      dirty: false
+    },
     zipcode: {
-      value: '20101',
+      value: '20101-0101',
+      dirty: false
+    },
+    postalCode: {
+      value: '13AA',
       dirty: false
     }
   },

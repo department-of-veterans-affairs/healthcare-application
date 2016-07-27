@@ -43,6 +43,25 @@ const formTemplate = {
   }
 };
 
+
+function formatAddress(address) {
+  const formatted = {
+    city: address.city,
+    country: address.country,
+    line1: address.street
+  };
+  if (address.country === 'USA') {
+    formatted.state = address.state;
+    const splitZip = address.zipcode.split('-');
+    formatted.zipCode = splitZip[0];
+    formatted.zipPlus4 = validations.validateString(splitZip[1], 20, true) || undefined;
+  } else {
+    formatted.provinceCode = address.state || address.provinceCode;
+    formatted.postalCode = address.zipcode || address.postalCode;
+  }
+  return formatted;
+}
+
 /**
  * Converts maritalStatus from the values in the Veteran resource to the VHA Standard Data Service code.
  *
@@ -185,6 +204,9 @@ function yesNoToESBoolean(yesNo) {
  * @returns {Object} ES system spouseInfo message
  */
 function veteranToSpouseInfo(veteran) {
+  const address = formatAddress(veteran.spouseAddress);
+  address.phoneNumber = veteran.spousePhone;
+
   return {
     dob: validations.dateOfBirth(veteran.spouseDateOfBirth),
     givenName: validations.validateName(veteran.spouseFullName.first),
@@ -198,14 +220,7 @@ function veteranToSpouseInfo(veteran) {
         ssnText: validations.validateSsn(veteran.spouseSocialSecurityNumber)
       }
     },
-    address: {
-      city: veteran.spouseAddress.city,
-      country: veteran.spouseAddress.country,
-      line1: veteran.spouseAddress.street,
-      state: veteran.spouseAddress.state,
-      zipCode: veteran.spouseAddress.zipcode,
-      phoneNumber: veteran.spousePhone,
-    },
+    address
   };
 }
 
@@ -1028,6 +1043,7 @@ function childToAssociation(child) {
 function spouseToAssociation(veteran) {
   if (_.includes(['Married', 'Separated'], veteran.maritalStatus)) {
     return {
+      address: formatAddress(veteran.spouseAddress),
       givenName: validations.validateName(veteran.spouseFullName.first),
       middleName: validations.validateName(veteran.spouseFullName.middle),
       familyName: validations.validateName(veteran.spouseFullName.last),
@@ -1196,18 +1212,14 @@ function veteranToAssociationCollection(veteran) {
 //  * demographicsInfo/contactinfo/addressInfo/zipCode, "If country is USA,  check for format: 99999.   Only numbers are allowed. ", ,
 //  * demographicsInfo/contactinfo/addressInfo/zipPlus4, "If country is USA,  check for format: 9999  Only numbers are allowed. ", ,
 function veteranToDemographicsInfo(veteran) {
+  const address = formatAddress(veteran.veteranAddress);
+  address.addressTypeCode = 'P';
+
   return {
     appointmentRequestResponse: veteran.wantsInitialVaContact,
     contactInfo: {
       addresses: {
-        address: {
-          city: veteran.veteranAddress.city,
-          country: veteran.veteranAddress.country,
-          line1: veteran.veteranAddress.street,
-          state: veteran.veteranAddress.state,
-          zipCode: veteran.veteranAddress.zipcode,
-          addressTypeCode: 'P',  // TODO(awong): this code is from VHA Standard Data Service (ADRDEV01) Address Type List P==Permanent. Determine if we need it.
-        },
+        address
       },
       emails: emailFromVeteran(veteran),
       phones: phoneNumberFromVeteran(veteran),

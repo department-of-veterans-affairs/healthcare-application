@@ -16,6 +16,7 @@
               <eeSummary:line1>123 NW 5th St</eeSummary:line1>
               <eeSummary:state>DC</eeSummary:state>
               <eeSummary:zipCode>20005</eeSummary:zipCode>
+              <eeSummary:zipPlus4>5500</eeSummary:zipPlus4>
               <eeSummary:addressTypeCode>P</eeSummary:addressTypeCode>
             </eeSummary:address>
           </eeSummary:addresses>
