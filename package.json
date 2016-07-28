@@ -105,6 +105,7 @@
     "react-addons-perf": "^15.0.1",
     "react-addons-test-utils": "^15.0.1",
     "react-dom": "^15.0.0",
+    "react-google-recaptcha": "^0.5.4",
     "react-redux": "^4.4.5",
     "react-router": "^2.0.0",
     "react-scroll": "^1.0.15",

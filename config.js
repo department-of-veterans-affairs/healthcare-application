@@ -41,6 +41,12 @@ const config = {
   // API root.
   apiRoot: '/api/hca/v1',
 
+  recaptcha: {
+    disabled: !!process.env.SKIP_CAPTCHA,
+    client: '',
+    server: ''
+  },
+
   // Configuration of the soap protocol.
   soap: {
     // URL of the soap endpoint to connect to.
