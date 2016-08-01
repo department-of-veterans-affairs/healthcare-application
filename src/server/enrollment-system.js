@@ -341,6 +341,10 @@ function childToDependentInfo(child) {
  */
 function childToDependentFinancialsInfo(child) {
   const incomes = resourceToIncomeCollection(child);
+  if (!incomes) {
+    return undefined;
+  }
+
   return {
     incomes,
     dependentInfo: childToDependentInfo(child),
