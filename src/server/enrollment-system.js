@@ -384,6 +384,10 @@ function veteranToSpouseFinancials(veteran) {
     otherIncome: veteran.spouseOtherIncome
   });
 
+  if (!spouseIncome) {
+    return undefined;
+  }
+
   // set cohabitedLastYear to false if not present or empty string
   let cohabitedLastYear = veteran.cohabitedLastYear;
   if (!cohabitedLastYear) {
