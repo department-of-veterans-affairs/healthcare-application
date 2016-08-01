@@ -47,7 +47,9 @@ export default function veteran(state = blankVeteran, action) {
         city: makeField(''),
         country: makeField(''),
         state: makeField(''),
+        provinceCode: makeField(''),
         zipcode: makeField(''),
+        postalCode: makeField('')
       };
       if (action.value.value === 'Y') {
         _.set(newState, action.propertyPath, state.veteranAddress);

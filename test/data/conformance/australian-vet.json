@@ -27,12 +27,10 @@
   "isWhite": true,
   "veteranAddress": {
     "street": "123 NW 5th St",
-    "city": "Ontario",
-    "country": "CAN",
-    "state": "ON",
-    "provinceCode": "ProvinceName",
-    "zipcode": "21231",
-    "postalCode": "13AA"
+    "city": "Sydney",
+    "country": "AUS",
+    "provinceCode": "New South Wales",
+    "postalCode": "2000"
   },
   "email": "foo@example.com",
   "homePhone": "1231241234",
@@ -52,12 +50,8 @@
   "provideSupportLastYear": false,
   "spouseAddress": {
     "street": "123 NW 8th St",
-    "city": "Dulles",
-    "country": "USA",
-    "postalCode": "13AA",
-    "provinceCode": "ProvinceName",
-    "state": "VA",
-    "zipcode": "20101-0101"
+    "city": "Sydney",
+    "country": "AUS"
   },
   "spousePhone": "1112221234",
   "children": [

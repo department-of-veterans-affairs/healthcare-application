@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { states } from './options-for-select';
 
 function validateIfDirty(field, validator) {
   if (field.dirty) {
@@ -103,13 +104,6 @@ function isValidEmail(value) {
   return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
 }
 
-// TODO:  1. what is a valid address?
-//        2. 6 arguments to a function is ugly...
-//        3. argument order is now based on form order... using
-function isValidAddress(street, city, country, state, zipcode) {
-  return isNotBlank(street) && isNotBlank(city) && isNotBlank(country) && isNotBlank(state) && isNotBlank(zipcode);
-}
-
 function isValidField(validator, field) {
   return isBlank(field.value) || validator(field.value);
 }
@@ -133,7 +127,20 @@ function isValidFullNameField(field) {
 }
 
 function isValidAddressField(field) {
-  return isValidAddress(field.street.value, field.city.value, field.country.value, field.state.value, field.zipcode.value);
+  const initialOk = isNotBlank(field.street.value) &&
+    isNotBlank(field.city.value) &&
+    isNotBlank(field.country.value);
+
+  // if we have a defined list of values, they will
+  // be set as the state and zipcode keys
+  if (_.hasIn(states, field.country.value)) {
+    return initialOk &&
+      isNotBlank(field.state.value) &&
+      isNotBlank(field.zipcode.value);
+  }
+  // if the entry was non-USA/CAN/MEX, only postal is
+  // required, not provinceCode
+  return initialOk && isNotBlank(field.postalCode.value);
 }
 
 function isValidInsurancePolicy(policyNumber, groupCode) {
@@ -468,7 +475,6 @@ export {
   isValidMonetaryValue,
   isValidPhone,
   isValidEmail,
-  isValidAddress,
   isValidInsurancePolicy,
   isValidEntryDateField,
   isValidDischargeDateField,

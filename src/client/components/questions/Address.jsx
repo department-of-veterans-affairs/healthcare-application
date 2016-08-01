@@ -30,7 +30,9 @@ class Address extends React.Component {
       city: this.props.value.city,
       country: this.props.value.country,
       state: this.props.value.state,
-      zipcode: this.props.value.zipcode
+      provinceCode: this.props.value.provinceCode,
+      zipcode: this.props.value.zipcode,
+      postalCode: this.props.value.postalCode
     };
 
     address[path] = update;
@@ -55,7 +57,7 @@ class Address extends React.Component {
       stateList.push('Foreign Country');
     }
 
-    return (
+    const commonForm = (
       <div>
         <ErrorableTextInput errorMessage={this.validateAddressField(this.props.value.street) ? undefined : 'Please enter a valid street address'}
             label="Street"
@@ -83,23 +85,56 @@ class Address extends React.Component {
             value={this.props.value.country}
             required={this.props.required}
             onValueChange={(update) => {this.handleChange('country', update);}}/>
+      </div>
+      );
 
-        <ErrorableSelect errorMessage={this.validateAddressField(this.props.value.state) ? undefined : 'Please enter a valid state'}
-            label="State"
-            name="state"
-            autocomplete="address-level1"
-            options={stateList}
-            value={this.props.value.state}
-            required={this.props.required}
-            onValueChange={(update) => {this.handleChange('state', update);}}/>
+    let secondaryForm = null;
+    if (_.hasIn(states, this.props.value.country.value)) {
+      secondaryForm = (
+        <div>
+          <ErrorableSelect errorMessage={this.validateAddressField(this.props.value.state) ? undefined : 'Please enter a valid state'}
+              label="State/Province"
+              name="state"
+              autocomplete="address-level1"
+              options={stateList}
+              value={this.props.value.state}
+              required={this.props.required}
+              onValueChange={(update) => {this.handleChange('state', update);}}/>
 
-        <ErrorableTextInput errorMessage={this.validateAddressField(this.props.value.zipcode) ? undefined : 'Please enter a valid ZIP code'}
-            label="ZIP Code"
-            name="zip"
-            autocomplete="postal-code"
-            field={this.props.value.zipcode}
-            required={this.props.required}
-            onValueChange={(update) => {this.handleChange('zipcode', update);}}/>
+          <ErrorableTextInput errorMessage={this.validateAddressField(this.props.value.zipcode) ? undefined : 'Please enter a valid ZIP code'}
+              label="ZIP Code"
+              name="zip"
+              autocomplete="postal-code"
+              field={this.props.value.zipcode}
+              required={this.props.required}
+              onValueChange={(update) => {this.handleChange('zipcode', update);}}/>
+        </div>
+      );
+    } else {
+      secondaryForm = (
+        <div>
+          <ErrorableTextInput label="State/Province"
+              name="province"
+              autocomplete="address-level1"
+              field={this.props.value.provinceCode}
+              required={false}
+              onValueChange={(update) => {this.handleChange('provinceCode', update);}}/>
+
+          <ErrorableTextInput errorMessage={this.validateAddressField(this.props.value.postalCode) ? undefined : 'Please enter a valid Postal code'}
+              label="Postal Code"
+              name="postalCode"
+              autocomplete="postal-code"
+              field={this.props.value.postalCode}
+              required={this.props.required}
+              onValueChange={(update) => {this.handleChange('postalCode', update);}}/>
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        {commonForm}
+        {secondaryForm}
       </div>
     );
   }

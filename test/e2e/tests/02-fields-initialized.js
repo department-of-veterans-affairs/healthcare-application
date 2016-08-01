@@ -88,9 +88,13 @@ module.exports = {
     expectValueToBeBlank(client, 'input[name="address"]');
     expectValueToBeBlank(client, 'input[name="city"]');
     expectValueToBeBlank(client, 'select[name="country"]');
-    expectValueToBeBlank(client, 'select[name="state"]');
-    expectValueToBeBlank(client, 'input[name="zip"]');
+    expectValueToBeBlank(client, 'input[name="province"]');
+    expectValueToBeBlank(client, 'input[name="postalCode"]');
+    client.expect.element('select[name="state"]').not.to.be.present;
+    client.expect.element('input[name="zip"]').not.to.be.present;
     common.completeVeteranAddress(client, common.testValues, true);
+    client.expect.element('select[name="state"]').to.be.visible;
+    client.expect.element('input[name="zip"]').to.be.visible;
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/veteran-information/veteran-address');
 
@@ -177,8 +181,10 @@ module.exports = {
     expectValueToBeBlank(client, 'input[name="address"]');
     expectValueToBeBlank(client, 'input[name="city"]');
     expectValueToBeBlank(client, 'select[name="country"]');
-    expectValueToBeBlank(client, 'select[name="state"]');
-    expectValueToBeBlank(client, 'input[name="zip"]');
+    expectValueToBeBlank(client, 'input[name="province"]');
+    expectValueToBeBlank(client, 'input[name="postalCode"]');
+    client.expect.element('select[name="state"]').not.to.be.present;
+    client.expect.element('input[name="zip"]').not.to.be.present;
 
     client.click('input[name="cohabitedLastYear-1"]');
     expectInputToNotBeSelected(client, 'input[name="provideSupportLastYear-0"]');
