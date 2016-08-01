@@ -30,6 +30,7 @@
             <eeSummary:line1>123 NW 8th St</eeSummary:line1>
             <eeSummary:state>VA</eeSummary:state>
             <eeSummary:zipCode>20101</eeSummary:zipCode>
+            <eeSummary:zipPlus4>0101</eeSummary:zipPlus4>
           </eeSummary:address>
           <eeSummary:givenName>FIRSTSPOUSE</eeSummary:givenName>
           <eeSummary:middleName>MIDDLESPOUSE</eeSummary:middleName>
@@ -44,11 +45,11 @@
         <eeSummary:contactInfo>
           <eeSummary:addresses>
             <eeSummary:address>
-              <eeSummary:city>Washington</eeSummary:city>
-              <eeSummary:country>USA</eeSummary:country>
+              <eeSummary:city>Ontario</eeSummary:city>
+              <eeSummary:country>CAN</eeSummary:country>
               <eeSummary:line1>123 NW 5th St</eeSummary:line1>
-              <eeSummary:state>DC</eeSummary:state>
-              <eeSummary:zipCode>20005</eeSummary:zipCode>
+              <eeSummary:provinceCode>ON</eeSummary:provinceCode>
+              <eeSummary:postalCode>21231</eeSummary:postalCode>
               <eeSummary:addressTypeCode>P</eeSummary:addressTypeCode>
             </eeSummary:address>
           </eeSummary:addresses>
@@ -101,6 +102,34 @@
           <eeSummary:discloseFinancialInformation>true</eeSummary:discloseFinancialInformation>
         </eeSummary:incomeTest>
         <eeSummary:financialStatement>
+          <eeSummary:expenses>
+            <eeSummary:expense>
+              <eeSummary:amount>77.77</eeSummary:amount>
+              <eeSummary:expenseType>3</eeSummary:expenseType>
+            </eeSummary:expense>
+            <eeSummary:expense>
+              <eeSummary:amount>44.44</eeSummary:amount>
+              <eeSummary:expenseType>19</eeSummary:expenseType>
+            </eeSummary:expense>
+            <eeSummary:expense>
+              <eeSummary:amount>33.3</eeSummary:amount>
+              <eeSummary:expenseType>18</eeSummary:expenseType>
+            </eeSummary:expense>
+          </eeSummary:expenses>
+          <eeSummary:incomes>
+            <eeSummary:income>
+              <eeSummary:amount>123.33</eeSummary:amount>
+              <eeSummary:type>7</eeSummary:type>
+            </eeSummary:income>
+            <eeSummary:income>
+              <eeSummary:amount>90.11</eeSummary:amount>
+              <eeSummary:type>13</eeSummary:type>
+            </eeSummary:income>
+            <eeSummary:income>
+              <eeSummary:amount>10.1</eeSummary:amount>
+              <eeSummary:type>10</eeSummary:type>
+            </eeSummary:income>
+          </eeSummary:incomes>
           <eeSummary:marriedLastCalendarYear>true</eeSummary:marriedLastCalendarYear>
           <eeSummary:dependentFinancialsList>
             <eeSummary:dependentFinancials>
@@ -136,6 +165,40 @@
               <eeSummary:incapableOfSelfSupport>true</eeSummary:incapableOfSelfSupport>
               <eeSummary:attendedSchool>true</eeSummary:attendedSchool>
               <eeSummary:contributedToSupport>false</eeSummary:contributedToSupport>
+            </eeSummary:dependentFinancials>
+            <eeSummary:dependentFinancials>
+              <eeSummary:incomes>
+                <eeSummary:income>
+                  <eeSummary:amount>791.9</eeSummary:amount>
+                  <eeSummary:type>7</eeSummary:type>
+                </eeSummary:income>
+                <eeSummary:income>
+                  <eeSummary:amount>781.2</eeSummary:amount>
+                  <eeSummary:type>13</eeSummary:type>
+                </eeSummary:income>
+                <eeSummary:income>
+                  <eeSummary:amount>71.9</eeSummary:amount>
+                  <eeSummary:type>10</eeSummary:type>
+                </eeSummary:income>
+              </eeSummary:incomes>
+              <eeSummary:dependentInfo>
+                <eeSummary:dob>03/07/1996</eeSummary:dob>
+                <eeSummary:givenName>FIRSTCHILDB</eeSummary:givenName>
+                <eeSummary:middleName>MIDDLECHILDB</eeSummary:middleName>
+                <eeSummary:familyName>LASTCHILDB</eeSummary:familyName>
+                <eeSummary:suffix>SR.</eeSummary:suffix>
+                <eeSummary:relationship>6</eeSummary:relationship>
+                <eeSummary:ssns>
+                  <eeSummary:ssn>
+                    <eeSummary:ssnText>222111234</eeSummary:ssnText>
+                  </eeSummary:ssn>
+                </eeSummary:ssns>
+                <eeSummary:startDate>04/07/2003</eeSummary:startDate>
+              </eeSummary:dependentInfo>
+              <eeSummary:livedWithPatient>false</eeSummary:livedWithPatient>
+              <eeSummary:incapableOfSelfSupport>false</eeSummary:incapableOfSelfSupport>
+              <eeSummary:attendedSchool>true</eeSummary:attendedSchool>
+              <eeSummary:contributedToSupport>true</eeSummary:contributedToSupport>
             </eeSummary:dependentFinancials>
           </eeSummary:dependentFinancialsList>
           <eeSummary:numberOfDependentChildren>2</eeSummary:numberOfDependentChildren>
