@@ -222,7 +222,7 @@ function veteranToSpouseInfo(veteran) {
     },
     address
   };
-};
+}
 
 /**
  * Extracts an incomeCollection object out of an API resource (eg., veteran, child, spouse)
