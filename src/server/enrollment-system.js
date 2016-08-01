@@ -205,25 +205,24 @@ function yesNoToESBoolean(yesNo) {
  */
 function veteranToSpouseInfo(veteran) {
   const address = formatAddress(veteran.spouseAddress);
-    address.phoneNumber = veteran.spousePhone;
+  address.phoneNumber = veteran.spousePhone;
 
-    return {
-      dob: validations.dateOfBirth(veteran.spouseDateOfBirth),
-      givenName: validations.validateName(veteran.spouseFullName.first),
-      middleName: validations.validateName(veteran.spouseFullName.middle),
-      familyName: validations.validateName(veteran.spouseFullName.last),
-      suffix: validations.validateName(veteran.spouseFullName.suffix),
-      relationship: 2,
-      startDate: validations.dateOfBirth(veteran.dateOfMarriage),
-      ssns: {
-        ssn: {
-          ssnText: validations.validateSsn(veteran.spouseSocialSecurityNumber)
-        }
-      },
-      address
-    };
+  return {
+    dob: validations.dateOfBirth(veteran.spouseDateOfBirth),
+    givenName: validations.validateName(veteran.spouseFullName.first),
+    middleName: validations.validateName(veteran.spouseFullName.middle),
+    familyName: validations.validateName(veteran.spouseFullName.last),
+    suffix: validations.validateName(veteran.spouseFullName.suffix),
+    relationship: 2,
+    startDate: validations.dateOfBirth(veteran.dateOfMarriage),
+    ssns: {
+      ssn: {
+        ssnText: validations.validateSsn(veteran.spouseSocialSecurityNumber)
+      }
+    },
+    address
   };
-}
+};
 
 /**
  * Extracts an incomeCollection object out of an API resource (eg., veteran, child, spouse)
