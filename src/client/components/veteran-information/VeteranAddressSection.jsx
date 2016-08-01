@@ -42,12 +42,12 @@ class VeteranAddressSection extends React.Component {
             <td>{this.props.data.veteranAddress.country.value}</td>
           </tr>
           <tr>
-            <td>State:</td>
-            <td>{this.props.data.veteranAddress.state.value}</td>
+            <td>State/Province:</td>
+            <td>{this.props.data.veteranAddress.state.value || this.props.data.veteranAddress.provinceCode.value}</td>
           </tr>
           <tr>
-            <td>ZIP Code:</td>
-            <td>{this.props.data.veteranAddress.zipcode.value}</td>
+            <td>ZIP/Postal Code:</td>
+            <td>{this.props.data.veteranAddress.zipcode.value || this.props.data.veteranAddress.postalCode.value}</td>
           </tr>
         </tbody>
       </table>);

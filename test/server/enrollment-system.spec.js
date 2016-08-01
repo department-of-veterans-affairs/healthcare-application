@@ -16,6 +16,8 @@ const config = require('../../config.js');
 const xsdValidator = require('libxml-xsd');
 const fs = require('fs');
 
+const xmlBeautify = require('xml-beautifier');
+
 describe('enrollment-system base tests', () => {
   describe('characterization tests', () => {
     const fluxCapacitor = new Date('2015-10-21');
@@ -37,16 +39,20 @@ describe('enrollment-system base tests', () => {
     });
 
 
-    const checks = ['child-financial', 'no-financial', 'spouse-financial', 'no-children', 'no-spouse', 'only-vet'];
-
+    const checks = ['child-financial', 'no-financial', 'spouse-financial',
+                    'no-children', 'no-spouse', 'only-vet',
+                    'canadian-vet', 'australian-vet'];
     for (const filename of checks) {
       it(`should serialize ${filename} correctly`, (done) => {
         const application = require(`../data/conformance/${filename}`);
+        const valid = validate(application);
+        chai.assert.isTrue(valid, JSON.stringify([validate.errors, application], null, 2));
+
         const input = enrollmentSystem.veteranToSaveSubmitForm(application);
         const result = fs.readFileSync(`test/data/conformance/${filename}.xml`, 'utf8');
         soap.createClient(config.soap.wsdl, {}, (_soapError, client) => {
           client.on('message', (messageBody) => {
-            chai.assert.equal(result, messageBody);
+            xmlBeautify(result).should.equal(xmlBeautify(messageBody));
             done();
           });
           client.saveSubmitForm(input, (_submitError, _result) => {});
