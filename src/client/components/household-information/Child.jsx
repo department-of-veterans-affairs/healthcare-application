@@ -62,7 +62,7 @@ class Child extends React.Component {
 
           <div className="row">
             <div className="small-12 columns">
-              <SocialSecurityNumber label="Child’s Social Security Number"
+              <SocialSecurityNumber label="Child’s social security number"
                   required
                   ssn={this.props.data.childSocialSecurityNumber}
                   onValueChange={(update) => {this.props.onValueChange('childSocialSecurityNumber', update);}}/>
@@ -72,7 +72,7 @@ class Child extends React.Component {
           <div className="row">
             <div className="small-12 columns">
               <DateInput required
-                  label="Child’s Date of Birth"
+                  label="Child’s date of birth"
                   name="childBirth"
                   day={this.props.data.childDateOfBirth.day}
                   month={this.props.data.childDateOfBirth.month}
@@ -86,7 +86,7 @@ class Child extends React.Component {
               <DateInput required
                   errorMessage="Child cannot be a dependent before child's date of birth"
                   validation={isValidDependentDateField(this.props.data.childBecameDependent, this.props.data.childDateOfBirth)}
-                  label="Date Child Became Dependent"
+                  label="Date child became dependent"
                   name="childBecameDependent"
                   day={this.props.data.childBecameDependent.day}
                   month={this.props.data.childBecameDependent.month}
@@ -109,7 +109,7 @@ class Child extends React.Component {
           <div className="row">
             <div className="small-12 columns">
               <ErrorableRadioButtons
-                  label="If child is between 18 and 23 years of age, did child attend school last calendar year?"
+                  label="If child is between 18 and 23 years of age, did child attend school during the last calendar year?"
                   name="childAttendedSchoolLastYear"
                   options={yesNo}
                   value={this.props.data.childAttendedSchoolLastYear}
@@ -121,8 +121,7 @@ class Child extends React.Component {
             <div className="small-12 columns">
               <ErrorableTextInput
                   errorMessage={isValidField(isValidMonetaryValue, this.props.data.childEducationExpenses) ? undefined : message}
-                  label="Expenses paid by your dependent child for college, vocational rehabilitation or training
-                      (e.g., tuition, books, materials)?"
+                  label="Expenses paid by your dependent child for college, vocational rehabilitation, or training (e.g., tuition, books, materials)?"
                   name="childEducationExpenses"
                   field={this.props.data.childEducationExpenses}
                   onValueChange={(update) => {this.props.onValueChange('childEducationExpenses', update);}}/>

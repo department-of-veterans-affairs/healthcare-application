@@ -51,7 +51,7 @@ class FullName extends React.Component {
       <div>
         <ErrorableTextInput
             errorMessage={this.validateRequiredFields(this.props.name.first, this.props.required) ? undefined : 'Please enter a valid name'}
-            label="First Name"
+            label="First name"
             name="fname"
             autocomplete="given-name"
             charMax={30}
@@ -61,7 +61,7 @@ class FullName extends React.Component {
 
         <ErrorableTextInput
             errorMessage={this.validateRequiredFields(this.props.name.middle, false) ? undefined : 'Please enter a valid name'}
-            label="Middle Name"
+            label="Middle name"
             name="mname"
             autocomplete="additional-name"
             charMax={30}
@@ -70,7 +70,7 @@ class FullName extends React.Component {
 
         <ErrorableTextInput
             errorMessage={this.validateRequiredFields(this.props.name.last, this.props.required) ? undefined : 'Please enter a valid name'}
-            label="Last Name"
+            label="Last name"
             name="lname"
             autocomplete="family-name"
             charMax={30}

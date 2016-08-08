@@ -67,7 +67,7 @@ class DeductibleExpensesSection extends React.Component {
       </table>);
     } else {
       content = (<fieldset>
-        <legend>Previous calendar year deductible expenses</legend>
+        <legend>Previous Calendar Year’s Deductible Expenses</legend>
         <p>
           Tell us a bit about your expenses this past calendar year. Enter information for any expenses that apply to you.
         </p>
@@ -89,7 +89,7 @@ class DeductibleExpensesSection extends React.Component {
 
           <ErrorableTextInput
               errorMessage={getErrorMessage(this.props.data.deductibleEducationExpenses, message)}
-              label="Amount you paid for anything related to your own education (college or vocational) this past year. Do not list your dependent's educational expenses."
+              label="Amount you paid for anything related to your own education (college or vocational) this past year. Do not list your dependents’ educational expenses."
               name="deductibleEducationExpenses"
               field={this.props.data.deductibleEducationExpenses}
               onValueChange={(update) => {this.props.onStateChange('deductibleEducationExpenses', update);}}/>

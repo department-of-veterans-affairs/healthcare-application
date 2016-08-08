@@ -30,10 +30,10 @@ class FinancialDisclosureSection extends React.Component {
         <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
           <p>You will now be asked to provide your financial information from the
-          most recent tax year. We ask for this information for two reasons:</p>
+          most recent tax year. We ask for this information for three reasons:</p>
 
           <ol>
-            <li>To determine your eligibility for healthcare if you do not have a
+            <li>To determine your eligibility for health care if you do not have a
             qualifying eligibility factor</li>
             <li>To determine your eligibility for additional benefits, like travel
             assistance, cost-free medications, and/or waiver of travel deductible</li>
@@ -51,17 +51,17 @@ class FinancialDisclosureSection extends React.Component {
           </div>
 
           {/* Move this list to a tooltip in reference above, create new tooltip component */}
-          <ul>The qualifying eligibility factors are:
-            <li>a former Prisoner of War</li>
-            <li>those in receipt of a Purple Heart</li>
-            <li>a recently discharged Combat Veteran</li>
-            <li>those discharged for a disability incurred or aggravated in the line of duty</li>
-            <li>those receiving VA SC disability compensation</li>
-            <li>those receiving VA pension</li>
-            <li>those in receipt of Medicaid benefits</li>
-            <li>those who served in Vietnam between January 9, 1962 and May 7, 1975</li>
-            <li>those who served in SW Asia during the Gulf War between August 2, 1990 and November 11, 1998</li>
-            <li>those who served at least 30 days at Camp Lejeune between August 1, 1953 and December 31, 1987.</li>
+          <ul>Qualifying eligibility factors:
+            <li>Former prisoners of war</li>
+            <li>Purple Heart recipients</li>
+            <li>Recently discharged combat Veterans</li>
+            <li>Veterans discharged for a disability incurred or aggravated in the line of duty</li>
+            <li>Those receiving VA service-connected disability compensation</li>
+            <li>Veterans receiving a VA pension</li>
+            <li>Medicaid recipients</li>
+            <li>Veterans who served in Vietnam between January 9, 1962, and May 7, 1975</li>
+            <li>Veterans who served in Southwest Asia during the Gulf War between August 2, 1990, and November 11, 1998</li>
+            <li>Veterans who served at least 30 days at Camp Lejeune between August 1, 1953, and December 31, 1987.</li>
           </ul>
 
           <div className="input-section">
