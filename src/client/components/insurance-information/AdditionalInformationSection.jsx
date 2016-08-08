@@ -26,11 +26,11 @@ class AdditionalInformationSection extends React.Component {
       content = (<table className="review usa-table-borderless">
         <tbody>
           <tr>
-            <td>I am enrolling to obtain minimal essential coverage under the affordable care act:</td>
+            <td>I am enrolling to obtain minimum essential coverage under the Affordable Care Act:</td>
             <td>{`${this.props.data.isEssentialAcaCoverage ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
-            <td>Preferred VA Medical Facility:</td>
+            <td>Preferred VA medical facility:</td>
             <td>{displayLabel(FacilitiesWithinState, selectedVaMedicalFacility)}</td>
           </tr>
           <tr>
@@ -46,14 +46,14 @@ class AdditionalInformationSection extends React.Component {
         <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
           <ErrorableCheckbox
-              label="I am enrolling to obtain minimal essential coverage under the affordable care act"
+              label="I am enrolling to obtain minimum essential coverage under the Affordable Care Act"
               name="isEssentialAcaCoverage"
               checked={this.props.data.isEssentialAcaCoverage}
               onValueChange={(update) => {this.props.onStateChange('isEssentialAcaCoverage', update);}}/>
         </div>
 
         <div className="input-section">
-          <h4>Select the VA Medical Facility which will be your preferred facility</h4>
+          <h4>Select your preferred VA medical facility</h4>
           <ErrorableSelect required
               errorMessage={validateIfDirty(this.props.data.facilityState, isNotBlank) ? undefined : 'Please select a state'}
               label="State"
@@ -65,7 +65,7 @@ class AdditionalInformationSection extends React.Component {
               value={this.props.data.vaMedicalFacility}
               facilityState={this.props.data.facilityState}
               onValueChange={(update) => {this.props.onStateChange('vaMedicalFacility', update);}}/>
-          OR <a target="_blank" href="/facility-locator">Go to the VA Facility Locator</a>
+          OR <a target="_blank" href="/facility-locator">Find locations with the VA Facility Locator</a>
         </div>
 
         <div className="input-section">

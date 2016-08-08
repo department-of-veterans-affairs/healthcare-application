@@ -66,15 +66,15 @@ class ChildInformationSection extends React.Component {
               <td>{childRelation}</td>
             </tr>
             <tr>
-              <td>Social Security Number:</td>
+              <td>Social security number:</td>
               <td>{childSocialSecurityNumber}</td>
             </tr>
             <tr>
-              <td>Date Child Became Dependent:</td>
+              <td>Date child became dependent:</td>
               <td>{childBecameDependentMonth}/{childBecameDependentDay}/{childBecameDependentYear}</td>
             </tr>
             <tr>
-              <td>Date of Birth:</td>
+              <td>Date of birth:</td>
               <td>{childDateOfBirthMonth}/{childDateOfBirthDay}/{childDateOfBirthYear}</td>
             </tr>
             <tr>
@@ -82,11 +82,11 @@ class ChildInformationSection extends React.Component {
               <td>{`${childDisabledBefore18 === 'Y' ? 'Yes' : 'No'}`}</td>
             </tr>
             <tr>
-              <td>If child is between 18 and 23 years of age, did child attend school last calendar year?:</td>
+              <td>If child is between 18 and 23 years of age, did child attend school during the last calendar year?:</td>
               <td>{`${childAttendedSchoolLastYear === 'Y' ? 'Yes' : 'No'}`}</td>
             </tr>
             <tr>
-              <td>Expenses paid by your dependent child for college, vocational rehabilitation or training (e.g., tuition, books, materials):</td>
+              <td>Expenses paid by your dependent child for college, vocational rehabilitation, or training (e.g., tuition, books, materials):</td>
               <td>{childEducationExpenses}</td>
             </tr>
             <tr>
@@ -131,9 +131,9 @@ class ChildInformationSection extends React.Component {
       </div>);
     } else {
       content = (<fieldset>
-        <legend>Children Information</legend>
+        <legend>Your Children’s Information</legend>
         <div>
-          <p>Please fill this out to the best of your knowledge. The more accurate your responses, the faster your application can proceed.</p>
+          <p>Please fill this out to the best of your knowledge. The more accurate your responses, the faster we can process your application.</p>
           <div className="input-section">
             <ErrorableRadioButtons required
                 errorMessage={validateIfDirty(this.props.data.hasChildrenToReport, isNotBlank) ? '' : 'Please select a response'}
