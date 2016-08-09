@@ -6,6 +6,7 @@ const returnRouter = (options) => {
   const router = require('express').Router(); // eslint-disable-line
   const config = options.config;
   let soapClient = null;
+  let esStatus = null;
   const readTLSArtifacts = require('../utils/tls')(config).readTLSArtifacts;
   const tlsArtifacts = readTLSArtifacts();
 
@@ -43,20 +44,32 @@ const returnRouter = (options) => {
     const getFormSubmissionStatusMsg = {
       formSubmissionId: id
     };
-    soapClient.getFormSubmissionStatus(getFormSubmissionStatusMsg, (err, response) => {
-      if (err) {
-        options.logger.info('voaService response had error', err);
-        res.status(500).end();
-      } else {
-        options.logger.info('voaService request', {
-          id,
-          env: options.config.environment
-        });
 
-        options.logger.info('voaService response - SUCCESS', response);
-        res.status(200).end();
-      }
-    });
+    if (!esStatus) {
+      options.logger.info('Checking voaService status...');
+      soapClient.getFormSubmissionStatus(getFormSubmissionStatusMsg, (err, response) => {
+        if (err) {
+          options.logger.info('voaService response had error', err);
+          esStatus = 500;
+          res.status(500).end();
+        } else {
+          options.logger.info('voaService request', {
+            id,
+            env: options.config.environment
+          });
+
+          options.logger.info('voaService response - SUCCESS', response);
+          esStatus = 200;
+          res.status(200).end();
+        }
+      });
+
+      // Rate limit these checks
+      setTimeout(() => { esStatus = null; }, config.esStatusRate);
+    } else {
+      // Return previously stored status
+      res.status(esStatus).end();
+    }
   });
   return router;
 };
