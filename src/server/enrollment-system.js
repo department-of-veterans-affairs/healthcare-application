@@ -341,9 +341,6 @@ function childToDependentInfo(child) {
  */
 function childToDependentFinancialsInfo(child) {
   const incomes = resourceToIncomeCollection(child);
-  if (!incomes) {
-    return undefined;
-  }
 
   return {
     incomes,
@@ -387,10 +384,6 @@ function veteranToSpouseFinancials(veteran) {
     netIncome: veteran.spouseNetIncome,
     otherIncome: veteran.spouseOtherIncome
   });
-
-  if (!spouseIncome) {
-    return undefined;
-  }
 
   // set cohabitedLastYear to false if not present or empty string
   let cohabitedLastYear = veteran.cohabitedLastYear;

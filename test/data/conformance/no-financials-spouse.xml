@@ -130,6 +130,35 @@
               <eeSummary:type>10</eeSummary:type>
             </eeSummary:income>
           </eeSummary:incomes>
+          <eeSummary:spouseFinancialsList>
+            <eeSummary:spouseFinancials>
+              <eeSummary:spouse>
+                <eeSummary:dob>04/06/1980</eeSummary:dob>
+                <eeSummary:givenName>FIRSTSPOUSE</eeSummary:givenName>
+                <eeSummary:middleName>MIDDLESPOUSE</eeSummary:middleName>
+                <eeSummary:familyName>LASTSPOUSE</eeSummary:familyName>
+                <eeSummary:suffix>SR.</eeSummary:suffix>
+                <eeSummary:relationship>2</eeSummary:relationship>
+                <eeSummary:startDate>05/10/1983</eeSummary:startDate>
+                <eeSummary:ssns>
+                  <eeSummary:ssn>
+                    <eeSummary:ssnText>111221234</eeSummary:ssnText>
+                  </eeSummary:ssn>
+                </eeSummary:ssns>
+                <eeSummary:address>
+                  <eeSummary:city>Dulles</eeSummary:city>
+                  <eeSummary:country>USA</eeSummary:country>
+                  <eeSummary:line1>123 NW 8th St</eeSummary:line1>
+                  <eeSummary:state>VA</eeSummary:state>
+                  <eeSummary:zipCode>20101</eeSummary:zipCode>
+                  <eeSummary:zipPlus4>0101</eeSummary:zipPlus4>
+                  <eeSummary:phoneNumber>1112221234</eeSummary:phoneNumber>
+                </eeSummary:address>
+              </eeSummary:spouse>
+              <eeSummary:contributedToSpousalSupport>false</eeSummary:contributedToSpousalSupport>
+              <eeSummary:livedWithPatient>true</eeSummary:livedWithPatient>
+            </eeSummary:spouseFinancials>
+          </eeSummary:spouseFinancialsList>
           <eeSummary:marriedLastCalendarYear>true</eeSummary:marriedLastCalendarYear>
           <eeSummary:dependentFinancialsList>
             <eeSummary:dependentFinancials>
