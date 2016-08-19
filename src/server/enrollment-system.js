@@ -232,26 +232,23 @@ function veteranToSpouseInfo(veteran) {
  */
 function resourceToIncomeCollection(resource) {
   const incomeCollection = [];
-  if (resource.grossIncome > 0) {
-    incomeCollection.push({
-      amount: resource.grossIncome,
-      type: 7,
-    });
-  }
-  if (resource.netIncome > 0) {
-    incomeCollection.push({
-      amount: resource.netIncome,
-      type: 13, // Net Income TODO is this right?
-    });
-  }
-  if (resource.otherIncome > 0) {
-    incomeCollection.push({
-      amount: resource.otherIncome,
-      type: 10, // All Other Income TODO is this right?
-    });
-  }
 
-  return incomeCollection.length > 0 ? { income: incomeCollection } : undefined;
+  incomeCollection.push({
+    amount: resource.grossIncome || 0,
+    type: 7,
+  });
+
+  incomeCollection.push({
+    amount: resource.netIncome || 0,
+    type: 13,
+  });
+
+  incomeCollection.push({
+    amount: resource.otherIncome || 0,
+    type: 10,
+  });
+
+  return { income: incomeCollection };
 }
 
 /**
@@ -262,26 +259,25 @@ function resourceToIncomeCollection(resource) {
  */
 function resourceToExpenseCollection(resource) {
   const expenseCollection = [];
-  if (resource.educationExpense > 0) {
-    expenseCollection.push({
-      amount: resource.educationExpense,
-      expenseType: '3', // Veteran's Educational Expenses TODO is this right?
-    });
-  }
-  if (resource.funeralExpense > 0) {
+  expenseCollection.push({
+    amount: resource.educationExpense || resource.childEducationExpenses || 0,
+    expenseType: '3', // Veteran's Educational Expenses TODO is this right?
+  });
+
+  if (resource.funeralExpense) {
     expenseCollection.push({
       amount: resource.funeralExpense,
       expenseType: '19', // Funeral and Burial Expenses TODO is this right?
     });
   }
-  if (resource.medicalExpense > 0) {
+  if (resource.medicalExpense) {
     expenseCollection.push({
       amount: resource.medicalExpense,
       expenseType: '18', // Total Non-Reimbursed Medical Expenses TODO is this right?
     });
   }
 
-  return expenseCollection.length > 0 ? { expense: expenseCollection } : undefined;
+  return { expense: expenseCollection };
 }
 
 /**
@@ -341,12 +337,14 @@ function childToDependentInfo(child) {
  */
 function childToDependentFinancialsInfo(child) {
   const incomes = resourceToIncomeCollection(child);
-  if (!incomes) {
+  const expenses = resourceToExpenseCollection(child);
+  if (!incomes && !expenses) {
     return undefined;
   }
 
   return {
     incomes,
+    expenses,
     dependentInfo: childToDependentInfo(child),
     livedWithPatient: child.childCohabitedLastYear,
     incapableOfSelfSupport: child.childDisabledBefore18,
@@ -916,6 +914,13 @@ function booleanToIncomeTest(hasIncomeData) {
   return undefined;
 }
 
+function totalAmount(valueList) {
+  if (valueList) {
+    return _.sum(_.map(valueList, (x) => { return x.amount; }));
+  }
+  return 0;
+}
+
 function veteranToFinancialsInfo(veteran) {
   const expenses = resourceToExpenseCollection({
     educationExpense: veteran.deductibleEducationExpenses,
@@ -927,23 +932,31 @@ function veteranToFinancialsInfo(veteran) {
     netIncome: veteran.veteranNetIncome,
     otherIncome: veteran.veteranOtherIncome
   });
+  let totalFinancial = 0;
 
   const dependentFinancials = veteranToDependentFinancialsCollection(veteran);
-  let hasDependentFinancials = false;
+
   if (dependentFinancials) {
-    hasDependentFinancials = _.compact(dependentFinancials.dependentFinancials.map((child) => { return child.incomes; })).length > 0;
+    _.each(dependentFinancials.dependentFinancials, (dep) => {
+      totalFinancial += totalAmount(dep.expenses.expense);
+      totalFinancial += totalAmount(dep.incomes.income);
+    });
   }
   const spouseFinancials = veteranToSpouseFinancials(veteran);
-  const hasSpouseIncome = spouseFinancials && spouseFinancials.spouseFinancials.incomes;
 
-  const hasIncomeData = expenses || incomes || hasSpouseIncome || hasDependentFinancials;
+  if (spouseFinancials) {
+    totalFinancial += totalAmount(spouseFinancials.spouseFinancials.incomes.income);
+  }
 
-  if (!hasIncomeData) {
+  totalFinancial += totalAmount(expenses.expense);
+  totalFinancial += totalAmount(incomes.income);
+
+  if (totalFinancial === 0) {
     return undefined;
   }
 
   return {
-    incomeTest: booleanToIncomeTest(hasIncomeData),
+    incomeTest: booleanToIncomeTest(true),
     financialStatement: {
       expenses,
       incomes,

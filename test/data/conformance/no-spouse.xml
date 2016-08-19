@@ -131,6 +131,12 @@
                   <eeSummary:type>10</eeSummary:type>
                 </eeSummary:income>
               </eeSummary:incomes>
+              <eeSummary:expenses>
+                <eeSummary:expense>
+                  <eeSummary:amount>45.2</eeSummary:amount>
+                  <eeSummary:expenseType>3</eeSummary:expenseType>
+                </eeSummary:expense>
+              </eeSummary:expenses>
               <eeSummary:dependentInfo>
                 <eeSummary:dob>05/05/1982</eeSummary:dob>
                 <eeSummary:givenName>FIRSTCHILDA</eeSummary:givenName>
@@ -165,6 +171,12 @@
                   <eeSummary:type>10</eeSummary:type>
                 </eeSummary:income>
               </eeSummary:incomes>
+              <eeSummary:expenses>
+                <eeSummary:expense>
+                  <eeSummary:amount>1198.11</eeSummary:amount>
+                  <eeSummary:expenseType>3</eeSummary:expenseType>
+                </eeSummary:expense>
+              </eeSummary:expenses>
               <eeSummary:dependentInfo>
                 <eeSummary:dob>03/07/1996</eeSummary:dob>
                 <eeSummary:givenName>FIRSTCHILDB</eeSummary:givenName>
