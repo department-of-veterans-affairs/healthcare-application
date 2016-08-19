@@ -130,7 +130,7 @@
                   "expense": [
                     {
                       "amount": "45.2",
-                      "expenseType": "3"
+                      "expenseType": "16"
                     }
                   ]
                 },
@@ -174,7 +174,7 @@
                   "expense": [
                     {
                       "amount": "1198.11",
-                      "expenseType": "3"
+                      "expenseType": "16"
                     }
                   ]
                 },

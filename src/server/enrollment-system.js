@@ -262,22 +262,30 @@ function resourceToIncomeCollection(resource) {
  */
 function resourceToExpenseCollection(resource) {
   const expenseCollection = [];
-  if (resource.educationExpense > 0 || resource.childEducationExpenses > 0) {
+  if (resource.educationExpense > 0) {
     expenseCollection.push({
-      amount: resource.educationExpense || resource.childEducationExpenses,
-      expenseType: '3', // Veteran's Educational Expenses TODO is this right?
+      amount: resource.educationExpense,
+      expenseType: '3',
     });
   }
+
+  if (resource.childEducationExpenses > 0) {
+    expenseCollection.push({
+      amount: resource.childEducationExpenses,
+      expenseType: '16',
+    });
+  }
+
   if (resource.funeralExpense > 0) {
     expenseCollection.push({
       amount: resource.funeralExpense,
-      expenseType: '19', // Funeral and Burial Expenses TODO is this right?
+      expenseType: '19',
     });
   }
   if (resource.medicalExpense > 0) {
     expenseCollection.push({
       amount: resource.medicalExpense,
-      expenseType: '18', // Total Non-Reimbursed Medical Expenses TODO is this right?
+      expenseType: '18',
     });
   }
 
