@@ -49,6 +49,10 @@ class VeteranAddressSection extends React.Component {
             <td>ZIP/Postal Code:</td>
             <td>{this.props.data.veteranAddress.zipcode.value || this.props.data.veteranAddress.postalCode.value}</td>
           </tr>
+          <tr>
+            <td>County:</td>
+            <td>{this.props.data.veteranAddress.county.value}</td>
+          </tr>
         </tbody>
       </table>);
     } else {
@@ -61,6 +65,7 @@ class VeteranAddressSection extends React.Component {
           </p>
           <Address required
               value={this.props.data.veteranAddress}
+              countyRequired={true}
               onUserInput={(update) => {this.props.onStateChange('veteranAddress', update);}}/>
         </div>
       </fieldset>);

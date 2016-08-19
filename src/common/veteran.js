@@ -49,6 +49,7 @@ const blankVeteran = {
     provinceCode: makeField(''),
     zipcode: makeField(''),
     postalCode: makeField(''),
+    county: makeField(''),
   },
   email: makeField(''),
   emailConfirmation: makeField(''),  // TODO(awong): Ignored by ES System
@@ -85,6 +86,7 @@ const blankVeteran = {
     provinceCode: makeField(''),
     zipcode: makeField(''),
     postalCode: makeField(''),
+    county: makeField(''),
   },
   spousePhone: makeField(''),
 
@@ -253,6 +255,10 @@ const completeVeteran = {
     postalCode: {
       value: '13AA',
       dirty: false
+    },
+    county: {
+      value: 'CountyName',
+      dirty: false
     }
   },
   email: {
@@ -364,6 +370,10 @@ const completeVeteran = {
     },
     postalCode: {
       value: '13AA',
+      dirty: false
+    },
+    county: {
+      value: 'CountyName',
       dirty: false
     }
   },

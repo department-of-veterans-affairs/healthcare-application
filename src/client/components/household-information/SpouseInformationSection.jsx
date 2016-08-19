@@ -156,6 +156,10 @@ class SpouseInformationSection extends React.Component {
                 <td>{this.props.data.spouseAddress.zipcode.value || this.props.data.spouseAddress.postalCode.value}</td>
               </tr>
               <tr>
+                <td>County:</td>
+                <td>{this.props.data.spouseAddress.county.value}</td>
+              </tr>
+              <tr>
                 <td>Phone:</td>
                 <td>{this.props.data.spousePhone.value}</td>
               </tr>
@@ -170,6 +174,7 @@ class SpouseInformationSection extends React.Component {
           <div className="input-section">
             <Address required
                 value={this.props.data.spouseAddress}
+                countryRequired={true}
                 onUserInput={(update) => {this.props.onStateChange('spouseAddress', update);}}/>
             <Phone
                 label="Phone"

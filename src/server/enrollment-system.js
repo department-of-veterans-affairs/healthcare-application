@@ -55,6 +55,7 @@ function formatAddress(address) {
     const splitZip = address.zipcode.split('-');
     formatted.zipCode = splitZip[0];
     formatted.zipPlus4 = validations.validateString(splitZip[1], 20, true) || undefined;
+    formatted.county = address.county;
   } else {
     formatted.provinceCode = address.state || address.provinceCode;
     formatted.postalCode = address.zipcode || address.postalCode;
