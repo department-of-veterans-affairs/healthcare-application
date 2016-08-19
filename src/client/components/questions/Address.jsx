@@ -32,7 +32,8 @@ class Address extends React.Component {
       state: this.props.value.state,
       provinceCode: this.props.value.provinceCode,
       zipcode: this.props.value.zipcode,
-      postalCode: this.props.value.postalCode
+      postalCode: this.props.value.postalCode,
+      county: this.props.value.county,
     };
 
     address[path] = update;
@@ -50,12 +51,24 @@ class Address extends React.Component {
 
   render() {
     let stateList = [];
+    let county;
     const selectedCountry = this.props.value.country.value;
     if (states[selectedCountry]) {
       stateList = states[selectedCountry];
     } else {
       stateList.push('Foreign Country');
     }
+
+    if (this.props.countyRequired) {
+      county = (
+        <ErrorableTextInput errorMessage={this.validateAddressField(this.props.value.county) ? undefined : 'Please enter a valid county'}
+            label="County"
+            name="county"
+            field={this.props.value.county}
+            required={this.props.required}
+            onValueChange={(update) => {this.handleChange('county', update);}}/>
+      );
+    } 
 
     const commonForm = (
       <div>
@@ -100,6 +113,8 @@ class Address extends React.Component {
               value={this.props.value.state}
               required={this.props.required}
               onValueChange={(update) => {this.handleChange('state', update);}}/>
+
+          {county}
 
           <ErrorableTextInput errorMessage={this.validateAddressField(this.props.value.zipcode) ? undefined : 'Please enter a valid ZIP code'}
               label="ZIP Code"
