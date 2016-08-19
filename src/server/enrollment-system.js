@@ -262,9 +262,9 @@ function resourceToIncomeCollection(resource) {
  */
 function resourceToExpenseCollection(resource) {
   const expenseCollection = [];
-  if (resource.educationExpense > 0) {
+  if (resource.educationExpense > 0 || resource.childEducationExpenses > 0) {
     expenseCollection.push({
-      amount: resource.educationExpense,
+      amount: resource.educationExpense || resource.childEducationExpenses,
       expenseType: '3', // Veteran's Educational Expenses TODO is this right?
     });
   }
@@ -341,9 +341,11 @@ function childToDependentInfo(child) {
  */
 function childToDependentFinancialsInfo(child) {
   const incomes = resourceToIncomeCollection(child);
+  const expenses = resourceToExpenseCollection(child);
 
   return {
     incomes,
+    expenses,
     dependentInfo: childToDependentInfo(child),
     livedWithPatient: child.childCohabitedLastYear,
     incapableOfSelfSupport: child.childDisabledBefore18,
