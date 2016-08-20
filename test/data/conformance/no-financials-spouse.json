@@ -93,10 +93,6 @@
       "childDateOfBirth": "1996-03-07",
       "childDisabledBefore18": false,
       "childAttendedSchoolLastYear": true,
-<<<<<<< HEAD
-      "childEducationExpenses": 1198.11,
-=======
->>>>>>> 292e2f00121f0688a95a14ee44331cadde4611cd
       "childCohabitedLastYear": false,
       "childReceivedSupportLastYear": true,
       "grossIncome": 791.9,

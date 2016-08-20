@@ -146,15 +146,12 @@
                   <eeSummary:type>10</eeSummary:type>
                 </eeSummary:income>
               </eeSummary:incomes>
-<<<<<<< HEAD
-=======
               <eeSummary:expenses>
                 <eeSummary:expense>
                   <eeSummary:amount>45.2</eeSummary:amount>
                   <eeSummary:expenseType>16</eeSummary:expenseType>
                 </eeSummary:expense>
               </eeSummary:expenses>
->>>>>>> 292e2f00121f0688a95a14ee44331cadde4611cd
               <eeSummary:dependentInfo>
                 <eeSummary:dob>05/05/1982</eeSummary:dob>
                 <eeSummary:givenName>FIRSTCHILDA</eeSummary:givenName>
@@ -174,8 +171,6 @@
               <eeSummary:attendedSchool>true</eeSummary:attendedSchool>
               <eeSummary:contributedToSupport>false</eeSummary:contributedToSupport>
             </eeSummary:dependentFinancials>
-<<<<<<< HEAD
-=======
             <eeSummary:dependentFinancials>
               <eeSummary:dependentInfo>
                 <eeSummary:dob>03/07/1996</eeSummary:dob>
@@ -196,7 +191,6 @@
               <eeSummary:attendedSchool>true</eeSummary:attendedSchool>
               <eeSummary:contributedToSupport>true</eeSummary:contributedToSupport>
             </eeSummary:dependentFinancials>
->>>>>>> 292e2f00121f0688a95a14ee44331cadde4611cd
           </eeSummary:dependentFinancialsList>
           <eeSummary:numberOfDependentChildren>2</eeSummary:numberOfDependentChildren>
         </eeSummary:financialStatement>
@@ -264,8 +258,4 @@
       <va:value>anonymous</va:value>
     </va:authenticationLevel>
   </va:identity>
-<<<<<<< HEAD
 </ns1:submitFormRequest>
-=======
-</ns1:submitFormRequest>
->>>>>>> 292e2f00121f0688a95a14ee44331cadde4611cd
