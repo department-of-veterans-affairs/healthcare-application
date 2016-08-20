@@ -77,10 +77,12 @@ const config = {
   },
 
   environment: process.env.NODE_ENV || 'development',
-  // This is a valid form submission ID from the ES system that will be used by the health check to 
+  // This is a valid form submission ID from the ES system that will be used by the health check to
   // verify that the ES system is up.
   validFormSubmissionId: '377609264',
 
+  // Rate limit for doing ES status checks
+  esStatusRate : 1000 * 60
 };
 
 module.exports = config;

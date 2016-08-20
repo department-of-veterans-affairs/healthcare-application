@@ -43,7 +43,7 @@ class ReviewAndSubmitSection extends React.Component {
       );
     } else {
       content = (<div>
-        <p>Please ensure all of your information is correct before submitting your application.</p>
+        <p>Please make sure all your information is correct before submitting your application.</p>
 
         {/* TODO(crew): Change names of sections to real names. */}
         <ReviewCollapsiblePanel
@@ -62,7 +62,7 @@ class ReviewAndSubmitSection extends React.Component {
             component={<DemographicInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="Veteran Address"
+            sectionLabel="Permanent Address"
             updatePath="/veteran-information/veteran-address"
             component={<VeteranAddressSection reviewSection/>}/>
 
@@ -72,17 +72,17 @@ class ReviewAndSubmitSection extends React.Component {
             component={<ContactInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="Military Service Information"
+            sectionLabel="Service Information"
             updatePath="/military-service/service-information"
             component={<ServiceInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="Additional Service Information"
+            sectionLabel="Service History"
             updatePath="/military-service/additional-information"
             component={<AdditionalMilitaryInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="VA Benefits Information"
+            sectionLabel="VA Benefits"
             updatePath="/va-benefits/basic-information"
             component={<VAInformationSection reviewSection/>}/>
 
@@ -92,27 +92,27 @@ class ReviewAndSubmitSection extends React.Component {
             component={<FinancialDisclosureSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="Spouse Information"
+            sectionLabel="Spouse’s Information"
             updatePath="/household-information/spouse-information"
             component={<SpouseInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="Children Information"
+            sectionLabel="Your Children’s Information"
             updatePath="/household-information/child-information"
             component={<ChildInformationSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="Annual Income Information"
+            sectionLabel="Annual Income"
             updatePath="/household-information/annual-income"
             component={<AnnualIncomeSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="Deductible Expenses"
+            sectionLabel="Previous Calendar Year’s Deductible Expenses"
             updatePath="/household-information/deductible-expenses"
             component={<DeductibleExpensesSection reviewSection/>}/>
 
         <ReviewCollapsiblePanel
-            sectionLabel="Medicare/Medicaid Information"
+            sectionLabel="Medicare/Medicaid"
             updatePath="/insurance-information/medicare"
             component={<MedicareMedicaidSection reviewSection/>}/>
 

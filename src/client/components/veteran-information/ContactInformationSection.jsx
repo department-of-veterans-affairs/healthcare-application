@@ -35,7 +35,7 @@ class ContactInformationSection extends React.Component {
             <td>{this.props.data.email.value}</td>
           </tr>
           <tr>
-            <td>Re-enter Email address:</td>
+            <td>Re-enter email address:</td>
             <td>{this.props.data.emailConfirmation.value}</td>
           </tr>
           <tr>
@@ -58,7 +58,7 @@ class ContactInformationSection extends React.Component {
               onValueChange={(update) => {this.props.onStateChange('email', update);}}/>
 
           <Email error={this.confirmEmail()}
-              label="Re-enter Email address"
+              label="Re-enter email address"
               email={this.props.data.emailConfirmation}
               additionalClass="second-email"
               onValueChange={(update) => {this.props.onStateChange('emailConfirmation', update);}}/>

@@ -174,6 +174,48 @@
             </eeSummary:spouseFinancials>
           </eeSummary:spouseFinancialsList>
           <eeSummary:marriedLastCalendarYear>true</eeSummary:marriedLastCalendarYear>
+          <eeSummary:dependentFinancialsList>
+            <eeSummary:dependentFinancials>
+              <eeSummary:dependentInfo>
+                <eeSummary:dob>05/05/1982</eeSummary:dob>
+                <eeSummary:givenName>FIRSTCHILDA</eeSummary:givenName>
+                <eeSummary:middleName>MIDDLECHILDA</eeSummary:middleName>
+                <eeSummary:familyName>LASTCHILDA</eeSummary:familyName>
+                <eeSummary:suffix>JR.</eeSummary:suffix>
+                <eeSummary:relationship>5</eeSummary:relationship>
+                <eeSummary:ssns>
+                  <eeSummary:ssn>
+                    <eeSummary:ssnText>111229876</eeSummary:ssnText>
+                  </eeSummary:ssn>
+                </eeSummary:ssns>
+                <eeSummary:startDate>04/07/1992</eeSummary:startDate>
+              </eeSummary:dependentInfo>
+              <eeSummary:livedWithPatient>true</eeSummary:livedWithPatient>
+              <eeSummary:incapableOfSelfSupport>true</eeSummary:incapableOfSelfSupport>
+              <eeSummary:attendedSchool>true</eeSummary:attendedSchool>
+              <eeSummary:contributedToSupport>false</eeSummary:contributedToSupport>
+            </eeSummary:dependentFinancials>
+            <eeSummary:dependentFinancials>
+              <eeSummary:dependentInfo>
+                <eeSummary:dob>03/07/1996</eeSummary:dob>
+                <eeSummary:givenName>FIRSTCHILDB</eeSummary:givenName>
+                <eeSummary:middleName>MIDDLECHILDB</eeSummary:middleName>
+                <eeSummary:familyName>LASTCHILDB</eeSummary:familyName>
+                <eeSummary:suffix>SR.</eeSummary:suffix>
+                <eeSummary:relationship>6</eeSummary:relationship>
+                <eeSummary:ssns>
+                  <eeSummary:ssn>
+                    <eeSummary:ssnText>222111234</eeSummary:ssnText>
+                  </eeSummary:ssn>
+                </eeSummary:ssns>
+                <eeSummary:startDate>04/07/2003</eeSummary:startDate>
+              </eeSummary:dependentInfo>
+              <eeSummary:livedWithPatient>false</eeSummary:livedWithPatient>
+              <eeSummary:incapableOfSelfSupport>false</eeSummary:incapableOfSelfSupport>
+              <eeSummary:attendedSchool>true</eeSummary:attendedSchool>
+              <eeSummary:contributedToSupport>true</eeSummary:contributedToSupport>
+            </eeSummary:dependentFinancials>
+          </eeSummary:dependentFinancialsList>
           <eeSummary:numberOfDependentChildren>2</eeSummary:numberOfDependentChildren>
         </eeSummary:financialStatement>
       </eeSummary:financialsInfo>

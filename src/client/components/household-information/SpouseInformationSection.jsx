@@ -56,15 +56,15 @@ class SpouseInformationSection extends React.Component {
             <td>{this.props.data.spouseFullName.first.value} {this.props.data.spouseFullName.middle.value} {this.props.data.spouseFullName.last.value} {this.props.data.spouseFullName.suffix.value}</td>
           </tr>
           <tr>
-            <td>Social Security Number:</td>
+            <td>Social security sumber:</td>
             <td>{this.props.data.spouseSocialSecurityNumber.value}</td>
           </tr>
           <tr>
-            <td>Date of Birth:</td>
+            <td>Date of birth:</td>
             <td>{this.props.data.spouseDateOfBirth.month.value}/{this.props.data.spouseDateOfBirth.day.value}/{this.props.data.spouseDateOfBirth.year.value}</td>
           </tr>
           <tr>
-            <td>Date of Marriage:</td>
+            <td>Date of marriage:</td>
             <td>{this.props.data.dateOfMarriage.month.value}/{this.props.data.dateOfMarriage.day.value}/{this.props.data.dateOfMarriage.year.value}</td>
           </tr>
           <tr>
@@ -86,12 +86,12 @@ class SpouseInformationSection extends React.Component {
               onUserInput={(update) => {this.props.onStateChange('spouseFullName', update);}}/>
 
           <SocialSecurityNumber required
-              label="Spouse’s Social Security Number"
+              label="Spouse’s social security number"
               ssn={this.props.data.spouseSocialSecurityNumber}
               onValueChange={(update) => {this.props.onStateChange('spouseSocialSecurityNumber', update);}}/>
 
           <DateInput required
-              label="Spouse’s Date of Birth"
+              label="Spouse’s date of birth"
               name="spouseBirth"
               day={this.props.data.spouseDateOfBirth.day}
               month={this.props.data.spouseDateOfBirth.month}
@@ -99,9 +99,9 @@ class SpouseInformationSection extends React.Component {
               onValueChange={(update) => {this.props.onStateChange('spouseDateOfBirth', update);}}/>
 
           <DateInput required
-              errorMessage="Date of marriage cannot be before veteran's or spouse's date of birth"
+              errorMessage="Date of marriage cannot be before the Veteran's or the spouse's date of birth"
               validation={isValidMarriageDate(this.props.data.dateOfMarriage, this.props.data.veteranDateOfBirth, this.props.data.spouseDateOfBirth)}
-              label="Date of Marriage"
+              label="Date of marriage"
               name="marriage"
               day={this.props.data.dateOfMarriage.day}
               month={this.props.data.dateOfMarriage.month}
@@ -197,11 +197,11 @@ class SpouseInformationSection extends React.Component {
       content = (<fieldset>
         <legend>Spouse's Information</legend>
         <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
-        <p>Please fill this out to the best of your knowledge. The more accurate your responses, the faster your application can proceed.</p>
+        <p>Please fill this out to the best of your knowledge. The more accurate your responses, the faster we can process your application.</p>
         <div className="input-section">
           <ErrorableSelect
               errorMessage={validateIfDirty(this.props.data.maritalStatus, isNotBlank) ? undefined : 'Please select a marital status'}
-              label="Current Marital Status"
+              label="Current marital status"
               name="maritalStatus"
               options={maritalStatuses}
               required

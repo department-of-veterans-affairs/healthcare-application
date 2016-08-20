@@ -43,7 +43,7 @@ class VaMedicalFacility extends React.Component {
       <div className="usa-input-grid usa-input-grid-large">
         <ErrorableSelect required={this.props.required}
             errorMessage={validateIfDirty(this.props.value, isNotBlank) ? undefined : 'Please select a medical facility'}
-            label="Center/Clinic"
+            label="Center/clinic"
             name="vaMedicalFacility"
             options={clinicList}
             value={this.props.value}

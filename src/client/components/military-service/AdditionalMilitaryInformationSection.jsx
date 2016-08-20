@@ -33,11 +33,11 @@ class AdditionalMilitaryInformationSection extends React.Component {
             <td>{`${this.props.data.disabledInLineOfDuty ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
-            <td>Did you serve in Southwest Asia during the Gulf War between August 2, 1990 and Nov 11, 1998?:</td>
+            <td>Served in Southwest Asia during the Gulf War between August 2, 1990, and Nov 11, 1998:</td>
             <td>{`${this.props.data.swAsiaCombat ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
-            <td>Did you serve in Vietnam between January 9, 1962 and May 7, 1975?:</td>
+            <td>Served in Vietnam between January 9, 1962, and May 7, 1975:</td>
             <td>{`${this.props.data.vietnamService ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
@@ -49,7 +49,7 @@ class AdditionalMilitaryInformationSection extends React.Component {
             <td>{`${this.props.data.radiumTreatments ? 'Yes' : 'No'}`}</td>
           </tr>
           <tr>
-            <td>Did you serve on active duty at least 30 days at Camp LeJeune from January 1, 1953 through December 31, 1987?:</td>
+            <td>Served on active duty at least 30 days at Camp Lejeune from January 1, 1953, through December 31, 1987:</td>
             <td>{`${this.props.data.campLejeune ? 'Yes' : 'No'}`}</td>
           </tr>
         </tbody>
@@ -84,13 +84,13 @@ class AdditionalMilitaryInformationSection extends React.Component {
               onValueChange={(update) => {this.props.onStateChange('disabledInLineOfDuty', update);}}/>
 
           <ErrorableCheckbox
-              label="Served in Southwest Asia during the Gulf War between August 2, 1990 and Nov 11, 1998"
+              label="Served in Southwest Asia during the Gulf War between August 2, 1990, and Nov 11, 1998"
               name="swAsiaCombat"
               checked={this.props.data.swAsiaCombat}
               onValueChange={(update) => {this.props.onStateChange('swAsiaCombat', update);}}/>
 
           <ErrorableCheckbox
-              label="Served in Vietnam between January 9, 1962 and May 7, 1975"
+              label="Served in Vietnam between January 9, 1962, and May 7, 1975"
               name="vietnamService"
               checked={this.props.data.vietnamService}
               onValueChange={(update) => {this.props.onStateChange('vietnamService', update);}}/>
@@ -108,7 +108,7 @@ class AdditionalMilitaryInformationSection extends React.Component {
               onValueChange={(update) => {this.props.onStateChange('radiumTreatments', update);}}/>
 
           <ErrorableCheckbox
-              label="Served on active duty at least 30 days at Camp LeJeune from January 1, 1953 through December 31, 1987"
+              label="Served on active duty at least 30 days at Camp Lejeune from January 1, 1953, through December 31, 1987"
               name="campLejeune"
               checked={this.props.data.campLejeune}
               onValueChange={(update) => {this.props.onStateChange('campLejeune', update);}}/>
