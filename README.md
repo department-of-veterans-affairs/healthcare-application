@@ -70,7 +70,7 @@ View your local server at `http://localhost:3000/` or `http://127.0.0.1:3000/`
 #### Development example of interaction with ES servers
 
 There are multiple environments for the ES servers. To use any of them, you must
-be on a machien that can access the VA internal network. Without this, the UI will
+be on a machine that can access the VA internal network. Without this, the UI will
 work but all submissions will end in a failure at the SOAP layer.
 
 The 4 environments used are `dev`, `sqa`, `preProd`, and `prod`.  For `preProd`,

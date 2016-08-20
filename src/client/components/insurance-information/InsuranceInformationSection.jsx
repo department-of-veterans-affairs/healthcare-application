@@ -65,15 +65,15 @@ class InsuranceInformationSection extends React.Component {
           </thead>
           <tbody>
             <tr>
-              <td>Policy Holder Name:</td>
+              <td>Name of policy holder:</td>
               <td>{insurancePolicyHolderName}</td>
             </tr>
             <tr>
-              <td>Policy Number:</td>
+              <td>Policy number:</td>
               <td>{insurancePolicyNumber}</td>
             </tr>
             <tr>
-              <td>Group Code:</td>
+              <td>Group code:</td>
               <td>{insuranceGroupCode}</td>
             </tr>
           </tbody>

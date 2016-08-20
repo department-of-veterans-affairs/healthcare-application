@@ -18,11 +18,11 @@ class PersonalInfoSection extends React.Component {
       content = (<table className="review usa-table-borderless">
         <tbody>
           <tr>
-            <td>Veteran Name:</td>
+            <td>Veteran name:</td>
             <td>{this.props.data.veteranFullName.first.value} {this.props.data.veteranFullName.middle.value} {this.props.data.veteranFullName.last.value} {this.props.data.veteranFullName.suffix.value}</td>
           </tr>
           <tr>
-            <td>Mother's Maiden Name:</td>
+            <td>Mother's maiden name:</td>
             <td>{this.props.data.mothersMaidenName.value}</td>
           </tr>
         </tbody>

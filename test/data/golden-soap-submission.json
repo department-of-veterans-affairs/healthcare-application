@@ -60,7 +60,7 @@
               "email": {
                 "address": "foo@example.com",
                 "type": "1"
-              }  
+              }
             }
           ],
           "phones": {
@@ -126,6 +126,14 @@
                   "startDate": "04/07/1992",
                   "suffix": "JR."
                 },
+                "expenses": {
+                  "expense": [
+                    {
+                      "amount": "45.2",
+                      "expenseType": "16"
+                    }
+                  ]
+                },
                 "incapableOfSelfSupport": "true",
                 "incomes": {
                   "income": [
@@ -161,6 +169,14 @@
                   },
                   "startDate": "04/07/2003",
                   "suffix": "SR."
+                },
+                "expenses": {
+                  "expense": [
+                    {
+                      "amount": "1198.11",
+                      "expenseType": "16"
+                    }
+                  ]
                 },
                 "incapableOfSelfSupport": "false",
                 "incomes": {

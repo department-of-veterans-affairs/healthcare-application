@@ -91,7 +91,7 @@ class DateInput extends React.Component {
     return (
       <div>
         <label>
-          {this.props.label ? this.props.label : 'Date of Birth'}
+          {this.props.label ? this.props.label : 'Date of birth'}
           {requiredSpan}
         </label>
         {errorSpan}

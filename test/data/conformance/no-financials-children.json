@@ -70,11 +70,10 @@
       },
       "childRelation": "Stepson",
       "childSocialSecurityNumber": "111-22-9876",
-      "childBecameDependent": "1992-04-07", 
+      "childBecameDependent": "1992-04-07",
       "childDateOfBirth": "1982-05-05",
       "childDisabledBefore18": true,
       "childAttendedSchoolLastYear": true,
-      "childEducationExpenses": 45.2,
       "childCohabitedLastYear": true,
       "childReceivedSupportLastYear": false
     },
@@ -91,7 +90,6 @@
       "childDateOfBirth": "1996-03-07",
       "childDisabledBefore18": false,
       "childAttendedSchoolLastYear": true,
-      "childEducationExpenses": 1198.11,
       "childCohabitedLastYear": false,
       "childReceivedSupportLastYear": true
     }

@@ -265,19 +265,27 @@ function resourceToExpenseCollection(resource) {
   if (resource.educationExpense > 0) {
     expenseCollection.push({
       amount: resource.educationExpense,
-      expenseType: '3', // Veteran's Educational Expenses TODO is this right?
+      expenseType: '3',
     });
   }
+
+  if (resource.childEducationExpenses > 0) {
+    expenseCollection.push({
+      amount: resource.childEducationExpenses,
+      expenseType: '16',
+    });
+  }
+
   if (resource.funeralExpense > 0) {
     expenseCollection.push({
       amount: resource.funeralExpense,
-      expenseType: '19', // Funeral and Burial Expenses TODO is this right?
+      expenseType: '19',
     });
   }
   if (resource.medicalExpense > 0) {
     expenseCollection.push({
       amount: resource.medicalExpense,
-      expenseType: '18', // Total Non-Reimbursed Medical Expenses TODO is this right?
+      expenseType: '18',
     });
   }
 
@@ -341,13 +349,11 @@ function childToDependentInfo(child) {
  */
 function childToDependentFinancialsInfo(child) {
   const incomes = resourceToIncomeCollection(child);
-
-  if (!incomes) {
-    return undefined;
-  }
+  const expenses = resourceToExpenseCollection(child);
 
   return {
     incomes,
+    expenses,
     dependentInfo: childToDependentInfo(child),
     livedWithPatient: child.childCohabitedLastYear,
     incapableOfSelfSupport: child.childDisabledBefore18,
@@ -388,10 +394,6 @@ function veteranToSpouseFinancials(veteran) {
     netIncome: veteran.spouseNetIncome,
     otherIncome: veteran.spouseOtherIncome
   });
-
-  if (!spouseIncome) {
-    return undefined;
-  }
 
   // set cohabitedLastYear to false if not present or empty string
   let cohabitedLastYear = veteran.cohabitedLastYear;
