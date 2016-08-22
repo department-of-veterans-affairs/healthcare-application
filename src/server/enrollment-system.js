@@ -52,9 +52,9 @@ function formatAddress(address) {
   };
   if (address.country === 'USA') {
     formatted.state = address.state;
-    const splitZip = address.zipcode.split('-');
-    formatted.zipCode = splitZip[0];
-    formatted.zipPlus4 = validations.validateString(splitZip[1], 20, true) || undefined;
+    const numericZip = address.zipcode.replace(/\D/g, '');
+    formatted.zipCode = numericZip.substr(0, 5);
+    formatted.zipPlus4 = validations.validateString(numericZip.substr(5, 4), 20, true) || undefined;
   } else {
     formatted.provinceCode = address.state || address.provinceCode;
     formatted.postalCode = address.zipcode || address.postalCode;
