@@ -14,6 +14,7 @@
             <eeSummary:line1>123 NW 8th St</eeSummary:line1>
             <eeSummary:state>VA</eeSummary:state>
             <eeSummary:zipCode>20101</eeSummary:zipCode>
+            <eeSummary:zipPlus4>6789</eeSummary:zipPlus4>
           </eeSummary:address>
           <eeSummary:givenName>FIRSTSPOUSE</eeSummary:givenName>
           <eeSummary:middleName>MIDDLESPOUSE</eeSummary:middleName>
@@ -33,6 +34,7 @@
               <eeSummary:line1>123 NW 5th St</eeSummary:line1>
               <eeSummary:state>DC</eeSummary:state>
               <eeSummary:zipCode>20005</eeSummary:zipCode>
+              <eeSummary:zipPlus4>1234</eeSummary:zipPlus4>
               <eeSummary:addressTypeCode>P</eeSummary:addressTypeCode>
             </eeSummary:address>
           </eeSummary:addresses>
