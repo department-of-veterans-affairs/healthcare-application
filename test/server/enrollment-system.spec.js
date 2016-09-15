@@ -43,7 +43,7 @@ describe('enrollment-system base tests', () => {
                     'no-children', 'no-spouse', 'only-vet',
                     'canadian-vet', 'australian-vet',
                     'no-financials-spouse', 'no-financials-children'];
-    for (const filename of checks) {
+    checks.forEach(filename => {
       it(`should serialize ${filename} correctly`, (done) => {
         const application = require(`../data/conformance/${filename}`);
         const valid = validate(application);
@@ -59,7 +59,7 @@ describe('enrollment-system base tests', () => {
           client.saveSubmitForm(input, (_submitError, _result) => {});
         });
       });
-    }
+    });
 
     it('should become a valid SOAP request', (done) => {
       // build the json to be sent through the SOAP service

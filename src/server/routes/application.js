@@ -45,7 +45,7 @@ function returnRouter(options) {
       const saveSubmitFormMsg = veteranToSaveSubmitForm(form);
       soapClient.saveSubmitForm(saveSubmitFormMsg, (err, response) => {
         if (err) {
-          options.logger.info('voaService response - error', err);
+          options.logger.info('voaService response - error', err, response);
           // TODO(awong): This may leak server config info on error. Is that a problem?
           res.status(500).json({ error: err });
         } else {
@@ -71,7 +71,7 @@ function returnRouter(options) {
     };
     soapClient.getFormSubmissionStatus(getFormSubmissionStatusMsg, (err, response) => {
       if (err) {
-        options.logger.info('voaService response had error', err);
+        options.logger.info('voaService response had error', err, response);
         // TODO(awong): This may leak server config info on error. Is that a problem?
         res.status(500).json({ error: err });
       } else {
