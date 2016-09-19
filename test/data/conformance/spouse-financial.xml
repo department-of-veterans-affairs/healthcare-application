@@ -38,7 +38,7 @@
           </eeSummary:addresses>
           <eeSummary:emails>
             <eeSummary:email>
-              <eeSummary:address>foo@example.com</eeSummary:address>
+              <eeSummary:address>foo.bar@example.com</eeSummary:address>
               <eeSummary:type>1</eeSummary:type>
             </eeSummary:email>
           </eeSummary:emails>
