@@ -32,7 +32,7 @@
     "state": "DC",
     "zipcode": "20005-5500"
   },
-  "email": "foo@example.com",
+  "email": "foo.bar+va@example.com",
   "homePhone": "1231241234",
   "mobilePhone": "1235551234",
   "understandsFinancialDisclosure": true,
