@@ -243,7 +243,8 @@ module.exports = {
     },
     email: {
       type: 'string',
-      pattern: '^(([a-zA-Z]|[0-9])|([-]|[_]|[.]))+[@](([a-zA-Z0-9])|([-])){2,63}[.](([a-zA-Z0-9]){2,63})+$' // Email pattern from RegEx 101 https://regex101.com/
+      // regex from client/validations.js' isValidEmail, with some extra escaping
+      pattern: '^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'
     },
     homePhone: {
       $ref: '#/definitions/phone'
