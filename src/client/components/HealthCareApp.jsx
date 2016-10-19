@@ -19,12 +19,21 @@ import PopulateVeteranButton from './debug/PopulateVeteranButton';
 import PerfPanel from './debug/PerfPanel';
 import RoutesDropdown from './debug/RoutesDropdown';
 
+
+const ReCAPTCHA = require('react-google-recaptcha');
+
 const Element = Scroll.Element;
 const scroller = Scroll.scroller;
 
 class HealthCareApp extends React.Component {
   constructor(props) {
     super(props);
+    // TODO: if recaptcha is disabled (usually for testing,
+    // skip to ready state). Do something like __DEV__ ?
+    if (false) {
+      this.props.onUpdateSubmissionStatus('ready');
+    }
+
     this.handleBack = this.handleBack.bind(this);
     this.handleContinue = this.handleContinue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,6 +58,11 @@ class HealthCareApp extends React.Component {
       e.returnValue = message;     // eslint-disable-line no-param-reassign
     }
     return message;
+  }
+
+  setRecaptcha(value) {
+    this.props.data.captcha = value;
+    this.props.onUpdateSubmissionStatus('ready');
   }
 
   getUrl(direction) {
@@ -109,6 +123,7 @@ class HealthCareApp extends React.Component {
   }
 
   handleSubmit(e) {
+    console.log(e);
     e.preventDefault();
     const veteran = this.props.data;
     const path = this.props.location.pathname;
@@ -123,7 +138,8 @@ class HealthCareApp extends React.Component {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'X-Captcha': this.props.data.captcha
         },
         timeout: 10000, // 10 seconds
         body: veteranToApplication(veteran)
@@ -202,6 +218,13 @@ class HealthCareApp extends React.Component {
         <ProgressButton
             onButtonClick={this.handleSubmit}
             buttonText="Submit Application"
+            buttonClass="usa-button-disabled"/>
+      );
+    } else if (submissionStatus === 'ready') {
+      submitButton = (
+        <ProgressButton
+            onButtonClick={this.handleSubmit}
+            buttonText="Submit Application"
             buttonClass="usa-button-primary"/>
       );
     } else if (submissionStatus === 'submitPending') {
@@ -235,6 +258,9 @@ class HealthCareApp extends React.Component {
 
     if (this.props.location.pathname === '/review-and-submit') {
       buttons = (<div>
+        <ReCAPTCHA ref="recaptcha"
+            sitekey={config.recaptcha.client}
+            onChange={this.setRecaptcha.bind(this)}/>
         <div className="row progress-buttons">
           <div className="small-6 medium-5 columns">
             {backButton}

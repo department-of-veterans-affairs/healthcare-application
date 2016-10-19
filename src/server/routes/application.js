@@ -1,4 +1,5 @@
 'use strict'; // eslint-disable-line
+const fetch = require('isomorphic-fetch');
 const soap = require('soap');
 const request = require('request');
 const router = require('express').Router(); // eslint-disable-line
@@ -6,6 +7,8 @@ const router = require('express').Router(); // eslint-disable-line
 const ApplicationJsonSchema = require('../../common/schema/application');
 const validate = require('../../common/schema/validator').compile(ApplicationJsonSchema);
 const veteranToSaveSubmitForm = require('../enrollment-system').veteranToSaveSubmitForm;
+
+const FormData = require('form-data');
 
 function returnRouter(options) {
   const config = options.config;
@@ -30,6 +33,7 @@ function returnRouter(options) {
       }
       soapClient = client;
     });
+
   function submitApplication(req, res) {
     const contentType = req.get('Content-Type');
     if (contentType !== 'application/json') {
@@ -81,8 +85,36 @@ function returnRouter(options) {
     });
   }
 
+  function checkRecaptcha(req, res, cb) {
+    // if the captcha is diabled, go right into the
+    // submit callback
+    if (config.recaptcha.disabled) {
+      cb(req, res);
+    }
+
+    const form = new FormData();
+    form.append('secret', config.recaptcha.server);
+    form.append('response', req.get('X-Captcha'));
+    console.log(req.get('X-Captcha'));
+    fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'POST',
+      body: form
+    }).then(response => {
+      return response.json();
+    }).then(googleRes => {
+      console.log(googleRes);
+      if (googleRes.success) {
+        cb(req, res);
+      } else {
+        res.status(500).json({ error: 'need reCAPTCHA' });
+      }
+    });
+  }
+
   router.post('/', (req, res) => {
-    submitApplication(req, res);
+    checkRecaptcha(req, res, () => {
+      submitApplication(req, res);
+    });
   });
 
   router.get('/:id', (req, res) => {
