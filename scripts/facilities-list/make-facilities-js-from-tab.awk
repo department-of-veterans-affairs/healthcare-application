@@ -2,10 +2,10 @@ BEGIN {
   FS="\t"; # use tabs as field separator
   OFS="\t";
 
-  if (showFieldNames == 1 || captureNeededFields == 1) {
-    RS="\r"; # Mac Excel uses \r as a line delimiter
-    ORS="\n" # We want Unix \n line delimiter output
-  }
+  #if (showFieldNames == 1 || captureNeededFields == 1) {
+  #  RS="\r"; # Mac Excel uses \r as a line delimiter
+  #  ORS="\n" # We want Unix \n line delimiter output
+  #}
 
   if (makeFacilitiesJson) {
     # print header
