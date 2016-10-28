@@ -10,20 +10,14 @@ pipeline {
   agent label:''
   stages {
     stage('Notify Slack') {
-      notify """Deploying `healthcare-app` to `${environment}`.
+      notify """Deploying `${application}` to `${environment}`.
                |${currentBuild.rawBuild.getCauses()[0].getShortDescription()}
                |${currentBuild.getAbsoluteUrl()}""".stripMargin()
     }
 
     stage('Checkout Code') {
-      checkout changelog: false,
-               poll: false,
-               scm: [$class: 'GitSCM', branches: [[name: '*/master']],
-               doGenerateSubmoduleConfigurations: false,
-               extensions: [
-                 [$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]
-               ],
-               submoduleCfg: [],
+      checkout scm: [$class: 'GitSCM', branches: [[name: '*/master']],
+               extensions: [[$class: 'SubmoduleOption', recursiveSubmodules: true]],
                userRemoteConfigs: [[url: 'git@github.com:department-of-veterans-affairs/devops.git']]]
     }
 
@@ -38,8 +32,9 @@ pipeline {
       dir('ansible') {
         sh  "bash -c 'source venv/bin/activate && ansible-playbook " +
             "-e env=${environment} " +
-            "-e app_name=healthcare-app " +
+            "-e app_name=${application} " +
             "-e force_ami=${force_ami} " +
+            "-e git_version=${branch}"
             "-i inventory " +
             "aws-deploy-app.yml'"
       }
@@ -48,11 +43,12 @@ pipeline {
 
   notifications {
     success {
-      notify """Successfully deployed `healthcare-app` to `${environment}`.
+      notify """Successfully deployed `${application}` to `${environment}`.
                |Took ${currentBuild.rawBuild.getDurationString()}""".stripMargin()
     }
     failure {
-      notify "Failed to deploy `healthcare-app` to `${environment}`!", 'danger'
+      notify """Failed to deploy `${application}` to `${environment}`!
+               |${currentBuild.getAbsoluteUrl()}console""".stripMargin(), 'danger'
     }
   }
 }
