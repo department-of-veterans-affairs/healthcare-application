@@ -63,8 +63,12 @@ class HealthCareApp extends React.Component {
     }
 
     const filtered = routes.filter(page => {
+      if (page.depends) {
+        console.log(page.depends, data);
+      }
       return page.depends === undefined || _.matches(page.depends)(data);
     });
+
 
     panels.push.apply(panels, filtered.map((obj) => { return obj.path; }));
 
