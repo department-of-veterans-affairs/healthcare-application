@@ -54,15 +54,19 @@ class HealthCareApp extends React.Component {
   getUrl(direction) {
     const routes = this.props.route.childRoutes;
     const panels = [];
+    const data = this.props.data;
     let currentPath = this.props.location.pathname;
     let nextPath = '';
 
-    // TODO(awong): remove the '/' alias for '/introduction' using history.replaceState()
     if (currentPath === '/') {
       currentPath = '/introduction';
     }
 
-    panels.push.apply(panels, routes.map((obj) => { return obj.path; }));
+    const filtered = routes.filter(page => {
+      return page.depends === undefined || _.matches(page.depends)(data);
+    });
+
+    panels.push.apply(panels, filtered.map((obj) => { return obj.path; }));
 
     for (let i = 0; i < panels.length; i++) {
       if (currentPath === panels[i]) {
