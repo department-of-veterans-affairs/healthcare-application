@@ -149,7 +149,8 @@ module.exports = {
 
     // Financial disclosure page.
     client.expect.element('input[name="understandsFinancialDisclosure"] + label').to.be.visible;
-    expectInputToNotBeSelected(client, 'input[name="understandsFinancialDisclosure"]');
+    expectInputToNotBeSelected(client, 'input[name="understandsFinancialDisclosure-0"]');
+    expectInputToNotBeSelected(client, 'input[name="understandsFinancialDisclosure-1"]');
     common.completeFinancialDisclosure(client, common.testValues, true);
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/financial-disclosure');

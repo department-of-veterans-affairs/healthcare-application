@@ -288,7 +288,7 @@ function completeVaBenefits(client, data, onlyRequiredFields) {
 }
 
 function completeFinancialDisclosure(client, data, onlyRequiredFields) {
-  client.click('input[name="understandsFinancialDisclosure"]');
+  client.click('input[name="understandsFinancialDisclosure-0"]');
 
   if (!onlyRequiredFields) {
     onlyRequiredFields;

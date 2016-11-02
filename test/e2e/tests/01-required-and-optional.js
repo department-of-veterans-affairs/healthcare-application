@@ -134,7 +134,7 @@ module.exports = {
     // Financial disclosure page.
     client.expect.element('input[name="understandsFinancialDisclosure"] + label').to.be.visible;
     client
-      .click('input[name="understandsFinancialDisclosure"]')
+      .click('input[name="understandsFinancialDisclosure-0"]')
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/financial-disclosure');
 
