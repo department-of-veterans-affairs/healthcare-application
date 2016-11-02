@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
+import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
 import { isValidFinancialDisclosure } from '../../utils/validations';
 import { veteranUpdateField } from '../../actions';
+
+import { yesNo } from '../../utils/options-for-select.js';
 
 /**
  * Props:
@@ -69,12 +71,13 @@ class FinancialDisclosureSection extends React.Component {
           </div>
 
           <div className="input-section">
-            <ErrorableCheckbox required
-                errorMessage={isValidFinancialDisclosure(this.props.data) ? '' : 'Please acknowledge this requirement'}
+            <ErrorableRadioButtons required
+                errorMessage={isValidFinancialDisclosure(this.props.data) ? '' : 'If you don\'t provide your financial information and you don\'t have another qualifying eligibility factor, VA can\'t enroll you.'}
                 label="I understand VA is not currently enrolling new applicants who decline to provide their financial information unless they have other qualifying eligibility factors."
                 name="understandsFinancialDisclosure"
-                checked={this.props.data.understandsFinancialDisclosure.value}
-                onValueChange={(update) => {this.props.onStateChange('understandsFinancialDisclosure', { value: update, dirty: false });}}/>
+                options={yesNo}
+                value={this.props.data.understandsFinancialDisclosure}
+                onValueChange={(update) => {this.props.onStateChange('understandsFinancialDisclosure', update);}}/>
           </div>
 
         </div>
