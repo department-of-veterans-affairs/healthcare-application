@@ -83,7 +83,7 @@ class FinancialDisclosureSection extends React.Component {
 
           <div className="input-section">
             <ErrorableRadioButtons required
-                errorMessage={isValidFinancialDisclosure(this.props.data) ? '' : 'If you don\'t provide your financial information and you don\'t have another qualifying eligibility factor, VA can\'t enroll you.'}
+                errorMessage={isValidFinancialDisclosure(this.props.data) ? '' : 'Please select either "Yes" or "No"'}
                 label="I understand VA is not currently enrolling new applicants who decline to provide their financial information unless they have other qualifying eligibility factors."
                 name="understandsFinancialDisclosure"
                 options={yesNo}
