@@ -272,7 +272,7 @@ const completeVeteran = {
     dirty: false
   },
   understandsFinancialDisclosure: {
-    value: true,
+    value: 'Y',
     dirty: false
   },
   spouseFullName: {
