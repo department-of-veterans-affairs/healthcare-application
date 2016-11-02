@@ -19,6 +19,10 @@ function getErrorMessage(field, message) {
  */
 class AnnualIncomeSection extends React.Component {
 
+  handleChange(field, update) {
+    this.props.onStateChange('veteranGrossIncome', update);
+  }
+
   hasIncome(data) {
     const income = [
       data.veteranGrossIncome,
@@ -182,26 +186,26 @@ class AnnualIncomeSection extends React.Component {
 
           <div className="input-section">
             <h6>Veteran</h6>
-            <ErrorableTextInput
+            <ErrorableTextInput required
                 errorMessage={getErrorMessage(this.props.data.veteranGrossIncome, message)}
                 label="Veteran gross annual income from employment"
                 name="veteranGrossIncome"
                 field={this.props.data.veteranGrossIncome}
-                onValueChange={(update) => {this.props.onStateChange('veteranGrossIncome', update);}}/>
+                onValueChange={(update) => {this.handleChange('veteranGrossIncome', update); }}/>
 
-            <ErrorableTextInput
+            <ErrorableTextInput required
                 errorMessage={getErrorMessage(this.props.data.veteranNetIncome, message)}
                 label="Veteran Net Income from your Farm, Ranch, Property or Business"
                 name="veteranNetIncome"
                 field={this.props.data.veteranNetIncome}
-                onValueChange={(update) => {this.props.onStateChange('veteranNetIncome', update);}}/>
+                onValueChange={(update) => {this.handleChange('veteranNetIncome', update); }}/>
 
-            <ErrorableTextInput
+            <ErrorableTextInput required
                 errorMessage={getErrorMessage(this.props.data.veteranOtherIncome, message)}
                 label="Veteran Other Income Amount"
                 name="veteranOtherIncome"
                 field={this.props.data.veteranOtherIncome}
-                onValueChange={(update) => {this.props.onStateChange('veteranOtherIncome', update);}}/>
+                onValueChange={(update) => {this.handleChange('veteranOtherIncome', update); }}/>
           </div>
 
           {spouseIncomeInput}

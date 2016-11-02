@@ -341,9 +341,9 @@ function isValidAnnualIncome(data) {
       isValidField(isValidMonetaryValue, data.spouseOtherIncome);
   }
 
-  return isValidField(isValidMonetaryValue, data.veteranGrossIncome) &&
-    isValidField(isValidMonetaryValue, data.veteranNetIncome) &&
-    isValidField(isValidMonetaryValue, data.veteranOtherIncome) &&
+  return isValidRequiredField(isValidMonetaryValue, data.veteranGrossIncome) &&
+    isValidRequiredField(isValidMonetaryValue, data.veteranNetIncome) &&
+    isValidRequiredField(isValidMonetaryValue, data.veteranOtherIncome) &&
     isValidSpouseIncomeFields &&
     isValidChildrenIncome(data.children);
 }
