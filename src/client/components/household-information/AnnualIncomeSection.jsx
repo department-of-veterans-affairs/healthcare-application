@@ -8,8 +8,20 @@ import FixedTable from '../form-elements/FixedTable.jsx';
 import { isValidField, isValidMonetaryValue } from '../../utils/validations';
 import { veteranUpdateField } from '../../actions';
 
-function getErrorMessage(field, message) {
-  return isValidField(isValidMonetaryValue, field) ? undefined : message;
+function getErrorMessage(field) {
+  return isValidField(isValidMonetaryValue, field) ? null : 'Please enter only numbers and a decimal point if necessary (no commas or currency signs)';
+}
+
+function getRequiredErrorMessage(field) {
+  let result;
+  if (isValidField(isValidMonetaryValue, field)) {
+    if (field.dirty && field.value === '') {
+      result = 'Please enter a number.';
+    }
+  } else {
+    result = 'Please enter only numbers and a decimal point if necessary (no commas or currency signs)';
+  }
+  return result;
 }
 
 /**
@@ -20,7 +32,7 @@ function getErrorMessage(field, message) {
 class AnnualIncomeSection extends React.Component {
 
   handleChange(field, update) {
-    this.props.onStateChange('veteranGrossIncome', update);
+    this.props.onStateChange(field, update);
   }
 
   hasIncome(data) {
@@ -63,7 +75,6 @@ class AnnualIncomeSection extends React.Component {
 
   // TODO: Figure out best way to enable users to change their response to pension
   render() {
-    const message = 'Please enter only numbers and a decimal point if necessary (no commas or currency signs)';
     let childrenIncomeInput;
     let childrenIncomeReview;
     let spouseIncomeInput;
@@ -110,21 +121,21 @@ class AnnualIncomeSection extends React.Component {
         <div className="input-section">
           <h6>Spouse</h6>
           <ErrorableTextInput
-              errorMessage={getErrorMessage(this.props.data.spouseGrossIncome, message)}
+              errorMessage={getErrorMessage(this.props.data.spouseGrossIncome)}
               label="Spouse Gross Annual Income from Employment"
               name="spouseGrossIncome"
               field={this.props.data.spouseGrossIncome}
               onValueChange={(update) => {this.props.onStateChange('spouseGrossIncome', update);}}/>
 
           <ErrorableTextInput
-              errorMessage={getErrorMessage(this.props.data.spouseNetIncome, message)}
+              errorMessage={getErrorMessage(this.props.data.spouseNetIncome)}
               label="Spouse Net Income from your Farm, Ranch, Property or Business"
               name="spouseNetIncome"
               field={this.props.data.spouseNetIncome}
               onValueChange={(update) => {this.props.onStateChange('spouseNetIncome', update);}}/>
 
           <ErrorableTextInput
-              errorMessage={getErrorMessage(this.props.data.spouseOtherIncome, message)}
+              errorMessage={getErrorMessage(this.props.data.spouseOtherIncome)}
               label="Spouse Other Income Amount"
               name="spouseOtherIncome"
               field={this.props.data.spouseOtherIncome}
@@ -187,21 +198,21 @@ class AnnualIncomeSection extends React.Component {
           <div className="input-section">
             <h6>Veteran</h6>
             <ErrorableTextInput required
-                errorMessage={getErrorMessage(this.props.data.veteranGrossIncome, message)}
+                errorMessage={getRequiredErrorMessage(this.props.data.veteranGrossIncome)}
                 label="Veteran gross annual income from employment"
                 name="veteranGrossIncome"
                 field={this.props.data.veteranGrossIncome}
                 onValueChange={(update) => {this.handleChange('veteranGrossIncome', update); }}/>
 
             <ErrorableTextInput required
-                errorMessage={getErrorMessage(this.props.data.veteranNetIncome, message)}
+                errorMessage={getRequiredErrorMessage(this.props.data.veteranNetIncome)}
                 label="Veteran Net Income from your Farm, Ranch, Property or Business"
                 name="veteranNetIncome"
                 field={this.props.data.veteranNetIncome}
                 onValueChange={(update) => {this.handleChange('veteranNetIncome', update); }}/>
 
             <ErrorableTextInput required
-                errorMessage={getErrorMessage(this.props.data.veteranOtherIncome, message)}
+                errorMessage={getRequiredErrorMessage(this.props.data.veteranOtherIncome)}
                 label="Veteran Other Income Amount"
                 name="veteranOtherIncome"
                 field={this.props.data.veteranOtherIncome}
