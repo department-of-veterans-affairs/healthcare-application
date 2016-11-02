@@ -15,6 +15,17 @@ import { yesNo } from '../../utils/options-for-select.js';
 class FinancialDisclosureSection extends React.Component {
   render() {
     let content;
+    let message;
+
+    if (this.props.data.understandsFinancialDisclosure.value === 'N') {
+      message = (
+        <div className="usa-alert usa-alert-info">
+          <div className="hca-alert-body">
+            <p>If you don't provide your financial information and you don't have another qualifying eligibility factor, VA can't enroll you.</p>
+          </div>
+        </div>
+      );
+    }
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
       content = (<table className="review usa-table-borderless">
@@ -79,7 +90,7 @@ class FinancialDisclosureSection extends React.Component {
                 value={this.props.data.understandsFinancialDisclosure}
                 onValueChange={(update) => {this.props.onStateChange('understandsFinancialDisclosure', update);}}/>
           </div>
-
+          {message}
         </div>
       </fieldset>);
     }
