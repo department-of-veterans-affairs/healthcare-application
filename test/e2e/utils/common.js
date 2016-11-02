@@ -288,10 +288,10 @@ function completeVaBenefits(client, data, onlyRequiredFields) {
 }
 
 function completeFinancialDisclosure(client, data, onlyRequiredFields) {
-  client.click('input[name="understandsFinancialDisclosure-0"]');
+  client.click('input[name="understandsFinancialDisclosure-1"]');
 
   if (!onlyRequiredFields) {
-    onlyRequiredFields;
+    client.click('input[name="understandsFinancialDisclosure-0"]');
   }
 }
 
