@@ -63,7 +63,7 @@ class FinancialDisclosureSection extends React.Component {
           </div>
 
           <ul>Qualifying eligibility factors:
-            <li>Former prisoners of war</li>
+            <li>Former prisoner of war</li>
             <li>Received a Purple Heart</li>
             <li>Recently discharged combat Veteran</li>
             <li>Discharged for a disability that was acquired or became worse in the line of duty</li>
