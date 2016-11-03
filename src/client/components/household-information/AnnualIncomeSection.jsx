@@ -8,10 +8,6 @@ import FixedTable from '../form-elements/FixedTable.jsx';
 import { isValidField, isValidMonetaryValue } from '../../utils/validations';
 import { veteranUpdateField } from '../../actions';
 
-function getErrorMessage(field) {
-  return isValidField(isValidMonetaryValue, field) ? null : 'Please enter only numbers and a decimal point if necessary (no commas or currency signs)';
-}
-
 function getRequiredErrorMessage(field) {
   let result;
   if (isValidField(isValidMonetaryValue, field)) {
@@ -120,22 +116,22 @@ class AnnualIncomeSection extends React.Component {
       spouseIncomeInput = (
         <div className="input-section">
           <h6>Spouse</h6>
-          <ErrorableTextInput
-              errorMessage={getErrorMessage(this.props.data.spouseGrossIncome)}
+          <ErrorableTextInput required
+              errorMessage={getRequiredErrorMessage(this.props.data.spouseGrossIncome)}
               label="Spouse Gross Annual Income from Employment"
               name="spouseGrossIncome"
               field={this.props.data.spouseGrossIncome}
               onValueChange={(update) => {this.props.onStateChange('spouseGrossIncome', update);}}/>
 
-          <ErrorableTextInput
-              errorMessage={getErrorMessage(this.props.data.spouseNetIncome)}
+          <ErrorableTextInput required
+              errorMessage={getRequiredErrorMessage(this.props.data.spouseNetIncome)}
               label="Spouse Net Income from your Farm, Ranch, Property or Business"
               name="spouseNetIncome"
               field={this.props.data.spouseNetIncome}
               onValueChange={(update) => {this.props.onStateChange('spouseNetIncome', update);}}/>
 
-          <ErrorableTextInput
-              errorMessage={getErrorMessage(this.props.data.spouseOtherIncome)}
+          <ErrorableTextInput required
+              errorMessage={getRequiredErrorMessage(this.props.data.spouseOtherIncome)}
               label="Spouse Other Income Amount"
               name="spouseOtherIncome"
               field={this.props.data.spouseOtherIncome}
