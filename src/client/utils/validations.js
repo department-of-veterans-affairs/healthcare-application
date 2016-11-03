@@ -264,7 +264,7 @@ function isValidContactInformationSection(data) {
 }
 
 function isValidFinancialDisclosure(data) {
-  return validateIfDirty(data.understandsFinancialDisclosure, _.identity);
+  return validateIfDirty(data.understandsFinancialDisclosure, isNotBlank);
 }
 
 function isValidIncome(income) {
