@@ -333,8 +333,7 @@ function isValidChildrenIncome(children) {
 
 function isValidAnnualIncome(data) {
   let isValidSpouseIncomeFields = true;
-
-  if (data.spouseGrossIncome && data.spouseNetIncome && data.spouseOtherIncome) {
+  if (data.maritalStatus.value === 'Married' || data.maritalStatus.value === 'Separated') {
     isValidSpouseIncomeFields =
       isValidRequiredField(isValidMonetaryValue, data.spouseGrossIncome) &&
       isValidRequiredField(isValidMonetaryValue, data.spouseNetIncome) &&
