@@ -347,6 +347,21 @@ function completeSpouseInformation(client, data, onlyRequiredFields) {
   }
 }
 
+function completeAnnualIncomeInformation(client, data, onlyRequiredFields) {
+  client.expect.element('input[name="veteranGrossIncome"]').to.be.visible.before(timeouts.normal);
+  client
+    .setValue('input[name="veteranGrossIncome"]', data.veteranGrossIncome)
+    .setValue('input[name="veteranNetIncome"]', data.veteranNetIncome)
+    .setValue('select[name="veteranOtherIncome"]', data.veteranOtherIncome);
+
+  if (!onlyRequiredFields) {
+    client
+      .setValue('input[name="spouseGrossIncome"]', data.spouseGrossIncome)
+      .setValue('input[name="spouseNetIncome"]', data.spouseNetIncome)
+      .setValue('select[name="spouseOtherIncome"]', data.spouseOtherIncome);
+  }
+}
+
 function completeChildInformation(client, data, onlyRequiredFields) {
   client.click('input[name="hasChildrenToReport-0"]');
   client.expect.element('input[name="fname"]').to.be.visible.before(timeouts.normal);
@@ -424,6 +439,7 @@ module.exports = {
   completeVaBenefits,
   completeFinancialDisclosure,
   completeSpouseInformation,
+  completeAnnualIncomeInformation,
   completeChildInformation,
   completeMedicareAndMedicaid,
   completeInsuranceInformation,
