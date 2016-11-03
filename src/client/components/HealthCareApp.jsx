@@ -70,7 +70,6 @@ class HealthCareApp extends React.Component {
         // Check to see if we should skip the next route
         if (route.depends !== undefined && !_.matches(route.depends)(data)) {
           if (markAsComplete) {
-            console.log(route.path);
             this.props.onCompletedStatus(route.path);
           }
           continue;
