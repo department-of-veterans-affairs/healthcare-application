@@ -352,13 +352,13 @@ function completeAnnualIncomeInformation(client, data, onlyRequiredFields) {
   client
     .setValue('input[name="veteranGrossIncome"]', data.veteranGrossIncome)
     .setValue('input[name="veteranNetIncome"]', data.veteranNetIncome)
-    .setValue('select[name="veteranOtherIncome"]', data.veteranOtherIncome);
+    .setValue('input[name="veteranOtherIncome"]', data.veteranOtherIncome);
 
   if (!onlyRequiredFields) {
     client
       .setValue('input[name="spouseGrossIncome"]', data.spouseGrossIncome)
       .setValue('input[name="spouseNetIncome"]', data.spouseNetIncome)
-      .setValue('select[name="spouseOtherIncome"]', data.spouseOtherIncome);
+      .setValue('input[name="spouseOtherIncome"]', data.spouseOtherIncome);
   }
 }
 
