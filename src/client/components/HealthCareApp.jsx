@@ -63,7 +63,15 @@ class HealthCareApp extends React.Component {
     }
 
     const filtered = routes.filter(page => {
-      return page.depends === undefined || _.matches(page.depends)(data);
+      let result = true;
+      if (page.depends !== undefined) {
+        if (!_.matches(page.depends)(data)) {
+          // Mark skipped pages as "complete"
+          this.props.onCompletedStatus(page.path);
+          result = false;
+        }
+      }
+      return result;
     });
 
 
