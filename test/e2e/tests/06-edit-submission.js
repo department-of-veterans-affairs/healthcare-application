@@ -105,12 +105,6 @@ module.exports = {
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/financial-disclosure');
 
-    // Financial disclosure page.
-    client.expect.element('input[name="understandsFinancialDisclosure"] + label').to.be.visible;
-    common.completeFinancialDisclosure(client, common.testValues, true);
-    client.click('.form-panel .usa-button-primary');
-    expectNavigateAwayFrom(client, '/household-information/financial-disclosure');
-
     // Selecting "no" for financial disclosures here causes the application to skip the next several sections:
     // Spouse information Page
     // Child Information Page
