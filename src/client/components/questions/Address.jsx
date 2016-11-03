@@ -27,6 +27,8 @@ class Address extends React.Component {
   handleChange(path, update) {
     const address = {
       street: this.props.value.street,
+      street2: this.props.value.street2,
+      street3: this.props.value.street3,
       city: this.props.value.city,
       country: this.props.value.country,
       state: this.props.value.state,
@@ -62,11 +64,26 @@ class Address extends React.Component {
         <ErrorableTextInput errorMessage={this.validateAddressField(this.props.value.street) ? undefined : 'Please enter a valid street address'}
             label="Street"
             name="address"
-            autocomplete="street-address"
-            charMax={30}
+            autocomplete="address-line1"
+            charMax={35}
             field={this.props.value.street}
             required={this.props.required}
             onValueChange={(update) => {this.handleChange('street', update);}}/>
+
+        <ErrorableTextInput
+            label="Line 2"
+            name="address2"
+            autocomplete="address-line2"
+            charMax={30}
+            field={this.props.value.street2}
+            onValueChange={(update) => {this.handleChange('street2', update);}}/>
+
+        <ErrorableTextInput
+            label="Line 3"
+            name="address3"
+            charMax={30}
+            field={this.props.value.street3}
+            onValueChange={(update) => {this.handleChange('street3', update);}}/>
 
         <ErrorableTextInput errorMessage={this.validateAddressField(this.props.value.city) ? undefined : 'Please enter a valid city'}
             label="City"

@@ -27,6 +27,8 @@
   "isWhite": true,
   "veteranAddress": {
     "street": "123 NW 5th St",
+    "street2": "",
+    "street3": "",
     "city": "Ontario",
     "country": "CAN",
     "state": "ON",
@@ -52,6 +54,8 @@
   "provideSupportLastYear": false,
   "spouseAddress": {
     "street": "123 NW 8th St",
+    "street2": "",
+    "street3": "",
     "city": "Dulles",
     "country": "USA",
     "postalCode": "13AA",

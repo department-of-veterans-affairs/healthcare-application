@@ -43,6 +43,8 @@ const blankVeteran = {
 
   veteranAddress: {
     street: makeField(''),
+    street2: makeField(''),
+    street3: makeField(''),
     city: makeField(''),
     country: makeField(''),
     state: makeField(''),
@@ -79,6 +81,8 @@ const blankVeteran = {
   provideSupportLastYear: makeField(''),  // TODO(awong): This name should be scoped to spouse.
   spouseAddress: {
     street: makeField(''),
+    street2: makeField(''),
+    street3: makeField(''),
     city: makeField(''),
     country: makeField(''),
     state: makeField(''),
@@ -230,6 +234,14 @@ const completeVeteran = {
       value: '123 NW 5th St',
       dirty: false
     },
+    street2: {
+      value: '',
+      dirty: false
+    },
+    street3: {
+      value: '',
+      dirty: false
+    },
     city: {
       value: 'Ontario',
       dirty: false
@@ -340,6 +352,14 @@ const completeVeteran = {
   spouseAddress: {
     street: {
       value: '123 NW 8th St',
+      dirty: false
+    },
+    street2: {
+      value: '',
+      dirty: false
+    },
+    street3: {
+      value: '',
       dirty: false
     },
     city: {

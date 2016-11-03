@@ -28,6 +28,8 @@
             <eeSummary:city>Sydney</eeSummary:city>
             <eeSummary:country>AUS</eeSummary:country>
             <eeSummary:line1>123 NW 8th St</eeSummary:line1>
+            <eeSummary:line2></eeSummary:line2>
+            <eeSummary:line3></eeSummary:line3>
           </eeSummary:address>
           <eeSummary:givenName>FIRSTSPOUSE</eeSummary:givenName>
           <eeSummary:middleName>MIDDLESPOUSE</eeSummary:middleName>
@@ -45,6 +47,8 @@
               <eeSummary:city>Sydney</eeSummary:city>
               <eeSummary:country>AUS</eeSummary:country>
               <eeSummary:line1>123 NW 5th St</eeSummary:line1>
+              <eeSummary:line2></eeSummary:line2>
+              <eeSummary:line3></eeSummary:line3>
               <eeSummary:provinceCode>New South Wales</eeSummary:provinceCode>
               <eeSummary:postalCode>2000</eeSummary:postalCode>
               <eeSummary:addressTypeCode>P</eeSummary:addressTypeCode>
@@ -160,6 +164,8 @@
                   <eeSummary:city>Sydney</eeSummary:city>
                   <eeSummary:country>AUS</eeSummary:country>
                   <eeSummary:line1>123 NW 8th St</eeSummary:line1>
+                  <eeSummary:line2></eeSummary:line2>
+                  <eeSummary:line3></eeSummary:line3>
                   <eeSummary:phoneNumber>1112221234</eeSummary:phoneNumber>
                 </eeSummary:address>
               </eeSummary:spouse>

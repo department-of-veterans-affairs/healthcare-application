@@ -48,7 +48,9 @@ function formatAddress(address) {
   const formatted = {
     city: address.city,
     country: address.country,
-    line1: address.street
+    line1: address.street,
+    line2: address.street2,
+    line3: address.street3
   };
   if (address.country === 'USA') {
     formatted.state = address.state;
