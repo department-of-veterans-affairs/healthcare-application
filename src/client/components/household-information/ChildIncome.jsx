@@ -46,7 +46,7 @@ class ChildIncome extends React.Component {
         <ErrorableTextInput required
             errorMessage={message(this.props.data.otherIncome)}
             label="Child Other Income Amount"
-            name="ChildOtherIncome"
+            name="childOtherIncome"
             field={this.props.data.otherIncome}
             onValueChange={(update) => {this.props.onValueChange('otherIncome', update);}}/>
       </div>
