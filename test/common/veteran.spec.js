@@ -1,5 +1,4 @@
 const chai = require('chai');
-const _ = require('lodash');
 chai.should();
 
 const veteran = require('../../src/common/veteran');
@@ -14,20 +13,6 @@ describe('Veteran model', () => {
       const application = JSON.parse(veteran.veteranToApplication(veteran.completeVeteran));
       const valid = validate(application);
       chai.assert.isTrue(valid, JSON.stringify([validate.errors, application], null, 2));
-      application.should.deep.eql(fakeApplication);
-    });
-  });
-});
-
-describe('Veteran model', () => {
-  describe('veteranToApplication', () => {
-    it('should not validate if depedencies aren\'t met.', () => {
-      const data = _.cloneDeep(veteran.completeVeteran);
-      console.log(data);
-      const application = JSON.parse(veteran.veteranToApplication(data));
-      const valid = validate(application);
-      console.log(valid);
-      chai.assert.isFalse(valid, JSON.stringify([validate.errors, application], null, 2));
       application.should.deep.eql(fakeApplication);
     });
   });
