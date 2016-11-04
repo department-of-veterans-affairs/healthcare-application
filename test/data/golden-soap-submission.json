@@ -30,8 +30,6 @@
               "city": "Dulles",
               "country": "USA",
               "line1": "123 NW 8th St",
-              "line2": "",
-              "line3": "",
               "state": "VA",
               "zipCode": "20101",
               "zipPlus4": "0101"
@@ -52,8 +50,6 @@
               "city": "Ontario",
               "country": "CAN",
               "line1": "123 NW 5th St",
-              "line2": "",
-              "line3": "",
               "provinceCode": "ON",
               "postalCode": "21231",
               "addressTypeCode": "P"
@@ -262,8 +258,6 @@
                   "city": "Dulles",
                   "country": "USA",
                   "line1": "123 NW 8th St",
-                  "line2": "",
-                  "line3": "",
                   "state": "VA",
                   "zipCode": "20101",
                   "zipPlus4": "0101",
