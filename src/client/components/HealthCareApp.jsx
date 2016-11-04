@@ -51,27 +51,32 @@ class HealthCareApp extends React.Component {
     return message;
   }
 
-  getUrl(direction) {
+  getUrl(direction, markAsComplete) {
     const routes = this.props.route.childRoutes;
-    const panels = [];
-    let currentPath = this.props.location.pathname;
-    let nextPath = '';
+    const paths = routes.map((d) => { return d.path; });
+    const data = this.props.data;
 
-    // TODO(awong): remove the '/' alias for '/introduction' using history.replaceState()
+    let currentPath = this.props.location.pathname;
     if (currentPath === '/') {
       currentPath = '/introduction';
     }
+    const currentIndex = paths.indexOf(currentPath);
+    const increment = direction === 'back' ? -1 : 1;
 
-    panels.push.apply(panels, routes.map((obj) => { return obj.path; }));
-
-    for (let i = 0; i < panels.length; i++) {
-      if (currentPath === panels[i]) {
-        if (direction === 'back') {
-          nextPath = panels[i - 1];
+    let nextPath = '';
+    for (let i = currentIndex; i >= 0 && i <= routes.length; i += increment) {
+      const route = routes[i + increment];
+      if (route) {
+        // Check to see if we should skip the next route
+        if (route.depends !== undefined && !_.matches(route.depends)(data)) {
+          if (markAsComplete) {
+            this.props.onCompletedStatus(route.path);
+          }
+          continue;
         } else {
-          nextPath = panels[i + 1];
+          nextPath = route.path;
+          break;
         }
-        break;
       }
     }
 
@@ -97,7 +102,7 @@ class HealthCareApp extends React.Component {
 
     this.props.onFieldsInitialized(sectionFields);
     if (validations.isValidSection(path, formData)) {
-      this.context.router.push(this.getUrl('next'));
+      this.context.router.push(this.getUrl('next', true));
       this.props.onCompletedStatus(path);
     }
     this.scrollToTop();

@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ErrorableCheckbox from '../form-elements/ErrorableCheckbox';
+import ErrorableRadioButtons from '../form-elements/ErrorableRadioButtons';
 import { isValidFinancialDisclosure } from '../../utils/validations';
 import { veteranUpdateField } from '../../actions';
+
+import { yesNo } from '../../utils/options-for-select.js';
 
 /**
  * Props:
@@ -13,6 +15,17 @@ import { veteranUpdateField } from '../../actions';
 class FinancialDisclosureSection extends React.Component {
   render() {
     let content;
+    let message;
+
+    if (this.props.data.understandsFinancialDisclosure.value === 'N') {
+      message = (
+        <div className="usa-alert usa-alert-info">
+          <div className="hca-alert-body">
+            <p>If you don't provide your financial information and you don't have another qualifying eligibility factor, VA can't enroll you.</p>
+          </div>
+        </div>
+      );
+    }
 
     if (this.props.isSectionComplete && this.props.reviewSection) {
       content = (<table className="review usa-table-borderless">
@@ -29,54 +42,53 @@ class FinancialDisclosureSection extends React.Component {
         <legend>Financial Disclosure</legend>
         <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
-          <p>You will now be asked to provide your financial information from the
-          most recent tax year. We ask for this information for three reasons:</p>
+          <p>Next, we'll ask you to provide your financial information from the most recent
+          tax year, which we will verify with the IRS. This information allows us to determine:</p>
 
           <ol>
-            <li>To determine your eligibility for health care if you do not have a
-            qualifying eligibility factor</li>
-            <li>To determine your eligibility for additional benefits, like travel
-            assistance, cost-free medications, and/or waiver of travel deductible</li>
-            <li>To determine whether you should be charged for copays and medication</li>
+            <li>Your eligibility for health care if you don't have another qualifying factor</li>
+            <li>Your eligibility for additional benefits, like travel assistance or cost-free medications</li>
+            <li>Whether you should be charged for copays and medication</li>
           </ol>
 
           <div className="usa-alert usa-alert-info">
             <div className="hca-alert-body">
               <p>
-                You are not required to provide your financial information. However,
-                <strong> if you do not have a qualifying eligibility factor, providing
-                your financial information is the only way to determine your eligibility.</strong>
+                Note: You don't have to provide your financial information. But if you don't have a qualifying
+                eligibility factor, this information is the only other way to determine your eligiblity. This
+                information also allows us to see if you should receive additional benefits like travel assistance
+                or waived copays.
               </p>
             </div>
           </div>
 
-          {/* Move this list to a tooltip in reference above, create new tooltip component */}
           <ul>Qualifying eligibility factors:
-            <li>Former prisoners of war</li>
-            <li>Purple Heart recipients</li>
-            <li>Recently discharged combat Veterans</li>
-            <li>Veterans discharged for a disability incurred or aggravated in the line of duty</li>
-            <li>Those receiving VA service-connected disability compensation</li>
-            <li>Veterans receiving a VA pension</li>
-            <li>Medicaid recipients</li>
-            <li>Veterans who served in Vietnam between January 9, 1962, and May 7, 1975</li>
-            <li>Veterans who served in Southwest Asia during the Gulf War between August 2, 1990, and November 11, 1998</li>
-            <li>Veterans who served at least 30 days at Camp Lejeune between August 1, 1953, and December 31, 1987.</li>
+            <li>Former prisoner of war</li>
+            <li>Received a Purple Heart</li>
+            <li>Recently discharged combat Veteran</li>
+            <li>Discharged for a disability that was acquired or became worse in the line of duty</li>
+            <li>Receiving VA service-connected disability compensation</li>
+            <li>Receiving a VA pension</li>
+            <li>Receiving Medicaid benefits</li>
+            <li>Served in Vietnam between January 9, 1962, and May 7, 1975</li>
+            <li>Served in Southwest Asia during the Gulf War between August 2, 1990, and November 11, 1998</li>
+            <li>Served at least 30 days at Camp Lejeune between August 1, 1953, and December 31, 1987</li>
           </ul>
 
           <div className="input-section">
-            <a target="_blank" href="http://www.va.gov/healthbenefits/cost/income_thresholds.asp">Learn more</a> about the income thresholds and copayments.
+            <a target="_blank" href="http://www.va.gov/healthbenefits/cost/income_thresholds.asp">Learn more</a> about our income thresholds and copayments.
           </div>
 
           <div className="input-section">
-            <ErrorableCheckbox required
-                errorMessage={isValidFinancialDisclosure(this.props.data) ? '' : 'Please acknowledge this requirement'}
+            <ErrorableRadioButtons required
+                errorMessage={isValidFinancialDisclosure(this.props.data) ? '' : 'Please select either "Yes" or "No"'}
                 label="I understand VA is not currently enrolling new applicants who decline to provide their financial information unless they have other qualifying eligibility factors."
                 name="understandsFinancialDisclosure"
-                checked={this.props.data.understandsFinancialDisclosure.value}
-                onValueChange={(update) => {this.props.onStateChange('understandsFinancialDisclosure', { value: update, dirty: false });}}/>
+                options={yesNo}
+                value={this.props.data.understandsFinancialDisclosure}
+                onValueChange={(update) => {this.props.onStateChange('understandsFinancialDisclosure', update);}}/>
           </div>
-
+          {message}
         </div>
       </fieldset>);
     }

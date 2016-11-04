@@ -55,7 +55,7 @@ const blankVeteran = {
   homePhone: makeField(''),
   mobilePhone: makeField(''),
 
-  understandsFinancialDisclosure: makeField(false),  // TODO(awong): Ignored by ES System
+  understandsFinancialDisclosure: makeField(''),  // TODO(awong): Ignored by ES System
 
   spouseFullName: {
     first: makeField(''),
@@ -272,7 +272,7 @@ const completeVeteran = {
     dirty: false
   },
   understandsFinancialDisclosure: {
-    value: true,
+    value: 'Y',
     dirty: false
   },
   spouseFullName: {
@@ -723,6 +723,7 @@ function veteranToApplication(veteran) {
       case 'childAttendedSchoolLastYear':
       case 'childCohabitedLastYear':
       case 'childReceivedSupportLastYear':
+      case 'understandsFinancialDisclosure':
         return value.value === 'Y';
 
       case 'childEducationExpenses':

@@ -388,5 +388,13 @@ module.exports = {
     'lastEntryDate',
     'lastDischargeDate',
     'dischargeType'
-  ]
+  ],
+  dependencies: {
+    veteranGrossIncome: ['understandsFinancialDisclosure'],
+    veteranNetIncome: ['understandsFinancialDisclosure'],
+    veteranOtherIncome: ['understandsFinancialDisclosure'],
+    spouseGrossIncome: ['understandsFinancialDisclosure'],
+    spouseNetIncome: ['understandsFinancialDisclosure'],
+    spouseOtherIncome: ['understandsFinancialDisclosure']
+  }
 };
