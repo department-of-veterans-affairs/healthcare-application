@@ -390,11 +390,11 @@ module.exports = {
     'dischargeType'
   ],
   dependencies: {
-    veteranGrossIncome: ['understandsFinancialDisclosure'],
-    veteranNetIncome: ['understandsFinancialDisclosure'],
-    veteranOtherIncome: ['understandsFinancialDisclosure'],
-    spouseGrossIncome: ['understandsFinancialDisclosure'],
-    spouseNetIncome: ['understandsFinancialDisclosure'],
-    spouseOtherIncome: ['understandsFinancialDisclosure']
+    veteranGrossIncome: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
+    veteranNetIncome: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
+    veteranOtherIncome: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
+    spouseGrossIncome: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
+    spouseNetIncome: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
+    spouseOtherIncome: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
   }
 };
