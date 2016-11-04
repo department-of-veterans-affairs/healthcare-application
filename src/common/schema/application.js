@@ -396,8 +396,8 @@ module.exports = {
     spouseGrossIncome: ['understandsFinancialDisclosure'],
     spouseNetIncome: ['understandsFinancialDisclosure'],
     spouseOtherIncome: ['understandsFinancialDisclosure'],
-		deductibleMedicalExpenses: ['understandsFinancialDisclosure'],
-		deductibleFuneralExpenses: ['understandsFinancialDisclosure'],
-		deductibleEducationExpenses: ['understandsFinancialDisclosure']
+    deductibleMedicalExpenses: ['understandsFinancialDisclosure'],
+    deductibleFuneralExpenses: ['understandsFinancialDisclosure'],
+    deductibleEducationExpenses: ['understandsFinancialDisclosure']
   }
 };
