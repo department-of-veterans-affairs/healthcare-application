@@ -10,4 +10,7 @@ HCA_MOCK_API=1 npm start &
 # via http://unix.stackexchange.com/questions/5277
 while ! echo exit | nc localhost 3000; do sleep 1; done
 
-npm run tests:e2e -- --env travis
+# Grab list of test environments from nightwatch.js
+environments=$(node -e "console.log(require('./test/e2e/nightwatch.js').saucelabs_environments.join())")
+
+./node_modules/nightwatch/bin/nightwatch --config ./test/e2e/nightwatch.js --env $environments
