@@ -18,17 +18,3 @@ describe('Veteran model', () => {
     });
   });
 });
-
-describe('Veteran model', () => {
-  describe('veteranToApplication', () => {
-    it('should not validate if depedencies aren\'t met.', () => {
-      const data = _.cloneDeep(veteran.completeVeteran);
-      console.log(data);
-      const application = JSON.parse(veteran.veteranToApplication(data));
-      const valid = validate(application);
-      console.log(valid);
-      chai.assert.isFalse(valid, JSON.stringify([validate.errors, application], null, 2));
-      application.should.deep.eql(fakeApplication);
-    });
-  });
-});
