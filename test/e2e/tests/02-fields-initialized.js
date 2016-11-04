@@ -191,7 +191,6 @@ module.exports = {
     expectInputToNotBeSelected(client, 'input[name="provideSupportLastYear-0"]');
     expectInputToNotBeSelected(client, 'input[name="provideSupportLastYear-1"]');
     common.completeSpouseInformation(client, common.testValues, true);
-    client.pause(30000);
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/spouse-information');
 
@@ -249,6 +248,7 @@ module.exports = {
     expectValueToBeBlank(client, 'input[name="deductibleMedicalExpenses"]');
     expectValueToBeBlank(client, 'input[name="deductibleFuneralExpenses"]');
     expectValueToBeBlank(client, 'input[name="deductibleEducationExpenses"]');
+    common.completeDeductableExpenses(client, common.testValues);
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/deductible-expenses');
 
