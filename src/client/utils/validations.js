@@ -290,9 +290,10 @@ function isValidSpouseInformation(data) {
         isValidField(isValidPhone, data.spousePhone);
   }
 
-  return isNotBlank(data.maritalStatus.value) &&
+  return data.understandsFinancialDisclosure === 'N' || (
       isValidSpouse &&
-      isValidSpouseAddress;
+      isValidSpouseAddress
+    );
 }
 
 function isValidChildInformationField(child) {
@@ -318,8 +319,10 @@ function isValidChildren(data) {
     }
   }
 
-  return isNotBlank(data.hasChildrenToReport.value) &&
-      allChildrenValid;
+  return data.understandsFinancialDisclosure || (
+      isNotBlank(data.hasChildrenToReport.value) &&
+      allChildrenValid
+    );
 }
 
 function isValidChildrenIncome(children) {
@@ -340,11 +343,13 @@ function isValidAnnualIncome(data) {
       isValidRequiredField(isValidMonetaryValue, data.spouseOtherIncome);
   }
 
-  return isValidRequiredField(isValidMonetaryValue, data.veteranGrossIncome) &&
-    isValidRequiredField(isValidMonetaryValue, data.veteranNetIncome) &&
-    isValidRequiredField(isValidMonetaryValue, data.veteranOtherIncome) &&
-    isValidSpouseIncomeFields &&
-    isValidChildrenIncome(data.children);
+  return data.understandsFinancialDisclosure || (
+      data.understandsFinancialisValidRequiredField(isValidMonetaryValue, data.veteranGrossIncome) &&
+      isValidRequiredField(isValidMonetaryValue, data.veteranNetIncome) &&
+      isValidRequiredField(isValidMonetaryValue, data.veteranOtherIncome) &&
+      isValidSpouseIncomeFields &&
+      isValidChildrenIncome(data.children)
+    );
 }
 
 function isValidDeductibleExpenses(data) {
@@ -395,6 +400,23 @@ function isValidServiceInformation(data) {
 }
 
 function isValidForm(data) {
+  console.log(isValidPersonalInfoSection(data),
+  isValidBirthInformationSection(data),
+  isValidDemographicInformation(data),
+  isValidVeteranAddress(data),
+  isValidContactInformationSection(data),
+  isValidServiceInformation(data),
+  isValidVaInformation(data),
+  isValidFinancialDisclosure(data),
+  isValidSpouseInformation(data),
+  isValidChildren(data),
+  isValidAnnualIncome(data),
+  isValidDeductibleExpenses(data),
+  isValidVAFacility(data),
+  isValidGeneralInsurance(data),
+  isValidMedicareMedicaid(data));
+
+
   return isValidPersonalInfoSection(data) &&
   isValidBirthInformationSection(data) &&
   isValidDemographicInformation(data) &&
