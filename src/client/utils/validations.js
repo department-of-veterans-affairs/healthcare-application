@@ -401,22 +401,6 @@ function isValidServiceInformation(data) {
 }
 
 function isValidForm(data) {
-  console.log(isValidPersonalInfoSection(data),
-  isValidBirthInformationSection(data),
-  isValidDemographicInformation(data),
-  isValidVeteranAddress(data),
-  isValidContactInformationSection(data),
-  isValidServiceInformation(data),
-  isValidVaInformation(data),
-  isValidFinancialDisclosure(data),
-  isValidSpouseInformation(data),
-  isValidChildren(data),
-  isValidAnnualIncome(data),
-  isValidDeductibleExpenses(data),
-  isValidVAFacility(data),
-  isValidGeneralInsurance(data),
-  isValidMedicareMedicaid(data));
-
   return isValidPersonalInfoSection(data) &&
   isValidBirthInformationSection(data) &&
   isValidDemographicInformation(data) &&
