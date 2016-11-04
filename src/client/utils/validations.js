@@ -290,7 +290,7 @@ function isValidSpouseInformation(data) {
         isValidField(isValidPhone, data.spousePhone);
   }
 
-  return data.understandsFinancialDisclosure === 'N' || (
+  return data.understandsFinancialDisclosure.value === 'N' || (
       isNotBlank(data.maritalStatus.value) &&
       isValidSpouse &&
       isValidSpouseAddress
@@ -320,7 +320,10 @@ function isValidChildren(data) {
     }
   }
 
-  return isNotBlank(data.hasChildrenToReport.value) && allChildrenValid;
+  return data.understandsFinancialDisclosure.value === 'N' || (
+    isNotBlank(data.hasChildrenToReport.value)
+    && allChildrenValid
+  );
 }
 
 function isValidChildrenIncome(children) {
@@ -341,8 +344,8 @@ function isValidAnnualIncome(data) {
       isValidRequiredField(isValidMonetaryValue, data.spouseOtherIncome);
   }
 
-  return data.understandsFinancialDisclosure || (
-      data.understandsFinancialisValidRequiredField(isValidMonetaryValue, data.veteranGrossIncome) &&
+  return data.understandsFinancialDisclosure.value === 'N' || (
+      isValidRequiredField(isValidMonetaryValue, data.veteranGrossIncome) &&
       isValidRequiredField(isValidMonetaryValue, data.veteranNetIncome) &&
       isValidRequiredField(isValidMonetaryValue, data.veteranOtherIncome) &&
       isValidSpouseIncomeFields &&
@@ -398,6 +401,22 @@ function isValidServiceInformation(data) {
 }
 
 function isValidForm(data) {
+  console.log(isValidPersonalInfoSection(data),
+  isValidBirthInformationSection(data),
+  isValidDemographicInformation(data),
+  isValidVeteranAddress(data),
+  isValidContactInformationSection(data),
+  isValidServiceInformation(data),
+  isValidVaInformation(data),
+  isValidFinancialDisclosure(data),
+  isValidSpouseInformation(data),
+  isValidChildren(data),
+  isValidAnnualIncome(data),
+  isValidDeductibleExpenses(data),
+  isValidVAFacility(data),
+  isValidGeneralInsurance(data),
+  isValidMedicareMedicaid(data));
+
   return isValidPersonalInfoSection(data) &&
   isValidBirthInformationSection(data) &&
   isValidDemographicInformation(data) &&
