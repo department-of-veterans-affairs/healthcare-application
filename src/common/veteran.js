@@ -57,7 +57,7 @@ const blankVeteran = {
   homePhone: makeField(''),
   mobilePhone: makeField(''),
 
-  discloseFinancialInformation: makeField(''),  
+  discloseFinancialInformation: makeField(''),
 
   spouseFullName: {
     first: makeField(''),

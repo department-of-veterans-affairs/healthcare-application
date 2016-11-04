@@ -941,19 +941,7 @@ function veteranToFinancialsInfo(veteran) {
   });
 
   const dependentFinancials = veteranToDependentFinancialsCollection(veteran);
-  // let hasDependentFinancials = false;
-  // if (dependentFinancials) {
-  //   hasDependentFinancials = _.compact(dependentFinancials.dependentFinancials.map((child) => { return child.incomes; })).length > 0;
-  // }
   const spouseFinancials = veteranToSpouseFinancials(veteran);
-  // const hasSpouseIncome = spouseFinancials && spouseFinancials.spouseFinancials.incomes;
-
-  // const hasIncomeData = expenses || incomes || hasSpouseIncome || hasDependentFinancials;
-
-  // if (!hasIncomeData) {
-  //   return undefined;
-  // }
-
   const discloseFinancials = veteran.discloseFinancialInformation;
 
   return {
