@@ -354,9 +354,11 @@ function isValidAnnualIncome(data) {
 }
 
 function isValidDeductibleExpenses(data) {
-  return isValidField(isValidMonetaryValue, data.deductibleMedicalExpenses) &&
-    isValidField(isValidMonetaryValue, data.deductibleFuneralExpenses) &&
-    isValidField(isValidMonetaryValue, data.deductibleEducationExpenses);
+  return data.understandsFinancialDisclosure.value === 'N' || (
+      isValidRequiredField(isValidMonetaryValue, data.deductibleMedicalExpenses) &&
+      isValidRequiredField(isValidMonetaryValue, data.deductibleFuneralExpenses) &&
+      isValidRequiredField(isValidMonetaryValue, data.deductibleEducationExpenses)
+    );
 }
 
 function isValidVAFacility(data) {
