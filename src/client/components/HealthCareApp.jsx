@@ -99,16 +99,11 @@ class HealthCareApp extends React.Component {
     const path = this.props.location.pathname;
     const formData = this.props.data;
     const sectionFields = this.props.uiState.sections[path].fields;
-    const noScrollPages = ['/household-information/financial-disclosure', '/household-information/annual-income'];
 
     this.props.onFieldsInitialized(sectionFields);
     if (validations.isValidSection(path, formData)) {
       this.context.router.push(this.getUrl('next', true));
       this.props.onCompletedStatus(path);
-    } else {
-      if (_.includes(noScrollPages, path)) {
-        return;
-      }
     }
     this.scrollToTop();
   }
