@@ -190,8 +190,6 @@ module.exports = {
 
     // Edit spouse information
     vetInfoCopy.maritalStatus = 'Separated';
-    vetInfoCopy.dateOfMarriage.year = '';
-    vetInfoCopy.spouseDateOfBirth.year = '';
     editSection(client);
     common.completeSpouseInformation(client, vetInfoCopy, true);
     verifyEdit(client, 'Separated');

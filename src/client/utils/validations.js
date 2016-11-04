@@ -291,6 +291,7 @@ function isValidSpouseInformation(data) {
   }
 
   return data.understandsFinancialDisclosure === 'N' || (
+      isNotBlank(data.maritalStatus.value) &&
       isValidSpouse &&
       isValidSpouseAddress
     );
@@ -319,10 +320,7 @@ function isValidChildren(data) {
     }
   }
 
-  return data.understandsFinancialDisclosure || (
-      isNotBlank(data.hasChildrenToReport.value) &&
-      allChildrenValid
-    );
+  return isNotBlank(data.hasChildrenToReport.value) && allChildrenValid;
 }
 
 function isValidChildrenIncome(children) {
@@ -400,23 +398,6 @@ function isValidServiceInformation(data) {
 }
 
 function isValidForm(data) {
-  console.log(isValidPersonalInfoSection(data),
-  isValidBirthInformationSection(data),
-  isValidDemographicInformation(data),
-  isValidVeteranAddress(data),
-  isValidContactInformationSection(data),
-  isValidServiceInformation(data),
-  isValidVaInformation(data),
-  isValidFinancialDisclosure(data),
-  isValidSpouseInformation(data),
-  isValidChildren(data),
-  isValidAnnualIncome(data),
-  isValidDeductibleExpenses(data),
-  isValidVAFacility(data),
-  isValidGeneralInsurance(data),
-  isValidMedicareMedicaid(data));
-
-
   return isValidPersonalInfoSection(data) &&
   isValidBirthInformationSection(data) &&
   isValidDemographicInformation(data) &&
