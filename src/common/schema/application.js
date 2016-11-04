@@ -260,7 +260,7 @@ module.exports = {
     mobilePhone: {
       $ref: '#/definitions/phone'
     },
-    understandsFinancialDisclosure: {
+    discloseFinancialInformation: {
       type: 'boolean'
     },
     spouseFullName: {
@@ -398,14 +398,14 @@ module.exports = {
     'dischargeType'
   ],
   dependencies: {
-    veteranGrossIncome: ['understandsFinancialDisclosure'],
-    veteranNetIncome: ['understandsFinancialDisclosure'],
-    veteranOtherIncome: ['understandsFinancialDisclosure'],
-    spouseGrossIncome: ['understandsFinancialDisclosure'],
-    spouseNetIncome: ['understandsFinancialDisclosure'],
-    spouseOtherIncome: ['understandsFinancialDisclosure'],
-    deductibleMedicalExpenses: ['understandsFinancialDisclosure'],
-    deductibleFuneralExpenses: ['understandsFinancialDisclosure'],
-    deductibleEducationExpenses: ['understandsFinancialDisclosure']
+    veteranGrossIncome: ['discloseFinancialInformation'],
+    veteranNetIncome: ['discloseFinancialInformation'],
+    veteranOtherIncome: ['discloseFinancialInformation'],
+    spouseGrossIncome: ['discloseFinancialInformation'],
+    spouseNetIncome: ['discloseFinancialInformation'],
+    spouseOtherIncome: ['discloseFinancialInformation'],
+    deductibleMedicalExpenses: ['discloseFinancialInformation'],
+    deductibleFuneralExpenses: ['discloseFinancialInformation'],
+    deductibleEducationExpenses: ['discloseFinancialInformation']
   }
 };

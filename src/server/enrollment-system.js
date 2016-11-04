@@ -921,8 +921,8 @@ function veteranToEnrollmentDeterminationInfo(veteran) {
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from employment.
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, "Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from FARM,  RANCH,  PROPERTY OR BUSINESS."
 
-function booleanToIncomeTest(hasIncomeData) {
-  if (hasIncomeData) {
+function booleanToIncomeTest(discloseFinancials) {
+  if (discloseFinancials) {
     return { discloseFinancialInformation: true };
   }
   return undefined;
@@ -941,21 +941,23 @@ function veteranToFinancialsInfo(veteran) {
   });
 
   const dependentFinancials = veteranToDependentFinancialsCollection(veteran);
-  let hasDependentFinancials = false;
-  if (dependentFinancials) {
-    hasDependentFinancials = _.compact(dependentFinancials.dependentFinancials.map((child) => { return child.incomes; })).length > 0;
-  }
+  // let hasDependentFinancials = false;
+  // if (dependentFinancials) {
+  //   hasDependentFinancials = _.compact(dependentFinancials.dependentFinancials.map((child) => { return child.incomes; })).length > 0;
+  // }
   const spouseFinancials = veteranToSpouseFinancials(veteran);
-  const hasSpouseIncome = spouseFinancials && spouseFinancials.spouseFinancials.incomes;
+  // const hasSpouseIncome = spouseFinancials && spouseFinancials.spouseFinancials.incomes;
 
-  const hasIncomeData = expenses || incomes || hasSpouseIncome || hasDependentFinancials;
+  // const hasIncomeData = expenses || incomes || hasSpouseIncome || hasDependentFinancials;
 
-  if (!hasIncomeData) {
-    return undefined;
-  }
+  // if (!hasIncomeData) {
+  //   return undefined;
+  // }
+
+  const discloseFinancials = veteran.discloseFinancialInformation;
 
   return {
-    incomeTest: booleanToIncomeTest(hasIncomeData),
+    incomeTest: booleanToIncomeTest(discloseFinancials),
     financialStatement: {
       expenses,
       incomes,

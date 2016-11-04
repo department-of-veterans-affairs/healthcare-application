@@ -268,7 +268,7 @@ function isValidContactInformationSection(data) {
 }
 
 function isValidFinancialDisclosure(data) {
-  return validateIfDirty(data.understandsFinancialDisclosure, isNotBlank);
+  return validateIfDirty(data.discloseFinancialInformation, isNotBlank);
 }
 
 function isValidRequiredIncome(income) {
@@ -294,7 +294,7 @@ function isValidSpouseInformation(data) {
         isValidField(isValidPhone, data.spousePhone);
   }
 
-  return data.understandsFinancialDisclosure.value === 'N' || (
+  return data.discloseFinancialInformation.value === 'N' || (
       isNotBlank(data.maritalStatus.value) &&
       isValidSpouse &&
       isValidSpouseAddress
@@ -324,7 +324,7 @@ function isValidChildren(data) {
     }
   }
 
-  return data.understandsFinancialDisclosure.value === 'N' || (
+  return data.discloseFinancialInformation.value === 'N' || (
     isNotBlank(data.hasChildrenToReport.value)
     && allChildrenValid
   );
@@ -348,7 +348,7 @@ function isValidAnnualIncome(data) {
       isValidRequiredField(isValidMonetaryValue, data.spouseOtherIncome);
   }
 
-  return data.understandsFinancialDisclosure.value === 'N' || (
+  return data.discloseFinancialInformation.value === 'N' || (
       isValidRequiredField(isValidMonetaryValue, data.veteranGrossIncome) &&
       isValidRequiredField(isValidMonetaryValue, data.veteranNetIncome) &&
       isValidRequiredField(isValidMonetaryValue, data.veteranOtherIncome) &&
