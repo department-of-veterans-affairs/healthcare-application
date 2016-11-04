@@ -267,10 +267,10 @@ function isValidFinancialDisclosure(data) {
   return validateIfDirty(data.understandsFinancialDisclosure, isNotBlank);
 }
 
-function isValidIncome(income) {
-  return isValidField(isValidMonetaryValue, income.grossIncome) &&
-      isValidField(isValidMonetaryValue, income.netIncome) &&
-      isValidField(isValidMonetaryValue, income.otherIncome);
+function isValidRequiredIncome(income) {
+  return isValidRequiredField(isValidMonetaryValue, income.grossIncome) &&
+      isValidRequiredField(isValidMonetaryValue, income.netIncome) &&
+      isValidRequiredField(isValidMonetaryValue, income.otherIncome);
 }
 
 function isValidSpouseInformation(data) {
@@ -328,7 +328,7 @@ function isValidChildren(data) {
 
 function isValidChildrenIncome(children) {
   for (let i = 0; i < children.length; i++) {
-    if (!isValidIncome(children[i])) {
+    if (!isValidRequiredIncome(children[i])) {
       return false;
     }
   }
