@@ -1,5 +1,4 @@
 const chai = require('chai');
-const _ = require('lodash');
 chai.should();
 
 const veteran = require('../../src/common/veteran');
