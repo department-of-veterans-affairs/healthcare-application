@@ -389,7 +389,7 @@ function completeChildInformation(client, data, onlyRequiredFields) {
   }
 }
 
-function completeDeductableExpenses(client, data) {
+function completeDeductibleExpenses(client, data) {
   client.expect.element('input[name="deductibleMedicalExpenses"]').to.be.visible.before(timeouts.normal);
   client
     .setValue('input[name="deductibleMedicalExpenses"]', data.deductibleMedicalExpenses)
@@ -450,7 +450,7 @@ module.exports = {
   completeSpouseInformation,
   completeAnnualIncomeInformation,
   completeChildInformation,
-  completeDeductableExpenses,
+  completeDeductibleExpenses,
   completeMedicareAndMedicaid,
   completeInsuranceInformation,
   completeVaInsuranceInformation,
