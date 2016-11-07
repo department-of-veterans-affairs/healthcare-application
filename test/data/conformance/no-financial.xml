@@ -6,39 +6,6 @@
       <va:version>1986360435</va:version>
     </va:formIdentifier>
     <va:summary>
-      <eeSummary:associations xmlns:eeSummary="http://jaxws.webservices.esr.med.va.gov/schemas">
-        <eeSummary:association>
-          <eeSummary:givenName>FIRSTCHILDA</eeSummary:givenName>
-          <eeSummary:middleName>MIDDLECHILDA</eeSummary:middleName>
-          <eeSummary:familyName>LASTCHILDA</eeSummary:familyName>
-          <eeSummary:suffix>JR.</eeSummary:suffix>
-          <eeSummary:contactType>11</eeSummary:contactType>
-          <eeSummary:relationship>Stepson</eeSummary:relationship>
-        </eeSummary:association>
-        <eeSummary:association>
-          <eeSummary:givenName>FIRSTCHILDB</eeSummary:givenName>
-          <eeSummary:middleName>MIDDLECHILDB</eeSummary:middleName>
-          <eeSummary:familyName>LASTCHILDB</eeSummary:familyName>
-          <eeSummary:suffix>SR.</eeSummary:suffix>
-          <eeSummary:contactType>11</eeSummary:contactType>
-          <eeSummary:relationship>Stepdaughter</eeSummary:relationship>
-        </eeSummary:association>
-        <eeSummary:association>
-          <eeSummary:address>
-            <eeSummary:city>Dulles</eeSummary:city>
-            <eeSummary:country>USA</eeSummary:country>
-            <eeSummary:line1>123 NW 8th St</eeSummary:line1>
-            <eeSummary:state>VA</eeSummary:state>
-            <eeSummary:zipCode>20101</eeSummary:zipCode>
-          </eeSummary:address>
-          <eeSummary:givenName>FIRSTSPOUSE</eeSummary:givenName>
-          <eeSummary:middleName>MIDDLESPOUSE</eeSummary:middleName>
-          <eeSummary:familyName>LASTSPOUSE</eeSummary:familyName>
-          <eeSummary:suffix>SR.</eeSummary:suffix>
-          <eeSummary:contactType>10</eeSummary:contactType>
-          <eeSummary:relationship>SPOUSE</eeSummary:relationship>
-        </eeSummary:association>
-      </eeSummary:associations>
       <eeSummary:demographics xmlns:eeSummary="http://jaxws.webservices.esr.med.va.gov/schemas">
         <eeSummary:appointmentRequestResponse>true</eeSummary:appointmentRequestResponse>
         <eeSummary:contactInfo>
@@ -70,7 +37,7 @@
           </eeSummary:phones>
         </eeSummary:contactInfo>
         <eeSummary:ethnicity>2135-2</eeSummary:ethnicity>
-        <eeSummary:maritalStatus>M</eeSummary:maritalStatus>
+        <eeSummary:maritalStatus>S</eeSummary:maritalStatus>
         <eeSummary:preferredFacility>689A4</eeSummary:preferredFacility>
         <eeSummary:races>
           <eeSummary:race>1002-5</eeSummary:race>
@@ -96,6 +63,12 @@
           <eeSummary:radiationExposureInd>true</eeSummary:radiationExposureInd>
         </eeSummary:specialFactors>
       </eeSummary:enrollmentDeterminationInfo>
+      <eeSummary:financialsInfo xmlns:eeSummary="http://jaxws.webservices.esr.med.va.gov/schemas">
+        <eeSummary:financialStatement>
+          <eeSummary:marriedLastCalendarYear>false</eeSummary:marriedLastCalendarYear>
+          <eeSummary:numberOfDependentChildren>0</eeSummary:numberOfDependentChildren>
+        </eeSummary:financialStatement>
+      </eeSummary:financialsInfo>
       <eeSummary:insuranceList xmlns:eeSummary="http://jaxws.webservices.esr.med.va.gov/schemas">
         <eeSummary:insurance>
           <eeSummary:companyName>MyInsruance</eeSummary:companyName>
