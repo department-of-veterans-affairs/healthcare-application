@@ -211,7 +211,7 @@ module.exports = {
       .setValue('input[name="spouseOtherIncome"]', '5000')
       .setValue('input[name="childGrossIncome"]', '4000')
       .setValue('input[name="childNetIncome"]', '3000')
-      .setValue('input[name="ChildOtherIncome"]', '2000')
+      .setValue('input[name="childOtherIncome"]', '2000')
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/annual-income');
 
