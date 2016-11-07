@@ -29,6 +29,10 @@ function isBlank(value) {
   return value === '';
 }
 
+function isDirty(field) {
+  return field.dirty;
+}
+
 function isNotBlank(value) {
   return value !== '';
 }
@@ -472,6 +476,7 @@ export {
   validateIfDirtyDate,
   validateIfDirtyProvider,
   initializeNullValues,
+  isDirty,
   isBlank,
   isNotBlank,
   isValidDate,

@@ -5,7 +5,7 @@ import _ from 'lodash';
 import ChildIncome from './ChildIncome';
 import ErrorableTextInput from '../form-elements/ErrorableTextInput';
 import FixedTable from '../form-elements/FixedTable.jsx';
-import { isValidField, isValidMonetaryValue } from '../../utils/validations';
+import { getMonetaryErrorMessage } from '../../utils/messages';
 import { veteranUpdateField } from '../../actions';
 
 /**
@@ -14,18 +14,6 @@ import { veteranUpdateField } from '../../actions';
  * `reviewSection` - Boolean. Hides components that are only needed for ReviewAndSubmitSection.
  */
 class AnnualIncomeSection extends React.Component {
-
-  getRequiredErrorMessage(field) {
-    let result;
-    if (isValidField(isValidMonetaryValue, field)) {
-      if (field.dirty && field.value === '') {
-        result = 'Please enter a number.';
-      }
-    } else {
-      result = 'Please enter only numbers and a decimal point if necessary (no commas or currency signs)';
-    }
-    return result;
-  }
 
   handleChange(field, update) {
     this.props.onStateChange(field, update);
@@ -77,7 +65,7 @@ class AnnualIncomeSection extends React.Component {
     let spouseIncomeReview;
     let content;
 
-    const message = this.getRequiredErrorMessage;
+    const message = getMonetaryErrorMessage;
 
     if (this.props.data.hasChildrenToReport.value === 'Y') {
       childrenIncomeInput = (
