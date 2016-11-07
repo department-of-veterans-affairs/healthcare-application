@@ -191,7 +191,6 @@ module.exports = {
     expectInputToNotBeSelected(client, 'input[name="provideSupportLastYear-0"]');
     expectInputToNotBeSelected(client, 'input[name="provideSupportLastYear-1"]');
     common.completeSpouseInformation(client, common.testValues, true);
-    client.pause(30000);
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/spouse-information');
 
@@ -239,7 +238,7 @@ module.exports = {
     expectValueToBeBlank(client, 'input[name="spouseOtherIncome"]');
     expectValueToBeBlank(client, 'input[name="childGrossIncome"]');
     expectValueToBeBlank(client, 'input[name="childNetIncome"]');
-    expectValueToBeBlank(client, 'input[name="ChildOtherIncome"]');
+    expectValueToBeBlank(client, 'input[name="childOtherIncome"]');
     common.completeAnnualIncomeInformation(client, common.testValues);
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/annual-income');
