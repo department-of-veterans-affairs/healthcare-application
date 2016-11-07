@@ -358,7 +358,10 @@ function completeAnnualIncomeInformation(client, data, onlyRequiredFields) {
     client
       .setValue('input[name="spouseGrossIncome"]', data.spouseGrossIncome)
       .setValue('input[name="spouseNetIncome"]', data.spouseNetIncome)
-      .setValue('input[name="spouseOtherIncome"]', data.spouseOtherIncome);
+      .setValue('input[name="spouseOtherIncome"]', data.spouseOtherIncome)
+      .setValue('input[name="childGrossIncome"]', data.children[0].grossIncome)
+      .setValue('input[name="childNetIncome"]', data.children[0].netIncome)
+      .setValue('input[name="childOtherIncome"]', data.children[0].otherIncome);
   }
 }
 
