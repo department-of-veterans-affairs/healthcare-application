@@ -238,7 +238,7 @@ module.exports = {
     expectValueToBeBlank(client, 'input[name="spouseOtherIncome"]');
     expectValueToBeBlank(client, 'input[name="childGrossIncome"]');
     expectValueToBeBlank(client, 'input[name="childNetIncome"]');
-    expectValueToBeBlank(client, 'input[name="ChildOtherIncome"]');
+    expectValueToBeBlank(client, 'input[name="childOtherIncome"]');
     common.completeAnnualIncomeInformation(client, common.testValues);
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/annual-income');
