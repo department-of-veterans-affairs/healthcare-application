@@ -91,7 +91,10 @@
       "childDisabledBefore18": false,
       "childAttendedSchoolLastYear": true,
       "childCohabitedLastYear": false,
-      "childReceivedSupportLastYear": true
+      "childReceivedSupportLastYear": true,
+      "grossIncome": 0,
+      "netIncome": 0,
+      "otherIncome": 0
     }
   ],
   "veteranGrossIncome": 123.33,
