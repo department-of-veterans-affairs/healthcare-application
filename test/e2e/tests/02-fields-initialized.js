@@ -157,12 +157,6 @@ module.exports = {
     expectNavigateAwayFrom(client, '/household-information/financial-disclosure');
 
     // Spouse information Page.
-    client.expect.element('select[name="maritalStatus"]').to.be.visible;
-    expectValueToBeBlank(client, 'select[name="maritalStatus"]');
-    client
-      .setValue('select[name="maritalStatus"]', 'Married')
-      .click('.form-panel');
-
     client.expect.element('input[name="fname"]').to.be.visible.before(common.timeouts.normal);
     expectValueToBeBlank(client, 'input[name="fname"]');
     expectValueToBeBlank(client, 'input[name="mname"]');
