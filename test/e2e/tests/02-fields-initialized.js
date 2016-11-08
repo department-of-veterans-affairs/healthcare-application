@@ -248,6 +248,7 @@ module.exports = {
     expectValueToBeBlank(client, 'input[name="deductibleMedicalExpenses"]');
     expectValueToBeBlank(client, 'input[name="deductibleFuneralExpenses"]');
     expectValueToBeBlank(client, 'input[name="deductibleEducationExpenses"]');
+    common.completeDeductibleExpenses(client, common.testValues);
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/deductible-expenses');
 
