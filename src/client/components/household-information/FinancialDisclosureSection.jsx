@@ -43,32 +43,31 @@ class FinancialDisclosureSection extends React.Component {
         <p>(<span className="hca-required-span">*</span>) Indicates a required field</p>
         <div className="input-section">
           <p>Next, we'll ask you to provide your financial information from the most recent
-          tax year, which we will verify with the IRS. This information allows us to determine:</p>
+          tax year, which we will verify with the IRS. We use this information to figure out if you:</p>
 
           <ol>
-            <li>Your eligibility for health care if you don't have another qualifying factor</li>
-            <li>Your eligibility for additional benefits, like travel assistance or cost-free medications</li>
-            <li>Whether you should be charged for copays and medication</li>
+            <li>Are eligible for health care even if you don't have one of the qualifying factors</li>
+            <li>Are eligible for added benefits, like reimbusement for travel costs or cost-free medications</li>
+            <li>Should be charged for copays or medication</li>
           </ol>
 
           <div className="usa-alert usa-alert-info">
             <div className="hca-alert-body">
               <p>
                 Note: You don't have to provide your financial information. But if you don't have a qualifying
-                eligibility factor, this information is the only other way to determine your eligiblity. This
-                information also allows us to see if you should receive additional benefits like travel assistance
-                or waived copays.
+                eligibility factor, this information is the only other way for us to see if you can get VA
+                health care benefits-- including added benefits like waived copays.
               </p>
             </div>
           </div>
 
-          <ul>Qualifying eligibility factors:
+          <ul>Qualifying factors:
             <li>Former prisoner of war</li>
             <li>Received a Purple Heart</li>
             <li>Recently discharged combat Veteran</li>
-            <li>Discharged for a disability that was acquired or became worse in the line of duty</li>
-            <li>Receiving VA service-connected disability compensation</li>
-            <li>Receiving a VA pension</li>
+            <li>Discharged for a disability that resulted from your service or got worse in the line of duty</li>
+            <li>Getting VA service-connected disability compensation</li>
+            <li>Getting a VA pension</li>
             <li>Receiving Medicaid benefits</li>
             <li>Served in Vietnam between January 9, 1962, and May 7, 1975</li>
             <li>Served in Southwest Asia during the Gulf War between August 2, 1990, and November 11, 1998</li>
@@ -76,13 +75,13 @@ class FinancialDisclosureSection extends React.Component {
           </ul>
 
           <div className="input-section">
-            <a target="_blank" href="http://www.va.gov/healthbenefits/cost/income_thresholds.asp">Learn more</a> about our income thresholds and copayments.
+            <a target="_blank" href="http://www.va.gov/healthbenefits/cost/income_thresholds.asp">Learn more</a> about our income thresholds (also called income limits) and copayments.
           </div>
 
           <div className="input-section">
             <ErrorableRadioButtons required
                 errorMessage={isValidFinancialDisclosure(this.props.data) ? '' : 'Please select either "Yes" or "No"'}
-                label="I understand VA is not currently enrolling new applicants who decline to provide their financial information unless they have other qualifying eligibility factors."
+                label="Do you want to provide your financial information?"
                 name="understandsFinancialDisclosure"
                 options={yesNo}
                 value={this.props.data.understandsFinancialDisclosure}
