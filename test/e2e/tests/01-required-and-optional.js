@@ -132,9 +132,9 @@ module.exports = {
     expectNavigateAwayFrom(client, '/va-benefits/basic-information');
 
     // Financial disclosure page.
-    client.expect.element('input[name="understandsFinancialDisclosure"] + label').to.be.visible;
+    client.expect.element('input[name="understandsFinancialDisclosure-0"] + label').to.be.visible;
     client
-      .click('input[name="understandsFinancialDisclosure"]')
+      .click('input[name="understandsFinancialDisclosure-0"]')
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/financial-disclosure');
 
@@ -211,7 +211,7 @@ module.exports = {
       .setValue('input[name="spouseOtherIncome"]', '5000')
       .setValue('input[name="childGrossIncome"]', '4000')
       .setValue('input[name="childNetIncome"]', '3000')
-      .setValue('input[name="ChildOtherIncome"]', '2000')
+      .setValue('input[name="childOtherIncome"]', '2000')
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/annual-income');
 

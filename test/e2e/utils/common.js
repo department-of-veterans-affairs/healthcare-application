@@ -288,10 +288,10 @@ function completeVaBenefits(client, data, onlyRequiredFields) {
 }
 
 function completeFinancialDisclosure(client, data, onlyRequiredFields) {
-  client.click('input[name="understandsFinancialDisclosure"]');
+  client.click('input[name="understandsFinancialDisclosure-1"]');
 
   if (!onlyRequiredFields) {
-    onlyRequiredFields;
+    client.click('input[name="understandsFinancialDisclosure-0"]');
   }
 }
 
@@ -344,6 +344,24 @@ function completeSpouseInformation(client, data, onlyRequiredFields) {
       .click('input[name="sameAddress-1"]')
       .click('input[name="cohabitedLastYear-0"]')
       .click('input[name="provideSupportLastYear-0"]');
+  }
+}
+
+function completeAnnualIncomeInformation(client, data, onlyRequiredFields) {
+  client.expect.element('input[name="veteranGrossIncome"]').to.be.visible.before(timeouts.normal);
+  client
+    .setValue('input[name="veteranGrossIncome"]', data.veteranGrossIncome)
+    .setValue('input[name="veteranNetIncome"]', data.veteranNetIncome)
+    .setValue('input[name="veteranOtherIncome"]', data.veteranOtherIncome);
+
+  if (!onlyRequiredFields) {
+    client
+      .setValue('input[name="spouseGrossIncome"]', data.spouseGrossIncome)
+      .setValue('input[name="spouseNetIncome"]', data.spouseNetIncome)
+      .setValue('input[name="spouseOtherIncome"]', data.spouseOtherIncome)
+      .setValue('input[name="childGrossIncome"]', data.children[0].grossIncome)
+      .setValue('input[name="childNetIncome"]', data.children[0].netIncome)
+      .setValue('input[name="childOtherIncome"]', data.children[0].otherIncome);
   }
 }
 
@@ -424,6 +442,7 @@ module.exports = {
   completeVaBenefits,
   completeFinancialDisclosure,
   completeSpouseInformation,
+  completeAnnualIncomeInformation,
   completeChildInformation,
   completeMedicareAndMedicaid,
   completeInsuranceInformation,

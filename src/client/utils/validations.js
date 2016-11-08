@@ -29,6 +29,10 @@ function isBlank(value) {
   return value === '';
 }
 
+function isDirty(field) {
+  return field.dirty;
+}
+
 function isNotBlank(value) {
   return value !== '';
 }
@@ -264,13 +268,13 @@ function isValidContactInformationSection(data) {
 }
 
 function isValidFinancialDisclosure(data) {
-  return validateIfDirty(data.understandsFinancialDisclosure, _.identity);
+  return validateIfDirty(data.understandsFinancialDisclosure, isNotBlank);
 }
 
-function isValidIncome(income) {
-  return isValidField(isValidMonetaryValue, income.grossIncome) &&
-      isValidField(isValidMonetaryValue, income.netIncome) &&
-      isValidField(isValidMonetaryValue, income.otherIncome);
+function isValidRequiredIncome(income) {
+  return isValidRequiredField(isValidMonetaryValue, income.grossIncome) &&
+      isValidRequiredField(isValidMonetaryValue, income.netIncome) &&
+      isValidRequiredField(isValidMonetaryValue, income.otherIncome);
 }
 
 function isValidSpouseInformation(data) {
@@ -290,9 +294,11 @@ function isValidSpouseInformation(data) {
         isValidField(isValidPhone, data.spousePhone);
   }
 
-  return isNotBlank(data.maritalStatus.value) &&
+  return data.understandsFinancialDisclosure.value === 'N' || (
+      isNotBlank(data.maritalStatus.value) &&
       isValidSpouse &&
-      isValidSpouseAddress;
+      isValidSpouseAddress
+    );
 }
 
 function isValidChildInformationField(child) {
@@ -318,13 +324,15 @@ function isValidChildren(data) {
     }
   }
 
-  return isNotBlank(data.hasChildrenToReport.value) &&
-      allChildrenValid;
+  return data.understandsFinancialDisclosure.value === 'N' || (
+    isNotBlank(data.hasChildrenToReport.value)
+    && allChildrenValid
+  );
 }
 
 function isValidChildrenIncome(children) {
   for (let i = 0; i < children.length; i++) {
-    if (!isValidIncome(children[i])) {
+    if (!isValidRequiredIncome(children[i])) {
       return false;
     }
   }
@@ -333,19 +341,20 @@ function isValidChildrenIncome(children) {
 
 function isValidAnnualIncome(data) {
   let isValidSpouseIncomeFields = true;
-
-  if (data.spouseGrossIncome && data.spouseNetIncome && data.spouseOtherIncome) {
+  if (data.maritalStatus.value === 'Married' || data.maritalStatus.value === 'Separated') {
     isValidSpouseIncomeFields =
-      isValidField(isValidMonetaryValue, data.spouseGrossIncome) &&
-      isValidField(isValidMonetaryValue, data.spouseNetIncome) &&
-      isValidField(isValidMonetaryValue, data.spouseOtherIncome);
+      isValidRequiredField(isValidMonetaryValue, data.spouseGrossIncome) &&
+      isValidRequiredField(isValidMonetaryValue, data.spouseNetIncome) &&
+      isValidRequiredField(isValidMonetaryValue, data.spouseOtherIncome);
   }
 
-  return isValidField(isValidMonetaryValue, data.veteranGrossIncome) &&
-    isValidField(isValidMonetaryValue, data.veteranNetIncome) &&
-    isValidField(isValidMonetaryValue, data.veteranOtherIncome) &&
-    isValidSpouseIncomeFields &&
-    isValidChildrenIncome(data.children);
+  return data.understandsFinancialDisclosure.value === 'N' || (
+      isValidRequiredField(isValidMonetaryValue, data.veteranGrossIncome) &&
+      isValidRequiredField(isValidMonetaryValue, data.veteranNetIncome) &&
+      isValidRequiredField(isValidMonetaryValue, data.veteranOtherIncome) &&
+      isValidSpouseIncomeFields &&
+      isValidChildrenIncome(data.children)
+    );
 }
 
 function isValidDeductibleExpenses(data) {
@@ -467,6 +476,7 @@ export {
   validateIfDirtyDate,
   validateIfDirtyProvider,
   initializeNullValues,
+  isDirty,
   isBlank,
   isNotBlank,
   isValidDate,
