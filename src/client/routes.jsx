@@ -73,7 +73,7 @@ const routes = [
       path="/household-information/financial-disclosure"/>,
   <Route
       component={SpouseInformationSection}
-      depends={{ understandsFinancialDisclosure: { value: 'Y' } }}
+      depends={{ understandsFinancialDisclosure: { value: 'Y' }, maritalStatus: { value: ['Married', 'Separated'] } }}
       key="/household-information/spouse-information"
       path="/household-information/spouse-information"/>,
   <Route

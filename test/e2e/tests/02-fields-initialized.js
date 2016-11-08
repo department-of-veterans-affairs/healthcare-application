@@ -73,6 +73,7 @@ module.exports = {
     // Demographic information page.
     client.expect.element('select[name="gender"]').to.be.visible;
     expectValueToBeBlank(client, 'select[name="gender"]');
+    expectValueToBeBlank(client, 'select[name="maritalStatus"]');
     expectInputToNotBeSelected(client, 'input[name="isAmericanIndianOrAlaskanNative"]');
     expectInputToNotBeSelected(client, 'input[name="isBlackOrAfricanAmerican"]');
     expectInputToNotBeSelected(client, 'input[name="isNativeHawaiianOrOtherPacificIslander"]');
