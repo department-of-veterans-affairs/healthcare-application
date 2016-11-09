@@ -403,6 +403,9 @@ module.exports = {
     veteranOtherIncome: ['understandsFinancialDisclosure'],
     spouseGrossIncome: ['understandsFinancialDisclosure'],
     spouseNetIncome: ['understandsFinancialDisclosure'],
-    spouseOtherIncome: ['understandsFinancialDisclosure']
+    spouseOtherIncome: ['understandsFinancialDisclosure'],
+    deductibleMedicalExpenses: ['understandsFinancialDisclosure'],
+    deductibleFuneralExpenses: ['understandsFinancialDisclosure'],
+    deductibleEducationExpenses: ['understandsFinancialDisclosure']
   }
 };
