@@ -16,4 +16,17 @@ describe('Veteran model', () => {
       application.should.deep.eql(fakeApplication);
     });
   });
+  describe('schema dependencies', () => {
+    it('should validate if jsonschema dependencies are met', () => {
+      const application = JSON.parse(veteran.veteranToApplication(veteran.completeVeteran));
+      const valid = validate(application);
+      chai.assert.isTrue(valid, JSON.stringify([validate.errors, application], null, 2));
+    });
+    it('should fail to validate if jsonschema dependencies are not met', () => {
+      const application = JSON.parse(veteran.veteranToApplication(veteran.completeVeteran));
+      application.understandsFinancialDisclosure = false;
+      const valid = validate(application);
+      chai.assert.isFalse(valid, JSON.stringify([validate.errors, application], null, 2));
+    });
+  });
 });
