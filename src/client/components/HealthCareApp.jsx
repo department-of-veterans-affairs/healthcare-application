@@ -28,6 +28,7 @@ class HealthCareApp extends React.Component {
     this.handleBack = this.handleBack.bind(this);
     this.handleContinue = this.handleContinue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.checkDependencies = this.checkDependencies.bind(this);
     this.getUrl = this.getUrl.bind(this);
     this.removeOnbeforeunload = this.removeOnbeforeunload.bind(this);
     this.onbeforeunload = this.onbeforeunload.bind(this);
@@ -68,7 +69,7 @@ class HealthCareApp extends React.Component {
       const route = routes[i + increment];
       if (route) {
         // Check to see if we should skip the next route
-        if (route.depends !== undefined && !_.matches(route.depends)(data)) {
+        if (route.depends !== undefined && !this.checkDependencies(route.depends, data)) {
           if (markAsComplete) {
             this.props.onCompletedStatus(route.path);
           }
@@ -81,6 +82,16 @@ class HealthCareApp extends React.Component {
     }
 
     return nextPath;
+  }
+
+  checkDependencies(depends, data) {
+    const arr = _.isArray(depends) ? depends : [depends];
+    for (let i = 0; i < arr.length; i++) {
+      if (_.matches(arr[i])(data)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   removeOnbeforeunload() {

@@ -189,10 +189,10 @@ module.exports = {
     nextSection(client);
 
     // Edit spouse information
-    vetInfoCopy.maritalStatus = 'Separated';
+    vetInfoCopy.spouseFullName.first = 'Anne';
     editSection(client);
     common.completeSpouseInformation(client, vetInfoCopy, true);
-    verifyEdit(client, 'Separated');
+    verifyEdit(client, 'Anne Hathaway');
 
     client.click('.form-panel .usa-button-primary');
     client.expect.element('.js-test-location').attribute('data-location')

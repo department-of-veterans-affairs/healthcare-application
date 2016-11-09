@@ -60,6 +60,7 @@ module.exports = {
     client.expect.element('select[name="gender"]').to.be.visible;
     client
       .setValue('select[name="gender"]', 'M')
+      .setValue('select[name="maritalStatus"]', 'Married')
       .click('input[name="isAmericanIndianOrAlaskanNative"]')
       .click('input[name="isBlackOrAfricanAmerican"]')
       .click('input[name="isNativeHawaiianOrOtherPacificIslander"]')
@@ -139,10 +140,6 @@ module.exports = {
     expectNavigateAwayFrom(client, '/household-information/financial-disclosure');
 
     // Spouse information Page.
-    client.expect.element('select[name="maritalStatus"]').to.be.visible;
-    client
-      .setValue('select[name="maritalStatus"]', 'Married')
-      .click('.form-panel');
     client.expect.element('input[name="fname"]').to.be.visible.before(common.timeouts.normal);
 
     client
