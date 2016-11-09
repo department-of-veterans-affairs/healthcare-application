@@ -392,6 +392,15 @@ function completeChildInformation(client, data, onlyRequiredFields) {
   }
 }
 
+function completeDeductibleExpenses(client, data) {
+  client.expect.element('input[name="deductibleMedicalExpenses"]').to.be.visible.before(timeouts.normal);
+  client
+    .setValue('input[name="deductibleMedicalExpenses"]', data.deductibleMedicalExpenses)
+    .setValue('input[name="deductibleFuneralExpenses"]', data.deductibleFuneralExpenses)
+    .setValue('input[name="deductibleEducationExpenses"]', data.deductibleEducationExpenses);
+}
+
+
 function completeMedicareAndMedicaid(client, data, onlyRequiredFields) {
   client
     .click('input[name="isMedicaidEligible-1"]')
@@ -444,6 +453,7 @@ module.exports = {
   completeSpouseInformation,
   completeAnnualIncomeInformation,
   completeChildInformation,
+  completeDeductibleExpenses,
   completeMedicareAndMedicaid,
   completeInsuranceInformation,
   completeVaInsuranceInformation,

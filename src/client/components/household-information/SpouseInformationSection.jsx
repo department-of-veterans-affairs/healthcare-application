@@ -140,6 +140,14 @@ class SpouseInformationSection extends React.Component {
                 <td>{this.props.data.spouseAddress.street.value}</td>
               </tr>
               <tr>
+                <td>Line 2:</td>
+                <td>{this.props.data.spouseAddress.street2.value}</td>
+              </tr>
+              <tr>
+                <td>Line 3:</td>
+                <td>{this.props.data.spouseAddress.street3.value}</td>
+              </tr>
+              <tr>
                 <td>City:</td>
                 <td>{this.props.data.spouseAddress.city.value}</td>
               </tr>

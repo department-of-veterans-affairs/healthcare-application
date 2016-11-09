@@ -50,6 +50,14 @@ module.exports = {
           minLength: 1,
           maxLength: 50
         },
+        street2: {
+          type: 'string',
+          maxLength: 50
+        },
+        street3: {
+          type: 'string',
+          maxLength: 50
+        },
         city: {
           type: 'string',
           minLength: 1,
@@ -396,5 +404,8 @@ module.exports = {
     spouseGrossIncome: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
     spouseNetIncome: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
     spouseOtherIncome: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
+    deductibleMedicalExpenses: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
+    deductibleFuneralExpenses: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
+    deductibleEducationExpenses: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } }
   }
 };

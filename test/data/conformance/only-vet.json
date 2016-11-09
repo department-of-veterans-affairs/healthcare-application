@@ -27,6 +27,8 @@
   "isWhite": true,
   "veteranAddress": {
     "street": "123 NW 5th St",
+    "street2": "second line",
+    "street3": "third line",
     "city": "Washington",
     "country": "USA",
     "state": "DC",
