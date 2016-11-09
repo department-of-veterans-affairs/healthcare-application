@@ -44,6 +44,8 @@ export default function veteran(state = blankVeteran, action) {
       newState = Object.assign({}, state);
       const emptyAddress = {
         street: makeField(''),
+        street2: makeField(''),
+        street3: makeField(''),
         city: makeField(''),
         country: makeField(''),
         state: makeField(''),

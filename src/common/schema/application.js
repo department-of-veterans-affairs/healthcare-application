@@ -50,6 +50,14 @@ module.exports = {
           minLength: 1,
           maxLength: 50
         },
+        street2: {
+          type: 'string',
+          maxLength: 50
+        },
+        street3: {
+          type: 'string',
+          maxLength: 50
+        },
         city: {
           type: 'string',
           minLength: 1,

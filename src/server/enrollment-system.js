@@ -50,6 +50,14 @@ function formatAddress(address) {
     country: address.country,
     line1: address.street
   };
+
+  if (address.street2) {
+    formatted.line2 = address.street2;
+  }
+  if (address.street3) {
+    formatted.line3 = address.street3;
+  }
+
   if (address.country === 'USA') {
     formatted.state = address.state;
     const numericZip = address.zipcode.replace(/\D/g, '');
@@ -59,6 +67,7 @@ function formatAddress(address) {
     formatted.provinceCode = address.state || address.provinceCode;
     formatted.postalCode = address.zipcode || address.postalCode;
   }
+
   return formatted;
 }
 
