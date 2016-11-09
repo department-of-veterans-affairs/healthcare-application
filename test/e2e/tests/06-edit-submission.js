@@ -192,7 +192,7 @@ module.exports = {
     vetInfoCopy.spouseFullName.first = 'Anne';
     editSection(client);
     common.completeSpouseInformation(client, vetInfoCopy, true);
-    verifyEdit(client, 'Anne');
+    verifyEdit(client, 'Anne Hathaway');
 
     client.click('.form-panel .usa-button-primary');
     client.expect.element('.js-test-location').attribute('data-location')
