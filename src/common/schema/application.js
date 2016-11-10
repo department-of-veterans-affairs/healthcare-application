@@ -260,7 +260,7 @@ module.exports = {
     mobilePhone: {
       $ref: '#/definitions/phone'
     },
-    understandsFinancialDisclosure: {
+    discloseFinancialInformation: {
       type: 'boolean'
     },
     spouseFullName: {

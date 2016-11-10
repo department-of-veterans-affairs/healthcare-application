@@ -35,7 +35,7 @@
   "email": "foo_bar@example.com",
   "homePhone": "1231241234",
   "mobilePhone": "1235551234",
-  "understandsFinancialDisclosure": true,
+  "discloseFinancialInformation": true,
   "cohabitedLastYear": true,
   "provideSupportLastYear": false,
   "children": [

@@ -53,7 +53,7 @@ const testValues = {
   homePhone: '5551112323',
   mobilePhone: '5551114545',
 
-  understandsFinancialDisclosure: false,
+  discloseFinancialInformation: false,
 
   spouseFullName: {
     first: 'Anne',
@@ -210,7 +210,10 @@ function completeBirthInformation(client, data, onlyRequiredFields) {
 }
 
 function completeDemographicInformation(client, data, onlyRequiredFields) {
-  client.setValue('select[name="gender"]', data.gender);
+  client
+    .setValue('select[name="gender"]', data.gender)
+    .clearValue('select[name="maritalStatus"]')
+    .setValue('select[name="maritalStatus"]', data.maritalStatus);
 
   if (!onlyRequiredFields) {
     client
@@ -288,20 +291,14 @@ function completeVaBenefits(client, data, onlyRequiredFields) {
 }
 
 function completeFinancialDisclosure(client, data, onlyRequiredFields) {
-  client.click('input[name="understandsFinancialDisclosure-1"]');
+  client.click('input[name="discloseFinancialInformation-1"]');
 
   if (!onlyRequiredFields) {
-    client.click('input[name="understandsFinancialDisclosure-0"]');
+    client.click('input[name="discloseFinancialInformation-0"]');
   }
 }
 
 function completeSpouseInformation(client, data, onlyRequiredFields) {
-  client
-    .clearValue('select[name="maritalStatus"]')
-    .setValue('select[name="maritalStatus"]', data.maritalStatus)
-    .click('.form-panel');
-  client.expect.element('input[name="fname"]').to.be.visible.before(timeouts.normal);
-
   client
     .clearValue('input[name="fname"]')
     .setValue('input[name="fname"]', data.spouseFullName.first)

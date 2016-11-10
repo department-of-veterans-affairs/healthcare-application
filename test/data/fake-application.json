@@ -39,7 +39,7 @@
   "email": "foo@example.com",
   "homePhone": "1231241234",
   "mobilePhone": "1235551234",
-  "understandsFinancialDisclosure": true,
+  "discloseFinancialInformation": true,
   "spouseFullName": {
     "first": "FirstSpouse",
     "middle": "MiddleSpouse",

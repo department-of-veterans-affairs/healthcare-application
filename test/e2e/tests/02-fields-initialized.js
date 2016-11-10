@@ -73,6 +73,7 @@ module.exports = {
     // Demographic information page.
     client.expect.element('select[name="gender"]').to.be.visible;
     expectValueToBeBlank(client, 'select[name="gender"]');
+    expectValueToBeBlank(client, 'select[name="maritalStatus"]');
     expectInputToNotBeSelected(client, 'input[name="isAmericanIndianOrAlaskanNative"]');
     expectInputToNotBeSelected(client, 'input[name="isBlackOrAfricanAmerican"]');
     expectInputToNotBeSelected(client, 'input[name="isNativeHawaiianOrOtherPacificIslander"]');
@@ -148,20 +149,14 @@ module.exports = {
     expectNavigateAwayFrom(client, '/va-benefits/basic-information');
 
     // Financial disclosure page.
-    client.expect.element('input[name="understandsFinancialDisclosure-0"] + label').to.be.visible;
-    expectInputToNotBeSelected(client, 'input[name="understandsFinancialDisclosure-0"]');
-    expectInputToNotBeSelected(client, 'input[name="understandsFinancialDisclosure-1"]');
+    client.expect.element('input[name="discloseFinancialInformation-0"] + label').to.be.visible;
+    expectInputToNotBeSelected(client, 'input[name="discloseFinancialInformation-0"]');
+    expectInputToNotBeSelected(client, 'input[name="discloseFinancialInformation-1"]');
     common.completeFinancialDisclosure(client, common.testValues);
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/financial-disclosure');
 
     // Spouse information Page.
-    client.expect.element('select[name="maritalStatus"]').to.be.visible;
-    expectValueToBeBlank(client, 'select[name="maritalStatus"]');
-    client
-      .setValue('select[name="maritalStatus"]', 'Married')
-      .click('.form-panel');
-
     client.expect.element('input[name="fname"]').to.be.visible.before(common.timeouts.normal);
     expectValueToBeBlank(client, 'input[name="fname"]');
     expectValueToBeBlank(client, 'input[name="mname"]');

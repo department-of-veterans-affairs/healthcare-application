@@ -100,7 +100,7 @@ module.exports = {
     expectNavigateAwayFrom(client, '/va-benefits/basic-information');
 
     // Financial disclosure page.
-    client.expect.element('input[name="understandsFinancialDisclosure-0"] + label').to.be.visible;
+    client.expect.element('input[name="discloseFinancialInformation-0"] + label').to.be.visible;
     common.completeFinancialDisclosure(client, common.testValues, true);
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/financial-disclosure');
@@ -189,10 +189,10 @@ module.exports = {
     nextSection(client);
 
     // Edit spouse information
-    vetInfoCopy.maritalStatus = 'Separated';
+    vetInfoCopy.spouseFullName.first = 'Anne';
     editSection(client);
     common.completeSpouseInformation(client, vetInfoCopy, true);
-    verifyEdit(client, 'Separated');
+    verifyEdit(client, 'Anne Hathaway');
 
     client.click('.form-panel .usa-button-primary');
     client.expect.element('.js-test-location').attribute('data-location')
