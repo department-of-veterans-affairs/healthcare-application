@@ -358,7 +358,7 @@ function isValidAnnualIncome(data) {
 }
 
 function isValidDeductibleExpenses(data) {
-  return data.discloseFinancialDisclosure.value === 'N' || (
+  return data.discloseFinancialInformation.value === 'N' || (
       isValidRequiredField(isValidMonetaryValue, data.deductibleMedicalExpenses) &&
       isValidRequiredField(isValidMonetaryValue, data.deductibleFuneralExpenses) &&
       isValidRequiredField(isValidMonetaryValue, data.deductibleEducationExpenses)
