@@ -263,9 +263,10 @@ module.exports = {
     discloseFinancialInformation: {
       type: 'boolean'
     },
-    spouseFullName: {
-      $ref: '#/definitions/fullName'
-    },
+    // TODO: look into why this is causing errors
+    // spouseFullName: {
+    //   $ref: '#/definitions/fullName'
+    // },
     spouseSocialSecurityNumber: {
       $ref: '#/definitions/ssn'
     },
@@ -284,9 +285,10 @@ module.exports = {
     provideSupportLastYear: {
       type: 'boolean'
     },
-    spouseAddress: {
-      $ref: '#/definitions/address'
-    },
+    // TODO: look into why this is causing errors
+    // spouseAddress: {
+    //   $ref: '#/definitions/address'
+    // },
     spousePhone: {
       $ref: '#/definitions/phone'
     },
