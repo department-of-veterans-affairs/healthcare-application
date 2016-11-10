@@ -37,7 +37,7 @@
   "email": "foo@examp.le",
   "homePhone": "1231241234",
   "mobilePhone": "1235551234",
-  "understandsFinancialDisclosure": true,
+  "discloseFinancialInformation": true,
   "spouseFullName": {
     "first": "FirstSpouse",
     "middle": "MiddleSpouse",
@@ -103,6 +103,9 @@
   "veteranGrossIncome": 123.33,
   "veteranNetIncome": 90.11,
   "veteranOtherIncome": 10.1,
+  "spouseGrossIncome": 0,
+  "spouseNetIncome": 0,
+  "spouseOtherIncome": 0,
   "deductibleMedicalExpenses": 33.3,
   "deductibleFuneralExpenses": 44.44,
   "deductibleEducationExpenses": 77.77,

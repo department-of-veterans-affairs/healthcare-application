@@ -921,13 +921,6 @@ function veteranToEnrollmentDeterminationInfo(veteran) {
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from employment.
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, "Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from FARM,  RANCH,  PROPERTY OR BUSINESS."
 
-function booleanToIncomeTest(hasIncomeData) {
-  if (hasIncomeData) {
-    return { discloseFinancialInformation: true };
-  }
-  return undefined;
-}
-
 function veteranToFinancialsInfo(veteran) {
   const expenses = resourceToExpenseCollection({
     educationExpense: veteran.deductibleEducationExpenses,
@@ -941,21 +934,14 @@ function veteranToFinancialsInfo(veteran) {
   });
 
   const dependentFinancials = veteranToDependentFinancialsCollection(veteran);
-  let hasDependentFinancials = false;
-  if (dependentFinancials) {
-    hasDependentFinancials = _.compact(dependentFinancials.dependentFinancials.map((child) => { return child.incomes; })).length > 0;
-  }
   const spouseFinancials = veteranToSpouseFinancials(veteran);
-  const hasSpouseIncome = spouseFinancials && spouseFinancials.spouseFinancials.incomes;
 
-  const hasIncomeData = expenses || incomes || hasSpouseIncome || hasDependentFinancials;
-
-  if (!hasIncomeData) {
+  if (!veteran.discloseFinancialInformation) {
     return undefined;
   }
 
   return {
-    incomeTest: booleanToIncomeTest(hasIncomeData),
+    incomeTest: { discloseFinancialInformation: true },
     financialStatement: {
       expenses,
       incomes,

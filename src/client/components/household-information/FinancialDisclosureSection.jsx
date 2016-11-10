@@ -17,7 +17,7 @@ class FinancialDisclosureSection extends React.Component {
     let content;
     let message;
 
-    if (this.props.data.understandsFinancialDisclosure.value === 'N') {
+    if (this.props.data.discloseFinancialInformation.value === 'N') {
       message = (
         <div className="usa-alert usa-alert-info">
           <div className="hca-alert-body">
@@ -33,7 +33,7 @@ class FinancialDisclosureSection extends React.Component {
           <tr>
             <td>I understand VA is not currently enrolling new applicants who decline to
             provide their financial information unless they have other qualifying eligibility factors: </td>
-            <td>{`${this.props.data.understandsFinancialDisclosure.value ? 'Yes' : 'No'}`}</td>
+            <td>{`${this.props.data.discloseFinancialInformation.value ? 'Yes' : 'No'}`}</td>
           </tr>
         </tbody>
       </table>);
@@ -82,10 +82,10 @@ class FinancialDisclosureSection extends React.Component {
             <ErrorableRadioButtons required
                 errorMessage={isValidFinancialDisclosure(this.props.data) ? '' : 'Please select either "Yes" or "No"'}
                 label="Do you want to provide your financial information?"
-                name="understandsFinancialDisclosure"
+                name="discloseFinancialInformation"
                 options={yesNo}
-                value={this.props.data.understandsFinancialDisclosure}
-                onValueChange={(update) => {this.props.onStateChange('understandsFinancialDisclosure', update);}}/>
+                value={this.props.data.discloseFinancialInformation}
+                onValueChange={(update) => {this.props.onStateChange('discloseFinancialInformation', update);}}/>
           </div>
           {message}
         </div>
