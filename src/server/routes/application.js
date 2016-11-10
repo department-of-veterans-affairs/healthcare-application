@@ -41,22 +41,21 @@ function returnRouter(options) {
     // TODO(awong): Use schema to sanitize input in addition to validation.
     const valid = validate(form, ApplicationJsonSchema, {});
 
-    if (valid) {
-      const saveSubmitFormMsg = veteranToSaveSubmitForm(form);
-      soapClient.saveSubmitForm(saveSubmitFormMsg, (err, response) => {
-        if (err) {
-          options.logger.info('voaService response:', response, 'error:', err);
-          // TODO(awong): This may leak server config info on error. Is that a problem?
-          res.status(500).json({ error: err });
-        } else {
-          options.logger.info('voaService response - SUCCESS', response);
-          res.json({ response });
-        }
-      });
-    } else {
-      res.status(400).json({ errors: validate.errors });
+    if (!valid) {
       options.logger.info('Form Validation - ERROR', validate.errors);
     }
+
+    const saveSubmitFormMsg = veteranToSaveSubmitForm(form);
+    soapClient.saveSubmitForm(saveSubmitFormMsg, (err, response) => {
+      if (err) {
+        options.logger.info('voaService response:', response, 'error:', err);
+        // TODO(awong): This may leak server config info on error. Is that a problem?
+        res.status(500).json({ error: err });
+      } else {
+        options.logger.info('voaService response - SUCCESS', response);
+        res.json({ response });
+      }
+    });
   }
 
   function getApplicationStatus(req, res) {
