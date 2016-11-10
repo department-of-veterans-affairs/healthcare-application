@@ -73,7 +73,7 @@ const ui = {
     '/household-information/child-information': {
       complete: false,
       verified: false,
-      fields: ['hasChildrenToReport', 'children']
+      fields: ['hasChildrenToReport']
     },
     '/household-information/annual-income': {
       complete: false,
