@@ -394,7 +394,7 @@ function veteranToDependentFinancialsCollection(veteran) {
  * @returns {Object} ES system dependentFinancialsCollection message
  */
 function veteranToSpouseFinancials(veteran) {
-  if (!_.includes(['Married', 'Separated'], veteran.maritalStatus)) {
+  if (!_.includes(['Married', 'Separated'], veteran.maritalStatus) || !veteran.discloseFinancialInformation) {
     return undefined;
   }
 
@@ -1047,7 +1047,7 @@ function childToAssociation(child) {
 }
 
 function spouseToAssociation(veteran) {
-  if (_.includes(['Married', 'Separated'], veteran.maritalStatus)) {
+  if (_.includes(['Married', 'Separated'], veteran.maritalStatus) && veteran.discloseFinancialInformation) {
     return {
       address: formatAddress(veteran.spouseAddress),
       givenName: validations.validateName(veteran.spouseFullName.first),
