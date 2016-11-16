@@ -241,19 +241,19 @@ function veteranToSpouseInfo(veteran) {
  */
 function resourceToIncomeCollection(resource) {
   const incomeCollection = [];
-  if (resource.grossIncome !== undefined) {
+  if (!_.isNil(resource.grossIncome)) {
     incomeCollection.push({
       amount: resource.grossIncome,
       type: 7,
     });
   }
-  if (resource.netIncome !== undefined) {
+  if (!_.isNil(resource.netIncome)) {
     incomeCollection.push({
       amount: resource.netIncome,
       type: 13, // Net Income TODO is this right?
     });
   }
-  if (resource.otherIncome !== undefined) {
+  if (!_.isNil(resource.otherIncome)) {
     incomeCollection.push({
       amount: resource.otherIncome,
       type: 10, // All Other Income TODO is this right?
@@ -271,27 +271,27 @@ function resourceToIncomeCollection(resource) {
  */
 function resourceToExpenseCollection(resource) {
   const expenseCollection = [];
-  if (resource.educationExpense !== undefined) {
+  if (!_.isNil(resource.educationExpense)) {
     expenseCollection.push({
       amount: resource.educationExpense,
       expenseType: '3',
     });
   }
 
-  if (resource.childEducationExpenses !== undefined) {
+  if (!_.isNil(resource.childEducationExpenses)) {
     expenseCollection.push({
       amount: resource.childEducationExpenses,
       expenseType: '16',
     });
   }
 
-  if (resource.funeralExpense !== undefined) {
+  if (!_.isNil(resource.funeralExpense)) {
     expenseCollection.push({
       amount: resource.funeralExpense,
       expenseType: '19',
     });
   }
-  if (resource.medicalExpense !== undefined) {
+  if (!_.isNil(resource.medicalExpense)) {
     expenseCollection.push({
       amount: resource.medicalExpense,
       expenseType: '18',
