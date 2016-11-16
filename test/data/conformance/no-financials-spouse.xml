@@ -132,6 +132,20 @@
           </eeSummary:incomes>
           <eeSummary:spouseFinancialsList>
             <eeSummary:spouseFinancials>
+              <eeSummary:incomes>
+                <eeSummary:income>
+                  <eeSummary:amount>0</eeSummary:amount>
+                  <eeSummary:type>7</eeSummary:type>
+                </eeSummary:income>
+                <eeSummary:income>
+                  <eeSummary:amount>0</eeSummary:amount>
+                  <eeSummary:type>13</eeSummary:type>
+                </eeSummary:income>
+                <eeSummary:income>
+                  <eeSummary:amount>0</eeSummary:amount>
+                  <eeSummary:type>10</eeSummary:type>
+                </eeSummary:income>
+              </eeSummary:incomes>
               <eeSummary:spouse>
                 <eeSummary:dob>04/06/1980</eeSummary:dob>
                 <eeSummary:givenName>FIRSTSPOUSE</eeSummary:givenName>
@@ -172,7 +186,7 @@
                   <eeSummary:type>13</eeSummary:type>
                 </eeSummary:income>
                 <eeSummary:income>
-                  <eeSummary:amount>91.9</eeSummary:amount>
+                  <eeSummary:amount>0</eeSummary:amount>
                   <eeSummary:type>10</eeSummary:type>
                 </eeSummary:income>
               </eeSummary:incomes>
