@@ -1,5 +1,5 @@
 const chai = require('chai');
-chai.should();
+const should = chai.should();
 const tk = require('timekeeper');
 const _ = require('lodash');
 
@@ -39,10 +39,11 @@ describe('enrollment-system base tests', () => {
     });
 
 
-    const checks = ['child-financial', 'no-financial', 'spouse-financial',
+    const checks = ['child-financial', 'spouse-financial',
                     'no-children', 'no-spouse', 'only-vet',
                     'canadian-vet', 'australian-vet',
-                    'no-financials-spouse', 'no-financials-children'];
+                    'no-financials-spouse', 'no-financials-children',
+                    'single-no-disclosure', 'married-no-disclosure'];
     checks.forEach(filename => {
       it(`should serialize ${filename} correctly`, (done) => {
         const application = require(`../data/conformance/${filename}`);
@@ -137,6 +138,15 @@ describe('enrollment-system base tests', () => {
       const spouseFinancials = result.form.summary.financialsInfo
         .financialStatement.spouseFinancialsList.spouseFinancials;
       spouseFinancials.livedWithPatient.should.equal('false');
+    });
+  });
+  describe('discloseFinancialInformation', () => {
+    it('should not set spouse info if not disclosing financials', () => {
+      const application = _.cloneDeep(fakeApplication);
+      application.discloseFinancialInformation = false;
+      const result = enrollmentSystem.veteranToSaveSubmitForm(application);
+      should.not.exist(result.form.summary.financialsInfo);
+      result.form.summary.associations.association.filter(x => x.relationship.toLowerCase() === 'spouse').should.have.length(0);
     });
   });
 });

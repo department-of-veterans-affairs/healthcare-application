@@ -111,7 +111,7 @@
               <eeSummary:expenseType>19</eeSummary:expenseType>
             </eeSummary:expense>
             <eeSummary:expense>
-              <eeSummary:amount>33.3</eeSummary:amount>
+              <eeSummary:amount>0</eeSummary:amount>
               <eeSummary:expenseType>18</eeSummary:expenseType>
             </eeSummary:expense>
           </eeSummary:expenses>
