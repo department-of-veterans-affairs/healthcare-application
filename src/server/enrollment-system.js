@@ -241,19 +241,19 @@ function veteranToSpouseInfo(veteran) {
  */
 function resourceToIncomeCollection(resource) {
   const incomeCollection = [];
-  if (resource.grossIncome) {
+  if (resource.grossIncome !== undefined) {
     incomeCollection.push({
       amount: resource.grossIncome,
       type: 7,
     });
   }
-  if (resource.netIncome) {
+  if (resource.netIncome !== undefined) {
     incomeCollection.push({
       amount: resource.netIncome,
       type: 13, // Net Income TODO is this right?
     });
   }
-  if (resource.otherIncome) {
+  if (resource.otherIncome !== undefined) {
     incomeCollection.push({
       amount: resource.otherIncome,
       type: 10, // All Other Income TODO is this right?
@@ -271,27 +271,27 @@ function resourceToIncomeCollection(resource) {
  */
 function resourceToExpenseCollection(resource) {
   const expenseCollection = [];
-  if (resource.educationExpense) {
+  if (resource.educationExpense !== undefined) {
     expenseCollection.push({
       amount: resource.educationExpense,
       expenseType: '3',
     });
   }
 
-  if (resource.childEducationExpenses) {
+  if (resource.childEducationExpenses !== undefined) {
     expenseCollection.push({
       amount: resource.childEducationExpenses,
       expenseType: '16',
     });
   }
 
-  if (resource.funeralExpense) {
+  if (resource.funeralExpense !== undefined) {
     expenseCollection.push({
       amount: resource.funeralExpense,
       expenseType: '19',
     });
   }
-  if (resource.medicalExpense) {
+  if (resource.medicalExpense !== undefined) {
     expenseCollection.push({
       amount: resource.medicalExpense,
       expenseType: '18',
