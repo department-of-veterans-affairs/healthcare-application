@@ -398,14 +398,14 @@ module.exports = {
     'dischargeType'
   ],
   dependencies: {
-    veteranGrossIncome: ['discloseFinancialInformation'],
-    veteranNetIncome: ['discloseFinancialInformation'],
-    veteranOtherIncome: ['discloseFinancialInformation'],
-    spouseGrossIncome: ['discloseFinancialInformation'],
-    spouseNetIncome: ['discloseFinancialInformation'],
-    spouseOtherIncome: ['discloseFinancialInformation'],
-    deductibleMedicalExpenses: ['discloseFinancialInformation'],
-    deductibleFuneralExpenses: ['discloseFinancialInformation'],
-    deductibleEducationExpenses: ['discloseFinancialInformation']
+    veteranGrossIncome: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
+    veteranNetIncome: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
+    veteranOtherIncome: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
+    spouseGrossIncome: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
+    spouseNetIncome: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
+    spouseOtherIncome: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
+    deductibleMedicalExpenses: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
+    deductibleFuneralExpenses: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } },
+    deductibleEducationExpenses: { properties: { understandsFinancialDisclosure: { 'enum': [true] } } }
   }
 };
