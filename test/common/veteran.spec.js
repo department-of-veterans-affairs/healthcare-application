@@ -2,7 +2,7 @@ const chai = require('chai');
 chai.should();
 
 const veteran = require('../../src/common/veteran');
-const applicationSchema = require('../../src/common/schema/application');
+const applicationSchema = require('vets-json-schema').healthcareApplication;
 const validate = require('../../src/common/schema/validator').compile(applicationSchema);
 const fakeApplication = require('../data/fake-application.json');
 
