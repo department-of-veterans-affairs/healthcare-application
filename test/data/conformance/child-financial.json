@@ -90,6 +90,7 @@
       "childDateOfBirth": "1996-03-07",
       "childDisabledBefore18": false,
       "childAttendedSchoolLastYear": true,
+      "childEducationExpenses": 0,
       "childCohabitedLastYear": false,
       "childReceivedSupportLastYear": true,
       "grossIncome": 791.9,

@@ -228,6 +228,12 @@
                   <eeSummary:type>10</eeSummary:type>
                 </eeSummary:income>
               </eeSummary:incomes>
+              <eeSummary:expenses>
+                <eeSummary:expense>
+                  <eeSummary:amount>0</eeSummary:amount>
+                  <eeSummary:expenseType>16</eeSummary:expenseType>
+                </eeSummary:expense>
+              </eeSummary:expenses>
               <eeSummary:dependentInfo>
                 <eeSummary:dob>03/07/1996</eeSummary:dob>
                 <eeSummary:givenName>FIRSTCHILDB</eeSummary:givenName>

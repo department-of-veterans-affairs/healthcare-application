@@ -74,8 +74,12 @@
       "childDateOfBirth": "1982-05-05",
       "childDisabledBefore18": true,
       "childAttendedSchoolLastYear": true,
+      "childEducationExpenses": 40,
       "childCohabitedLastYear": true,
-      "childReceivedSupportLastYear": false
+      "childReceivedSupportLastYear": false,
+      "grossIncome": 0,
+      "netIncome": 0,
+      "otherIncome": 0
     },
     {
       "childFullName": {
@@ -90,6 +94,7 @@
       "childDateOfBirth": "1996-03-07",
       "childDisabledBefore18": false,
       "childAttendedSchoolLastYear": true,
+      "childEducationExpenses": 0,
       "childCohabitedLastYear": false,
       "childReceivedSupportLastYear": true,
       "grossIncome": 0,

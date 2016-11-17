@@ -176,6 +176,26 @@
           <eeSummary:marriedLastCalendarYear>true</eeSummary:marriedLastCalendarYear>
           <eeSummary:dependentFinancialsList>
             <eeSummary:dependentFinancials>
+              <eeSummary:incomes>
+                <eeSummary:income>
+                  <eeSummary:amount>0</eeSummary:amount>
+                  <eeSummary:type>7</eeSummary:type>
+                </eeSummary:income>
+                <eeSummary:income>
+                  <eeSummary:amount>0</eeSummary:amount>
+                  <eeSummary:type>13</eeSummary:type>
+                </eeSummary:income>
+                <eeSummary:income>
+                  <eeSummary:amount>0</eeSummary:amount>
+                  <eeSummary:type>10</eeSummary:type>
+                </eeSummary:income>
+              </eeSummary:incomes>
+              <eeSummary:expenses>
+                <eeSummary:expense>
+                  <eeSummary:amount>40</eeSummary:amount>
+                  <eeSummary:expenseType>16</eeSummary:expenseType>
+                </eeSummary:expense>
+              </eeSummary:expenses>
               <eeSummary:dependentInfo>
                 <eeSummary:dob>05/05/1982</eeSummary:dob>
                 <eeSummary:givenName>FIRSTCHILDA</eeSummary:givenName>
@@ -210,6 +230,12 @@
                   <eeSummary:type>10</eeSummary:type>
                 </eeSummary:income>
               </eeSummary:incomes>
+              <eeSummary:expenses>
+                <eeSummary:expense>
+                  <eeSummary:amount>0</eeSummary:amount>
+                  <eeSummary:expenseType>16</eeSummary:expenseType>
+                </eeSummary:expense>
+              </eeSummary:expenses>
               <eeSummary:dependentInfo>
                 <eeSummary:dob>03/07/1996</eeSummary:dob>
                 <eeSummary:givenName>FIRSTCHILDB</eeSummary:givenName>
