@@ -118,7 +118,7 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "uswds": "^0.9.1",
-    "vets-json-schema": "git://github.com/department-of-veterans-affairs/vets-json-schema#bc5e4da2b17b95b9932ce8f08b681233c130c22d",
+    "vets-json-schema": "git://github.com/department-of-veterans-affairs/vets-json-schema#003c1c9c450a88a9230b633560855ab7ec16b54c",
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.10.0",
