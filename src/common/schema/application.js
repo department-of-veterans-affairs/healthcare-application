@@ -50,6 +50,14 @@ module.exports = {
           minLength: 1,
           maxLength: 50
         },
+        street2: {
+          type: 'string',
+          maxLength: 50
+        },
+        street3: {
+          type: 'string',
+          maxLength: 50
+        },
         city: {
           type: 'string',
           minLength: 1,
@@ -252,7 +260,7 @@ module.exports = {
     mobilePhone: {
       $ref: '#/definitions/phone'
     },
-    understandsFinancialDisclosure: {
+    discloseFinancialInformation: {
       type: 'boolean'
     },
     spouseFullName: {
@@ -388,5 +396,16 @@ module.exports = {
     'lastEntryDate',
     'lastDischargeDate',
     'dischargeType'
-  ]
+  ],
+  dependencies: {
+    veteranGrossIncome: ['discloseFinancialInformation'],
+    veteranNetIncome: ['discloseFinancialInformation'],
+    veteranOtherIncome: ['discloseFinancialInformation'],
+    spouseGrossIncome: ['discloseFinancialInformation'],
+    spouseNetIncome: ['discloseFinancialInformation'],
+    spouseOtherIncome: ['discloseFinancialInformation'],
+    deductibleMedicalExpenses: ['discloseFinancialInformation'],
+    deductibleFuneralExpenses: ['discloseFinancialInformation'],
+    deductibleEducationExpenses: ['discloseFinancialInformation']
+  }
 };

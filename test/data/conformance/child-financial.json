@@ -35,7 +35,7 @@
   "email": "foo@example.com",
   "homePhone": "1231241234",
   "mobilePhone": "1235551234",
-  "understandsFinancialDisclosure": true,
+  "discloseFinancialInformation": true,
   "spouseFullName": {
     "first": "FirstSpouse",
     "middle": "MiddleSpouse",
@@ -66,7 +66,7 @@
       },
       "childRelation": "Stepson",
       "childSocialSecurityNumber": "111-22-9876",
-      "childBecameDependent": "1992-04-07", 
+      "childBecameDependent": "1992-04-07",
       "childDateOfBirth": "1982-05-05",
       "childDisabledBefore18": true,
       "childAttendedSchoolLastYear": true,
@@ -90,10 +90,23 @@
       "childDateOfBirth": "1996-03-07",
       "childDisabledBefore18": false,
       "childAttendedSchoolLastYear": true,
+      "childEducationExpenses": 0,
       "childCohabitedLastYear": false,
-      "childReceivedSupportLastYear": true
+      "childReceivedSupportLastYear": true,
+      "grossIncome": 791.9,
+      "netIncome": 781.2,
+      "otherIncome": 71.9
     }
   ],
+  "veteranGrossIncome": 123.33,
+  "veteranNetIncome": 90.11,
+  "veteranOtherIncome": 10.1,
+  "spouseGrossIncome": 64.1,
+  "spouseNetIncome": 35.1,
+  "spouseOtherIncome": 12.3,
+  "deductibleMedicalExpenses": 0,
+  "deductibleFuneralExpenses": 44.44,
+  "deductibleEducationExpenses": 77.77,
   "isCoveredByHealthInsurance": true,
   "providers": [
     {

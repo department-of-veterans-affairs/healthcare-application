@@ -35,7 +35,7 @@
   "email": "foo@example.com",
   "homePhone": "1231241234",
   "mobilePhone": "1235551234",
-  "understandsFinancialDisclosure": true,
+  "discloseFinancialInformation": true,
   "spouseFullName": {
     "first": "FirstSpouse",
     "middle": "MiddleSpouse",
@@ -56,9 +56,16 @@
     "zipcode": "201016789"
   },
   "spousePhone": "1112221234",
-  "children": [
-
-  ],
+  "children": [],
+  "veteranGrossIncome": 123.33,
+  "veteranNetIncome": 90.11,
+  "veteranOtherIncome": 10.1,
+  "deductibleMedicalExpenses": 33.3,
+  "deductibleFuneralExpenses": 44.44,
+  "deductibleEducationExpenses": 77.77,
+  "spouseGrossIncome": 64.1,
+  "spouseNetIncome": 35.1,
+  "spouseOtherIncome": 12.3,
   "isCoveredByHealthInsurance": true,
   "providers": [
     {

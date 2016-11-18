@@ -3,8 +3,9 @@ const path = require('path');
 const endpoint = {
   // ES "unofficial" (provided by Joshua) endpoints for development
   c7401: 'http://vaausesrapp803.aac.va.gov:7401/voa/voaSvc',
-  e7401: 'http://vaausappesr801.aac.va.gov:7401/voa/voaSvc', // latest one provided by Joshua
+  e7401: 'http://vaausappesr801.aac.va.gov:7401/voa/voaSvc',
   e6401: 'https://vaausesrapp803.aac.va.gov:6401/voa/voaSvc',
+  d7401: 'http://vaausappesr800.aac.va.gov:7401/voa/voaSvc?wsdl', // latest one provided by Joshua
   // ES "official" endpoints for development
   esSqa: 'https://vaww.esrstage1a.aac.va.gov/voa/voaSvc',
   esDev: 'https://vaww.esrdev30.aac.va.gov:8432/voa/voaSvc',
@@ -44,7 +45,7 @@ const config = {
   // Configuration of the soap protocol.
   soap: {
     // URL of the soap endpoint to connect to.
-    endpoint: endpoint.e7401,
+    endpoint: endpoint.d7401,
 
     // Override the default wsdl URL. By default the wsdl file is expected to be at `url?wsdl`.
     // Set to undefined for the default.

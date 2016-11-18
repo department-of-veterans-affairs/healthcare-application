@@ -37,7 +37,7 @@
   "email": "foo@example.com",
   "homePhone": "1231241234",
   "mobilePhone": "1235551234",
-  "understandsFinancialDisclosure": true,
+  "discloseFinancialInformation": true,
   "spouseFullName": {
     "first": "FirstSpouse",
     "middle": "MiddleSpouse",
@@ -74,8 +74,12 @@
       "childDateOfBirth": "1982-05-05",
       "childDisabledBefore18": true,
       "childAttendedSchoolLastYear": true,
+      "childEducationExpenses": 40,
       "childCohabitedLastYear": true,
-      "childReceivedSupportLastYear": false
+      "childReceivedSupportLastYear": false,
+      "grossIncome": 0,
+      "netIncome": 0,
+      "otherIncome": 0
     },
     {
       "childFullName": {
@@ -90,8 +94,12 @@
       "childDateOfBirth": "1996-03-07",
       "childDisabledBefore18": false,
       "childAttendedSchoolLastYear": true,
+      "childEducationExpenses": 0,
       "childCohabitedLastYear": false,
-      "childReceivedSupportLastYear": true
+      "childReceivedSupportLastYear": true,
+      "grossIncome": 0,
+      "netIncome": 0,
+      "otherIncome": 0
     }
   ],
   "veteranGrossIncome": 123.33,

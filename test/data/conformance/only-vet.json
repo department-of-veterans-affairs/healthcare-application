@@ -27,6 +27,8 @@
   "isWhite": true,
   "veteranAddress": {
     "street": "123 NW 5th St",
+    "street2": "second line",
+    "street3": "third line",
     "city": "Washington",
     "country": "USA",
     "state": "DC",
@@ -35,7 +37,7 @@
   "email": "foo.bar+va@example.com",
   "homePhone": "1231241234",
   "mobilePhone": "1235551234",
-  "understandsFinancialDisclosure": true,
+  "discloseFinancialInformation": true,
   "children": [],
   "veteranGrossIncome": 123.33,
   "veteranNetIncome": 90.11,

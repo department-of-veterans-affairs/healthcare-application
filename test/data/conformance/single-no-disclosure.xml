@@ -14,17 +14,14 @@
               <eeSummary:city>Washington</eeSummary:city>
               <eeSummary:country>USA</eeSummary:country>
               <eeSummary:line1>123 NW 5th St</eeSummary:line1>
-              <eeSummary:line2>second line</eeSummary:line2>
-              <eeSummary:line3>third line</eeSummary:line3>
               <eeSummary:state>DC</eeSummary:state>
               <eeSummary:zipCode>20005</eeSummary:zipCode>
-              <eeSummary:zipPlus4>5500</eeSummary:zipPlus4>
               <eeSummary:addressTypeCode>P</eeSummary:addressTypeCode>
             </eeSummary:address>
           </eeSummary:addresses>
           <eeSummary:emails>
             <eeSummary:email>
-              <eeSummary:address>foo.bar+va@example.com</eeSummary:address>
+              <eeSummary:address>foo@example.com</eeSummary:address>
               <eeSummary:type>1</eeSummary:type>
             </eeSummary:email>
           </eeSummary:emails>
@@ -66,43 +63,6 @@
           <eeSummary:radiationExposureInd>true</eeSummary:radiationExposureInd>
         </eeSummary:specialFactors>
       </eeSummary:enrollmentDeterminationInfo>
-      <eeSummary:financialsInfo xmlns:eeSummary="http://jaxws.webservices.esr.med.va.gov/schemas">
-        <eeSummary:incomeTest>
-          <eeSummary:discloseFinancialInformation>true</eeSummary:discloseFinancialInformation>
-        </eeSummary:incomeTest>
-        <eeSummary:financialStatement>
-          <eeSummary:expenses>
-            <eeSummary:expense>
-              <eeSummary:amount>77.77</eeSummary:amount>
-              <eeSummary:expenseType>3</eeSummary:expenseType>
-            </eeSummary:expense>
-            <eeSummary:expense>
-              <eeSummary:amount>44.44</eeSummary:amount>
-              <eeSummary:expenseType>19</eeSummary:expenseType>
-            </eeSummary:expense>
-            <eeSummary:expense>
-              <eeSummary:amount>33.3</eeSummary:amount>
-              <eeSummary:expenseType>18</eeSummary:expenseType>
-            </eeSummary:expense>
-          </eeSummary:expenses>
-          <eeSummary:incomes>
-            <eeSummary:income>
-              <eeSummary:amount>123.33</eeSummary:amount>
-              <eeSummary:type>7</eeSummary:type>
-            </eeSummary:income>
-            <eeSummary:income>
-              <eeSummary:amount>90.11</eeSummary:amount>
-              <eeSummary:type>13</eeSummary:type>
-            </eeSummary:income>
-            <eeSummary:income>
-              <eeSummary:amount>10.1</eeSummary:amount>
-              <eeSummary:type>10</eeSummary:type>
-            </eeSummary:income>
-          </eeSummary:incomes>
-          <eeSummary:marriedLastCalendarYear>false</eeSummary:marriedLastCalendarYear>
-          <eeSummary:numberOfDependentChildren>0</eeSummary:numberOfDependentChildren>
-        </eeSummary:financialStatement>
-      </eeSummary:financialsInfo>
       <eeSummary:insuranceList xmlns:eeSummary="http://jaxws.webservices.esr.med.va.gov/schemas">
         <eeSummary:insurance>
           <eeSummary:companyName>MyInsruance</eeSummary:companyName>

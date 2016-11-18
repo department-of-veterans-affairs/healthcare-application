@@ -43,6 +43,8 @@ const blankVeteran = {
 
   veteranAddress: {
     street: makeField(''),
+    street2: makeField(''),
+    street3: makeField(''),
     city: makeField(''),
     country: makeField(''),
     state: makeField(''),
@@ -55,7 +57,7 @@ const blankVeteran = {
   homePhone: makeField(''),
   mobilePhone: makeField(''),
 
-  understandsFinancialDisclosure: makeField(false),  // TODO(awong): Ignored by ES System
+  discloseFinancialInformation: makeField(''),
 
   spouseFullName: {
     first: makeField(''),
@@ -79,6 +81,8 @@ const blankVeteran = {
   provideSupportLastYear: makeField(''),  // TODO(awong): This name should be scoped to spouse.
   spouseAddress: {
     street: makeField(''),
+    street2: makeField(''),
+    street3: makeField(''),
     city: makeField(''),
     country: makeField(''),
     state: makeField(''),
@@ -230,6 +234,14 @@ const completeVeteran = {
       value: '123 NW 5th St',
       dirty: false
     },
+    street2: {
+      value: '',
+      dirty: false
+    },
+    street3: {
+      value: '',
+      dirty: false
+    },
     city: {
       value: 'Ontario',
       dirty: false
@@ -271,8 +283,8 @@ const completeVeteran = {
     value: '1235551234',
     dirty: false
   },
-  understandsFinancialDisclosure: {
-    value: true,
+  discloseFinancialInformation: {
+    value: 'Y',
     dirty: false
   },
   spouseFullName: {
@@ -340,6 +352,14 @@ const completeVeteran = {
   spouseAddress: {
     street: {
       value: '123 NW 8th St',
+      dirty: false
+    },
+    street2: {
+      value: '',
+      dirty: false
+    },
+    street3: {
+      value: '',
       dirty: false
     },
     city: {
@@ -683,7 +703,7 @@ const completeVeteran = {
 };
 
 function veteranToApplication(veteran) {
-  if (_.includes(['Never Married', 'Widowed', 'Divorced'], veteran.maritalStatus.value)) {
+  if (_.includes(['Never Married', 'Widowed', 'Divorced'], veteran.maritalStatus.value) || veteran.discloseFinancialInformation.value === 'N') {
     /* eslint-disable no-param-reassign*/
     delete veteran.spouseAddress;
     delete veteran.spouseFullName;
@@ -723,6 +743,7 @@ function veteranToApplication(veteran) {
       case 'childAttendedSchoolLastYear':
       case 'childCohabitedLastYear':
       case 'childReceivedSupportLastYear':
+      case 'discloseFinancialInformation':
         return value.value === 'Y';
 
       case 'childEducationExpenses':
