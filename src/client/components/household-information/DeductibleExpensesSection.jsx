@@ -6,8 +6,16 @@ import ErrorableTextInput from '../form-elements/ErrorableTextInput';
 import { isValidField, isValidMonetaryValue } from '../../utils/validations';
 import { veteranUpdateField } from '../../actions';
 
-function getErrorMessage(field, message) {
-  return isValidField(isValidMonetaryValue, field) ? undefined : message;
+function getRequiredErrorMessage(field) {
+  let result;
+  if (isValidField(isValidMonetaryValue, field)) {
+    if (field.dirty && field.value === '') {
+      result = 'Please enter a number.';
+    }
+  } else {
+    result = 'Please enter only numbers and a decimal point if necessary (no commas or currency signs)';
+  }
+  return result;
 }
 
 /**
@@ -73,22 +81,22 @@ class DeductibleExpensesSection extends React.Component {
         </p>
 
         <div className="input-section">
-          <ErrorableTextInput
-              errorMessage={getErrorMessage(this.props.data.deductibleMedicalExpenses, message)}
+          <ErrorableTextInput required
+              errorMessage={getRequiredErrorMessage(this.props.data.deductibleMedicalExpenses, message)}
               label="Amount you or your spouse paid in non-reimbursable medical expenses this past year."
               name="deductibleMedicalExpenses"
               field={this.props.data.deductibleMedicalExpenses}
               onValueChange={(update) => {this.props.onStateChange('deductibleMedicalExpenses', update);}}/>
 
-          <ErrorableTextInput
-              errorMessage={getErrorMessage(this.props.data.deductibleFuneralExpenses, message)}
+          <ErrorableTextInput required
+              errorMessage={getRequiredErrorMessage(this.props.data.deductibleFuneralExpenses, message)}
               label="Amount you paid in funeral or burial expenses for a deceased spouse or child this past year."
               name="deductibleFuneralExpenses"
               field={this.props.data.deductibleFuneralExpenses}
               onValueChange={(update) => {this.props.onStateChange('deductibleFuneralExpenses', update);}}/>
 
-          <ErrorableTextInput
-              errorMessage={getErrorMessage(this.props.data.deductibleEducationExpenses, message)}
+          <ErrorableTextInput required
+              errorMessage={getRequiredErrorMessage(this.props.data.deductibleEducationExpenses, message)}
               label="Amount you paid for anything related to your own education (college or vocational) this past year. Do not list your dependents’ educational expenses."
               name="deductibleEducationExpenses"
               field={this.props.data.deductibleEducationExpenses}

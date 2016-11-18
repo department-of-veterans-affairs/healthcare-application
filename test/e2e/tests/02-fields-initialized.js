@@ -73,6 +73,7 @@ module.exports = {
     // Demographic information page.
     client.expect.element('select[name="gender"]').to.be.visible;
     expectValueToBeBlank(client, 'select[name="gender"]');
+    expectValueToBeBlank(client, 'select[name="maritalStatus"]');
     expectInputToNotBeSelected(client, 'input[name="isAmericanIndianOrAlaskanNative"]');
     expectInputToNotBeSelected(client, 'input[name="isBlackOrAfricanAmerican"]');
     expectInputToNotBeSelected(client, 'input[name="isNativeHawaiianOrOtherPacificIslander"]');
@@ -148,19 +149,14 @@ module.exports = {
     expectNavigateAwayFrom(client, '/va-benefits/basic-information');
 
     // Financial disclosure page.
-    client.expect.element('input[name="understandsFinancialDisclosure"] + label').to.be.visible;
-    expectInputToNotBeSelected(client, 'input[name="understandsFinancialDisclosure"]');
-    common.completeFinancialDisclosure(client, common.testValues, true);
+    client.expect.element('input[name="discloseFinancialInformation-0"] + label').to.be.visible;
+    expectInputToNotBeSelected(client, 'input[name="discloseFinancialInformation-0"]');
+    expectInputToNotBeSelected(client, 'input[name="discloseFinancialInformation-1"]');
+    common.completeFinancialDisclosure(client, common.testValues);
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/financial-disclosure');
 
     // Spouse information Page.
-    client.expect.element('select[name="maritalStatus"]').to.be.visible;
-    expectValueToBeBlank(client, 'select[name="maritalStatus"]');
-    client
-      .setValue('select[name="maritalStatus"]', 'Married')
-      .click('.form-panel');
-
     client.expect.element('input[name="fname"]').to.be.visible.before(common.timeouts.normal);
     expectValueToBeBlank(client, 'input[name="fname"]');
     expectValueToBeBlank(client, 'input[name="mname"]');
@@ -237,7 +233,8 @@ module.exports = {
     expectValueToBeBlank(client, 'input[name="spouseOtherIncome"]');
     expectValueToBeBlank(client, 'input[name="childGrossIncome"]');
     expectValueToBeBlank(client, 'input[name="childNetIncome"]');
-    expectValueToBeBlank(client, 'input[name="ChildOtherIncome"]');
+    expectValueToBeBlank(client, 'input[name="childOtherIncome"]');
+    common.completeAnnualIncomeInformation(client, common.testValues);
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/annual-income');
 
@@ -246,6 +243,7 @@ module.exports = {
     expectValueToBeBlank(client, 'input[name="deductibleMedicalExpenses"]');
     expectValueToBeBlank(client, 'input[name="deductibleFuneralExpenses"]');
     expectValueToBeBlank(client, 'input[name="deductibleEducationExpenses"]');
+    common.completeDeductibleExpenses(client, common.testValues);
     client.click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/deductible-expenses');
 

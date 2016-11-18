@@ -60,6 +60,7 @@ module.exports = {
     client.expect.element('select[name="gender"]').to.be.visible;
     client
       .setValue('select[name="gender"]', 'M')
+      .setValue('select[name="maritalStatus"]', 'Married')
       .click('input[name="isAmericanIndianOrAlaskanNative"]')
       .click('input[name="isBlackOrAfricanAmerican"]')
       .click('input[name="isNativeHawaiianOrOtherPacificIslander"]')
@@ -132,17 +133,13 @@ module.exports = {
     expectNavigateAwayFrom(client, '/va-benefits/basic-information');
 
     // Financial disclosure page.
-    client.expect.element('input[name="understandsFinancialDisclosure"] + label').to.be.visible;
+    client.expect.element('input[name="discloseFinancialInformation-0"] + label').to.be.visible;
     client
-      .click('input[name="understandsFinancialDisclosure"]')
+      .click('input[name="discloseFinancialInformation-0"]')
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/financial-disclosure');
 
     // Spouse information Page.
-    client.expect.element('select[name="maritalStatus"]').to.be.visible;
-    client
-      .setValue('select[name="maritalStatus"]', 'Married')
-      .click('.form-panel');
     client.expect.element('input[name="fname"]').to.be.visible.before(common.timeouts.normal);
 
     client
@@ -211,7 +208,7 @@ module.exports = {
       .setValue('input[name="spouseOtherIncome"]', '5000')
       .setValue('input[name="childGrossIncome"]', '4000')
       .setValue('input[name="childNetIncome"]', '3000')
-      .setValue('input[name="ChildOtherIncome"]', '2000')
+      .setValue('input[name="childOtherIncome"]', '2000')
       .click('.form-panel .usa-button-primary');
     expectNavigateAwayFrom(client, '/household-information/annual-income');
 

@@ -50,6 +50,14 @@ function formatAddress(address) {
     country: address.country,
     line1: address.street
   };
+
+  if (address.street2) {
+    formatted.line2 = address.street2;
+  }
+  if (address.street3) {
+    formatted.line3 = address.street3;
+  }
+
   if (address.country === 'USA') {
     formatted.state = address.state;
     const numericZip = address.zipcode.replace(/\D/g, '');
@@ -59,6 +67,7 @@ function formatAddress(address) {
     formatted.provinceCode = address.state || address.provinceCode;
     formatted.postalCode = address.zipcode || address.postalCode;
   }
+
   return formatted;
 }
 
@@ -232,19 +241,19 @@ function veteranToSpouseInfo(veteran) {
  */
 function resourceToIncomeCollection(resource) {
   const incomeCollection = [];
-  if (resource.grossIncome > 0) {
+  if (!_.isNil(resource.grossIncome)) {
     incomeCollection.push({
       amount: resource.grossIncome,
       type: 7,
     });
   }
-  if (resource.netIncome > 0) {
+  if (!_.isNil(resource.netIncome)) {
     incomeCollection.push({
       amount: resource.netIncome,
       type: 13, // Net Income TODO is this right?
     });
   }
-  if (resource.otherIncome > 0) {
+  if (!_.isNil(resource.otherIncome)) {
     incomeCollection.push({
       amount: resource.otherIncome,
       type: 10, // All Other Income TODO is this right?
@@ -262,27 +271,27 @@ function resourceToIncomeCollection(resource) {
  */
 function resourceToExpenseCollection(resource) {
   const expenseCollection = [];
-  if (resource.educationExpense > 0) {
+  if (!_.isNil(resource.educationExpense)) {
     expenseCollection.push({
       amount: resource.educationExpense,
       expenseType: '3',
     });
   }
 
-  if (resource.childEducationExpenses > 0) {
+  if (!_.isNil(resource.childEducationExpenses)) {
     expenseCollection.push({
       amount: resource.childEducationExpenses,
       expenseType: '16',
     });
   }
 
-  if (resource.funeralExpense > 0) {
+  if (!_.isNil(resource.funeralExpense)) {
     expenseCollection.push({
       amount: resource.funeralExpense,
       expenseType: '19',
     });
   }
-  if (resource.medicalExpense > 0) {
+  if (!_.isNil(resource.medicalExpense)) {
     expenseCollection.push({
       amount: resource.medicalExpense,
       expenseType: '18',
@@ -385,7 +394,7 @@ function veteranToDependentFinancialsCollection(veteran) {
  * @returns {Object} ES system dependentFinancialsCollection message
  */
 function veteranToSpouseFinancials(veteran) {
-  if (!_.includes(['Married', 'Separated'], veteran.maritalStatus)) {
+  if (!_.includes(['Married', 'Separated'], veteran.maritalStatus) || !veteran.discloseFinancialInformation) {
     return undefined;
   }
 
@@ -912,13 +921,6 @@ function veteranToEnrollmentDeterminationInfo(veteran) {
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from employment.
 //  * financialStatementInfo / spouseFinancialsCollection / spouseFinancialsInfo / incomeCollection / incomeInfo / type, Not applicable, Yes, "Data element is not a form captured element but provides the income type to identify the value as the Spouse's gross income from FARM,  RANCH,  PROPERTY OR BUSINESS."
 
-function booleanToIncomeTest(hasIncomeData) {
-  if (hasIncomeData) {
-    return { discloseFinancialInformation: true };
-  }
-  return undefined;
-}
-
 function veteranToFinancialsInfo(veteran) {
   const expenses = resourceToExpenseCollection({
     educationExpense: veteran.deductibleEducationExpenses,
@@ -932,21 +934,14 @@ function veteranToFinancialsInfo(veteran) {
   });
 
   const dependentFinancials = veteranToDependentFinancialsCollection(veteran);
-  let hasDependentFinancials = false;
-  if (dependentFinancials) {
-    hasDependentFinancials = _.compact(dependentFinancials.dependentFinancials.map((child) => { return child.incomes; })).length > 0;
-  }
   const spouseFinancials = veteranToSpouseFinancials(veteran);
-  const hasSpouseIncome = spouseFinancials && spouseFinancials.spouseFinancials.incomes;
 
-  const hasIncomeData = expenses || incomes || hasSpouseIncome || hasDependentFinancials;
-
-  if (!hasIncomeData) {
+  if (!veteran.discloseFinancialInformation) {
     return undefined;
   }
 
   return {
-    incomeTest: booleanToIncomeTest(hasIncomeData),
+    incomeTest: { discloseFinancialInformation: true },
     financialStatement: {
       expenses,
       incomes,
@@ -1052,7 +1047,7 @@ function childToAssociation(child) {
 }
 
 function spouseToAssociation(veteran) {
-  if (_.includes(['Married', 'Separated'], veteran.maritalStatus)) {
+  if (_.includes(['Married', 'Separated'], veteran.maritalStatus) && veteran.discloseFinancialInformation) {
     return {
       address: formatAddress(veteran.spouseAddress),
       givenName: validations.validateName(veteran.spouseFullName.first),

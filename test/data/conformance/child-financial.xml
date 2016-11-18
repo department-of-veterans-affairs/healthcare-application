@@ -101,8 +101,50 @@
           <eeSummary:discloseFinancialInformation>true</eeSummary:discloseFinancialInformation>
         </eeSummary:incomeTest>
         <eeSummary:financialStatement>
+          <eeSummary:expenses>
+            <eeSummary:expense>
+              <eeSummary:amount>77.77</eeSummary:amount>
+              <eeSummary:expenseType>3</eeSummary:expenseType>
+            </eeSummary:expense>
+            <eeSummary:expense>
+              <eeSummary:amount>44.44</eeSummary:amount>
+              <eeSummary:expenseType>19</eeSummary:expenseType>
+            </eeSummary:expense>
+            <eeSummary:expense>
+              <eeSummary:amount>0</eeSummary:amount>
+              <eeSummary:expenseType>18</eeSummary:expenseType>
+            </eeSummary:expense>
+          </eeSummary:expenses>
+          <eeSummary:incomes>
+            <eeSummary:income>
+              <eeSummary:amount>123.33</eeSummary:amount>
+              <eeSummary:type>7</eeSummary:type>
+            </eeSummary:income>
+            <eeSummary:income>
+              <eeSummary:amount>90.11</eeSummary:amount>
+              <eeSummary:type>13</eeSummary:type>
+            </eeSummary:income>
+            <eeSummary:income>
+              <eeSummary:amount>10.1</eeSummary:amount>
+              <eeSummary:type>10</eeSummary:type>
+            </eeSummary:income>
+          </eeSummary:incomes>
           <eeSummary:spouseFinancialsList>
             <eeSummary:spouseFinancials>
+              <eeSummary:incomes>
+                <eeSummary:income>
+                  <eeSummary:amount>64.1</eeSummary:amount>
+                  <eeSummary:type>7</eeSummary:type>
+                </eeSummary:income>
+                <eeSummary:income>
+                  <eeSummary:amount>35.1</eeSummary:amount>
+                  <eeSummary:type>13</eeSummary:type>
+                </eeSummary:income>
+                <eeSummary:income>
+                  <eeSummary:amount>12.3</eeSummary:amount>
+                  <eeSummary:type>10</eeSummary:type>
+                </eeSummary:income>
+              </eeSummary:incomes>
               <eeSummary:spouse>
                 <eeSummary:dob>04/06/1980</eeSummary:dob>
                 <eeSummary:givenName>FIRSTSPOUSE</eeSummary:givenName>
@@ -172,6 +214,26 @@
               <eeSummary:contributedToSupport>false</eeSummary:contributedToSupport>
             </eeSummary:dependentFinancials>
             <eeSummary:dependentFinancials>
+              <eeSummary:incomes>
+                <eeSummary:income>
+                  <eeSummary:amount>791.9</eeSummary:amount>
+                  <eeSummary:type>7</eeSummary:type>
+                </eeSummary:income>
+                <eeSummary:income>
+                  <eeSummary:amount>781.2</eeSummary:amount>
+                  <eeSummary:type>13</eeSummary:type>
+                </eeSummary:income>
+                <eeSummary:income>
+                  <eeSummary:amount>71.9</eeSummary:amount>
+                  <eeSummary:type>10</eeSummary:type>
+                </eeSummary:income>
+              </eeSummary:incomes>
+              <eeSummary:expenses>
+                <eeSummary:expense>
+                  <eeSummary:amount>0</eeSummary:amount>
+                  <eeSummary:expenseType>16</eeSummary:expenseType>
+                </eeSummary:expense>
+              </eeSummary:expenses>
               <eeSummary:dependentInfo>
                 <eeSummary:dob>03/07/1996</eeSummary:dob>
                 <eeSummary:givenName>FIRSTCHILDB</eeSummary:givenName>
