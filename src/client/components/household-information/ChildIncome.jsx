@@ -24,12 +24,14 @@ class ChildIncome extends React.Component {
             name="childGrossIncome"
             field={this.props.data.grossIncome}
             onValueChange={(update) => {this.props.onValueChange('grossIncome', update);}}/>
+
         <ErrorableTextInput required
             errorMessage={message(this.props.data.netIncome)}
             label="Child Net Income from your Farm, Ranch, Property or Business"
             name="childNetIncome"
             field={this.props.data.netIncome}
             onValueChange={(update) => {this.props.onValueChange('netIncome', update);}}/>
+
         <ErrorableTextInput required
             errorMessage={message(this.props.data.otherIncome)}
             label="Child Other Income Amount"

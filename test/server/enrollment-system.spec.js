@@ -140,6 +140,7 @@ describe('enrollment-system base tests', () => {
       spouseFinancials.livedWithPatient.should.equal('false');
     });
   });
+
   describe('discloseFinancialInformation', () => {
     it('should not set spouse info if not disclosing financials', () => {
       const application = _.cloneDeep(fakeApplication);
