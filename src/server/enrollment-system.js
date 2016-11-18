@@ -43,6 +43,9 @@ const formTemplate = {
   }
 };
 
+function hasFinancialFlag(veteran) {
+  return veteran.understandsFinancialDisclosure || veteran.discloseFinancialInformation;
+}
 
 function formatAddress(address) {
   const formatted = {
@@ -394,7 +397,7 @@ function veteranToDependentFinancialsCollection(veteran) {
  * @returns {Object} ES system dependentFinancialsCollection message
  */
 function veteranToSpouseFinancials(veteran) {
-  if (!_.includes(['Married', 'Separated'], veteran.maritalStatus) || !veteran.discloseFinancialInformation) {
+  if (!_.includes(['Married', 'Separated'], veteran.maritalStatus) || !hasFinancialFlag(veteran)) {
     return undefined;
   }
 
@@ -936,7 +939,7 @@ function veteranToFinancialsInfo(veteran) {
   const dependentFinancials = veteranToDependentFinancialsCollection(veteran);
   const spouseFinancials = veteranToSpouseFinancials(veteran);
 
-  if (!veteran.discloseFinancialInformation) {
+  if (!hasFinancialFlag(veteran)) {
     return undefined;
   }
 
@@ -1047,7 +1050,7 @@ function childToAssociation(child) {
 }
 
 function spouseToAssociation(veteran) {
-  if (_.includes(['Married', 'Separated'], veteran.maritalStatus) && veteran.discloseFinancialInformation) {
+  if (_.includes(['Married', 'Separated'], veteran.maritalStatus) && hasFinancialFlag(veteran)) {
     return {
       address: formatAddress(veteran.spouseAddress),
       givenName: validations.validateName(veteran.spouseFullName.first),
