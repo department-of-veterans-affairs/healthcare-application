@@ -167,6 +167,11 @@ class HealthCareApp extends React.Component {
           this.context.router.push(this.getUrl('next'));
           this.scrollToTop();
         }, 1000);
+
+        window.dataLayer.push({
+          event: 'submission-successful',
+          submissionID: this.props.uiState.submission.id
+        });
       }).catch(error => {
         // TODO(crew): Pass meaningful errors to the client.
         setTimeout(() => { // eslint-disable-line scanjs-rules/call_setTimeout
