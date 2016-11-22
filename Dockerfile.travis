@@ -30,6 +30,8 @@ COPY package.json package.json
 COPY npm-shrinkwrap.json npm-shrinkwrap.json
 COPY webpack.config.js webpack.config.js
 
+RUN apk update && apk add --no-cache git
+
 ENV NODE_ENV development
 RUN npm install
 RUN npm run webpack-prod
