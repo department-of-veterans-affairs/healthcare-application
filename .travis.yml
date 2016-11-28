@@ -1,6 +1,10 @@
 sudo: required
 
 language: node_js
+branches:
+  only:
+  - master
+  - production
 before_install:
   - docker pull dsva/healthcare-application:build-cached
   - docker images
