@@ -1,5 +1,5 @@
 pipeline {
-  agent label:'hca-linting'
+  agent label:'hca-testing'
   stages {
     stage('Checkout Code') {
       steps {
