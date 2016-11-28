@@ -9,7 +9,6 @@ pipeline {
 
     stage('Run tests') {
       steps {
-        sh 'sudo npm -g install npm-cache'
         sh 'npm-cache install'
         // Sigh. https://github.com/sass/node-sass/issues/1579
         sh 'npm rebuild node-sass'
