@@ -775,13 +775,18 @@ function veteranToApplication(veteran) {
       case 'cityOfBirth':
       case 'stateOfBirth':
       case 'email':
-      case 'homePhone':
-      case 'mobilePhone':
-      case 'spousePhone':
         if (value.value === '') {
           return undefined;
         }
         break;
+
+      case 'homePhone':
+      case 'mobilePhone':
+      case 'spousePhone':
+        if (value.value == '') {
+          return undefined
+        }
+        return value.value.replace(/[- )(]/g, '');
 
       default:
         // fall through.
