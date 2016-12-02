@@ -783,8 +783,8 @@ function veteranToApplication(veteran) {
       case 'homePhone':
       case 'mobilePhone':
       case 'spousePhone':
-        if (value.value == '') {
-          return undefined
+        if (value.value === '') {
+          return undefined;
         }
         return value.value.replace(/[- )(]/g, '');
 
