@@ -1,3 +1,4 @@
+const moment = require('moment');
 const validations = require('../../../src/server/utils/validations');
 const chai = require('chai');
 chai.should();
@@ -21,7 +22,7 @@ describe('validations', () => {
         convertedDate.should.be.empty;
       });
       it('if the date passed in is a string after today', () => {
-        const convertedDate = validations.dateOfBirth('2016-12-01');
+        const convertedDate = validations.dateOfBirth(moment().add(1, 'day').format('YYYY-MM-DD'));
         convertedDate.should.be.a('string');
         convertedDate.should.be.empty;
       });

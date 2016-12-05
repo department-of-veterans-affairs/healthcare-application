@@ -6,7 +6,7 @@ const _ = require('lodash');
 const enrollmentSystem = require('../../src/server/enrollment-system');
 const fakeApplication = require('../data/fake-application');
 
-const ApplicationJsonSchema = require('../../src/common/schema/application');
+const ApplicationJsonSchema = require('vets-json-schema').healthcareApplication;
 const validate = require('../../src/common/schema/validator').compile(ApplicationJsonSchema);
 
 const goldenJsonSubmission = require('../data/golden-soap-submission.json');

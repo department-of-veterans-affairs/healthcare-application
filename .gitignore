@@ -20,4 +20,3 @@ generated/
 node_modules/
 typings*
 reports/
-test/e2e/reports/
