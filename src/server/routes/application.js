@@ -3,7 +3,7 @@ const soap = require('soap');
 const request = require('request');
 const router = require('express').Router(); // eslint-disable-line
 
-const ApplicationJsonSchema = require('../../common/schema/application');
+const ApplicationJsonSchema = require('vets-json-schema').healthcareApplication;
 const validate = require('../../common/schema/validator').compile(ApplicationJsonSchema);
 const veteranToSaveSubmitForm = require('../enrollment-system').veteranToSaveSubmitForm;
 
