@@ -1,4 +1,4 @@
-# Healthcare Application [![Build Status](https://travis-ci.org/department-of-veterans-affairs/healthcare-application.svg?branch=master)](https://travis-ci.org/department-of-veterans-affairs/healthcare-application)
+# Healthcare Application [![Build Status](https://dev.vets.gov/jenkins/buildStatus/icon?job=department-of-veterans-affairs/healthcare-application/master)](https://dev.vets.gov/jenkins/job/department-of-veterans-affairs/job/healthcare-application/job/master/)
 
 ## Project Background
 
