@@ -138,7 +138,8 @@ const blankVeteran = {
   vietnamService: false,
   exposedToRadiation: false,
   radiumTreatments: false,
-  campLejeune: false
+  campLejeune: false,
+  privacyAgreementAccepted: false
 };
 
 const completeVeteran = {
@@ -699,7 +700,8 @@ const completeVeteran = {
   vietnamService: true,
   exposedToRadiation: true,
   radiumTreatments: true,
-  campLejeune: true
+  campLejeune: true,
+  privacyAgreementAccepted: true
 };
 
 function veteranToApplication(veteran) {

@@ -19,6 +19,16 @@ const fs = require('fs');
 const xmlBeautify = require('xml-beautifier');
 
 describe('enrollment-system base tests', () => {
+  it('should require privacyAgreementAccepted to be true', () => {
+    const application = _.clone(fakeApplication);
+    _.each([[true, true], [false, false], [null, false]], (pair) => {
+      application.privacyAgreementAccepted = pair[0];
+
+      const valid = validate(application);
+      chai.assert.equal(valid, pair[1], JSON.stringify([validate.errors, application], null, 2));
+    });
+  });
+
   describe('characterization tests', () => {
     const fluxCapacitor = new Date('2015-10-21');
     beforeEach(() => {
