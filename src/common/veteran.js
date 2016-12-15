@@ -139,7 +139,7 @@ const blankVeteran = {
   exposedToRadiation: false,
   radiumTreatments: false,
   campLejeune: false,
-  privacyAgreementAccepted: true
+  privacyAgreementAccepted: false
 };
 
 const completeVeteran = {
