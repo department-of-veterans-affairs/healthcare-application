@@ -1,5 +1,7 @@
 pipeline {
-  agent label:'hca-testing'
+  agent {
+    label 'hca-testing'
+  }
   stages {
     stage('Checkout Code') {
       steps {
