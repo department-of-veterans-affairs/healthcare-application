@@ -74,6 +74,14 @@ function formatAddress(address) {
   return formatted;
 }
 
+
+function convertBirthState(birthState) {
+  if (birthState === 'Other') {
+    return 'FOREIGN COUNTRY';
+  }
+  return birthState;
+}
+
 /**
  * Converts maritalStatus from the values in the Veteran resource to the VHA Standard Data Service code.
  *
@@ -474,7 +482,7 @@ function veteranToPersonInfo(veteran) {
     dob: validations.dateOfBirth(veteran.veteranDateOfBirth),
     mothersMaidenName: validations.validateString(veteran.mothersMaidenName, 35, true),
     placeOfBirthCity: validations.validateString(veteran.cityOfBirth, 20, true),
-    placeOfBirthState: veteran.stateOfBirth, // todo(robbie) need to do this validation.
+    placeOfBirthState: convertBirthState(veteran.stateOfBirth), // todo(robbie) need to do this validation.
   };
 }
 
