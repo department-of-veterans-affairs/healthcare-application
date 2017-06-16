@@ -146,7 +146,7 @@ using a GET request with a query string of `?wsdl`.
 Status can be retrieved from the commandline using
 
 ```
-scripts/status.sh [submisison number]
+scripts/status.sh [submisson number]
 ```
 
 ##### Certificates and trust stores.
